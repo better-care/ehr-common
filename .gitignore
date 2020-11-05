@@ -17,6 +17,4 @@ jboss.identity
 *.releaseBackup
 /.project
 generated.ddl
-application-dev.yml
-application-dev.properties
 *.lck

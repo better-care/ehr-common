@@ -1,0 +1,206 @@
+// Copyright 2021 Better Ltd (www.better.care)
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "Report"
+  },
+  "archetype_details": {
+    "_type": "ARCHETYPED",
+    "archetype_id": {
+      "_type": "ARCHETYPE_ID",
+      "value": "openEHR-EHR-COMPOSITION.report.v2"
+    },
+    "template_id": {
+      "_type": "TEMPLATE_ID",
+      "value": "HerzfrequenzTemplate"
+    },
+    "rm_version": "1.0.1"
+  },
+  "archetypeNodeId": "openEHR-EHR-COMPOSITION.report.v2",
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "testdoctor"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2016-05-19T13:50:48.240+02:00"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "other care",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "238"
+      }
+    },
+    "other_context": {
+      "_type": "ITEM_TREE",
+      "name": {
+        "value": "IZahl"
+      },
+      "archetypeNodeId": "at0001"
+    }
+  },
+  "content": [
+    {
+      "_type": "OBSERVATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "*Pulse/Heart beat(en)"
+      },
+      "archetype_details": {
+        "_type": "ARCHETYPED",
+        "archetype_id": {
+          "_type": "ARCHETYPE_ID",
+          "value": "openEHR-EHR-OBSERVATION.pulse.v1"
+        },
+        "rm_version": "1.0.1"
+      },
+      "archetypeNodeId": "openEHR-EHR-OBSERVATION.pulse.v1",
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "en"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "UTF-8"
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_IDENTIFIED",
+        "name": "Dr. James Surgeon"
+      },
+      "protocol": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "*Extension(en)"
+        },
+        "archetypeNodeId": "at0010"
+      },
+      "data": {
+        "_type": "HISTORY",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "History"
+        },
+        "archetypeNodeId": "at0002",
+        "origin": {
+          "_type": "DV_DATE_TIME",
+          "value": "2016-05-19T13:50:48.240+02:00"
+        },
+        "events": [
+          {
+            "_type": "POINT_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "*Any event(en)"
+            },
+            "archetypeNodeId": "at0003",
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2016-05-19T13:50:48.240+02:00"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "*Clinical interpretation(en)"
+              },
+              "archetypeNodeId": "at0001",
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_CODED_TEXT",
+                    "value": "Pulse",
+                    "defining_code": {
+                      "_type": "CODE_PHRASE",
+                      "terminology_id": {
+                        "_type": "TERMINOLOGY_ID",
+                        "value": "local"
+                      },
+                      "code_string": "at1026"
+                    }
+                  },
+                  "archetypeNodeId": "at0004",
+                  "value": {
+                    "_type": "DV_QUANTITY",
+                    "magnitude": 60.0,
+                    "units": "/min"
+                  }
+                }
+              ]
+            },
+            "state": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "*Exertion(en)"
+              },
+              "archetypeNodeId": "at0012"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
