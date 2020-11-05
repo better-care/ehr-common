@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Section : ContentItem() {
-    var items: List<ContentItem> = mutableListOf()
+    var items: MutableList<ContentItem> = mutableListOf()
 }

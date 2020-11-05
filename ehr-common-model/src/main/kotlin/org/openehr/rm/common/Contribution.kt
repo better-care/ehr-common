@@ -11,6 +11,6 @@ import org.openehr.base.basetypes.HierObjectId
 @Serializable
 class Contribution : RmObject() {
     lateinit var uid: HierObjectId
-    var versions: List<RmObject> = mutableListOf()
+    var versions: MutableList<RmObject> = mutableListOf()
     lateinit var audit: AuditDetails
 }

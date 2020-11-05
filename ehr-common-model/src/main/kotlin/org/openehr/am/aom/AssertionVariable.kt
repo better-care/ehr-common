@@ -1,4 +1,4 @@
-package org.openehr.base.basetypes
+package org.openehr.am.aom
 
 import care.better.openehr.referencemodel.RmObject
 import kotlinx.serialization.Serializable
@@ -8,8 +8,7 @@ import kotlinx.serialization.Serializable
  */
 
 @Serializable
-abstract class ObjectId : RmObject() {
-    lateinit var value: String
+class AssertionVariable : RmObject() {
+    lateinit var name: String
+    lateinit var definition: String
 }
-
-
