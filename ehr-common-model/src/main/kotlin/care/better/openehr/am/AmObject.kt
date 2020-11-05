@@ -1,4 +1,4 @@
-package care.better.openehr.referencemodel
+package care.better.openehr.am
 
 import kotlinx.serialization.Serializable
 
@@ -7,8 +7,8 @@ import kotlinx.serialization.Serializable
  */
 
 @Serializable
-abstract class RmObject {
+abstract class AmObject {
     companion object {
-        val RM_VERSION = RmVersion.RM1_0_4
+        const val AM_VERSION = "1.0.1"
     }
 }

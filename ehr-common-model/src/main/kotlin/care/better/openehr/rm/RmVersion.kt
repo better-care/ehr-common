@@ -1,4 +1,4 @@
-package care.better.openehr.referencemodel
+package care.better.openehr.rm
 
 /**
  * @author Primoz Delopst

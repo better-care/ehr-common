@@ -1,6 +1,6 @@
 package org.openehr.am.aom
 
-import care.better.openehr.referencemodel.RmObject
+import care.better.openehr.rm.RmObject
 import kotlinx.serialization.Serializable
 
 /**

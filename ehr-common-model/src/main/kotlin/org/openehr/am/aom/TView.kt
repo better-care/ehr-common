@@ -1,6 +1,6 @@
 package org.openehr.am.aom
 
-import care.better.openehr.archetypemodel.AmObject
+import care.better.openehr.am.AmObject
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 

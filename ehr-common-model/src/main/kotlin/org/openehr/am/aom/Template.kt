@@ -1,6 +1,6 @@
 package org.openehr.am.aom
 
-import care.better.openehr.archetypemodel.AmObject
+import care.better.openehr.am.AmObject
 import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.base.basetypes.TemplateId

@@ -1,6 +1,6 @@
 package org.openehr.rm.composition
 
-import care.better.openehr.referencemodel.RmObject
+import care.better.openehr.rm.RmObject
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyIdentified

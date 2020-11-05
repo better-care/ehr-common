@@ -1,6 +1,6 @@
 package org.openehr.base.foundationtypes
 
-import care.better.openehr.referencemodel.RmObject
+import care.better.openehr.rm.RmObject
 import kotlinx.serialization.Serializable
 
 /**

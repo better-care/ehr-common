@@ -1,6 +1,6 @@
 package org.openehr.base.resource
 
-import care.better.openehr.referencemodel.RmObject
+import care.better.openehr.rm.RmObject
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.StringDictionaryItem
 import org.openehr.rm.datatypes.CodePhrase
