@@ -11,5 +11,16 @@
 
     <artifactId>ehr-common-json-kotlin</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>care.better.platform</groupId>
+            <artifactId>ehr-common-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-serialization-json</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
