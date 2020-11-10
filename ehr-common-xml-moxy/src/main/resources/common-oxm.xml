@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.rm.common">
+    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
+    </xml-schema>
+    <xml-enums/>
+    <java-types>
+        <java-type name="org.openehr.rm.common.Archetyped">
+            <xml-type name="ARCHETYPED" prop-order="archetypeId templateId rmVersion"/>
+            <java-attributes>
+                <xml-element java-attribute="archetypeId" name="archetype_id" required="true"/>
+                <xml-element java-attribute="templateId" name="template_id"/>
+                <xml-element java-attribute="rmVersion" name="rm_version" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.Attestation">
+            <xml-type name="ATTESTATION" prop-order="attestedView proof items reason isPending"/>
+            <java-attributes>
+                <xml-element java-attribute="attestedView" name="attested_view"/>
+                <xml-element java-attribute="proof" name="proof"/>
+                <xml-element java-attribute="items" name="items" nillable="true"/>
+                <xml-element java-attribute="reason" name="reason" required="true"/>
+                <xml-element java-attribute="isPending" name="is_pending" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.AuditDetails">
+            <xml-type name="AUDIT_DETAILS" prop-order="systemId committer timeCommitted changeType description"/>
+            <java-attributes>
+                <xml-element java-attribute="systemId" name="system_id" required="true"/>
+                <xml-element java-attribute="committer" name="committer" required="true"/>
+                <xml-element java-attribute="timeCommitted" name="time_committed" required="true"/>
+                <xml-element java-attribute="changeType" name="change_type" required="true"/>
+                <xml-element java-attribute="description" name="description"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.AuthoredResource">
+            <xml-type name="AUTHORED_RESOURCE" prop-order="originalLanguage isControlled description translations revisionHistory"/>
+            <java-attributes>
+                <xml-element java-attribute="originalLanguage" name="original_language" required="true"/>
+                <xml-element java-attribute="isControlled" name="is_controlled"/>
+                <xml-element java-attribute="description" name="description"/>
+                <xml-element java-attribute="translations" name="translations" nillable="true"/>
+                <xml-element java-attribute="revisionHistory" name="revision_history"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.Contribution">
+            <xml-type name="CONTRIBUTION" prop-order="uid versions audit"/>
+            <xml-root-element name="##default"/>
+            <java-attributes>
+                <xml-element java-attribute="uid" name="uid" required="true"/>
+                <xml-element java-attribute="versions" name="versions" required="true"/>
+                <xml-element java-attribute="audit" name="audit" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.FeederAudit">
+            <xml-type name="FEEDER_AUDIT" prop-order="originatingSystemItemIds feederSystemItemIds originalContent originatingSystemAudit feederSystemAudit"/>
+            <java-attributes>
+                <xml-element java-attribute="originatingSystemItemIds" name="originating_system_item_ids"/>
+                <xml-element java-attribute="feederSystemItemIds" name="feeder_system_item_ids"/>
+                <xml-element java-attribute="originalContent" name="original_content"/>
+                <xml-element java-attribute="originatingSystemAudit" name="originating_system_audit" required="true"/>
+                <xml-element java-attribute="feederSystemAudit" name="feeder_system_audit"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.FeederAuditDetails">
+            <xml-type name="FEEDER_AUDIT_DETAILS" prop-order="systemId location provider subject time versionId"/>
+            <java-attributes>
+                <xml-element java-attribute="systemId" name="system_id" required="true"/>
+                <xml-element java-attribute="location" name="location"/>
+                <xml-element java-attribute="provider" name="provider"/>
+                <xml-element java-attribute="subject" name="subject"/>
+                <xml-element java-attribute="time" name="time"/>
+                <xml-element java-attribute="versionId" name="version_id"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.Folder">
+            <xml-type name="FOLDER" prop-order="folders items details"/>
+            <java-attributes>
+                <xml-element java-attribute="folders" name="folders" nillable="true"/>
+                <xml-element java-attribute="items" name="items" nillable="true"/>
+                <xml-element java-attribute="details" name="details"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.ImportedVersion">
+            <xml-type name="IMPORTED_VERSION"/>
+            <java-attributes>
+                <xml-element java-attribute="item" name="item" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.Link">
+            <xml-type name="LINK" prop-order="meaning type target"/>
+            <java-attributes>
+                <xml-element java-attribute="meaning" name="meaning" required="true"/>
+                <xml-element java-attribute="type" name="type" required="true"/>
+                <xml-element java-attribute="target" name="target" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.Locatable">
+            <xml-type name="LOCATABLE" prop-order="name uid links archetypeDetails feederAudit"/>
+            <xml-root-element name="##default"/>
+            <java-attributes>
+                <xml-element java-attribute="name" name="name" required="true"/>
+                <xml-element java-attribute="uid" name="uid"/>
+                <xml-element java-attribute="links" name="links" nillable="true"/>
+                <xml-element java-attribute="archetypeDetails" name="archetype_details"/>
+                <xml-element java-attribute="feederAudit" name="feeder_audit"/>
+                <xml-attribute java-attribute="archetypeNodeId" name="archetype_node_id"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.OriginalVersion">
+            <xml-type name="ORIGINAL_VERSION" prop-order="uid data precedingVersionUid otherInputVersionUids attestations lifecycleState"/>
+            <java-attributes>
+                <xml-element java-attribute="uid" name="uid" required="true"/>
+                <xml-element java-attribute="data" name="data"/>
+                <xml-element java-attribute="precedingVersionUid" name="preceding_version_uid"/>
+                <xml-element java-attribute="otherInputVersionUids" name="other_input_version_uids"/>
+                <xml-element java-attribute="attestations" name="attestations" nillable="true"/>
+                <xml-element java-attribute="lifecycleState" name="lifecycle_state" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.Participation">
+            <xml-type name="PARTICIPATION" prop-order="function performer time mode"/>
+            <java-attributes>
+                <xml-element java-attribute="function" name="function" required="true"/>
+                <xml-element java-attribute="performer" name="performer" required="true"/>
+                <xml-element java-attribute="time" name="time"/>
+                <xml-element java-attribute="mode" name="mode"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.PartyIdentified">
+            <xml-type name="PARTY_IDENTIFIED" prop-order="name identifiers"/>
+            <java-attributes>
+                <xml-element java-attribute="name" name="name"/>
+                <xml-element java-attribute="identifiers" name="identifiers" nillable="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.PartyProxy">
+            <xml-type name="PARTY_PROXY"/>
+            <java-attributes>
+                <xml-element java-attribute="externalRef" name="external_ref"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.PartyRelated">
+            <xml-type name="PARTY_RELATED"/>
+            <java-attributes>
+                <xml-element java-attribute="relationship" name="relationship" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.PartySelf">
+            <xml-type name="PARTY_SELF"/>
+            <java-attributes/>
+        </java-type>
+        <java-type name="org.openehr.rm.common.ResourceDescription">
+            <xml-type name="RESOURCE_DESCRIPTION" prop-order="originalAuthor otherContributors lifecycleState resourcePackageUri otherDetails details parentResource"/>
+            <java-attributes>
+                <xml-element java-attribute="originalAuthor" name="original_author" required="true"/>
+                <xml-element java-attribute="otherContributors" name="other_contributors"/>
+                <xml-element java-attribute="lifecycleState" name="lifecycle_state" required="true"/>
+                <xml-element java-attribute="resourcePackageUri" name="resource_package_uri"/>
+                <xml-element java-attribute="otherDetails" name="other_details"/>
+                <xml-element java-attribute="details" name="details" required="true"/>
+                <xml-element java-attribute="parentResource" name="parent_resource"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.ResourceDescriptionItem">
+            <xml-type name="RESOURCE_DESCRIPTION_ITEM" prop-order="language purpose keywords use misuse copyright originalResourceUri otherDetails"/>
+            <java-attributes>
+                <xml-element java-attribute="language" name="language" required="true"/>
+                <xml-element java-attribute="purpose" name="purpose" required="true"/>
+                <xml-element java-attribute="keywords" name="keywords" nillable="true"/>
+                <xml-element java-attribute="use" name="use"/>
+                <xml-element java-attribute="misuse" name="misuse"/>
+                <xml-element java-attribute="copyright" name="copyright"/>
+                <xml-element java-attribute="originalResourceUri" name="original_resource_uri"/>
+                <xml-element java-attribute="otherDetails" name="other_details"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.RevisionHistory">
+            <xml-type name="REVISION_HISTORY"/>
+            <java-attributes>
+                <xml-element java-attribute="items" name="items" nillable="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.RevisionHistoryItem">
+            <xml-type name="REVISION_HISTORY_ITEM" prop-order="versionId audits"/>
+            <java-attributes>
+                <xml-element java-attribute="versionId" name="version_id" required="true"/>
+                <xml-element java-attribute="audits" name="audits" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.StringDictionaryItem">
+            <xml-type name="StringDictionaryItem"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value"/>
+                <xml-attribute java-attribute="id" name="id"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.Version">
+            <xml-type name="VERSION" prop-order="contribution commitAudit signature"/>
+            <xml-root-element name="##default"/>
+            <java-attributes>
+                <xml-element java-attribute="contribution" name="contribution" required="true"/>
+                <xml-element java-attribute="commitAudit" name="commit_audit" required="true"/>
+                <xml-element java-attribute="signature" name="signature"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.common.VersionedObject">
+            <xml-type name="VERSIONED_OBJECT" prop-order="uid ownerId timeCreated trunkLifecycleState"/>
+            <xml-root-element name="##default"/>
+            <java-attributes>
+                <xml-element java-attribute="uid" name="uid"/>
+                <xml-element java-attribute="ownerId" name="owner_id"/>
+                <xml-element java-attribute="timeCreated" name="time_created"/>
+                <xml-element java-attribute="trunkLifecycleState" name="trunk_lifecycle_state"/>
+            </java-attributes>
+        </java-type>
+    </java-types>
+</xml-bindings>

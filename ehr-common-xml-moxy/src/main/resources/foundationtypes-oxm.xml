@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.base.foundationtypes">
+    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
+    </xml-schema>
+    <xml-enums/>
+    <java-types>
+        <java-type name="org.openehr.base.foundationtypes.Interval">
+            <xml-type name="Interval" prop-order="lowerIncluded upperIncluded lowerUnbounded upperUnbounded"/>
+            <java-attributes>
+                <xml-element java-attribute="lowerIncluded" name="lower_included"/>
+                <xml-element java-attribute="upperIncluded" name="upper_included"/>
+                <xml-element java-attribute="lowerUnbounded" name="lower_unbounded" required="true"/>
+                <xml-element java-attribute="upperUnbounded" name="upper_unbounded" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.base.foundationtypes.IntervalOfDate">
+            <xml-type name="IntervalOfDate" prop-order="lower upper"/>
+            <java-attributes>
+                <xml-element java-attribute="lower" name="lower"/>
+                <xml-element java-attribute="upper" name="upper"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.base.foundationtypes.IntervalOfDateTime">
+            <xml-type name="IntervalOfDateTime" prop-order="lower upper"/>
+            <java-attributes>
+                <xml-element java-attribute="lower" name="lower"/>
+                <xml-element java-attribute="upper" name="upper"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.base.foundationtypes.IntervalOfDuration">
+            <xml-type name="IntervalOfDuration" prop-order="lower upper"/>
+            <java-attributes>
+                <xml-element java-attribute="lower" name="lower"/>
+                <xml-element java-attribute="upper" name="upper"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.base.foundationtypes.IntervalOfInteger">
+            <xml-type name="IntervalOfInteger" prop-order="lower upper"/>
+            <java-attributes>
+                <xml-element java-attribute="lower" name="lower"/>
+                <xml-element java-attribute="upper" name="upper"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.base.foundationtypes.IntervalOfReal">
+            <xml-type name="IntervalOfReal" prop-order="lower upper"/>
+            <java-attributes>
+                <xml-element java-attribute="lower" name="lower"/>
+                <xml-element java-attribute="upper" name="upper"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.base.foundationtypes.IntervalOfTime">
+            <xml-type name="IntervalOfTime" prop-order="lower upper"/>
+            <java-attributes>
+                <xml-element java-attribute="lower" name="lower"/>
+                <xml-element java-attribute="upper" name="upper"/>
+            </java-attributes>
+        </java-type>
+    </java-types>
+</xml-bindings>

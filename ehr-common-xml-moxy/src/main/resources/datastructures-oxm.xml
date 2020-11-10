@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.rm.datastructures">
+    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
+    </xml-schema>
+    <xml-enums/>
+    <java-types>
+        <java-type name="org.openehr.rm.datastructures.Cluster">
+            <xml-type name="CLUSTER"/>
+            <java-attributes>
+                <xml-element java-attribute="items" name="items" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.Element">
+            <xml-type name="ELEMENT" prop-order="value nullFlavour"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value"/>
+                <xml-element java-attribute="nullFlavour" name="null_flavour"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.Event">
+            <xml-type name="EVENT" prop-order="time data state"/>
+            <java-attributes>
+                <xml-element java-attribute="time" name="time" required="true"/>
+                <xml-element java-attribute="data" name="data" required="true"/>
+                <xml-element java-attribute="state" name="state"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.History">
+            <xml-type name="HISTORY" prop-order="origin period duration events summary"/>
+            <java-attributes>
+                <xml-element java-attribute="origin" name="origin" required="true"/>
+                <xml-element java-attribute="period" name="period"/>
+                <xml-element java-attribute="duration" name="duration"/>
+                <xml-element java-attribute="events" name="events" nillable="true"/>
+                <xml-element java-attribute="summary" name="summary"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.IntervalEvent">
+            <xml-type name="INTERVAL_EVENT" prop-order="width sampleCount mathFunction"/>
+            <java-attributes>
+                <xml-element java-attribute="width" name="width" required="true"/>
+                <xml-element java-attribute="sampleCount" name="sample_count"/>
+                <xml-element java-attribute="mathFunction" name="math_function" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.Item">
+            <xml-type name="ITEM"/>
+            <java-attributes/>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.ItemList">
+            <xml-type name="ITEM_LIST"/>
+            <java-attributes>
+                <xml-element java-attribute="items" name="items" nillable="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.ItemSingle">
+            <xml-type name="ITEM_SINGLE"/>
+            <java-attributes>
+                <xml-element java-attribute="item" name="item" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.ItemStructure">
+            <xml-type name="ITEM_STRUCTURE"/>
+            <java-attributes/>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.ItemTable">
+            <xml-type name="ITEM_TABLE"/>
+            <java-attributes>
+                <xml-element java-attribute="rows" name="rows" nillable="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.ItemTree">
+            <xml-type name="ITEM_TREE"/>
+            <java-attributes>
+                <xml-element java-attribute="items" name="items" nillable="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datastructures.PointEvent">
+            <xml-type name="POINT_EVENT"/>
+            <java-attributes/>
+        </java-type>
+    </java-types>
+</xml-bindings>

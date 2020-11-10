@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.rm.datatypes">
+    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
+    </xml-schema>
+    <xml-enums/>
+    <java-types>
+        <java-type name="org.openehr.rm.datatypes.CodePhrase">
+            <xml-type name="CODE_PHRASE" prop-order="terminologyId codeString"/>
+            <java-attributes>
+                <xml-element java-attribute="terminologyId" name="terminology_id" required="true"/>
+                <xml-element java-attribute="codeString" name="code_string" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DataValue">
+            <xml-type name="DATA_VALUE"/>
+            <java-attributes/>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvAmount">
+            <xml-type name="DV_AMOUNT" prop-order="accuracy accuracyIsPercent"/>
+            <java-attributes>
+                <xml-element java-attribute="accuracy" name="accuracy"/>
+                <xml-element java-attribute="accuracyIsPercent" name="accuracy_is_percent"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvBoolean">
+            <xml-type name="DV_BOOLEAN"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvCodedText">
+            <xml-type name="DV_CODED_TEXT"/>
+            <java-attributes>
+                <xml-element java-attribute="definingCode" name="defining_code" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvCount">
+            <xml-type name="DV_COUNT"/>
+            <java-attributes>
+                <xml-element java-attribute="magnitude" name="magnitude" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvDate">
+            <xml-type name="DV_DATE"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvDateTime">
+            <xml-type name="DV_DATE_TIME"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvDuration">
+            <xml-type name="DV_DURATION"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvEhrUri">
+            <xml-type name="DV_EHR_URI"/>
+            <java-attributes/>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvEncapsulated">
+            <xml-type name="DV_ENCAPSULATED" prop-order="charset language"/>
+            <java-attributes>
+                <xml-element java-attribute="charset" name="charset"/>
+                <xml-element java-attribute="language" name="language"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvGeneralTimeSpecification">
+            <xml-type name="DV_GENERAL_TIME_SPECIFICATION"/>
+            <java-attributes/>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvIdentifier">
+            <xml-type name="DV_IDENTIFIER" prop-order="issuer assigner id type"/>
+            <java-attributes>
+                <xml-element java-attribute="issuer" name="issuer"/>
+                <xml-element java-attribute="assigner" name="assigner"/>
+                <xml-element java-attribute="id" name="id" required="true"/>
+                <xml-element java-attribute="type" name="type"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvInterval">
+            <xml-type name="DV_INTERVAL" prop-order="lower upper lowerIncluded upperIncluded lowerUnbounded upperUnbounded"/>
+            <java-attributes>
+                <xml-element java-attribute="lower" name="lower"/>
+                <xml-element java-attribute="upper" name="upper"/>
+                <xml-element java-attribute="lowerIncluded" name="lower_included"/>
+                <xml-element java-attribute="upperIncluded" name="upper_included"/>
+                <xml-element java-attribute="lowerUnbounded" name="lower_unbounded" required="true"/>
+                <xml-element java-attribute="upperUnbounded" name="upper_unbounded" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvMultimedia">
+            <xml-type name="DV_MULTIMEDIA" prop-order="alternateText uri data mediaType compressionAlgorithm integrityCheck integrityCheckAlgorithm size thumbnail"/>
+            <java-attributes>
+                <xml-element java-attribute="alternateText" name="alternate_text"/>
+                <xml-element java-attribute="uri" name="uri"/>
+                <xml-element java-attribute="data" name="data"/>
+                <xml-element java-attribute="mediaType" name="media_type" required="true"/>
+                <xml-element java-attribute="compressionAlgorithm" name="compression_algorithm"/>
+                <xml-element java-attribute="integrityCheck" name="integrity_check"/>
+                <xml-element java-attribute="integrityCheckAlgorithm" name="integrity_check_algorithm"/>
+                <xml-element java-attribute="size" name="size" required="true"/>
+                <xml-element java-attribute="thumbnail" name="thumbnail"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvOrdered">
+            <xml-type name="DV_ORDERED" prop-order="normalRange otherReferenceRanges normalStatus"/>
+            <java-attributes>
+                <xml-element java-attribute="normalRange" name="normal_range"/>
+                <xml-element java-attribute="otherReferenceRanges" name="other_reference_ranges"/>
+                <xml-element java-attribute="normalStatus" name="normal_status"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvOrdinal">
+            <xml-type name="DV_ORDINAL" prop-order="value symbol"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+                <xml-element java-attribute="symbol" name="symbol" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvParagraph">
+            <xml-type name="DV_PARAGRAPH"/>
+            <java-attributes>
+                <xml-element java-attribute="items" name="items" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvParsable">
+            <xml-type name="DV_PARSABLE" prop-order="value formalism"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+                <xml-element java-attribute="formalism" name="formalism" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvPeriodicTimeSpecification">
+            <xml-type name="DV_PERIODIC_TIME_SPECIFICATION"/>
+            <java-attributes/>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvProportion">
+            <xml-type name="DV_PROPORTION" prop-order="numerator denominator type precision"/>
+            <java-attributes>
+                <xml-element java-attribute="numerator" name="numerator" required="true"/>
+                <xml-element java-attribute="denominator" name="denominator" required="true"/>
+                <xml-element java-attribute="type" name="type" required="true"/>
+                <xml-element java-attribute="precision" name="precision"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvQuantified">
+            <xml-type name="DV_QUANTIFIED"/>
+            <java-attributes>
+                <xml-element java-attribute="magnitudeStatus" name="magnitude_status"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvQuantity">
+            <xml-type name="DV_QUANTITY" prop-order="magnitude units precision"/>
+            <java-attributes>
+                <xml-element java-attribute="magnitude" name="magnitude" required="true"/>
+                <xml-element java-attribute="units" name="units" required="true"/>
+                <xml-element java-attribute="precision" name="precision"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvState">
+            <xml-type name="DV_STATE" prop-order="value isTerminal"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+                <xml-element java-attribute="isTerminal" name="is_terminal" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvTemporal">
+            <xml-type name="DV_TEMPORAL"/>
+            <java-attributes>
+                <xml-element java-attribute="accuracy" name="accuracy"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvText">
+            <xml-type name="DV_TEXT" prop-order="value hyperlink formatting mappings language encoding"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+                <xml-element java-attribute="hyperlink" name="hyperlink"/>
+                <xml-element java-attribute="formatting" name="formatting"/>
+                <xml-element java-attribute="mappings" name="mappings" nillable="true"/>
+                <xml-element java-attribute="language" name="language"/>
+                <xml-element java-attribute="encoding" name="encoding"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvTime">
+            <xml-type name="DV_TIME"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvTimeSpecification">
+            <xml-type name="DV_TIME_SPECIFICATION"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.DvUri">
+            <xml-type name="DV_URI"/>
+            <java-attributes>
+                <xml-element java-attribute="value" name="value"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.ReferenceRange">
+            <xml-type name="REFERENCE_RANGE" prop-order="meaning range"/>
+            <java-attributes>
+                <xml-element java-attribute="meaning" name="meaning" required="true"/>
+                <xml-element java-attribute="range" name="range" required="true"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="org.openehr.rm.datatypes.TermMapping">
+            <xml-type name="TERM_MAPPING" prop-order="match purpose target"/>
+            <java-attributes>
+                <xml-element java-attribute="match" name="match" required="true"/>
+                <xml-element java-attribute="purpose" name="purpose"/>
+                <xml-element java-attribute="target" name="target" required="true"/>
+            </java-attributes>
+        </java-type>
+    </java-types>
+</xml-bindings>

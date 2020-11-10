@@ -16,8 +16,6 @@ fun main() {
     val composition = mapper.readValue(jsonString, Composition::class.java)
 
 
-    val ehrStatus = OpenEhrObjectMapper().readValue(OpenEhrObjectMapper().writeValueAsString(EhrStatus()), EhrStatus::class.java)
-
-    //OpenEhrObjectMapper().writeValueAsString(composition)
+    println(OpenEhrObjectMapper().writeValueAsString(composition))
 
 }

@@ -32,7 +32,6 @@ class RmUtils {
 
         fun getAttributeForField(fieldName: String): String = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, fieldName)
 
-
         private fun findClass(name: String): KClass<out RmObject> {
             for (packageName in PACKAGE_NAMES) {
                 try {
