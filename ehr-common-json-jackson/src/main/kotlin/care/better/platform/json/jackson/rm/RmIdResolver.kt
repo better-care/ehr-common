@@ -1,6 +1,7 @@
-package care.better.platform.json.jackson
+package care.better.platform.json.jackson.rm
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.json.jackson.RmUtils
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id
 import com.fasterxml.jackson.databind.DatabindContext
 import com.fasterxml.jackson.databind.JavaType
@@ -17,9 +18,9 @@ import kotlin.reflect.KClass
 /**
  * @author Primoz Delopst
  */
-class RmIdResolver : TypeIdResolver {
+@Suppress("UNCHECKED_CAST")
+class RmIdResolver(private val typeFactory: TypeFactory) : TypeIdResolver {
     private var baseType: JavaType? = null
-    private var typeFactory: TypeFactory? = null
 
     private val rmClassNames = CacheBuilder.newBuilder()
             .maximumSize(1000L)
@@ -29,12 +30,6 @@ class RmIdResolver : TypeIdResolver {
                 }
             })
 
-    constructor() : this(TypeFactory.defaultInstance())
-
-
-    constructor(typeFactory: TypeFactory)  {
-        this.typeFactory = typeFactory
-    }
 
     override fun init(baseType: JavaType?) {
         this.baseType = baseType
@@ -53,9 +48,7 @@ class RmIdResolver : TypeIdResolver {
             }
         }
 
-        // Should really never happen
-        val classNameIdResolver = ClassNameIdResolver(
-                typeFactory!!.constructType(value.javaClass), typeFactory, LaissezFaireSubTypeValidator.instance)
+        val classNameIdResolver = ClassNameIdResolver(typeFactory.constructType(value.javaClass), typeFactory, LaissezFaireSubTypeValidator.instance)
         return classNameIdResolver.idFromValueAndType(value, suggestedType)
     }
 
@@ -67,20 +60,21 @@ class RmIdResolver : TypeIdResolver {
     override fun typeFromId(context: DatabindContext?, id: String?): JavaType? {
         return try {
             val rmClass: Class<out RmObject?> = RmUtils.getRmClass(id!!).java
-            typeFactory!!.constructType(rmClass)
+            typeFactory.constructType(rmClass)
         } catch (ignored: ClassNotFoundException) {
-            // Now try with the regular class type serializer
             val classNameIdResolver = ClassNameIdResolver(
-                    null, if (context != null) context.typeFactory else typeFactory, LaissezFaireSubTypeValidator.instance)
+                    null,
+                    if (context != null)
+                        context.typeFactory
+                    else
+                        typeFactory,
+                    LaissezFaireSubTypeValidator.instance)
             classNameIdResolver.typeFromId(context, id)
         }
     }
 
-    override fun getDescForKnownTypeIds(): String? {
-        return null
-    }
+    override fun getDescForKnownTypeIds(): String? = null
 
-    override fun getMechanism(): Id? {
-        return Id.CUSTOM
-    }
+
+    override fun getMechanism(): Id? = Id.CUSTOM
 }

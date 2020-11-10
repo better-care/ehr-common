@@ -1,4 +1,4 @@
-package care.better.platform.json.jackson
+package care.better.platform.json.jackson.rm
 
 import care.better.openehr.rm.RmObject
 import com.fasterxml.jackson.core.JsonGenerator
@@ -12,9 +12,7 @@ import java.io.IOException
 /**
  * @author Primoz Delopst
  */
-class RmObjectAsPropertyTypeSerializer(idRes: TypeIdResolver?, property: BeanProperty?, propName: String?) :
-        AsPropertyTypeSerializer(idRes, property, propName) {
-
+class RmObjectAsPropertyTypeSerializer(idRes: TypeIdResolver?, property: BeanProperty?, propName: String?) : AsPropertyTypeSerializer(idRes, property, propName) {
 
     override fun forProperty(prop: BeanProperty?): AsPropertyTypeSerializer? =
             if (_property === prop)

@@ -1,6 +1,6 @@
 package care.better.platform.json.jackson.better
 
-import care.better.platform.json.jackson.RmTypeResolverBuilder
+import care.better.platform.json.jackson.rm.RmTypeResolverBuilder
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper

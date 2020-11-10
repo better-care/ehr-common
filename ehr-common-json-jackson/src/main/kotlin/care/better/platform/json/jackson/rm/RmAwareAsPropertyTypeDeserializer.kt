@@ -1,6 +1,7 @@
-package care.better.platform.json.jackson
+package care.better.platform.json.jackson.rm
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.json.jackson.RmUtils
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.core.util.JsonParserSequence
@@ -48,71 +49,71 @@ class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, proper
             typeDeserializer
     }
 
+    @Suppress("UNCHECKED_CAST")
     @Throws(IOException::class)
     override fun deserializeTypedFromObject(p: JsonParser, ctxt: DeserializationContext): Any? {
-        var p = p
-        if (p.canReadTypeId()) {
-            val typeId = p.typeId
+        var jsonParser = p
+        if (jsonParser.canReadTypeId()) {
+            val typeId = jsonParser.typeId
             if (typeId != null) {
-                return _deserializeWithNativeTypeId(p, ctxt, typeId)
+                return _deserializeWithNativeTypeId(jsonParser, ctxt, typeId)
             }
         }
-        var t = p.currentToken
+        var t = jsonParser.currentToken
         if (t == JsonToken.START_OBJECT) {
-            t = p.nextToken()
+            t = jsonParser.nextToken()
         } else if (t != JsonToken.FIELD_NAME) {
-            return _deserializeTypedUsingDefaultImpl(p, ctxt, null)
+            return _deserializeTypedUsingDefaultImpl(jsonParser, ctxt, null)
         }
         var tb: TokenBuffer? = null
         while (t == JsonToken.FIELD_NAME) {
-            val name = p.currentName
-            p.nextToken()
+            val name = jsonParser.currentName
+            jsonParser.nextToken()
             if (name == _typePropertyName) {
-                return _deserializeTypedForId(p, ctxt, tb)
+                return _deserializeTypedForId(jsonParser, ctxt, tb)
             }
             if (tb == null) {
-                tb = TokenBuffer(p, ctxt)
+                tb = TokenBuffer(jsonParser, ctxt)
             }
             tb.writeFieldName(name)
-            tb.copyCurrentStructure(p)
-            t = p.nextToken()
+            tb.copyCurrentStructure(jsonParser)
+            t = jsonParser.nextToken()
         }
         if (tb != null) {
             tb.writeEndObject()
-            p = tb.asParser(p)
-            // must move to point to the first token:
-            p.nextToken()
+            jsonParser = tb.asParser(jsonParser)
+            jsonParser.nextToken()
         }
-        val rawClass: Class<*> = baseType().getRawClass()
+        val rawClass: Class<*> = baseType().rawClass
         if (RmObject::class.java.isAssignableFrom(rawClass)) {
             if (tb != null) {
                 tb.writeEndObject()
-                p = tb.asParser(p)
-                // must move to point to the first token:
-                p.nextToken()
+                jsonParser = tb.asParser(jsonParser)
+                jsonParser.nextToken()
             }
-            return _deserializeTypedForId(p, ctxt, tb!!, RmUtils.getRmTypeName(rawClass.kotlin as KClass<out RmObject>))
+            return deserializeTypedForId(jsonParser, ctxt, tb!!, RmUtils.getRmTypeName(rawClass.kotlin as KClass<out RmObject>))
         }
-        return _deserializeTypedUsingDefaultImpl(p, ctxt, tb)
+        return _deserializeTypedUsingDefaultImpl(jsonParser, ctxt, tb)
     }
 
     @Throws(IOException::class)
-    fun _deserializeTypedForId(p: JsonParser, ctxt: DeserializationContext, tb: TokenBuffer, typeId: String): Any? {
-        var p = p
-        var tb: TokenBuffer? = tb
-        val deser: JsonDeserializer<Any> = _findDeserializer(ctxt, typeId)
+    fun deserializeTypedForId(p: JsonParser, context: DeserializationContext, tb: TokenBuffer, typeId: String): Any? {
+        var jsonParser = p
+        var tokenBuffer: TokenBuffer? = tb
+        val deserializer: JsonDeserializer<Any> = _findDeserializer(context, typeId)
         if (_typeIdVisible) {
-            if (tb == null) {
-                tb = TokenBuffer(p, ctxt)
+            if (tokenBuffer == null) {
+                tokenBuffer = TokenBuffer(jsonParser, context)
             }
-            tb!!.writeFieldName(p.currentName)
-            tb!!.writeString(typeId)
+
+            tokenBuffer.writeFieldName(jsonParser.currentName)
+            tokenBuffer.writeString(typeId)
         }
-        if (tb != null) {
-            p.clearCurrentToken()
-            p = JsonParserSequence.createFlattened(false, tb!!.asParser(p), p)
+        if (tokenBuffer != null) {
+            jsonParser.clearCurrentToken()
+            jsonParser = JsonParserSequence.createFlattened(false, tokenBuffer.asParser(jsonParser), jsonParser)
         }
-        p.nextToken()
-        return deser.deserialize(p, ctxt)
+        jsonParser.nextToken()
+        return deserializer.deserialize(jsonParser, context)
     }
 }

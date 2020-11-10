@@ -1,4 +1,4 @@
-package care.better.platform.json.jackson
+package care.better.platform.json.jackson.rm
 
 import care.better.openehr.rm.RmObject
 import com.fasterxml.jackson.annotation.JsonTypeInfo
@@ -23,7 +23,7 @@ class RmTypeResolverBuilder(defaultTyping: DefaultTyping) : ObjectMapper.Default
                 _idType == Id.NONE -> null
                 !useForType(baseType) -> null
                 _includeAs == JsonTypeInfo.As.PROPERTY -> {
-                    val idRes: TypeIdResolver = idResolver(config, baseType, LaissezFaireSubTypeValidator.instance, subtypes, true, false)
+                    val idRes: TypeIdResolver = idResolver(config, baseType, LaissezFaireSubTypeValidator.instance, subtypes, forSer = true, forDeser = false)
                     RmObjectAsPropertyTypeSerializer(idRes, null, _typeProperty)
                 }
                 else -> super.buildTypeSerializer(config, baseType, subtypes)
