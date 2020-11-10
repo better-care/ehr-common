@@ -1,13 +1,13 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class CalendarEntry : RmObject() {
+class CalendarEntry : RmObject(), Serializable {
 
+    override fun toString(): String = "CalendarEntry{}"
 }

@@ -8,8 +8,7 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
  */
 abstract class ContextValue<T>() : RmObject(), VisitableByModelVisitor {
     lateinit var name: String
-    lateinit var type: ExprTypeDef<T>
-
+    private lateinit var type: ExprTypeDef<T>
 
     protected constructor(type: ExprTypeDef<T>) : this() {
         this.type = type
@@ -18,4 +17,16 @@ abstract class ContextValue<T>() : RmObject(), VisitableByModelVisitor {
     protected constructor(name: String, type: ExprTypeDef<T>) : this(type) {
         this.name = name
     }
+
+    open fun getType(): ExprTypeDef<T> = type
+
+    open fun setType(type: ExprTypeDef<T>) {
+        this.type = type
+    }
+
+    override fun toString(): String =
+            "ContextValue{" +
+                    "name='$name'" +
+                    ", type=$type" +
+                    "} ${super.toString()}"
 }
