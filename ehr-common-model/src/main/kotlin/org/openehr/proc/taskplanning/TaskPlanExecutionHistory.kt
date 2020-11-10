@@ -9,7 +9,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class TaskPlanExecutionHistory : RmObject() {
-    val taskEvents: MutableList<TaskEventRecord> = mutableListOf()
+    var taskEvents: MutableList<TaskEventRecord> = mutableListOf()
+    var planEvents: MutableList<TaskPlanEventRecord> = mutableListOf()
 
-    val planEvents: MutableList<TaskPlanEventRecord> = mutableListOf()
+    fun addTaskEvent(taskEvent: TaskEventRecord): TaskPlanExecutionHistory = taskEvents.add(taskEvent).let { this }
+
+    fun addPlanEvent(planEvent: TaskPlanEventRecord): TaskPlanExecutionHistory = planEvents.add(planEvent).let { this }
+
+    override fun toString(): String =
+            "TaskPlanExecutionHistory{" +
+                    "taskEvents= $taskEvents" +
+                    ", planEvents= $planEvents" +
+                    '}'
 }

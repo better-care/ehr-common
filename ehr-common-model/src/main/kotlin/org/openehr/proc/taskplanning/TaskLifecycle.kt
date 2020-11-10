@@ -11,4 +11,6 @@ enum class TaskLifecycle(val code: Int) : EnumerationInteger, EnumerationString 
     COMPLETED(8),
     SUSPENDED(6),
     UNDERWAY(5);
+
+    override fun integerValue(): Int = code
 }

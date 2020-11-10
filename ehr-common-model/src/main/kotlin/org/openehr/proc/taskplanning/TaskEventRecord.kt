@@ -8,7 +8,7 @@ import org.openehr.base.basetypes.LocatableRef
  */
 
 @Serializable
-class TaskEventRecord : EventRecord() {
+class TaskEventRecord : EventRecord {
     lateinit var taskId: String
     lateinit var lifecycleState: TaskLifecycle
     var notificationsSent: MutableList<TaskNotificationRecord> = mutableListOf()
@@ -16,4 +16,26 @@ class TaskEventRecord : EventRecord() {
     var preconditionsSatisfied = false
     var waitConditionsSatisfied = false
     var lifecycleTransitionReason: String? = null
+
+    constructor() : super()
+
+    constructor(time: String, taskId: String, lifecycleState: TaskLifecycle) : super(time) {
+        this.taskId = taskId
+        this.lifecycleState = lifecycleState
+    }
+
+    fun addNotificationSet(notificationSent: TaskNotificationRecord): TaskEventRecord = notificationsSent.add(notificationSent).let { this }
+
+    fun addEntryInstance(entryInstance: LocatableRef): TaskEventRecord = entryInstances.add(entryInstance).let { this }
+
+    override fun toString(): String =
+            "TaskEventRecord{" +
+                    "taskId='$taskId'" +
+                    ", lifecycleState=$lifecycleState" +
+                    ", notificationsSent=$notificationsSent" + notificationsSent +
+                    ", entryInstances=$entryInstances" + entryInstances +
+                    ", preconditionsSatisfied=$preconditionsSatisfied" +
+                    ", waitConditionsSatisfied=$waitConditionsSatisfied" +
+                    ", lifecycleTransitionReason='$lifecycleTransitionReason'" +
+                    "} ${super.toString()}"
 }
