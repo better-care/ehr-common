@@ -3,5 +3,8 @@ package org.openehr.proc.taskplanning
 /**
  * @author Primoz Delopst
  */
-class ResumeType {
+enum class ResumeType : EnumerationInteger, EnumerationString {
+    RESUME_SPECIFIED,
+    RETRY_CURRENT_GROUP,
+    NEW_THREAD;
 }

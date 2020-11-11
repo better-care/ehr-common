@@ -24,4 +24,9 @@ class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
         visitor.afterAccept(this)
     }
 
+    override fun toString(): String =
+            "DatasetCommitGroup{" +
+                "groupId='$groupId'" +
+                ", completionStep=$completionStep" +
+                '}'
 }

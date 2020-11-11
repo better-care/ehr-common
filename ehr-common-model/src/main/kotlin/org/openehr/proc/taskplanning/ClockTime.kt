@@ -1,12 +1,18 @@
 package org.openehr.proc.taskplanning
 
-import kotlinx.serialization.Serializable
-
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class ClockTime : TimeSpecifier() {
+class ClockTime() : TimeSpecifier() {
     lateinit var time: String
+
+    constructor(time: String) : this() {
+        this.time = time
+    }
+
+    override fun toString(): String =
+            "ClockTime{" +
+                    "time=$time" +
+                    "} ${super.toString()}"
 }

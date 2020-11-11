@@ -23,7 +23,6 @@ open class ContextExpression<T> : ContextValue<T> {
         visitor.afterAccept(this)
     }
 
-
     override fun toString(): String =
             "ContextExpression{" +
                     "expression='$expression'" +

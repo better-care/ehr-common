@@ -18,9 +18,9 @@ class CaptureDatasetSpec : DatasetSpec() {
         visitor.afterAccept(this)
     }
 
-    override fun toString(): String? {
-        return "CaptureDatasetSpec{" +
-                "commitGroup=$commitGroup" +
-                "} ${super.toString()}"
-    }
+    override fun toString(): String =
+            "CaptureDatasetSpec{" +
+                    "commitGroup=$commitGroup" +
+                    "} ${super.toString()}"
+
 }

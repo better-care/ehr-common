@@ -18,7 +18,7 @@ class TaskPlanExecutionHistory : RmObject() {
 
     override fun toString(): String =
             "TaskPlanExecutionHistory{" +
-                    "taskEvents= $taskEvents" +
-                    ", planEvents= $planEvents" +
+                    "taskEvents=$taskEvents" +
+                    ", planEvents=$planEvents" +
                     '}'
 }

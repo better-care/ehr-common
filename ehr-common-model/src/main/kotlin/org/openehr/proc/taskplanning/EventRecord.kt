@@ -21,7 +21,7 @@ abstract class EventRecord constructor() : RmObject(), Serializable {
 
     override fun toString(): String =
             "EventRecord{" +
-                    "time=$time" + time +
+                    "time=$time" +
                     ", description='$description'" +
                     '}'
 }

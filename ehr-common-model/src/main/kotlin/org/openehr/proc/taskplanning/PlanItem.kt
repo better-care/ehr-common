@@ -15,7 +15,7 @@ abstract class PlanItem : Locatable, VisitableByModelVisitor {
     lateinit var description: DvText
     var repeatSpec: TaskRepeat? = null
     var otherDetails: ItemStructure? = null
-    var waitSpec: TaskWait? = null
+    private var waitSpec: TaskWait? = null
     var reviewDataset: MutableList<ReviewDatasetSpec> = mutableListOf()
     var classification: ItemStructure? = null
     var guidelineStep: String? = null
@@ -27,13 +27,18 @@ abstract class PlanItem : Locatable, VisitableByModelVisitor {
         this.description = description
     }
 
-    protected constructor(description: DvText, repeatSpec: TaskRepeat, waitSpec: TaskWait) : this(description) {
+    protected constructor(description: DvText, repeatSpec: TaskRepeat?, waitSpec: TaskWait?) : this(description) {
         this.repeatSpec = repeatSpec
         this.waitSpec = waitSpec
     }
 
-    fun addReviewDataset(reviewDataset: ReviewDatasetSpec): PlanItem = this.reviewDataset.add(reviewDataset).let { this }
+    fun getWaitSpec(): TaskWait? = waitSpec
 
+    open fun setWaitSpec(waitSpec: TaskWait?) {
+        this.waitSpec = waitSpec
+    }
+
+    fun addReviewDataset(reviewDataset: ReviewDatasetSpec): PlanItem = this.reviewDataset.add(reviewDataset).let { this }
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

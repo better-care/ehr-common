@@ -3,5 +3,8 @@ package org.openehr.proc.taskplanning
 /**
  * @author Primoz Delopst
  */
-class ValidityKind {
+enum class ValidityKind : EnumerationInteger, EnumerationString {
+    MANDATORY,
+    OPTIONAL,
+    PROHIBITED;
 }

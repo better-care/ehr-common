@@ -21,6 +21,6 @@ abstract class ExprTypeDef<T> constructor(val typeName: String) : RmObject(), Se
 
     override fun toString(): String =
             "ExprTypeDef{" +
-                    "typeName='" + typeName + '\'' +
+                    "typeName='$typeName'" +
                     '}'
 }

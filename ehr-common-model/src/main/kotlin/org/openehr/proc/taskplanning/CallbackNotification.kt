@@ -8,13 +8,35 @@ import org.openehr.base.basetypes.UidBasedId
  */
 
 @Serializable
-class CallbackNotification : PlanEvent(), TaskReferencingEvent {
+class CallbackNotification constructor() : PlanEvent(), TaskReferencingEvent {
 
-    lateinit var taskId: UidBasedId
+    private lateinit var taskId: UidBasedId
 
     var requestId: String? = null
 
     var subjectId: String? = null
 
     var manuallyNotified: Boolean? = null
+
+    constructor(taskId: UidBasedId) : this() {
+        this.taskId = taskId
+    }
+
+    constructor(taskId: UidBasedId, requestId: String) : this(taskId) {
+        this.requestId = requestId
+    }
+
+    override fun getTaskId(): UidBasedId = taskId
+
+    fun setTaskId(taskId: UidBasedId) {
+        this.taskId = taskId
+    }
+
+    override fun toString(): String =
+            "CallbackNotification{" +
+                    "taskId=" +
+                    ", requestId='$requestId'" +
+                    ", subjectId='$subjectId'" +
+                    ", manuallyNotified=$manuallyNotified'" +
+                    "} ${super.toString()}"
 }

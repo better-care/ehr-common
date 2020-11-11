@@ -31,7 +31,7 @@ class ParameterDef<T : Any> constructor() : RmObject(), Serializable, VisitableB
 
     override fun toString(): String =
             "ParameterDef{" +
-                    "name='$name" +
+                    "name='$name'" +
                     ", type=$type" +
                     ", value=$value" +
                     "} ${super.toString()}"
