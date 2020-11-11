@@ -293,8 +293,11 @@
         <java-type name="org.openehr.proc.taskplanning.OrderRef">
             <xml-type name="ORDER_REF" prop-order="orderTag instructionArchetypeId actionArchetypeId orderRef"/>
             <java-attributes>
+                <xml-java-type-adapter java-attribute="orderTag" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
                 <xml-element java-attribute="orderTag" name="orderTag" required="true"/>
+                <xml-java-type-adapter java-attribute="instructionArchetypeId" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
                 <xml-element java-attribute="instructionArchetypeId" name="instructionArchetypeId"/>
+                <xml-java-type-adapter java-attribute="actionArchetypeId" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
                 <xml-element java-attribute="actionArchetypeId" name="actionArchetypeId"/>
                 <xml-element java-attribute="orderRef" name="order_ref"/>
             </java-attributes>
@@ -598,6 +601,7 @@
             <xml-type name="CALLBACK_WAIT" prop-order="failAction customActions"/>
             <java-attributes>
                 <xml-element java-attribute="failAction" name="event_action"/>
+                <xml-java-type-adapter java-attribute="customActions" value="care.better.platform.moxy.adapter.MapStringAdapter"
                 <xml-element java-attribute="customActions" name="custom_action"/>
             </java-attributes>
         </java-type>
@@ -637,6 +641,7 @@
         <java-type name="org.openehr.proc.taskplanning.DatasetCommitGroup">
             <xml-type name="DATASET_COMMIT_GROUP" prop-order="groupId completionStep"/>
             <java-attributes>
+                <xml-java-type-adapter java-attribute="groupId" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
                 <xml-element java-attribute="groupId" name="group_id" required="true"/>
                 <xml-element java-attribute="completionStep" name="completion_step" required="true"/>
             </java-attributes>
@@ -653,12 +658,14 @@
             <java-attributes>
                 <xml-element java-attribute="receiver" name="receiver" required="true"/>
                 <xml-element java-attribute="receiverTaskPlan" name="receiver_task_plan" required="true"/>
+                <xml-java-type-adapter java-attribute="details" value="care.better.platform.moxy.adapter.MapStringAdapter"/>
                 <xml-element java-attribute="details" name="details"/>
             </java-attributes>
         </java-type>
         <java-type name="org.openehr.proc.taskplanning.TaskPlanEventRecord">
             <xml-type name="TASK_PLAN_EVENT_RECORD"/>
             <java-attributes>
+                <xml-java-type-adapter java-attribute="details" value="care.better.platform.moxy.adapter.MapStringAdapter"/>
                 <xml-element java-attribute="details" name="details" required="true"/>
             </java-attributes>
         </java-type>

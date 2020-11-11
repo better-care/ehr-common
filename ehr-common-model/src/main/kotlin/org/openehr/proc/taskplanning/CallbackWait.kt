@@ -6,7 +6,7 @@ package org.openehr.proc.taskplanning
 class CallbackWait : EventWait<CallbackNotification> {
 
     var failAction: EventAction? = null
-    var customActions: Map<String, EventAction>? = null
+    var customActions: MutableMap<String, EventAction> = mutableMapOf()
 
     constructor() : super()
 

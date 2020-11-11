@@ -32,6 +32,7 @@
         <java-type name="org.openehr.base.basetypes.ObjectId">
             <xml-type name="OBJECT_ID"/>
             <java-attributes>
+                <xml-java-type-adapter java-attribute="value" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
                 <xml-element java-attribute="value" name="value" required="true"/>
             </java-attributes>
         </java-type>
@@ -39,7 +40,9 @@
             <xml-type name="OBJECT_REF" prop-order="id namespace type"/>
             <java-attributes>
                 <xml-element java-attribute="id" name="id" required="true"/>
+                <xml-java-type-adapter java-attribute="namespace" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
                 <xml-element java-attribute="namespace" name="namespace" required="true"/>
+                <xml-java-type-adapter java-attribute="type" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
                 <xml-element java-attribute="type" name="type" required="true"/>
             </java-attributes>
         </java-type>
