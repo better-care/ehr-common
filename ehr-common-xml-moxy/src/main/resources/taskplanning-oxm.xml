@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.proc.taskplanning">
+    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
+    </xml-schema>
     <xml-enums>
         <xml-enum java-enum="org.openehr.proc.taskplanning.PlanTimeOrigin">
             <xml-enum-value java-enum-value="CURRENT_WORK_PLAN">CURRENT_WORK_PLAN</xml-enum-value>
