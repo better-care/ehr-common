@@ -1,15 +1,14 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectVersionId
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class RevisionHistoryItem : RmObject() {
+class RevisionHistoryItem : RmObject(), Serializable {
     lateinit var versionId: ObjectVersionId
     var audits: MutableList<AuditDetails> = mutableListOf()
 }

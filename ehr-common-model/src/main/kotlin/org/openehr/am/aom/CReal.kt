@@ -1,14 +1,13 @@
 package org.openehr.am.aom
 
-import kotlinx.serialization.Serializable
 import org.openehr.base.foundationtypes.IntervalOfReal
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class CReal : CPrimitive() {
+class CReal : CPrimitive(), Serializable {
     var list: MutableList<Float> = mutableListOf()
     var range: IntervalOfReal? = null
     var assumedValue: Float? = null

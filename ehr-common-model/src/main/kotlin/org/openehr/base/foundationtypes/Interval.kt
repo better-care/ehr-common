@@ -1,14 +1,13 @@
 package org.openehr.base.foundationtypes
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-abstract class Interval : RmObject() {
+abstract class Interval : RmObject(), Serializable {
     var lowerIncluded: Boolean? = null
     var upperIncluded: Boolean? = null
     var lowerUnbounded = false

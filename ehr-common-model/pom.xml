@@ -11,11 +11,4 @@
 
     <artifactId>ehr-common-model</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>kotlinx-serialization-core-jvm</artifactId>
-        </dependency>
-    </dependencies>
-
 </project>

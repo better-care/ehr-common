@@ -1,12 +1,9 @@
 package org.openehr.rm.datatypes
 
-import kotlinx.serialization.Serializable
-
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
 open class DvText : DataValue() {
     lateinit var value: String
     var hyperlink: DvUri? = null

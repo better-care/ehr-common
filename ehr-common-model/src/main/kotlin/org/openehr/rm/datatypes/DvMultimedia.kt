@@ -1,12 +1,9 @@
 package org.openehr.rm.datatypes
 
-import kotlinx.serialization.Serializable
-
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
 class DvMultimedia : DvEncapsulated() {
     var alternateText: String? = null
     var uri: DvUri? = null

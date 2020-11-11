@@ -5,4 +5,4 @@ package care.better.platform.annotation
  */
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Name(val name: String)
+annotation class OpenEhrName(val name: String)

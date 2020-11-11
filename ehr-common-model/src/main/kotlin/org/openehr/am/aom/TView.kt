@@ -1,25 +1,20 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class TView : AmObject() {
+class TView : AmObject(), Serializable {
     var constraints: MutableList<Constraints> = mutableListOf()
 
-    @Serializable
-    class Constraints : AmObject(){
+    class Constraints : AmObject(), Serializable {
         var items: MutableList<Items> = mutableListOf()
         lateinit var path: String
 
-        @Serializable
-        class Items : AmObject(){
-            @Contextual
+        class Items : AmObject(), Serializable {
             lateinit var value: Any
             lateinit var id: String
         }

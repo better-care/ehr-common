@@ -1,14 +1,13 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class ResourceDescription : RmObject() {
+class ResourceDescription : RmObject(), Serializable {
     var originalAuthor: MutableList<StringDictionaryItem> = mutableListOf()
     var otherContributors: MutableList<String> = mutableListOf()
     lateinit var lifecycleState: String

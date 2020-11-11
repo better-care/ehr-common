@@ -1,7 +1,6 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.rm.common.PartyProxy
 import java.util.*
 
@@ -9,7 +8,6 @@ import java.util.*
  * @author Primoz Delopst
  */
 
-@Serializable
 class TaskNotificationRecord constructor() : RmObject() {
     lateinit var receiver: PartyProxy
     lateinit var receiverTaskPlan: String

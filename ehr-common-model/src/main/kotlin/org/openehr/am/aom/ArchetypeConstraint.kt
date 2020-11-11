@@ -1,11 +1,10 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-abstract class ArchetypeConstraint : AmObject()
+abstract class ArchetypeConstraint : AmObject(), Serializable

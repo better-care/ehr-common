@@ -1,15 +1,14 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Serializable
 import org.openehr.rm.common.StringDictionaryItem
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class Annotation : AmObject() {
+class Annotation : AmObject(), Serializable {
     var items: MutableList<StringDictionaryItem> = mutableListOf()
     lateinit var path: String
 }

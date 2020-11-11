@@ -1,14 +1,13 @@
 package org.openehr.base.basetypes
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-open class ObjectRef : RmObject() {
+open class ObjectRef : RmObject(), Serializable {
     lateinit var id: ObjectId
     lateinit var namespace: String
     val type: String? = null

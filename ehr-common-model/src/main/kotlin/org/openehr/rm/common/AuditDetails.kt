@@ -1,17 +1,16 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvText
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-open class AuditDetails : RmObject() {
+open class AuditDetails : RmObject(), Serializable {
     lateinit var systemId: String
     lateinit var committer: PartyProxy
     lateinit var timeCommitted: DvDateTime

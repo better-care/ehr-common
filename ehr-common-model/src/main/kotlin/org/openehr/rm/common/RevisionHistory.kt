@@ -1,13 +1,12 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class RevisionHistory : RmObject() {
+class RevisionHistory : RmObject(), Serializable {
     var items: MutableList<RevisionHistoryItem> = mutableListOf()
 }

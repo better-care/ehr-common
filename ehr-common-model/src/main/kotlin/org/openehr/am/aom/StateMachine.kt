@@ -1,13 +1,12 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class StateMachine : AmObject() {
+class StateMachine : AmObject(), Serializable {
     var states: MutableList<State> = mutableListOf()
 }

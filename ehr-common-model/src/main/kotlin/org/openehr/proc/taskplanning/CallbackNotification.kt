@@ -1,13 +1,11 @@
 package org.openehr.proc.taskplanning
 
-import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.UidBasedId
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
 class CallbackNotification constructor() : PlanEvent(), TaskReferencingEvent {
 
     private lateinit var taskId: UidBasedId

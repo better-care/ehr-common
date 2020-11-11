@@ -1,6 +1,5 @@
 package org.openehr.rm.composition
 
-import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.CodePhrase
@@ -10,7 +9,6 @@ import org.openehr.rm.datatypes.DvCodedText
  * @author Primoz Delopst
  */
 
-@Serializable
 class Composition : Locatable() {
     lateinit var language: CodePhrase
     lateinit var territory: CodePhrase

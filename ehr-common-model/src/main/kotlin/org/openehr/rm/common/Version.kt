@@ -1,15 +1,14 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectRef
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-abstract class Version : RmObject() {
+abstract class Version : RmObject(), Serializable {
     lateinit var contribution: ObjectRef
     lateinit var commitAudit: AuditDetails
     var signature: String? = null

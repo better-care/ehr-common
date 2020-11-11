@@ -1,13 +1,12 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-abstract class State : AmObject() {
+abstract class State : AmObject(), Serializable {
     lateinit var name: String
 }

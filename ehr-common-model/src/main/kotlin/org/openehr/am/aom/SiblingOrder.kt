@@ -1,14 +1,13 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class SiblingOrder : AmObject() {
+class SiblingOrder : AmObject(), Serializable {
     var isBefore = false
     lateinit var siblingNodeId: String
 }

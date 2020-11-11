@@ -1,14 +1,13 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class TermMapping : RmObject() {
+class TermMapping : RmObject(), Serializable {
     var match: String = "?"
     var purpose: DvCodedText? = null
     lateinit var target: CodePhrase

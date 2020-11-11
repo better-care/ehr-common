@@ -1,19 +1,18 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.base.basetypes.TemplateId
 import org.openehr.rm.common.ResourceDescription
 import org.openehr.rm.common.RevisionHistory
 import org.openehr.rm.datatypes.CodePhrase
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class Template : AmObject() {
+class Template : AmObject(), Serializable {
     lateinit var language: CodePhrase
     var isControlled: Boolean? = null
     var description: ResourceDescription? = null

@@ -1,15 +1,14 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvDateTime
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class FeederAuditDetails : RmObject() {
+class FeederAuditDetails : RmObject(), Serializable {
     lateinit var systemId: String
     var location: PartyIdentified? = null
     var provider: PartyIdentified? = null

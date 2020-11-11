@@ -1,15 +1,14 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.CodePhrase
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class ResourceDescriptionItem : RmObject() {
+class ResourceDescriptionItem : RmObject(), Serializable {
     lateinit var language: CodePhrase
     lateinit var purpose: String
     var keywords: MutableList<String> = mutableListOf()

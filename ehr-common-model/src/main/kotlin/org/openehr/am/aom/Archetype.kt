@@ -1,6 +1,5 @@
 package org.openehr.am.aom
 
-import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.common.AuthoredResource
@@ -9,7 +8,6 @@ import org.openehr.rm.common.AuthoredResource
  * @author Primoz Delopst
  */
 
-@Serializable
 class Archetype : AuthoredResource() {
     var uid: HierObjectId? = null
     lateinit var archetypeId: ArchetypeId

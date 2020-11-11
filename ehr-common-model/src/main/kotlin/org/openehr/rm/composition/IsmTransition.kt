@@ -1,16 +1,15 @@
 package org.openehr.rm.composition
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class IsmTransition : RmObject() {
+class IsmTransition : RmObject(), Serializable {
     lateinit var currentState: DvCodedText
     var transition: DvCodedText? = null
     var careflowStep: DvCodedText? = null

@@ -1,16 +1,15 @@
 package org.openehr.rm.ehr
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.datatypes.DvDateTime
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class Ehr : RmObject() {
+class Ehr : RmObject(), Serializable {
     var systemId: HierObjectId? = null
     var ehrId: HierObjectId? = null
     var timeCreated: DvDateTime? = null

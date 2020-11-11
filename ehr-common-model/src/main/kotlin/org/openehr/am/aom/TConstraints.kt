@@ -1,13 +1,12 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-class TConstraints : AmObject() {
+class TConstraints : AmObject(), Serializable{
     var attributes: MutableList<TAttribute> = mutableListOf()
 }

@@ -1,14 +1,13 @@
 package org.openehr.base.basetypes
 
 import care.better.openehr.rm.RmObject
-import kotlinx.serialization.Serializable
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Serializable
-abstract class ObjectId : RmObject() {
+abstract class ObjectId : RmObject(), Serializable {
     lateinit var value: String
 }
 
