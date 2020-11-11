@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotEmpty
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -8,6 +9,7 @@ import org.openehr.rm.datatypes.DvText
  */
 open class TaskGroup<I : PlanItem> : PlanItem {
 
+    @RequiresNotEmpty
     var members: MutableList<I> = mutableListOf()
     private var executionType: ExecutionType? = null
     var trainingLevel: Int? = null

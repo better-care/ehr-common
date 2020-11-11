@@ -1,6 +1,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotEmpty
 import org.openehr.base.basetypes.ObjectVersionId
 import java.io.Serializable
 
@@ -10,5 +11,6 @@ import java.io.Serializable
 
 class RevisionHistoryItem : RmObject(), Serializable {
     lateinit var versionId: ObjectVersionId
+    @RequiresNotEmpty
     var audits: MutableList<AuditDetails> = mutableListOf()
 }

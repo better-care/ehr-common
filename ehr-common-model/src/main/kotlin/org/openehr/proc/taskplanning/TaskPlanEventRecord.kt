@@ -1,10 +1,14 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotEmpty
+
 /**
  * @author Primoz Delopst
  */
 
 class TaskPlanEventRecord : EventRecord {
+
+    @RequiresNotEmpty
     val details: LinkedHashMap<String, String> = LinkedHashMap()
 
     constructor() : super()
