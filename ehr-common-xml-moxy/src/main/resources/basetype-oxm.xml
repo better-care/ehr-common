@@ -1,70 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.base.basetypes">
-    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
-        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
-    </xml-schema>
-    <xml-enums/>
-    <java-types>
-        <java-type name="org.openehr.base.basetypes.AccessGroupRef">
-            <xml-type name="ACCESS_GROUP_REF"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.ArchetypeId">
-            <xml-type name="ARCHETYPE_ID"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.GenericId">
-            <xml-type name="GENERIC_ID"/>
-            <java-attributes>
-                <xml-element java-attribute="scheme" name="scheme" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.HierObjectId">
-            <xml-type name="HIER_OBJECT_ID"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.LocatableRef">
-            <xml-type name="LOCATABLE_REF"/>
-            <java-attributes>
-                <xml-element java-attribute="path" name="path"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.ObjectId">
-            <xml-type name="OBJECT_ID"/>
-            <java-attributes>
-                <xml-java-type-adapter java-attribute="value" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
-                <xml-element java-attribute="value" name="value" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.ObjectRef">
-            <xml-type name="OBJECT_REF" prop-order="id namespace type"/>
-            <java-attributes>
-                <xml-element java-attribute="id" name="id" required="true"/>
-                <xml-java-type-adapter java-attribute="namespace" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
-                <xml-element java-attribute="namespace" name="namespace" required="true"/>
-                <xml-java-type-adapter java-attribute="type" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
-                <xml-element java-attribute="type" name="type" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.ObjectVersionId">
-            <xml-type name="OBJECT_VERSION_ID"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.PartyRef">
-            <xml-type name="PARTY_REF"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.TemplateId">
-            <xml-type name="TEMPLATE_ID"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.TerminologyId">
-            <xml-type name="TERMINOLOGY_ID"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.base.basetypes.UidBasedId">
-            <xml-type name="UID_BASED_ID"/>
-            <java-attributes/>
-        </java-type>
-    </java-types>
+<xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.base.basetype">
+   <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+      <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""/>
+   </xml-schema>
+   <xml-enums/>
+   <java-types>
+      <java-type name="org.openehr.base.basetypes.ObjectVersionId" xml-accessor-type="FIELD">
+         <xml-type name="OBJECT_VERSION_ID" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.ObjectId" xml-accessor-type="FIELD">
+         <xml-type name="OBJECT_ID" prop-order="value"/>
+         <xml-see-also>org.openehr.base.basetypes.ArchetypeId org.openehr.base.basetypes.TemplateId org.openehr.base.basetypes.TerminologyId org.openehr.base.basetypes.UidBasedId org.openehr.base.basetypes.GenericId</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="value" name="value" required="true">
+               <xml-java-type-adapter value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+               <xml-schema-type name="token"/>
+            </xml-element>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.TemplateId" xml-accessor-type="FIELD">
+         <xml-type name="TEMPLATE_ID" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.AccessGroupRef" xml-accessor-type="FIELD">
+         <xml-type name="ACCESS_GROUP_REF" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.HierObjectId" xml-accessor-type="FIELD">
+         <xml-type name="HIER_OBJECT_ID" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.PartyRef" xml-accessor-type="FIELD">
+         <xml-type name="PARTY_REF" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.UidBasedId" xml-accessor-type="FIELD">
+         <xml-type name="UID_BASED_ID" prop-order=""/>
+         <xml-see-also>org.openehr.base.basetypes.ObjectVersionId org.openehr.base.basetypes.HierObjectId</xml-see-also>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.ArchetypeId" xml-accessor-type="FIELD">
+         <xml-type name="ARCHETYPE_ID" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.GenericId" xml-accessor-type="FIELD">
+         <xml-type name="GENERIC_ID" prop-order="scheme"/>
+         <java-attributes>
+            <xml-element java-attribute="scheme" name="scheme" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.LocatableRef" xml-accessor-type="FIELD">
+         <xml-type name="LOCATABLE_REF" prop-order="path"/>
+         <java-attributes>
+            <xml-element java-attribute="path" name="path"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.ObjectRef" xml-accessor-type="FIELD">
+         <xml-type name="OBJECT_REF" prop-order="id namespace type"/>
+         <xml-see-also>org.openehr.base.basetypes.PartyRef org.openehr.base.basetypes.AccessGroupRef org.openehr.base.basetypes.LocatableRef</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="id" name="id" required="true"/>
+            <xml-element java-attribute="namespace" name="namespace" required="true">
+               <xml-java-type-adapter value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+               <xml-schema-type name="token"/>
+            </xml-element>
+            <xml-element java-attribute="type" name="type" required="true">
+               <xml-java-type-adapter value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+               <xml-schema-type name="token"/>
+            </xml-element>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.base.basetypes.TerminologyId" xml-accessor-type="FIELD">
+         <xml-type name="TERMINOLOGY_ID" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+   </java-types>
 </xml-bindings>

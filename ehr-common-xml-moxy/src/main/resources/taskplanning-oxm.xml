@@ -1,699 +1,729 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.proc.taskplanning">
-    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
-        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
-    </xml-schema>
-    <xml-enums>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.PlanTimeOrigin">
-            <xml-enum-value java-enum-value="CURRENT_WORK_PLAN">CURRENT_WORK_PLAN</xml-enum-value>
-            <xml-enum-value java-enum-value="CURRENT_TASK_PLAN">CURRENT_TASK_PLAN</xml-enum-value>
-            <xml-enum-value java-enum-value="INNER_REPEAT_SECTION">INNER_REPEAT_SECTION</xml-enum-value>
-            <xml-enum-value java-enum-value="OUTER_REPEAT_SECTION">OUTER_REPEAT_SECTION</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.OverrideType">
-            <xml-enum-value java-enum-value="ALLOWED">ALLOWED</xml-enum-value>
-            <xml-enum-value java-enum-value="ALLOWED_WITH_REASON">ALLOWED_WITH_REASON</xml-enum-value>
-            <xml-enum-value java-enum-value="PROHIBITED">PROHIBITED</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.ValidityKind">
-            <xml-enum-value java-enum-value="MANDATORY">MANDATORY</xml-enum-value>
-            <xml-enum-value java-enum-value="OPTIONAL">OPTIONAL</xml-enum-value>
-            <xml-enum-value java-enum-value="PROHIBITED">PROHIBITED</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.TaskLifecycle">
-            <xml-enum-value java-enum-value="PLANNED">PLANNED</xml-enum-value>
-            <xml-enum-value java-enum-value="AVAILABLE">AVAILABLE</xml-enum-value>
-            <xml-enum-value java-enum-value="CANCELLED">CANCELLED</xml-enum-value>
-            <xml-enum-value java-enum-value="ABANDONED">ABANDONED</xml-enum-value>
-            <xml-enum-value java-enum-value="COMPLETED">COMPLETED</xml-enum-value>
-            <xml-enum-value java-enum-value="SUSPENDED">SUSPENDED</xml-enum-value>
-            <xml-enum-value java-enum-value="UNDERWAY">UNDERWAY</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.TemporalRelation">
-            <xml-enum-value java-enum-value="BEFORE">BEFORE</xml-enum-value>
-            <xml-enum-value java-enum-value="WITH">WITH</xml-enum-value>
-            <xml-enum-value java-enum-value="AFTER">AFTER</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.ConcurrencyMode">
-            <xml-enum-value java-enum-value="XOR_ONE_PATH">XOR_ONE_PATH</xml-enum-value>
-            <xml-enum-value java-enum-value="AND_ALL_PATHS">AND_ALL_PATHS</xml-enum-value>
-            <xml-enum-value java-enum-value="OR_FIRST_COMPLETED">OR_FIRST_COMPLETED</xml-enum-value>
-            <xml-enum-value java-enum-value="OR_ALL_STARTED">OR_ALL_STARTED</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.ExecutionType">
-            <xml-enum-value java-enum-value="SEQUENTIAL">SEQUENTIAL</xml-enum-value>
-            <xml-enum-value java-enum-value="PARALLEL">PARALLEL</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.ExpressionType">
-            <xml-enum-value java-enum-value="BOOLEAN">BOOLEAN</xml-enum-value>
-            <xml-enum-value java-enum-value="DECIMAL">DECIMAL</xml-enum-value>
-            <xml-enum-value java-enum-value="INTEGER">INTEGER</xml-enum-value>
-            <xml-enum-value java-enum-value="LONG">LONG</xml-enum-value>
-            <xml-enum-value java-enum-value="STRING">STRING</xml-enum-value>
-            <xml-enum-value java-enum-value="DATE">DATE</xml-enum-value>
-            <xml-enum-value java-enum-value="TIME">TIME</xml-enum-value>
-            <xml-enum-value java-enum-value="DATE_TIME">DATE_TIME</xml-enum-value>
-            <xml-enum-value java-enum-value="ZONED_DATE_TIME">ZONED_DATE_TIME</xml-enum-value>
-            <xml-enum-value java-enum-value="DURATION">DURATION</xml-enum-value>
-            <xml-enum-value java-enum-value="OBJECT">OBJECT</xml-enum-value>
-            <xml-enum-value java-enum-value="VOID">VOID</xml-enum-value>
-            <xml-enum-value java-enum-value="TERMINOLOGY_CODE">TERMINOLOGY_CODE</xml-enum-value>
-            <xml-enum-value java-enum-value="OBJECT_REF">OBJECT_REF</xml-enum-value>
-        </xml-enum>
-        <xml-enum java-enum="org.openehr.proc.taskplanning.ResumeType">
-            <xml-enum-value java-enum-value="RESUME_SPECIFIED">RESUME_SPECIFIED</xml-enum-value>
-            <xml-enum-value java-enum-value="RETRY_CURRENT_GROUP">RETRY_CURRENT_GROUP</xml-enum-value>
-            <xml-enum-value java-enum-value="NEW_THREAD">NEW_THREAD</xml-enum-value>
-        </xml-enum>
-    </xml-enums>
-    <java-types>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefString">
-            <xml-type name="TYPE_DEF_STRING"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefTerminologyCode">
-            <xml-type name="TYPE_DEF_TERMINOLOGY_CODE"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefReal">
-            <xml-type name="TYPE_DEF_REAL"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefObject">
-            <xml-type name="TYPE_DEF_OBJECT"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefUri">
-            <xml-type name="TYPE_DEF_URI"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefInteger">
-            <xml-type name="TYPE_DEF_INTEGER"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefVoid">
-            <xml-type name="TYPE_DEF_VOID"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefObjectRef">
-            <xml-type name="TYPE_DEF_OBJECT_REF"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefBoolean">
-            <xml-type name="TYPE_DEF_BOOLEAN"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefDate">
-            <xml-type name="TYPE_DEF_DATE"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefDuration">
-            <xml-type name="TYPE_DEF_DURATION"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ExprTypeDef">
-            <xml-type name="EXPR_TYPE_DEF"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="type_name" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TypeDefDateTime">
-            <xml-type name="TYPE_DEF_DATE_TIME"/>
-            <java-attributes>
-                <xml-element java-attribute="typeName" name="typeName"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ChoiceGroup">
-            <xml-type name="CHOICE_GROUP" prop-order="overrideType timeout"/>
-            <java-attributes>
-                <xml-element java-attribute="overrideType" name="overrideType" required="true"/>
-                <xml-element java-attribute="timeout" name="timeout"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.DatasetSpec">
-            <xml-type name="DATASET_SPEC" prop-order="templateId formId otherDetails populatingCall formSectionPath"/>
-            <java-attributes>
-                <xml-element java-attribute="templateId" name="template_id"/>
-                <xml-element java-attribute="formId" name="form_id"/>
-                <xml-element java-attribute="otherDetails" name="other_details"/>
-                <xml-element java-attribute="populatingCall" name="populating_call"/>
-                <xml-element java-attribute="formSectionPath" name="form_section_path"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.EventBranch">
-            <xml-type name="EVENT_BRANCH"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.CallbackNotification">
-            <xml-type name="CALLBACK_NOTIFICATION" prop-order="taskId requestId subjectId manuallyNotified"/>
-            <java-attributes>
-                <xml-element java-attribute="taskId" name="task_id" required="true"/>
-                <xml-element java-attribute="requestId" name="request_id"/>
-                <xml-element java-attribute="subjectId" name="subject_id"/>
-                <xml-element java-attribute="manuallyNotified" name="manually_notified"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ContextExpression">
-            <xml-type name="CONTEXT_EXPRESSION"/>
-            <java-attributes>
-                <xml-element java-attribute="expression" name="expression" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.CustomaryTime">
-            <xml-type name="CUSTOMARY_TIME"/>
-            <java-attributes>
-                <xml-element java-attribute="time" name="time" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.PerformableAction">
-            <xml-type name="PERFORMABLE_ACTION" prop-order="resources otherParticipations"/>
-            <java-attributes>
-                <xml-element java-attribute="resources" name="resources" nillable="true"/>
-                <xml-element java-attribute="otherParticipations" name="other_participations"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskGroup">
-            <xml-type name="TASK_GROUP" prop-order="members executionType concurrencyMode executionRules trainingLevel"/>
-            <java-attributes>
-                <xml-element java-attribute="members" name="members" required="true"/>
-                <xml-element java-attribute="executionType" name="execution_type"/>
-                <xml-element java-attribute="concurrencyMode" name="concurrency_mode"/>
-                <xml-element java-attribute="executionRules" name="execution_rules"/>
-                <xml-element java-attribute="trainingLevel" name="training_level"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ContextConstant">
-            <xml-type name="CONTEXT_CONSTANT"/>
-            <java-attributes>
-                <xml-element java-attribute="value" name="value" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.SystemCall">
-            <xml-type name="SYSTEM_CALL" prop-order="systemId callName parameterMap boundParameters"/>
-            <java-attributes>
-                <xml-element java-attribute="systemId" name="system_id" required="true"/>
-                <xml-element java-attribute="callName" name="call_name" required="true"/>
-                <xml-element java-attribute="parameterMap" name="parameter_map"/>
-                <xml-element java-attribute="boundParameters" name="bound_parameters"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TimelineMoment">
-            <xml-type name="TIMELINE_MOMENT" prop-order="timelineOffset fixedTime timelineOrigin"/>
-            <java-attributes>
-                <xml-element java-attribute="timelineOffset" name="timeline_offset"/>
-                <xml-element java-attribute="fixedTime" name="fixed_time"/>
-                <xml-element java-attribute="timelineOrigin" name="timeline_origin"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.CaptureDatasetSpec">
-            <xml-type name="CAPTURE_DATASET_SPEC"/>
-            <java-attributes>
-                <xml-element java-attribute="commitGroup" name="commit_group"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.Task">
-            <xml-type name="TASK" prop-order="action orderTags"/>
-            <java-attributes>
-                <xml-element java-attribute="action" name="action" required="true"/>
-                <xml-element java-attribute="orderTags" name="order_tags"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.BooleanContextExpression">
-            <xml-type name="BOOLEAN_CONTEXT_EXPRESSION"/>
-            <java-attributes>
-                <xml-element java-attribute="type" name="type"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ChoiceBranch">
-            <xml-type name="CHOICE_BRANCH"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.WorkPlan">
-            <xml-type name="WORK_PLAN" prop-order="description topLevelPlanUids topLevelPlans carePathway carePlan orderList calendar timeline context eventWaitStates indications classification"/>
-            <java-attributes>
-                <xml-element java-attribute="description" name="description" required="true"/>
-                <xml-element java-attribute="topLevelPlanUids" name="top_level_plan_uids"/>
-                <xml-element java-attribute="topLevelPlans" name="top_level_plans"/>
-                <xml-element java-attribute="carePathway" name="care_pathway"/>
-                <xml-element java-attribute="carePlan" name="care_plan"/>
-                <xml-element java-attribute="orderList" name="order_list"/>
-                <xml-element java-attribute="calendar" name="calendar" required="true"/>
-                <xml-element java-attribute="timeline" name="timeline" required="true"/>
-                <xml-element java-attribute="context" name="context"/>
-                <xml-element java-attribute="eventWaitStates" name="event_wait_states"/>
-                <xml-element java-attribute="indications" name="indications"/>
-                <xml-element java-attribute="classification" name="classification"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.EventAction">
-            <xml-type name="EVENT_ACTION" prop-order="systemCall message resumeAction receiverThreadNextState"/>
-            <java-attributes>
-                <xml-element java-attribute="systemCall" name="system_call"/>
-                <xml-element java-attribute="message" name="message"/>
-                <xml-element java-attribute="resumeAction" name="resume_action"/>
-                <xml-element java-attribute="receiverThreadNextState" name="receiver_thread_next_state"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.DispatchableTask">
-            <xml-type name="DISPATCHABLE_TASK" prop-order="wait callback"/>
-            <java-attributes>
-                <xml-element java-attribute="wait" name="wait" required="true"/>
-                <xml-element java-attribute="callback" name="callback"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.SubPlan">
-            <xml-type name="SUB_PLAN" prop-order="target targetUid"/>
-            <java-attributes>
-                <xml-element java-attribute="target" name="target"/>
-                <xml-element java-attribute="targetUid" name="target_uid"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.OrderRef">
-            <xml-type name="ORDER_REF" prop-order="orderTag instructionArchetypeId actionArchetypeId orderRef"/>
-            <java-attributes>
-                <xml-java-type-adapter java-attribute="orderTag" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
-                <xml-element java-attribute="orderTag" name="orderTag" required="true"/>
-                <xml-java-type-adapter java-attribute="instructionArchetypeId" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
-                <xml-element java-attribute="instructionArchetypeId" name="instructionArchetypeId"/>
-                <xml-java-type-adapter java-attribute="actionArchetypeId" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
-                <xml-element java-attribute="actionArchetypeId" name="actionArchetypeId"/>
-                <xml-element java-attribute="orderRef" name="order_ref"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.DecisionBranch">
-            <xml-type name="DECISION_BRANCH"/>
-            <java-attributes>
-                <xml-element java-attribute="valueConstraint" name="value_constraint" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ClockTime">
-            <xml-type name="CLOCK_TIME"/>
-            <java-attributes>
-                <xml-element java-attribute="time" name="time" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.StateVariable">
-            <xml-type name="STATE_VARIABLE"/>
-            <java-attributes>
-                <xml-element java-attribute="requiredCurrency" name="required_currency"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.EventGroup">
-            <xml-type name="EVENT_GROUP"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.SubjectPrecondition">
-            <xml-type name="SUBJECT_PRECONDITION" prop-order="description expression"/>
-            <java-attributes>
-                <xml-element java-attribute="description" name="description" required="true"/>
-                <xml-element java-attribute="expression" name="expression"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.DecisionGroup">
-            <xml-type name="DECISION_GROUP"/>
-            <java-attributes>
-                <xml-element java-attribute="test" name="test" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.SystemNotification">
-            <xml-type name="SYSTEM_NOTIFICATION" prop-order="systemId notificationType referenceId"/>
-            <java-attributes>
-                <xml-element java-attribute="systemId" name="system_id" required="true"/>
-                <xml-element java-attribute="notificationType" name="notification_type"/>
-                <xml-element java-attribute="referenceId" name="reference_id"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ContinuousEventVariable">
-            <xml-type name="CONTINUOUS_EVENT_VARIABLE"/>
-            <java-attributes>
-                <xml-element java-attribute="updateVariation" name="update_variation"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.PlanItem">
-            <xml-type name="PLAN_ITEM" prop-order="description repeatSpec waitSpec otherDetails reviewDataset classification guidelineStep reminders"/>
-            <java-attributes>
-                <xml-element java-attribute="description" name="description" required="true"/>
-                <xml-element java-attribute="repeatSpec" name="repeat_spec"/>
-                <xml-element java-attribute="waitSpec" name="wait_spec"/>
-                <xml-element java-attribute="otherDetails" name="other_details"/>
-                <xml-element java-attribute="reviewDataset" name="review_dataset"/>
-                <xml-element java-attribute="classification" name="classification"/>
-                <xml-element java-attribute="guidelineStep" name="guideline_step"/>
-                <xml-element java-attribute="reminders" name="reminders"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.SystemRequest">
-            <xml-type name="system_request"/>
-            <java-attributes>
-                <xml-element java-attribute="systemCall" name="system_call" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.PlanDataContext">
-            <xml-type name="PLAN_DATA_CONTEXT" prop-order="variables expressions constants"/>
-            <java-attributes>
-                <xml-element java-attribute="variables" name="variables" nillable="true"/>
-                <xml-element java-attribute="expressions" name="expressions" nillable="true"/>
-                <xml-element java-attribute="constants" name="constants" nillable="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ConditionBranch">
-            <xml-type name="CONDITION_BRANCH"/>
-            <java-attributes>
-                <xml-element java-attribute="test" name="test" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskAction">
-            <xml-type name="TASK_ACTION" prop-order="subjectPreconditions instructionActivity costingData"/>
-            <java-attributes>
-                <xml-element java-attribute="subjectPreconditions" name="subject_preconditions"/>
-                <xml-element java-attribute="instructionActivity" name="instruction_activity"/>
-                <xml-element java-attribute="costingData" name="costing_data"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.EventWait">
-            <xml-type name="EVENT_WAIT" prop-order="event successAction timeout"/>
-            <java-attributes>
-                <xml-element java-attribute="event" name="event" required="true"/>
-                <xml-element java-attribute="successAction" name="successAction"/>
-                <xml-element java-attribute="timeout" name="timeout"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskParticipation">
-            <xml-type name="TASK_PARTICIPATION" prop-order="function role mode performer optionality"/>
-            <java-attributes>
-                <xml-element java-attribute="function" name="function" required="true"/>
-                <xml-element java-attribute="role" name="role"/>
-                <xml-element java-attribute="mode" name="mode"/>
-                <xml-element java-attribute="performer" name="performer"/>
-                <xml-element java-attribute="optionality" name="optionality" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ExternalRequest">
-            <xml-type name="EXTERNAL_REQUEST" prop-order="organisation requestId otherDetails"/>
-            <java-attributes>
-                <xml-element java-attribute="organisation" name="organisation" required="true"/>
-                <xml-element java-attribute="requestId" name="request_id" required="true"/>
-                <xml-element java-attribute="otherDetails" name="other_details"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskWait">
-            <xml-type name="TASK_WAIT" prop-order="eventRelation events timeout nextState"/>
-            <java-attributes>
-                <xml-element java-attribute="eventRelation" name="event_relation"/>
-                <xml-element java-attribute="events" name="events"/>
-                <xml-element java-attribute="timeout" name="timeout"/>
-                <xml-element java-attribute="nextState" name="next_state"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.PlanCalendar">
-            <xml-type name="PLAN_CALENDAR"/>
-            <java-attributes>
-                <xml-element java-attribute="entries" name="entries" nillable="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ContextVariable">
-            <xml-type name="CONTEXT_VARIABLE"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ManualNotification">
-            <xml-type name="MANUAL_NOTIFICATION"/>
-            <java-attributes>
-                <xml-element java-attribute="description" name="description" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ConditionGroup">
-            <xml-type name="CONDITION_GROUP"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.StateTrigger">
-            <xml-type name="STATE_TRIGGER"/>
-            <java-attributes>
-                <xml-element java-attribute="expression" name="expression" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.CalendarEvent">
-            <xml-type name="CALENDAR_EVENT" prop-order="entryId time"/>
-            <java-attributes>
-                <xml-element java-attribute="entryId" name="entry_id"/>
-                <xml-element java-attribute="time" name="time" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ContextValue">
-            <xml-type name="CONTEXT_VALUE" prop-order="name type"/>
-            <java-attributes>
-                <xml-element java-attribute="name" name="name" required="true"/>
-                <xml-element java-attribute="type" name="type" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.PlanEvent">
-            <xml-type name="PLAN_EVENT" prop-order="delay otherDetails"/>
-            <java-attributes>
-                <xml-element java-attribute="delay" name="delay"/>
-                <xml-element java-attribute="otherDetails" name="other_details"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TimeSpecifier">
-            <xml-type name="TIME_SPECIFIER"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskCosting">
-            <xml-type name="TASK_COSTING"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.EventVariable">
-            <xml-type name="EVENT_VARIABLE"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.LocalVariable">
-            <xml-type name="LOCAL_VARIABLE"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.CalendarEntry">
-            <xml-type name="CALENDAR_ENTRY"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ReviewDatasetSpec">
-            <xml-type name="REVIEW_DATASET_SPEC"/>
-            <java-attributes>
-                <xml-element java-attribute="captureDatasets" name="capture_datasets"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.DefinedAction">
-            <xml-type name="DEFINED_ACTION" prop-order="prototype optionality"/>
-            <java-attributes>
-                <xml-element java-attribute="prototype" name="prototype"/>
-                <xml-element java-attribute="optionality" name="optionality"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.DispatchableAction">
-            <xml-type name="DISPATCHABLE_ACTION"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ParameterMapping">
-            <xml-type name="PARAMETER_MAPPING" prop-order="name contextName"/>
-            <java-attributes>
-                <xml-element java-attribute="name" name="name" required="true"/>
-                <xml-element java-attribute="contextName" name="context_name" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ResumeAction">
-            <xml-type name="RESUME_ACTION" prop-order="resumeType resumeLocation"/>
-            <java-attributes>
-                <xml-element java-attribute="resumeType" name="resume_type" required="true"/>
-                <xml-element java-attribute="resumeLocation" name="resume_location"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TimerWait">
-            <xml-type name="TIMER_WAIT"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.AdhocBranch">
-            <xml-type name="ADHOC_BRANCH"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TimerEvent">
-            <xml-type name="TIMER_EVENT" prop-order="duration purpose"/>
-            <java-attributes>
-                <xml-element java-attribute="duration" name="duration" required="true"/>
-                <xml-element java-attribute="purpose" name="purpose"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.PlanTimeline">
-            <xml-type name="PLAN_TIMELINE" prop-order="plannedItems timers"/>
-            <java-attributes>
-                <xml-element java-attribute="plannedItems" name="planned_items"/>
-                <xml-element java-attribute="timers" name="timers" nillable="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.Reminder">
-            <xml-type name="REMINDER"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskPlan">
-            <xml-type name="TASK_PLAN" prop-order="subject description principalPerformer definition trainingLevel guideline bestPracticeRef orderSetId orderSetType expiryTime dueTime indications executionHistory"/>
-            <java-attributes>
-                <xml-element java-attribute="subject" name="subject"/>
-                <xml-element java-attribute="description" name="description" required="true"/>
-                <xml-element java-attribute="principalPerformer" name="principal_performer"/>
-                <xml-element java-attribute="definition" name="definition" required="true"/>
-                <xml-element java-attribute="trainingLevel" name="training_level"/>
-                <xml-element java-attribute="guideline" name="guideline"/>
-                <xml-element java-attribute="bestPracticeRef" name="best_practice_ref"/>
-                <xml-element java-attribute="orderSetId" name="order_set_id"/>
-                <xml-element java-attribute="orderSetType" name="order_set_type"/>
-                <xml-element java-attribute="expiryTime" name="expiry_time"/>
-                <xml-element java-attribute="dueTime" name="due_time"/>
-                <xml-element java-attribute="indications" name="indications"/>
-                <xml-element java-attribute="executionHistory" name="execution_history"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ExternalVariable">
-            <xml-type name="EXTERNAL_VARIABLE"/>
-            <java-attributes>
-                <xml-element java-attribute="populatingRequest" name="populating_request"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ParameterDef">
-            <xml-type name="PARAMETER_DEF" prop-order="name type value"/>
-            <java-attributes>
-                <xml-element java-attribute="name" name="name" required="true"/>
-                <xml-element java-attribute="type" name="type" required="true"/>
-                <xml-element java-attribute="value" name="value" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ResourceParticipation">
-            <xml-type name="RESOURCE_PARTICIPATION" prop-order="resourceType externalRef"/>
-            <java-attributes>
-                <xml-element java-attribute="resourceType" name="resource_type" required="true"/>
-                <xml-element java-attribute="externalRef" name="external_ref"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskTransition">
-            <xml-type name="TASK_TRANSITION" prop-order="taskId transitions"/>
-            <java-attributes>
-                <xml-element java-attribute="taskId" name="task_id" required="true"/>
-                <xml-element java-attribute="transitions" name="transitions" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.CallbackWait">
-            <xml-type name="CALLBACK_WAIT" prop-order="failAction customActions"/>
-            <java-attributes>
-                <xml-element java-attribute="failAction" name="event_action"/>
-                <xml-java-type-adapter java-attribute="customActions" value="care.better.platform.moxy.adapter.MapStringAdapter"
-                <xml-element java-attribute="customActions" name="custom_action"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.PerformableTask">
-            <xml-type name="PERFORMABLE_TASK"/>
-            <java-attributes>
-                <xml-element java-attribute="captureDataset" name="capture_dataset"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.AdhocGroup">
-            <xml-type name="ADHOC_GROUP"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ExecutionRule">
-            <xml-type name="EXECUTION_RULE"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.ApiCall">
-            <xml-type name="API_CALL"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.HandOff">
-            <xml-type name="HAND_OFF" prop-order="target targetUid"/>
-            <java-attributes>
-                <xml-element java-attribute="target" name="target"/>
-                <xml-element java-attribute="targetUid" name="target_uid"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskRepeat">
-            <xml-type name="TASK_REPEAT" prop-order="repeats terminateCondition period"/>
-            <java-attributes>
-                <xml-element java-attribute="repeats" name="repeats"/>
-                <xml-element java-attribute="terminateCondition" name="terminate_condition"/>
-                <xml-element java-attribute="period" name="period"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.DatasetCommitGroup">
-            <xml-type name="DATASET_COMMIT_GROUP" prop-order="groupId completionStep"/>
-            <java-attributes>
-                <xml-java-type-adapter java-attribute="groupId" value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter"/>
-                <xml-element java-attribute="groupId" name="group_id" required="true"/>
-                <xml-element java-attribute="completionStep" name="completion_step" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.QueryCall">
-            <xml-type name="QUERY_CALL" prop-order="queryId queryText"/>
-            <java-attributes>
-                <xml-element java-attribute="queryId" name="query_id"/>
-                <xml-element java-attribute="queryText" name="query_text"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskNotificationRecord">
-            <xml-type name="TASK_NOTIFICATION_RECORD" prop-order="receiver receiverTaskPlan details"/>
-            <java-attributes>
-                <xml-element java-attribute="receiver" name="receiver" required="true"/>
-                <xml-element java-attribute="receiverTaskPlan" name="receiver_task_plan" required="true"/>
-                <xml-java-type-adapter java-attribute="details" value="care.better.platform.moxy.adapter.MapStringAdapter"/>
-                <xml-element java-attribute="details" name="details"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskPlanEventRecord">
-            <xml-type name="TASK_PLAN_EVENT_RECORD"/>
-            <java-attributes>
-                <xml-java-type-adapter java-attribute="details" value="care.better.platform.moxy.adapter.MapStringAdapter"/>
-                <xml-element java-attribute="details" name="details" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskEventRecord">
-            <xml-type name="TASK_EVENT_RECORD" prop-order="taskId lifecycleState preconditionsSatisfied waitConditionsSatisfied notificationsSent entryInstances lifecycleTransitionReason"/>
-            <java-attributes>
-                <xml-element java-attribute="taskId" name="task_id" required="true"/>
-                <xml-element java-attribute="lifecycleState" name="lifecycle_state" required="true"/>
-                <xml-element java-attribute="preconditionsSatisfied" name="preconditions_satisfied" required="true"/>
-                <xml-element java-attribute="waitConditionsSatisfied" name="wait_conditions_satisfied" required="true"/>
-                <xml-element java-attribute="notificationsSent" name="notifications_sent"/>
-                <xml-element java-attribute="entryInstances" name="entry_instances"/>
-                <xml-element java-attribute="lifecycleTransitionReason" name="lifecycle_transition_reason"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.TaskPlanExecutionHistory">
-            <xml-type name="TASK_PLAN_EXECUTION_HISTORY" prop-order="planEvents taskEvents"/>
-            <java-attributes>
-                <xml-element java-attribute="planEvents" name="plan_events"/>
-                <xml-element java-attribute="taskEvents" name="task_events"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.proc.taskplanning.EventRecord">
-            <xml-type name="EVENT_RECORD" prop-order="time description"/>
-            <java-attributes>
-                <xml-element java-attribute="time" name="time" required="true"/>
-                <xml-element java-attribute="description" name="description"/>
-            </java-attributes>
-        </java-type>
-    </java-types>
+   <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+      <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""/>
+   </xml-schema>
+   <xml-enums>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.PlanTimeOrigin">
+         <xml-enum-value java-enum-value="CURRENT_WORK_PLAN">CURRENT_WORK_PLAN</xml-enum-value>
+         <xml-enum-value java-enum-value="CURRENT_TASK_PLAN">CURRENT_TASK_PLAN</xml-enum-value>
+         <xml-enum-value java-enum-value="INNER_REPEAT_SECTION">INNER_REPEAT_SECTION</xml-enum-value>
+         <xml-enum-value java-enum-value="OUTER_REPEAT_SECTION">OUTER_REPEAT_SECTION</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.TemporalRelation">
+         <xml-enum-value java-enum-value="BEFORE">BEFORE</xml-enum-value>
+         <xml-enum-value java-enum-value="WITH">WITH</xml-enum-value>
+         <xml-enum-value java-enum-value="AFTER">AFTER</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.ValidityKind">
+         <xml-enum-value java-enum-value="MANDATORY">MANDATORY</xml-enum-value>
+         <xml-enum-value java-enum-value="OPTIONAL">OPTIONAL</xml-enum-value>
+         <xml-enum-value java-enum-value="PROHIBITED">PROHIBITED</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.TaskLifecycle">
+         <xml-enum-value java-enum-value="PLANNED">PLANNED</xml-enum-value>
+         <xml-enum-value java-enum-value="AVAILABLE">AVAILABLE</xml-enum-value>
+         <xml-enum-value java-enum-value="CANCELLED">CANCELLED</xml-enum-value>
+         <xml-enum-value java-enum-value="ABANDONED">ABANDONED</xml-enum-value>
+         <xml-enum-value java-enum-value="COMPLETED">COMPLETED</xml-enum-value>
+         <xml-enum-value java-enum-value="SUSPENDED">SUSPENDED</xml-enum-value>
+         <xml-enum-value java-enum-value="UNDERWAY">UNDERWAY</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.ResumeType">
+         <xml-enum-value java-enum-value="RESUME_SPECIFIED">RESUME_SPECIFIED</xml-enum-value>
+         <xml-enum-value java-enum-value="RETRY_CURRENT_GROUP">RETRY_CURRENT_GROUP</xml-enum-value>
+         <xml-enum-value java-enum-value="NEW_THREAD">NEW_THREAD</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.ExpressionType">
+         <xml-enum-value java-enum-value="BOOLEAN">BOOLEAN</xml-enum-value>
+         <xml-enum-value java-enum-value="DECIMAL">DECIMAL</xml-enum-value>
+         <xml-enum-value java-enum-value="INTEGER">INTEGER</xml-enum-value>
+         <xml-enum-value java-enum-value="LONG">LONG</xml-enum-value>
+         <xml-enum-value java-enum-value="STRING">STRING</xml-enum-value>
+         <xml-enum-value java-enum-value="DATE">DATE</xml-enum-value>
+         <xml-enum-value java-enum-value="TIME">TIME</xml-enum-value>
+         <xml-enum-value java-enum-value="DATE_TIME">DATE_TIME</xml-enum-value>
+         <xml-enum-value java-enum-value="ZONED_DATE_TIME">ZONED_DATE_TIME</xml-enum-value>
+         <xml-enum-value java-enum-value="DURATION">DURATION</xml-enum-value>
+         <xml-enum-value java-enum-value="OBJECT">OBJECT</xml-enum-value>
+         <xml-enum-value java-enum-value="VOID">VOID</xml-enum-value>
+         <xml-enum-value java-enum-value="TERMINOLOGY_CODE">TERMINOLOGY_CODE</xml-enum-value>
+         <xml-enum-value java-enum-value="OBJECT_REF">OBJECT_REF</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.ConcurrencyMode">
+         <xml-enum-value java-enum-value="XOR_ONE_PATH">XOR_ONE_PATH</xml-enum-value>
+         <xml-enum-value java-enum-value="AND_ALL_PATHS">AND_ALL_PATHS</xml-enum-value>
+         <xml-enum-value java-enum-value="OR_FIRST_COMPLETED">OR_FIRST_COMPLETED</xml-enum-value>
+         <xml-enum-value java-enum-value="OR_ALL_STARTED">OR_ALL_STARTED</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.OverrideType">
+         <xml-enum-value java-enum-value="ALLOWED">ALLOWED</xml-enum-value>
+         <xml-enum-value java-enum-value="ALLOWED_WITH_REASON">ALLOWED_WITH_REASON</xml-enum-value>
+         <xml-enum-value java-enum-value="PROHIBITED">PROHIBITED</xml-enum-value>
+      </xml-enum>
+      <xml-enum java-enum="org.openehr.proc.taskplanning.ExecutionType">
+         <xml-enum-value java-enum-value="SEQUENTIAL">SEQUENTIAL</xml-enum-value>
+         <xml-enum-value java-enum-value="PARALLEL">PARALLEL</xml-enum-value>
+      </xml-enum>
+   </xml-enums>
+   <java-types>
+      <java-type name="org.openehr.proc.taskplanning.ExternalVariable" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="EXTERNAL_VARIABLE" prop-order="populatingRequest"/>
+         <xml-see-also>org.openehr.proc.taskplanning.EventVariable org.openehr.proc.taskplanning.StateVariable</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="populatingRequest" name="populating_request"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ContinuousEventVariable" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CONTINUOUS_EVENT_VARIABLE" prop-order="updateVariation"/>
+         <java-attributes>
+            <xml-element java-attribute="updateVariation" name="update_variation"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ApiCall" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="API_CALL" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskParticipation" xml-accessor-type="FIELD">
+         <xml-type name="TASK_PARTICIPATION" prop-order="function role mode performer optionality"/>
+         <java-attributes>
+            <xml-element java-attribute="function" name="function" required="true"/>
+            <xml-element java-attribute="role" name="role"/>
+            <xml-element java-attribute="mode" name="mode"/>
+            <xml-element java-attribute="performer" name="performer"/>
+            <xml-element java-attribute="optionality" name="optionality" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.EventWait" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="EVENT_WAIT" prop-order="event successAction timeout"/>
+         <xml-see-also>org.openehr.proc.taskplanning.TimerWait org.openehr.proc.taskplanning.CallbackWait org.openehr.proc.taskplanning.Reminder</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="event" name="event" required="true"/>
+            <xml-element java-attribute="successAction" name="successAction"/>
+            <xml-element java-attribute="timeout" name="timeout"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ContextConstant" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CONTEXT_CONSTANT" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="value" name="value" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.CaptureDatasetSpec" xml-accessor-type="FIELD">
+         <xml-type name="CAPTURE_DATASET_SPEC" prop-order="commitGroup"/>
+         <java-attributes>
+            <xml-element java-attribute="commitGroup" name="commit_group"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefObject" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_OBJECT" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TimerWait" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TIMER_WAIT" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TimerEvent" xml-accessor-type="FIELD">
+         <xml-type name="TIMER_EVENT" prop-order="duration purpose"/>
+         <java-attributes>
+            <xml-element java-attribute="duration" name="duration" required="true"/>
+            <xml-element java-attribute="purpose" name="purpose"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.SystemCall" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="SYSTEM_CALL" prop-order="systemId callName parameterMap boundParameters"/>
+         <xml-see-also>org.openehr.proc.taskplanning.ApiCall org.openehr.proc.taskplanning.QueryCall</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="systemId" name="system_id" required="true"/>
+            <xml-element java-attribute="callName" name="call_name" required="true"/>
+            <xml-element java-attribute="parameterMap" name="parameter_map"/>
+            <xml-element java-attribute="boundParameters" name="bound_parameters"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefBoolean" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_BOOLEAN" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefDate" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_DATE" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskEventRecord" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TASK_EVENT_RECORD" prop-order="taskId lifecycleState preconditionsSatisfied waitConditionsSatisfied notificationsSent entryInstances lifecycleTransitionReason"/>
+         <java-attributes>
+            <xml-element java-attribute="taskId" name="task_id" required="true"/>
+            <xml-element java-attribute="lifecycleState" name="lifecycle_state" required="true"/>
+            <xml-element java-attribute="preconditionsSatisfied" name="preconditions_satisfied" required="true"/>
+            <xml-element java-attribute="waitConditionsSatisfied" name="wait_conditions_satisfied" required="true"/>
+            <xml-element java-attribute="notificationsSent" name="notifications_sent"/>
+            <xml-element java-attribute="entryInstances" name="entry_instances"/>
+            <xml-element java-attribute="lifecycleTransitionReason" name="lifecycle_transition_reason"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ResourceParticipation" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="RESOURCE_PARTICIPATION" prop-order="resourceType externalRef"/>
+         <java-attributes>
+            <xml-element java-attribute="resourceType" name="resource_type" required="true"/>
+            <xml-element java-attribute="externalRef" name="external_ref"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.DatasetCommitGroup" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="DATASET_COMMIT_GROUP" prop-order="groupId completionStep"/>
+         <java-attributes>
+            <xml-element java-attribute="groupId" name="group_id" required="true">
+               <xml-java-type-adapter value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+            </xml-element>
+            <xml-element java-attribute="completionStep" name="completion_step" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.DecisionBranch" xml-accessor-type="FIELD">
+         <xml-type name="DECISION_BRANCH" prop-order="valueConstraint"/>
+         <java-attributes>
+            <xml-element java-attribute="valueConstraint" name="value_constraint" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.PlanItem" xml-accessor-type="FIELD">
+         <xml-type name="PLAN_ITEM" prop-order="description repeatSpec waitSpec otherDetails reviewDataset classification guidelineStep reminders"/>
+         <xml-see-also>org.openehr.proc.taskplanning.TaskGroup org.openehr.proc.taskplanning.Task</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="description" name="description" required="true"/>
+            <xml-element java-attribute="repeatSpec" name="repeat_spec"/>
+            <xml-element java-attribute="waitSpec" name="wait_spec"/>
+            <xml-element java-attribute="otherDetails" name="other_details"/>
+            <xml-element java-attribute="reviewDataset" name="review_dataset"/>
+            <xml-element java-attribute="classification" name="classification"/>
+            <xml-element java-attribute="guidelineStep" name="guideline_step"/>
+            <xml-element java-attribute="reminders" name="reminders"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.EventRecord" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="EVENT_RECORD" prop-order="time description"/>
+         <xml-see-also>org.openehr.proc.taskplanning.TaskPlanEventRecord org.openehr.proc.taskplanning.TaskEventRecord</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="time" name="time" required="true"/>
+            <xml-element java-attribute="description" name="description"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ChoiceBranch" xml-accessor-type="FIELD">
+         <xml-type name="CHOICE_BRANCH" prop-order=""/>
+         <xml-see-also>org.openehr.proc.taskplanning.DecisionBranch org.openehr.proc.taskplanning.ConditionBranch org.openehr.proc.taskplanning.EventBranch org.openehr.proc.taskplanning.AdhocBranch</xml-see-also>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.StateTrigger" xml-accessor-type="FIELD">
+         <xml-type name="STATE_TRIGGER" prop-order="expression"/>
+         <java-attributes>
+            <xml-element java-attribute="expression" name="expression" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.OrderRef" xml-accessor-type="FIELD">
+         <xml-type name="ORDER_REF" prop-order="orderTag instructionArchetypeId actionArchetypeId orderRef"/>
+         <java-attributes>
+            <xml-element java-attribute="orderTag" name="orderTag" required="true">
+               <xml-java-type-adapter value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+               <xml-schema-type name="order_tag"/>
+            </xml-element>
+            <xml-element java-attribute="instructionArchetypeId" name="instructionArchetypeId">
+               <xml-java-type-adapter value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+               <xml-schema-type name="instruction_archetype_id"/>
+            </xml-element>
+            <xml-element java-attribute="actionArchetypeId" name="actionArchetypeId">
+               <xml-java-type-adapter value="javax.xml.bind.annotation.adapters.CollapsedStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+               <xml-schema-type name="action_archetype_id"/>
+            </xml-element>
+            <xml-element java-attribute="orderRef" name="order_ref"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.EventAction" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="EVENT_ACTION" prop-order="systemCall message resumeAction receiverThreadNextState"/>
+         <java-attributes>
+            <xml-element java-attribute="systemCall" name="system_call"/>
+            <xml-element java-attribute="message" name="message"/>
+            <xml-element java-attribute="resumeAction" name="resume_action"/>
+            <xml-element java-attribute="receiverThreadNextState" name="receiver_thread_next_state"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskNotificationRecord" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TASK_NOTIFICATION_RECORD" prop-order="receiver receiverTaskPlan details"/>
+         <java-attributes>
+            <xml-element java-attribute="receiver" name="receiver" required="true"/>
+            <xml-element java-attribute="receiverTaskPlan" name="receiver_task_plan" required="true"/>
+            <xml-element java-attribute="details" name="details">
+               <xml-java-type-adapter value="care.better.platform.moxy.adapter.MapStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+            </xml-element>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.PerformableAction" xml-accessor-type="FIELD">
+         <xml-type name="PERFORMABLE_ACTION" prop-order="resources otherParticipations"/>
+         <xml-see-also>org.openehr.proc.taskplanning.DefinedAction org.openehr.proc.taskplanning.SubPlan</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="resources" name="resources" nillable="true"/>
+            <xml-element java-attribute="otherParticipations" name="other_participations"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ExternalRequest" xml-accessor-type="FIELD">
+         <xml-type name="EXTERNAL_REQUEST" prop-order="organisation requestId otherDetails"/>
+         <java-attributes>
+            <xml-element java-attribute="organisation" name="organisation" required="true"/>
+            <xml-element java-attribute="requestId" name="request_id" required="true"/>
+            <xml-element java-attribute="otherDetails" name="other_details"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.LocalVariable" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="LOCAL_VARIABLE" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ExecutionRule" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="EXECUTION_RULE" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskTransition" xml-accessor-type="FIELD">
+         <xml-type name="TASK_TRANSITION" prop-order="taskId transitions"/>
+         <java-attributes>
+            <xml-element java-attribute="taskId" name="task_id" required="true"/>
+            <xml-element java-attribute="transitions" name="transitions" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.SystemNotification" xml-accessor-type="FIELD">
+         <xml-type name="SYSTEM_NOTIFICATION" prop-order="systemId notificationType referenceId"/>
+         <java-attributes>
+            <xml-element java-attribute="systemId" name="system_id" required="true"/>
+            <xml-element java-attribute="notificationType" name="notification_type"/>
+            <xml-element java-attribute="referenceId" name="reference_id"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.PlanEvent" xml-accessor-type="FIELD">
+         <xml-type name="PLAN_EVENT" prop-order="delay otherDetails"/>
+         <xml-see-also>org.openehr.proc.taskplanning.ManualNotification org.openehr.proc.taskplanning.SystemNotification org.openehr.proc.taskplanning.CallbackNotification org.openehr.proc.taskplanning.StateTrigger org.openehr.proc.taskplanning.TimerEvent org.openehr.proc.taskplanning.CalendarEvent org.openehr.proc.taskplanning.TimelineMoment</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="delay" name="delay"/>
+            <xml-element java-attribute="otherDetails" name="other_details"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.DefinedAction" xml-accessor-type="FIELD">
+         <xml-type name="DEFINED_ACTION" prop-order="prototype optionality"/>
+         <java-attributes>
+            <xml-element java-attribute="prototype" name="prototype"/>
+            <xml-element java-attribute="optionality" name="optionality"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ResumeAction" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="RESUME_ACTION" prop-order="resumeType resumeLocation"/>
+         <java-attributes>
+            <xml-element java-attribute="resumeType" name="resume_type" required="true"/>
+            <xml-element java-attribute="resumeLocation" name="resume_location"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.BooleanContextExpression" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="BOOLEAN_CONTEXT_EXPRESSION" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="type" name="type"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.DispatchableTask" xml-accessor-type="FIELD">
+         <xml-type name="DISPATCHABLE_TASK" prop-order="wait callback"/>
+         <java-attributes>
+            <xml-element java-attribute="wait" name="wait" required="true"/>
+            <xml-element java-attribute="callback" name="callback"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.AdhocBranch" xml-accessor-type="FIELD">
+         <xml-type name="ADHOC_BRANCH" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.AdhocGroup" xml-accessor-type="FIELD">
+         <xml-type name="ADHOC_GROUP" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ChoiceGroup" xml-accessor-type="FIELD">
+         <xml-type name="CHOICE_GROUP" prop-order="overrideType timeout"/>
+         <xml-see-also>org.openehr.proc.taskplanning.ConditionGroup org.openehr.proc.taskplanning.DecisionGroup org.openehr.proc.taskplanning.AdhocGroup org.openehr.proc.taskplanning.EventGroup</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="overrideType" name="overrideType" required="true"/>
+            <xml-element java-attribute="timeout" name="timeout"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskRepeat" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TASK_REPEAT" prop-order="repeats terminateCondition period"/>
+         <java-attributes>
+            <xml-element java-attribute="repeats" name="repeats"/>
+            <xml-element java-attribute="terminateCondition" name="terminate_condition"/>
+            <xml-element java-attribute="period" name="period"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ClockTime" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CLOCK_TIME" prop-order="time"/>
+         <java-attributes>
+            <xml-element java-attribute="time" name="time" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.CallbackWait" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CALLBACK_WAIT" prop-order="failAction customActions"/>
+         <java-attributes>
+            <xml-element java-attribute="failAction" name="event_action"/>
+            <xml-element java-attribute="customActions" name="custom_action">
+               <xml-java-type-adapter value="care.better.platform.moxy.adapter.MapStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+            </xml-element>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.PlanCalendar" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="PLAN_CALENDAR" prop-order="entries"/>
+         <java-attributes>
+            <xml-element java-attribute="entries" name="entries" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.SubPlan" xml-accessor-type="FIELD">
+         <xml-type name="SUB_PLAN" prop-order="target targetUid"/>
+         <java-attributes>
+            <xml-element java-attribute="target" name="target"/>
+            <xml-element java-attribute="targetUid" name="target_uid"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefReal" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_REAL" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.DecisionGroup" xml-accessor-type="FIELD">
+         <xml-type name="DECISION_GROUP" prop-order="test"/>
+         <java-attributes>
+            <xml-element java-attribute="test" name="test" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ParameterMapping" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="PARAMETER_MAPPING" prop-order="name contextName"/>
+         <java-attributes>
+            <xml-element java-attribute="name" name="name" required="true"/>
+            <xml-element java-attribute="contextName" name="context_name" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.QueryCall" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="QUERY_CALL" prop-order="queryId queryText"/>
+         <java-attributes>
+            <xml-element java-attribute="queryId" name="query_id"/>
+            <xml-element java-attribute="queryText" name="query_text"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefInteger" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_INTEGER" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.HandOff" xml-accessor-type="FIELD">
+         <xml-type name="HAND_OFF" prop-order="target targetUid"/>
+         <java-attributes>
+            <xml-element java-attribute="target" name="target"/>
+            <xml-element java-attribute="targetUid" name="target_uid"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskWait" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TASK_WAIT" prop-order="eventRelation events timeout nextState"/>
+         <java-attributes>
+            <xml-element java-attribute="eventRelation" name="event_relation"/>
+            <xml-element java-attribute="events" name="events"/>
+            <xml-element java-attribute="timeout" name="timeout"/>
+            <xml-element java-attribute="nextState" name="next_state"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ParameterDef" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="PARAMETER_DEF" prop-order="name type value"/>
+         <java-attributes>
+            <xml-element java-attribute="name" name="name" required="true"/>
+            <xml-element java-attribute="type" name="type" required="true"/>
+            <xml-element java-attribute="value" name="value" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefUri" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_URI" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ContextValue" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CONTEXT_VALUE" prop-order="name type"/>
+         <xml-see-also>org.openehr.proc.taskplanning.ContextVariable org.openehr.proc.taskplanning.ContextExpression org.openehr.proc.taskplanning.ContextConstant</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="name" name="name" required="true"/>
+            <xml-element java-attribute="type" name="type" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskGroup" xml-accessor-type="FIELD">
+         <xml-type name="TASK_GROUP" prop-order="members executionType concurrencyMode executionRules trainingLevel"/>
+         <xml-see-also>org.openehr.proc.taskplanning.ChoiceGroup org.openehr.proc.taskplanning.ChoiceBranch</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="members" name="members" required="true"/>
+            <xml-element java-attribute="executionType" name="execution_type"/>
+            <xml-element java-attribute="concurrencyMode" name="concurrency_mode"/>
+            <xml-element java-attribute="executionRules" name="execution_rules"/>
+            <xml-element java-attribute="trainingLevel" name="training_level"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskPlanEventRecord" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TASK_PLAN_EVENT_RECORD" prop-order="details"/>
+         <java-attributes>
+            <xml-element java-attribute="details" name="details" required="true">
+               <xml-java-type-adapter value="care.better.platform.moxy.adapter.MapStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+            </xml-element>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.WorkPlan" xml-accessor-type="FIELD">
+         <xml-type name="WORK_PLAN" prop-order="description topLevelPlanUids topLevelPlans carePathway carePlan orderList calendar timeline context eventWaitStates indications classification"/>
+         <java-attributes>
+            <xml-element java-attribute="description" name="description" required="true"/>
+            <xml-element java-attribute="topLevelPlanUids" name="top_level_plan_uids"/>
+            <xml-element java-attribute="topLevelPlans" name="top_level_plans"/>
+            <xml-element java-attribute="carePathway" name="care_pathway"/>
+            <xml-element java-attribute="carePlan" name="care_plan"/>
+            <xml-element java-attribute="orderList" name="order_list"/>
+            <xml-element java-attribute="calendar" name="calendar" required="true"/>
+            <xml-element java-attribute="timeline" name="timeline" required="true"/>
+            <xml-element java-attribute="context" name="context"/>
+            <xml-element java-attribute="eventWaitStates" name="event_wait_states"/>
+            <xml-element java-attribute="indications" name="indications"/>
+            <xml-element java-attribute="classification" name="classification"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.Reminder" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="REMINDER" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskCosting" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TASK_COSTING" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.EventVariable" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="EVENT_VARIABLE" prop-order=""/>
+         <xml-see-also>org.openehr.proc.taskplanning.ContinuousEventVariable</xml-see-also>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ConditionGroup" xml-accessor-type="FIELD">
+         <xml-type name="CONDITION_GROUP" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefString" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_STRING" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.CalendarEvent" xml-accessor-type="FIELD">
+         <xml-type name="CALENDAR_EVENT" prop-order="entryId time"/>
+         <java-attributes>
+            <xml-element java-attribute="entryId" name="entry_id"/>
+            <xml-element java-attribute="time" name="time" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefVoid" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_VOID" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ContextVariable" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CONTEXT_VARIABLE" prop-order=""/>
+         <xml-see-also>org.openehr.proc.taskplanning.ExternalVariable org.openehr.proc.taskplanning.LocalVariable</xml-see-also>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.StateVariable" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="STATE_VARIABLE" prop-order="requiredCurrency"/>
+         <java-attributes>
+            <xml-element java-attribute="requiredCurrency" name="required_currency"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.PlanDataContext" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="PLAN_DATA_CONTEXT" prop-order="variables expressions constants"/>
+         <java-attributes>
+            <xml-element java-attribute="variables" name="variables" nillable="true"/>
+            <xml-element java-attribute="expressions" name="expressions" nillable="true"/>
+            <xml-element java-attribute="constants" name="constants" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TimelineMoment" xml-accessor-type="FIELD">
+         <xml-type name="TIMELINE_MOMENT" prop-order="timelineOffset fixedTime timelineOrigin"/>
+         <java-attributes>
+            <xml-element java-attribute="timelineOffset" name="timeline_offset"/>
+            <xml-element java-attribute="fixedTime" name="fixed_time"/>
+            <xml-element java-attribute="timelineOrigin" name="timeline_origin"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskPlan" xml-accessor-type="FIELD">
+         <xml-type name="TASK_PLAN" prop-order="subject description principalPerformer definition trainingLevel guideline bestPracticeRef orderSetId orderSetType expiryTime dueTime indications executionHistory"/>
+         <java-attributes>
+            <xml-element java-attribute="subject" name="subject"/>
+            <xml-element java-attribute="description" name="description" required="true"/>
+            <xml-element java-attribute="principalPerformer" name="principal_performer"/>
+            <xml-element java-attribute="definition" name="definition" required="true"/>
+            <xml-element java-attribute="trainingLevel" name="training_level"/>
+            <xml-element java-attribute="guideline" name="guideline"/>
+            <xml-element java-attribute="bestPracticeRef" name="best_practice_ref"/>
+            <xml-element java-attribute="orderSetId" name="order_set_id"/>
+            <xml-element java-attribute="orderSetType" name="order_set_type"/>
+            <xml-element java-attribute="expiryTime" name="expiry_time"/>
+            <xml-element java-attribute="dueTime" name="due_time"/>
+            <xml-element java-attribute="indications" name="indications"/>
+            <xml-element java-attribute="executionHistory" name="execution_history"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.SubjectPrecondition" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="SUBJECT_PRECONDITION" prop-order="description expression"/>
+         <java-attributes>
+            <xml-element java-attribute="description" name="description" required="true"/>
+            <xml-element java-attribute="expression" name="expression"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefDuration" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_DURATION" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ManualNotification" xml-accessor-type="FIELD">
+         <xml-type name="MANUAL_NOTIFICATION" prop-order="description"/>
+         <java-attributes>
+            <xml-element java-attribute="description" name="description" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.PlanTimeline" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="PLAN_TIMELINE" prop-order="plannedItems timers"/>
+         <java-attributes>
+            <xml-element java-attribute="plannedItems" name="planned_items"/>
+            <xml-element java-attribute="timers" name="timers" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ContextExpression" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CONTEXT_EXPRESSION" prop-order="expression"/>
+         <xml-see-also>org.openehr.proc.taskplanning.BooleanContextExpression</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="expression" name="expression" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.EventBranch" xml-accessor-type="FIELD">
+         <xml-type name="EVENT_BRANCH" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.CustomaryTime" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CUSTOMARY_TIME" prop-order="time"/>
+         <java-attributes>
+            <xml-element java-attribute="time" name="time" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.SystemRequest" xml-accessor-type="FIELD">
+         <xml-type name="system_request" prop-order="systemCall"/>
+         <java-attributes>
+            <xml-element java-attribute="systemCall" name="system_call" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.DispatchableAction" xml-accessor-type="FIELD">
+         <xml-type name="DISPATCHABLE_ACTION" prop-order=""/>
+         <xml-see-also>org.openehr.proc.taskplanning.HandOff org.openehr.proc.taskplanning.ExternalRequest org.openehr.proc.taskplanning.SystemRequest</xml-see-also>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.Task" xml-accessor-type="FIELD">
+         <xml-type name="TASK" prop-order="action orderTags"/>
+         <xml-see-also>org.openehr.proc.taskplanning.DispatchableTask org.openehr.proc.taskplanning.PerformableTask</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="action" name="action" required="true"/>
+            <xml-element java-attribute="orderTags" name="order_tags"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ConditionBranch" xml-accessor-type="FIELD">
+         <xml-type name="CONDITION_BRANCH" prop-order="test"/>
+         <java-attributes>
+            <xml-element java-attribute="test" name="test" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TimeSpecifier" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TIME_SPECIFIER" prop-order=""/>
+         <xml-see-also>org.openehr.proc.taskplanning.ClockTime org.openehr.proc.taskplanning.CustomaryTime</xml-see-also>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskAction" xml-accessor-type="FIELD">
+         <xml-type name="TASK_ACTION" prop-order="subjectPreconditions instructionActivity costingData"/>
+         <xml-see-also>org.openehr.proc.taskplanning.PerformableAction org.openehr.proc.taskplanning.DispatchableAction</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="subjectPreconditions" name="subject_preconditions"/>
+            <xml-element java-attribute="instructionActivity" name="instruction_activity"/>
+            <xml-element java-attribute="costingData" name="costing_data"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.PerformableTask" xml-accessor-type="FIELD">
+         <xml-type name="PERFORMABLE_TASK" prop-order="captureDataset"/>
+         <java-attributes>
+            <xml-element java-attribute="captureDataset" name="capture_dataset"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.DatasetSpec" xml-accessor-type="FIELD">
+         <xml-type name="DATASET_SPEC" prop-order="templateId formId otherDetails populatingCall formSectionPath"/>
+         <xml-see-also>org.openehr.proc.taskplanning.CaptureDatasetSpec org.openehr.proc.taskplanning.ReviewDatasetSpec</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="templateId" name="template_id"/>
+            <xml-element java-attribute="formId" name="form_id"/>
+            <xml-element java-attribute="otherDetails" name="other_details"/>
+            <xml-element java-attribute="populatingCall" name="populating_call"/>
+            <xml-element java-attribute="formSectionPath" name="form_section_path"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefObjectRef" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_OBJECT_REF" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ExprTypeDef" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="EXPR_TYPE_DEF" prop-order="typeName"/>
+         <xml-see-also>org.openehr.proc.taskplanning.TypeDefBoolean org.openehr.proc.taskplanning.TypeDefReal org.openehr.proc.taskplanning.TypeDefInteger org.openehr.proc.taskplanning.TypeDefDate org.openehr.proc.taskplanning.TypeDefDateTime org.openehr.proc.taskplanning.TypeDefDuration org.openehr.proc.taskplanning.TypeDefObject org.openehr.proc.taskplanning.TypeDefObjectRef org.openehr.proc.taskplanning.TypeDefString org.openehr.proc.taskplanning.TypeDefVoid org.openehr.proc.taskplanning.TypeDefTerminologyCode org.openehr.proc.taskplanning.TypeDefUri</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="type_name" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefTerminologyCode" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_TERMINOLOGY_CODE" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.CalendarEntry" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="CALENDAR_ENTRY" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TaskPlanExecutionHistory" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TASK_PLAN_EXECUTION_HISTORY" prop-order="planEvents taskEvents"/>
+         <java-attributes>
+            <xml-element java-attribute="planEvents" name="plan_events"/>
+            <xml-element java-attribute="taskEvents" name="task_events"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.TypeDefDateTime" xml-accessor-type="PUBLIC_MEMBER">
+         <xml-type name="TYPE_DEF_DATE_TIME" prop-order=""/>
+         <java-attributes>
+            <xml-element java-attribute="typeName" name="typeName"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.ReviewDatasetSpec" xml-accessor-type="FIELD">
+         <xml-type name="REVIEW_DATASET_SPEC" prop-order="captureDatasets"/>
+         <java-attributes>
+            <xml-element java-attribute="captureDatasets" name="capture_datasets"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.CallbackNotification" xml-accessor-type="FIELD">
+         <xml-type name="CALLBACK_NOTIFICATION" prop-order="taskId requestId subjectId manuallyNotified"/>
+         <java-attributes>
+            <xml-element java-attribute="taskId" name="task_id" required="true"/>
+            <xml-element java-attribute="requestId" name="request_id"/>
+            <xml-element java-attribute="subjectId" name="subject_id"/>
+            <xml-element java-attribute="manuallyNotified" name="manually_notified"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.proc.taskplanning.EventGroup" xml-accessor-type="FIELD">
+         <xml-type name="EVENT_GROUP" prop-order=""/>
+         <java-attributes/>
+      </java-type>
+   </java-types>
 </xml-bindings>

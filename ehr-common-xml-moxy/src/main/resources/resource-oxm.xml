@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.base.resource">
-    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
-        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
-    </xml-schema>
-    <xml-enums/>
-    <java-types>
-        <java-type name="org.openehr.base.resource.TranslationDetails">
-            <xml-type name="TRANSLATION_DETAILS" prop-order="language author accreditation otherDetails"/>
-            <java-attributes>
-                <xml-element java-attribute="language" name="language" required="true"/>
-                <xml-element java-attribute="author" name="author" required="true"/>
-                <xml-element java-attribute="accreditation" name="accreditation"/>
-                <xml-element java-attribute="otherDetails" name="other_details"/>
-            </java-attributes>
-        </java-type>
-    </java-types>
+   <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+      <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""/>
+   </xml-schema>
+   <xml-enums/>
+   <java-types>
+      <java-type name="org.openehr.base.resource.TranslationDetails" xml-accessor-type="FIELD">
+         <xml-type name="TRANSLATION_DETAILS" prop-order="language author accreditation otherDetails"/>
+         <java-attributes>
+            <xml-element java-attribute="language" name="language" required="true"/>
+            <xml-element java-attribute="author" name="author" required="true"/>
+            <xml-element java-attribute="accreditation" name="accreditation"/>
+            <xml-element java-attribute="otherDetails" name="other_details"/>
+         </java-attributes>
+      </java-type>
+   </java-types>
 </xml-bindings>

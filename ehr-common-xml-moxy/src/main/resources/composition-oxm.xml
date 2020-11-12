@@ -1,123 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm" package-name="org.openehr.rm.composition">
-    <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
-        <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""></xml-ns>
-    </xml-schema>
-    <xml-enums/>
-    <java-types>
-        <java-type name="org.openehr.rm.composition.Action">
-            <xml-type name="ACTION" prop-order="time description ismTransition instructionDetails"/>
-            <java-attributes>
-                <xml-element java-attribute="time" name="time" required="true"/>
-                <xml-element java-attribute="description" name="description" required="true"/>
-                <xml-element java-attribute="ismTransition" name="ism_transition" required="true"/>
-                <xml-element java-attribute="instructionDetails" name="instruction_details"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.Activity">
-            <xml-type name="ACTIVITY" prop-order="description timing actionArchetypeId"/>
-            <java-attributes>
-                <xml-element java-attribute="description" name="description" required="true"/>
-                <xml-element java-attribute="timing" name="timing"/>
-                <xml-element java-attribute="actionArchetypeId" name="action_archetype_id" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.AdminEntry">
-            <xml-type name="ADMIN_ENTRY"/>
-            <java-attributes>
-                <xml-element java-attribute="data" name="data" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.CareEntry">
-            <xml-type name="CARE_ENTRY" prop-order="protocol guidelineId"/>
-            <java-attributes>
-                <xml-element java-attribute="protocol" name="protocol"/>
-                <xml-element java-attribute="guidelineId" name="guideline_id"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.Composition">
-            <xml-type name="COMPOSITION" prop-order="language territory category composer context content"/>
-            <xml-root-element name="##default"/>
-            <java-attributes>
-                <xml-element java-attribute="language" name="language" required="true"/>
-                <xml-element java-attribute="territory" name="territory" required="true"/>
-                <xml-element java-attribute="category" name="category" required="true"/>
-                <xml-element java-attribute="composer" name="composer" required="true"/>
-                <xml-element java-attribute="context" name="context"/>
-                <xml-element java-attribute="content" name="content" nillable="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.ContentItem">
-            <xml-type name="CONTENT_ITEM"/>
-            <java-attributes/>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.Entry">
-            <xml-type name="ENTRY" prop-order="language encoding subject provider otherParticipations workFlowId"/>
-            <java-attributes>
-                <xml-element java-attribute="language" name="language" required="true"/>
-                <xml-element java-attribute="encoding" name="encoding" required="true"/>
-                <xml-element java-attribute="subject" name="subject" required="true"/>
-                <xml-element java-attribute="provider" name="provider"/>
-                <xml-element java-attribute="otherParticipations" name="other_participations"/>
-                <xml-element java-attribute="workFlowId" name="work_flow_id"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.Evaluation">
-            <xml-type name="EVALUATION"/>
-            <java-attributes>
-                <xml-element java-attribute="data" name="data" required="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.EventContext">
-            <xml-type name="EVENT_CONTEXT" prop-order="startTime endTime location setting otherContext healthCareFacility participations"/>
-            <java-attributes>
-                <xml-element java-attribute="startTime" name="start_time" required="true"/>
-                <xml-element java-attribute="endTime" name="end_time"/>
-                <xml-element java-attribute="location" name="location"/>
-                <xml-element java-attribute="setting" name="setting" required="true"/>
-                <xml-element java-attribute="otherContext" name="other_context"/>
-                <xml-element java-attribute="healthCareFacility" name="health_care_facility"/>
-                <xml-element java-attribute="participations" name="participations" nillable="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.Instruction">
-            <xml-type name="INSTRUCTION" prop-order="narrative expiryTime wfDefinition activities"/>
-            <java-attributes>
-                <xml-element java-attribute="narrative" name="narrative" required="true"/>
-                <xml-element java-attribute="expiryTime" name="expiry_time"/>
-                <xml-element java-attribute="wfDefinition" name="wf_definition"/>
-                <xml-element java-attribute="activities" name="activities" nillable="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.InstructionDetails">
-            <xml-type name="INSTRUCTION_DETAILS" prop-order="instructionId activityId wfDetails"/>
-            <java-attributes>
-                <xml-element java-attribute="instructionId" name="instruction_id" required="true"/>
-                <xml-element java-attribute="activityId" name="activity_id" required="true"/>
-                <xml-element java-attribute="wfDetails" name="wf_details"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.IsmTransition">
-            <xml-type name="ISM_TRANSITION" prop-order="currentState transition careflowStep reason"/>
-            <java-attributes>
-                <xml-element java-attribute="currentState" name="current_state" required="true"/>
-                <xml-element java-attribute="transition" name="transition"/>
-                <xml-element java-attribute="careflowStep" name="careflow_step"/>
-                <xml-element java-attribute="reason" name="reason" nillable="true"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.Observation">
-            <xml-type name="OBSERVATION" prop-order="data state"/>
-            <java-attributes>
-                <xml-element java-attribute="data" name="data" required="true"/>
-                <xml-element java-attribute="state" name="state"/>
-            </java-attributes>
-        </java-type>
-        <java-type name="org.openehr.rm.composition.Section">
-            <xml-type name="SECTION"/>
-            <java-attributes>
-                <xml-element java-attribute="items" name="items" nillable="true"/>
-            </java-attributes>
-        </java-type>
-    </java-types>
+   <xml-schema element-form-default="QUALIFIED" namespace="http://schemas.openehr.org/v1">
+      <xml-ns namespace-uri="http://schemas.openehr.org/v1" prefix=""/>
+   </xml-schema>
+   <xml-enums/>
+   <java-types>
+      <java-type name="org.openehr.rm.composition.Activity" xml-accessor-type="FIELD">
+         <xml-type name="ACTIVITY" prop-order="description timing actionArchetypeId"/>
+         <java-attributes>
+            <xml-element java-attribute="description" name="description" required="true"/>
+            <xml-element java-attribute="timing" name="timing"/>
+            <xml-element java-attribute="actionArchetypeId" name="action_archetype_id" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.Observation" xml-accessor-type="FIELD">
+         <xml-type name="OBSERVATION" prop-order="data state"/>
+         <java-attributes>
+            <xml-element java-attribute="data" name="data" required="true"/>
+            <xml-element java-attribute="state" name="state"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.ContentItem" xml-accessor-type="FIELD">
+         <xml-type name="CONTENT_ITEM" prop-order=""/>
+         <xml-see-also>org.openehr.rm.composition.Section org.openehr.rm.integration.GenericEntry org.openehr.rm.composition.Entry org.openehr.proc.taskplanning.WorkPlan org.openehr.proc.taskplanning.TaskPlan</xml-see-also>
+         <java-attributes/>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.Composition" xml-accessor-type="FIELD">
+         <xml-type name="COMPOSITION" prop-order="language territory category composer context content"/>
+         <xml-root-element name="##default"/>
+         <java-attributes>
+            <xml-element java-attribute="language" name="language" required="true"/>
+            <xml-element java-attribute="territory" name="territory" required="true"/>
+            <xml-element java-attribute="category" name="category" required="true"/>
+            <xml-element java-attribute="composer" name="composer" required="true"/>
+            <xml-element java-attribute="context" name="context"/>
+            <xml-element java-attribute="content" name="content" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.EventContext" xml-accessor-type="FIELD">
+         <xml-type name="EVENT_CONTEXT" prop-order="startTime endTime location setting otherContext healthCareFacility participations"/>
+         <java-attributes>
+            <xml-element java-attribute="startTime" name="start_time" required="true"/>
+            <xml-element java-attribute="endTime" name="end_time"/>
+            <xml-element java-attribute="location" name="location"/>
+            <xml-element java-attribute="setting" name="setting" required="true"/>
+            <xml-element java-attribute="otherContext" name="other_context"/>
+            <xml-element java-attribute="healthCareFacility" name="health_care_facility"/>
+            <xml-element java-attribute="participations" name="participations" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.Evaluation" xml-accessor-type="FIELD">
+         <xml-type name="EVALUATION" prop-order="data"/>
+         <java-attributes>
+            <xml-element java-attribute="data" name="data" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.Section" xml-accessor-type="FIELD">
+         <xml-type name="SECTION" prop-order="items"/>
+         <java-attributes>
+            <xml-element java-attribute="items" name="items" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.Action" xml-accessor-type="FIELD">
+         <xml-type name="ACTION" prop-order="time description ismTransition instructionDetails"/>
+         <java-attributes>
+            <xml-element java-attribute="time" name="time" required="true"/>
+            <xml-element java-attribute="description" name="description" required="true"/>
+            <xml-element java-attribute="ismTransition" name="ism_transition" required="true"/>
+            <xml-element java-attribute="instructionDetails" name="instruction_details"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.CareEntry" xml-accessor-type="FIELD">
+         <xml-type name="CARE_ENTRY" prop-order="protocol guidelineId"/>
+         <xml-see-also>org.openehr.rm.composition.Evaluation org.openehr.rm.composition.Observation org.openehr.rm.composition.Instruction org.openehr.rm.composition.Action</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="protocol" name="protocol"/>
+            <xml-element java-attribute="guidelineId" name="guideline_id"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.Instruction" xml-accessor-type="FIELD">
+         <xml-type name="INSTRUCTION" prop-order="narrative expiryTime wfDefinition activities"/>
+         <java-attributes>
+            <xml-element java-attribute="narrative" name="narrative" required="true"/>
+            <xml-element java-attribute="expiryTime" name="expiry_time"/>
+            <xml-element java-attribute="wfDefinition" name="wf_definition"/>
+            <xml-element java-attribute="activities" name="activities" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.AdminEntry" xml-accessor-type="FIELD">
+         <xml-type name="ADMIN_ENTRY" prop-order="data"/>
+         <java-attributes>
+            <xml-element java-attribute="data" name="data" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.IsmTransition" xml-accessor-type="FIELD">
+         <xml-type name="ISM_TRANSITION" prop-order="currentState transition careflowStep reason"/>
+         <java-attributes>
+            <xml-element java-attribute="currentState" name="current_state" required="true"/>
+            <xml-element java-attribute="transition" name="transition"/>
+            <xml-element java-attribute="careflowStep" name="careflow_step"/>
+            <xml-element java-attribute="reason" name="reason" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.InstructionDetails" xml-accessor-type="FIELD">
+         <xml-type name="INSTRUCTION_DETAILS" prop-order="instructionId activityId wfDetails"/>
+         <java-attributes>
+            <xml-element java-attribute="instructionId" name="instruction_id" required="true"/>
+            <xml-element java-attribute="activityId" name="activity_id" required="true"/>
+            <xml-element java-attribute="wfDetails" name="wf_details"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.composition.Entry" xml-accessor-type="FIELD">
+         <xml-type name="ENTRY" prop-order="language encoding subject provider otherParticipations workFlowId"/>
+         <xml-see-also>org.openehr.rm.composition.AdminEntry org.openehr.rm.composition.CareEntry</xml-see-also>
+         <java-attributes>
+            <xml-element java-attribute="language" name="language" required="true"/>
+            <xml-element java-attribute="encoding" name="encoding" required="true"/>
+            <xml-element java-attribute="subject" name="subject" required="true"/>
+            <xml-element java-attribute="provider" name="provider"/>
+            <xml-element java-attribute="otherParticipations" name="other_participations"/>
+            <xml-element java-attribute="workFlowId" name="work_flow_id"/>
+         </java-attributes>
+      </java-type>
+   </java-types>
 </xml-bindings>
