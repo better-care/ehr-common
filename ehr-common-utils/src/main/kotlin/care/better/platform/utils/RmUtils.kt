@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package care.better.platform.json.jackson
+package care.better.platform.utils
 
 import care.better.openehr.rm.RmObject
 import com.google.common.base.CaseFormat

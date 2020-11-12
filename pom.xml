@@ -5,10 +5,12 @@
     <groupId>care.better.platform</groupId>
     <artifactId>ehr-common</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+
     <modules>
         <module>ehr-common-model</module>
         <module>ehr-common-json-jackson</module>
         <module>ehr-common-xml-moxy</module>
+        <module>ehr-common-utils</module>
     </modules>
 
     <name>EHR common modules</name>
@@ -21,6 +23,7 @@
         <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
 
         <guava.version>29.0-jre</guava.version>
+        <joda.version>2.10.8</joda.version>
         <jackson.version>2.11.3</jackson.version>
         <moxy.version>2.7.7</moxy.version>
 
@@ -62,9 +65,33 @@
             </dependency>
 
             <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-utils</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-json-jackson</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-xml-moxy</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.version}</version>
             </dependency>
 
             <dependency>
