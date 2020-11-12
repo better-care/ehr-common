@@ -1,13 +1,16 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
+
 /**
  * @author Primoz Delopst
  */
 
 class ClockTime() : TimeSpecifier() {
-    lateinit var time: String
+    @RequiresNotNull
+    var time: String? = null
 
-    constructor(time: String) : this() {
+    constructor(time: String?) : this() {
         this.time = time
     }
 

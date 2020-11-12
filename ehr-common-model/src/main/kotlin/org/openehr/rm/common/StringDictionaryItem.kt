@@ -1,6 +1,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -9,5 +10,7 @@ import java.io.Serializable
 
 class StringDictionaryItem : RmObject(), Serializable {
     var value: String? = null
-    lateinit var id: String
+
+    @RequiresNotNull
+    var id: String? = null
 }

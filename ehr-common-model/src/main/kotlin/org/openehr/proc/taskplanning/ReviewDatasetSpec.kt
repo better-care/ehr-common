@@ -11,11 +11,11 @@ class ReviewDatasetSpec : DatasetSpec {
 
     var captureDatasets: MutableList<CaptureDatasetSpec> = mutableListOf()
 
-    constructor() : super()
+    constructor()
 
-    constructor(formId: String, templateId: String) : super(formId, templateId)
+    constructor(formId: String?, templateId: String?) : super(formId, templateId)
 
-    constructor(formId: String, templateId: String, otherDetails: ItemStructure?) : super(formId, templateId, otherDetails)
+    constructor(formId: String?, templateId: String?, otherDetails: ItemStructure?) : super(formId, templateId, otherDetails)
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

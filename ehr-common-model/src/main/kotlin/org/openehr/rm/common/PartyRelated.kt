@@ -1,5 +1,6 @@
 package org.openehr.rm.common
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datatypes.DvCodedText
 
 /**
@@ -7,5 +8,6 @@ import org.openehr.rm.datatypes.DvCodedText
  */
 
 class PartyRelated : PartyIdentified() {
-    lateinit var relationship: DvCodedText
+    @RequiresNotNull
+    var relationship: DvCodedText? = null
 }

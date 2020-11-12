@@ -16,15 +16,15 @@ open class TaskGroup<I : PlanItem> : PlanItem {
     var executionRules: MutableList<ExecutionRule> = mutableListOf()
     var concurrencyMode: ConcurrencyMode? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(executionType: ExecutionType) : this()
+    constructor(executionType: ExecutionType?)
 
-    constructor(description: DvText) : super(description) {
+    constructor(description: DvText?) : super(description) {
         this.executionType = ExecutionType.SEQUENTIAL
     }
 
-    constructor(description: DvText, executionType: ExecutionType) : super(description) {
+    constructor(description: DvText?, executionType: ExecutionType?) : super(description) {
         this.executionType = executionType
     }
 

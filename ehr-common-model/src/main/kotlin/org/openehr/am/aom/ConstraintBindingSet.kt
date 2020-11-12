@@ -1,6 +1,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -9,5 +10,7 @@ import java.io.Serializable
 
 class ConstraintBindingSet : AmObject(), Serializable {
     var items: MutableList<ConstraintBindingItem> = mutableListOf()
-    lateinit var terminology: String
+
+    @RequiresNotNull
+    var terminology: String? = null
 }

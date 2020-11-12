@@ -1,5 +1,6 @@
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvParsable
@@ -9,7 +10,10 @@ import org.openehr.rm.datatypes.DvParsable
  */
 
 class Activity : Locatable() {
-    lateinit var description: ItemStructure
+    @RequiresNotNull
+    var description: ItemStructure? = null
     var timing: DvParsable? = null
-    lateinit var actionArchetypeId: String
+
+    @RequiresNotNull
+    var actionArchetypeId: String? = null
 }

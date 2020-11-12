@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 /**
@@ -7,9 +8,10 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  */
 class SystemRequest() : DispatchableAction() {
 
-    lateinit var systemCall: SystemCall
+    @RequiresNotNull
+    var systemCall: SystemCall? = null
 
-    constructor(systemCall: SystemCall) : this() {
+    constructor(systemCall: SystemCall?) : this() {
         this.systemCall = systemCall
     }
 
@@ -20,7 +22,7 @@ class SystemRequest() : DispatchableAction() {
         visitor.visit(this)
         visitor.afterVisit(this)
         acceptPreconditions(visitor)
-        systemCall.accept(visitor)
+        systemCall?.accept(visitor)
         visitor.afterAccept(this)
     }
 

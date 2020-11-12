@@ -8,11 +8,11 @@ class CallbackWait : EventWait<CallbackNotification> {
     var failAction: EventAction? = null
     var customActions: MutableMap<String, EventAction> = mutableMapOf()
 
-    constructor() : super()
+    constructor()
 
-    constructor(event: CallbackNotification) : super(event)
+    constructor(event: CallbackNotification?) : super(event)
 
-    constructor(event: CallbackNotification, successAction: EventAction?, timeout: TimerWait?, failAction: EventAction?) : super(event, successAction, timeout) {
+    constructor(event: CallbackNotification?, successAction: EventAction?, timeout: TimerWait?, failAction: EventAction?) : super(event, successAction, timeout) {
         this.failAction = failAction
     }
 

@@ -1,9 +1,12 @@
 package org.openehr.am.aom
 
+import care.better.platform.annotation.RequiresNotNull
+
 /**
  * @author Primoz Delopst
  */
 
 class FlatArchetypeOntology : ArchetypeOntology() {
-    lateinit var archetypeId: String
+    @RequiresNotNull
+    var archetypeId: String? = null
 }

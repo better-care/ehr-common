@@ -10,11 +10,11 @@ import java.math.BigDecimal
 class ContinuousEventVariable<T> : EventVariable<T> {
     var updateVariation: BigDecimal? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(type: ExprTypeDef<T>, name: String) : super(type, name)
+    constructor(type: ExprTypeDef<T>?, name: String?) : super(type, name)
 
-    constructor(type: ExprTypeDef<T>, name: String, populatingRequest: SystemCall, updateVariation: BigDecimal) : super(type, name, populatingRequest) {
+    constructor(type: ExprTypeDef<T>?, name: String?, populatingRequest: SystemCall?, updateVariation: BigDecimal?) : super(type, name, populatingRequest) {
         this.updateVariation = updateVariation
     }
 

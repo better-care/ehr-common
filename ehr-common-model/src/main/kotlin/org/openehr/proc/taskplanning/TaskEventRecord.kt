@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.basetypes.LocatableRef
 
 /**
@@ -7,17 +8,20 @@ import org.openehr.base.basetypes.LocatableRef
  */
 
 class TaskEventRecord : EventRecord {
-    lateinit var taskId: String
-    lateinit var lifecycleState: TaskLifecycle
+    @RequiresNotNull
+    var taskId: String? = null
+
+    @RequiresNotNull
+    var lifecycleState: TaskLifecycle? = null
     var notificationsSent: MutableList<TaskNotificationRecord> = mutableListOf()
     var entryInstances: MutableList<LocatableRef> = mutableListOf()
     var preconditionsSatisfied = false
     var waitConditionsSatisfied = false
     var lifecycleTransitionReason: String? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(time: String, taskId: String, lifecycleState: TaskLifecycle) : super(time) {
+    constructor(time: String?, taskId: String?, lifecycleState: TaskLifecycle?) : super(time) {
         this.taskId = taskId
         this.lifecycleState = lifecycleState
     }

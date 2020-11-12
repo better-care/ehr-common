@@ -1,6 +1,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
 
@@ -9,6 +10,9 @@ import java.io.Serializable
  */
 
 class TermBindingItem : AmObject(), Serializable {
-    lateinit var value: CodePhrase
-    lateinit var code: String
+    @RequiresNotNull
+    var value: CodePhrase? = null
+
+    @RequiresNotNull
+    var code: String? = null
 }

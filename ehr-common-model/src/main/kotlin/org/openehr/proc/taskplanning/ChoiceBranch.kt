@@ -8,13 +8,13 @@ import org.openehr.rm.datatypes.DvText
  */
 abstract class ChoiceBranch<I : PlanItem> : TaskGroup<I> {
 
-    constructor() : super()
+    constructor()
 
-    protected constructor(executionType: ExecutionType) : super(executionType)
+    protected constructor(executionType: ExecutionType?) : super(executionType)
 
-    protected constructor(description: DvText, executionType: ExecutionType) : super(description, executionType)
+    protected constructor(description: DvText?, executionType: ExecutionType?) : super(description, executionType)
 
-    protected constructor(description: DvText) : super(description)
+    protected constructor(description: DvText?) : super(description)
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

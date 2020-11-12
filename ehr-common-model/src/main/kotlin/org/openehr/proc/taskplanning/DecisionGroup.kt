@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -8,15 +9,16 @@ import org.openehr.rm.datatypes.DvText
  */
 class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
 
-    lateinit var test: ContextExpression<*>
+    @RequiresNotNull
+    var test: ContextExpression<*>? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(test: ContextExpression<*>) : this() {
+    constructor(test: ContextExpression<*>?) {
         this.test = test
     }
 
-    constructor(description: DvText, test: ContextExpression<*>) : super(description) {
+    constructor(description: DvText?, test: ContextExpression<*>?) : super(description) {
         this.test = test
     }
 
@@ -32,7 +34,7 @@ class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
 
     override fun addExecutionRule(executionRule: ExecutionRule): DecisionGroup = super.addExecutionRule(executionRule) as DecisionGroup
 
-    override fun getExpressionNames(): Sequence<String> = listOf(test.name).asSequence()
+    override fun getExpressionNames(): Sequence<String> = test?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)
@@ -40,7 +42,7 @@ class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
         acceptRepeatAndWaitSpec(visitor)
         acceptReviewDataset(visitor)
         acceptExecutionRules(visitor)
-        test.accept(visitor)
+        test?.accept(visitor)
         acceptMembers(visitor)
         visitor.afterAccept(this)
     }

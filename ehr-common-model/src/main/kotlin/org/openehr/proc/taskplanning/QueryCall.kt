@@ -10,11 +10,11 @@ class QueryCall : SystemCall {
     var queryId: String? = null
     var queryText: String? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(systemId: String, callName: String) : super(systemId, callName)
+    constructor(systemId: String?, callName: String?) : super(systemId, callName)
 
-    constructor(systemId: String, callName: String, parameterMap: MutableList<ParameterMapping>) : super(systemId, callName, parameterMap)
+    constructor(systemId: String?, callName: String?, parameterMap: MutableList<ParameterMapping>) : super(systemId, callName, parameterMap)
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

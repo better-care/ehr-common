@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.PartyProxy
@@ -15,10 +16,14 @@ import org.openehr.rm.datatypes.DvUri
 class TaskPlan() : ContentItem(), VisitableByModelVisitor {
 
     var subject: PartyProxy? = null
-    lateinit var description: DvText
+
+    @RequiresNotNull
+    var description: DvText? = null
     var guideline: ItemStructure? = null
     var principalPerformer: TaskParticipation? = null
-    lateinit var definition: TaskGroup<out PlanItem>
+
+    @RequiresNotNull
+    var definition: TaskGroup<out PlanItem>? = null
     var executionHistory: TaskPlanExecutionHistory? = null
     var trainingLevel: Int? = null
     var bestPracticeRef: DvUri? = null
@@ -28,12 +33,12 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
     var orderSetId: DvIdentifier? = null
     var indications: MutableList<DvText> = mutableListOf()
 
-    constructor(description: DvText, definition: TaskGroup<out PlanItem>) : this() {
+    constructor(description: DvText?, definition: TaskGroup<out PlanItem>?) : this() {
         this.description = description
         this.definition = definition
     }
 
-    constructor(description: DvText, principalPerformer: TaskParticipation?, definition: TaskGroup<out PlanItem>) : this(description, definition) {
+    constructor(description: DvText?, principalPerformer: TaskParticipation?, definition: TaskGroup<out PlanItem>?) : this(description, definition) {
         this.principalPerformer = principalPerformer
     }
 
@@ -43,7 +48,7 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
         visitor.visit(this)
         visitor.afterVisit(this)
         principalPerformer?.also { it.accept(visitor) }
-        definition.accept(visitor)
+        definition?.accept(visitor)
         visitor.afterAccept(this)
     }
 

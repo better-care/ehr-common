@@ -1,10 +1,13 @@
 package org.openehr.rm.datastructures
 
+import care.better.platform.annotation.RequiresNotNull
+
 
 /**
  * @author Primoz Delopst
  */
 
 class ItemSingle : ItemStructure() {
-    lateinit var item: Element
+    @RequiresNotNull
+    var item: Element? = null
 }

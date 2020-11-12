@@ -1,5 +1,6 @@
 package org.openehr.am.aom
 
+import care.better.platform.annotation.RequiresNotNull
 import java.math.BigInteger
 
 /**
@@ -7,6 +8,7 @@ import java.math.BigInteger
  */
 
 abstract class ExprOperator : ExprItem() {
-    lateinit var operator: BigInteger
+    @RequiresNotNull
+    var operator: BigInteger? = null
     var precedenceOverridden: Boolean = false
 }

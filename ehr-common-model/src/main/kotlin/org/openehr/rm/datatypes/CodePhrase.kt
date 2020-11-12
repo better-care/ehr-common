@@ -1,6 +1,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
 
@@ -9,6 +10,9 @@ import java.io.Serializable
  */
 
 class CodePhrase : RmObject(), Serializable {
-    lateinit var terminologyId: TerminologyId
-    lateinit var codeString: String
+    @RequiresNotNull
+    var terminologyId: TerminologyId? = null
+
+    @RequiresNotNull
+    var codeString: String? = null
 }

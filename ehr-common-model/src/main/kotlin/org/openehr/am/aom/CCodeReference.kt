@@ -1,10 +1,13 @@
 package org.openehr.am.aom
 
+import care.better.platform.annotation.RequiresNotNull
+
 
 /**
  * @author Primoz Delopst
  */
 
 class CCodeReference : CCodePhrase() {
-    lateinit var referenceSetUri: String
+    @RequiresNotNull
+    var referenceSetUri: String? = null
 }

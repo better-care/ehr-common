@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datatypes.DvCodedText
 
 /**
@@ -7,9 +8,10 @@ import org.openehr.rm.datatypes.DvCodedText
  */
 class CustomaryTime() : TimeSpecifier() {
 
-    lateinit var time: DvCodedText
+    @RequiresNotNull
+    var time: DvCodedText? = null
 
-    constructor(time: DvCodedText) : this() {
+    constructor(time: DvCodedText?) : this() {
         this.time = time
     }
 

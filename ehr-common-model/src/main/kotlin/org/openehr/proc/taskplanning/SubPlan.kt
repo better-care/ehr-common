@@ -13,13 +13,13 @@ class SubPlan : PerformableAction, LinkedPlan {
     private var target: TaskPlan? = null
     private var targetUid: UidBasedId? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(target: TaskPlan?) : this() {
+    constructor(target: TaskPlan?) {
         this.target = target
     }
 
-    constructor(targetUid: UidBasedId?) : this() {
+    constructor(targetUid: UidBasedId?) {
         this.targetUid = targetUid
     }
 

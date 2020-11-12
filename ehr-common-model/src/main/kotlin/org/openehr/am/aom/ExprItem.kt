@@ -1,6 +1,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -8,5 +9,6 @@ import java.io.Serializable
  */
 
 abstract class ExprItem : AmObject(), Serializable {
-    lateinit var type: String
+    @RequiresNotNull
+    var type: String? = null
 }

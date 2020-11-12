@@ -1,5 +1,6 @@
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvParsable
 import org.openehr.rm.datatypes.DvText
@@ -9,7 +10,8 @@ import org.openehr.rm.datatypes.DvText
  */
 
 class Instruction : CareEntry() {
-    lateinit var narrative: DvText
+    @RequiresNotNull
+    var narrative: DvText? = null
     var expiryTime: DvDateTime? = null
     var wfDefinition: DvParsable? = null
     var activities: MutableList<Activity> = mutableListOf()

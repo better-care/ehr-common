@@ -11,7 +11,7 @@ class TimelineMoment : PlanEvent {
     var fixedTime: TimeSpecifier? = null
     var timelineOrigin: PlanTimeOrigin? = null
 
-    constructor() : super()
+    constructor()
 
     constructor(timelineOffset: String?, fixedTime: TimeSpecifier?) : this(null, timelineOffset, fixedTime)
 

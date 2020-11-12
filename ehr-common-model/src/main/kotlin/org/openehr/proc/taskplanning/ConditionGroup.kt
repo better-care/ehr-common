@@ -9,9 +9,9 @@ import org.openehr.rm.datatypes.DvText
 
 class ConditionGroup : ChoiceGroup<ConditionBranch> {
 
-    constructor() : super()
+    constructor()
 
-    constructor(description: DvText) : super(description)
+    constructor(description: DvText?) : super(description)
 
     override fun setWaitSpec(waitSpec: TaskWait?) {
         if (waitSpec != null) {

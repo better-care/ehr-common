@@ -1,6 +1,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -10,14 +11,16 @@ import java.io.Serializable
  */
 class SubjectPrecondition() : RmObject(), Serializable, VisitableByModelVisitor, ExpressionNamesProvider {
 
-    lateinit var description: String
+    @RequiresNotNull
+    var description: String? = null
+
     var expression: BooleanContextExpression? = null
 
-    constructor(description: String) : this() {
+    constructor(description: String?) : this() {
         this.description = description
     }
 
-    constructor(description: String, expression: BooleanContextExpression?) : this(description) {
+    constructor(description: String?, expression: BooleanContextExpression?) : this(description) {
         this.expression = expression
     }
 

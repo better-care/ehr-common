@@ -1,5 +1,6 @@
 package org.openehr.rm.common
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.basetypes.ObjectVersionId
 import org.openehr.rm.datatypes.DvCodedText
 
@@ -8,10 +9,13 @@ import org.openehr.rm.datatypes.DvCodedText
  */
 
 class OriginalVersion : Version() {
-    lateinit var uid: ObjectVersionId
+    @RequiresNotNull
+    var uid: ObjectVersionId? = null
     var data: Any? = null
     var precedingVersionUid: ObjectVersionId? = null
     var otherInputVersionUids: MutableList<ObjectVersionId> = mutableListOf()
     var attestations: MutableList<Attestation> = mutableListOf()
-    lateinit var lifecycleState: DvCodedText
+
+    @RequiresNotNull
+    var lifecycleState: DvCodedText? = null
 }

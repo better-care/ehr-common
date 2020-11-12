@@ -8,7 +8,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
-abstract class ExprTypeDef<T> constructor(val typeName: String) : RmObject(), Serializable {
+abstract class ExprTypeDef<T> constructor(val typeName: String?) : RmObject(), Serializable {
 
     override fun hashCode(): Int = Objects.hash(typeName)
 

@@ -8,6 +8,5 @@ import java.io.Serializable
  */
 
 class CalendarEntry : RmObject(), Serializable {
-
     override fun toString(): String = "CalendarEntry{}"
 }

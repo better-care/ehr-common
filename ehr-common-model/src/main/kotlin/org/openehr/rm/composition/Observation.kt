@@ -1,5 +1,6 @@
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datastructures.History
 
 /**
@@ -7,6 +8,7 @@ import org.openehr.rm.datastructures.History
  */
 
 class Observation : CareEntry() {
-    lateinit var data: History
+    @RequiresNotNull
+    var data: History? = null
     var state: History? = null
 }

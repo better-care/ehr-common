@@ -8,11 +8,11 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 class ApiCall : SystemCall {
 
-    constructor() : super()
+    constructor()
 
-    constructor(systemId: String, callName: String) : super(systemId, callName)
+    constructor(systemId: String?, callName: String?) : super(systemId, callName)
 
-    constructor(systemId: String, callName: String, parameterMap: MutableList<ParameterMapping>) : super(systemId, callName, parameterMap)
+    constructor(systemId: String?, callName: String?, parameterMap: MutableList<ParameterMapping>) : super(systemId, callName, parameterMap)
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

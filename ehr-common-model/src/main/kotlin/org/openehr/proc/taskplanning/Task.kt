@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -8,21 +9,21 @@ import org.openehr.rm.datatypes.DvText
  */
 abstract class Task<A : TaskAction> : PlanItem {
 
-    lateinit var action: A
+    @RequiresNotNull
+    var action: A? = null
     var orderTags: MutableList<String> = mutableListOf()
 
+    constructor()
 
-    constructor() : super()
-
-    protected constructor(action: A) : this() {
+    protected constructor(action: A?) {
         this.action = action
     }
 
-    protected constructor(description: DvText, action: A) : super(description) {
+    protected constructor(description: DvText?, action: A?) : super(description) {
         this.action = action
     }
 
-    protected constructor(description: DvText, repeatSpec: TaskRepeat?, waitSpec: TaskWait?, action: A) : super(description, repeatSpec, waitSpec) {
+    protected constructor(description: DvText?, repeatSpec: TaskRepeat?, waitSpec: TaskWait?, action: A?) : super(description, repeatSpec, waitSpec) {
         this.action = action
     }
 
@@ -31,7 +32,7 @@ abstract class Task<A : TaskAction> : PlanItem {
         visitor.afterVisit(this)
         acceptRepeatAndWaitSpec(visitor)
         acceptReviewDataset(visitor)
-        action.accept(visitor)
+        action?.accept(visitor)
         visitor.afterAccept(this)
     }
 

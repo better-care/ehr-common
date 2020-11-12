@@ -1,6 +1,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.resource.TranslationDetails
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
@@ -10,7 +11,8 @@ import java.io.Serializable
  */
 
 abstract class AuthoredResource : RmObject(), Serializable {
-    lateinit var originalLanguage: CodePhrase
+    @RequiresNotNull
+    var originalLanguage: CodePhrase? = null
     var isControlled: Boolean? = null
     var description: ResourceDescription? = null
     var translations: MutableList<TranslationDetails> = mutableListOf()

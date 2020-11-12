@@ -1,9 +1,12 @@
 package org.openehr.am.aom
 
+import care.better.platform.annotation.RequiresNotNull
+
 /**
  * @author Primoz Delopst
  */
 
 class ArchetypeInternalRef : CObject() {
-    lateinit var targetPath: String
+    @RequiresNotNull
+    var targetPath: String? = null
 }

@@ -1,10 +1,15 @@
 package org.openehr.am.aom
 
+import care.better.platform.annotation.RequiresNotNull
+
 /**
  * @author Primoz Delopst
  */
 
 class ExprLeaf : ExprItem() {
-    lateinit var item: Any
-    lateinit var referenceType: String
+    @RequiresNotNull
+    var item: Any? = null
+
+    @RequiresNotNull
+    var referenceType: String? = null
 }

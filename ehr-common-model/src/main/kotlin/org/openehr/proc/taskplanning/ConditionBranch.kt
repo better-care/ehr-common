@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -9,11 +10,12 @@ import org.openehr.rm.datatypes.DvText
 
 class ConditionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
 
-    lateinit var test: BooleanContextExpression
+    @RequiresNotNull
+    var test: BooleanContextExpression? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(description: DvText, test: BooleanContextExpression) : super(description) {
+    constructor(description: DvText?, test: BooleanContextExpression?) : super(description) {
         this.test = test
     }
 
@@ -35,12 +37,12 @@ class ConditionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
         acceptRepeatAndWaitSpec(visitor)
         acceptReviewDataset(visitor)
         acceptExecutionRules(visitor)
-        test.also { it.accept(visitor) }
+        test?.also { it.accept(visitor) }
         acceptMembers(visitor)
         visitor.afterAccept(this)
     }
 
-    override fun getExpressionNames(): Sequence<String> = listOf(test.name).asSequence()
+    override fun getExpressionNames(): Sequence<String> = test?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun toString(): String =
             "ConditionBranch{" +

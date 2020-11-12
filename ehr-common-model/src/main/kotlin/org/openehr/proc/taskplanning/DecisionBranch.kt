@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -8,11 +9,12 @@ import org.openehr.rm.datatypes.DvText
  */
 class DecisionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
 
-    lateinit var valueConstraint: BooleanContextExpression
+    @RequiresNotNull
+    var valueConstraint: BooleanContextExpression? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(description: DvText, valueConstraint: BooleanContextExpression) : super(description) {
+    constructor(description: DvText, valueConstraint: BooleanContextExpression?) : super(description) {
         this.valueConstraint = valueConstraint
     }
 
@@ -28,7 +30,7 @@ class DecisionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
 
     override fun addExecutionRule(executionRule: ExecutionRule): DecisionBranch = super.addExecutionRule(executionRule) as DecisionBranch
 
-    override fun getExpressionNames(): Sequence<String> = listOf(valueConstraint.name).asSequence()
+    override fun getExpressionNames(): Sequence<String> = valueConstraint?.name?.let { listOf(it).asSequence()} ?: emptySequence()
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)
@@ -36,7 +38,7 @@ class DecisionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
         acceptRepeatAndWaitSpec(visitor)
         acceptReviewDataset(visitor)
         acceptExecutionRules(visitor)
-        valueConstraint.also { it.accept(visitor) }
+        valueConstraint?.also { it.accept(visitor) }
         acceptMembers(visitor)
         visitor.afterAccept(this)
     }

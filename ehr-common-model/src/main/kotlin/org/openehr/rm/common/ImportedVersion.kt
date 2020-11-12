@@ -1,9 +1,12 @@
 package org.openehr.rm.common
 
+import care.better.platform.annotation.RequiresNotNull
+
 /**
  * @author Primoz Delopst
  */
 
 class ImportedVersion : Version() {
-    lateinit var item: OriginalVersion
+    @RequiresNotNull
+    var item: OriginalVersion? = null
 }

@@ -5,11 +5,11 @@ package org.openehr.proc.taskplanning
  */
 class TimerWait : EventWait<TimerEvent> {
 
-    constructor() : super()
+    constructor()
 
-    constructor(event: TimerEvent) : super(event)
+    constructor(event: TimerEvent?) : super(event)
 
-    constructor(event: TimerEvent, successAction: EventAction?, timeout: TimerWait?) : super(event, successAction, timeout)
+    constructor(event: TimerEvent?, successAction: EventAction?, timeout: TimerWait?) : super(event, successAction, timeout)
 
     override fun toString(): String = "TimerWait{} ${super.toString()}"
 }

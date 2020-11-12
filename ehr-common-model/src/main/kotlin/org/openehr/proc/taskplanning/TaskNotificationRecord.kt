@@ -1,6 +1,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.common.PartyProxy
 import java.util.*
 
@@ -8,12 +9,16 @@ import java.util.*
  * @author Primoz Delopst
  */
 
-class TaskNotificationRecord constructor() : RmObject() {
-    lateinit var receiver: PartyProxy
-    lateinit var receiverTaskPlan: String
+class TaskNotificationRecord() : RmObject() {
+    @RequiresNotNull
+    var receiver: PartyProxy? = null
+
+    @RequiresNotNull
+    var receiverTaskPlan: String? = null
+
     val details: LinkedHashMap<String, String> = LinkedHashMap()
 
-    constructor(receiver: PartyProxy, receiverTaskPlan: String) : this() {
+    constructor(receiver: PartyProxy?, receiverTaskPlan: String?) : this() {
         this.receiver = receiver
         this.receiverTaskPlan = receiverTaskPlan
     }

@@ -2,6 +2,7 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -14,11 +15,16 @@ class TView : AmObject(), Serializable {
     class Constraints : AmObject(), Serializable {
         @RequiresNotEmpty
         var items: MutableList<Items> = mutableListOf()
-        lateinit var path: String
+
+        @RequiresNotNull
+        var path: String? = null
 
         class Items : AmObject(), Serializable {
-            lateinit var value: Any
-            lateinit var id: String
+            @RequiresNotNull
+            var value: Any? = null
+
+            @RequiresNotNull
+            var id: String? = null
         }
     }
 }

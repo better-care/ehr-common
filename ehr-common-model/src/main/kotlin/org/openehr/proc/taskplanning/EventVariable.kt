@@ -8,11 +8,11 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 open class EventVariable<T> : ExternalVariable<T> {
 
-    constructor() : super()
+    constructor()
 
-    constructor(type: ExprTypeDef<T>, name: String) : super(type, name)
+    constructor(type: ExprTypeDef<T>?, name: String?) : super(type, name)
 
-    constructor(type: ExprTypeDef<T>, name: String, populatingRequest: SystemCall) : super(type, name, populatingRequest)
+    constructor(type: ExprTypeDef<T>?, name: String?, populatingRequest: SystemCall?) : super(type, name, populatingRequest)
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

@@ -1,6 +1,7 @@
 package org.openehr.base.basetypes
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -8,7 +9,8 @@ import java.io.Serializable
  */
 
 abstract class ObjectId : RmObject(), Serializable {
-    lateinit var value: String
+    @RequiresNotNull
+    var value: String? = null
 }
 
 

@@ -10,11 +10,11 @@ class BooleanContextExpression : ContextExpression<Boolean> {
 
     constructor() : super(TypeDefBoolean.INSTANCE)
 
-    constructor(expression: String) : super(TypeDefBoolean.INSTANCE, expression)
+    constructor(expression: String?) : super(TypeDefBoolean.INSTANCE, expression)
 
-    override fun getType(): TypeDefBoolean = super.getType() as TypeDefBoolean
+    override fun getType(): TypeDefBoolean? = super.getType() as TypeDefBoolean?
 
-    override fun setType(type: ExprTypeDef<Boolean>) {
+    override fun setType(type: ExprTypeDef<Boolean>?) {
         if (TypeDefBoolean.INSTANCE != type) {
             throw UnsupportedOperationException("TypeDefBoolean required here.")
         }

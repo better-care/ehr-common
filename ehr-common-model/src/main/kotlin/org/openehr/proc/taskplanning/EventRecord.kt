@@ -1,21 +1,23 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-abstract class EventRecord constructor() : RmObject(), Serializable {
-    lateinit var time: String
+abstract class EventRecord() : RmObject(), Serializable {
+    @RequiresNotNull
+    var time: String? = null
     var description: String? = null
 
-    constructor(time: String) : this() {
+    constructor(time: String?) : this() {
         this.time = time
     }
 
-    constructor(time: String, description: String?) : this(time) {
+    constructor(time: String?, description: String?) : this(time) {
         this.description = description
     }
 

@@ -7,5 +7,4 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
-abstract class DataValue : RmObject(), Serializable {
-}
+abstract class DataValue : RmObject(), Serializable

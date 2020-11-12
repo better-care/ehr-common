@@ -30,5 +30,4 @@ class EventAction() : RmObject(), Serializable {
                     ", resumeAction=$resumeAction" +
                     ", receiverThreadNextState=$receiverThreadNextState" +
                     '}'
-
 }

@@ -5,11 +5,11 @@ package org.openehr.proc.taskplanning
  */
 class Reminder : EventWait<PlanEvent> {
 
-    constructor() : super()
+    constructor()
 
-    constructor(event: PlanEvent) : super(event)
+    constructor(event: PlanEvent?) : super(event)
 
-    constructor(event: PlanEvent, successAction: EventAction?) : super(event, successAction, null)
+    constructor(event: PlanEvent?, successAction: EventAction?) : super(event, successAction, null)
 
     override fun toString(): String = "Reminder{} ${super.toString()}"
 }

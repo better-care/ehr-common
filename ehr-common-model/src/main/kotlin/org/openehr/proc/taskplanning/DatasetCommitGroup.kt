@@ -1,6 +1,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -10,10 +11,11 @@ import java.io.Serializable
  */
 class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
 
-    lateinit var groupId: String
+    @RequiresNotNull
+    var groupId: String? = null
     var completionStep: Boolean = false
 
-    constructor(groupId: String, completionStep: Boolean) : this() {
+    constructor(groupId: String?, completionStep: Boolean) : this() {
         this.completionStep = completionStep
         this.groupId = groupId
     }
@@ -26,7 +28,7 @@ class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
 
     override fun toString(): String =
             "DatasetCommitGroup{" +
-                "groupId='$groupId'" +
-                ", completionStep=$completionStep" +
-                '}'
+                    "groupId='$groupId'" +
+                    ", completionStep=$completionStep" +
+                    '}'
 }

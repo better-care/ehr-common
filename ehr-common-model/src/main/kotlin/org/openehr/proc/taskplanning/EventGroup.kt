@@ -8,11 +8,11 @@ import org.openehr.rm.datatypes.DvText
  */
 class EventGroup : ChoiceGroup<EventBranch> {
 
-    constructor() : super()
+    constructor()
 
     constructor(timeout: TimerWait?) : super(timeout)
 
-    constructor(description: DvText, timeout: TimerWait?) : super(description, timeout)
+    constructor(description: DvText?, timeout: TimerWait?) : super(description, timeout)
 
     override fun addMember(member: EventBranch): EventGroup = super.addMember(member) as EventGroup
 

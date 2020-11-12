@@ -1,6 +1,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -8,6 +9,9 @@ import java.io.Serializable
  */
 
 class AssertionVariable : RmObject(), Serializable {
-    lateinit var name: String
-    lateinit var definition: String
+    @RequiresNotNull
+    var name: String? = null
+
+    @RequiresNotNull
+    var definition: String? = null
 }

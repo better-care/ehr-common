@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
@@ -13,7 +14,9 @@ import org.openehr.rm.datatypes.DvText
  */
 class WorkPlan() : ContentItem(), VisitableByModelVisitor {
 
-    lateinit var description: DvText
+    @RequiresNotNull
+    var description: DvText? = null
+
     var carePathway: ItemStructure? = null
     var topLevelPlanUids: LinkedHashSet<UidBasedId> = LinkedHashSet()
     var topLevelPlans: LinkedHashSet<TaskPlan> = LinkedHashSet()
@@ -26,11 +29,11 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     var indications: MutableList<DvText> = mutableListOf()
     var classification: ItemStructure? = null
 
-    constructor(description: DvText) : this() {
+    constructor(description: DvText?)  : this() {
         this.description = description
     }
 
-    constructor(description: DvText, context: PlanDataContext) : this(description) {
+    constructor(description: DvText?, context: PlanDataContext?) : this(description) {
         this.context = context
     }
 

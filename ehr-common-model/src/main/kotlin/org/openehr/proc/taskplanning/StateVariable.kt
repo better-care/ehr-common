@@ -9,9 +9,9 @@ class StateVariable<T> : ExternalVariable<T> {
 
     var requiredCurrency: String? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(type: ExprTypeDef<T>, name: String, populatingRequest: SystemCall, requiredCurrency: String?) : super(type, name, populatingRequest) {
+    constructor(type: ExprTypeDef<T>?, name: String?, populatingRequest: SystemCall?, requiredCurrency: String?) : super(type, name, populatingRequest) {
         this.requiredCurrency = requiredCurrency
     }
 

@@ -1,6 +1,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
+import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -8,7 +9,10 @@ import java.io.Serializable
  */
 
 class TAttribute : AmObject(), Serializable {
-    lateinit var rmAttributeName: String
+    @RequiresNotNull
+    var rmAttributeName: String? = null
     var children: MutableList<TComplexObject> = mutableListOf()
-    lateinit var differentialPath: String
+
+    @RequiresNotNull
+    var differentialPath: String? = null
 }

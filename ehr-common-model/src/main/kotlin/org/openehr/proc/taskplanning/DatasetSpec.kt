@@ -9,7 +9,7 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
-abstract class DatasetSpec : Locatable, Serializable, VisitableByModelVisitor {
+abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisitor {
 
     var formId: String? = null
     var templateId: String? = null
@@ -17,14 +17,12 @@ abstract class DatasetSpec : Locatable, Serializable, VisitableByModelVisitor {
     var populatingCall: SystemCall? = null
     var formSectionPath: String? = null
 
-    constructor() : super()
-
-    constructor(formId: String?, templateId: String) : this() {
+    constructor(formId: String?, templateId: String?) : this() {
         this.formId = formId
         this.templateId = templateId
     }
 
-    constructor(formId: String?, templateId: String, otherDetails: ItemStructure?) : this(formId, templateId) {
+    constructor(formId: String?, templateId: String?, otherDetails: ItemStructure?) : this(formId, templateId) {
         this.otherDetails = otherDetails
     }
 

@@ -9,13 +9,13 @@ import org.openehr.rm.datatypes.DvText
 
 class AdhocBranch : ChoiceBranch<PlanItem> {
 
-    constructor() : super()
+    constructor()
 
-    constructor(executionType: ExecutionType) : super(executionType)
+    constructor(executionType: ExecutionType?) : super(executionType)
 
-    constructor(description: DvText, executionType: ExecutionType) : super(description, executionType)
+    constructor(description: DvText?, executionType: ExecutionType?) : super(description, executionType)
 
-    constructor(description: DvText) : super(description)
+    constructor(description: DvText?) : super(description)
 
     override fun addMember(member: PlanItem): AdhocBranch = super.addMember(member) as AdhocBranch
 

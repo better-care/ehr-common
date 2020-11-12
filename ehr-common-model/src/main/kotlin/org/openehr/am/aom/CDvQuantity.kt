@@ -7,7 +7,7 @@ import org.openehr.rm.datatypes.DvQuantity
  * @author Primoz Delopst
  */
 
-class CDvQuantity : CDomainType(){
+class CDvQuantity : CDomainType() {
     var assumedValue: DvQuantity? = null
     var defaultValue: DvQuantity? = null
     var property: CodePhrase? = null

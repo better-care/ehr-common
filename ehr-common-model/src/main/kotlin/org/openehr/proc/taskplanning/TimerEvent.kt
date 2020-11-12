@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
@@ -7,16 +8,17 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 class TimerEvent : PlanEvent {
 
-    lateinit var duration: String
+    @RequiresNotNull
+    var duration: String? = null
     var purpose: String? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(duration: String) : this() {
+    constructor(duration: String?) {
         this.duration = duration
     }
 
-    constructor(otherDetails: ItemStructure?, duration: String, purpose: String?) : super(otherDetails) {
+    constructor(otherDetails: ItemStructure?, duration: String?, purpose: String?) : super(otherDetails) {
         this.duration = duration
         this.purpose = purpose
     }

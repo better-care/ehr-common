@@ -1,6 +1,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -8,19 +9,22 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
-abstract class SystemCall constructor() : RmObject(), Serializable, VisitableByModelVisitor {
+abstract class SystemCall() : RmObject(), Serializable, VisitableByModelVisitor {
 
-    lateinit var systemId: String
-    lateinit var callName: String
+    @RequiresNotNull
+    var systemId: String? = null
+
+    @RequiresNotNull
+    var callName: String? = null
     var parameterMap: MutableList<ParameterMapping> = mutableListOf()
     var boundParameters: MutableList<ParameterDef<*>> = mutableListOf()
 
-    protected constructor(systemId: String, callName: String) : this() {
+    protected constructor(systemId: String?, callName: String?) : this() {
         this.systemId = systemId
         this.callName = callName
     }
 
-    protected constructor(systemId: String, callName: String, parameterMap: MutableList<ParameterMapping>) : this(systemId, callName) {
+    protected constructor(systemId: String?, callName: String?, parameterMap: MutableList<ParameterMapping>) : this(systemId, callName) {
         this.parameterMap = parameterMap
     }
 

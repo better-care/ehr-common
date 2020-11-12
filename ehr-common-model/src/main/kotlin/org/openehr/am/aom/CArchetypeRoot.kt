@@ -1,5 +1,6 @@
 package org.openehr.am.aom
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
 
@@ -8,7 +9,8 @@ import org.openehr.base.basetypes.TemplateId
  */
 
 class CArchetypeRoot : CComplexObject() {
-    lateinit var archetypeId: ArchetypeId
+    @RequiresNotNull
+    var archetypeId: ArchetypeId? = null
     var templateId: TemplateId? = null
     var termDefinitions: MutableList<ArchetypeTerm> = mutableListOf()
     var termBindings: MutableList<TermBindingSet> = mutableListOf()

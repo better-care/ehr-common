@@ -9,7 +9,7 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
-class OrderRef() : Locatable(), Serializable, VisitableByModelVisitor {
+class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
 
     var orderTag: String? = null
     var instructionArchetypeId: String? = null

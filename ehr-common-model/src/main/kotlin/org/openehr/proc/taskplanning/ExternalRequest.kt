@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datastructures.ItemStructure
@@ -10,11 +11,14 @@ import org.openehr.rm.datastructures.ItemStructure
 
 class ExternalRequest() : DispatchableAction() {
 
-    lateinit var organisation: PartyProxy
-    lateinit var requestId: String
+    @RequiresNotNull
+    var organisation: PartyProxy? = null
+
+    @RequiresNotNull
+    var requestId: String? = null
     var otherDetails: ItemStructure? = null
 
-    constructor(organisation: PartyProxy, requestId: String) : this() {
+    constructor(organisation: PartyProxy?, requestId: String?) : this() {
         this.organisation = organisation
         this.requestId = requestId
     }

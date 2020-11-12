@@ -7,5 +7,5 @@ import org.openehr.base.basetypes.UidBasedId
  */
 
 fun interface TaskReferencingEvent {
-    fun getTaskId(): UidBasedId
+    fun getTaskId(): UidBasedId?
 }

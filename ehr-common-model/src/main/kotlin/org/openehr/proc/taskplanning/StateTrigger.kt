@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
@@ -7,19 +8,20 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 class StateTrigger : PlanEvent, ExpressionNamesProvider {
 
-    lateinit var expression: BooleanContextExpression
+    @RequiresNotNull
+    var expression: BooleanContextExpression? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(expression: BooleanContextExpression) : this() {
+    constructor(expression: BooleanContextExpression?) {
         this.expression = expression
     }
 
-    constructor(otherDetails: ItemStructure?, expression: BooleanContextExpression) : super(otherDetails) {
+    constructor(otherDetails: ItemStructure?, expression: BooleanContextExpression?) : super(otherDetails) {
         this.expression = expression
     }
 
-    override fun getExpressionNames(): Sequence<String> = listOf(expression.name).asSequence()
+    override fun getExpressionNames(): Sequence<String> = expression?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun toString(): String =
             "StateTrigger{" +

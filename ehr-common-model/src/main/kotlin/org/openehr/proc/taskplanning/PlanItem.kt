@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.Locatable
@@ -12,7 +13,8 @@ import org.openehr.rm.datatypes.DvText
 
 abstract class PlanItem : Locatable, VisitableByModelVisitor {
 
-    lateinit var description: DvText
+    @RequiresNotNull
+    var description: DvText? = null
     var repeatSpec: TaskRepeat? = null
     var otherDetails: ItemStructure? = null
     private var waitSpec: TaskWait? = null
@@ -21,13 +23,13 @@ abstract class PlanItem : Locatable, VisitableByModelVisitor {
     var guidelineStep: String? = null
     var reminders: MutableList<Reminder> = mutableListOf()
 
-    constructor() : super()
+    constructor()
 
-    protected constructor(description: DvText) : this() {
+    protected constructor(description: DvText?) {
         this.description = description
     }
 
-    protected constructor(description: DvText, repeatSpec: TaskRepeat?, waitSpec: TaskWait?) : this(description) {
+    protected constructor(description: DvText?, repeatSpec: TaskRepeat?, waitSpec: TaskWait?) : this(description) {
         this.repeatSpec = repeatSpec
         this.waitSpec = waitSpec
     }

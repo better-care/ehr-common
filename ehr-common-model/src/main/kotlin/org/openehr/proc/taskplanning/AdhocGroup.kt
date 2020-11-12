@@ -8,11 +8,11 @@ import org.openehr.rm.datatypes.DvText
  */
 
 class AdhocGroup : ChoiceGroup<AdhocBranch> {
-    constructor() : super()
+    constructor()
 
-    constructor(description: DvText) : super(description)
+    constructor(description: DvText?) : super(description)
 
-    constructor(description: DvText, overrideType: OverrideType) : this(description) {
+    constructor(description: DvText?, overrideType: OverrideType?) : this(description) {
         this.overrideType = overrideType
     }
 

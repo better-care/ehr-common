@@ -8,11 +8,11 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 abstract class ExternalVariable<T> : ContextVariable<T> {
     var populatingRequest: SystemCall? = null
 
-    constructor() : super()
+    constructor()
 
-    protected constructor(type: ExprTypeDef<T>, name: String) : super(name, type)
+    protected constructor(type: ExprTypeDef<T>?, name: String?) : super(name, type)
 
-    protected constructor(type: ExprTypeDef<T>, name: String, populatingRequest: SystemCall) : this(type, name) {
+    protected constructor(type: ExprTypeDef<T>?, name: String?, populatingRequest: SystemCall?) : this(type, name) {
         this.populatingRequest = populatingRequest
     }
 

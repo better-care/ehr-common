@@ -1,6 +1,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datatypes.DvEhrUri
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
@@ -10,7 +11,12 @@ import java.io.Serializable
  */
 
 class Link : RmObject(), Serializable {
-    lateinit var meaning: DvText
-    lateinit var type: DvText
-    lateinit var target: DvEhrUri
+    @RequiresNotNull
+    var meaning: DvText? = null
+
+    @RequiresNotNull
+    var type: DvText? = null
+
+    @RequiresNotNull
+    var target: DvEhrUri? = null
 }

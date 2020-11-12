@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
@@ -7,15 +8,16 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 class ManualNotification : PlanEvent {
 
-    lateinit var description: String
+    @RequiresNotNull
+    var description: String? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(description: String) : this() {
+    constructor(description: String?) {
         this.description = description
     }
 
-    constructor(otherDetails: ItemStructure?, description: String) : super(otherDetails) {
+    constructor(otherDetails: ItemStructure?, description: String?) : super(otherDetails) {
         this.description = description
     }
 

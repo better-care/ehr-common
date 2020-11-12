@@ -1,6 +1,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -8,18 +9,23 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
-class ParameterDef<T : Any> constructor() : RmObject(), Serializable, VisitableByModelVisitor {
+class ParameterDef<T : Any>() : RmObject(), Serializable, VisitableByModelVisitor {
 
-    lateinit var name: String
-    lateinit var type: ExprTypeDef<T>
-    lateinit var value: T
+    @RequiresNotNull
+    var name: String? = null
 
-    constructor(name: String, type: ExprTypeDef<T>) : this() {
+    @RequiresNotNull
+    var type: ExprTypeDef<T>? = null
+
+    @RequiresNotNull
+    var value: T? = null
+
+    constructor(name: String?, type: ExprTypeDef<T>?) : this() {
         this.name = name
         this.type = type
     }
 
-    constructor(name: String, type: ExprTypeDef<T>, value: T) : this(name, type) {
+    constructor(name: String?, type: ExprTypeDef<T>?, value: T?) : this(name, type) {
         this.value = value
     }
 

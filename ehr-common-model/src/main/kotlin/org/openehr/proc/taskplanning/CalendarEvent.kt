@@ -1,28 +1,30 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.basetypes.UidBasedId
 
 /**
  * @author Primoz Delopst
  */
 
-class CalendarEvent constructor() : PlanEvent() {
+class CalendarEvent() : PlanEvent() {
 
     var entryId: UidBasedId? = null
 
-    lateinit var time: String
+    @RequiresNotNull
+    var time: String? = null
 
-    constructor(time: String) : this() {
+    constructor(time: String?) : this() {
         this.time = time
     }
 
-    constructor(time: String, entryId: UidBasedId) : this(time){
+    constructor(time: String?, entryId: UidBasedId?) : this(time) {
         this.entryId = entryId
     }
 
     override fun toString(): String =
             "CalendarEvent{" +
-                "entryId=$entryId" +
-                ", time=$time" +
-                "} ${super.toString()}"
+                    "entryId=$entryId" +
+                    ", time=$time" +
+                    "} ${super.toString()}"
 }

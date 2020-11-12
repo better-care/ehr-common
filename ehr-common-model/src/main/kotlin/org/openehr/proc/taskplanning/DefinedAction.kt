@@ -12,9 +12,9 @@ class DefinedAction : PerformableAction {
     var prototype: MutableList<Entry> = mutableListOf()
     var optionality: ValidityKind? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(optionality: ValidityKind?) : this() {
+    constructor(optionality: ValidityKind?) {
         this.optionality = optionality
     }
 

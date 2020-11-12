@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 /**
@@ -7,13 +8,14 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  */
 
 open class ContextExpression<T> : ContextValue<T> {
-    lateinit var expression: String
+    @RequiresNotNull
+    var expression: String? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(type: ExprTypeDef<T>) : super(type)
+    constructor(type: ExprTypeDef<T>?) : super(type)
 
-    constructor(type: ExprTypeDef<T>, expression: String) : this(type) {
+    constructor(type: ExprTypeDef<T>?, expression: String?) : this(type) {
         this.expression = expression
     }
 

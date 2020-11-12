@@ -1,5 +1,6 @@
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.RequiresNotNull
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -8,22 +9,23 @@ import org.openehr.rm.datatypes.DvText
  */
 
 abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
-    lateinit var overrideType: OverrideType
+    @RequiresNotNull
+    var overrideType: OverrideType? = null
     var timeout: TimerWait? = null
 
-    constructor() : super()
+    constructor()
 
-    constructor(description: DvText) : super(description)
+    constructor(description: DvText?) : super(description)
 
-    constructor(description: DvText, overrideType: OverrideType) : this(description) {
+    constructor(description: DvText?, overrideType: OverrideType?) : this(description) {
         this.overrideType = overrideType
     }
 
-    constructor(timeout: TimerWait?) : this() {
+    constructor(timeout: TimerWait?) {
         this.timeout = timeout
     }
 
-    constructor(description: DvText, timeout: TimerWait?) : this(description) {
+    constructor(description: DvText?, timeout: TimerWait?) : this(description) {
         this.timeout = timeout
     }
 

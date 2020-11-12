@@ -7,9 +7,9 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  */
 class LocalVariable<T> : ContextVariable<T> {
 
-    constructor() : super()
+    constructor()
 
-    constructor(name: String, type: ExprTypeDef<T>) : super(name, type)
+    constructor(name: String?, type: ExprTypeDef<T>?) : super(name, type)
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

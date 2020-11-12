@@ -11,7 +11,7 @@ abstract class PerformableAction : TaskAction {
     var resources: MutableList<ResourceParticipation> = mutableListOf()
     var otherParticipations: MutableList<TaskParticipation> = mutableListOf()
 
-    constructor() : super()
+    constructor()
 
     protected constructor(instructionActivity: LocatableRef?) : super(instructionActivity)
 
