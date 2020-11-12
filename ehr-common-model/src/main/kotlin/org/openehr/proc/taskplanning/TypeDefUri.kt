@@ -12,5 +12,13 @@ class TypeDefUri : ExprTypeDef<URI>("Uri") {
         val INSTANCE: TypeDefUri = TypeDefUri()
     }
 
+    override fun setTypeName(typeName: String?) {
+        if ("Uri" != typeName) {
+            throw UnsupportedOperationException("The type name has to be Uri")
+        }
+        super.setTypeName(typeName)
+    }
+
+
     override fun toString(): String = "TypeDefUri{} ${super.toString()}"
 }

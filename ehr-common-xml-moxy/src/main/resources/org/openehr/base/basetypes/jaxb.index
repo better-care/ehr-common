@@ -1,0 +1,12 @@
+PartyRef
+GenericId
+AccessGroupRef
+TerminologyId
+ObjectId
+ObjectVersionId
+LocatableRef
+ArchetypeId
+ObjectRef
+TemplateId
+HierObjectId
+UidBasedId

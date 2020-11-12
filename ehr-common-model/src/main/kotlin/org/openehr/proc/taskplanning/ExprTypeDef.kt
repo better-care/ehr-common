@@ -8,7 +8,17 @@ import java.util.*
  * @author Primoz Delopst
  */
 
-abstract class ExprTypeDef<T> constructor(val typeName: String?) : RmObject(), Serializable {
+abstract class ExprTypeDef<T>() : RmObject(), Serializable {
+
+    private var typeName: String? = null
+
+    constructor(typeName: String?) : this() {
+        this.typeName = typeName
+    }
+
+    open fun setTypeName(typeName: String?) {
+        this.typeName = typeName
+    }
 
     override fun hashCode(): Int = Objects.hash(typeName)
 

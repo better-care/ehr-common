@@ -11,7 +11,21 @@ class MapStringAdapter : XmlAdapter<MapStringAdapter.AdaptedMap, MutableMap<Stri
 
     override fun marshal(map: MutableMap<String, String>): AdaptedMap = AdaptedMap(map.entries.map { Entry(it.key, it.value) })
 
-    data class AdaptedMap(val entry: List<Entry>)
+    class AdaptedMap(){
+        var entry: MutableList<Entry> = mutableListOf()
 
-    data class Entry(val key: String, val value: String)
+        constructor(entry: List<Entry>) : this() {
+            this.entry.addAll(entry)
+        }
+    }
+
+    class Entry() {
+        lateinit var key: String
+        lateinit var value: String
+
+        constructor(key: String, value: String) : this() {
+            this.key = key
+            this.value = value
+        }
+    }
 }
