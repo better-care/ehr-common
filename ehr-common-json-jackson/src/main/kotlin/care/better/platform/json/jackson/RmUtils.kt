@@ -15,7 +15,7 @@ class RmUtils {
         private val CLASS_MAP: ConcurrentHashMap<String, KClass<out RmObject>> = ConcurrentHashMap()
         private val PACKAGE_NAMES: List<String> = listOf(
                 "org.openehr.am.aom",
-                "org.openehr.base.basetype",
+                "org.openehr.base.basetypes",
                 "org.openehr.base.foundationtypes",
                 "org.openehr.base.resource",
                 "org.openehr.proc.taskplanning",

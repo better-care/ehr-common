@@ -15,18 +15,18 @@
     <packaging>pom</packaging>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <kotlin.version>1.4.10</kotlin.version>
 
         <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
 
+        <guava.version>29.0-jre</guava.version>
         <jackson.version>2.11.3</jackson.version>
         <moxy.version>2.7.7</moxy.version>
-        <jaxb-api.version>2.3.1</jaxb-api.version>
 
         <enforcer-plugin.version>3.0.0-M2</enforcer-plugin.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -44,6 +44,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib-jdk8</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
                 <version>${kotlin-annotations.version}</version>
@@ -53,6 +59,12 @@
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-model</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>
@@ -72,12 +84,6 @@
                 <artifactId>org.eclipse.persistence.moxy</artifactId>
                 <version>${moxy.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>javax.xml.bind</groupId>
-                <artifactId>jaxb-api</artifactId>
-                <version>${jaxb-api.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -85,19 +91,21 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-            <version>${kotlin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
-            <version>${kotlin.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>${kotlin-annotations.version}</version>
         </dependency>
     </dependencies>
 
@@ -154,9 +162,6 @@
                         <configuration>
                             <rules>
                                 <dependencyConvergence/>
-                                <requireJavaVersion>
-                                    <version>11</version>
-                                </requireJavaVersion>
                             </rules>
                         </configuration>
                         <goals>
