@@ -1,3 +1,18 @@
+/* Copyright 2020-2025 Better Ltd (www.better.care)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package care.better.platform.utils
 
 import org.joda.time.DateTime
@@ -12,14 +27,13 @@ import java.util.regex.Pattern
  * @author Primoz Delopst
  */
 
+@Suppress("MemberVisibilityCanBePrivate", "unused", "DuplicatedCode")
 class DateTimeConversionUtils {
     companion object {
-        private val ZONED_DATE_TIME_PARSER =
-                Pattern.compile("^([-+]?[0-9]{4})(?:-?([0-9]{2})(?:-?([0-9]{2})(?:T([0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2})(?:[.,]([0-9]{1,9}))?)?)?(?:([+-][0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2}))?)?|(Z))?)?)?)?$")
+        private val ZONED_DATE_TIME_PARSER = Pattern.compile("^([-+]?[0-9]{4})(?:-?([0-9]{2})(?:-?([0-9]{2})(?:T([0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2})(?:[.,]([0-9]{1,9}))?)?)?(?:([+-][0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2}))?)?|(Z))?)?)?)?$")
         private val LOCAL_DATE_PARSER = Pattern.compile("^([-+]?[0-9]{4})(?:-?([0-9]{2})(?:-?([0-9]{2}))?)?.*")
         private val LOCAL_TIME_PARSER = Pattern.compile("^([0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2})(?:[.,]([0-9]{1,9}))?)?)?.*")
-        private val OFFSET_TIME_PARSER =
-                Pattern.compile("^([0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2})(?:[.,]([0-9]{1,9}))?)?)?(?:([+-][0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2}))?)?|(Z))?.*")
+        private val OFFSET_TIME_PARSER = Pattern.compile("^([0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2})(?:[.,]([0-9]{1,9}))?)?)?(?:([+-][0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2}))?)?|(Z))?.*")
         private val FULL_DATE_PATTERN = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}.*")
         private val FULL_DATE_TIME_PATTERN = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}.*")
 
@@ -34,9 +48,9 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvDateTime.
          *
-         * @param value string value of datetime
-         * @return ZonedDateTime
-         * @throws DateTimeException when string could not be parsed
+         * @param value [String] value of datetime
+         * @return [ZonedDateTime]
+         * @throws [DateTimeException] when string could not be parsed
          */
         fun toZonedDateTime(value: String): ZonedDateTime = toZonedDateTime(value, false)
 
@@ -50,10 +64,10 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvDateTime.
          *
-         * @param value  string value of datetime
+         * @param value  [String] value of datetime
          * @param strict throw an exception when date is not complete (date, time, tz)
-         * @return ZonedDateTime
-         * @throws DateTimeException when string could not be parsed
+         * @return [ZonedDateTime]
+         * @throws [DateTimeException] when string could not be parsed
          */
         fun toZonedDateTime(value: String, strict: Boolean): ZonedDateTime =
                 with(ZONED_DATE_TIME_PARSER.matcher(value)) {
@@ -110,9 +124,9 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvDateTime.
          *
-         * @param value string value of datetime
-         * @return OffsetDateTime
-         * @throws DateTimeException when string could not be parsed
+         * @param value [String] value of datetime
+         * @return [OffsetDateTime]
+         * @throws [DateTimeException] when string could not be parsed
          */
         fun toOffsetDateTime(value: String): OffsetDateTime = toOffsetDateTime(value, false)
 
@@ -126,10 +140,10 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvDateTime.
          *
-         * @param value  string value of datetime
+         * @param value  [String] value of datetime
          * @param strict throw an exception when date is not complete (date, time, tz)
-         * @return OffsetDateTime
-         * @throws DateTimeException when string could not be parsed
+         * @return [OffsetDateTime]
+         * @throws [DateTimeException] when string could not be parsed
          */
         fun toOffsetDateTime(value: String, strict: Boolean): OffsetDateTime = toZonedDateTime(value, strict).toOffsetDateTime()
 
@@ -143,23 +157,26 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvDate.
          *
-         * @param value string value of datetime
-         * @return LocalDate
-         * @throws DateTimeException when string could not be parsed
+         * @param value [String] value of datetime
+         * @return [LocalDate]
+         * @throws [DateTimeException] when string could not be parsed
          */
         fun toLocalDate(value: String): LocalDate = toLocalDate(value, false)
 
-        fun toLocalDate(value: String, strict: Boolean): LocalDate {
-            val matcher = LOCAL_DATE_PARSER.matcher(value)
-            if (matcher.matches()) {
-                return try {
-                    LocalDate.of(matcher.group(1).toInt(), parseInt(matcher.group(2), strict, 1), parseInt(matcher.group(3), strict, 1))
-                } catch (e: NumberFormatException) {
-                    throw DateTimeException("Invalid full date value: $value", e)
+        fun toLocalDate(value: String, strict: Boolean): LocalDate =
+                with(LOCAL_DATE_PARSER.matcher(value)) {
+                    if (this.matches()) {
+                        return try {
+                            LocalDate.of(
+                                    this.group(1).toInt(),
+                                    parseInt(this.group(2), strict, 1),
+                                    parseInt(this.group(3), strict, 1))
+                        } catch (e: NumberFormatException) {
+                            throw DateTimeException("Invalid full date value: $value", e)
+                        }
+                    }
+                    throw DateTimeException("Invalid date value: $value")
                 }
-            }
-            throw DateTimeException("Invalid date value: $value")
-        }
 
         /**
          * This method parses string in valid openEHR time format to a LocalTime.
@@ -168,21 +185,21 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvTime.
          *
-         * @param value string value of time
-         * @return LocalTime
-         * @throws DateTimeException when string could not be parsed
+         * @param value [String] value of time
+         * @return [LocalTime]
+         * @throws [DateTimeException] when string could not be parsed
          */
-        fun toLocalTime(value: String): LocalTime {
-            val matcher = LOCAL_TIME_PARSER.matcher(normalizeTimeString(value))
-            if (matcher.matches()) {
-                val hour = if (matcher.group(1) == null) 0 else matcher.group(1).toInt()
-                val minute = if (matcher.group(2) == null) 0 else matcher.group(2).toInt()
-                val second = if (matcher.group(3) == null) 0 else matcher.group(3).toInt()
-                val nano = if (matcher.group(4) == null) 0 else (matcher.group(4) + "00000000").substring(0, 9).toInt()
-                return LocalTime.of(hour, minute, second, nano)
-            }
-            throw DateTimeException("Invalid time value: $value")
-        }
+        fun toLocalTime(value: String): LocalTime =
+                with(LOCAL_TIME_PARSER.matcher(normalizeTimeString(value))) {
+                    if (this.matches()) {
+                        return LocalTime.of(
+                                if (this.group(1) == null) 0 else this.group(1).toInt(),
+                                if (this.group(2) == null) 0 else this.group(2).toInt(),
+                                if (this.group(3) == null) 0 else this.group(3).toInt(),
+                                if (this.group(4) == null) 0 else (this.group(4) + "00000000").substring(0, 9).toInt())
+                    }
+                    throw DateTimeException("Invalid time value: $value")
+                }
 
         /**
          * This method parses string in valid openEHR time format to an OffsetTime.
@@ -191,9 +208,9 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvTime.
          *
-         * @param value string value of time
-         * @return OffsetTime
-         * @throws DateTimeException when string could not be parsed
+         * @param value [String] value of time
+         * @return [OffsetTime]
+         * @throws [DateTimeException] when string could not be parsed
          */
         fun toOffsetTime(value: String): OffsetTime = toOffsetTime(value, false)
 
@@ -204,34 +221,33 @@ class DateTimeConversionUtils {
          *
          * Usually the string values would come from DvTime.
          *
-         * @param value  string value of time
+         * @param value  [String] value of time
          * @param strict if true converter will throw an exception when time zone is not in the provided string
-         * @return OffsetTime
-         * @throws DateTimeException when string could not be parsed
+         * @return [OffsetTime]
+         * @throws [DateTimeException] when string could not be parsed
          */
-        fun toOffsetTime(value: String, strict: Boolean): OffsetTime {
-            val matcher = OFFSET_TIME_PARSER.matcher(normalizeTimeString(value))
-            if (matcher.matches()) {
-                val hour = if (matcher.group(1) == null) 0 else matcher.group(1).toInt()
-                val minute = if (matcher.group(2) == null) 0 else matcher.group(2).toInt()
-                val second = if (matcher.group(3) == null) 0 else matcher.group(3).toInt()
-                val nano = if (matcher.group(4) == null) 0 else (matcher.group(4) + "00000000").substring(0, 9).toInt()
-                val localDateTime = LocalTime.of(hour, minute, second, nano)
-                val zoneOffset: ZoneOffset
-                zoneOffset = if (matcher.group(5) != null) {
-                    val offsetHours = if (matcher.group(5) == null) 0 else matcher.group(5).toInt()
-                    val offsetMinutes = if (matcher.group(6) == null) 0 else matcher.group(6).toInt()
-                    val offsetSeconds = if (matcher.group(7) == null) 0 else matcher.group(7).toInt()
-                    ZoneOffset.ofHoursMinutesSeconds(offsetHours, offsetMinutes, offsetSeconds)
-                } else if (!strict) {
-                    ZoneOffset.UTC
-                } else {
+        fun toOffsetTime(value: String, strict: Boolean): OffsetTime =
+                with(OFFSET_TIME_PARSER.matcher(normalizeTimeString(value))) {
+                    if (this.matches()) {
+                        val localDateTime = LocalTime.of(
+                                if (this.group(1) == null) 0 else this.group(1).toInt(),
+                                if (this.group(2) == null) 0 else this.group(2).toInt(),
+                                if (this.group(3) == null) 0 else this.group(3).toInt(),
+                                if (this.group(4) == null) 0 else (this.group(4) + "00000000").substring(0, 9).toInt())
+
+                        val zoneOffset: ZoneOffset = when {
+                            this.group(5) != null ->
+                                ZoneOffset.ofHoursMinutesSeconds(
+                                        if (this.group(5) == null) 0 else this.group(5).toInt(),
+                                        if (this.group(6) == null) 0 else this.group(6).toInt(),
+                                        if (this.group(7) == null) 0 else this.group(7).toInt())
+                            !strict -> ZoneOffset.UTC
+                            else -> throw DateTimeException("Invalid time value: $value")
+                        }
+                        return OffsetTime.of(localDateTime, zoneOffset)
+                    }
                     throw DateTimeException("Invalid time value: $value")
                 }
-                return OffsetTime.of(localDateTime, zoneOffset)
-            }
-            throw DateTimeException("Invalid time value: $value")
-        }
 
         /**
          * This method returns true if supplied string contains a time zone.
@@ -239,24 +255,18 @@ class DateTimeConversionUtils {
          * @param value string value of time
          * @return boolean true when supplied string contains a time-zone
          */
-        fun isOffsetTime(value: String): Boolean {
-            val matcher = OFFSET_TIME_PARSER.matcher(normalizeTimeString(value))
-            if (matcher.matches()) {
-                if (matcher.group(5) != null) {
-                    if (matcher.group(5) != null) {
-                        matcher.group(5).toInt()
+        fun isOffsetTime(value: String): Boolean =
+                with(OFFSET_TIME_PARSER.matcher(normalizeTimeString(value))) {
+                    if (this.matches()) {
+                        if (this.group(5) != null) {
+                            this.group(5)?.also { this.group(5).toInt() }
+                            this.group(6)?.also { this.group(6).toInt() }
+                            this.group(7)?.also { this.group(7).toInt() }
+                            return true
+                        }
                     }
-                    if (matcher.group(6) != null) {
-                        matcher.group(6).toInt()
-                    }
-                    if (matcher.group(7) != null) {
-                        matcher.group(7).toInt()
-                    }
-                    return true
+                    return false
                 }
-            }
-            return false
-        }
 
         fun toJodaDateTime(offsetDateTime: OffsetDateTime): DateTime = DateTime(GregorianCalendar.from(offsetDateTime.toZonedDateTime()))
 

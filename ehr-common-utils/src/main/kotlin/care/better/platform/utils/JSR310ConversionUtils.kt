@@ -1,3 +1,18 @@
+/* Copyright 2020-2025 Better Ltd (www.better.care)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package care.better.platform.utils
 
 import org.openehr.rm.datatypes.DvDate
@@ -55,9 +70,10 @@ class JSR310ConversionUtils {
          * @param time [LocalTime]
          * @return [DvTime]
          */
-        fun toDvTime(time: LocalTime): DvTime = DvTime().apply {
-            this.value = DateTimeFormatter.ISO_LOCAL_TIME.format(time)
-        }
+        fun toDvTime(time: LocalTime): DvTime =
+                DvTime().apply {
+                    this.value = DateTimeFormatter.ISO_LOCAL_TIME.format(time)
+                }
 
         /**
          * Converts [OffsetTime] to [DvTime]
@@ -76,7 +92,8 @@ class JSR310ConversionUtils {
          * @param dateTime [DvDateTime]
          * @return [ZonedDateTime]
          */
-        fun toZonedDateTime(dateTime: DvDateTime): ZonedDateTime = DateTimeConversionUtils.toZonedDateTime(dateTime.value!!)
+        fun toZonedDateTime(dateTime: DvDateTime): ZonedDateTime = DateTimeConversionUtils.toZonedDateTime(requireNotNull(dateTime.value))
+
 
         /**
          * Converts [DvDateTime] to [OffsetDateTime]
@@ -92,7 +109,7 @@ class JSR310ConversionUtils {
          * @param time [DvTime]
          * @return [LocalTime]
          */
-        fun toLocalTime(time: DvTime): LocalTime = DateTimeConversionUtils.toLocalTime(time.value!!)
+        fun toLocalTime(time: DvTime): LocalTime = DateTimeConversionUtils.toLocalTime(requireNotNull(time.value))
 
         /**
          * Converts [DvTime] to [OffsetTime]
@@ -100,7 +117,7 @@ class JSR310ConversionUtils {
          * @param time [DvTime]
          * @return [OffsetTime]
          */
-        fun toOffsetTime(time: DvTime): OffsetTime = DateTimeConversionUtils.toOffsetTime(time.value!!)
+        fun toOffsetTime(time: DvTime): OffsetTime = DateTimeConversionUtils.toOffsetTime(requireNotNull(time.value))
 
         /**
          * Converts [DvDate] to [LocalDate]
@@ -108,6 +125,6 @@ class JSR310ConversionUtils {
          * @param date [DvDate]
          * @return [DvDateTime]
          */
-        fun toLocalDate(date: DvDate): LocalDate = DateTimeConversionUtils.toLocalDate(date.value!!)
+        fun toLocalDate(date: DvDate): LocalDate = DateTimeConversionUtils.toLocalDate(requireNotNull(date.value))
     }
 }
