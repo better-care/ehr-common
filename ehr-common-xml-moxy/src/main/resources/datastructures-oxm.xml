@@ -5,21 +5,23 @@
    </xml-schema>
    <xml-enums/>
    <java-types>
+      <java-type name="org.openehr.rm.datastructures.ItemTable" xml-accessor-type="FIELD">
+         <xml-type name="ITEM_TABLE" prop-order="rows"/>
+         <java-attributes>
+            <xml-element java-attribute="rows" name="rows" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.datastructures.Element" xml-accessor-type="FIELD">
+         <xml-type name="ELEMENT" prop-order="value nullFlavour"/>
+         <java-attributes>
+            <xml-element java-attribute="value" name="value"/>
+            <xml-element java-attribute="nullFlavour" name="null_flavour"/>
+         </java-attributes>
+      </java-type>
       <java-type name="org.openehr.rm.datastructures.Item" xml-accessor-type="FIELD">
          <xml-type name="ITEM" prop-order=""/>
          <xml-see-also>org.openehr.rm.datastructures.Cluster org.openehr.rm.datastructures.Element</xml-see-also>
          <java-attributes/>
-      </java-type>
-      <java-type name="org.openehr.rm.datastructures.ItemStructure" xml-accessor-type="FIELD">
-         <xml-type name="ITEM_STRUCTURE" prop-order=""/>
-         <xml-see-also>org.openehr.rm.datastructures.ItemSingle org.openehr.rm.datastructures.ItemList org.openehr.rm.datastructures.ItemTree org.openehr.rm.datastructures.ItemTable</xml-see-also>
-         <java-attributes/>
-      </java-type>
-      <java-type name="org.openehr.rm.datastructures.ItemSingle" xml-accessor-type="FIELD">
-         <xml-type name="ITEM_SINGLE" prop-order="item"/>
-         <java-attributes>
-            <xml-element java-attribute="item" name="item" required="true"/>
-         </java-attributes>
       </java-type>
       <java-type name="org.openehr.rm.datastructures.Event" xml-accessor-type="FIELD">
          <xml-type name="EVENT" prop-order="time data state"/>
@@ -30,21 +32,10 @@
             <xml-element java-attribute="state" name="state"/>
          </java-attributes>
       </java-type>
-      <java-type name="org.openehr.rm.datastructures.PointEvent" xml-accessor-type="FIELD">
-         <xml-type name="POINT_EVENT" prop-order=""/>
+      <java-type name="org.openehr.rm.datastructures.ItemStructure" xml-accessor-type="FIELD">
+         <xml-type name="ITEM_STRUCTURE" prop-order=""/>
+         <xml-see-also>org.openehr.rm.datastructures.ItemSingle org.openehr.rm.datastructures.ItemList org.openehr.rm.datastructures.ItemTree org.openehr.rm.datastructures.ItemTable</xml-see-also>
          <java-attributes/>
-      </java-type>
-      <java-type name="org.openehr.rm.datastructures.ItemList" xml-accessor-type="FIELD">
-         <xml-type name="ITEM_LIST" prop-order="items"/>
-         <java-attributes>
-            <xml-element java-attribute="items" name="items" nillable="true"/>
-         </java-attributes>
-      </java-type>
-      <java-type name="org.openehr.rm.datastructures.Cluster" xml-accessor-type="FIELD">
-         <xml-type name="CLUSTER" prop-order="items"/>
-         <java-attributes>
-            <xml-element java-attribute="items" name="items" required="true"/>
-         </java-attributes>
       </java-type>
       <java-type name="org.openehr.rm.datastructures.History" xml-accessor-type="FIELD">
          <xml-type name="HISTORY" prop-order="origin period duration events summary"/>
@@ -56,17 +47,28 @@
             <xml-element java-attribute="summary" name="summary"/>
          </java-attributes>
       </java-type>
-      <java-type name="org.openehr.rm.datastructures.Element" xml-accessor-type="FIELD">
-         <xml-type name="ELEMENT" prop-order="value nullFlavour"/>
+      <java-type name="org.openehr.rm.datastructures.Cluster" xml-accessor-type="FIELD">
+         <xml-type name="CLUSTER" prop-order="items"/>
          <java-attributes>
-            <xml-element java-attribute="value" name="value"/>
-            <xml-element java-attribute="nullFlavour" name="null_flavour"/>
+            <xml-element java-attribute="items" name="items" required="true"/>
          </java-attributes>
       </java-type>
-      <java-type name="org.openehr.rm.datastructures.ItemTable" xml-accessor-type="FIELD">
-         <xml-type name="ITEM_TABLE" prop-order="rows"/>
+      <java-type name="org.openehr.rm.datastructures.ItemSingle" xml-accessor-type="FIELD">
+         <xml-type name="ITEM_SINGLE" prop-order="item"/>
          <java-attributes>
-            <xml-element java-attribute="rows" name="rows" nillable="true"/>
+            <xml-element java-attribute="item" name="item" required="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.datastructures.ItemTree" xml-accessor-type="FIELD">
+         <xml-type name="ITEM_TREE" prop-order="items"/>
+         <java-attributes>
+            <xml-element java-attribute="items" name="items" nillable="true"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.datastructures.ItemList" xml-accessor-type="FIELD">
+         <xml-type name="ITEM_LIST" prop-order="items"/>
+         <java-attributes>
+            <xml-element java-attribute="items" name="items" nillable="true"/>
          </java-attributes>
       </java-type>
       <java-type name="org.openehr.rm.datastructures.IntervalEvent" xml-accessor-type="FIELD">
@@ -77,11 +79,9 @@
             <xml-element java-attribute="mathFunction" name="math_function" required="true"/>
          </java-attributes>
       </java-type>
-      <java-type name="org.openehr.rm.datastructures.ItemTree" xml-accessor-type="FIELD">
-         <xml-type name="ITEM_TREE" prop-order="items"/>
-         <java-attributes>
-            <xml-element java-attribute="items" name="items" nillable="true"/>
-         </java-attributes>
+      <java-type name="org.openehr.rm.datastructures.PointEvent" xml-accessor-type="FIELD">
+         <xml-type name="POINT_EVENT" prop-order=""/>
+         <java-attributes/>
       </java-type>
    </java-types>
 </xml-bindings>

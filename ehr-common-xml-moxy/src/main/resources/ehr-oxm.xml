@@ -5,16 +5,6 @@
    </xml-schema>
    <xml-enums/>
    <java-types>
-      <java-type name="org.openehr.rm.ehr.Ehr" xml-accessor-type="FIELD">
-         <xml-type name="PATIENT_EHR" prop-order="systemId ehrId timeCreated ehrStatus"/>
-         <xml-root-element name="##default"/>
-         <java-attributes>
-            <xml-element java-attribute="systemId" name="system_id"/>
-            <xml-element java-attribute="ehrId" name="ehr_id"/>
-            <xml-element java-attribute="timeCreated" name="time_created"/>
-            <xml-element java-attribute="ehrStatus" name="ehr_status"/>
-         </java-attributes>
-      </java-type>
       <java-type name="org.openehr.rm.ehr.EhrStatus" xml-accessor-type="FIELD">
          <xml-type name="EHR_STATUS" prop-order="subject queryable modifiable otherDetails"/>
          <xml-root-element name="##default"/>
@@ -23,6 +13,16 @@
             <xml-element java-attribute="queryable" name="is_queryable" required="true"/>
             <xml-element java-attribute="modifiable" name="is_modifiable" required="true"/>
             <xml-element java-attribute="otherDetails" name="other_details"/>
+         </java-attributes>
+      </java-type>
+      <java-type name="org.openehr.rm.ehr.Ehr" xml-accessor-type="FIELD">
+         <xml-type name="PATIENT_EHR" prop-order="systemId ehrId timeCreated ehrStatus"/>
+         <xml-root-element name="##default"/>
+         <java-attributes>
+            <xml-element java-attribute="systemId" name="system_id"/>
+            <xml-element java-attribute="ehrId" name="ehr_id"/>
+            <xml-element java-attribute="timeCreated" name="time_created"/>
+            <xml-element java-attribute="ehrStatus" name="ehr_status"/>
          </java-attributes>
       </java-type>
    </java-types>
