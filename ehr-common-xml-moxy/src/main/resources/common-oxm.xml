@@ -185,7 +185,7 @@
       <java-type name="org.openehr.rm.common.StringDictionaryItem" xml-accessor-type="FIELD">
          <xml-type name="StringDictionaryItem" prop-order="value"/>
          <java-attributes>
-            <xml-element java-attribute="value" name="value"/>
+            <xml-value java-attribute="value"/>
             <xml-attribute java-attribute="id" name="id"/>
          </java-attributes>
       </java-type>
