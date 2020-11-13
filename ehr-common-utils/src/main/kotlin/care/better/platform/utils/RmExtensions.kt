@@ -339,7 +339,7 @@ fun CodePhrase.Companion.createEncodingPhrase(encodingCode: String): CodePhrase 
  * @param formalism parsable formalism
  * @return [DvParsable] object
  */
-fun DvParsable.Companion.getDvParsable(value: String, formalism: String): DvParsable =
+fun DvParsable.Companion.create(value: String, formalism: String): DvParsable =
         DvParsable().apply {
             this.formalism = formalism
             this.value = value
