@@ -19,4 +19,6 @@ package org.openehr.base.basetypes
  * @author Primoz Delopst
  */
 
-class ObjectVersionId : UidBasedId()
+class ObjectVersionId : UidBasedId() {
+    companion object
+}

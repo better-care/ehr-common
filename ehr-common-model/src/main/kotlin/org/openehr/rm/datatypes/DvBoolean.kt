@@ -20,5 +20,8 @@ package org.openehr.rm.datatypes
  */
 
 class DvBoolean : DataValue() {
+
+    companion object
+
     var value: Boolean = false
 }

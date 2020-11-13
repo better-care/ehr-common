@@ -22,6 +22,9 @@ import care.better.platform.annotation.RequiresNotNull
  */
 
 class DvParsable : DvEncapsulated() {
+
+    companion object
+    
     @RequiresNotNull
     var value: String? = null
 

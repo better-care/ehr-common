@@ -22,7 +22,10 @@ import care.better.platform.annotation.RequiresNotNull
  */
 
 class DvOrdinal : DvOrdered() {
-    var value = 0
+
+    companion object
+
+    var value: Int = 0
 
     @RequiresNotNull
     var symbol: DvCodedText? = null

@@ -22,6 +22,9 @@ import care.better.platform.annotation.RequiresNotNull
  */
 
 open class DvText : DataValue() {
+
+    companion object
+
     @RequiresNotNull
     var value: String? = null
     var hyperlink: DvUri? = null

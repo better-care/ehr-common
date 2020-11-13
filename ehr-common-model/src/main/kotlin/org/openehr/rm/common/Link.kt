@@ -26,6 +26,9 @@ import java.io.Serializable
  */
 
 class Link : RmObject(), Serializable {
+
+    companion object
+
     @RequiresNotNull
     var meaning: DvText? = null
 

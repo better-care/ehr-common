@@ -19,4 +19,6 @@ package org.openehr.rm.datatypes
  * @author Primoz Delopst
  */
 
-class DvEhrUri : DvUri()
+class DvEhrUri : DvUri() {
+    companion object
+}

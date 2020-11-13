@@ -24,10 +24,13 @@ import java.io.Serializable
  */
 
 open class ObjectRef : RmObject(), Serializable {
+
+    companion object
+
     @RequiresNotNull
     var id: ObjectId? = null
 
     @RequiresNotNull
     var namespace: String? = null
-    val type: String? = null
+    var type: String? = null
 }

@@ -22,9 +22,12 @@ import care.better.platform.annotation.RequiresNotNull
  */
 
 class DvQuantity : DvAmount() {
-    var magnitude = 0.0
+
+    companion object
+
+    var magnitude: Double? = 0.0
 
     @RequiresNotNull
     var units: String? = null
-    var precision: Int = -1
+    var precision: Int? = -1
 }

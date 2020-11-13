@@ -25,6 +25,9 @@ import java.io.Serializable
  */
 
 class CodePhrase : RmObject(), Serializable {
+
+    companion object
+
     @RequiresNotNull
     var terminologyId: TerminologyId? = null
 

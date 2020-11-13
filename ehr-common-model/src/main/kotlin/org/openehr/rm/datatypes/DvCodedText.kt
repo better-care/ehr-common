@@ -22,6 +22,8 @@ import care.better.platform.annotation.RequiresNotNull
  */
 
 class DvCodedText : DvText() {
+    companion object
+
     @RequiresNotNull
     var definingCode: CodePhrase? = null
 }

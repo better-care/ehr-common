@@ -22,6 +22,9 @@ import org.openehr.rm.datatypes.DvIdentifier
  */
 
 open class PartyIdentified : PartyProxy() {
+
+    companion object
+
     var name: String? = null
     var identifiers: MutableList<DvIdentifier> = mutableListOf()
 }
