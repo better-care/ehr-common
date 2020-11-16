@@ -104,9 +104,9 @@ class DateTimeConversionUtils {
                     throw DateTimeException("Invalid date time value: $value")
                 }
 
-        private fun parseInt(`val`: String, strict: Boolean, defaultValue: Int): Int =
+        private fun parseInt(`val`: String?, strict: Boolean, defaultValue: Int): Int =
                 try {
-                    `val`.toInt()
+                    `val`?.toInt() ?: throw NumberFormatException()
                 } catch (e: NumberFormatException) {
                     if (strict) {
                         throw e
@@ -272,7 +272,7 @@ class DateTimeConversionUtils {
 
         fun toOffsetDateTime(dateTime: DateTime): OffsetDateTime = dateTime.toGregorianCalendar().toZonedDateTime().toOffsetDateTime()
 
-        private fun plusPeriod(offsetDateTime: OffsetDateTime, period: Period): OffsetDateTime =
+        fun plusPeriod(offsetDateTime: OffsetDateTime, period: Period): OffsetDateTime =
                 offsetDateTime
                         .plus(period.years.toLong(), ChronoUnit.YEARS)
                         .plus(period.months.toLong(), ChronoUnit.MONTHS)
@@ -284,7 +284,7 @@ class DateTimeConversionUtils {
                         .plus(period.millis.toLong(), ChronoUnit.MILLIS)
 
 
-        private fun minusPeriod(offsetDateTime: OffsetDateTime, period: Period): OffsetDateTime =
+        fun minusPeriod(offsetDateTime: OffsetDateTime, period: Period): OffsetDateTime =
                 offsetDateTime
                         .minus(period.years.toLong(), ChronoUnit.YEARS)
                         .minus(period.months.toLong(), ChronoUnit.MONTHS)

@@ -45,31 +45,43 @@ class RmUtils {
                 "org.openehr.rm.ehr",
                 "org.openehr.rm.integration")
 
+        @JvmStatic
         fun getRmClass(className: String): Class<out RmObject> = getClassInfo(className).clazz
 
+        @JvmStatic
         fun getRmTypeName(clazz: Class<out RmObject>): String = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)
 
+        @JvmStatic
         fun getAllFields(className: String) = getClassInfo(className).fields
 
+        @JvmStatic
         fun getAllFields(clazz: Class<out RmObject>) = getClassInfo(clazz).fields
 
+        @JvmStatic
         fun getRequiredFields(className: String) = getClassInfo(className).requiredFields
 
+        @JvmStatic
         fun getRequiredFields(clazz: Class<out RmObject>) = getClassInfo(clazz).requiredFields
 
-        fun getFiledForAttribute(attributeName: String): String = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, attributeName)
+        @JvmStatic
+        fun getFieldForAttribute(attributeName: String): String = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, attributeName)
 
+        @JvmStatic
         fun getAttributeForField(fieldName: String): String = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, fieldName)
 
+        @JvmStatic
         fun getGetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
                 getGetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
+        @JvmStatic
         fun getGetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
                 getGetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
+        @JvmStatic
         fun getSetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
                 getSetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
+        @JvmStatic
         fun getSetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
                 getSetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
@@ -94,7 +106,7 @@ class RmUtils {
                     for (packageName in PACKAGE_NAMES) {
                         try {
                             val clazz = Class.forName("$packageName.${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}") as Class<out RmObject>
-                            ClassInfo(
+                            return@computeIfAbsent ClassInfo(
                                     clazz,
                                     getAllNonStaticFields(clazz),
                                     getAllRequiredFields(clazz),
@@ -109,7 +121,7 @@ class RmUtils {
 
         private fun getClassInfo(clazz: Class<out RmObject>): ClassInfo =
                 CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)) {
-                    ClassInfo(
+                    return@computeIfAbsent ClassInfo(
                             clazz,
                             getAllNonStaticFields(clazz),
                             getAllRequiredFields(clazz),
