@@ -16,7 +16,6 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -24,8 +23,6 @@ import java.io.Serializable
  */
 
 class SiblingOrder : AmObject(), Serializable {
-    var isBefore = false
-
-    @RequiresNotNull
-    var siblingNodeId: String? = null
+    var isBefore: Boolean = false
+    lateinit var siblingNodeId: String
 }

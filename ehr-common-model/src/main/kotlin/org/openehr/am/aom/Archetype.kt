@@ -15,7 +15,6 @@
 
 package org.openehr.am.aom
 
-import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.common.AuthoredResource
@@ -26,19 +25,11 @@ import org.openehr.rm.common.AuthoredResource
 
 class Archetype : AuthoredResource() {
     var uid: HierObjectId? = null
-
-    @RequiresNotNull
-    var archetypeId: ArchetypeId? = null
+    lateinit var archetypeId: ArchetypeId
     var adlVersion: String? = null
-
-    @RequiresNotNull
-    var concept: String? = null
+    lateinit var concept: String
     var parentArchetypeId: ArchetypeId? = null
-
-    @RequiresNotNull
-    var definition: CComplexObject? = null
+    lateinit var definition: CComplexObject
     var invariants: MutableList<Assertion> = mutableListOf()
-
-    @RequiresNotNull
-    var ontology: ArchetypeOntology? = null
+    lateinit var ontology: ArchetypeOntology
 }

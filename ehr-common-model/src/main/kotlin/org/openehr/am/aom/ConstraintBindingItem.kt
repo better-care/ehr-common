@@ -16,7 +16,6 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -24,9 +23,6 @@ import java.io.Serializable
  */
 
 class ConstraintBindingItem : AmObject(), Serializable {
-    @RequiresNotNull
-    var value: String? = null
-
-    @RequiresNotNull
-    var code: String? = null
+    lateinit var value: String
+    lateinit var code: String
 }

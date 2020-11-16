@@ -15,7 +15,6 @@
 
 package org.openehr.am.aom
 
-import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.foundationtypes.IntervalOfInteger
 
 /**
@@ -23,12 +22,7 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  */
 
 class CObjectGroup : ArchetypeConstraint() {
-    @RequiresNotNull
-    var range: IntervalOfInteger? = null
-
-    @RequiresNotNull
-    var cardinality: Cardinality? = null
-
-    @RequiresNotNull
-    var occurrences: IntervalOfInteger? = null
+    lateinit var range: IntervalOfInteger
+    lateinit var cardinality: Cardinality
+    lateinit var occurrences: IntervalOfInteger
 }

@@ -16,7 +16,6 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -24,11 +23,8 @@ import java.io.Serializable
  */
 
 class Transition : AmObject(), Serializable {
-    @RequiresNotNull
-    var event: String? = null
+    lateinit var event: String
     var action: String? = null
     var guard: String? = null
-
-    @RequiresNotNull
-    var nextState: State? = null
+    lateinit var nextState: State
 }

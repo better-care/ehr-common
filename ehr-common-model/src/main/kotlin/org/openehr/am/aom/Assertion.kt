@@ -16,7 +16,6 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotNull
 import java.io.Serializable
 
 /**
@@ -26,8 +25,6 @@ import java.io.Serializable
 class Assertion : AmObject(), Serializable {
     var tag: String? = null
     var stringExpression: String? = null
-
-    @RequiresNotNull
-    var expression: ExprItem? = null
+    lateinit var expression: ExprItem
     var variables: MutableList<AssertionVariable> = mutableListOf()
 }

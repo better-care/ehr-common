@@ -16,7 +16,6 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotNull
 import org.openehr.base.foundationtypes.IntervalOfInteger
 import java.io.Serializable
 
@@ -25,9 +24,8 @@ import java.io.Serializable
  */
 
 class Cardinality : AmObject(), Serializable {
-    var isOrdered = false
-    var isUnique = false
+    var isOrdered: Boolean = false
+    var isUnique: Boolean = false
 
-    @RequiresNotNull
-    var interval: IntervalOfInteger? = null
+    lateinit var interval: IntervalOfInteger
 }

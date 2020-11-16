@@ -15,7 +15,6 @@
 
 package org.openehr.am.aom
 
-import care.better.platform.annotation.RequiresNotNull
 import org.openehr.rm.datatypes.DvState
 
 /**
@@ -24,7 +23,5 @@ import org.openehr.rm.datatypes.DvState
 
 class CDvState : CDomainType() {
     var assumedValue: DvState? = null
-
-    @RequiresNotNull
-    var value: StateMachine? = null
+    lateinit var value: StateMachine
 }

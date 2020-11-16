@@ -20,8 +20,8 @@ package org.openehr.am.aom
  */
 
 class CBoolean : CPrimitive() {
-    var trueValid = false
-    var falseValid = false
+    var trueValid: Boolean = false
+    var falseValid: Boolean = false
     var assumedValue: Boolean? = null
     var defaultValue: Boolean? = null
 }
