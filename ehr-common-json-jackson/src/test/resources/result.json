@@ -1,0 +1,26 @@
+{
+  "resultSet": [
+    {
+      "composition": {
+        "@class": "COMPOSITION",
+        "name": {
+          "@class": "DV_TEXT",
+          "value": "Composition name"
+        }
+      },
+      "tags": [
+        {
+          "tag": "abc1",
+          "value": "val1",
+          "aqlPath": "/"
+        },
+        {
+          "tag": "abc2",
+          "value": "val2",
+          "aqlPath": "/"
+        }
+      ]
+    }
+  ]
+}
+

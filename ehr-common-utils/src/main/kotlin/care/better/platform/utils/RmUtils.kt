@@ -16,9 +16,13 @@
 package care.better.platform.utils
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.RequiresNotNull
 import com.google.common.base.CaseFormat
+import java.lang.reflect.Field
+import java.lang.reflect.Method
+import java.lang.reflect.Modifier
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.reflect.KClass
 
 /**
  * @author Primoz Delopst
@@ -26,7 +30,8 @@ import kotlin.reflect.KClass
 @Suppress("UNCHECKED_CAST")
 class RmUtils {
     companion object {
-        private val CLASS_MAP: ConcurrentHashMap<String, KClass<out RmObject>> = ConcurrentHashMap()
+        private val CLASS_MAP: ConcurrentHashMap<String, ClassInfo> = ConcurrentHashMap()
+
         private val PACKAGE_NAMES: List<String> = listOf(
                 "org.openehr.am.aom",
                 "org.openehr.base.basetypes",
@@ -40,20 +45,114 @@ class RmUtils {
                 "org.openehr.rm.ehr",
                 "org.openehr.rm.integration")
 
-        fun getRmClass(name: String): KClass<out RmObject> = CLASS_MAP.computeIfAbsent(name) { findClass(name) }
+        fun getRmClass(className: String): Class<out RmObject> = getClassInfo(className).clazz
 
-        fun getRmTypeName(clazz: KClass<out RmObject>): String = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName!!)
+        fun getRmTypeName(clazz: Class<out RmObject>): String = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)
+
+        fun getAllFields(className: String) = getClassInfo(className).fields
+
+        fun getAllFields(clazz: Class<out RmObject>) = getClassInfo(clazz).fields
+
+        fun getRequiredFields(className: String) = getClassInfo(className).requiredFields
+
+        fun getRequiredFields(clazz: Class<out RmObject>) = getClassInfo(clazz).requiredFields
+
+        fun getFiledForAttribute(attributeName: String): String = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, attributeName)
 
         fun getAttributeForField(fieldName: String): String = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, fieldName)
 
-        private fun findClass(name: String): KClass<out RmObject> {
-            for (packageName in PACKAGE_NAMES) {
-                try {
-                    return Class.forName("$packageName.${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}").kotlin as KClass<out RmObject>
-                } catch (ignore: ClassNotFoundException) {
+        fun getGetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
+                getGetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+
+        fun getGetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
+                getGetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+
+        fun getSetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
+                getSetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+
+        fun getSetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
+                getSetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+
+        private fun getGetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
+                with(getClassInfo(clazz).getter) {
+                    val getMethod: Method? = this["get${nameTransformer.invoke(name)}"]
+                    val setMethod: Method? = this["get${nameTransformer.invoke(name)}"]
+
+                    if (getMethod != null || setMethod != null) {
+                        getMethod ?: setMethod
+                    } else {
+                        null
+                    }
                 }
+
+        private fun getSetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
+                getClassInfo(clazz).setter["set${nameTransformer.invoke(name)}"]
+
+
+        private fun getClassInfo(name: String): ClassInfo =
+                CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, name)) {
+                    for (packageName in PACKAGE_NAMES) {
+                        try {
+                            val clazz = Class.forName("$packageName.${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}") as Class<out RmObject>
+                            ClassInfo(
+                                    clazz,
+                                    getAllNonStaticFields(clazz),
+                                    getAllRequiredFields(clazz),
+                                    getGetters(clazz),
+                                    getSetters(clazz))
+
+                        } catch (ignore: ClassNotFoundException) {
+                        }
+                    }
+                    throw ClassNotFoundException(name)
+                }
+
+        private fun getClassInfo(clazz: Class<out RmObject>): ClassInfo =
+                CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)) {
+                    ClassInfo(
+                            clazz,
+                            getAllNonStaticFields(clazz),
+                            getAllRequiredFields(clazz),
+                            getGetters(clazz),
+                            getSetters(clazz))
+                }
+
+        private fun getAllNonStaticFields(clazz: Class<out RmObject>): Collection<Field> =
+                with(mutableListOf<Field>()) {
+                    addFieldsRecursive(clazz, { !Modifier.isStatic(it.modifiers) }, this)
+                    this.toList()
+                }
+
+        private fun getAllRequiredFields(clazz: Class<out RmObject>): Collection<Field> =
+                with(mutableListOf<Field>()) {
+                    addFieldsRecursive(
+                            clazz,
+                            { it.getAnnotation(RequiresNotNull::class.java) != null || it.getAnnotation(RequiresNotEmpty::class.java) != null },
+                            this)
+                    this.toList()
+                }
+
+        private fun addFieldsRecursive(clazz: Class<*>?, predicate: (Field) -> Boolean, list: MutableList<Field>) {
+            if (clazz == null) {
+                return
             }
-            throw ClassNotFoundException(name)
+
+            clazz.declaredFields.filter(predicate).forEach { list.add(it) }
+            addFieldsRecursive(clazz.superclass, predicate, list)
         }
+
+        private fun getGetters(clazz: Class<out RmObject>): Map<String, Method> =
+                clazz.methods.filter { it.name.startsWith("get") || it.name.startsWith("is") }.associateBy { it.name }
+
+
+        private fun getSetters(clazz: Class<out RmObject>): Map<String, Method> =
+                clazz.methods.filter { it.name.startsWith("set") }.associateBy { it.name }
     }
+
+    data class ClassInfo(
+            val clazz: Class<out RmObject>,
+            val fields: Collection<Field>,
+            val requiredFields: Collection<Field>,
+            val getter: Map<String, Method>,
+            val setter: Map<String, Method>)
 }

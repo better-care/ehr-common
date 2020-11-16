@@ -27,7 +27,6 @@ import com.fasterxml.jackson.databind.jsontype.TypeDeserializer
 import com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer
 import com.fasterxml.jackson.databind.util.TokenBuffer
 import java.io.IOException
-import kotlin.reflect.KClass
 
 /**
  * @author Primoz Delopst
@@ -106,7 +105,7 @@ class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, proper
                 jsonParser = tb.asParser(jsonParser)
                 jsonParser.nextToken()
             }
-            return deserializeTypedForId(jsonParser, ctxt, tb!!, RmUtils.getRmTypeName(rawClass.kotlin as KClass<out RmObject>))
+            return deserializeTypedForId(jsonParser, ctxt, tb!!, RmUtils.getRmTypeName(rawClass as Class<out RmObject>))
         }
         return _deserializeTypedUsingDefaultImpl(jsonParser, ctxt, tb)
     }
