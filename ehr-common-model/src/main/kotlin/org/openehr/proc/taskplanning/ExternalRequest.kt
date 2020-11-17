@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datastructures.ItemStructure
@@ -26,10 +26,10 @@ import org.openehr.rm.datastructures.ItemStructure
 
 class ExternalRequest() : DispatchableAction() {
 
-    @RequiresNotNull
+    @Required
     var organisation: PartyProxy? = null
 
-    @RequiresNotNull
+    @Required
     var requestId: String? = null
     var otherDetails: ItemStructure? = null
 

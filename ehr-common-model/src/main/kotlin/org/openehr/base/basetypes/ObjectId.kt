@@ -16,7 +16,7 @@
 package org.openehr.base.basetypes
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
@@ -24,7 +24,7 @@ import java.io.Serializable
  */
 
 abstract class ObjectId : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var value: String? = null
 }
 

@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
@@ -25,7 +25,7 @@ open class DvText : DataValue() {
 
     companion object
 
-    @RequiresNotNull
+    @Required
     var value: String? = null
     var hyperlink: DvUri? = null
     var formatting: String? = null

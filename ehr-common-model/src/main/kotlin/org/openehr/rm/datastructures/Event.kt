@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datastructures
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
 
@@ -24,10 +24,10 @@ import org.openehr.rm.datatypes.DvDateTime
  */
 
 abstract class Event : Locatable() {
-    @RequiresNotNull
+    @Required
     var time: DvDateTime? = null
 
-    @RequiresNotNull
+    @Required
     var data: ItemStructure? = null
     var state: ItemStructure? = null
 }

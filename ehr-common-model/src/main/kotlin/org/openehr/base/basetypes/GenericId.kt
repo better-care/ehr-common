@@ -15,13 +15,13 @@
 
 package org.openehr.base.basetypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
 class GenericId : ObjectId() {
-    @RequiresNotNull
+    @Required
     var scheme: String? = null
 }

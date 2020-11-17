@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -24,7 +24,7 @@ import org.openehr.rm.datatypes.DvText
  */
 abstract class Task<A : TaskAction> : PlanItem {
 
-    @RequiresNotNull
+    @Required
     var action: A? = null
     var orderTags: MutableList<String> = mutableListOf()
 

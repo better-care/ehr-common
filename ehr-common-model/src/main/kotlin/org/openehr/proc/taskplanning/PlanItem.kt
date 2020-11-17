@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.Locatable
@@ -28,7 +28,7 @@ import org.openehr.rm.datatypes.DvText
 
 abstract class PlanItem : Locatable, VisitableByModelVisitor {
 
-    @RequiresNotNull
+    @Required
     var description: DvText? = null
     var repeatSpec: TaskRepeat? = null
     var otherDetails: ItemStructure? = null

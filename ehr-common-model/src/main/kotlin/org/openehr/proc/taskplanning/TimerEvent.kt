@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
@@ -23,7 +23,7 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 class TimerEvent : PlanEvent {
 
-    @RequiresNotNull
+    @Required
     var duration: String? = null
     var purpose: String? = null
 

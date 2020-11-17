@@ -16,7 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -26,10 +26,10 @@ import java.io.Serializable
  */
 class ParameterMapping() : RmObject(), Serializable, VisitableByModelVisitor {
 
-    @RequiresNotNull
+    @Required
     var name: String? = null
 
-    @RequiresNotNull
+    @Required
     var contextName: String? = null
 
     constructor(name: String?, contextName: String?) : this() {

@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
@@ -26,7 +26,7 @@ class DvMultimedia : DvEncapsulated() {
     var uri: DvUri? = null
     var data: ByteArray? = null
 
-    @RequiresNotNull
+    @Required
     var mediaType: CodePhrase? = null
     var compressionAlgorithm: CodePhrase? = null
     var integrityCheck: ByteArray? = null

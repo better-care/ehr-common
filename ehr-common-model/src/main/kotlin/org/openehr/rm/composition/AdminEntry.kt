@@ -15,7 +15,7 @@
 
 package org.openehr.rm.composition
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
@@ -23,6 +23,6 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 
 class AdminEntry : Entry() {
-    @RequiresNotNull
+    @Required
     var data: ItemStructure? = null
 }

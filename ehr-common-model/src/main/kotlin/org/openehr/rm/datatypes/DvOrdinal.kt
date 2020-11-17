@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
@@ -27,6 +27,6 @@ class DvOrdinal : DvOrdered() {
 
     var value: Int = 0
 
-    @RequiresNotNull
+    @Required
     var symbol: DvCodedText? = null
 }

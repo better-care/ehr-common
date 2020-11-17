@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
@@ -23,7 +23,7 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 class SystemNotification : PlanEvent {
 
-    @RequiresNotNull
+    @Required
     var systemId: String? = null
     var notificationType: String? = null
     var referenceId: String? = null

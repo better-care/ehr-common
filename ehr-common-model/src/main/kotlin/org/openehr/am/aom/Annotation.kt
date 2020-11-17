@@ -16,7 +16,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.Required
 import org.openehr.rm.common.StringDictionaryItem
 import java.io.Serializable
 
@@ -25,7 +25,7 @@ import java.io.Serializable
  */
 
 class Annotation : AmObject(), Serializable {
-    @RequiresNotEmpty
+    @Required
     var items: MutableList<StringDictionaryItem> = mutableListOf()
 
     lateinit var path: String

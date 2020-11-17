@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datastructures
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 
 /**
@@ -23,6 +23,6 @@ import care.better.platform.annotation.RequiresNotNull
  */
 
 class ItemSingle : ItemStructure() {
-    @RequiresNotNull
+    @Required
     var item: Element? = null
 }

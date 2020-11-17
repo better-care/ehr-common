@@ -15,13 +15,13 @@
 
 package org.openehr.rm.common
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
 class ImportedVersion : Version() {
-    @RequiresNotNull
+    @Required
     var item: OriginalVersion? = null
 }

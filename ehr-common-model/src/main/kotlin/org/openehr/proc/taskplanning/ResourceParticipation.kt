@@ -16,7 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.ObjectRef
@@ -29,7 +29,7 @@ import java.io.Serializable
 
 class ResourceParticipation() : RmObject(), Serializable, VisitableByModelVisitor {
 
-    @RequiresNotNull
+    @Required
     var resourceType: DvText? = null
     var externalRef: ObjectRef? = null
 

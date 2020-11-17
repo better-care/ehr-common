@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.PartyProxy
@@ -32,12 +32,12 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
 
     var subject: PartyProxy? = null
 
-    @RequiresNotNull
+    @Required
     var description: DvText? = null
     var guideline: ItemStructure? = null
     var principalPerformer: TaskParticipation? = null
 
-    @RequiresNotNull
+    @Required
     var definition: TaskGroup<out PlanItem>? = null
     var executionHistory: TaskPlanExecutionHistory? = null
     var trainingLevel: Int? = null

@@ -16,7 +16,7 @@
 package org.openehr.rm.composition
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyIdentified
 import org.openehr.rm.datastructures.ItemStructure
@@ -29,12 +29,12 @@ import java.io.Serializable
  */
 
 class EventContext : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var startTime: DvDateTime? = null
     var endTime: DvDateTime? = null
     var location: String? = null
 
-    @RequiresNotNull
+    @Required
     var setting: DvCodedText? = null
     var otherContext: ItemStructure? = null
     var healthCareFacility: PartyIdentified? = null

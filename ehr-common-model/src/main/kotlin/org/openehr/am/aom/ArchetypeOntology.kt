@@ -16,7 +16,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
@@ -24,7 +24,7 @@ import java.io.Serializable
  */
 
 open class ArchetypeOntology : AmObject(), Serializable {
-    @RequiresNotEmpty
+    @Required
     var termDefinitions: MutableList<CodeDefinitionSet> = mutableListOf()
     var constraintDefinitions: MutableList<CodeDefinitionSet> = mutableListOf()
     var termBindings: MutableList<TermBindingSet> = mutableListOf()

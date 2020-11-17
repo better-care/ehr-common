@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
@@ -25,7 +25,7 @@ class DvIdentifier : DataValue() {
     var issuer: String? = null
     var assigner: String? = null
 
-    @RequiresNotNull
+    @Required
     var id: String? = null
     var type: String? = null
 }

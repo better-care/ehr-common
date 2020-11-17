@@ -16,7 +16,7 @@
 package org.openehr.rm.composition
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
@@ -26,7 +26,7 @@ import java.io.Serializable
  */
 
 class IsmTransition : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var currentState: DvCodedText? = null
     var transition: DvCodedText? = null
     var careflowStep: DvCodedText? = null

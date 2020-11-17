@@ -15,7 +15,7 @@
 
 package org.openehr.rm.composition
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyProxy
@@ -26,13 +26,13 @@ import org.openehr.rm.datatypes.CodePhrase
  */
 
 abstract class Entry : ContentItem() {
-    @RequiresNotNull
+    @Required
     var language: CodePhrase? = null
 
-    @RequiresNotNull
+    @Required
     var encoding: CodePhrase? = null
 
-    @RequiresNotNull
+    @Required
     var subject: PartyProxy? = null
     var provider: PartyProxy? = null
     var otherParticipations: MutableList<Participation> = mutableListOf()

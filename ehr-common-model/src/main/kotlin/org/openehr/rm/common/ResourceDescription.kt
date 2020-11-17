@@ -16,8 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotEmpty
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
@@ -25,16 +24,16 @@ import java.io.Serializable
  */
 
 class ResourceDescription : RmObject(), Serializable {
-    @RequiresNotEmpty
+    @Required
     var originalAuthor: MutableList<StringDictionaryItem> = mutableListOf()
     var otherContributors: MutableList<String> = mutableListOf()
 
-    @RequiresNotNull
+    @Required
     var lifecycleState: String? = null
     var resourcePackageUri: String? = null
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
-    @RequiresNotEmpty
+    @Required
     var details: MutableList<ResourceDescriptionItem> = mutableListOf()
     var parentResource: AuthoredResource? = null
 }

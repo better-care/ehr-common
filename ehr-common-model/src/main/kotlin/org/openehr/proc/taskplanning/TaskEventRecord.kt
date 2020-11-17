@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.LocatableRef
 
 /**
@@ -23,10 +23,10 @@ import org.openehr.base.basetypes.LocatableRef
  */
 
 class TaskEventRecord : EventRecord {
-    @RequiresNotNull
+    @Required
     var taskId: String? = null
 
-    @RequiresNotNull
+    @Required
     var lifecycleState: TaskLifecycle? = null
     var notificationsSent: MutableList<TaskNotificationRecord> = mutableListOf()
     var entryInstances: MutableList<LocatableRef> = mutableListOf()

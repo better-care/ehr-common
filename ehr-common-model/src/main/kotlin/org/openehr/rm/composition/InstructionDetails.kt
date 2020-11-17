@@ -16,7 +16,7 @@
 package org.openehr.rm.composition
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.datastructures.ItemStructure
 import java.io.Serializable
@@ -26,10 +26,10 @@ import java.io.Serializable
  */
 
 class InstructionDetails : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var instructionId: LocatableRef? = null
 
-    @RequiresNotNull
+    @Required
     var activityId: String? = null
     var wfDetails: ItemStructure? = null
 }

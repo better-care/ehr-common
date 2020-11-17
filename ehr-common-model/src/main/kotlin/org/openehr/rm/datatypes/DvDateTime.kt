@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
@@ -25,6 +25,6 @@ class DvDateTime : DvTemporal() {
 
     companion object
 
-    @RequiresNotNull
+    @Required
     var value: String? = null
 }

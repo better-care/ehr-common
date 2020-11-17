@@ -16,8 +16,7 @@
 package care.better.platform.utils
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotEmpty
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import com.google.common.base.CaseFormat
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -27,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * @author Primoz Delopst
  */
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "unused")
 class RmUtils {
     companion object {
         private val CLASS_MAP: ConcurrentHashMap<String, ClassInfo> = ConcurrentHashMap()
@@ -88,7 +87,7 @@ class RmUtils {
         private fun getGetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
                 with(getClassInfo(clazz).getter) {
                     val getMethod: Method? = this["get${nameTransformer.invoke(name)}"]
-                    val setMethod: Method? = this["get${nameTransformer.invoke(name)}"]
+                    val setMethod: Method? = this["is${nameTransformer.invoke(name)}"]
 
                     if (getMethod != null || setMethod != null) {
                         getMethod ?: setMethod
@@ -139,7 +138,7 @@ class RmUtils {
                 with(mutableListOf<Field>()) {
                     addFieldsRecursive(
                             clazz,
-                            { it.getAnnotation(RequiresNotNull::class.java) != null || it.getAnnotation(RequiresNotEmpty::class.java) != null },
+                            { it.getAnnotation(Required::class.java) != null },
                             this)
                     this.toList()
                 }

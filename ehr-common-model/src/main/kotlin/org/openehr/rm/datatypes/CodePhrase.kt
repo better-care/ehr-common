@@ -16,7 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
 
@@ -28,9 +28,9 @@ class CodePhrase : RmObject(), Serializable {
 
     companion object
 
-    @RequiresNotNull
+    @Required
     var terminologyId: TerminologyId? = null
 
-    @RequiresNotNull
+    @Required
     var codeString: String? = null
 }

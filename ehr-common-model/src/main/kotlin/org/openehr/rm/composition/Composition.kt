@@ -15,7 +15,7 @@
 
 package org.openehr.rm.composition
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.CodePhrase
@@ -26,16 +26,16 @@ import org.openehr.rm.datatypes.DvCodedText
  */
 
 class Composition : Locatable() {
-    @RequiresNotNull
+    @Required
     var language: CodePhrase? = null
 
-    @RequiresNotNull
+    @Required
     var territory: CodePhrase? = null
 
-    @RequiresNotNull
+    @Required
     var category: DvCodedText? = null
 
-    @RequiresNotNull
+    @Required
     var composer: PartyProxy? = null
     var context: EventContext? = null
     var content: MutableList<ContentItem> = mutableListOf()

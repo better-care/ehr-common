@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
 
 /**
@@ -26,7 +26,7 @@ class CalendarEvent() : PlanEvent() {
 
     var entryId: UidBasedId? = null
 
-    @RequiresNotNull
+    @Required
     var time: String? = null
 
     constructor(time: String?) : this() {

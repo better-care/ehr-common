@@ -15,7 +15,7 @@
 
 package org.openehr.rm.composition
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
 
@@ -24,13 +24,13 @@ import org.openehr.rm.datatypes.DvDateTime
  */
 
 class Action : CareEntry() {
-    @RequiresNotNull
+    @Required
     var time: DvDateTime? = null
 
-    @RequiresNotNull
+    @Required
     var description: ItemStructure? = null
 
-    @RequiresNotNull
+    @Required
     var ismTransition: IsmTransition? = null
     var instructionDetails: InstructionDetails? = null
 }

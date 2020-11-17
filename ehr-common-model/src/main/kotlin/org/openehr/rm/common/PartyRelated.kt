@@ -15,7 +15,7 @@
 
 package org.openehr.rm.common
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 
 /**
@@ -23,6 +23,6 @@ import org.openehr.rm.datatypes.DvCodedText
  */
 
 class PartyRelated : PartyIdentified() {
-    @RequiresNotNull
+    @Required
     var relationship: DvCodedText? = null
 }

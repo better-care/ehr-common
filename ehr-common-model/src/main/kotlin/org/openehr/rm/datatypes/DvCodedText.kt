@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
@@ -24,6 +24,6 @@ import care.better.platform.annotation.RequiresNotNull
 class DvCodedText : DvText() {
     companion object
 
-    @RequiresNotNull
+    @Required
     var definingCode: CodePhrase? = null
 }

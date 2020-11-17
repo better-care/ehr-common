@@ -16,7 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -26,7 +26,7 @@ import java.io.Serializable
  */
 class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
 
-    @RequiresNotNull
+    @Required
     var groupId: String? = null
     var completionStep: Boolean = false
 

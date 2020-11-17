@@ -16,7 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
 import java.io.Serializable
 
@@ -26,7 +26,7 @@ import java.io.Serializable
 
 class ResumeAction() : RmObject(), Serializable {
 
-    @RequiresNotNull
+    @Required
     var resumeType: ResumeType? = null
     var resumeLocation: UidBasedId? = null
 

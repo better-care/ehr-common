@@ -16,7 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectRef
 import java.io.Serializable
 
@@ -25,10 +25,10 @@ import java.io.Serializable
  */
 
 abstract class Version : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var contribution: ObjectRef? = null
 
-    @RequiresNotNull
+    @Required
     var commitAudit: AuditDetails? = null
     var signature: String? = null
 }

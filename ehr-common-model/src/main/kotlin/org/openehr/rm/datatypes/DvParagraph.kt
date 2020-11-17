@@ -15,13 +15,13 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
 class DvParagraph : DataValue() {
-    @RequiresNotEmpty
+    @Required
     var items: MutableList<DvText> = mutableListOf()
 }

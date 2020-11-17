@@ -16,7 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
 
@@ -25,7 +25,7 @@ import java.io.Serializable
  */
 
 class FeederAuditDetails : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var systemId: String? = null
     var location: PartyIdentified? = null
     var provider: PartyIdentified? = null

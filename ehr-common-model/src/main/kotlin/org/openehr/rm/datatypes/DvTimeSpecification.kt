@@ -15,13 +15,13 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
 abstract class DvTimeSpecification : DataValue() {
-    @RequiresNotNull
+    @Required
     var value: DvParsable? = null
 }

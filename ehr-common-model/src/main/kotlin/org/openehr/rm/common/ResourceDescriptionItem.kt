@@ -16,7 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
 
@@ -25,10 +25,10 @@ import java.io.Serializable
  */
 
 class ResourceDescriptionItem : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var language: CodePhrase? = null
 
-    @RequiresNotNull
+    @Required
     var purpose: String? = null
     var keywords: MutableList<String> = mutableListOf()
     var use: String? = null

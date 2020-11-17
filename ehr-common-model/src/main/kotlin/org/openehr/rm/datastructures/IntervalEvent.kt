@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datastructures
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDuration
 
@@ -24,10 +24,10 @@ import org.openehr.rm.datatypes.DvDuration
  */
 
 class IntervalEvent : Event() {
-    @RequiresNotNull
+    @Required
     var width: DvDuration? = null
     var sampleCount: Int? = null
 
-    @RequiresNotNull
+    @Required
     var mathFunction: DvCodedText? = null
 }

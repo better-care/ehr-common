@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datatypes
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import java.math.BigInteger
 
 /**
@@ -26,7 +26,7 @@ class DvProportion : DvAmount() {
     var numerator = 0f
     var denominator = 0f
 
-    @RequiresNotNull
+    @Required
     var type: BigInteger? = null
     var precision: Int = -1
 }

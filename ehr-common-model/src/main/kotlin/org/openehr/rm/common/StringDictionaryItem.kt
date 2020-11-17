@@ -16,7 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
@@ -26,6 +26,6 @@ import java.io.Serializable
 class StringDictionaryItem : RmObject(), Serializable {
     var value: String? = null
 
-    @RequiresNotNull
+    @Required
     var id: String? = null
 }

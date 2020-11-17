@@ -16,7 +16,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
@@ -27,7 +27,7 @@ class TView : AmObject(), Serializable {
     var constraints: MutableList<Constraints> = mutableListOf()
 
     class Constraints : AmObject(), Serializable {
-        @RequiresNotEmpty
+        @Required
         var items: MutableList<Items> = mutableListOf()
         lateinit var path: String
 

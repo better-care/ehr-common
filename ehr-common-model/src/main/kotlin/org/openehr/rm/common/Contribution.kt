@@ -16,8 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotEmpty
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.HierObjectId
 import java.io.Serializable
 
@@ -26,12 +25,12 @@ import java.io.Serializable
  */
 
 class Contribution : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var uid: HierObjectId? = null
 
-    @RequiresNotEmpty
+    @Required
     var versions: MutableList<RmObject> = mutableListOf()
 
-    @RequiresNotNull
+    @Required
     var audit: AuditDetails? = null
 }

@@ -15,8 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotEmpty
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
 
 /**
@@ -24,10 +23,10 @@ import org.openehr.base.basetypes.UidBasedId
  */
 class TaskTransition() : PlanEvent(), TaskReferencingEvent {
 
-    @RequiresNotNull
+    @Required
     private var taskId: UidBasedId? = null
 
-    @RequiresNotEmpty
+    @Required
     var transitions: MutableList<TaskLifecycle> = mutableListOf()
 
     constructor(taskId: UidBasedId?) : this() {

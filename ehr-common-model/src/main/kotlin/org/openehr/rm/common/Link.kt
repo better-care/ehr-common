@@ -16,7 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvEhrUri
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
@@ -29,12 +29,12 @@ class Link : RmObject(), Serializable {
 
     companion object
 
-    @RequiresNotNull
+    @Required
     var meaning: DvText? = null
 
-    @RequiresNotNull
+    @Required
     var type: DvText? = null
 
-    @RequiresNotNull
+    @Required
     var target: DvEhrUri? = null
 }

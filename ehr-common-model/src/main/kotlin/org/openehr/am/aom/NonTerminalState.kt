@@ -15,13 +15,13 @@
 
 package org.openehr.am.aom
 
-import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
 class NonTerminalState : State() {
-    @RequiresNotEmpty
+    @Required
     var transitions: MutableList<Transition> = mutableListOf()
 }

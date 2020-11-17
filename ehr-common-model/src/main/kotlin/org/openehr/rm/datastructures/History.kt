@@ -15,7 +15,7 @@
 
 package org.openehr.rm.datastructures
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvDuration
@@ -25,7 +25,7 @@ import org.openehr.rm.datatypes.DvDuration
  */
 
 class History : Locatable() {
-    @RequiresNotNull
+    @Required
     var origin: DvDateTime? = null
     var period: DvDuration? = null
     var duration: DvDuration? = null

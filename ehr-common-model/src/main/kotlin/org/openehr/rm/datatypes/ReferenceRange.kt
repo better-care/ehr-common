@@ -16,7 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
@@ -24,9 +24,9 @@ import java.io.Serializable
  */
 
 class ReferenceRange : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var meaning: DvText? = null
 
-    @RequiresNotNull
+    @Required
     var range: DvInterval? = null
 }

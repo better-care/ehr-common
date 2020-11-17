@@ -15,7 +15,7 @@
 
 package org.openehr.rm.integration
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.composition.ContentItem
 import org.openehr.rm.datastructures.ItemTree
 
@@ -24,6 +24,6 @@ import org.openehr.rm.datastructures.ItemTree
  */
 
 class GenericEntry : ContentItem() {
-    @RequiresNotNull
+    @Required
     var data: ItemTree? = null
 }

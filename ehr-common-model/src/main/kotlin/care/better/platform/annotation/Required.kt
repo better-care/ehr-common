@@ -21,4 +21,4 @@ package care.better.platform.annotation
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RequiresNotNull
+annotation class Required

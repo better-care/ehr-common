@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 
 /**
@@ -23,7 +23,7 @@ import org.openehr.rm.datatypes.DvCodedText
  */
 class CustomaryTime() : TimeSpecifier() {
 
-    @RequiresNotNull
+    @Required
     var time: DvCodedText? = null
 
     constructor(time: DvCodedText?) : this() {

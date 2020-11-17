@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 /**
@@ -23,7 +23,7 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  */
 
 open class ContextExpression<T> : ContextValue<T> {
-    @RequiresNotNull
+    @Required
     var expression: String? = null
 
     constructor()

@@ -16,7 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvText
@@ -27,16 +27,16 @@ import java.io.Serializable
  */
 
 open class AuditDetails : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var systemId: String? = null
 
-    @RequiresNotNull
+    @Required
     var committer: PartyProxy? = null
 
-    @RequiresNotNull
+    @Required
     var timeCommitted: DvDateTime? = null
 
-    @RequiresNotNull
+    @Required
     var changeType: DvCodedText? = null
     var description: DvText? = null
 }

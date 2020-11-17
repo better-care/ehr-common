@@ -16,7 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
@@ -27,6 +27,6 @@ class TermMapping : RmObject(), Serializable {
     var match: String = "?"
     var purpose: DvCodedText? = null
 
-    @RequiresNotNull
+    @Required
     var target: CodePhrase? = null
 }

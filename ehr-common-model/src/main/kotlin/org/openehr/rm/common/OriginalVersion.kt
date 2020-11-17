@@ -15,7 +15,7 @@
 
 package org.openehr.rm.common
 
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectVersionId
 import org.openehr.rm.datatypes.DvCodedText
 
@@ -24,13 +24,13 @@ import org.openehr.rm.datatypes.DvCodedText
  */
 
 class OriginalVersion : Version() {
-    @RequiresNotNull
+    @Required
     var uid: ObjectVersionId? = null
     var data: Any? = null
     var precedingVersionUid: ObjectVersionId? = null
     var otherInputVersionUids: MutableList<ObjectVersionId> = mutableListOf()
     var attestations: MutableList<Attestation> = mutableListOf()
 
-    @RequiresNotNull
+    @Required
     var lifecycleState: DvCodedText? = null
 }

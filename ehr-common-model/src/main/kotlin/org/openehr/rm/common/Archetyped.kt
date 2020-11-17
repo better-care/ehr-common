@@ -16,7 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.RequiresNotNull
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
 import java.io.Serializable
@@ -26,7 +26,7 @@ import java.io.Serializable
  */
 
 class Archetyped : RmObject(), Serializable {
-    @RequiresNotNull
+    @Required
     var archetypeId: ArchetypeId? = null
     var templateId: TemplateId? = null
     var rmVersion: String = RM_VERSION.version

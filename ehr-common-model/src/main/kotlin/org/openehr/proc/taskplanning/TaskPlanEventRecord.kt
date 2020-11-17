@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
@@ -23,7 +23,7 @@ import care.better.platform.annotation.RequiresNotEmpty
 
 class TaskPlanEventRecord : EventRecord {
 
-    @RequiresNotEmpty
+    @Required
     val details: LinkedHashMap<String, String> = LinkedHashMap()
 
     constructor()

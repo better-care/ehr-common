@@ -15,13 +15,13 @@
 
 package org.openehr.rm.datastructures
 
-import care.better.platform.annotation.RequiresNotEmpty
+import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
 class Cluster : Item() {
-    @RequiresNotEmpty
+    @Required
     var items: MutableList<Item> = mutableListOf()
 }
