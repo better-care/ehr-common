@@ -20,5 +20,14 @@ package org.openehr.base.basetypes
  */
 
 class HierObjectId : UidBasedId() {
-    companion object
+    companion object {
+        /**
+         * Creates a [HierObjectId]
+         *
+         * @param uid uid
+         * @return [HierObjectId]] object
+         */
+        @JvmStatic
+        fun create(uid: String): HierObjectId = HierObjectId().apply { this.value = uid }
+    }
 }

@@ -25,7 +25,33 @@ import java.io.Serializable
 
 open class ObjectRef : RmObject(), Serializable {
 
-    companion object
+    companion object {
+        /**
+         * Creates a person [ObjectRef].
+         *
+         * @param uid       uid
+         * @param namespace namespace
+         * @return [ObjectRef] object
+         */
+        @JvmStatic
+        fun create(uid: String, namespace: String): ObjectRef = create("PERSON", uid, namespace)
+
+        /**
+         * Creates an [ObjectRef].
+         *
+         * @param type      type
+         * @param uid       uid
+         * @param namespace namespace
+         * @return [ObjectRef] object
+         */
+        @JvmStatic
+        fun create(type: String, uid: String, namespace: String): ObjectRef =
+                ObjectRef().apply {
+                    this.id = ObjectVersionId.create(uid)
+                    this.namespace = namespace
+                    this.type = type
+                }
+    }
 
     @Required
     var id: ObjectId? = null

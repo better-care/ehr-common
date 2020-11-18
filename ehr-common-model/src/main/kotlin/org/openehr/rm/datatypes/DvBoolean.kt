@@ -21,7 +21,16 @@ package org.openehr.rm.datatypes
 
 class DvBoolean : DataValue() {
 
-    companion object
+    companion object {
+        /**
+         * Converts a boolean to [DvBoolean]
+         *
+         * @param value boolean value
+         * @return [DvBoolean] object
+         */
+        @JvmStatic
+        fun create(value: Boolean): DvBoolean = DvBoolean().apply { this.value = value }
+    }
 
     var value: Boolean = false
 }

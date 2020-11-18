@@ -20,5 +20,32 @@ package org.openehr.rm.datatypes
  */
 
 class DvEhrUri : DvUri() {
-    companion object
+    companion object {
+        /**
+         * Creates [DvEhrUri].
+         *
+         * @param ehrUid         ehr uid
+         * @param compositionUid composition uid - this can be full uid (xxx::system_id::version) or just versioned uid (xxx). If full path is specified then link
+         * points to a specific composition version, otherwise it points to the last version.
+         * @return [DvEhrUri] object
+         */
+        @JvmStatic
+        fun create(ehrUid: String, compositionUid: String): DvEhrUri = create(ehrUid, compositionUid, null)
+
+        /**
+         * Creates [DvEhrUri].
+         *
+         * @param ehrUid         ehr uid
+         * @param compositionUid composition uid - this can be full uid (xxx::system_id::version) or just versioned uid (xxx). If full path is specified then link
+         * points to a specific composition version, otherwise it points to the last version.
+         * @param path           RM path to an element within a composition
+         * @return [DvEhrUri] object
+         */
+        @JvmStatic
+        fun create(ehrUid: String, compositionUid: String, path: String?): DvEhrUri =
+                DvEhrUri().apply {
+                    this.value = "ehr://$ehrUid/$compositionUid${path?.let { if (it.startsWith("/")) it else "/$it" } ?: ""}"
+                }
+
+    }
 }

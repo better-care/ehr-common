@@ -51,6 +51,10 @@ open class TaskGroup<I : PlanItem> : PlanItem {
 
     open fun addMember(member: I): TaskGroup<I> = members.add(member).let { this }
 
+    open fun addMembers(members: List<I>) {
+        this.members.addAll(members)
+    }
+
     open fun addExecutionRule(executionRule: ExecutionRule): TaskGroup<I> = executionRules.add(executionRule).let { this }
 
     override fun accept(visitor: TaskModelVisitor) {

@@ -26,7 +26,48 @@ import java.io.Serializable
 
 class CodePhrase : RmObject(), Serializable {
 
-    companion object
+    companion object {
+        /**
+         * Creates a [CodePhrase] from terminology id and code
+         *
+         * @param terminology terminology id
+         * @param code        code
+         * @return [CodePhrase] object
+         */
+        @JvmStatic
+        fun create(terminology: String, code: String): CodePhrase =
+                CodePhrase().apply {
+                    this.terminologyId = TerminologyId().apply { this.value = terminology }
+                    this.codeString = code
+                }
+
+        /**
+         * Gets language [CodePhrase]
+         *
+         * @param languageCode ISO language code (ISO_639-1)
+         * @return [CodePhrase] object
+         */
+        @JvmStatic
+        fun createLanguagePhrase(languageCode: String): CodePhrase = create("ISO_639-1", languageCode)
+
+        /**
+         * Gets territory [CodePhrase]
+         *
+         * @param territoryCode ISO territory code (ISO_3166-1)
+         * @return [CodePhrase] object
+         */
+        @JvmStatic
+        fun createTerritoryPhrase(territoryCode: String): CodePhrase = create("ISO_3166-1", territoryCode)
+
+        /**
+         * Gets encoding [CodePhrase]
+         *
+         * @param encodingCode encoding code (IANA character sets)
+         * @return [CodePhrase] object
+         */
+        @JvmStatic
+        fun createEncodingPhrase(encodingCode: String): CodePhrase = create("IANA_character-sets", encodingCode)
+    }
 
     @Required
     var terminologyId: TerminologyId? = null

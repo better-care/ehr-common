@@ -16,6 +16,9 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.time.LocalTime
+import java.time.OffsetTime
+import java.time.format.DateTimeFormatter
 
 /**
  * @author Primoz Delopst
@@ -23,7 +26,31 @@ import care.better.platform.annotation.Required
 
 class DvTime : DvTemporal() {
 
-    companion object
+    companion object {
+        /**
+         * Converts [LocalTime] to [DvTime]
+         *
+         * @param time [LocalTime]
+         * @return [DvTime]
+         */
+        @JvmStatic
+        fun toDvTime(time: LocalTime): DvTime =
+                DvTime().apply {
+                    this.value = DateTimeFormatter.ISO_LOCAL_TIME.format(time)
+                }
+
+        /**
+         * Converts [OffsetTime] to [DvTime]
+         *
+         * @param time [OffsetTime]
+         * @return [DvTime]
+         */
+        @JvmStatic
+        fun toDvTime(time: OffsetTime): DvTime =
+                DvTime().apply {
+                    this.value = DateTimeFormatter.ISO_OFFSET_TIME.format(time)
+                }
+    }
 
     @Required
     var value: String? = null

@@ -40,7 +40,7 @@ class RmIdResolver(private val typeFactory: TypeFactory) : TypeIdResolver {
             .maximumSize(1000L)
             .build(object : CacheLoader<Class<*>?, String?>() {
                 override fun load(clazz: Class<*>): String {
-                    return RmUtils.getRmTypeName(clazz.kotlin as Class<out RmObject>)
+                    return RmUtils.getRmTypeName(clazz as Class<out RmObject>)
                 }
             })
 
@@ -58,7 +58,7 @@ class RmIdResolver(private val typeFactory: TypeFactory) : TypeIdResolver {
             return try {
                 rmClassNames[suggestedType]
             } catch (e: ExecutionException) {
-                RmUtils.getRmTypeName(suggestedType.kotlin as Class<out RmObject>)
+                RmUtils.getRmTypeName(suggestedType as Class<out RmObject>)
             }
         }
 
@@ -73,7 +73,7 @@ class RmIdResolver(private val typeFactory: TypeFactory) : TypeIdResolver {
     @Throws(IOException::class)
     override fun typeFromId(context: DatabindContext?, id: String?): JavaType? {
         return try {
-            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(id!!)
+            val rmClass: Class<*> = RmUtils.getRmClass(id!!)
             typeFactory.constructType(rmClass)
         } catch (ignored: ClassNotFoundException) {
             val classNameIdResolver = ClassNameIdResolver(

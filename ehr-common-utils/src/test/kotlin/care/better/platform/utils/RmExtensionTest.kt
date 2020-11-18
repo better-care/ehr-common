@@ -95,11 +95,11 @@ class RmExtensionTest {
         val period = Period(DateTime(2011, 1, 1, 1, 0, 0), DateTime(2011, 1, 1, 2, 0, 0))
         val duration: DvDuration = DvDuration.create(period)
         assertThat(duration.value).isEqualTo("PT1H")
-        assertThat(period).isEqualTo(duration.toPeriod())
+        assertThat(period).isEqualTo(duration.toJodaPeriod())
         val period1 = Period(DateTime(2011, 1, 1, 1, 0, 0), DateTime(2011, 1, 2, 2, 0, 0))
         val duration1: DvDuration = DvDuration.create(period1)
         assertThat(duration1.value).isEqualTo("P1DT1H")
-        assertThat(period1).isEqualTo(duration1.toPeriod())
+        assertThat(period1).isEqualTo(duration1.toJodaPeriod())
         assertThat(DvDuration.create("P1YT1H")?.value).isEqualTo("P1YT1H")
         assertThat(DvDuration.create(null as String?)).isNull()
     }
@@ -114,10 +114,10 @@ class RmExtensionTest {
         val dateTime = DateTime(2011, 1, 1, 1, 0, 0, DateTimeZone.UTC)
         val dvDateTime: DvDateTime = DvDateTime.create(dateTime)
         assertThat(dvDateTime.value).isEqualTo("2011-01-01T01:00:00.000Z")
-        assertThat(dvDateTime.toDateTime().withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
-        assertThat(DvDateTime.toDateTime("2011-01-01T01:00:00.000Z").withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
+        assertThat(dvDateTime.toJodaDateTime().withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
+        assertThat(DvDateTime.toJodaDateTime("2011-01-01T01:00:00.000Z").withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
         val dateTime1 = DateTime(2011, 1, 1, 1, 0, 0, DateTimeZone.forOffsetHours(1))
-        assertThat(DvDateTime.toDateTime("2011-01-01T01:00+01:00")).isEqualTo(dateTime1)
+        assertThat(DvDateTime.toJodaDateTime("2011-01-01T01:00+01:00")).isEqualTo(dateTime1)
     }
 
     @Test
@@ -125,11 +125,11 @@ class RmExtensionTest {
         val date = LocalDate(2012, 3, 17)
         val dvDate: DvDate = DvDate.create(date)
         assertThat(dvDate.value).isEqualTo("2012-03-17")
-        assertThat(dvDate.toLocalDate()).isEqualTo(date)
+        assertThat(dvDate.toJodaLocalDate()).isEqualTo(date)
         dvDate.value = "2011-01-01T01:00:00.000Z"
-        assertThat(dvDate.toLocalDate()).isEqualTo(LocalDate(2011, 1, 1))
+        assertThat(dvDate.toJodaLocalDate()).isEqualTo(LocalDate(2011, 1, 1))
         dvDate.value = "2011-01-01T01:00:00.000"
-        assertThat(dvDate.toLocalDate()).isEqualTo(LocalDate(2011, 1, 1))
+        assertThat(dvDate.toJodaLocalDate()).isEqualTo(LocalDate(2011, 1, 1))
     }
 
     @Test
@@ -137,17 +137,17 @@ class RmExtensionTest {
         val time = LocalTime(13, 39, 17, 776)
         val dvTime: DvTime = DvTime.create(time)
         assertThat(dvTime.value).isEqualTo("13:39:17.776")
-        assertThat(dvTime.toLocalTime()).isEqualTo(time)
+        assertThat(dvTime.toJodaLocalTime()).isEqualTo(time)
         dvTime.value = "13:39:17.776+01:00"
-        assertThat(dvTime.toLocalTime()).isEqualTo(time)
+        assertThat(dvTime.toJodaLocalTime()).isEqualTo(time)
         dvTime.value = "13:39:17"
-        assertThat(dvTime.toLocalTime()).isEqualTo(LocalTime(13, 39, 17))
+        assertThat(dvTime.toJodaLocalTime()).isEqualTo(LocalTime(13, 39, 17))
     }
 
     @Test
     fun localTimeFromDateTime() {
         val time = DvTime().apply { this.value = "2011-01-01T13:39:17.776Z" }
-        assertThat(time.toLocalTime()).isEqualTo(LocalTime(13, 39, 17, 776))
+        assertThat(time.toJodaLocalTime()).isEqualTo(LocalTime(13, 39, 17, 776))
     }
 
     @Test
@@ -242,22 +242,22 @@ class RmExtensionTest {
     fun fromDvDateTimeZone() {
         val dateTime1 = DateTime(2015, 1, 1, 12, 0, DateTimeZone.UTC)
         val dvDateTime1: DvDateTime = DvDateTime.create(dateTime1)
-        val dateTime2: DateTime = dvDateTime1.toDateTime()
+        val dateTime2: DateTime = dvDateTime1.toJodaDateTime()
         assertThat(dateTime2.zone).isEqualTo(dateTime1.zone)
     }
 
     @Test
     fun jsr310DateTimeUTC() {
         val zonedDateTime1 = ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneId.of("Z"))
-        val dvDateTime1: DvDateTime = JSR310ConversionUtils.toDvDateTime(zonedDateTime1)
+        val dvDateTime1: DvDateTime = DvDateTime.toDvDateTime(zonedDateTime1)
         assertThat(dvDateTime1.value).isEqualTo("2015-01-01T12:00:00.000000001Z")
-        val zonedDateTime2 = JSR310ConversionUtils.toZonedDateTime(dvDateTime1)
+        val zonedDateTime2 = dvDateTime1.toZonedDateTime()
         assertThat(zonedDateTime2.zone).isEqualTo(zonedDateTime1.zone)
         assertThat(zonedDateTime2).isEqualTo(zonedDateTime1)
         val offsetDateTime1 = OffsetDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneOffset.UTC)
-        val dvDateTime2: DvDateTime = JSR310ConversionUtils.toDvDateTime(offsetDateTime1)
+        val dvDateTime2: DvDateTime = DvDateTime.toDvDateTime(offsetDateTime1)
         assertThat(dvDateTime2.value).isEqualTo("2015-01-01T12:00:00.000000001Z")
-        val offsetDateTime2 = JSR310ConversionUtils.toOffsetDateTime(dvDateTime2)
+        val offsetDateTime2 = dvDateTime2.toOffsetDateTime()
         assertThat(offsetDateTime2.offset).isEqualTo(offsetDateTime1.offset)
         assertThat(offsetDateTime2).isEqualTo(offsetDateTime1)
     }
@@ -265,40 +265,40 @@ class RmExtensionTest {
     @Test
     fun jsr310DateTime() {
         val zonedDateTime1 = ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneId.systemDefault())
-        val dvDateTime1: DvDateTime = JSR310ConversionUtils.toDvDateTime(zonedDateTime1)
+        val dvDateTime1: DvDateTime = DvDateTime.toDvDateTime(zonedDateTime1)
         assertThat(dvDateTime1.value).isEqualTo("2015-01-01T12:00:00.000000001+01:00")
-        val zonedDateTime2 = JSR310ConversionUtils.toZonedDateTime(dvDateTime1)
+        val zonedDateTime2 = dvDateTime1.toZonedDateTime()
         assertThat(zonedDateTime2.toOffsetDateTime()).isEqualTo(zonedDateTime1.toOffsetDateTime())
         val offsetDateTime1 = OffsetDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneOffset.ofHours(1))
-        val dvDateTime2: DvDateTime = JSR310ConversionUtils.toDvDateTime(offsetDateTime1)
+        val dvDateTime2: DvDateTime = DvDateTime.toDvDateTime(offsetDateTime1)
         assertThat(dvDateTime2.value).isEqualTo("2015-01-01T12:00:00.000000001+01:00")
-        val offsetDateTime2 = JSR310ConversionUtils.toOffsetDateTime(dvDateTime2)
+        val offsetDateTime2 = dvDateTime2.toOffsetDateTime()
         assertThat(offsetDateTime2.offset).isEqualTo(offsetDateTime1.offset)
         assertThat(offsetDateTime2).isEqualTo(offsetDateTime1)
         val dvDateTime3 = DvDateTime()
         dvDateTime3.value = "2015-01-01T12:00:00.000000001"
-        assertThat(JSR310ConversionUtils.toZonedDateTime(dvDateTime3)).isNotNull()
+        assertThat(dvDateTime3.toZonedDateTime()).isNotNull()
         val dvDateTime4 = DvDateTime()
         dvDateTime4.value = "2015-01-01T12:00:00"
-        assertThat(JSR310ConversionUtils.toZonedDateTime(dvDateTime4)).isNotNull()
-        assertThat(JSR310ConversionUtils.toOffsetDateTime(dvDateTime4)).isNotNull()
+        assertThat(dvDateTime4.toZonedDateTime()).isNotNull()
+        assertThat(dvDateTime4.toOffsetDateTime()).isNotNull()
     }
 
     @Test
     fun jsr310LocalDate() {
         val date1 = LocalDate.of(2015, 1, 1)
-        val dvDate1: DvDate = JSR310ConversionUtils.toDvDate(date1)
+        val dvDate1: DvDate = DvDate.toDvDate(date1)
         assertThat(dvDate1.value).isEqualTo("2015-01-01")
-        val date2 = JSR310ConversionUtils.toLocalDate(dvDate1)
+        val date2 = dvDate1.toLocalDate()
         assertThat(date1).isEqualTo(date2)
     }
 
     @Test
     fun jsr310LocalTime() {
         val time1 = LocalTime.of(11, 19, 30)
-        val dvTime1: DvTime = JSR310ConversionUtils.toDvTime(time1)
+        val dvTime1: DvTime = DvTime.toDvTime(time1)
         assertThat(dvTime1.value).isEqualTo("11:19:30")
-        val time2 = JSR310ConversionUtils.toLocalTime(dvTime1)
+        val time2 = dvTime1.toLocalTime()
         assertThat(time1).isEqualTo(time2)
     }
 

@@ -20,5 +20,26 @@ package org.openehr.base.basetypes
  */
 
 class ObjectVersionId : UidBasedId() {
-    companion object
+    companion object {
+        /**
+         * Creates an [ObjectVersionId]
+         *
+         * @param uid uid
+         * @return [ObjectVersionId] object
+         */
+        @JvmStatic
+        fun create(uid: String): ObjectVersionId = ObjectVersionId().apply { this.value = uid }
+
+        /**
+         * Creates an [ObjectVersionId] from versioned object id, system id and version number.
+         *
+         * @param versionedObjectUid versioned uid
+         * @param systemId           system id
+         * @param version            version
+         * @return [ObjectVersionId] object
+         */
+        @JvmStatic
+        fun create(versionedObjectUid: String, systemId: String, version: Int): ObjectVersionId =
+                create("$versionedObjectUid::$systemId::$version")
+    }
 }

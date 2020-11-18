@@ -257,7 +257,7 @@ class DateTimeConversionUtilsTest {
 
     @Test
     fun negativeDateTime() {
-        val dateTime: DateTime = DvDateTime.toDateTime("-0001-12-31T23:30:20.000+02:30:20")
+        val dateTime: DateTime = DvDateTime.toJodaDateTime("-0001-12-31T23:30:20.000+02:30:20")
         val offsetDateTime = DateTimeConversionUtils.toOffsetDateTime("-0001-12-31T23:30:20.000+02:30:20")
         assertThat(DateTimeConversionUtils.toJodaDateTime(offsetDateTime)).isEqualByComparingTo(dateTime)
     }

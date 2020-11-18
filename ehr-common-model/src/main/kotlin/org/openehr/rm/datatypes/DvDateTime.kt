@@ -16,6 +16,9 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.time.OffsetDateTime
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 /**
  * @author Primoz Delopst
@@ -23,7 +26,32 @@ import care.better.platform.annotation.Required
 
 class DvDateTime : DvTemporal() {
 
-    companion object
+    companion object {
+        /**
+         * Converts [ZonedDateTime] to [DvDateTime].
+         * Please note that only the offset is preserved, the actual time-zone is discarded.
+         *
+         * @param dateTime [ZonedDateTime]
+         * @return [DvDateTime]
+         */
+        @JvmStatic
+        fun toDvDateTime(dateTime: ZonedDateTime): DvDateTime =
+                DvDateTime().apply {
+                    this.value = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateTime)
+                }
+
+        /**
+         * Converts [OffsetDateTime] to [DvDateTime]
+         *
+         * @param dateTime [OffsetDateTime]
+         * @return [DvDateTime]
+         */
+        @JvmStatic
+        fun toDvDateTime(dateTime: OffsetDateTime): DvDateTime =
+                DvDateTime().apply {
+                    this.value = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateTime)
+                }
+    }
 
     @Required
     var value: String? = null

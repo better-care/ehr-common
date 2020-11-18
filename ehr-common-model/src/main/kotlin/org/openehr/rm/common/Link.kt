@@ -27,7 +27,20 @@ import java.io.Serializable
 
 class Link : RmObject(), Serializable {
 
-    companion object
+    companion object {
+        /**
+         * Creates a name suffix suitable for use in LINKs (i.e. /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
+         *
+         * @param name  name part of suffix
+         * @param index element index (0-based)
+         * @return complete suffix to be placed after node id
+         */
+        @JvmStatic
+        fun getNameSuffix(name: String, index: Int): String = '\''.toString() + quote(name) + (if (index > 0) " #" + (index + 1) else "") + '\''
+
+        private fun quote(parameter: String): String =
+                parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
+    }
 
     @Required
     var meaning: DvText? = null

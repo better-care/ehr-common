@@ -16,6 +16,9 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 /**
  * @author Primoz Delopst
@@ -23,7 +26,19 @@ import care.better.platform.annotation.Required
 
 class DvDate : DvTemporal() {
 
-    companion object
+    companion object {
+        /**
+         * Converts [LocalTime] to [DvDate]
+         *
+         * @param date [LocalTime]
+         * @return [DvDate]
+         */
+        @JvmStatic
+        fun toDvDate(date: LocalDate): DvDate =
+                DvDate().apply {
+                    this.value = DateTimeFormatter.ISO_LOCAL_DATE.format(date)
+                }
+    }
 
     @Required
     var value: String? = null

@@ -23,7 +23,21 @@ import care.better.platform.annotation.Required
 
 class DvParsable : DvEncapsulated() {
 
-    companion object
+    companion object {
+        /**
+         * Creates [DvParsable] from a value and formalism.
+         *
+         * @param value     parsable content
+         * @param formalism parsable formalism
+         * @return [DvParsable] object
+         */
+        @JvmStatic
+        fun create(value: String, formalism: String): DvParsable =
+                DvParsable().apply {
+                    this.formalism = formalism
+                    this.value = value
+                }
+    }
     
     @Required
     var value: String? = null

@@ -26,13 +26,13 @@ enum class RmVersion(val version: String, private val possibleValues: Set<String
     RM1_0_4("1.0.4", setOf("1.0.4", "RM1.0.4", "rm1.0.4", "1_0_4", "RM1_0_4", "rm1_0_4"));
 
     companion object {
-        fun from(version: String): RmVersion? =
+        fun from(version: String): RmVersion =
                 when {
                     RM1_0_1.possibleValues.contains(version) -> RM1_0_1
                     RM1_0_2.possibleValues.contains(version) -> RM1_0_2
                     RM1_0_3.possibleValues.contains(version) -> RM1_0_3
                     RM1_0_4.possibleValues.contains(version) -> RM1_0_4
-                    else -> null
+                    else -> throw IllegalArgumentException("Unknown task RM version $version.")
                 }
     }
 }

@@ -23,7 +23,16 @@ import org.openehr.rm.datatypes.DvIdentifier
 
 open class PartyIdentified : PartyProxy() {
 
-    companion object
+    companion object {
+        /**
+         * Creates a [PartyIdentified] from a party name
+         *
+         * @param name party name
+         * @return [PartyIdentified]
+         */
+        @JvmStatic
+        fun create(name: String): PartyIdentified = PartyIdentified().apply { this.name = name }
+    }
 
     var name: String? = null
     var identifiers: MutableList<DvIdentifier> = mutableListOf()

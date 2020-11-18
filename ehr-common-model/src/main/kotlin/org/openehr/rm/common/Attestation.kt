@@ -31,5 +31,6 @@ class Attestation : AuditDetails() {
 
     @Required
     var reason: DvText? = null
-    var isPending = false
+
+    var isPending: Boolean = false
 }

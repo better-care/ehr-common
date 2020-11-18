@@ -1,8 +1,6 @@
 package care.better.platform.json.jackson
 
 import care.better.platform.json.jackson.openehr.OpenEhrObjectMapper
-import care.better.platform.utils.create
-import care.better.platform.utils.createLocal
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.common.collect.ImmutableList
@@ -257,14 +255,14 @@ class OpenEhrObjectMapperSerializationTest {
         assertThat((tags[1] as Map<*, *>)["tag"]).isEqualTo("abc2")
     }
 
-    private fun buildCluster(): Cluster = Cluster().apply { this.name = DvCodedText.createLocal("at0001", "Name") }
+    private fun buildCluster(): Cluster = Cluster().apply { this.name = DvCodedText.createWithLocalTerminology("at0001", "Name") }
 
     private fun buildComposition(): Composition =
             Composition().apply {
-                this.name = DvCodedText.createLocal("111", "Name")
+                this.name = DvCodedText.createWithLocalTerminology("111", "Name")
                 this.archetypeNodeId = "at0000"
                 this.content.add(Section().apply {
-                    this.name = DvCodedText.createLocal("222", "Name")
+                    this.name = DvCodedText.createWithLocalTerminology("222", "Name")
                 })
             }
 

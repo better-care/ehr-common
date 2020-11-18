@@ -22,7 +22,42 @@ import care.better.platform.annotation.Required
  */
 
 class DvCodedText : DvText() {
-    companion object
+    companion object {
+        /**
+         * Creates a [DvCodedText] from terminology id, code and value
+         *
+         * @param terminology terminology id
+         * @param code        code
+         * @param value       value
+         * @return [DvCodedText] object
+         */
+        @JvmStatic
+        fun create(terminology: String, code: String, value: String): DvCodedText =
+                DvCodedText().apply {
+                    this.definingCode = CodePhrase.create(terminology, code)
+                    this.value = value
+                }
+
+        /**
+         * Creates a [DvCodedText] with local terminology, code and value
+         *
+         * @param code  code
+         * @param value value
+         * @return [DvCodedText] object
+         */
+        @JvmStatic
+        fun createWithLocalTerminology(code: String, value: String): DvCodedText = create("local", code, value)
+
+        /**
+         * Creates a [DvCodedText] with openEHR terminology, code and value
+         *
+         * @param code  code
+         * @param value value
+         * @return [DvCodedText] object
+         */
+        @JvmStatic
+        fun createWithOpenEHRTerminology(code: String, value: String): DvCodedText = create("openehr", code, value)
+    }
 
     @Required
     var definingCode: CodePhrase? = null

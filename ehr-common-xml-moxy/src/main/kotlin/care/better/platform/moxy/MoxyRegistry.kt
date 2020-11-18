@@ -32,6 +32,7 @@ class MoxyRegistry {
     companion object {
         private val INSTANCE: MoxyRegistry = MoxyRegistry()
 
+        @JvmStatic
         fun getInstance(): MoxyRegistry = INSTANCE
     }
 

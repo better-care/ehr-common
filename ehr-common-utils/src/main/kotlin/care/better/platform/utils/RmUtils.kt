@@ -18,9 +18,7 @@ package care.better.platform.utils
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Required
 import com.google.common.base.CaseFormat
-import java.lang.reflect.Field
-import java.lang.reflect.Method
-import java.lang.reflect.Modifier
+import java.lang.reflect.*
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -45,21 +43,26 @@ class RmUtils {
                 "org.openehr.rm.integration")
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getRmClass(className: String): Class<out RmObject> = getClassInfo(className).clazz
 
         @JvmStatic
-        fun getRmTypeName(clazz: Class<out RmObject>): String = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)
+        fun getRmTypeName(clazz: Class<*>): String = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getAllFields(className: String) = getClassInfo(className).fields
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getAllFields(clazz: Class<out RmObject>) = getClassInfo(clazz).fields
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getRequiredFields(className: String) = getClassInfo(className).requiredFields
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getRequiredFields(clazz: Class<out RmObject>) = getClassInfo(clazz).requiredFields
 
         @JvmStatic
@@ -69,20 +72,28 @@ class RmUtils {
         fun getAttributeForField(fieldName: String): String = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, fieldName)
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getGetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
                 getGetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getGetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
                 getGetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getSetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
                 getSetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
+        @Throws(ClassNotFoundException::class)
         fun getSetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
                 getSetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+
+        @JvmStatic
+        @Throws(ClassNotFoundException::class)
+        fun getFieldType(clazz: Class<out RmObject>, fieldName: String) = getClassInfo(clazz).fieldTypes[fieldName]!! //TODO
 
         private fun getGetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
                 with(getClassInfo(clazz).getter) {
@@ -100,6 +111,7 @@ class RmUtils {
                 getClassInfo(clazz).setter["set${nameTransformer.invoke(name)}"]
 
 
+        @Throws(ClassNotFoundException::class)
         private fun getClassInfo(name: String): ClassInfo =
                 CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, name)) {
                     for (packageName in PACKAGE_NAMES) {
@@ -109,6 +121,7 @@ class RmUtils {
                                     clazz,
                                     getAllNonStaticFields(clazz),
                                     getAllRequiredFields(clazz),
+                                    getFieldTypes(clazz),
                                     getGetters(clazz),
                                     getSetters(clazz))
 
@@ -124,6 +137,7 @@ class RmUtils {
                             clazz,
                             getAllNonStaticFields(clazz),
                             getAllRequiredFields(clazz),
+                            getFieldTypes(clazz),
                             getGetters(clazz),
                             getSetters(clazz))
                 }
@@ -158,12 +172,32 @@ class RmUtils {
 
         private fun getSetters(clazz: Class<out RmObject>): Map<String, Method> =
                 clazz.methods.filter { it.name.startsWith("set") }.associateBy { it.name }
+
+
+        private fun getFieldTypes(clazz: Class<out RmObject>): Map<String, Class<*>> =
+                clazz.declaredFields.associate {  Pair(it.name, getParametrizedClass(it.genericType) ?: it.type) }
+
+        private fun getParametrizedClass(type: Type?): Class<*>? {
+            if (type is ParameterizedType) {
+                with(type.actualTypeArguments) {
+                    if (this.isNotEmpty()) {
+                        if (this[0] is Class<*>) {
+                            this[0] as Class<*>
+                        } else {
+                            getParametrizedClass(this[0])
+                        }
+                    }
+                }
+            }
+            return null
+        }
     }
 
     data class ClassInfo(
             val clazz: Class<out RmObject>,
             val fields: Collection<Field>,
             val requiredFields: Collection<Field>,
+            val fieldTypes: Map<String, Class<*>>,
             val getter: Map<String, Method>,
             val setter: Map<String, Method>)
 }

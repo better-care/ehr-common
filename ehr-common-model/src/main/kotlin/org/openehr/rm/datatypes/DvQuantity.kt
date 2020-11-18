@@ -23,9 +23,35 @@ import care.better.platform.annotation.Required
 
 class DvQuantity : DvAmount() {
 
-    companion object
+    companion object {
+        /**
+         * Creates [DvQuantity] from a magnitude (numeric value), unit string and precision. Precision can be null.
+         *
+         * @param magnitude magnitude
+         * @param units     unit
+         * @param precision precision
+         * @return [DvQuantity] object
+         */
+        @JvmStatic
+        fun create(magnitude: Double, units: String, precision: Int?): DvQuantity =
+                DvQuantity().apply {
+                    this.magnitude = magnitude
+                    this.precision = precision
+                    this.units = units
+                }
 
-    var magnitude: Double? = 0.0
+        /**
+         * Creates [DvQuantity] from a magnitude (numeric value) and unit string. Precision is not set.
+         *
+         * @param magnitude magnitude
+         * @param units     unit
+         * @return [DvQuantity] object
+         */
+        @JvmStatic
+        fun create(magnitude: Double, units: String): DvQuantity = create(magnitude, units, null)
+    }
+
+    var magnitude: Double = 0.0
 
     @Required
     var units: String? = null

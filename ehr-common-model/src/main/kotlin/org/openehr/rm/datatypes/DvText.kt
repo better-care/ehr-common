@@ -23,7 +23,16 @@ import care.better.platform.annotation.Required
 
 open class DvText : DataValue() {
 
-    companion object
+    companion object {
+        /**
+         * Creates a [DvText] from a string
+         *
+         * @param value input value
+         * @return [DvText] object
+         */
+        @JvmStatic
+        fun create(value: String): DvText = DvText().apply { this.value = value }
+    }
 
     @Required
     var value: String? = null

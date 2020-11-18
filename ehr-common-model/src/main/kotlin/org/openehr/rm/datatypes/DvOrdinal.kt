@@ -23,7 +23,22 @@ import care.better.platform.annotation.Required
 
 class DvOrdinal : DvOrdered() {
 
-    companion object
+    companion object {
+        /**
+         * Creates [DvOrdinal] from value and symbol
+         *
+         * @param value  numeric value
+         * @param symbol [DvCodedText] symbol
+         * @return [DvOrdinal] object
+         */
+        @JvmStatic
+        fun create(value: Int, symbol: DvCodedText): DvOrdinal =
+                DvOrdinal().apply {
+                    this.value = value
+                    this.symbol = symbol
+                }
+
+    }
 
     var value: Int = 0
 
