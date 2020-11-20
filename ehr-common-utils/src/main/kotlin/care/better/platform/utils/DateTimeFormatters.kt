@@ -112,6 +112,17 @@ class DateTimeFormatters {
                 .toFormatter()
 
         /**
+         * The date time formatter that formats or parses a zone.
+         */
+        val ZONE_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
+                .optionalStart()
+                .appendLiteral('[')
+                .parseCaseSensitive()
+                .appendZoneRegionId()
+                .appendLiteral(']')
+                .toFormatter()
+
+        /**
          * The time formatter that formats or parses a time in openEHR format with an offset.
          * This returns a formatter capable of formatting and parsing the regular (HHmmss.S, )
          * or extended (HH:mm:ss.S) time format.
@@ -167,11 +178,7 @@ class DateTimeFormatters {
         val PARTIAL_ZONE_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
                 .appendOptional(PARTIAL_OFFSET_DATE_TIME_FORMATTER)
-                .optionalStart()
-                .appendLiteral('[')
-                .parseCaseSensitive()
-                .appendZoneRegionId()
-                .appendLiteral(']')
+                .appendOptional(ZONE_FORMATTER)
                 .toFormatter()
 
         /**
@@ -182,11 +189,7 @@ class DateTimeFormatters {
         val STRICT_ZONE_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
                 .append(STRICT_OFFSET_DATE_TIME_FORMATTER)
-                .optionalStart()
-                .appendLiteral('[')
-                .parseCaseSensitive()
-                .appendZoneRegionId()
-                .appendLiteral(']')
+                .append(ZONE_FORMATTER)
                 .toFormatter()
 
         /**
@@ -201,11 +204,7 @@ class DateTimeFormatters {
                 .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").toFormatter())
                 .appendOptional(PARTIAL_TIME_FORMATTER)
                 .appendOptional(OFFSET_FORMATTER)
-                .optionalStart()
-                .appendLiteral('[')
-                .parseCaseSensitive()
-                .appendZoneRegionId()
-                .appendLiteral(']')
+                .append(ZONE_FORMATTER)
                 .toFormatter()
 
         /**
@@ -220,11 +219,7 @@ class DateTimeFormatters {
                 .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").toFormatter())
                 .append(STRICT_TIME_FORMATTER)
                 .appendOptional(OFFSET_FORMATTER)
-                .optionalStart()
-                .appendLiteral('[')
-                .parseCaseSensitive()
-                .appendZoneRegionId()
-                .appendLiteral(']')
+                .appendOptional(ZONE_FORMATTER)
                 .toFormatter()
 
     }

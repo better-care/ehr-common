@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 @file:JvmName("DateTimeConversionUtils")
 
 package care.better.platform.utils
@@ -88,8 +89,7 @@ class DateTimeConversionUtils {
         fun toLocalTime(value: String, strict: Boolean = false): LocalTime =
                 if (strict) {
                     try {
-                        DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER
-                                .parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                        DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
                     } catch (ex: DateTimeParseException) {
                         DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_TIME_FORMATTER
                                 .parseBest(
@@ -102,8 +102,7 @@ class DateTimeConversionUtils {
                     }
                 } else {
                     try {
-                        DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER
-                                .parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                        DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
                     } catch (ex: DateTimeParseException) {
                         DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
                                 .parseBest(
@@ -179,8 +178,7 @@ class DateTimeConversionUtils {
         fun toOffsetTime(value: String, strict: Boolean = false): OffsetTime =
                 if (strict) {
                     try {
-                        DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER
-                                .parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                        DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
                     } catch (ex: DateTimeParseException) {
                         DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_TIME_FORMATTER
                                 .parseBest(
@@ -193,8 +191,7 @@ class DateTimeConversionUtils {
                     }
                 } else {
                     try {
-                        DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER
-                                .parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                        DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
                     } catch (ex: DateTimeParseException) {
                         DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
                                 .parseBest(
@@ -209,8 +206,12 @@ class DateTimeConversionUtils {
                     when (it) {
                         is ZonedDateTime -> it.toOffsetDateTime().toOffsetTime()
                         is OffsetDateTime -> it.toOffsetTime()
-                        is LocalDateTime -> OffsetTime.of(it.toLocalTime(),
-                                                          if (strict) throw DateTimeException("Invalid offset time value: $value") else ZoneOffset.UTC)
+                        is LocalDateTime -> OffsetTime.of(
+                                it.toLocalTime(),
+                                if (strict)
+                                    throw DateTimeException("Invalid offset time value: $value")
+                                else
+                                    ZoneOffset.UTC)
                         is OffsetTime -> it
                         is LocalTime -> OffsetTime.of(it, if (strict) throw DateTimeException("Invalid offset time value: $value") else ZoneOffset.UTC)
                         else -> throw DateTimeException("Invalid offset time value: $value")
