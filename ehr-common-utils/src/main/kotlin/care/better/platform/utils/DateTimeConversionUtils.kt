@@ -31,8 +31,7 @@ import java.util.regex.Pattern
 @Suppress("MemberVisibilityCanBePrivate", "unused", "DuplicatedCode")
 class DateTimeConversionUtils {
     companion object {
-        private val OFFSET_TIME_PARSER =
-                Pattern.compile("^([0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2})(?:[.,]([0-9]{1,9}))?)?)?(?:([+-][0-9]{2})(?::?([0-9]{2})(?::?([0-9]{2}))?)?|(Z))?.*")
+
         private val FULL_DATE_PATTERN = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}.*")
         private val FULL_DATE_TIME_PATTERN = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}.*")
 
