@@ -241,9 +241,9 @@ class DateTimeConversionUtilsTest {
 
     @Test
     fun toJoda() {
-        assertThat(DateTimeConversionUtils.toJodaDateTime(OffsetDateTime.of(2016, 1, 1, 12, 30, 17, 100000, ZoneOffset.ofHours(2)))
+        assertThat(DateTimeConversionUtils.toDateTime(OffsetDateTime.of(2016, 1, 1, 12, 30, 17, 100000, ZoneOffset.ofHours(2)))
                            .compareTo(DateTime(2016, 1, 1, 12, 30, 17, 0, DateTimeZone.forOffsetHours(2)))).isEqualTo(0)
-        assertThat(DateTimeConversionUtils.toJodaDateTime(OffsetDateTime.of(2016, 1, 1, 12, 30, 17, 100000000, ZoneOffset.ofHours(2)))
+        assertThat(DateTimeConversionUtils.toDateTime(OffsetDateTime.of(2016, 1, 1, 12, 30, 17, 100000000, ZoneOffset.ofHours(2)))
                            .compareTo(DateTime(2016, 1, 1, 12, 30, 17, 100, DateTimeZone.forOffsetHours(2)))).isEqualTo(0)
     }
 
@@ -257,9 +257,9 @@ class DateTimeConversionUtilsTest {
 
     @Test
     fun negativeDateTime() {
-        val dateTime: DateTime = DvDateTime.toJodaDateTime("-0001-12-31T23:30:20.000+02:30:20")
+        val dateTime: DateTime = DvDateTime.toDateTime("-0001-12-31T23:30:20.000+02:30:20")
         val offsetDateTime = DateTimeConversionUtils.toOffsetDateTime("-0001-12-31T23:30:20.000+02:30:20")
-        assertThat(DateTimeConversionUtils.toJodaDateTime(offsetDateTime)).isEqualByComparingTo(dateTime)
+        assertThat(DateTimeConversionUtils.toDateTime(offsetDateTime)).isEqualByComparingTo(dateTime)
     }
 
     @Test

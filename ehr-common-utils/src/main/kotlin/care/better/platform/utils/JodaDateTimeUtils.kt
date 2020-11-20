@@ -58,7 +58,7 @@ fun DvDuration.Companion.create(value: String?): DvDuration? =
  *
  * @return [Period]
  */
-fun DvDuration.toJodaPeriod(): Period = ISOPeriodFormat.standard().parsePeriod(requireNotNull(value))
+fun DvDuration.toPeriod(): Period = ISOPeriodFormat.standard().parsePeriod(requireNotNull(value))
 
 
 /**
@@ -67,7 +67,7 @@ fun DvDuration.toJodaPeriod(): Period = ISOPeriodFormat.standard().parsePeriod(r
  * @param durationValue duration string
  * @return [Period]
  */
-fun DvDuration.Companion.toJodaPeriod(durationValue: String): Period = ISOPeriodFormat.standard().parsePeriod(durationValue)
+fun DvDuration.Companion.toPeriod(durationValue: String): Period = ISOPeriodFormat.standard().parsePeriod(durationValue)
 
 /**
  * Converts Joda DateTime to DV_DATETIME
@@ -98,7 +98,7 @@ fun DvTime.Companion.create(time: LocalTime): DvTime = DvTime().apply { this.val
  *
  * @return Joda DateTime
  */
-fun DvDateTime.toJodaDateTime(): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(requireNotNull(value))
+fun DvDateTime.toDateTime(): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(requireNotNull(value))
 
 /**
  * Converts string date time to [DateTime]
@@ -106,7 +106,7 @@ fun DvDateTime.toJodaDateTime(): DateTime = ISODateTimeFormat.dateTimeParser().w
  * @param dateTimeValue string value (ISO format)
  * @return [DateTime]
  */
-fun DvDateTime.Companion.toJodaDateTime(dateTimeValue: String): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(dateTimeValue)
+fun DvDateTime.Companion.toDateTime(dateTimeValue: String): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(dateTimeValue)
 
 /**
  * Converts [DvTime] to [LocalTime]

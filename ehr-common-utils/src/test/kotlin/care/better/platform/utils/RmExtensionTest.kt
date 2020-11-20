@@ -95,11 +95,11 @@ class RmExtensionTest {
         val period = Period(DateTime(2011, 1, 1, 1, 0, 0), DateTime(2011, 1, 1, 2, 0, 0))
         val duration: DvDuration = DvDuration.create(period)
         assertThat(duration.value).isEqualTo("PT1H")
-        assertThat(period).isEqualTo(duration.toJodaPeriod())
+        assertThat(period).isEqualTo(duration.toPeriod())
         val period1 = Period(DateTime(2011, 1, 1, 1, 0, 0), DateTime(2011, 1, 2, 2, 0, 0))
         val duration1: DvDuration = DvDuration.create(period1)
         assertThat(duration1.value).isEqualTo("P1DT1H")
-        assertThat(period1).isEqualTo(duration1.toJodaPeriod())
+        assertThat(period1).isEqualTo(duration1.toPeriod())
         assertThat(DvDuration.create("P1YT1H")?.value).isEqualTo("P1YT1H")
         assertThat(DvDuration.create(null as String?)).isNull()
     }
@@ -114,10 +114,10 @@ class RmExtensionTest {
         val dateTime = DateTime(2011, 1, 1, 1, 0, 0, DateTimeZone.UTC)
         val dvDateTime: DvDateTime = DvDateTime.create(dateTime)
         assertThat(dvDateTime.value).isEqualTo("2011-01-01T01:00:00.000Z")
-        assertThat(dvDateTime.toJodaDateTime().withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
-        assertThat(DvDateTime.toJodaDateTime("2011-01-01T01:00:00.000Z").withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
+        assertThat(dvDateTime.toDateTime().withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
+        assertThat(DvDateTime.toDateTime("2011-01-01T01:00:00.000Z").withZone(DateTimeZone.UTC)).isEqualTo(dateTime)
         val dateTime1 = DateTime(2011, 1, 1, 1, 0, 0, DateTimeZone.forOffsetHours(1))
-        assertThat(DvDateTime.toJodaDateTime("2011-01-01T01:00+01:00")).isEqualTo(dateTime1)
+        assertThat(DvDateTime.toDateTime("2011-01-01T01:00+01:00")).isEqualTo(dateTime1)
     }
 
     @Test
@@ -242,7 +242,7 @@ class RmExtensionTest {
     fun fromDvDateTimeZone() {
         val dateTime1 = DateTime(2015, 1, 1, 12, 0, DateTimeZone.UTC)
         val dvDateTime1: DvDateTime = DvDateTime.create(dateTime1)
-        val dateTime2: DateTime = dvDateTime1.toJodaDateTime()
+        val dateTime2: DateTime = dvDateTime1.toDateTime()
         assertThat(dateTime2.zone).isEqualTo(dateTime1.zone)
     }
 
