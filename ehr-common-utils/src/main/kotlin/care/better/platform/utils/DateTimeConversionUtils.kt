@@ -323,7 +323,7 @@ class DateTimeConversionUtils {
                         is LocalDateTime -> true
                         is OffsetTime -> true
                         is LocalTime -> false
-                        else -> throw DateTimeException("Invalid local time value: $value")
+                        else -> throw DateTimeException("Invalid offset time value: $value")
                     }
                 }
 
