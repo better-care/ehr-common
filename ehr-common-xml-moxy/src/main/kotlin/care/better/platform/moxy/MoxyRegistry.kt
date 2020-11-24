@@ -19,6 +19,7 @@ import org.eclipse.persistence.jaxb.JAXBContextFactory
 import java.security.AccessController
 import java.security.PrivilegedAction
 import javax.xml.bind.JAXBContext
+import javax.xml.bind.JAXBException
 import javax.xml.bind.Marshaller
 import javax.xml.bind.Unmarshaller
 import javax.xml.transform.stream.StreamSource
@@ -33,6 +34,7 @@ class MoxyRegistry {
         private val INSTANCE: MoxyRegistry = MoxyRegistry()
 
         @JvmStatic
+        @Throws(JAXBException::class)
         fun getInstance(): MoxyRegistry = INSTANCE
     }
 
