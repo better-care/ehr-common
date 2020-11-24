@@ -175,7 +175,10 @@ class RmUtils {
 
 
         private fun getFieldTypes(clazz: Class<out RmObject>): Map<String, Class<*>> =
-                clazz.declaredFields.associate {  Pair(it.name, getParametrizedClass(it.genericType) ?: it.type) }
+                with(mutableListOf<Field>()){
+                    addFieldsRecursive(clazz, { true }, this)
+                    this.associate { Pair(it.name, getParametrizedClass(it.genericType) ?: it.type) }
+                }
 
         private fun getParametrizedClass(type: Type?): Class<*>? {
             if (type is ParameterizedType) {

@@ -67,6 +67,6 @@ class MoxyRegistry {
                 mapOf<String, Any>(Pair(JAXBContextFactory.ECLIPSELINK_OXM_XML_KEY, this.toMap()))
             })
 
-    val marshaller: Marshaller = context.createMarshaller()
-    val unmarshaller: Unmarshaller = context.createUnmarshaller()
+    val marshaller: Marshaller = context.createMarshaller().apply { schema = null }
+    val unmarshaller: Unmarshaller = context.createUnmarshaller().apply { schema = null }
 }
