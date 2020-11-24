@@ -13,12 +13,13 @@
  * limitations under the License.
  */
 
+@file:JvmName("RmUtils")
+
 package care.better.platform.utils
 
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Required
 import com.google.common.base.CaseFormat
-import org.openehr.rm.datastructures.Element
 import java.lang.reflect.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -206,8 +207,4 @@ class RmUtils {
             val fieldTypes: Map<String, Class<*>>,
             val getter: Map<String, Method>,
             val setter: Map<String, Method>)
-}
-
-fun main() {
-    RmUtils.getFieldType(Element::class.java, "links")
 }

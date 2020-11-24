@@ -24,7 +24,6 @@ import org.openehr.rm.datatypes.DvTime
 import java.time.*
 
 /**
- * @author Bostjan Lah
  * @author Primoz Delopst
  */
 
