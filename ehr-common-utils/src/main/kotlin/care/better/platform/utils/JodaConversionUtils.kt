@@ -14,7 +14,6 @@
  */
 
 @file:Suppress("unused")
-@file:JvmName("JodaConversionUtils")
 
 package care.better.platform.utils
 
@@ -26,9 +25,130 @@ import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvDuration
 import org.openehr.rm.datatypes.DvTime
 
+
 /**
  * @author Primoz Delopst
  */
+
+
+class JodaConversionUtils {
+    companion object {
+
+        /**
+         * Converts a ReadablePeriod to [DvDuration]
+         *
+         * @param period [ReadablePeriod]
+         * @return [DvDuration] object
+         */
+        @JvmStatic
+        fun createDvDuration(period: ReadablePeriod): DvDuration = DvDuration().apply { this.value = ISOPeriodFormat.standard().print(period) }
+
+        /**
+         * Converts a string duration to [DvDuration]
+         *
+         * @param value [String] duration in standard ISO format - PyYmMwWdDThHmMsS.
+         * @return [DvDuration] object
+         */
+        @JvmStatic
+        fun createDvDuration(value: String?): DvDuration? =
+                value?.let {
+                    DvDuration().apply {
+                        ISOPeriodFormat.standard().parsePeriod(value)
+                        this.value = value
+                    }
+                }
+
+        /**
+         * Converts duration string value to [Period]
+         *
+         * @param durationValue duration string
+         * @return [Period]
+         */
+        @JvmStatic
+        fun toPeriod(durationValue: String): Period = ISOPeriodFormat.standard().parsePeriod(durationValue)
+
+        /**
+         * Converts Joda DateTime to DV_DATETIME
+         *
+         * @param dateTime Joda DateTime
+         * @return DV_DATETIME object
+         */
+        @JvmStatic
+        fun createDvDateTime(dateTime: DateTime): DvDateTime = DvDateTime().apply { this.value = ISODateTimeFormat.dateTime().print(dateTime) }
+
+        /**
+         * Converts [LocalDate] to [DvDate]
+         *
+         * @param date [LocalDate]
+         * @return [DvDate] object
+         */
+        @JvmStatic
+        fun createDvDate(date: LocalDate): DvDate = DvDate().apply { this.value = ISODateTimeFormat.date().print(date) }
+
+        /**
+         * Converts [LocalTime] to [DvTime]
+         *
+         * @param time [LocalTime]
+         * @return [DvTime] object
+         */
+        @JvmStatic
+        fun createDvTime(time: LocalTime): DvTime = DvTime().apply { this.value = ISODateTimeFormat.time().print(time) }
+
+        /**
+         * Converts string date time to [DateTime]
+         *
+         * @param dateTimeValue string value (ISO format)
+         * @return [DateTime]
+         */
+        @JvmStatic
+        fun toDateTime(dateTimeValue: String): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(dateTimeValue)
+
+
+        /**
+         * Converts [DvTime] to [LocalTime]
+         *
+         * @param time [DvTime]
+         * @return [LocalTime]
+         */
+        @JvmStatic
+        fun toLocalTime(time: DvTime): LocalTime =
+                with(requireNotNull(time.value)) {
+                    val timeIndex = this.indexOf('T')
+                    ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
+                            if (timeIndex == -1)
+                                this
+                            else
+                                this.substring(timeIndex + 1))
+                }
+
+        /**
+         * Converts [DvDate] to [LocalDate]
+         *
+         * @param date [DvDate]
+         * @return [LocalDate]
+         */
+        @JvmStatic
+        fun toLocalDate(date: DvDate): LocalDate = ISODateTimeFormat.dateOptionalTimeParser().withOffsetParsed().parseLocalDate(requireNotNull(date.value))
+
+        /**
+         * Converts DV_DATETIME to Joda DateTime
+         *
+         * @param dateTime [DvDateTime]
+         * @return Joda DateTime
+         */
+        @JvmStatic
+        fun toDateTime(dateTime: DvDateTime): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(requireNotNull(dateTime.value))
+
+        /**
+         * Converts [DvDuration] to Joda Period
+         *
+         * @param duration [DvDuration]
+         * @return [Period]
+         */
+        @JvmStatic
+        fun toPeriod(duration: DvDuration): Period = ISOPeriodFormat.standard().parsePeriod(requireNotNull(duration.value))
+    }
+}
 
 /**
  * Converts a ReadablePeriod to [DvDuration]
@@ -36,9 +156,8 @@ import org.openehr.rm.datatypes.DvTime
  * @param period [ReadablePeriod]
  * @return [DvDuration] object
  */
-@JvmName("createDvDuration")
-fun DvDuration.Companion.create(period: ReadablePeriod): DvDuration = DvDuration().apply { this.value = ISOPeriodFormat.standard().print(period) }
-
+@JvmSynthetic
+fun DvDuration.Companion.create(period: ReadablePeriod): DvDuration = JodaConversionUtils.createDvDuration(period)
 
 /**
  * Converts a string duration to [DvDuration]
@@ -46,22 +165,8 @@ fun DvDuration.Companion.create(period: ReadablePeriod): DvDuration = DvDuration
  * @param value [String] duration in standard ISO format - PyYmMwWdDThHmMsS.
  * @return [DvDuration] object
  */
-@JvmName("createDvDuration")
-fun DvDuration.Companion.create(value: String?): DvDuration? =
-        value?.let {
-            DvDuration().apply {
-                ISOPeriodFormat.standard().parsePeriod(value)
-                this.value = value
-            }
-        }
-
-/**
- * Converts [DvDuration] to Joda Period
- *
- * @return [Period]
- */
-@JvmName("toPeriod")
-fun DvDuration.toPeriod(): Period = ISOPeriodFormat.standard().parsePeriod(requireNotNull(value))
+@JvmSynthetic
+fun DvDuration.Companion.create(value: String?): DvDuration? = JodaConversionUtils.createDvDuration(value)
 
 
 /**
@@ -70,8 +175,8 @@ fun DvDuration.toPeriod(): Period = ISOPeriodFormat.standard().parsePeriod(requi
  * @param durationValue duration string
  * @return [Period]
  */
-@JvmName("toPeriod")
-fun DvDuration.Companion.toPeriod(durationValue: String): Period = ISOPeriodFormat.standard().parsePeriod(durationValue)
+@JvmSynthetic
+fun DvDuration.Companion.toPeriod(durationValue: String): Period = JodaConversionUtils.toPeriod(durationValue)
 
 /**
  * Converts Joda DateTime to DV_DATETIME
@@ -79,8 +184,8 @@ fun DvDuration.Companion.toPeriod(durationValue: String): Period = ISOPeriodForm
  * @param dateTime Joda DateTime
  * @return DV_DATETIME object
  */
-@JvmName("createDvDateTime")
-fun DvDateTime.Companion.create(dateTime: DateTime): DvDateTime = DvDateTime().apply { this.value = ISODateTimeFormat.dateTime().print(dateTime) }
+@JvmSynthetic
+fun DvDateTime.Companion.create(dateTime: DateTime): DvDateTime = JodaConversionUtils.createDvDateTime(dateTime)
 
 /**
  * Converts [LocalDate] to [DvDate]
@@ -88,8 +193,8 @@ fun DvDateTime.Companion.create(dateTime: DateTime): DvDateTime = DvDateTime().a
  * @param date [LocalDate]
  * @return [DvDate] object
  */
-@JvmName("createDvDate")
-fun DvDate.Companion.create(date: LocalDate): DvDate = DvDate().apply { this.value = ISODateTimeFormat.date().print(date) }
+@JvmSynthetic
+fun DvDate.Companion.create(date: LocalDate): DvDate = JodaConversionUtils.createDvDate(date)
 
 /**
  * Converts [LocalTime] to [DvTime]
@@ -97,16 +202,9 @@ fun DvDate.Companion.create(date: LocalDate): DvDate = DvDate().apply { this.val
  * @param time [LocalTime]
  * @return [DvTime] object
  */
-@JvmName("createDvTime")
-fun DvTime.Companion.create(time: LocalTime): DvTime = DvTime().apply { this.value = ISODateTimeFormat.time().print(time) }
+@JvmSynthetic
+fun DvTime.Companion.create(time: LocalTime): DvTime = JodaConversionUtils.createDvTime(time)
 
-/**
- * Converts DV_DATETIME to Joda DateTime
- *
- * @return Joda DateTime
- */
-@JvmName("toDateTime")
-fun DvDateTime.toDateTime(): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(requireNotNull(value))
 
 /**
  * Converts string date time to [DateTime]
@@ -114,29 +212,36 @@ fun DvDateTime.toDateTime(): DateTime = ISODateTimeFormat.dateTimeParser().withO
  * @param dateTimeValue string value (ISO format)
  * @return [DateTime]
  */
-@JvmName("toDateTime")
-fun DvDateTime.Companion.toDateTime(dateTimeValue: String): DateTime = ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(dateTimeValue)
+@JvmSynthetic
+fun DvDateTime.Companion.toDateTime(dateTimeValue: String): DateTime = JodaConversionUtils.toDateTime(dateTimeValue)
+
+/**
+ * Converts [DvDuration] to Joda Period
+ *
+ * @return [Period]
+ */
+@JvmSynthetic
+fun DvDuration.toPeriod(): Period = JodaConversionUtils.toPeriod(this)
+
+/**
+ * Converts DV_DATETIME to Joda DateTime
+ *
+ * @return Joda DateTime
+ */
+@JvmSynthetic
+fun DvDateTime.toDateTime(): DateTime = JodaConversionUtils.toDateTime(this)
 
 /**
  * Converts [DvTime] to [LocalTime]
  *
  * @return [LocalTime]
  */
-@JvmName("toLocalTime")
-fun DvTime.toJodaLocalTime(): LocalTime =
-        with(requireNotNull(value)) {
-            val timeIndex = this.indexOf('T')
-            ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
-                    if (timeIndex == -1)
-                        this
-                    else
-                        this.substring(timeIndex + 1))
-        }
-
+@JvmSynthetic
+fun DvTime.toJodaLocalTime(): LocalTime = JodaConversionUtils.toLocalTime(this)
 /**
  * Converts [DvDate] to [LocalDate]
  *
  * @return [LocalDate]
  */
-@JvmName("toLocalDate")
-fun DvDate.toJodaLocalDate(): LocalDate = ISODateTimeFormat.dateOptionalTimeParser().withOffsetParsed().parseLocalDate(requireNotNull(value))
+@JvmSynthetic
+fun DvDate.toJodaLocalDate(): LocalDate = JodaConversionUtils.toLocalDate(this)
