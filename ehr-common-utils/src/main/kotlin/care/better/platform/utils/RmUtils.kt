@@ -18,6 +18,7 @@ package care.better.platform.utils
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Required
 import com.google.common.base.CaseFormat
+import org.openehr.rm.datastructures.Element
 import java.lang.reflect.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -182,13 +183,15 @@ class RmUtils {
 
         private fun getParametrizedClass(type: Type?): Class<*>? {
             if (type is ParameterizedType) {
-                with(type.actualTypeArguments) {
+                return with(type.actualTypeArguments) {
                     if (this.isNotEmpty()) {
                         if (this[0] is Class<*>) {
                             this[0] as Class<*>
                         } else {
                             getParametrizedClass(this[0])
                         }
+                    } else {
+                        null
                     }
                 }
             }
@@ -203,4 +206,8 @@ class RmUtils {
             val fieldTypes: Map<String, Class<*>>,
             val getter: Map<String, Method>,
             val setter: Map<String, Method>)
+}
+
+fun main() {
+    RmUtils.getFieldType(Element::class.java, "links")
 }
