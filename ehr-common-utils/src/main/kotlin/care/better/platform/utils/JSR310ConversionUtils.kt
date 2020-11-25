@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-@file:JvmName("JSR310ConversionUtils")
-
 
 package care.better.platform.utils
 
@@ -27,37 +25,112 @@ import java.time.*
  * @author Primoz Delopst
  */
 
+
+class JSR310ConversionUtils  {
+
+    companion object {
+        /**
+         * Converts [DvDateTime] to [ZonedDateTime]
+         *
+         * @param dateTime [DvDateTime]
+         * @return [ZonedDateTime]
+         */
+        @JvmStatic
+        fun toZonedDateTime(dateTime: DvDateTime): ZonedDateTime = DateTimeConversionUtils.toZonedDateTime(requireNotNull(dateTime.value))
+
+        /**
+         * Converts [DvDateTime] to [OffsetDateTime]
+         *
+         * @param dateTime [DvDateTime]
+         * @return [OffsetDateTime]
+         */
+        @JvmStatic
+        fun toOffsetDateTime(dateTime: DvDateTime): OffsetDateTime = DateTimeConversionUtils.toOffsetDateTime(requireNotNull(dateTime.value))
+
+        /**
+         * Converts [DvDateTime] to [LocalDateTime]
+         *
+         * @param dateTime [DvDateTime]
+         * @return [LocalDateTime]
+         */
+        @JvmStatic
+        fun toLocalDateTime(dateTime: DvDateTime): LocalDateTime = DateTimeConversionUtils.toLocalDateTime(requireNotNull(dateTime.value))
+
+        /**
+         * Converts [DvDate] to [LocalDate]
+         *
+         * @param date [DvDate]
+         * @return [DvDateTime]
+         */
+        @JvmStatic
+        fun toLocalDate(date: DvDate): LocalDate = DateTimeConversionUtils.toLocalDate(requireNotNull(date.value))
+
+        /**
+         * Converts [DvTime] to [LocalTime]
+         *
+         * @param time [DvTime]
+         * @return [LocalTime]
+         */
+        @JvmStatic
+        fun toLocalTime(time: DvTime): LocalTime = DateTimeConversionUtils.toLocalTime(requireNotNull(time.value))
+
+        /**
+         * Converts [DvTime] to [OffsetTime]
+         *
+         * @param time [DvTime]
+         * @return [OffsetTime]
+         */
+        @JvmStatic
+        fun toOffsetTime(time: DvTime): OffsetTime = DateTimeConversionUtils.toOffsetTime(requireNotNull(time.value))
+
+    }
+}
+
 /**
  * Converts [DvDateTime] to [ZonedDateTime]
  *
  * @return [ZonedDateTime]
  */
-fun DvDateTime.toZonedDateTime(): ZonedDateTime = DateTimeConversionUtils.toZonedDateTime(requireNotNull(value))
+@JvmSynthetic
+fun DvDateTime.toZonedDateTime(): ZonedDateTime = JSR310ConversionUtils.toZonedDateTime(this)
 
 /**
  * Converts [DvDateTime] to [OffsetDateTime]
  *
  * @return [OffsetDateTime]
  */
-fun DvDateTime.toOffsetDateTime(): OffsetDateTime = DateTimeConversionUtils.toZonedDateTime(requireNotNull(value)).toOffsetDateTime()
+@JvmSynthetic
+fun DvDateTime.toOffsetDateTime(): OffsetDateTime = JSR310ConversionUtils.toOffsetDateTime(this)
+
 
 /**
- * Converts [DvTime] to [LocalTime]
+ * Converts [DvDateTime] to [LocalDateTime]
  *
- * @return [LocalTime]
+ * @return [LocalDateTime]
  */
-fun DvTime.toLocalTime(): LocalTime = DateTimeConversionUtils.toLocalTime(requireNotNull(value))
-
-/**
- * Converts [DvTime] to [OffsetTime]
- *
- * @return [OffsetTime]
- */
-fun DvTime.toOffsetTime(): OffsetTime = DateTimeConversionUtils.toOffsetTime(requireNotNull(value))
+@JvmSynthetic
+fun DvDateTime.toLocalDateTime(): LocalDateTime = JSR310ConversionUtils.toLocalDateTime(this)
 
 /**
  * Converts [DvDate] to [LocalDate]
  *
  * @return [DvDateTime]
  */
-fun DvDate.toLocalDate(): LocalDate = DateTimeConversionUtils.toLocalDate(requireNotNull(value))
+@JvmSynthetic
+fun DvDate.toLocalDate(): LocalDate = JSR310ConversionUtils.toLocalDate(this)
+
+/**
+ * Converts [DvTime] to [LocalTime]
+ *
+ * @return [LocalTime]
+ */
+@JvmSynthetic
+fun DvTime.toLocalTime(): LocalTime = JSR310ConversionUtils.toLocalTime(this)
+
+/**
+ * Converts [DvTime] to [OffsetTime]
+ *
+ * @return [OffsetTime]
+ */
+@JvmSynthetic
+fun DvTime.toOffsetTime(): OffsetTime = JSR310ConversionUtils.toOffsetTime(this)

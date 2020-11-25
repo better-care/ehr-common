@@ -136,7 +136,7 @@ class DateTimeConversionUtils {
          * @throws [DateTimeException] when string could not be parsed
          */
         @JvmStatic
-        fun toLocalDateTime(value: String, strict: Boolean): LocalDateTime =
+        fun toLocalDateTime(value: String, strict: Boolean = false): LocalDateTime =
                 if (strict) {
                     DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
                             .parseBest(
