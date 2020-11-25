@@ -11,6 +11,7 @@
         <module>ehr-common-json-jackson</module>
         <module>ehr-common-xml-moxy</module>
         <module>ehr-common-utils</module>
+        <module>ehr-common-terminology</module>
     </modules>
 
     <name>EHR common modules</name>
