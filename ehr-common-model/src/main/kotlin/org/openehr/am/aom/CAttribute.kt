@@ -15,6 +15,7 @@
 
 package org.openehr.am.aom
 
+import care.better.platform.annotation.Required
 import org.openehr.base.foundationtypes.IntervalOfInteger
 
 /**
@@ -22,8 +23,10 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  */
 
 abstract class CAttribute : ArchetypeConstraint() {
-    lateinit var rmAttributeName: String
-    lateinit var existence: IntervalOfInteger
+    @Required
+    var rmAttributeName: String? = null
+    @Required
+    var existence: IntervalOfInteger? = null
     var differentialPath: String? = null
     var matchNegated = false
     var children: MutableList<CObject> = mutableListOf()

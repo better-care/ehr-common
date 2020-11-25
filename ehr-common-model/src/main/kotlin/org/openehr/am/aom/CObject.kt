@@ -15,6 +15,7 @@
 
 package org.openehr.am.aom
 
+import care.better.platform.annotation.Required
 import org.openehr.base.foundationtypes.IntervalOfInteger
 
 /**
@@ -23,7 +24,9 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
 
 abstract class CObject : ArchetypeConstraint() {
     lateinit var rmTypeName: String
-    lateinit var occurrences: IntervalOfInteger
-    lateinit var nodeId: String
+    @Required
+    var occurrences: IntervalOfInteger? = null
+    @Required
+    var nodeId: String? = null
     var siblingOrder: SiblingOrder? = null
 }

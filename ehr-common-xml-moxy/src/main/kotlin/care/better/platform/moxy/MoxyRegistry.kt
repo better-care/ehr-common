@@ -28,28 +28,36 @@ import javax.xml.transform.stream.StreamSource
  * @author Primoz Delopst
  */
 
-class MoxyRegistry {
+class MoxyRegistry(private val packages: List<String>) {
 
     companion object {
-        private val INSTANCE: MoxyRegistry = MoxyRegistry()
+
+        private val INSTANCE: MoxyRegistry = MoxyRegistry(emptyList())
+
+        private const val CONTEXT_PATH =
+                "org.openehr.am.aom:" +
+                        "org.openehr.base.basetypes:" +
+                        "org.openehr.base.foundationtypes:" +
+                        "org.openehr.base.resource:" +
+                        "org.openehr.proc.taskplanning:" +
+                        "org.openehr.rm.common:" +
+                        "org.openehr.rm.composition:" +
+                        "org.openehr.rm.datastructures:" +
+                        "org.openehr.rm.datatypes:" +
+                        "org.openehr.rm.ehr:" +
+                        "org.openehr.rm.integration"
 
         @JvmStatic
         @Throws(JAXBException::class)
         fun getInstance(): MoxyRegistry = INSTANCE
+
+        @JvmStatic
+        @Throws(JAXBException::class)
+        fun createInstance(packages: List<String>) = MoxyRegistry(packages.filter { !CONTEXT_PATH.contains(it) })
     }
 
     private val context: JAXBContext = JAXBContext.newInstance(
-            "org.openehr.am.aom:" +
-                    "org.openehr.base.basetypes:" +
-                    "org.openehr.base.foundationtypes:" +
-                    "org.openehr.base.resource:" +
-                    "org.openehr.proc.taskplanning:" +
-                    "org.openehr.rm.common:" +
-                    "org.openehr.rm.composition:" +
-                    "org.openehr.rm.datastructures:" +
-                    "org.openehr.rm.datatypes:" +
-                    "org.openehr.rm.ehr:" +
-                    "org.openehr.rm.integration",
+            if (packages.isNotEmpty()) "$CONTEXT_PATH:${packages.joinToString(":")}" else CONTEXT_PATH,
             if (System.getSecurityManager() == null)
                 Thread.currentThread().contextClassLoader
             else

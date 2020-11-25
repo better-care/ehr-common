@@ -16,6 +16,7 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
+import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.base.basetypes.TemplateId
 import org.openehr.rm.common.ResourceDescription
@@ -28,7 +29,8 @@ import java.io.Serializable
  */
 
 class Template : AmObject(), Serializable {
-    lateinit var language: CodePhrase
+    @Required
+    var language: CodePhrase? = null
     var isControlled: Boolean? = null
     var description: ResourceDescription? = null
     var revisionHistory: RevisionHistory? = null
