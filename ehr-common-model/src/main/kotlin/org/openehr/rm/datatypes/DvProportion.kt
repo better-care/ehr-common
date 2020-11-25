@@ -28,5 +28,5 @@ class DvProportion : DvAmount() {
 
     @Required
     var type: BigInteger? = null
-    var precision: Int = -1
+    var precision: Int? = -1
 }

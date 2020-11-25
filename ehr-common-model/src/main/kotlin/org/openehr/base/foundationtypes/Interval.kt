@@ -15,6 +15,7 @@
 
 package org.openehr.base.foundationtypes
 
+import care.better.openehr.rm.RangeParameters
 import care.better.openehr.rm.RmObject
 import java.io.Serializable
 
@@ -22,9 +23,17 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
-abstract class Interval : RmObject(), Serializable {
+abstract class Interval : RmObject(), Serializable, RangeParameters {
     var lowerIncluded: Boolean? = null
     var upperIncluded: Boolean? = null
     var lowerUnbounded = false
     var upperUnbounded = false
+
+    override fun isLowerIncluded(): Boolean? = lowerIncluded
+
+    override fun isUpperIncluded(): Boolean? = upperIncluded
+
+    override fun isLowerUnbounded(): Boolean = lowerUnbounded
+
+    override fun isUpperUnbounded(): Boolean = upperUnbounded
 }

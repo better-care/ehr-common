@@ -15,15 +15,26 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.openehr.rm.RangeParameters
+
 /**
  * @author Primoz Delopst
  */
 
-class DvInterval : DataValue() {
+class DvInterval : DataValue(), RangeParameters {
     var lower: DvOrdered? = null
     var upper: DvOrdered? = null
     var lowerIncluded: Boolean? = null
     var upperIncluded: Boolean? = null
     var lowerUnbounded = false
     var upperUnbounded = false
+
+
+    override fun isLowerIncluded(): Boolean? = lowerIncluded
+
+    override fun isUpperIncluded(): Boolean? = upperIncluded
+
+    override fun isLowerUnbounded(): Boolean = lowerUnbounded
+
+    override fun isUpperUnbounded(): Boolean = upperUnbounded
 }

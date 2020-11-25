@@ -20,6 +20,8 @@ package org.openehr.proc.taskplanning
  */
 
 interface EnumerationInteger {
+
+    @JvmDefault
     fun integerValue(): Int =
             if (this is Enum<*>)
                 (this as Enum<*>).ordinal
@@ -27,6 +29,7 @@ interface EnumerationInteger {
                 throw AssertionError("EnumerationInteger " + javaClass.simpleName + " is not an Enum")
 
 
+    @JvmDefault
     fun <T : EnumerationInteger> fromInteger(enumClass: Class<T>, value: Int): T =
             enumClass.enumConstants.firstOrNull { it.integerValue() == value }
                     ?: throw IllegalArgumentException("No such " + enumClass.simpleName + ": " + value)

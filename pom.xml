@@ -187,6 +187,7 @@
                 <configuration>
                     <jvmTarget>${java.version}</jvmTarget>
                     <args>
+                        <arg>-Xjvm-default=compatibility</arg>
                         <arg>-Xjsr305=strict</arg>
                     </args>
                 </configuration>
