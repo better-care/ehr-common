@@ -51,6 +51,7 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
          *
          * @return [OpenEhrTerminology]
          */
+        @JvmStatic
         fun getInstance(): OpenEhrTerminology = instance
 
         /**
@@ -58,6 +59,7 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
          *
          * @return set of codes
          */
+        @JvmStatic
         fun getNormalStatusCodes(): Set<String> = NORMAL_STATUS_CODES
 
         /**
@@ -65,6 +67,7 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
          *
          * @return set of codes
          */
+        @JvmStatic
         fun getMagnitudeStatusCodes(): Set<String?> = MAGNITUDE_STATUS_CODES
 
     }
