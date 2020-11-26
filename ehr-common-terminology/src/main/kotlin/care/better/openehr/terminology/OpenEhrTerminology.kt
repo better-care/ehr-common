@@ -35,13 +35,11 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
 
         private val instance = with(SAXParserFactory.newInstance()) {
             this.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)
-            val saxParser = this.newSAXParser()
-            val xmlReader = saxParser.xmlReader
+            val xmlReader = this.newSAXParser().xmlReader
 
             val handler = TerminologyHandler()
             xmlReader.contentHandler = handler
-            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResource("/care/better/openehr/terminology/openehr-terminology.xml")
-                                                .toExternalForm()))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResource("/care/better/openehr/terminology/openehr-terminology.xml").toExternalForm()))
 
             OpenEhrTerminology(handler.getGroups(), handler.getTerms())
         }
