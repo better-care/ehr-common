@@ -67,8 +67,8 @@ class DvCodedText : DvText() {
             when {
                 this === other -> true
                 javaClass != other?.javaClass -> false
-                else -> (other as DvCodedText).value == value
+                else -> (other as DvCodedText).definingCode == definingCode
             }
 
-    override fun hashCode(): Int = Objects.hash(value)
+    override fun hashCode(): Int = Objects.hash(definingCode)
 }

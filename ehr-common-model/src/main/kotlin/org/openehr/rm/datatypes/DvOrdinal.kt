@@ -51,8 +51,9 @@ class DvOrdinal : DvOrdered() {
                 this === other -> true
                 javaClass != other?.javaClass -> false
                 !super.equals(other) -> false
-                else -> (other as DvOrdinal).value == value
+                (other as DvOrdinal).value != value -> false
+                else -> other.symbol == symbol
             }
 
-    override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(value, symbol)
 }
