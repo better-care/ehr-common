@@ -55,5 +55,5 @@ class DvQuantity : DvAmount() {
 
     @Required
     var units: String? = null
-    var precision: Int? = -1
+    var precision: Int? = null
 }

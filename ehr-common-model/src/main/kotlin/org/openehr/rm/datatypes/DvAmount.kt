@@ -20,6 +20,6 @@ package org.openehr.rm.datatypes
  */
 
 open class DvAmount : DvQuantified() {
-    var accuracy: Float? = -1.0f
+    var accuracy: Float? = null
     var accuracyIsPercent: Boolean? = null
 }

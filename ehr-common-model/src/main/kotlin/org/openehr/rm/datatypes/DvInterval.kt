@@ -26,8 +26,8 @@ class DvInterval : DataValue(), RangeParameters {
     var upper: DvOrdered? = null
     var lowerIncluded: Boolean? = null
     var upperIncluded: Boolean? = null
-    var lowerUnbounded = false
-    var upperUnbounded = false
+    var lowerUnbounded: Boolean = false
+    var upperUnbounded: Boolean = false
 
 
     override fun isLowerIncluded(): Boolean? = lowerIncluded

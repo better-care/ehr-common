@@ -15,11 +15,13 @@
 
 package care.better.platform.json.jackson.openehr
 
+import care.better.platform.json.jackson.mixedin.BooleanContextExpressionMixedIn
 import care.better.platform.json.jackson.rm.RmTypeResolverBuilder
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import org.openehr.proc.taskplanning.BooleanContextExpression
 
 /**
  * @author Primoz Delopst
@@ -35,6 +37,7 @@ class OpenEhrObjectMapper : ObjectMapper() {
         registerModule(KotlinModule())
         configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)
         configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        addMixIn(BooleanContextExpression::class.java, BooleanContextExpressionMixedIn::class.java)
         propertyNamingStrategy = OpenEhrPropertyNamingStrategy()
     }
 }

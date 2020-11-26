@@ -23,10 +23,10 @@ import java.math.BigInteger
  */
 
 class DvProportion : DvAmount() {
-    var numerator = 0f
-    var denominator = 0f
+    var numerator: Float = 0f
+    var denominator: Float = 0f
 
     @Required
     var type: BigInteger? = null
-    var precision: Int? = -1
+    var precision: Int? = null
 }

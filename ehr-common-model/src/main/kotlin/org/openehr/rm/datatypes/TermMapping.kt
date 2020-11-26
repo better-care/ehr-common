@@ -24,7 +24,7 @@ import java.io.Serializable
  */
 
 class TermMapping : RmObject(), Serializable {
-    var match: String? = "?"
+    var match: String? = null
     var purpose: DvCodedText? = null
 
     @Required
