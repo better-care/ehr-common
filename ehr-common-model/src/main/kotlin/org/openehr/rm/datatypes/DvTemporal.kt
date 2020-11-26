@@ -15,10 +15,22 @@
 
 package org.openehr.rm.datatypes
 
+import java.util.*
+
 /**
  * @author Primoz Delopst
  */
 
 open class DvTemporal : DvQuantified() {
     var accuracy: DvDuration? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                else -> (other as DvTemporal).accuracy == accuracy
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy)
 }

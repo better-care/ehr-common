@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -41,4 +42,17 @@ open class DvText : DataValue() {
     var mappings: MutableList<TermMapping> = mutableListOf()
     var language: CodePhrase? = null
     var encoding: CodePhrase? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                (other as DvText).value != value -> false
+                other.hyperlink != hyperlink -> false
+                other.formatting != formatting -> false
+                other.language != language -> false
+                else -> other.encoding == encoding
+            }
+
+    override fun hashCode(): Int = Objects.hash(value, encoding, formatting, hyperlink, language)
 }

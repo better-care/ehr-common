@@ -19,6 +19,7 @@ import care.better.platform.annotation.Required
 import java.time.OffsetDateTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -55,4 +56,14 @@ class DvDateTime : DvTemporal() {
 
     @Required
     var value: String? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                else -> (other as DvDateTime).value == value
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 }

@@ -15,10 +15,22 @@
 
 package org.openehr.rm.datatypes
 
+import java.util.*
+
 /**
  * @author Primoz Delopst
  */
 
 abstract class DvQuantified : DvOrdered() {
     var magnitudeStatus: String? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                else -> (other as DvQuantified).magnitudeStatus == magnitudeStatus
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitudeStatus)
 }

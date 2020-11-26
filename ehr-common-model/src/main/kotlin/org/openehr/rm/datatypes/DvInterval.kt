@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RangeParameters
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -37,4 +38,19 @@ class DvInterval : DataValue(), RangeParameters {
     override fun isLowerUnbounded(): Boolean = lowerUnbounded
 
     override fun isUpperUnbounded(): Boolean = upperUnbounded
+
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                (other as DvInterval).lower != lower -> false
+                other.upper != upper -> false
+                other.lowerIncluded != lowerIncluded -> false
+                other.upperIncluded != upperIncluded -> false
+                other.lowerUnbounded != lowerUnbounded -> false
+                else -> other.upperUnbounded == upperUnbounded
+            }
+
+    override fun hashCode(): Int = Objects.hash(lower, upper, lowerIncluded, upperIncluded, lowerUnbounded, upperUnbounded)
 }

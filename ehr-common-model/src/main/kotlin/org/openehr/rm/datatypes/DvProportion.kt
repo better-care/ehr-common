@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
 import java.math.BigInteger
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -29,4 +30,17 @@ class DvProportion : DvAmount() {
     @Required
     var type: BigInteger? = null
     var precision: Int? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                (other as DvProportion).numerator != numerator -> false
+                other.denominator != denominator -> false
+                other.precision != precision -> false
+                else -> other.type == type
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(numerator, type, precision, denominator)
 }

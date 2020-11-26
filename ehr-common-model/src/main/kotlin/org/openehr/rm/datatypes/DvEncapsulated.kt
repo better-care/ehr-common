@@ -15,6 +15,8 @@
 
 package org.openehr.rm.datatypes
 
+import java.util.*
+
 /**
  * @author Primoz Delopst
  */
@@ -22,4 +24,14 @@ package org.openehr.rm.datatypes
 abstract class DvEncapsulated : DataValue() {
     var charset: CodePhrase? = null
     var language: CodePhrase? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                (other as DvEncapsulated).charset != charset -> false
+                else -> language == other.language
+            }
+
+    override fun hashCode(): Int = Objects.hash(charset, language)
 }

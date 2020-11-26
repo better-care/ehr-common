@@ -15,6 +15,8 @@
 
 package org.openehr.rm.datatypes
 
+import java.util.*
+
 /**
  * @author Primoz Delopst
  */
@@ -22,4 +24,15 @@ package org.openehr.rm.datatypes
 open class DvAmount : DvQuantified() {
     var accuracy: Float? = null
     var accuracyIsPercent: Boolean? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                (other as DvAmount).accuracy != accuracy -> false
+                else -> accuracyIsPercent == other.accuracyIsPercent
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy, accuracyIsPercent)
 }

@@ -19,6 +19,7 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -74,4 +75,14 @@ class CodePhrase : RmObject(), Serializable {
 
     @Required
     var codeString: String? = null
+
+    override fun equals(other: Any?): Boolean =
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            (other as CodePhrase).terminologyId != terminologyId -> false
+            else -> codeString == other.codeString
+        }
+
+    override fun hashCode(): Int = Objects.hash(terminologyId, codeString)
 }

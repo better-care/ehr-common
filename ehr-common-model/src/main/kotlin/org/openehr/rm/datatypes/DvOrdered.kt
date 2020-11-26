@@ -15,6 +15,8 @@
 
 package org.openehr.rm.datatypes
 
+import java.util.*
+
 /**
  * @author Primoz Delopst
  */
@@ -23,4 +25,14 @@ abstract class DvOrdered : DataValue() {
     var normalRange: DvInterval? = null
     var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf()
     var normalStatus: CodePhrase? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                (other as DvOrdered).normalRange != normalRange -> false
+                else -> normalStatus == other.normalStatus
+            }
+
+    override fun hashCode(): Int = Objects.hash(normalRange, normalStatus)
 }

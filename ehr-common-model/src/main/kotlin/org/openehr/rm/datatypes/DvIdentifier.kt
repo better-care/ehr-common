@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -28,4 +29,16 @@ class DvIdentifier : DataValue() {
     @Required
     var id: String? = null
     var type: String? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                (other as DvIdentifier).id != id -> false
+                other.assigner != assigner -> false
+                other.issuer != issuer -> false
+                else -> other.type == type
+            }
+
+    override fun hashCode(): Int = Objects.hash(id, type, issuer, assigner)
 }

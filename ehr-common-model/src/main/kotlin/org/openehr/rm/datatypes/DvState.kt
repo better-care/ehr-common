@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -25,4 +26,14 @@ class DvState : DataValue() {
     @Required
     var value: DvCodedText? = null
     var isTerminal = false
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                (other as DvState).value != value -> false
+                else -> isTerminal == other.isTerminal
+            }
+
+    override fun hashCode(): Int = Objects.hash(value, isTerminal)
 }

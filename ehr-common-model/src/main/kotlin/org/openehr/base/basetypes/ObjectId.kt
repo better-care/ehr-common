@@ -18,6 +18,7 @@ package org.openehr.base.basetypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -26,6 +27,15 @@ import java.io.Serializable
 abstract class ObjectId : RmObject(), Serializable {
     @Required
     var value: String? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                else -> (other as ObjectId).value == value
+            }
+
+    override fun hashCode(): Int = Objects.hash(value)
 }
 
 

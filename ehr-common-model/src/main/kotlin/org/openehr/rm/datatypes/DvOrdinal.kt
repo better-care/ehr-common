@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -44,4 +45,14 @@ class DvOrdinal : DvOrdered() {
 
     @Required
     var symbol: DvCodedText? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                else -> (other as DvOrdinal).value == value
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 }

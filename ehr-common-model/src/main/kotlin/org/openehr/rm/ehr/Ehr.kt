@@ -19,6 +19,7 @@ import care.better.openehr.rm.RmObject
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -29,4 +30,14 @@ class Ehr : RmObject(), Serializable {
     var ehrId: HierObjectId? = null
     var timeCreated: DvDateTime? = null
     var ehrStatus: EhrStatus? = null
+
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                else -> (other as Ehr).ehrId == ehrId
+            }
+
+    override fun hashCode(): Int = Objects.hash(ehrId)
 }

@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -27,4 +28,14 @@ class DvDuration : DvAmount() {
 
     @Required
     var value: String? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                else -> (other as DvDuration).value == value
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 }

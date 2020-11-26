@@ -15,6 +15,8 @@
 
 package org.openehr.rm.datatypes
 
+import java.util.*
+
 /**
  * @author Primoz Delopst
  */
@@ -33,4 +35,13 @@ class DvBoolean : DataValue() {
     }
 
     var value: Boolean = false
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                else -> (other as DvBoolean).value == value
+            }
+
+    override fun hashCode(): Int = Objects.hash(value)
 }

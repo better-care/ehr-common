@@ -19,6 +19,7 @@ import care.better.platform.annotation.Required
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -42,4 +43,14 @@ class DvDate : DvTemporal() {
 
     @Required
     var value: String? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                else -> (other as DvDate).value == value
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 }

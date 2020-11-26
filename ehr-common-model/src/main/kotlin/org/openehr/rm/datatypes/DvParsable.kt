@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -44,4 +45,15 @@ class DvParsable : DvEncapsulated() {
 
     @Required
     var formalism: String? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                (other as DvParsable).value != value -> false
+                else -> formalism == other.formalism
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(value, formalism)
 }

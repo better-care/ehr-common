@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -24,4 +25,13 @@ import care.better.platform.annotation.Required
 abstract class DvTimeSpecification : DataValue() {
     @Required
     var value: DvParsable? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                else -> (other as DvTimeSpecification).value == value
+            }
+
+    override fun hashCode(): Int = Objects.hash(value)
 }

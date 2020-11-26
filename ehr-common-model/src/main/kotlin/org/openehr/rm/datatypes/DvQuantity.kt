@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Required
+import java.util.*
 
 /**
  * @author Primoz Delopst
@@ -56,4 +57,16 @@ class DvQuantity : DvAmount() {
     @Required
     var units: String? = null
     var precision: Int? = null
+
+    override fun equals(other: Any?): Boolean =
+            when {
+                this === other -> true
+                javaClass != other?.javaClass -> false
+                !super.equals(other) -> false
+                (other as DvQuantity).magnitude != magnitude -> false
+                other.units != units -> false
+                else -> other.precision == precision
+            }
+
+    override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude, precision, units)
 }
