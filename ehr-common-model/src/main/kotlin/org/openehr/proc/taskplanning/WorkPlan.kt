@@ -34,7 +34,7 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
 
     var carePathway: ItemStructure? = null
     var topLevelPlanUids: LinkedHashSet<UidBasedId> = LinkedHashSet()
-    var topLevelPlans: LinkedHashSet<TaskPlan> = LinkedHashSet()
+    private var topLevelPlans: LinkedHashSet<TaskPlan> = LinkedHashSet()
     var carePlan: LocatableRef? = null
     var orderList: MutableList<OrderRef> = mutableListOf()
     var calendar: PlanCalendar = PlanCalendar()
@@ -57,6 +57,8 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     fun addTopLevelPlanUids(planIds: Set<UidBasedId>): WorkPlan = topLevelPlanUids.addAll(planIds).let { this }
 
     fun addOrderList(orderList: OrderRef): WorkPlan = this.orderList.add(orderList).let { this }
+
+    fun getTopLevelPlans() = topLevelPlans
 
     fun setTopLevelPlans(topLevelPlans: Set<TaskPlan>) {
         if (topLevelPlans.isNotEmpty()) {

@@ -36,10 +36,6 @@ class BooleanContextExpression : ContextExpression<Boolean> {
         super.setType(type)
     }
 
-    fun setType(type: TypeDefBoolean) {
-        super.setType(type)
-    }
-
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)
         visitor.afterVisit(this)

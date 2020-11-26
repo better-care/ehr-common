@@ -23,7 +23,8 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  */
 
 abstract class CObject : ArchetypeConstraint() {
-    lateinit var rmTypeName: String
+    @Required
+    var rmTypeName: String? = null
     @Required
     var occurrences: IntervalOfInteger? = null
     @Required
