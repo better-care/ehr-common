@@ -40,8 +40,8 @@ class Link : RmObject(), Serializable {
         @JvmStatic
         fun getNameSuffix(name: String, index: Int): String = '\''.toString() + quote(name) + (if (index > 0) " #" + (index + 1) else "") + '\''
 
-        private fun quote(parameter: String): String =
-                parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
+        @JvmStatic
+        fun quote(parameter: String): String = parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
     }
 
     @Required
