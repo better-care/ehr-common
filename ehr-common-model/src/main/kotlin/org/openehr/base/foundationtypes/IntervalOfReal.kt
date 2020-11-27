@@ -15,10 +15,13 @@
 
 package org.openehr.base.foundationtypes
 
+import care.better.platform.annotation.Opened
+
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class IntervalOfReal : Interval() {
     var lower: Float? = null
     var upper: Float? = null

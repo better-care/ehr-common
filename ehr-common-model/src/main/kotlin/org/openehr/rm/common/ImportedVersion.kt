@@ -15,12 +15,14 @@
 
 package org.openehr.rm.common
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class ImportedVersion : Version() {
     @Required
     var item: OriginalVersion? = null

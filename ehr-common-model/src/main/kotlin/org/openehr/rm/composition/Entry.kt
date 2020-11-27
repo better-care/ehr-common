@@ -15,6 +15,7 @@
 
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.common.Participation
@@ -25,6 +26,7 @@ import org.openehr.rm.datatypes.CodePhrase
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class Entry : ContentItem() {
     @Required
     var language: CodePhrase? = null

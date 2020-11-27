@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datastructures
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 
 
@@ -22,6 +23,7 @@ import care.better.platform.annotation.Required
  * @author Primoz Delopst
  */
 
+@Opened
 class ItemSingle : ItemStructure() {
     @Required
     var item: Element? = null

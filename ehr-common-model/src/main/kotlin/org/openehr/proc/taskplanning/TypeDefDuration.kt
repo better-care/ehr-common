@@ -15,12 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import java.time.Duration
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class TypeDefDuration : ExprTypeDef<Duration>("Duration") {
 
     companion object {

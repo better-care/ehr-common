@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datastructures
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
@@ -23,6 +24,7 @@ import org.openehr.rm.datatypes.DvDateTime
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class Event : Locatable() {
     @Required
     var time: DvDateTime? = null

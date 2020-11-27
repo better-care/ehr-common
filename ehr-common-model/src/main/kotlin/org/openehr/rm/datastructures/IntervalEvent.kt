@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datastructures
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDuration
@@ -23,6 +24,7 @@ import org.openehr.rm.datatypes.DvDuration
  * @author Primoz Delopst
  */
 
+@Opened
 class IntervalEvent : Event() {
     @Required
     var width: DvDuration? = null

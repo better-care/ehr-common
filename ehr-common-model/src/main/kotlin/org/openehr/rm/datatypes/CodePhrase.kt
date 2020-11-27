@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
@@ -25,6 +26,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 class CodePhrase : RmObject(), Serializable {
 
     companion object {

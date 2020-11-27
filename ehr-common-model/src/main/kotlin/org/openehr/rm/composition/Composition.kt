@@ -15,6 +15,7 @@
 
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartyProxy
@@ -25,6 +26,7 @@ import org.openehr.rm.datatypes.DvCodedText
  * @author Primoz Delopst
  */
 
+@Opened
 class Composition : Locatable() {
     @Required
     var language: CodePhrase? = null

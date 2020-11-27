@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
@@ -22,6 +23,8 @@ import org.openehr.rm.datatypes.DvText
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 open class TaskGroup<I : PlanItem> : PlanItem {
 
     @Required

@@ -16,12 +16,14 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RangeParameters
+import care.better.platform.annotation.Opened
 import java.util.*
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class DvInterval : DataValue(), RangeParameters {
     var lower: DvOrdered? = null
     var upper: DvOrdered? = null

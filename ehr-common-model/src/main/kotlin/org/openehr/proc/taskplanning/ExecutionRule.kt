@@ -16,12 +16,14 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class ExecutionRule : RmObject(), Serializable {
     override fun toString(): String = "ExecutionRule{}"
 }

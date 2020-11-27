@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvEncapsulated
 import org.openehr.rm.datatypes.DvIdentifier
@@ -25,6 +26,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
+@Opened
 class FeederAudit : RmObject(), Serializable {
     var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
     var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf()

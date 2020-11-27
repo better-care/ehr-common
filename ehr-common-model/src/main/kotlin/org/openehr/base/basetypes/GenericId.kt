@@ -15,12 +15,14 @@
 
 package org.openehr.base.basetypes
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class GenericId : ObjectId() {
     @Required
     var scheme: String? = null

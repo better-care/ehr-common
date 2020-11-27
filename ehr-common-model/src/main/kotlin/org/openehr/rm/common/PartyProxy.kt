@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import org.openehr.base.basetypes.PartyRef
 import java.io.Serializable
 
@@ -23,6 +24,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class PartyProxy : RmObject(), Serializable {
     var externalRef: PartyRef? = null
 }

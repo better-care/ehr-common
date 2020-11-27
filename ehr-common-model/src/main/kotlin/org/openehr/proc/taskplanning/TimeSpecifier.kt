@@ -21,6 +21,7 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
+
 abstract class TimeSpecifier : RmObject(), Serializable {
     override fun toString(): String = "TimeSpecifier{}"
 }

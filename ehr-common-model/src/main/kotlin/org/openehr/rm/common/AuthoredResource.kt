@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.base.resource.TranslationDetails
 import org.openehr.rm.datatypes.CodePhrase
@@ -25,6 +26,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class AuthoredResource : RmObject(), Serializable {
     @Required
     var originalLanguage: CodePhrase? = null

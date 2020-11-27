@@ -16,6 +16,7 @@
 package org.openehr.base.basetypes
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import java.io.Serializable
 import java.util.*
@@ -24,6 +25,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class ObjectId : RmObject(), Serializable {
     @Required
     var value: String? = null

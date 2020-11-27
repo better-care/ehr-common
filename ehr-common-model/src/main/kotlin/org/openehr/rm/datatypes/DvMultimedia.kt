@@ -15,12 +15,14 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class DvMultimedia : DvEncapsulated() {
     var alternateText: String? = null
     var uri: DvUri? = null

@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import java.time.LocalDate
 import java.time.LocalTime
@@ -25,6 +26,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 class DvDate : DvTemporal() {
 
     companion object {

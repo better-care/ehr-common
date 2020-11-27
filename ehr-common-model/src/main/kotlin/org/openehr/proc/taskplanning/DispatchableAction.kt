@@ -15,11 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 open class DispatchableAction : TaskAction() {
     override fun addSubjectPrecondition(subjectPrecondition: SubjectPrecondition): DispatchableAction =
             super.addSubjectPrecondition(subjectPrecondition) as DispatchableAction

@@ -191,6 +191,13 @@
                         <arg>-Xjvm-default=compatibility</arg>
                         <arg>-Xjsr305=strict</arg>
                     </args>
+                    <compilerPlugins>
+                        <plugin>all-open</plugin>
+                    </compilerPlugins>
+
+                    <pluginOptions>
+                        <option>all-open:annotation=care.better.platform.annotation.Opened</option>
+                    </pluginOptions>
                 </configuration>
                 <dependencies>
                     <dependency>

@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.base.basetypes.UidBasedId
@@ -23,6 +24,8 @@ import org.openehr.base.basetypes.UidBasedId
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class SubPlan : PerformableAction, LinkedPlan {
 
     private var target: TaskPlan? = null

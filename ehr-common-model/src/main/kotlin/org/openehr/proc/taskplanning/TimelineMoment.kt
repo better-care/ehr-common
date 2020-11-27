@@ -15,11 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class TimelineMoment : PlanEvent {
 
     var timelineOffset: String? = null

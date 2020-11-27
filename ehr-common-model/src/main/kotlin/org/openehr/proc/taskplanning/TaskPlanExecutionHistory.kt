@@ -16,11 +16,13 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class TaskPlanExecutionHistory : RmObject() {
     var taskEvents: MutableList<TaskEventRecord> = mutableListOf()
     var planEvents: MutableList<TaskPlanEventRecord> = mutableListOf()

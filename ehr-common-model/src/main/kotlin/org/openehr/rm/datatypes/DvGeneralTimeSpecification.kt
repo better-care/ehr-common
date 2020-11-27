@@ -15,8 +15,11 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
+
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class DvGeneralTimeSpecification : DvTimeSpecification()

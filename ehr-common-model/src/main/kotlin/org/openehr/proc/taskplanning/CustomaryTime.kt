@@ -15,12 +15,15 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class CustomaryTime() : TimeSpecifier() {
 
     @Required

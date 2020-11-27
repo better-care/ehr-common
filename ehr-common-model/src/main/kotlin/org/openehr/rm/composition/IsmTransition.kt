@@ -16,6 +16,7 @@
 package org.openehr.rm.composition
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
@@ -25,6 +26,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
+@Opened
 class IsmTransition : RmObject(), Serializable {
     @Required
     var currentState: DvCodedText? = null

@@ -16,6 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -23,6 +24,8 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
 
     var variables: MutableList<ContextVariable<*>> = mutableListOf()

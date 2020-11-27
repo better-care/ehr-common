@@ -15,12 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import org.openehr.base.basetypes.ObjectRef
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class TypeDefObjectRef : ExprTypeDef<ObjectRef>("Object_ref") {
 
     companion object {

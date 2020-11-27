@@ -15,12 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class ClockTime() : TimeSpecifier() {
     @Required
     var time: String? = null

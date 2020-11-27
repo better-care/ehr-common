@@ -15,6 +15,7 @@
 
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
@@ -24,6 +25,7 @@ import org.openehr.rm.datatypes.DvParsable
  * @author Primoz Delopst
  */
 
+@Opened
 class Activity : Locatable() {
     @Required
     var description: ItemStructure? = null

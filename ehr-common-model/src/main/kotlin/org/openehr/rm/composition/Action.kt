@@ -15,6 +15,7 @@
 
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
@@ -23,6 +24,7 @@ import org.openehr.rm.datatypes.DvDateTime
  * @author Primoz Delopst
  */
 
+@Opened
 class Action : CareEntry() {
     @Required
     var time: DvDateTime? = null

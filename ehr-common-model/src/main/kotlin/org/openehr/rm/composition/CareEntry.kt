@@ -15,6 +15,7 @@
 
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.Opened
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datastructures.ItemStructure
 
@@ -22,6 +23,7 @@ import org.openehr.rm.datastructures.ItemStructure
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class CareEntry : Entry() {
     var protocol: ItemStructure? = null
     var guidelineId: ObjectRef? = null

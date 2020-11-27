@@ -15,6 +15,7 @@
 
 package org.openehr.rm.common
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectVersionId
 import org.openehr.rm.datatypes.DvCodedText
@@ -23,6 +24,7 @@ import org.openehr.rm.datatypes.DvCodedText
  * @author Primoz Delopst
  */
 
+@Opened
 class OriginalVersion : Version() {
     @Required
     var uid: ObjectVersionId? = null

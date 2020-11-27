@@ -16,12 +16,14 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class RevisionHistory : RmObject(), Serializable {
     var items: MutableList<RevisionHistoryItem> = mutableListOf()
 }

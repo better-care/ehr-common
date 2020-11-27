@@ -16,12 +16,15 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class EventAction() : RmObject(), Serializable {
 
     var systemCall: MutableList<SystemCall> = mutableListOf()

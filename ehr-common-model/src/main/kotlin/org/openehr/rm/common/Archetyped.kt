@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
@@ -25,6 +26,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
+@Opened
 class Archetyped : RmObject(), Serializable {
     @Required
     var archetypeId: ArchetypeId? = null

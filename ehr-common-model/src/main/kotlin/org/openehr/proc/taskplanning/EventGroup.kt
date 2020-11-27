@@ -15,12 +15,15 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class EventGroup : ChoiceGroup<EventBranch> {
 
     constructor()

@@ -15,8 +15,11 @@
 
 package org.openehr.rm.common
 
+import care.better.platform.annotation.Opened
+
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class PartySelf : PartyProxy()

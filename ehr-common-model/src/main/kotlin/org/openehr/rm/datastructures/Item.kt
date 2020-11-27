@@ -15,10 +15,12 @@
 
 package org.openehr.rm.datastructures
 
+import care.better.platform.annotation.Opened
 import org.openehr.rm.common.Locatable
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class Item : Locatable()

@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
@@ -28,6 +29,8 @@ import org.openehr.rm.datatypes.DvUri
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class TaskPlan() : ContentItem(), VisitableByModelVisitor {
 
     var subject: PartyProxy? = null

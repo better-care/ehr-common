@@ -15,13 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import java.time.LocalDate
 
 /**
  * @author Primoz Delopst
  */
 
-
+@Opened
 class TypeDefDate : ExprTypeDef<LocalDate>("Date") {
 
     companion object {

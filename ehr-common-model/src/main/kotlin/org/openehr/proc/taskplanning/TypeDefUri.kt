@@ -15,12 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import java.net.URI
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class TypeDefUri : ExprTypeDef<URI>("Uri") {
 
     companion object {

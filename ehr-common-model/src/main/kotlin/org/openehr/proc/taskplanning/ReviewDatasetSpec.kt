@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datastructures.ItemStructure
 
@@ -22,6 +23,7 @@ import org.openehr.rm.datastructures.ItemStructure
  * @author Primoz Delopst
  */
 
+@Opened
 class ReviewDatasetSpec : DatasetSpec {
 
     var captureDatasets: MutableList<CaptureDatasetSpec> = mutableListOf()

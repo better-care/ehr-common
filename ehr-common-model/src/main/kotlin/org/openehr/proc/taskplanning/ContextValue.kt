@@ -16,11 +16,14 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 abstract class ContextValue<T>() : RmObject(), VisitableByModelVisitor {
     var name: String? = null
     private var type: ExprTypeDef<T>? = null

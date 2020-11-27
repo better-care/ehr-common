@@ -15,10 +15,13 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
+
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class TypeDefString : ExprTypeDef<String>("String") {
 
     companion object {

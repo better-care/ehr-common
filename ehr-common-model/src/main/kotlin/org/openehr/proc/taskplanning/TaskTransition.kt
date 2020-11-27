@@ -15,12 +15,15 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class TaskTransition() : PlanEvent(), TaskReferencingEvent {
 
     @Required

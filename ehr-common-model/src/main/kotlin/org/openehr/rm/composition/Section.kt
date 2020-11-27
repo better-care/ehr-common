@@ -15,10 +15,13 @@
 
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.Opened
+
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class Section : ContentItem() {
     var items: MutableList<ContentItem> = mutableListOf()
 }

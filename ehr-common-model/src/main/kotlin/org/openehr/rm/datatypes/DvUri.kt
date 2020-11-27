@@ -15,12 +15,14 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
 import java.util.*
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 open class DvUri : DataValue() {
     var value: String? = null
 

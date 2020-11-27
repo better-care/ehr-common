@@ -15,10 +15,13 @@
 
 package org.openehr.base.foundationtypes
 
+import care.better.platform.annotation.Opened
+
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class IntervalOfDateTime : Interval() {
     var lower: String? = null
     var upper: String? = null

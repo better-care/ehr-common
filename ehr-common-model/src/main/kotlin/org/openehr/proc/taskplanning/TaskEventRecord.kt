@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.LocatableRef
 
@@ -22,6 +23,7 @@ import org.openehr.base.basetypes.LocatableRef
  * @author Primoz Delopst
  */
 
+@Opened
 class TaskEventRecord : EventRecord {
     @Required
     var taskId: String? = null

@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
@@ -23,6 +24,8 @@ import org.openehr.rm.common.Locatable
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 abstract class TaskAction() : Locatable(), VisitableByModelVisitor {
 
     var instructionActivity: LocatableRef? = null

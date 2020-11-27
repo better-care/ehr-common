@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
@@ -24,6 +25,8 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
 
     var orderTag: String? = null

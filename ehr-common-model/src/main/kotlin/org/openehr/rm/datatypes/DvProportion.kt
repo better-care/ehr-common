@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import java.math.BigInteger
 import java.util.*
@@ -23,6 +24,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 class DvProportion : DvAmount() {
     var numerator: Float = 0f
     var denominator: Float = 0f

@@ -16,6 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import java.io.Serializable
 import java.util.*
 
@@ -23,6 +24,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class ExprTypeDef<T>() : RmObject(), Serializable {
 
     private var typeName: String? = null

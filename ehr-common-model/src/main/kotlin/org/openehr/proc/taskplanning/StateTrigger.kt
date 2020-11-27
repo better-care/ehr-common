@@ -15,12 +15,15 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class StateTrigger : PlanEvent, ExpressionNamesProvider {
 
     @Required

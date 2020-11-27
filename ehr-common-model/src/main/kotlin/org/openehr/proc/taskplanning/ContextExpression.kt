@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
@@ -22,6 +23,7 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  * @author Primoz Delopst
  */
 
+@Opened
 open class ContextExpression<T> : ContextValue<T> {
     @Required
     var expression: String? = null

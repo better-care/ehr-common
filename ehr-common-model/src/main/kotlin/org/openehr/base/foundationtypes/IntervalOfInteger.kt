@@ -15,10 +15,13 @@
 
 package org.openehr.base.foundationtypes
 
+import care.better.platform.annotation.Opened
+
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class IntervalOfInteger : Interval() {
     var lower: Int? = null
     var upper: Int? = null

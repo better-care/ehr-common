@@ -16,6 +16,7 @@
 package org.openehr.rm.composition
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyIdentified
@@ -28,6 +29,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
+@Opened
 class EventContext : RmObject(), Serializable {
     @Required
     var startTime: DvDateTime? = null

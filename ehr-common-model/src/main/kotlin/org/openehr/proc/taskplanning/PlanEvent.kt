@@ -15,12 +15,15 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 abstract class PlanEvent constructor() : Locatable() {
 
     var otherDetails: ItemStructure? = null

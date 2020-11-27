@@ -15,11 +15,14 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 abstract class ExternalVariable<T> : ContextVariable<T> {
     var populatingRequest: SystemCall? = null
 

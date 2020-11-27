@@ -15,6 +15,7 @@
 
 package org.openehr.rm.composition
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.History
 
@@ -22,6 +23,7 @@ import org.openehr.rm.datastructures.History
  * @author Primoz Delopst
  */
 
+@Opened
 class Observation : CareEntry() {
     @Required
     var data: History? = null

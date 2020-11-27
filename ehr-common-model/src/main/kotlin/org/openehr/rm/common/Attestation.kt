@@ -15,6 +15,7 @@
 
 package org.openehr.rm.common
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvEhrUri
 import org.openehr.rm.datatypes.DvMultimedia
@@ -24,6 +25,7 @@ import org.openehr.rm.datatypes.DvText
  * @author Primoz Delopst
  */
 
+@Opened
 class Attestation : AuditDetails() {
     var attestedView: DvMultimedia? = null
     var proof: String? = null

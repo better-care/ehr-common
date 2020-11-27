@@ -15,12 +15,14 @@
 
 package org.openehr.rm.datastructures
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class Cluster : Item() {
     @Required
     var items: MutableList<Item> = mutableListOf()

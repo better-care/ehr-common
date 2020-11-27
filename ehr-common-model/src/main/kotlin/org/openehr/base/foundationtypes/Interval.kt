@@ -17,12 +17,14 @@ package org.openehr.base.foundationtypes
 
 import care.better.openehr.rm.RangeParameters
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 abstract class Interval : RmObject(), Serializable, RangeParameters {
     var lowerIncluded: Boolean? = null
     var upperIncluded: Boolean? = null

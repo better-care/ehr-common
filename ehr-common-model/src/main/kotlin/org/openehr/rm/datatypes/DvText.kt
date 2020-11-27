@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import java.util.*
 
@@ -22,6 +23,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 open class DvText : DataValue() {
 
     companion object {

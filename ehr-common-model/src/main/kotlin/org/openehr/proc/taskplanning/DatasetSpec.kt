@@ -15,6 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.Locatable
@@ -24,6 +25,8 @@ import java.io.Serializable
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisitor {
 
     var formId: String? = null

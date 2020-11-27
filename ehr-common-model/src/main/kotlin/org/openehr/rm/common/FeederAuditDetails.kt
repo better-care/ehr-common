@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
@@ -24,6 +25,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
+@Opened
 class FeederAuditDetails : RmObject(), Serializable {
     @Required
     var systemId: String? = null

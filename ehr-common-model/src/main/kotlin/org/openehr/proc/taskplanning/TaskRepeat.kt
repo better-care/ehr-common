@@ -16,12 +16,15 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import org.openehr.base.foundationtypes.IntervalOfInteger
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 class TaskRepeat() : RmObject(), Serializable {
 
     var repeats: IntervalOfInteger? = null

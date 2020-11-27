@@ -15,11 +15,14 @@
 
 package org.openehr.rm.datastructures
 
+import care.better.platform.annotation.Opened
+
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class ItemList : ItemStructure() {
     var items: MutableList<Element> = mutableListOf()
 }

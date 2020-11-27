@@ -15,12 +15,15 @@
 
 package org.openehr.proc.taskplanning
 
+import care.better.platform.annotation.Opened
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 abstract class PerformableAction : TaskAction {
 
     var resources: MutableList<ResourceParticipation> = mutableListOf()

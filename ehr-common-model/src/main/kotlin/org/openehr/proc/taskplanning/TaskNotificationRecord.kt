@@ -16,6 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.PartyProxy
 import java.util.*
@@ -24,6 +25,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 class TaskNotificationRecord() : RmObject() {
     @Required
     var receiver: PartyProxy? = null

@@ -16,12 +16,15 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
+
+@Opened
 open class EventWait<E : PlanEvent>() : RmObject(), Serializable {
     @Required
     var event: E? = null

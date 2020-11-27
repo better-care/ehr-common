@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 import java.time.LocalTime
 import java.time.OffsetTime
@@ -25,6 +26,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
+@Opened
 class DvTime : DvTemporal() {
 
     companion object {

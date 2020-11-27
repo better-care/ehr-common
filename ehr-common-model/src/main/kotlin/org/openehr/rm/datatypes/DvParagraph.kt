@@ -15,12 +15,14 @@
 
 package org.openehr.rm.datatypes
 
+import care.better.platform.annotation.Opened
 import care.better.platform.annotation.Required
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 class DvParagraph : DataValue() {
     @Required
     var items: MutableList<DvText> = mutableListOf()

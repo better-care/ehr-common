@@ -15,12 +15,14 @@
 
 package org.openehr.rm.common
 
+import care.better.platform.annotation.Opened
 import org.openehr.rm.datatypes.DvIdentifier
 
 /**
  * @author Primoz Delopst
  */
 
+@Opened
 open class PartyIdentified : PartyProxy() {
 
     companion object {

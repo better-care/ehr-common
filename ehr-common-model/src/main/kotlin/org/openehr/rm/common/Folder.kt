@@ -15,6 +15,7 @@
 
 package org.openehr.rm.common
 
+import care.better.platform.annotation.Opened
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datastructures.ItemStructure
 
@@ -22,6 +23,7 @@ import org.openehr.rm.datastructures.ItemStructure
  * @author Primoz Delopst
  */
 
+@Opened
 class Folder : Locatable() {
     var folders: MutableList<Folder> = mutableListOf()
     var items: MutableList<ObjectRef> = mutableListOf()
