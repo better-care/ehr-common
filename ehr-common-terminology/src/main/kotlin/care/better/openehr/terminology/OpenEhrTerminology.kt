@@ -95,7 +95,7 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
      * @param groupCode group code
      * @return collection of children codes
      */
-    private fun getGroupChildren(groupCode: String?): Collection<String> =
+    fun getGroupChildren(groupCode: String?): Collection<String> =
             with(groups[groupCode]) {
                 this?.termCodes?.toList() ?: emptyList()
             }

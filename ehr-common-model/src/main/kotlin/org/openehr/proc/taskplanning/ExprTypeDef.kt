@@ -33,6 +33,8 @@ abstract class ExprTypeDef<T>() : RmObject(), Serializable {
         this.typeName = typeName
     }
 
+    open fun getTypeName(): String? = typeName
+
     open fun setTypeName(typeName: String?) {
         this.typeName = typeName
     }
