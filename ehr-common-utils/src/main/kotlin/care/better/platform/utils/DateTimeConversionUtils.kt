@@ -47,6 +47,7 @@ class DateTimeConversionUtils {
          * @throws [DateTimeException] when string could not be parsed
          */
         @JvmStatic
+        @JvmOverloads
         fun toLocalDate(value: String, strict: Boolean = false): LocalDate =
                 if (strict) {
                     DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_DATE_FORMATTER
@@ -86,6 +87,7 @@ class DateTimeConversionUtils {
          * @throws [DateTimeException] when string could not be parsed
          */
         @JvmStatic
+        @JvmOverloads
         fun toLocalTime(value: String, strict: Boolean = false): LocalTime =
                 if (strict) {
                     try {
@@ -136,6 +138,7 @@ class DateTimeConversionUtils {
          * @throws [DateTimeException] when string could not be parsed
          */
         @JvmStatic
+        @JvmOverloads
         fun toLocalDateTime(value: String, strict: Boolean = false): LocalDateTime =
                 if (strict) {
                     DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
@@ -175,6 +178,7 @@ class DateTimeConversionUtils {
          * @throws [DateTimeException] when string could not be parsed
          */
         @JvmStatic
+        @JvmOverloads
         fun toOffsetTime(value: String, strict: Boolean = false): OffsetTime =
                 if (strict) {
                     try {
@@ -230,6 +234,7 @@ class DateTimeConversionUtils {
          * @throws [DateTimeException] when string could not be parsed
          */
         @JvmStatic
+        @JvmOverloads
         fun toOffsetDateTime(value: String, strict: Boolean = false): OffsetDateTime =
                 if (strict) {
                     DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
@@ -269,6 +274,7 @@ class DateTimeConversionUtils {
          * @throws [DateTimeException] when string could not be parsed
          */
         @JvmStatic
+        @JvmOverloads
         fun toZonedDateTime(value: String, strict: Boolean = false): ZonedDateTime =
                 if (strict) {
                     DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER

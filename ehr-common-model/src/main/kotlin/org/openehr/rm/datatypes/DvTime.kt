@@ -35,7 +35,7 @@ class DvTime : DvTemporal() {
          * @return [DvTime]
          */
         @JvmStatic
-        fun toDvTime(time: LocalTime): DvTime =
+        fun create(time: LocalTime): DvTime =
                 DvTime().apply {
                     this.value = DateTimeFormatter.ISO_LOCAL_TIME.format(time)
                 }
@@ -47,7 +47,7 @@ class DvTime : DvTemporal() {
          * @return [DvTime]
          */
         @JvmStatic
-        fun toDvTime(time: OffsetTime): DvTime =
+        fun create(time: OffsetTime): DvTime =
                 DvTime().apply {
                     this.value = DateTimeFormatter.ISO_OFFSET_TIME.format(time)
                 }

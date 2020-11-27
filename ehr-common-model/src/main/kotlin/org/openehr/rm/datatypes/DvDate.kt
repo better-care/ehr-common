@@ -35,7 +35,7 @@ class DvDate : DvTemporal() {
          * @return [DvDate]
          */
         @JvmStatic
-        fun toDvDate(date: LocalDate): DvDate =
+        fun create(date: LocalDate): DvDate =
                 DvDate().apply {
                     this.value = DateTimeFormatter.ISO_LOCAL_DATE.format(date)
                 }
