@@ -23,7 +23,7 @@ import java.util.*
  */
 
 @Opened
-open class DvUri : DataValue() {
+class DvUri : DataValue() {
     var value: String? = null
 
     override fun equals(other: Any?): Boolean =

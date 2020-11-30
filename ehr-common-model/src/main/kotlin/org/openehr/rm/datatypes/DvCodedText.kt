@@ -35,7 +35,7 @@ class DvCodedText : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun create(terminology: String, code: String, value: String): DvCodedText =
+        fun create(terminology: String, code: String, value: String?): DvCodedText =
                 DvCodedText().apply {
                     this.definingCode = CodePhrase.create(terminology, code)
                     this.value = value
@@ -49,7 +49,7 @@ class DvCodedText : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun createWithLocalTerminology(code: String, value: String): DvCodedText = create("local", code, value)
+        fun createWithLocalTerminology(code: String, value: String?): DvCodedText = create("local", code, value)
 
         /**
          * Creates a [DvCodedText] with openEHR terminology, code and value
@@ -59,7 +59,7 @@ class DvCodedText : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun createWithOpenEHRTerminology(code: String, value: String): DvCodedText = create("openehr", code, value)
+        fun createWithOpenEHRTerminology(code: String, value: String?): DvCodedText = create("openehr", code, value)
     }
 
     @Required

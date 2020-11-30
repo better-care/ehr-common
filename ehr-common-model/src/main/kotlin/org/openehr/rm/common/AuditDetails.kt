@@ -28,7 +28,7 @@ import java.io.Serializable
  */
 
 @Opened
-open class AuditDetails : RmObject(), Serializable {
+class AuditDetails : RmObject(), Serializable {
     @Required
     var systemId: String? = null
 

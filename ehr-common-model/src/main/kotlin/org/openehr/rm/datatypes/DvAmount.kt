@@ -23,7 +23,7 @@ import java.util.*
  */
 
 @Opened
-open class DvAmount : DvQuantified() {
+class DvAmount : DvQuantified() {
     var accuracy: Float? = null
     var accuracyIsPercent: Boolean? = null
 

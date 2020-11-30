@@ -24,7 +24,7 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  */
 
 @Opened
-open class ContextExpression<T> : ContextValue<T> {
+class ContextExpression<T> : ContextValue<T> {
     @Required
     var expression: String? = null
 

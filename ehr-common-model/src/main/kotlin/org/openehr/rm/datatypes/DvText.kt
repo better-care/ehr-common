@@ -24,7 +24,7 @@ import java.util.*
  */
 
 @Opened
-open class DvText : DataValue() {
+class DvText : DataValue() {
 
     companion object {
         /**
@@ -34,7 +34,7 @@ open class DvText : DataValue() {
          * @return [DvText] object
          */
         @JvmStatic
-        fun create(value: String): DvText = DvText().apply { this.value = value }
+        fun create(value: String?): DvText = DvText().apply { this.value = value }
     }
 
     @Required

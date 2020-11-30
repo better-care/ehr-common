@@ -23,7 +23,7 @@ import org.openehr.rm.datatypes.DvIdentifier
  */
 
 @Opened
-open class PartyIdentified : PartyProxy() {
+class PartyIdentified : PartyProxy() {
 
     companion object {
         /**

@@ -116,22 +116,24 @@ class RmUtils {
 
         @Throws(RmClassCastException::class)
         private fun getClassInfo(name: String): ClassInfo =
-                CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, name)) {
-                    for (packageName in PACKAGE_NAMES) {
-                        try {
-                            val clazz = Class.forName("$packageName.${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}") as Class<out RmObject>
-                            return@computeIfAbsent ClassInfo(
-                                    clazz,
-                                    getAllNonStaticFields(clazz),
-                                    getAllRequiredFields(clazz),
-                                    getFieldTypes(clazz),
-                                    getGetters(clazz),
-                                    getSetters(clazz))
+                with(getClassName(name)) {
+                    CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, this)) {
+                        for (packageName in PACKAGE_NAMES) {
+                            try {
+                                val clazz = Class.forName("$packageName.${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)}") as Class<out RmObject>
+                                return@computeIfAbsent ClassInfo(
+                                        clazz,
+                                        getAllNonStaticFields(clazz),
+                                        getAllRequiredFields(clazz),
+                                        getFieldTypes(clazz),
+                                        getGetters(clazz),
+                                        getSetters(clazz))
 
-                        } catch (ignore: ClassNotFoundException) {
+                            } catch (ignore: ClassNotFoundException) {
+                            }
                         }
+                        throw RmClassCastException(name)
                     }
-                    throw RmClassCastException(name)
                 }
 
         private fun getClassInfo(clazz: Class<out RmObject>): ClassInfo =
@@ -143,6 +145,14 @@ class RmUtils {
                             getFieldTypes(clazz),
                             getGetters(clazz),
                             getSetters(clazz))
+                }
+
+        private fun getClassName(name: String): String =
+                with(name.indexOf('<')) {
+                    if (this == -1)
+                        name
+                    else
+                       name.substring(0, this)
                 }
 
         private fun getAllNonStaticFields(clazz: Class<out RmObject>): Collection<Field> =

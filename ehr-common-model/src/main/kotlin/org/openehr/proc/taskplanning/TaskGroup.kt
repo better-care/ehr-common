@@ -25,7 +25,7 @@ import org.openehr.rm.datatypes.DvText
  */
 
 @Opened
-open class TaskGroup<I : PlanItem> : PlanItem {
+class TaskGroup<I : PlanItem> : PlanItem {
 
     @Required
     var members: MutableList<I> = mutableListOf()

@@ -21,6 +21,7 @@ package care.better.openehr.rm
 
 abstract class RmObject {
     companion object {
+        @JvmField
         val RM_VERSION = RmVersion.RM1_0_4
     }
 }

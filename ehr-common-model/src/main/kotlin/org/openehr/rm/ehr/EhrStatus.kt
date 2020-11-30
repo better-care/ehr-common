@@ -30,9 +30,9 @@ class EhrStatus : Locatable() {
     var subject: PartySelf? = null
 
     @OpenEhrName("is_queryable")
-    val queryable = true
+    var queryable = true
 
     @OpenEhrName("is_modifiable")
-    val modifiable = true
-    val otherDetails: ItemStructure? = null
+    var modifiable = true
+    var otherDetails: ItemStructure? = null
 }

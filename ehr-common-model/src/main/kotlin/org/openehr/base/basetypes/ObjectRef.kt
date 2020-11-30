@@ -25,7 +25,7 @@ import java.io.Serializable
  */
 
 @Opened
-open class ObjectRef : RmObject(), Serializable {
+class ObjectRef : RmObject(), Serializable {
 
     companion object {
         /**

@@ -23,7 +23,7 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  */
 
 @Opened
-open class EventVariable<T> : ExternalVariable<T> {
+class EventVariable<T> : ExternalVariable<T> {
 
     constructor()
 

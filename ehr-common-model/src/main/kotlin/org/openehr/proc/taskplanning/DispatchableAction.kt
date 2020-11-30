@@ -23,7 +23,7 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
  */
 
 @Opened
-open class DispatchableAction : TaskAction() {
+class DispatchableAction : TaskAction() {
     override fun addSubjectPrecondition(subjectPrecondition: SubjectPrecondition): DispatchableAction =
             super.addSubjectPrecondition(subjectPrecondition) as DispatchableAction
 

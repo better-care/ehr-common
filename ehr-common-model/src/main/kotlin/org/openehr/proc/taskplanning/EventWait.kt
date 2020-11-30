@@ -25,7 +25,7 @@ import java.io.Serializable
  */
 
 @Opened
-open class EventWait<E : PlanEvent>() : RmObject(), Serializable {
+class EventWait<E : PlanEvent>() : RmObject(), Serializable {
     @Required
     var event: E? = null
     var successAction: EventAction? = null

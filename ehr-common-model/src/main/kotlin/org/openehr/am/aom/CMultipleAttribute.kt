@@ -15,11 +15,14 @@
 
 package org.openehr.am.aom
 
+import care.better.platform.annotation.Required
+
 /**
  * @author Primoz Delopst
  */
 
 class CMultipleAttribute : CAttribute() {
-    lateinit var cardinality: Cardinality
+    @Required
+    var cardinality: Cardinality? = null
     var groups: MutableList<CObjectGroup> = mutableListOf()
 }

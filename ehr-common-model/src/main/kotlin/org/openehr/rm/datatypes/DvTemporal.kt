@@ -23,7 +23,7 @@ import java.util.*
  */
 
 @Opened
-open class DvTemporal : DvQuantified() {
+class DvTemporal : DvQuantified() {
     var accuracy: DvDuration? = null
 
     override fun equals(other: Any?): Boolean =
