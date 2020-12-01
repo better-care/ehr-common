@@ -15,6 +15,7 @@
 
 package care.better.platform.json.jackson.openehr
 
+import care.better.platform.annotation.Opened
 import care.better.platform.json.jackson.mixedin.BooleanContextExpressionMixedIn
 import care.better.platform.json.jackson.rm.RmTypeResolverBuilder
 import com.fasterxml.jackson.annotation.JsonTypeInfo
@@ -27,6 +28,7 @@ import org.openehr.proc.taskplanning.BooleanContextExpression
  * @author Primoz Delopst
  */
 
+@Opened
 class OpenEhrObjectMapper : ObjectMapper() {
     init {
         setDefaultTyping(RmTypeResolverBuilder(DefaultTyping.NON_FINAL)
