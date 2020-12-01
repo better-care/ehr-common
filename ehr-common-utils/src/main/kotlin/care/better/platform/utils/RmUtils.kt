@@ -20,6 +20,7 @@ package care.better.platform.utils
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Required
 import care.better.platform.utils.exception.RmClassCastException
+import care.better.platform.utils.exception.RmClassFieldNotFoundException
 import com.google.common.base.CaseFormat
 import java.lang.reflect.*
 import java.util.concurrent.ConcurrentHashMap
@@ -95,8 +96,9 @@ class RmUtils {
                 getSetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
-        @Throws(RmClassCastException::class)
-        fun getFieldType(clazz: Class<out RmObject>, fieldName: String) = getClassInfo(clazz).fieldTypes[fieldName]!! //TODO
+        @Throws(RmClassCastException::class, RmClassFieldNotFoundException::class)
+        fun getFieldType(clazz: Class<out RmObject>, fieldName: String) =
+                getClassInfo(clazz).fieldTypes[fieldName] ?: throw RmClassFieldNotFoundException(clazz.name, fieldName)
 
         private fun getGetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
                 with(getClassInfo(clazz).getter) {
