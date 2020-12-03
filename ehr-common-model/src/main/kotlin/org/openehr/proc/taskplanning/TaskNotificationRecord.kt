@@ -33,7 +33,7 @@ class TaskNotificationRecord() : RmObject() {
     @Required
     var receiverTaskPlan: String? = null
 
-    val details: LinkedHashMap<String, String> = LinkedHashMap()
+    var details: LinkedHashMap<String, String> = LinkedHashMap()
 
     constructor(receiver: PartyProxy?, receiverTaskPlan: String?) : this() {
         this.receiver = receiver

@@ -26,7 +26,7 @@ import care.better.platform.annotation.Required
 class TaskPlanEventRecord : EventRecord {
 
     @Required
-    val details: LinkedHashMap<String, String> = LinkedHashMap()
+    var details: LinkedHashMap<String, String> = LinkedHashMap()
 
     constructor()
 
