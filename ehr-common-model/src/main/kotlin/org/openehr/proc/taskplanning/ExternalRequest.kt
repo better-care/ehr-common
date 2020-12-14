@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.common.PartyProxy
@@ -26,7 +26,7 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 
 
-@Opened
+@Open
 class ExternalRequest() : DispatchableAction() {
 
     @Required
@@ -40,9 +40,6 @@ class ExternalRequest() : DispatchableAction() {
         this.organisation = organisation
         this.requestId = requestId
     }
-
-    override fun addSubjectPrecondition(subjectPrecondition: SubjectPrecondition): ExternalRequest =
-            super.addSubjectPrecondition(subjectPrecondition) as ExternalRequest
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,18 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import org.openehr.base.basetypes.ObjectRef
 
 /**
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class TypeDefObjectRef : ExprTypeDef<ObjectRef>("Object_ref") {
 
     companion object {
         val INSTANCE: TypeDefObjectRef = TypeDefObjectRef()
-    }
-
-    override fun setTypeName(typeName: String?) {
-        if ("Object_ref" != typeName) {
-            throw UnsupportedOperationException("The type name has to be Object_ref")
-        }
-        super.setTypeName(typeName)
     }
 
     override fun toString(): String = "TypeDefObjectRef{} ${super.toString()}"

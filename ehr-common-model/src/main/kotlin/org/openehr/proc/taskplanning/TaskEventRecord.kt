@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.LocatableRef
 
@@ -23,7 +23,7 @@ import org.openehr.base.basetypes.LocatableRef
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class TaskEventRecord : EventRecord {
     @Required
     var taskId: String? = null
@@ -42,10 +42,6 @@ class TaskEventRecord : EventRecord {
         this.taskId = taskId
         this.lifecycleState = lifecycleState
     }
-
-    fun addNotificationSet(notificationSent: TaskNotificationRecord): TaskEventRecord = notificationsSent.add(notificationSent).let { this }
-
-    fun addEntryInstance(entryInstance: LocatableRef): TaskEventRecord = entryInstances.add(entryInstance).let { this }
 
     override fun toString(): String =
             "TaskEventRecord{" +

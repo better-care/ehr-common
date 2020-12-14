@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,17 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 
 /**
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class TypeDefVoid : ExprTypeDef<Void>("Void") {
 
     companion object {
         val INSTANCE: TypeDefVoid = TypeDefVoid()
-    }
-
-    override fun setTypeName(typeName: String?) {
-        if ("Void" != typeName) {
-            throw UnsupportedOperationException("The type name has to be Void")
-        }
-        super.setTypeName(typeName)
     }
 
     override fun toString(): String = "TypeDefVoid{} ${super.toString()}"

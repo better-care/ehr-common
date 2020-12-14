@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
@@ -29,7 +29,7 @@ import org.openehr.rm.datatypes.DvText
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class WorkPlan() : ContentItem(), VisitableByModelVisitor {
 
     @Required
@@ -55,12 +55,6 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
         this.context = context
     }
 
-    fun addTopLevelPlanUid(planId: UidBasedId): WorkPlan = topLevelPlanUids.add(planId).let { this }
-
-    fun addTopLevelPlanUids(planIds: Set<UidBasedId>): WorkPlan = topLevelPlanUids.addAll(planIds).let { this }
-
-    fun addOrderList(orderList: OrderRef): WorkPlan = this.orderList.add(orderList).let { this }
-
     fun getTopLevelPlans() = topLevelPlans
 
     fun setTopLevelPlans(topLevelPlans: Set<TaskPlan>) {
@@ -70,12 +64,6 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
             this.topLevelPlans.clear()
         }
     }
-
-    fun addTopLevelPlan(topLevelPlan: TaskPlan): WorkPlan = topLevelPlans.add(topLevelPlan).let { this }
-
-    fun addEventWaitState(eventWaitState: EventWait<out PlanEvent>): WorkPlan = eventWaitStates.add(eventWaitState).let { this }
-
-    fun addIndication(indication: DvText): WorkPlan = indications.add(indication).let { this }
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

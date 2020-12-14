@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
@@ -24,7 +24,7 @@ import org.openehr.rm.datatypes.DvText
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class TaskGroup<I : PlanItem> : PlanItem {
 
     @Required
@@ -46,19 +46,12 @@ class TaskGroup<I : PlanItem> : PlanItem {
         this.executionType = executionType
     }
 
-    open fun setExecutionType(executionType: ExecutionType?){
+    fun setExecutionType(executionType: ExecutionType?){
         this.executionType = executionType
     }
 
     fun getExecutionType(): ExecutionType? = executionType
 
-    open fun addMember(member: I): TaskGroup<I> = members.add(member).let { this }
-
-    open fun addMembers(members: List<I>) {
-        this.members.addAll(members)
-    }
-
-    open fun addExecutionRule(executionRule: ExecutionRule): TaskGroup<I> = executionRules.add(executionRule).let { this }
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

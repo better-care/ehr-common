@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
@@ -27,7 +27,7 @@ import org.openehr.rm.datatypes.DvText
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 abstract class PlanItem : Locatable, VisitableByModelVisitor {
 
     @Required
@@ -53,11 +53,10 @@ abstract class PlanItem : Locatable, VisitableByModelVisitor {
 
     fun getWaitSpec(): TaskWait? = waitSpec
 
-    open fun setWaitSpec(waitSpec: TaskWait?) {
+    fun setWaitSpec(waitSpec: TaskWait?) {
         this.waitSpec = waitSpec
     }
 
-    fun addReviewDataset(reviewDataset: ReviewDatasetSpec): PlanItem = this.reviewDataset.add(reviewDataset).let { this }
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)
@@ -67,12 +66,12 @@ abstract class PlanItem : Locatable, VisitableByModelVisitor {
         visitor.afterAccept(this)
     }
 
-    protected open fun acceptRepeatAndWaitSpec(taskModelVisitor: TaskModelVisitor) {
+    protected fun acceptRepeatAndWaitSpec(taskModelVisitor: TaskModelVisitor) {
         repeatSpec?.also { }
         waitSpec?.also { }
     }
 
-    protected open fun acceptReviewDataset(taskModelVisitor: TaskModelVisitor) {
+    protected fun acceptReviewDataset(taskModelVisitor: TaskModelVisitor) {
         reviewDataset.forEach { it.accept(taskModelVisitor) }
     }
 

@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,18 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import java.time.Duration
 
 /**
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class TypeDefDuration : ExprTypeDef<Duration>("Duration") {
 
     companion object {
         val INSTANCE: TypeDefDuration = TypeDefDuration()
-    }
-
-    override fun setTypeName(typeName: String?) {
-        if ("Duration" != typeName) {
-            throw UnsupportedOperationException("The type name has to be Duration")
-        }
-        super.setTypeName(typeName)
     }
 
     override fun toString(): String = "TypeDefDuration{} ${super.toString()}"

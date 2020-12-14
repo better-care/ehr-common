@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package care.better.platform.json.jackson.better
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.json.jackson.mixedin.BooleanContextExpressionMixedIn
 import care.better.platform.json.jackson.rm.RmTypeResolverBuilder
 import com.fasterxml.jackson.annotation.JsonTypeInfo
@@ -28,7 +28,7 @@ import org.openehr.proc.taskplanning.BooleanContextExpression
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class BetterObjectMapper : ObjectMapper() {
     init {
         setDefaultTyping(RmTypeResolverBuilder(DefaultTyping.NON_FINAL).init(JsonTypeInfo.Id.CLASS, null).inclusion(JsonTypeInfo.As.PROPERTY))

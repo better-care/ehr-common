@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 
@@ -23,7 +23,7 @@ import org.openehr.rm.datatypes.DvText
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class EventGroup : ChoiceGroup<EventBranch> {
 
     constructor()
@@ -31,10 +31,6 @@ class EventGroup : ChoiceGroup<EventBranch> {
     constructor(timeout: TimerWait?) : super(timeout)
 
     constructor(description: DvText?, timeout: TimerWait?) : super(description, timeout)
-
-    override fun addMember(member: EventBranch): EventGroup = super.addMember(member) as EventGroup
-
-    override fun addExecutionRule(executionRule: ExecutionRule): EventGroup = super.addExecutionRule(executionRule) as EventGroup
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,18 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import java.io.Serializable
 
 /**
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class PlanTimeline : RmObject(), Serializable {
 
     var plannedItems: MutableList<PlanItem> = mutableListOf()
     var timers: MutableList<TimerWait> = mutableListOf()
-
-    fun addPlannedItem(planItem: PlanItem): PlanTimeline = plannedItems.add(planItem).let { this }
-
-    fun addTimer(timer: TimerWait): PlanTimeline = timers.add(timer).let { this }
 
     override fun toString(): String =
             "PlanTimeline{" +

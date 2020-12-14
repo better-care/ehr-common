@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.composition.Entry
@@ -24,7 +24,7 @@ import org.openehr.rm.composition.Entry
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class DefinedAction : PerformableAction {
 
     var prototype: MutableList<Entry> = mutableListOf()
@@ -44,13 +44,6 @@ class DefinedAction : PerformableAction {
         this.optionality = optionality
     }
 
-    fun addPrototype(prototype: Entry): DefinedAction = this.prototype.add(prototype).let { this }
-
-    override fun addResource(resource: ResourceParticipation): DefinedAction = super.addResource(resource) as DefinedAction
-
-    override fun addOtherParticipation(participation: TaskParticipation): DefinedAction = super.addOtherParticipation(participation) as DefinedAction
-
-    override fun addSubjectPrecondition(subjectPrecondition: SubjectPrecondition): DefinedAction = super.addSubjectPrecondition(subjectPrecondition) as DefinedAction
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

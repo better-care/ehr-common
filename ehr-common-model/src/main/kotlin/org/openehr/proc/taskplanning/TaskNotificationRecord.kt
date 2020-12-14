@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.PartyProxy
 import java.util.*
@@ -25,7 +25,7 @@ import java.util.*
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class TaskNotificationRecord() : RmObject() {
     @Required
     var receiver: PartyProxy? = null
@@ -38,11 +38,6 @@ class TaskNotificationRecord() : RmObject() {
     constructor(receiver: PartyProxy?, receiverTaskPlan: String?) : this() {
         this.receiver = receiver
         this.receiverTaskPlan = receiverTaskPlan
-    }
-
-    fun addDetails(key: String, value: String): TaskNotificationRecord {
-        details[key] = value
-        return this
     }
 
     override fun toString(): String =

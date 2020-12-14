@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ enum class TpVersion(val version: String, private val possibleValues: Set<String
                 when {
                     TP1_5_0.possibleValues.contains(version) -> TP1_5_0
                     TP1_5_1.possibleValues.contains(version) -> TP1_5_1
-                    else -> throw IllegalArgumentException("Unknown task TP version $version.")
+                    else -> throw IllegalArgumentException("Unknown TP version $version.")
                 }
     }
 }

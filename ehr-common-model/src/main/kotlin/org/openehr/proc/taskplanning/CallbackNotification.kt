@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
 
@@ -23,7 +23,7 @@ import org.openehr.base.basetypes.UidBasedId
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class CallbackNotification() : PlanEvent(), TaskReferencingEvent {
     @Required
     private var taskId: UidBasedId? = null

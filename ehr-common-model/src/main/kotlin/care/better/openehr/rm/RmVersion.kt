@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ enum class RmVersion(val version: String, private val possibleValues: Set<String
                     RM1_0_2.possibleValues.contains(version) -> RM1_0_2
                     RM1_0_3.possibleValues.contains(version) -> RM1_0_3
                     RM1_0_4.possibleValues.contains(version) -> RM1_0_4
-                    else -> throw IllegalArgumentException("Unknown task RM version $version.")
+                    else -> throw IllegalArgumentException("Unknown RM version $version.")
                 }
     }
 }

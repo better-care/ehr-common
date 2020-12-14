@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package org.openehr.proc.taskplanning
 
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 
@@ -23,7 +23,7 @@ import org.openehr.base.basetypes.LocatableRef
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 abstract class PerformableAction : TaskAction {
 
     var resources: MutableList<ResourceParticipation> = mutableListOf()
@@ -34,13 +34,6 @@ abstract class PerformableAction : TaskAction {
     protected constructor(instructionActivity: LocatableRef?) : super(instructionActivity)
 
     protected constructor(instructionActivity: LocatableRef?, costingData: TaskCosting?) : super(instructionActivity, costingData)
-
-    open fun addResource(resource: ResourceParticipation): PerformableAction = resources.add(resource).let { this }
-
-    open fun addOtherParticipation(participation: TaskParticipation): PerformableAction = otherParticipations.add(participation).let { this }
-
-    override fun addSubjectPrecondition(subjectPrecondition: SubjectPrecondition): PerformableAction =
-            super.addSubjectPrecondition(subjectPrecondition) as PerformableAction
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

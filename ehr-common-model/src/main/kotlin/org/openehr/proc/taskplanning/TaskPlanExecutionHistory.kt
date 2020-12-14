@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,16 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 
 /**
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class TaskPlanExecutionHistory : RmObject() {
     var taskEvents: MutableList<TaskEventRecord> = mutableListOf()
     var planEvents: MutableList<TaskPlanEventRecord> = mutableListOf()
-
-    fun addTaskEvent(taskEvent: TaskEventRecord): TaskPlanExecutionHistory = taskEvents.add(taskEvent).let { this }
-
-    fun addPlanEvent(planEvent: TaskPlanEventRecord): TaskPlanExecutionHistory = planEvents.add(planEvent).let { this }
 
     override fun toString(): String =
             "TaskPlanExecutionHistory{" +

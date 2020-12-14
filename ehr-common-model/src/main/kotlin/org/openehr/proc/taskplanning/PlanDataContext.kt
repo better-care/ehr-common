@@ -1,4 +1,4 @@
-/* Copyright 2020-2025 Better Ltd (www.better.care)
+/* Copyright 2021 Better Ltd (www.better.care)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
-import care.better.platform.annotation.Opened
+import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
@@ -25,18 +25,12 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
-@Opened
+@Open
 class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
 
     var variables: MutableList<ContextVariable<*>> = mutableListOf()
     var expressions: MutableList<ContextExpression<*>> = mutableListOf()
     var constants: MutableList<ContextConstant<*>> = mutableListOf()
-
-    fun addVariable(variable: ContextVariable<*>): PlanDataContext = variables.add(variable).let { this }
-
-    fun addExpression(expression: ContextExpression<*>): PlanDataContext = expressions.add(expression).let { this }
-
-    fun addConstant(constant: ContextConstant<*>): PlanDataContext = constants.add(constant).let { this }
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)

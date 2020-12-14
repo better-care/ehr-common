@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	Copyright 2020-2025 Better Ltd (www.better.care)
+	Copyright 2021 Better Ltd (www.better.care)
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -399,7 +399,7 @@
          <java-attributes>
             <xml-element java-attribute="failAction" name="event_action"/>
             <xml-element java-attribute="customActions" name="custom_action">
-               <xml-java-type-adapter value="care.better.platform.moxy.adapter.MapStringAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
+               <xml-java-type-adapter value="care.better.platform.moxy.adapter.MapStringToEventActionAdapter" type="javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter$DEFAULT"/>
             </xml-element>
          </java-attributes>
       </java-type>
