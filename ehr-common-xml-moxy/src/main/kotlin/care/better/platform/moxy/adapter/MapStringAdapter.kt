@@ -21,21 +21,21 @@ import javax.xml.bind.annotation.adapters.XmlAdapter
  * @author Primoz Delopst
  */
 
-class MapStringAdapter : XmlAdapter<MapStringAdapter.AdaptedMap, MutableMap<String, String>>() {
+class MapStringAdapter : XmlAdapter<MapStringAdapter.StringAdaptedMap, MutableMap<String, String>>() {
 
-    override fun unmarshal(adapterMap: AdaptedMap): MutableMap<String, String> = adapterMap.entry.associateTo(mutableMapOf(), { Pair(it.key, it.value) })
+    override fun unmarshal(adapterMapString: StringAdaptedMap): MutableMap<String, String> = adapterMapString.stringAdaptedEntry.associateTo(mutableMapOf(), { Pair(it.key, it.value) })
 
-    override fun marshal(map: MutableMap<String, String>): AdaptedMap = AdaptedMap(map.entries.map { Entry(it.key, it.value) })
+    override fun marshal(map: MutableMap<String, String>): StringAdaptedMap = StringAdaptedMap(map.entries.map { StringAdaptedEntry(it.key, it.value) })
 
-    class AdaptedMap(){
-        var entry: MutableList<Entry> = mutableListOf()
+    class StringAdaptedMap(){
+        var stringAdaptedEntry: MutableList<StringAdaptedEntry> = mutableListOf()
 
-        constructor(entry: List<Entry>) : this() {
-            this.entry.addAll(entry)
+        constructor(stringAdaptedEntry: List<StringAdaptedEntry>) : this() {
+            this.stringAdaptedEntry.addAll(stringAdaptedEntry)
         }
     }
 
-    class Entry() {
+    class StringAdaptedEntry() {
         lateinit var key: String
         lateinit var value: String
 

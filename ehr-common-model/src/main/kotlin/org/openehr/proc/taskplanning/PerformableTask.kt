@@ -25,6 +25,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class PerformableTask<A : PerformableAction> : Task<A> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = -2716744970112165763L
+    }
 
     var captureDataset: MutableList<CaptureDatasetSpec> = mutableListOf()
 
