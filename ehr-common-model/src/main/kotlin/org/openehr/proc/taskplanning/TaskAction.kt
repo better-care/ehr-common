@@ -27,6 +27,10 @@ import org.openehr.rm.common.Locatable
 
 @Open
 abstract class TaskAction() : Locatable(), VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var instructionActivity: LocatableRef? = null
     var subjectPreconditions: MutableList<SubjectPrecondition> = mutableListOf()

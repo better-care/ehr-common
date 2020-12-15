@@ -27,6 +27,9 @@ import java.util.*
 class DvQuantity : DvAmount() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Creates [DvQuantity] from a magnitude (numeric value), unit string and precision. Precision can be null.
          *

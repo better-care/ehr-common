@@ -26,7 +26,11 @@ import java.time.Duration
 class TypeDefDuration : ExprTypeDef<Duration>("Duration") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefDuration = TypeDefDuration()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefDuration{} ${super.toString()}"

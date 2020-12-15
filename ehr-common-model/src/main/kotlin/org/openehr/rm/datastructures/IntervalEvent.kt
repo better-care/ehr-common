@@ -26,6 +26,11 @@ import org.openehr.rm.datatypes.DvDuration
 
 @Open
 class IntervalEvent : Event() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var width: DvDuration? = null
     var sampleCount: Int? = null

@@ -24,14 +24,29 @@ import java.io.Serializable
  */
 
 class TView : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var constraints: MutableList<Constraints> = mutableListOf()
 
     class Constraints : AmObject(), Serializable {
+        companion object {
+            @JvmStatic
+            private val serialVersionUID: Long = 0L
+        }
+
         @Required
         var items: MutableList<Items> = mutableListOf()
         lateinit var path: String
 
         class Items : AmObject(), Serializable {
+            companion object {
+                @JvmStatic
+                private val serialVersionUID: Long = 0L
+            }
+
             lateinit var value: Any
             lateinit var id: String
         }

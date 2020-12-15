@@ -27,6 +27,11 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class Attestation : AuditDetails() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var attestedView: DvMultimedia? = null
     var proof: String? = null
     var items: MutableList<DvEhrUri> = mutableListOf()

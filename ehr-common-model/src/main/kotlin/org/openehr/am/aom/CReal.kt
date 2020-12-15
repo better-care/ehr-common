@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class CReal : CPrimitive(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var list: MutableList<Float> = mutableListOf()
     var range: IntervalOfReal? = null
     var assumedValue: Float? = null

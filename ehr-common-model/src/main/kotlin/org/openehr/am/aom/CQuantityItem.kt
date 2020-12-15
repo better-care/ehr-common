@@ -25,6 +25,11 @@ import java.io.Serializable
  */
 
 class CQuantityItem : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var magnitude: IntervalOfReal? = null
     var precision: IntervalOfInteger? = null
     lateinit var units: String

@@ -22,4 +22,9 @@ import care.better.platform.annotation.Open
  */
 
 @Open
-class DvGeneralTimeSpecification : DvTimeSpecification()
+class DvGeneralTimeSpecification : DvTimeSpecification() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

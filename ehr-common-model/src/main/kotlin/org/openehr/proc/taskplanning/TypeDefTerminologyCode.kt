@@ -25,7 +25,11 @@ import care.better.platform.annotation.Open
 class TypeDefTerminologyCode : ExprTypeDef<String>("Terminology_code") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefTerminologyCode = TypeDefTerminologyCode()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefTerminologyCode{} ${super.toString()}"

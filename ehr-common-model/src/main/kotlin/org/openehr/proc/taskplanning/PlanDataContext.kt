@@ -27,6 +27,10 @@ import java.io.Serializable
 
 @Open
 class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var variables: MutableList<ContextVariable<*>> = mutableListOf()
     var expressions: MutableList<ContextExpression<*>> = mutableListOf()

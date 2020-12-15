@@ -25,6 +25,10 @@ import org.openehr.base.basetypes.LocatableRef
 
 @Open
 abstract class PerformableAction : TaskAction {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var resources: MutableList<ResourceParticipation> = mutableListOf()
     var otherParticipations: MutableList<TaskParticipation> = mutableListOf()

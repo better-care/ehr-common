@@ -22,6 +22,11 @@ import org.openehr.rm.datatypes.DvState
  */
 
 class CDvState : CDomainType() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var assumedValue: DvState? = null
     lateinit var value: StateMachine
 }

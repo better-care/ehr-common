@@ -25,7 +25,11 @@ import care.better.platform.annotation.Open
 class TypeDefReal : ExprTypeDef<Double>("Real") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefReal = TypeDefReal()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefReal{} ${super.toString()}"

@@ -25,6 +25,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 abstract class ChoiceBranch<I : PlanItem> : TaskGroup<I> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     constructor()
 

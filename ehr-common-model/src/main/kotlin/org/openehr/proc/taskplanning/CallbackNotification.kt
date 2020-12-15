@@ -25,6 +25,10 @@ import org.openehr.base.basetypes.UidBasedId
 
 @Open
 class CallbackNotification() : PlanEvent(), TaskReferencingEvent {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 1L
+    }
     @Required
     private var taskId: UidBasedId? = null
 

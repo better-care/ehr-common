@@ -25,6 +25,11 @@ import java.io.Serializable
 
 @Open
 class TaskWait() : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 1L
+    }
+
     var events: MutableList<PlanEvent> = mutableListOf()
     var eventRelation: TemporalRelation? = null
     var timeout: TimerWait? = null

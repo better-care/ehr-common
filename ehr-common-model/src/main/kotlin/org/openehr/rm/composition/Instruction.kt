@@ -27,6 +27,11 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class Instruction : CareEntry() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var narrative: DvText? = null
     var expiryTime: DvDateTime? = null

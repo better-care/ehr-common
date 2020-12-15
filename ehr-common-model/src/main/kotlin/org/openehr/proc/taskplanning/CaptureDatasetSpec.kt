@@ -24,6 +24,10 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 @Open
 class CaptureDatasetSpec : DatasetSpec() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var commitGroup: DatasetCommitGroup? = null
 

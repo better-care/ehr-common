@@ -28,6 +28,10 @@ import java.io.Serializable
 
 @Open
 class ParameterMapping() : RmObject(), Serializable, VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var name: String? = null

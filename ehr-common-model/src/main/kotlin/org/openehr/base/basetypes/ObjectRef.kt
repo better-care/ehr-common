@@ -28,6 +28,10 @@ import java.io.Serializable
 class ObjectRef : RmObject(), Serializable {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
+
         /**
          * Creates a person [ObjectRef].
          *

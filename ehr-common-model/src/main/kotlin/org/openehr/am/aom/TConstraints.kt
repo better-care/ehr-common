@@ -22,6 +22,11 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
-class TConstraints : AmObject(), Serializable{
+class TConstraints : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var attributes: MutableList<TAttribute> = mutableListOf()
 }

@@ -24,6 +24,11 @@ import java.util.*
 
 @Open
 class DvAmount : DvQuantified() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var accuracy: Float? = null
     var accuracyIsPercent: Boolean? = null
 

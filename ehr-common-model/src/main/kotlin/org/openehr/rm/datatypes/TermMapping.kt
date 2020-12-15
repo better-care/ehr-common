@@ -26,6 +26,11 @@ import java.io.Serializable
 
 @Open
 class TermMapping : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var match: String? = null
     var purpose: DvCodedText? = null
 

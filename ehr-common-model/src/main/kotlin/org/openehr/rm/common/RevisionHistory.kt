@@ -25,5 +25,10 @@ import java.io.Serializable
 
 @Open
 class RevisionHistory : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var items: MutableList<RevisionHistoryItem> = mutableListOf()
 }

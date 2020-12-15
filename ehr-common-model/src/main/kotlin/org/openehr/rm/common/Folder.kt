@@ -25,6 +25,11 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 class Folder : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var folders: MutableList<Folder> = mutableListOf()
     var items: MutableList<ObjectRef> = mutableListOf()
     var details: ItemStructure? = null

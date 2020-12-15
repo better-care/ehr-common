@@ -24,6 +24,10 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 class TimelineMoment : PlanEvent {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var timelineOffset: String? = null
     var fixedTime: TimeSpecifier? = null

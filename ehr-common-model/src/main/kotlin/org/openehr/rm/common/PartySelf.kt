@@ -22,4 +22,9 @@ import care.better.platform.annotation.Open
  */
 
 @Open
-class PartySelf : PartyProxy()
+class PartySelf : PartyProxy() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

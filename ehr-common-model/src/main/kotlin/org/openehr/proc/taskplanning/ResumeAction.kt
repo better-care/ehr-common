@@ -27,6 +27,10 @@ import java.io.Serializable
 
 @Open
 class ResumeAction() : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var resumeType: ResumeType? = null

@@ -26,7 +26,11 @@ import java.net.URI
 class TypeDefUri : ExprTypeDef<URI>("Uri") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefUri = TypeDefUri()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefUri{} ${super.toString()}"

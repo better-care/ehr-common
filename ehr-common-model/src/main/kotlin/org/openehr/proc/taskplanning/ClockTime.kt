@@ -24,6 +24,11 @@ import care.better.platform.annotation.Required
 
 @Open
 class ClockTime() : TimeSpecifier() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var time: String? = null
 

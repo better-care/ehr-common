@@ -25,6 +25,10 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 class SystemNotification : PlanEvent {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var systemId: String? = null

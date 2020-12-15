@@ -21,4 +21,9 @@ import org.openehr.rm.common.Locatable
  * @author Primoz Delopst
  */
 
-abstract class ContentItem : Locatable()
+abstract class ContentItem : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

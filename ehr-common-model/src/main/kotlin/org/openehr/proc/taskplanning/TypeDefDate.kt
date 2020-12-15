@@ -26,7 +26,12 @@ import java.time.LocalDate
 class TypeDefDate : ExprTypeDef<LocalDate>("Date") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefDate = TypeDefDate()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
     }
 
     override fun toString(): String = "TypeDefDate{} ${super.toString()}"

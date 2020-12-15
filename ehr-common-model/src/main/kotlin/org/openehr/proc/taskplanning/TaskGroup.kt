@@ -26,6 +26,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class TaskGroup<I : PlanItem> : PlanItem {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var members: MutableList<I> = mutableListOf()

@@ -30,6 +30,11 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class TaskParticipation() : Locatable(), VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var function: DvText? = null
     var role: MutableList<DvText> = mutableListOf()

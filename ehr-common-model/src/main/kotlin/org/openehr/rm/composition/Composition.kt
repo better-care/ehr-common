@@ -28,6 +28,11 @@ import org.openehr.rm.datatypes.DvCodedText
 
 @Open
 class Composition : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var language: CodePhrase? = null
 

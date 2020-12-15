@@ -24,6 +24,11 @@ import java.util.*
 
 @Open
 abstract class DvEncapsulated : DataValue() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var charset: CodePhrase? = null
     var language: CodePhrase? = null
 

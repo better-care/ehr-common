@@ -31,13 +31,18 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class WorkPlan() : ContentItem(), VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
 
     @Required
     var description: DvText? = null
 
     var carePathway: ItemStructure? = null
     var topLevelPlanUids: LinkedHashSet<UidBasedId> = LinkedHashSet()
-    private var topLevelPlans: LinkedHashSet<TaskPlan> = LinkedHashSet()
+    var topLevelPlans: LinkedHashSet<TaskPlan> = LinkedHashSet()
     var carePlan: LocatableRef? = null
     var orderList: MutableList<OrderRef> = mutableListOf()
     var calendar: PlanCalendar = PlanCalendar()
@@ -53,16 +58,6 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
 
     constructor(description: DvText?, context: PlanDataContext?) : this(description) {
         this.context = context
-    }
-
-    fun getTopLevelPlans() = topLevelPlans
-
-    fun setTopLevelPlans(topLevelPlans: Set<TaskPlan>) {
-        if (topLevelPlans.isNotEmpty()) {
-            this.topLevelPlans.addAll(topLevelPlans)
-        } else {
-            this.topLevelPlans.clear()
-        }
     }
 
     override fun accept(visitor: TaskModelVisitor) {

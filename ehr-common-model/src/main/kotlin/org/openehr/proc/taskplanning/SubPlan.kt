@@ -27,6 +27,10 @@ import org.openehr.base.basetypes.UidBasedId
 
 @Open
 class SubPlan : PerformableAction, LinkedPlan {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     private var target: TaskPlan? = null
     private var targetUid: UidBasedId? = null

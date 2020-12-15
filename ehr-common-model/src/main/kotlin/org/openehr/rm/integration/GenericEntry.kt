@@ -26,6 +26,11 @@ import org.openehr.rm.datastructures.ItemTree
 
 @Open
 class GenericEntry : ContentItem() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var data: ItemTree? = null
 }

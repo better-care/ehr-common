@@ -24,6 +24,11 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 @Open
 abstract class ExternalVariable<T> : ContextVariable<T> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var populatingRequest: SystemCall? = null
 
     constructor()

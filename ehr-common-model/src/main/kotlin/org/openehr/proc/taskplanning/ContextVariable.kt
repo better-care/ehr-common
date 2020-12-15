@@ -24,6 +24,10 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 @Open
 abstract class ContextVariable<T> : ContextValue<T> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     constructor()
 

@@ -23,7 +23,12 @@ import java.util.*
  */
 
 @Open
-class DvCount : DvAmount(){
+class DvCount : DvAmount() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var magnitude: Long = 0L
 
     override fun equals(other: Any?): Boolean =

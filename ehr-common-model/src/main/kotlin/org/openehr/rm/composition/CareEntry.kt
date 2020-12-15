@@ -25,6 +25,11 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 abstract class CareEntry : Entry() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var protocol: ItemStructure? = null
     var guidelineId: ObjectRef? = null
 }

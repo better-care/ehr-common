@@ -20,5 +20,10 @@ package org.openehr.am.aom
  */
 
 class ArchetypeInternalRef : CObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var targetPath: String
 }

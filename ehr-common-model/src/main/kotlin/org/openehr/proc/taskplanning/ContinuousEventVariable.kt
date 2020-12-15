@@ -25,6 +25,11 @@ import java.math.BigDecimal
 
 @Open
 class ContinuousEventVariable<T> : EventVariable<T> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var updateVariation: BigDecimal? = null
 
     constructor()

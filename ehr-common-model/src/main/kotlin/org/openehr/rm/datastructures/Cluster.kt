@@ -24,6 +24,11 @@ import care.better.platform.annotation.Required
 
 @Open
 class Cluster : Item() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var items: MutableList<Item> = mutableListOf()
 }

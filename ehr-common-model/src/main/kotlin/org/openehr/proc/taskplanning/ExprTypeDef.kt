@@ -27,6 +27,11 @@ import java.util.*
 @Open
 abstract class ExprTypeDef<T>(val typeName: String) : RmObject(), Serializable {
 
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     override fun hashCode(): Int = Objects.hash(typeName)
 
     override fun equals(other: Any?): Boolean =

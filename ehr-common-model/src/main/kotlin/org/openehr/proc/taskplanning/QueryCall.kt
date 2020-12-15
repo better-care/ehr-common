@@ -24,6 +24,10 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 @Open
 class QueryCall : SystemCall {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var queryId: String? = null
     var queryText: String? = null

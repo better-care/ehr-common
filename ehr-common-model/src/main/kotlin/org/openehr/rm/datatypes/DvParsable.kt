@@ -27,6 +27,9 @@ import java.util.*
 class DvParsable : DvEncapsulated() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Creates [DvParsable] from a value and formalism.
          *

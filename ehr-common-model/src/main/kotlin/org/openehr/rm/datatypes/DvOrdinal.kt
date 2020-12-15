@@ -27,6 +27,9 @@ import java.util.*
 class DvOrdinal : DvOrdered() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Creates [DvOrdinal] from value and symbol
          *

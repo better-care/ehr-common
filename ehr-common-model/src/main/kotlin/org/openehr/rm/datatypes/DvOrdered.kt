@@ -24,6 +24,11 @@ import java.util.*
 
 @Open
 abstract class DvOrdered : DataValue() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var normalRange: DvInterval? = null
     var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf()
     var normalStatus: CodePhrase? = null

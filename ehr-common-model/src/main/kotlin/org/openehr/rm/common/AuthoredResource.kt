@@ -28,6 +28,11 @@ import java.io.Serializable
 
 @Open
 abstract class AuthoredResource : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var originalLanguage: CodePhrase? = null
     var isControlled: Boolean? = null

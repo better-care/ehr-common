@@ -19,4 +19,9 @@ package org.openehr.am.aom
  * @author Primoz Delopst
  */
 
-open class CDefinedObject : CObject()
+open class CDefinedObject : CObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

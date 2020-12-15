@@ -27,6 +27,9 @@ import java.util.*
 class DvText : DataValue() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Creates a [DvText] from a string
          *

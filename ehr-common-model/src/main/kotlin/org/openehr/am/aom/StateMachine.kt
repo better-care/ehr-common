@@ -24,6 +24,11 @@ import java.io.Serializable
  */
 
 class StateMachine : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var states: MutableList<State> = mutableListOf()
 }

@@ -26,7 +26,10 @@ import java.util.*
 @Open
 class DvDuration : DvAmount() {
 
-    companion object
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var value: String? = null

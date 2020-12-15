@@ -20,6 +20,11 @@ package org.openehr.am.aom
  */
 
 class ExprLeaf : ExprItem() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var item: Any
     lateinit var referenceType: String
 }

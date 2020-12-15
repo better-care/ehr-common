@@ -26,7 +26,11 @@ import org.openehr.base.basetypes.ObjectRef
 class TypeDefObjectRef : ExprTypeDef<ObjectRef>("Object_ref") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefObjectRef = TypeDefObjectRef()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefObjectRef{} ${super.toString()}"

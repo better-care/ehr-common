@@ -31,6 +31,11 @@ import java.io.Serializable
 
 @Open
 class EventContext : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var startTime: DvDateTime? = null
     var endTime: DvDateTime? = null

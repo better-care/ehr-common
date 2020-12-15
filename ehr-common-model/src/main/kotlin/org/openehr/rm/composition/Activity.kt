@@ -27,6 +27,11 @@ import org.openehr.rm.datatypes.DvParsable
 
 @Open
 class Activity : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var description: ItemStructure? = null
     var timing: DvParsable? = null

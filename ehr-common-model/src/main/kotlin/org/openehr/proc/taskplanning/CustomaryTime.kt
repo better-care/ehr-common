@@ -25,6 +25,10 @@ import org.openehr.rm.datatypes.DvCodedText
 
 @Open
 class CustomaryTime() : TimeSpecifier() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var time: DvCodedText? = null

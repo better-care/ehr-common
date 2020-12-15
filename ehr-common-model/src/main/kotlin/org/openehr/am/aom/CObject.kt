@@ -23,6 +23,11 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  */
 
 abstract class CObject : ArchetypeConstraint() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var rmTypeName: String? = null
     @Required

@@ -24,6 +24,10 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 @Open
 class StateVariable<T> : ExternalVariable<T> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var requiredCurrency: String? = null
 

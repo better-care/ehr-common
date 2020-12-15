@@ -24,6 +24,11 @@ import care.better.platform.annotation.Required
 
 @Open
 class ImportedVersion : Version() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var item: OriginalVersion? = null
 }

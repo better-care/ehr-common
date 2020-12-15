@@ -24,6 +24,11 @@ import care.better.platform.annotation.Required
 
 @Open
 class DvMultimedia : DvEncapsulated() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var alternateText: String? = null
     var uri: DvUri? = null
     var data: ByteArray? = null

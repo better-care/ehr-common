@@ -27,6 +27,11 @@ import java.io.Serializable
 
 @Open
 class ResourceDescriptionItem : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var language: CodePhrase? = null
 

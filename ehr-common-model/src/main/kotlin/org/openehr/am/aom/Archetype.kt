@@ -24,6 +24,11 @@ import org.openehr.rm.common.AuthoredResource
  */
 
 class Archetype : AuthoredResource() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var uid: HierObjectId? = null
     lateinit var archetypeId: ArchetypeId
     var adlVersion: String? = null

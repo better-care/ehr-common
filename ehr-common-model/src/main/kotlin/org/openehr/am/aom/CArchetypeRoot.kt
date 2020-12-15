@@ -23,6 +23,11 @@ import org.openehr.base.basetypes.TemplateId
  */
 
 class CArchetypeRoot : CComplexObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var archetypeId: ArchetypeId
     var templateId: TemplateId? = null
     var termDefinitions: MutableList<ArchetypeTerm> = mutableListOf()

@@ -27,6 +27,11 @@ import java.util.*
 
 @Open
 class TaskNotificationRecord() : RmObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var receiver: PartyProxy? = null
 

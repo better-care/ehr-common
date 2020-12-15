@@ -23,6 +23,11 @@ import care.better.platform.annotation.Open
 
 @Open
 class IntervalOfInteger : Interval() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var lower: Int? = null
     var upper: Int? = null
 }

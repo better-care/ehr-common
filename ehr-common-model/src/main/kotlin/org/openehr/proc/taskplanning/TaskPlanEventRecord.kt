@@ -24,6 +24,11 @@ import care.better.platform.annotation.Required
 
 @Open
 class TaskPlanEventRecord : EventRecord {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
 
     @Required
     var details: LinkedHashMap<String, String> = LinkedHashMap()

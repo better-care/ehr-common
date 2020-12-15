@@ -22,4 +22,9 @@ import care.better.platform.annotation.Open
  */
 
 @Open
-class PartyRef : ObjectRef()
+class PartyRef : ObjectRef() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

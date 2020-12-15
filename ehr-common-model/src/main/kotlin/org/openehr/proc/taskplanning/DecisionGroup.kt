@@ -26,6 +26,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var test: ContextExpression<*>? = null

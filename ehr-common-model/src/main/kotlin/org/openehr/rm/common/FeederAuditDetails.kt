@@ -27,6 +27,11 @@ import java.io.Serializable
 
 @Open
 class FeederAuditDetails : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var systemId: String? = null
     var location: PartyIdentified? = null

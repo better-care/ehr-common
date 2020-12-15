@@ -27,6 +27,11 @@ import java.util.*
 
 @Open
 abstract class ObjectId : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var value: String? = null
 

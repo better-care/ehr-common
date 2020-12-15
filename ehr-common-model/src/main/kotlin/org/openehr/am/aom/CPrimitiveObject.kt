@@ -20,5 +20,10 @@ package org.openehr.am.aom
  */
 
 class CPrimitiveObject : CDefinedObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var item: CPrimitive? = null
 }

@@ -30,6 +30,9 @@ import java.util.*
 class DvTime : DvTemporal() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Converts [LocalTime] to [DvTime]
          *

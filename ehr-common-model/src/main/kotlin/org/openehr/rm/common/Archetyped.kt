@@ -28,6 +28,11 @@ import java.io.Serializable
 
 @Open
 class Archetyped : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var archetypeId: ArchetypeId? = null
     var templateId: TemplateId? = null

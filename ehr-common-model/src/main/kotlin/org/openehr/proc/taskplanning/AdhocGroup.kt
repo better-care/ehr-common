@@ -25,6 +25,11 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class AdhocGroup : ChoiceGroup<AdhocBranch> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     constructor()
 
     constructor(description: DvText?) : super(description)

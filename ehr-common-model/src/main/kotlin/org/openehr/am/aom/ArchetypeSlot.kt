@@ -20,6 +20,11 @@ package org.openehr.am.aom
  */
 
 class ArchetypeSlot : CObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var includes: MutableList<Assertion> = mutableListOf()
     var excludes: MutableList<Assertion> = mutableListOf()
 }

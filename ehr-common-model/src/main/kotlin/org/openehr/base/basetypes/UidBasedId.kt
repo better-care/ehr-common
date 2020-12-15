@@ -22,4 +22,9 @@ import care.better.platform.annotation.Open
  */
 
 @Open
-abstract class UidBasedId : ObjectId()
+abstract class UidBasedId : ObjectId() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

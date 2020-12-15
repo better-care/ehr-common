@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class ConstraintBindingSet : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var items: MutableList<ConstraintBindingItem> = mutableListOf()
     lateinit var terminology: String
 }

@@ -28,6 +28,11 @@ import java.io.Serializable
 
 @Open
 class InstructionDetails : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var instructionId: LocatableRef? = null
 

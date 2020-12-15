@@ -25,6 +25,11 @@ import org.openehr.rm.datastructures.History
 
 @Open
 class Observation : CareEntry() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var data: History? = null
     var state: History? = null

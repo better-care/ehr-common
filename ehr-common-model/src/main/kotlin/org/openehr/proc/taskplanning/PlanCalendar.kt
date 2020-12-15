@@ -25,6 +25,10 @@ import java.io.Serializable
 
 @Open
 class PlanCalendar : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var entries: MutableList<CalendarEntry> = mutableListOf()
 

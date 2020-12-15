@@ -24,6 +24,10 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 
 @Open
 class BooleanContextExpression : ContextExpression<Boolean> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     constructor() : super(TypeDefBoolean.INSTANCE)
 

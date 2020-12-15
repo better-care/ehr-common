@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class Transition : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var event: String
     var action: String? = null
     var guard: String? = null

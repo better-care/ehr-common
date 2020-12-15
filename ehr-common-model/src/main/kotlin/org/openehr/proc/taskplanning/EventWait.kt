@@ -26,6 +26,11 @@ import java.io.Serializable
 
 @Open
 class EventWait<E : PlanEvent>() : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var event: E? = null
     var successAction: EventAction? = null

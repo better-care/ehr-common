@@ -25,6 +25,10 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 abstract class PlanEvent constructor() : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var otherDetails: ItemStructure? = null
     var delay: String? = null

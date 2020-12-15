@@ -28,6 +28,10 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 class ExternalRequest() : DispatchableAction() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var organisation: PartyProxy? = null

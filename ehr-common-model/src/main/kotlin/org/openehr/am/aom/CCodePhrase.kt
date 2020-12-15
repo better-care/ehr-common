@@ -23,6 +23,11 @@ import org.openehr.rm.datatypes.CodePhrase
  */
 
 open class CCodePhrase : CDomainType() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var assumedValue: CodePhrase? = null
     var defaultValue: CodePhrase? = null
     var terminologyId: TerminologyId? = null

@@ -21,5 +21,10 @@ package org.openehr.am.aom
  */
 
 class CCodeReference : CCodePhrase() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var referenceSetUri: String
 }

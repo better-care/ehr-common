@@ -25,6 +25,11 @@ import java.io.Serializable
  */
 
 abstract class Version : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var contribution: ObjectRef? = null
 

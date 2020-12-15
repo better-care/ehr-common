@@ -26,6 +26,11 @@ import java.util.*
 
 @Open
 class DvProportion : DvAmount() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var numerator: Float = 0f
     var denominator: Float = 0f
 

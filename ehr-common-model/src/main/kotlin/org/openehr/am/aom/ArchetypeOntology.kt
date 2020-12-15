@@ -24,6 +24,11 @@ import java.io.Serializable
  */
 
 open class ArchetypeOntology : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var termDefinitions: MutableList<CodeDefinitionSet> = mutableListOf()
     var constraintDefinitions: MutableList<CodeDefinitionSet> = mutableListOf()

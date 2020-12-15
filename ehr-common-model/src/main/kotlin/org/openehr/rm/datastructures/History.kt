@@ -27,6 +27,11 @@ import org.openehr.rm.datatypes.DvDuration
 
 @Open
 class History : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var origin: DvDateTime? = null
     var period: DvDuration? = null

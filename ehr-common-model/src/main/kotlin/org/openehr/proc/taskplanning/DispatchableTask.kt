@@ -25,6 +25,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class DispatchableTask<A : DispatchableAction> : Task<A> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var wait = false
     var callback: CallbackWait? = null

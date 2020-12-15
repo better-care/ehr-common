@@ -24,6 +24,11 @@ import java.util.*
 
 @Open
 abstract class DvQuantified : DvOrdered() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var magnitudeStatus: String? = null
 
     override fun equals(other: Any?): Boolean =

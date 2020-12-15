@@ -28,6 +28,11 @@ import java.io.Serializable
 
 @Open
 abstract class Locatable : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var name: DvText? = null
     var uid: UidBasedId? = null

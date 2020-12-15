@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class Assertion : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var tag: String? = null
     var stringExpression: String? = null
     lateinit var expression: ExprItem

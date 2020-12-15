@@ -24,6 +24,10 @@ import care.better.platform.annotation.Open
 @Open
 class HierObjectId : UidBasedId() {
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
+
         /**
          * Creates a [HierObjectId]
          *

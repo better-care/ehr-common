@@ -30,6 +30,9 @@ import java.util.*
 class DvDateTime : DvTemporal() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Converts [ZonedDateTime] to [DvDateTime].
          * Please note that only the offset is preserved, the actual time-zone is discarded.

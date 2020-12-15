@@ -28,6 +28,11 @@ import java.io.Serializable
 
 @Open
 class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
 
     @Required
     var groupId: String? = null

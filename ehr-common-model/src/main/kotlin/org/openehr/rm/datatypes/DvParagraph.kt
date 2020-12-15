@@ -24,6 +24,11 @@ import care.better.platform.annotation.Required
 
 @Open
 class DvParagraph : DataValue() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var items: MutableList<DvText> = mutableListOf()
 }

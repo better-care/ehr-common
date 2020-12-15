@@ -26,6 +26,10 @@ import org.openehr.rm.composition.Entry
 
 @Open
 class DefinedAction : PerformableAction {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var prototype: MutableList<Entry> = mutableListOf()
     var optionality: ValidityKind? = null

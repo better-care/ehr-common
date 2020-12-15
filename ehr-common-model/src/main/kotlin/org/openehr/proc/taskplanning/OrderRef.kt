@@ -28,6 +28,10 @@ import java.io.Serializable
 
 @Open
 class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var orderTag: String? = null
     var instructionArchetypeId: String? = null

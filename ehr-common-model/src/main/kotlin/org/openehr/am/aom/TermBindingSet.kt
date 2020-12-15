@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class TermBindingSet : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var items: MutableList<TermBindingItem> = mutableListOf()
     lateinit var terminology: String
 }

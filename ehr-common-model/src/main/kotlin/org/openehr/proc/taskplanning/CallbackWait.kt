@@ -23,6 +23,10 @@ import care.better.platform.annotation.Open
 
 @Open
 class CallbackWait : EventWait<CallbackNotification> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 1L
+    }
 
     var failAction: EventAction? = null
     var customActions: MutableMap<String, EventAction> = mutableMapOf()

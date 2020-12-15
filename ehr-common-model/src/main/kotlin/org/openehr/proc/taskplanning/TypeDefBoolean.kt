@@ -25,7 +25,11 @@ import care.better.platform.annotation.Open
 class TypeDefBoolean : ExprTypeDef<Boolean>("Boolean") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefBoolean = TypeDefBoolean()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefBoolean{} ${super.toString()}"

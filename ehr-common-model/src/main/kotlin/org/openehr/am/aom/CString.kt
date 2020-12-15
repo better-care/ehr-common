@@ -20,6 +20,11 @@ package org.openehr.am.aom
  */
 
 class CString : CPrimitive() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var pattern: String? = null
     var list: MutableList<String> = mutableListOf()
     var listOpen: Boolean? = null

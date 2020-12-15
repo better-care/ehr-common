@@ -25,6 +25,11 @@ import java.util.*
 
 @Open
 class DvIdentifier : DataValue() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var issuer: String? = null
     var assigner: String? = null
 

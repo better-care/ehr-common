@@ -22,6 +22,11 @@ import org.openehr.base.foundationtypes.IntervalOfDuration
  */
 
 class CDuration : CPrimitive() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var pattern: String? = null
     var range: IntervalOfDuration? = null
     var assumedValue: String? = null

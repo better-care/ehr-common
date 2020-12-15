@@ -29,6 +29,11 @@ import java.io.Serializable
  */
 
 class Template : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var language: CodePhrase? = null
     var isControlled: Boolean? = null

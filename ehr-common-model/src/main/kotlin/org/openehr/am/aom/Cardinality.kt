@@ -24,6 +24,11 @@ import java.io.Serializable
  */
 
 class Cardinality : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var isOrdered: Boolean = false
     var isUnique: Boolean = false
 

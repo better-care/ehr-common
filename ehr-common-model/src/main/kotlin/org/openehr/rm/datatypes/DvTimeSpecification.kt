@@ -25,6 +25,11 @@ import java.util.*
 
 @Open
 abstract class DvTimeSpecification : DataValue() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var value: DvParsable? = null
 

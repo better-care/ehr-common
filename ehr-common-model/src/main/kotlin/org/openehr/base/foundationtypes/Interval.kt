@@ -26,6 +26,11 @@ import java.io.Serializable
 
 @Open
 abstract class Interval : RmObject(), Serializable, RangeParameters {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var lowerIncluded: Boolean? = null
     var upperIncluded: Boolean? = null
     var lowerUnbounded = false

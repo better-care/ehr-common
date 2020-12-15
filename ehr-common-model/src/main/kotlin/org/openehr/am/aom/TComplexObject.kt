@@ -22,5 +22,10 @@ import org.openehr.rm.datatypes.DataValue
  */
 
 class TComplexObject : CComplexObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var defaultValue: DataValue? = null
 }

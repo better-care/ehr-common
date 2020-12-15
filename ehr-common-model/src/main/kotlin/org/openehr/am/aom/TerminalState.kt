@@ -19,4 +19,9 @@ package org.openehr.am.aom
  * @author Primoz Delopst
  */
 
-class TerminalState : State()
+class TerminalState : State() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

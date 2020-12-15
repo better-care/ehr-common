@@ -25,5 +25,9 @@ import java.io.Serializable
 
 @Open
 class CalendarEntry : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
     override fun toString(): String = "CalendarEntry{}"
 }

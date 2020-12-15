@@ -32,6 +32,10 @@ import org.openehr.rm.datatypes.DvUri
 
 @Open
 class TaskPlan() : ContentItem(), VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var subject: PartyProxy? = null
 

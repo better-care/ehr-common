@@ -23,6 +23,11 @@ import org.openehr.rm.datatypes.DvQuantity
  */
 
 class CDvQuantity : CDomainType() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var assumedValue: DvQuantity? = null
     var defaultValue: DvQuantity? = null
     var property: CodePhrase? = null

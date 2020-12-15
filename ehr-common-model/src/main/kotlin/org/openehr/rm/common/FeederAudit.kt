@@ -28,6 +28,11 @@ import java.io.Serializable
 
 @Open
 class FeederAudit : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
     var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
     var originalContent: DvEncapsulated? = null

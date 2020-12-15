@@ -26,6 +26,11 @@ import org.openehr.rm.datatypes.DvCodedText
 
 @Open
 class OriginalVersion : Version() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var uid: ObjectVersionId? = null
     var data: Any? = null

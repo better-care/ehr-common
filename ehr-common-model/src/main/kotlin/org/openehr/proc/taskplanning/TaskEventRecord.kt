@@ -25,6 +25,11 @@ import org.openehr.base.basetypes.LocatableRef
 
 @Open
 class TaskEventRecord : EventRecord {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var taskId: String? = null
 

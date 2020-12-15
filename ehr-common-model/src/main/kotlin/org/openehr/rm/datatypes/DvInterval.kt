@@ -25,6 +25,11 @@ import java.util.*
 
 @Open
 class DvInterval : DataValue(), RangeParameters {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var lower: DvOrdered? = null
     var upper: DvOrdered? = null
     var lowerIncluded: Boolean? = null

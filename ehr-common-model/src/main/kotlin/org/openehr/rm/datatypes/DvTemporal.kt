@@ -24,6 +24,11 @@ import java.util.*
 
 @Open
 class DvTemporal : DvQuantified() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var accuracy: DvDuration? = null
 
     override fun equals(other: Any?): Boolean =

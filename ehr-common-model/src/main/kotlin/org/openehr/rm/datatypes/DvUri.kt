@@ -24,6 +24,11 @@ import java.util.*
 
 @Open
 class DvUri : DataValue() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var value: String? = null
 
     override fun equals(other: Any?): Boolean =

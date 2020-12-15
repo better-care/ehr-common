@@ -26,6 +26,10 @@ import java.io.Serializable
 
 @Open
 class EventAction() : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var systemCall: MutableList<SystemCall> = mutableListOf()
     var message: DvText? = null

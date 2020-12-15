@@ -25,7 +25,11 @@ import care.better.platform.annotation.Open
 class TypeDefObject : ExprTypeDef<Any>("Object") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefObject = TypeDefObject()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefObject{} ${super.toString()}"

@@ -26,6 +26,11 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 
 class EhrStatus : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var subject: PartySelf? = null
 

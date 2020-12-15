@@ -24,6 +24,11 @@ import java.io.Serializable
  */
 
 class TermBindingItem : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var value: CodePhrase
     lateinit var code: String
 }

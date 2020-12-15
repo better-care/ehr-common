@@ -27,6 +27,11 @@ import java.io.Serializable
  */
 
 class VersionedObject : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var uid: HierObjectId? = null
     var ownerId: ObjectRef? = null
     var timeCreated: DvDateTime? = null

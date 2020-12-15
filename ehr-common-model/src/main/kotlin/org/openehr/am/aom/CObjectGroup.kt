@@ -22,6 +22,11 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  */
 
 class CObjectGroup : ArchetypeConstraint() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var range: IntervalOfInteger
     lateinit var cardinality: Cardinality
     lateinit var occurrences: IntervalOfInteger

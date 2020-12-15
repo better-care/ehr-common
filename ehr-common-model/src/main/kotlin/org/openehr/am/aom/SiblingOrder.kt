@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class SiblingOrder : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var isBefore: Boolean = false
     lateinit var siblingNodeId: String
 }

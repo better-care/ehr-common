@@ -25,6 +25,11 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 
 @Open
 abstract class ContextValue<T>() : RmObject(), VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var name: String? = null
     private var type: ExprTypeDef<T>? = null
 

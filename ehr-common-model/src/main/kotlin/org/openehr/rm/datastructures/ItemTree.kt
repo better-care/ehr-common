@@ -23,5 +23,10 @@ import care.better.platform.annotation.Open
 
 @Open
 class ItemTree : ItemStructure() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var items: MutableList<Item> = mutableListOf()
 }

@@ -22,6 +22,11 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  */
 
 class CInteger : CPrimitive() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var list: MutableList<Int> = mutableListOf()
     var range: IntervalOfInteger? = null
     var assumedValue: Int? = null

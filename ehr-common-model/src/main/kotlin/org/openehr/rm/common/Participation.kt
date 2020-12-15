@@ -29,6 +29,11 @@ import java.io.Serializable
 
 @Open
 class Participation : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var function: DvText? = null
 

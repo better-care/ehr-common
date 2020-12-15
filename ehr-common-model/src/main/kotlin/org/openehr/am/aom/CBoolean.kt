@@ -20,6 +20,11 @@ package org.openehr.am.aom
  */
 
 class CBoolean : CPrimitive() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var trueValid: Boolean = false
     var falseValid: Boolean = false
     var assumedValue: Boolean? = null

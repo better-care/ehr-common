@@ -23,4 +23,9 @@ import org.openehr.rm.common.Locatable
  */
 
 @Open
-abstract class Item : Locatable()
+abstract class Item : Locatable() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

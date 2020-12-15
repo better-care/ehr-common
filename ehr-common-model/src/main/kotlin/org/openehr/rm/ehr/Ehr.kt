@@ -26,6 +26,11 @@ import java.util.*
  */
 
 class Ehr : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var systemId: HierObjectId? = null
     var ehrId: HierObjectId? = null
     var timeCreated: DvDateTime? = null

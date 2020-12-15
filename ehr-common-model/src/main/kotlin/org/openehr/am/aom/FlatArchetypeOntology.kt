@@ -20,5 +20,10 @@ package org.openehr.am.aom
  */
 
 class FlatArchetypeOntology : ArchetypeOntology() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var archetypeId: String
 }

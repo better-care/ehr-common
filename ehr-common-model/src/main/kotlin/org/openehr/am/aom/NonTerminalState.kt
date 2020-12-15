@@ -22,6 +22,11 @@ import care.better.platform.annotation.Required
  */
 
 class NonTerminalState : State() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var transitions: MutableList<Transition> = mutableListOf()
 }

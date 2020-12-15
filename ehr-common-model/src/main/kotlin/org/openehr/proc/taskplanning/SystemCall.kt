@@ -28,6 +28,10 @@ import java.io.Serializable
 
 @Open
 abstract class SystemCall() : RmObject(), Serializable, VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var systemId: String? = null

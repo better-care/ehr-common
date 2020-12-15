@@ -22,6 +22,11 @@ import java.math.BigInteger
  */
 
 abstract class ExprOperator : ExprItem() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var operator: BigInteger
     var precedenceOverridden: Boolean = false
 }

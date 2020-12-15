@@ -22,4 +22,9 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
-abstract class ArchetypeConstraint : AmObject(), Serializable
+abstract class ArchetypeConstraint : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

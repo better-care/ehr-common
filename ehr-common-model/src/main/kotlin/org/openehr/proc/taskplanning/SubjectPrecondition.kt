@@ -28,6 +28,10 @@ import java.io.Serializable
 
 @Open
 class SubjectPrecondition() : RmObject(), Serializable, VisitableByModelVisitor, ExpressionNamesProvider {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var description: String? = null

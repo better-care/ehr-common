@@ -25,5 +25,10 @@ import java.io.Serializable
 
 @Open
 class ExecutionRule : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     override fun toString(): String = "ExecutionRule{}"
 }

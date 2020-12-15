@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class CodeDefinitionSet : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var items: MutableList<ArchetypeTerm> = mutableListOf()
     lateinit var language: String
 }

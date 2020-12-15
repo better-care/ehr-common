@@ -28,6 +28,11 @@ import java.io.Serializable
 
 @Open
 class IsmTransition : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var currentState: DvCodedText? = null
     var transition: DvCodedText? = null

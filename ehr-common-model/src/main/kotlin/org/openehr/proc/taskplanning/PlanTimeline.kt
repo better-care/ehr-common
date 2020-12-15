@@ -25,6 +25,10 @@ import java.io.Serializable
 
 @Open
 class PlanTimeline : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var plannedItems: MutableList<PlanItem> = mutableListOf()
     var timers: MutableList<TimerWait> = mutableListOf()

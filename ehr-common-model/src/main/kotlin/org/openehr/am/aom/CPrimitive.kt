@@ -22,4 +22,9 @@ import java.io.Serializable
  * @author Primoz Delopst
  */
 
-abstract class CPrimitive : AmObject(), Serializable
+abstract class CPrimitive : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+}

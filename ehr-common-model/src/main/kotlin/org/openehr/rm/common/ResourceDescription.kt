@@ -26,6 +26,11 @@ import java.io.Serializable
 
 @Open
 class ResourceDescription : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var originalAuthor: MutableList<StringDictionaryItem> = mutableListOf()
     var otherContributors: MutableList<String> = mutableListOf()

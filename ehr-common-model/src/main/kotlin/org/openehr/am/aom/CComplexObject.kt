@@ -21,5 +21,10 @@ package org.openehr.am.aom
  */
 
 open class CComplexObject : CDefinedObject() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var attributes: MutableList<CAttribute> = mutableListOf()
 }

@@ -23,5 +23,10 @@ import java.io.Serializable
  */
 
 abstract class TimeSpecifier : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     override fun toString(): String = "TimeSpecifier{}"
 }

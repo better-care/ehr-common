@@ -25,6 +25,11 @@ import java.io.Serializable
  */
 
 class Annotation : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var items: MutableList<StringDictionaryItem> = mutableListOf()
 

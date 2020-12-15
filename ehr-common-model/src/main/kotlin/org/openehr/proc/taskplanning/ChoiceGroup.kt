@@ -26,6 +26,11 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var overrideType: OverrideType? = null
     var timeout: TimerWait? = null

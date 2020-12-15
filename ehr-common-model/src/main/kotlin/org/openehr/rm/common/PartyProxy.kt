@@ -26,5 +26,10 @@ import java.io.Serializable
 
 @Open
 abstract class PartyProxy : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var externalRef: PartyRef? = null
 }

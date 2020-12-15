@@ -24,6 +24,11 @@ import java.io.Serializable
  */
 
 class TAttribute : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var rmAttributeName: String? = null
     var children: MutableList<TComplexObject> = mutableListOf()

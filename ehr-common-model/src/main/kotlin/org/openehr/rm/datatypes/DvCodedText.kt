@@ -26,6 +26,9 @@ import java.util.*
 @Open
 class DvCodedText : DvText() {
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Creates a [DvCodedText] from terminology id, code and value
          *

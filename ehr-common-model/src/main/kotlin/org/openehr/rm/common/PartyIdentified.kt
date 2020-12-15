@@ -26,6 +26,10 @@ import org.openehr.rm.datatypes.DvIdentifier
 class PartyIdentified : PartyProxy() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
+
         /**
          * Creates a [PartyIdentified] from a party name
          *

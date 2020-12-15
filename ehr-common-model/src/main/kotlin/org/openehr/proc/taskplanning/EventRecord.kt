@@ -26,6 +26,11 @@ import java.io.Serializable
 
 @Open
 abstract class EventRecord() : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var time: String? = null
     var description: String? = null

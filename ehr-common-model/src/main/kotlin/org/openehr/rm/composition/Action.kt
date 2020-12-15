@@ -26,6 +26,11 @@ import org.openehr.rm.datatypes.DvDateTime
 
 @Open
 class Action : CareEntry() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var time: DvDateTime? = null
 

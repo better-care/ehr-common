@@ -25,6 +25,10 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 class StateTrigger : PlanEvent, ExpressionNamesProvider {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var expression: BooleanContextExpression? = null

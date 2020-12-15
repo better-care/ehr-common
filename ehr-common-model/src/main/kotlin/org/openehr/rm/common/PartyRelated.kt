@@ -25,6 +25,11 @@ import org.openehr.rm.datatypes.DvCodedText
 
 @Open
 class PartyRelated : PartyIdentified() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var relationship: DvCodedText? = null
 }

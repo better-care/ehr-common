@@ -25,7 +25,11 @@ import care.better.platform.annotation.Open
 class TypeDefVoid : ExprTypeDef<Void>("Void") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefVoid = TypeDefVoid()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefVoid{} ${super.toString()}"

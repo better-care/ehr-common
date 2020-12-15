@@ -24,6 +24,11 @@ import java.io.Serializable
  */
 
 @Open
-class TaskCosting : RmObject(), Serializable{
+class TaskCosting : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     override fun toString(): String = "TaskCosting{}"
 }

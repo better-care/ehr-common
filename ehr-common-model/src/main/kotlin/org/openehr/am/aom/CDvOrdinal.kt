@@ -22,6 +22,11 @@ import org.openehr.rm.datatypes.DvOrdinal
  */
 
 class CDvOrdinal : CDomainType() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var assumedValue: DvOrdinal? = null
     var list: MutableList<DvOrdinal> = mutableListOf()
 }

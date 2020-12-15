@@ -23,6 +23,11 @@ import java.io.Serializable
  */
 
 class ConstraintBindingItem : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var value: String
     lateinit var code: String
 }

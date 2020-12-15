@@ -26,6 +26,9 @@ import java.util.*
 class DvBoolean : DataValue() {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
         /**
          * Converts a boolean to [DvBoolean]
          *

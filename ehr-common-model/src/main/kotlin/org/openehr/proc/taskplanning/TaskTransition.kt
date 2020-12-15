@@ -25,6 +25,10 @@ import org.openehr.base.basetypes.UidBasedId
 
 @Open
 class TaskTransition() : PlanEvent(), TaskReferencingEvent {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     private var taskId: UidBasedId? = null

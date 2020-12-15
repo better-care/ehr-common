@@ -25,6 +25,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 class ConditionGroup : ChoiceGroup<ConditionBranch> {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     constructor()
 

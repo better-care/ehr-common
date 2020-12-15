@@ -30,6 +30,10 @@ import java.util.*
 class CodePhrase : RmObject(), Serializable {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
+
         /**
          * Creates a [CodePhrase] from terminology id and code
          *

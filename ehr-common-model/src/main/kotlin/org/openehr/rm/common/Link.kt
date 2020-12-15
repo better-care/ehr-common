@@ -30,6 +30,10 @@ import java.io.Serializable
 class Link : RmObject(), Serializable {
 
     companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+
+
         /**
          * Creates a name suffix suitable for use in LINKs (i.e. /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
          *

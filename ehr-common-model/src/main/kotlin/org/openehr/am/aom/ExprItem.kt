@@ -23,5 +23,10 @@ import java.io.Serializable
  */
 
 abstract class ExprItem : AmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     lateinit var type: String
 }

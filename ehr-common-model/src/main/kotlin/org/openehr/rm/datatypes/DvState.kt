@@ -25,6 +25,11 @@ import java.util.*
 
 @Open
 class DvState : DataValue() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var value: DvCodedText? = null
     var isTerminal = false

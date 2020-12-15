@@ -22,6 +22,11 @@ import care.better.platform.annotation.Required
  */
 
 class CMultipleAttribute : CAttribute() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var cardinality: Cardinality? = null
     var groups: MutableList<CObjectGroup> = mutableListOf()

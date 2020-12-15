@@ -28,6 +28,10 @@ import java.io.Serializable
 
 @Open
 abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var formId: String? = null
     var templateId: String? = null

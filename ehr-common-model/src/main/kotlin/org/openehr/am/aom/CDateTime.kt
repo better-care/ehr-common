@@ -23,6 +23,11 @@ import java.math.BigInteger
  */
 
 class CDateTime : CPrimitive() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     var pattern: String? = null
     var timezoneValidity: BigInteger? = null
     var range: IntervalOfDateTime? = null

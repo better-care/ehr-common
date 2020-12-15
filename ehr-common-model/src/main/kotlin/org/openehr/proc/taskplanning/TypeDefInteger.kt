@@ -25,7 +25,11 @@ import care.better.platform.annotation.Open
 class TypeDefInteger : ExprTypeDef<Int>("Integer") {
 
     companion object {
+        @JvmField
         val INSTANCE: TypeDefInteger = TypeDefInteger()
+
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefInteger{} ${super.toString()}"

@@ -26,6 +26,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 abstract class Task<A : TaskAction> : PlanItem {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     @Required
     var action: A? = null

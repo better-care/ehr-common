@@ -26,6 +26,10 @@ import java.io.Serializable
 
 @Open
 class TaskRepeat() : RmObject(), Serializable {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var repeats: IntervalOfInteger? = null
     var terminateCondition: PlanEvent? = null

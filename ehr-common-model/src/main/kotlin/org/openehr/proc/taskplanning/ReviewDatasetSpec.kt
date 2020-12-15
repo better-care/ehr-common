@@ -25,6 +25,10 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @Open
 class ReviewDatasetSpec : DatasetSpec {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
 
     var captureDatasets: MutableList<CaptureDatasetSpec> = mutableListOf()
 

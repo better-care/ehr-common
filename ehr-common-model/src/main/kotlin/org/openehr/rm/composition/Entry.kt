@@ -28,6 +28,11 @@ import org.openehr.rm.datatypes.CodePhrase
 
 @Open
 abstract class Entry : ContentItem() {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 0L
+    }
+
     @Required
     var language: CodePhrase? = null
 

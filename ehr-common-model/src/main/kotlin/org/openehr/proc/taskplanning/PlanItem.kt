@@ -29,6 +29,10 @@ import org.openehr.rm.datatypes.DvText
 
 @Open
 abstract class PlanItem : Locatable, VisitableByModelVisitor {
+    companion object {
+        @JvmStatic
+        private val serialVersionUID: Long = 1L
+    }
 
     @Required
     var description: DvText? = null
