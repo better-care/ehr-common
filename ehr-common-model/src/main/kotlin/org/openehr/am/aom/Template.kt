@@ -42,7 +42,8 @@ class Template : AmObject(), Serializable {
     var uid: HierObjectId? = null
     lateinit var templateId: TemplateId
     lateinit var concept: String
-    lateinit var definition: CArchetypeRoot
+    @Required
+    var definition: CArchetypeRoot? = null
     var ontology: FlatArchetypeOntology? = null
     var componentOntologies: MutableList<FlatArchetypeOntology> = mutableListOf()
     var annotations: MutableList<Annotation> = mutableListOf()

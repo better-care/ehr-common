@@ -15,6 +15,8 @@
 
 package org.openehr.am.aom
 
+import care.better.platform.annotation.Required
+
 
 /**
  * @author Primoz Delopst
@@ -26,5 +28,6 @@ class CCodeReference : CCodePhrase() {
         private val serialVersionUID: Long = 0L
     }
 
-    lateinit var referenceSetUri: String
+    @Required
+    var referenceSetUri: String? = null
 }
