@@ -25,11 +25,17 @@ import java.util.*
  */
 
 @Open
-abstract class ExprTypeDef<T>(val typeName: String) : RmObject(), Serializable {
+abstract class ExprTypeDef<T>(private var typeName: String) : RmObject(), Serializable {
 
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
+    }
+
+    fun getTypeName(): String? = typeName
+
+    fun setTypeName(typeName: String) {
+        this.typeName = typeName
     }
 
     override fun hashCode(): Int = Objects.hash(typeName)
