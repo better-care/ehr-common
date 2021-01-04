@@ -10,7 +10,6 @@ ConcurrencyMode
 TypeDefBoolean
 TaskPlanExecutionHistory
 Companion
-DefaultImpls
 ContextValue
 TimerWait
 SystemNotification
@@ -113,7 +112,6 @@ TaskRepeat
 DecisionBranch
 TaskEventRecord
 StateVariable
-DefaultImpls
 TaskGroup
 TaskWait
 WorkPlan

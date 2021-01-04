@@ -32,9 +32,10 @@ class MoxyRegistry(private val packages: List<String>) {
 
     companion object {
 
+        @JvmStatic
         private val INSTANCE: MoxyRegistry = MoxyRegistry(emptyList())
 
-        private const val CONTEXT_PATH =
+        private const val CONTEXT_PATH: String =
                 "org.openehr.am.aom:" +
                         "org.openehr.base.basetypes:" +
                         "org.openehr.base.foundationtypes:" +
@@ -54,6 +55,26 @@ class MoxyRegistry(private val packages: List<String>) {
         @JvmStatic
         @Throws(JAXBException::class)
         fun createInstance(packages: List<String>) = MoxyRegistry(packages.filter { !CONTEXT_PATH.contains(it) })
+
+        @JvmStatic
+        fun getMoxyProperties(): Map<String, Any?> =
+                with(mutableMapOf<String, Any?>()) {
+                    this["org.openehr.am.aom"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/aom-oxm.xml"))
+                    this["org.openehr.base.basetypes"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/basetype-oxm.xml"))
+                    this["org.openehr.base.foundationtypes"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/foundationtypes-oxm.xml"))
+                    this["org.openehr.base.resource"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/resource-oxm.xml"))
+                    this["org.openehr.proc.taskplanning"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/taskplanning-oxm.xml"))
+                    this["org.openehr.rm.common"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/common-oxm.xml"))
+                    this["org.openehr.rm.composition"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/composition-oxm.xml"))
+                    this["org.openehr.rm.datastructures"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/datastructures-oxm.xml"))
+                    this["org.openehr.rm.datatypes"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/datatypes-oxm.xml"))
+                    this["org.openehr.rm.ehr"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/ehr-oxm.xml"))
+                    this["org.openehr.rm.integration"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/integration-oxm.xml"))
+                    mapOf<String, Any>(Pair(JAXBContextFactory.ECLIPSELINK_OXM_XML_KEY, this.toMap()))
+                }
+
+        @JvmStatic
+        fun getContextPath(): String = CONTEXT_PATH
     }
 
     private val context: JAXBContext = JAXBContext.newInstance(
@@ -62,20 +83,7 @@ class MoxyRegistry(private val packages: List<String>) {
                 Thread.currentThread().contextClassLoader
             else
                 AccessController.doPrivileged(PrivilegedAction { Thread.currentThread().contextClassLoader }) as ClassLoader,
-            with(mutableMapOf<String, Any?>()) {
-                this["org.openehr.am.aom"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/aom-oxm.xml"))
-                this["org.openehr.base.basetypes"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/basetype-oxm.xml"))
-                this["org.openehr.base.foundationtypes"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/foundationtypes-oxm.xml"))
-                this["org.openehr.base.resource"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/resource-oxm.xml"))
-                this["org.openehr.proc.taskplanning"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/taskplanning-oxm.xml"))
-                this["org.openehr.rm.common"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/common-oxm.xml"))
-                this["org.openehr.rm.composition"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/composition-oxm.xml"))
-                this["org.openehr.rm.datastructures"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/datastructures-oxm.xml"))
-                this["org.openehr.rm.datatypes"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/datatypes-oxm.xml"))
-                this["org.openehr.rm.ehr"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/ehr-oxm.xml"))
-                this["org.openehr.rm.integration"] = StreamSource(MoxyRegistry::class.java.getResourceAsStream("/integration-oxm.xml"))
-                mapOf<String, Any>(Pair(JAXBContextFactory.ECLIPSELINK_OXM_XML_KEY, this.toMap()))
-            })
+            getMoxyProperties())
 
     val marshaller: Marshaller = createMarshaller()
     val unmarshaller: Unmarshaller = createUnmarshaller()
