@@ -41,8 +41,8 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     var description: DvText? = null
 
     var carePathway: ItemStructure? = null
-    var topLevelPlanUids: LinkedHashSet<UidBasedId> = LinkedHashSet()
-    var topLevelPlans: LinkedHashSet<TaskPlan> = LinkedHashSet()
+    var topLevelPlanUids: LinkedHashSet<UidBasedId> = linkedSetOf()
+    var topLevelPlans: LinkedHashSet<TaskPlan> = linkedSetOf()
     var carePlan: LocatableRef? = null
     var orderList: MutableList<OrderRef> = mutableListOf()
     var calendar: PlanCalendar = PlanCalendar()

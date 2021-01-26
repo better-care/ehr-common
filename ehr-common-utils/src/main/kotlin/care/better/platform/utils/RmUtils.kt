@@ -100,6 +100,9 @@ class RmUtils {
         fun getFieldType(clazz: Class<out RmObject>, fieldName: String) =
                 getClassInfo(clazz).fieldTypes[fieldName] ?: throw RmClassFieldNotFoundException(clazz.name, fieldName)
 
+        @JvmStatic
+        fun isRmClass(clazz: Class<*>): Boolean = PACKAGE_NAMES.contains(clazz.`package`.name)
+
         private fun getGetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
                 with(getClassInfo(clazz).getter) {
                     val getMethod: Method? = this["get${nameTransformer.invoke(name)}"]
@@ -118,7 +121,7 @@ class RmUtils {
 
         @Throws(RmClassCastException::class)
         private fun getClassInfo(name: String): ClassInfo =
-                with(getClassName(name)) {
+                with(getNonGenericRmNamePart(name)) {
                     CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, this)) {
                         for (packageName in PACKAGE_NAMES) {
                             try {
@@ -149,12 +152,20 @@ class RmUtils {
                             getSetters(clazz))
                 }
 
-        private fun getClassName(name: String): String =
+        fun getNonGenericRmNamePart(name: String): String =
                 with(name.indexOf('<')) {
                     if (this == -1)
                         name
                     else
                        name.substring(0, this)
+                }
+
+        fun getGenericRmNamePart(name: String): String =
+                with(name.indexOf('<')) {
+                    if (this == -1)
+                        name
+                    else
+                        name.substring(this + 1, with(name.indexOf('>')) { if (this == -1) name.length else name.length - 1 })
                 }
 
         private fun getAllNonStaticFields(clazz: Class<out RmObject>): Collection<Field> =
