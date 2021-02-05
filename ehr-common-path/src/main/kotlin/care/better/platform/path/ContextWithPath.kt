@@ -20,34 +20,59 @@ import java.util.*
 /**
  * @author Primoz Delopst
  * @since 3.1.0
+ *
+ * Context used to hold [List] of [PathSegment].
+ *
+ * @constructor Creates new instance of [ContextWithPath]
  */
-class ContextWithPath {
+open class ContextWithPath {
     private val pathSegments: MutableList<PathSegment> = mutableListOf()
 
+    /**
+     * Returns [List] of [PathSegment] associated with this [ContextWithPath].
+     *
+     * @return [List] of [PathSegment] associated with this [ContextWithPath]
+     */
     fun getPathSegments(): List<PathSegment> = pathSegments
 
+    /**
+     * Returns number of [PathSegment] that are associated with this context.
+     *
+     * @return Number of [PathSegment] that are associated with this context
+     */
     fun getSegmentsSize(): Int = pathSegments.size
 
+    /**
+     * Adds [PathSegment] to this [ContextWithPath].
+     *
+     * @param pathSegment [PathSegment]
+     */
     fun addPathSegment(pathSegment: PathSegment) {
         pathSegments.add(pathSegment)
     }
 
+    /**
+     * Removes last added [PathSegment] from this [PathSegment] and returns removed [PathSegment].
+     *
+     * @return Removed [PathSegment] if removed, otherwise, return null
+     */
     fun removeLastPathSegment(): PathSegment? =
         if (pathSegments.isEmpty())
             null
         else
             pathSegments.removeAt(pathSegments.size - 1)
 
+    /**
+     * Returns names of the [PathSegment] that are  associated with this [ContextWithPath].
+     *
+     * @return Names of the [PathSegment] that are  associated with this [ContextWithPath]
+     */
     fun getPathNames(): List<String?> {
         val names: MutableList<String?> = ArrayList()
         for (pathSegment in pathSegments) {
             names.add(pathSegment.name)
         }
-        removeTrailingNulls(names)
-        return names.toList()
-    }
 
-    private fun removeTrailingNulls(names: MutableList<String?>) {
         val iterator = names.listIterator(names.size)
         while (iterator.hasPrevious()) {
             if (iterator.previous() == null)
@@ -55,5 +80,7 @@ class ContextWithPath {
             else
                 break
         }
+
+        return names.toList()
     }
 }

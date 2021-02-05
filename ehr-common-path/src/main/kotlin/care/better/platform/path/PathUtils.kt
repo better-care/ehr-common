@@ -18,12 +18,15 @@
 package care.better.platform.path
 
 import org.apache.commons.lang3.StringUtils
+import java.lang.reflect.Method
 import java.util.*
 import java.util.regex.Pattern
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
+ *
+ * Set of utilities used to transform path and path segment [String].
  */
 object PathUtils {
     private val NODE_PATTERN = Pattern.compile(
@@ -36,6 +39,12 @@ object PathUtils {
     private val PREDICATE_PATTERN = Pattern.compile("\\s*and\\s+([^\\s=]+)\\s*=\\s*", Pattern.CASE_INSENSITIVE)
 
 
+    /**
+     * Returns [List] of [PathSegment] for the path.
+     *
+     * @param path Path [String]
+     * @return [List] of [PathSegment]
+     */
     @JvmStatic
     fun getPathSegments(path: String): List<PathSegment> {
         val pathSegments: MutableList<PathSegment> = ArrayList<PathSegment>()
@@ -55,7 +64,7 @@ object PathUtils {
                         if (fullPrefix == null) {
                             PathSegment(nodeMatcher.group(1), nodeMatcher.group(3), name, null)
                         } else {
-                            val prefix = getPath(fullPrefix)
+                            val prefix = getPrefixPath(fullPrefix)
                             PathSegment(nodeMatcher.group(1), nodeMatcher.group(3), name, if (("name/value" == prefix)) null else prefix)
                         }
                     }
@@ -68,12 +77,17 @@ object PathUtils {
         return pathSegments.toList()
     }
 
-    @JvmStatic
-    private fun getPath(path: String): String? =
+    private fun getPrefixPath(path: String): String? =
         with(PREDICATE_PATTERN.matcher(path)) {
             if (this.matches()) this.group(1).toLowerCase() else null
         }
 
+    /**
+     * Returns path [String] for the [List] of [PathSegment].
+     *
+     * @param pathSegments [List] of [PathSegment]
+     * @return Path [String]
+     */
     @JvmStatic
     fun buildPath(pathSegments: List<PathSegment>): String =
         with(StringBuilder()) {
@@ -86,17 +100,29 @@ object PathUtils {
             if (this.isEmpty()) "" else this.substring(1)
         }
 
+    /**
+     * Underscores and returns path [String].
+     *
+     * @param path [String]
+     * @return Underscored path [String]
+     */
     @JvmStatic
     fun underscorePath(path: String): String =
-        with(StringBuilder()){
+        with(StringBuilder()) {
             StringUtils.splitByCharacterTypeCamelCase(path).forEach {
-                if ("_" != it){
+                if ("_" != it) {
                     this.append('_').append(it.toLowerCase())
                 }
             }
             if (this.isNotEmpty()) this.substring(1) else ""
         }
 
+    /**
+     * Returns getter [Method] name for the [PathSegment] name.
+     *
+     * @param pathSegmentName [PathSegment] name
+     * @return Getter [Method] name
+     */
     @JvmStatic
     fun getGetter(pathSegmentName: String): String =
         with(StringBuilder()) {
@@ -106,14 +132,20 @@ object PathUtils {
             this.toString()
         }
 
+    /**
+     * Returns [Class] property name for the [PathSegment] name.
+     *
+     * @param pathSegmentName [PathSegment] name
+     * @return [Class] property name
+     */
     @JvmStatic
     fun getPropertyName(pathSegmentName: String?): String =
         StringUtils.split(pathSegmentName, '_').let {
-            with(StringBuilder(it[0])){
+            with(StringBuilder(it[0])) {
                 it.drop(1).forEach { part ->
                     this.append(Character.toUpperCase(part[0])).append(part.substring(1))
                 }
-             this.toString()
+                this.toString()
             }
         }
 

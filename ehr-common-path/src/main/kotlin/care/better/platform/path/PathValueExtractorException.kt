@@ -18,15 +18,33 @@ package care.better.platform.path
 /**
  * @author Primoz Delopst
  * @since 3.1.0
+ *
+ * Exception that is thrown during value extracting.
  */
 class PathValueExtractorException : RuntimeException {
     companion object {
         const val serialVersionUID: Long = 1L
     }
 
+    /**
+     * Creates a new instance of [PathValueExtractorException].
+     *
+     * @param message Exception message
+     */
     constructor(message: String) : super(message)
 
+    /**
+     * Creates a new instance of [PathValueExtractorException].
+     *
+     * @param message Exception message
+     * @param cause [Throwable]
+     */
     constructor(message: String, cause: Throwable) : super(message, cause)
 
+    /**
+     * Creates a new instance of [PathValueExtractorException].
+     *
+     * @param cause [Throwable]
+     */
     constructor(cause: Throwable) : super(cause)
 }

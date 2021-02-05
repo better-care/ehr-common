@@ -19,8 +19,14 @@ package care.better.platform.path
  * @author Primoz Delopst
  * @since 3.1.0
  *
- * Base interface used to extract objects based on path.
+ * Base interface used to extract objects using the path.
  */
 fun interface PathValueExtractor {
-    fun getValue(node: Any?): List<Any?>
+    /**
+     * Extracts and returns [List] of values using the path.
+     *
+     * @param node Root node
+     * @return [List] of extracted values
+     */
+    fun getValue(node: Any?): List<Any>
 }

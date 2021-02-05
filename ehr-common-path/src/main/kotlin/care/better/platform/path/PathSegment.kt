@@ -7,22 +7,39 @@ import java.util.*
  * @author Primoz Delopst
  * @since 3.1.0
  *
- * Represents information about single path segment.
+ * Holds information about single path segment.
  *
  * Note that prefix is `null` when name prefix is used (i.e. /items[at0001 and name/value='Name'] or /items[at0001,'Name']
  *
- * @constructor Creates new instance of [PathSegment]
+ * @constructor Creates a new instance of [PathSegment]
  * @param element First part of a path segment (**items**[at0001,'Name'])
  * @param archetypeNodeId Archetype node id part of the archetype predicate (/items[**at0001**,'Name'])
- * @param prefix Additional condition prefix - specified after archetype node (/items[at0001 and **uid/value**='Name']).
  * @param name Additional condition value (/items[at0001,**'Name'**] or /items[at0001 and uid/value=**'Name'**])
+ * @param prefix Additional condition prefix - specified after archetype node (/items[at0001 and **uid/value**='Name']).
  */
 data class PathSegment(val element: String, val archetypeNodeId: String?, val name: String?, val prefix: String?) {
 
+    /**
+     * Creates a new instance of [PathSegment].
+     *
+     * @param element First part of a path segment (**items**[at0001,'Name'])
+     * @param archetypeNodeId Archetype node id part of the archetype predicate (/items[**at0001**,'Name'])
+     */
     constructor(element: String, archetypeNodeId: String?) : this(element, archetypeNodeId, null)
 
+    /**
+     * Creates a new instance of [PathSegment].
+     * @param element First part of a path segment (**items**[at0001,'Name'])
+     * @param archetypeNodeId Archetype node id part of the archetype predicate (/items[**at0001**,'Name'])
+     * @param name Additional condition value (/items[at0001,**'Name'**] or /items[at0001 and uid/value=**'Name'**])
+     */
     constructor(element: String, archetypeNodeId: String?, name: String?) : this(element, archetypeNodeId, name, null)
 
+    /**
+     * Returns [PathSegment] [String].
+     *
+     * @return [PathSegment] [String]
+     */
     fun getSegment(): String =
         if (archetypeNodeId == null)
             PathUtils.underscorePath(element)

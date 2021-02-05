@@ -25,100 +25,182 @@ import java.util.concurrent.ConcurrentMap
 /**
  * @author Primoz Delopst
  * @since 3.1.0
+ *
+ * Implementation of [PathValueExtractor] that extract values for a path from a given object.
+ *
+ * @constructor Creates a new instance of [SimplePathValueExtractor]
+ * @param path Path [String]
  */
-open class SimplePathValueExtractor(path: String) : PathValueExtractor{
-    private var pathSegments: List<PathSegment> = PathUtils.getPathSegments(path)
-    private val propertyNames: List<String> = pathSegments.map { PathUtils.getPropertyName(it.element) }
+open class SimplePathValueExtractor(path: String) : PathValueExtractor {
+    private var pathSegmentsWithNames: List<Pair<PathSegment, String>> = PathUtils.getPathSegments(path).map { Pair(it, PathUtils.getPropertyName(it.element)) }
     private val propertyMethods: ConcurrentMap<MethodKey, (Any) -> Any?> = ConcurrentHashMap()
 
 
-    override fun getValue(node: Any?): List<Any?> {
+    /**
+     * Extracts and returns [List] of values using the path.
+     *
+     * @param node Root node
+     * @return [List] of extracted values
+     */
+    override fun getValue(node: Any?): List<Any> {
         return getValue(node, false)
     }
 
-    fun getValue(rootNode: Any?, quiet: Boolean): List<Any?> {
-        if (!rootMatches(rootNode)) {
+    /**
+     * Extracts and returns [List] of values using the path.
+     *
+     * @param node Root node
+     * @param ignoreExceptions [Boolean] indicating if the exception will be thrown
+     * @return [List] of extracted values
+     */
+    open fun getValue(node: Any?, ignoreExceptions: Boolean): List<Any> {
+        if (node == null || !rootMatches(node)) {
             return listOf()
         }
-
-        var values: List<Any?> = listOf(rootNode)
-        var segmentIndex = 0
-        for (pathSegment in pathSegments) {
-            values = getValuesForSegment(quiet, values, segmentIndex++, pathSegment.archetypeNodeId)
-            if (values.isEmpty()) {
-                break
-            }
-        }
-        return values
+        return getValuesRecursively(listOf(node), 0, ignoreExceptions)
     }
 
-    private fun getValuesForSegment(quiet: Boolean, currentValues: List<Any?>, segmentIndex: Int, archetypeNodeId: String?): List<Any?> =
-        with(mutableListOf<Any?>()){
-            val propertyName = propertyNames[segmentIndex]
-            currentValues.forEach {
-                if (it != null) {
-                    addMatchingValues(this, asList(getPropertyValue(propertyName, it, quiet)), segmentIndex, archetypeNodeId)
+    /**
+     * Extract and returns [List] of values using the path.
+     *
+     * @param nodes Singleton [List] of root node when depth is null, otherwise [List] of nodes for previous [PathSegment]
+     * @param index Index of the current path segment
+     * @param ignoreExceptions [Boolean] indicating if the exception will be thrown
+     * @return [List] of extracted values
+     */
+    private fun getValuesRecursively(nodes: List<Any>, index: Int, ignoreExceptions: Boolean): List<Any> {
+        if (nodes.isEmpty()) {
+            return emptyList()
+        }
+        val (pathSegment, propertyName) = pathSegmentsWithNames[index]
+        val nodesForSegment = getNodesForSegment(nodes, pathSegment, propertyName, ignoreExceptions)
+
+        if (index == pathSegmentsWithNames.size - 1) {
+            return nodesForSegment
+        }
+
+        return getValuesRecursively(nodesForSegment, index + 1, ignoreExceptions)
+    }
+
+    /**
+     * Returns [List] of nodes for the [PathSegment] from the [List] of nodes for the previous [PathSegment].
+     *
+     * @param previousSegmentNodes [List] of nodes for the previous [PathSegment]
+     * @param pathSegment [PathSegment]
+     * @param propertyName Name of the [Class] property
+     * @param ignoreExceptions [Boolean] indicating if the exception will be thrown
+     * @return [List] of nodes for the [PathSegment]
+     */
+    private fun getNodesForSegment(previousSegmentNodes: List<Any>, pathSegment: PathSegment, propertyName: String, ignoreExceptions: Boolean): List<Any> =
+        with(mutableListOf<Any>()) {
+            previousSegmentNodes.forEach { nodeForPreviousSegment ->
+                asList(getNodeForProperty(propertyName, nodeForPreviousSegment, ignoreExceptions)).forEach { nodeForProperty ->
+                    if (nodeForProperty != null && elementMatches(nodeForProperty, pathSegment)) {
+                        this.add(nodeForProperty)
+                    }
                 }
             }
             this.toList()
         }
 
+    /**
+     * Returns node or [List] of nodes for [Class] property.
+     *
+     * @param propertyName Name of the [Class] property
+     * @param node Object from which value of the [Class] property will be retrieved
+     * @param ignoreExceptions [Boolean] indicating if the exception will be thrown
+     * @return Node or [List] of nodes for the [Class] property
+     */
+    private fun getNodeForProperty(propertyName: String, node: Any, ignoreExceptions: Boolean): Any? =
+        propertyMethods.computeIfAbsent(MethodKey(node.javaClass, propertyName)) { getMethod(it, ignoreExceptions) }.invoke(node)
 
-    private fun addMatchingValues(newValues: MutableList<Any?>, propertyValues: List<Any?>, segmentIndex: Int, archetypeNodeId: String?) {
-        propertyValues.forEach {
-            if (it != null && elementMatches(it, archetypeNodeId, segmentIndex)) {
-                newValues.add(it)
-            }
-        }
-    }
-
-    private fun getPropertyValue(propertyName: String, value: Any, quiet: Boolean): Any? =
-        propertyMethods.computeIfAbsent(MethodKey(value.javaClass, propertyName)) { getMethod(it, quiet) }.invoke(value)
-
-    private fun getMethod(methodKey: MethodKey, quiet: Boolean): (Any) -> Any? {
+    /**
+     * Returns function that will invokes [Method] on the object and returns the invocation result.
+     *
+     * @param methodKey [MethodKey]
+     * @param ignoreExceptions [Boolean] indicating if the exception will be thrown
+     * @return  function that will retrieve call method on the invoked object and return the result
+     */
+    private fun getMethod(methodKey: MethodKey, ignoreExceptions: Boolean): (Any) -> Any? {
         val methodName: String = StringUtils.capitalize(methodKey.propertyName)
         try {
-            return { invoke(methodKey.clazz.getMethod("get$methodName"), it, quiet) }
+            return { invoke(methodKey.clazz.getMethod("get$methodName"), it) }
         } catch (ignored: NoSuchMethodException) {
         } catch (ignored: SecurityException) {
         }
 
         try {
-            return { invoke(methodKey.clazz.getMethod("is$methodName"), it, quiet) }
+            return { invoke(methodKey.clazz.getMethod("is$methodName"), it) }
         } catch (ignored: NoSuchMethodException) {
         } catch (ignored: SecurityException) {
         }
 
-        return try {
-            { invoke(methodKey.clazz.getMethod(methodName), it, quiet) }
+        try {
+            return { invoke(methodKey.clazz.getMethod(methodName), it) }
         } catch (e: NoSuchMethodException) {
-            return if (quiet) { _ -> null } else throw PathValueExtractorException(e)
+            return if (ignoreExceptions) { _ -> null } else throw PathValueExtractorException(e)
         }
     }
 
-    private operator fun invoke(method: Method, value: Any, quiet: Boolean): Any? =
+    /**
+     * Invokes [Method] on the object.
+     *
+     * @param method [Method]
+     * @param node Object on which [Method] will be invoked
+     * @return Invocation result
+     */
+    private operator fun invoke(method: Method, node: Any): Any? =
         try {
-            method.invoke(value)
+            method.invoke(node)
         } catch (_: IllegalAccessException) {
             null
         } catch (_: InvocationTargetException) {
             null
         }
 
-    protected open fun elementMatches(element: Any?, archetypeId: String?, segmentNumber: Int): Boolean = true
+    /**
+     * Checks if the [PathSegment] matches with the object.
+     *
+     * @param node Object
+     * @param pathSegment [PathSegment]
+     * @return [Boolean] indicating if [PathSegment] matches with the objects.
+     */
+    protected open fun elementMatches(node: Any, pathSegment: PathSegment): Boolean = true
 
-    protected open fun rootMatches(root: Any?): Boolean = root != null
+    /**
+     * Checks if the rood objects matches with the [List] of [PathSegment].
+     * @param node Root object
+     */
+    protected open fun rootMatches(node: Any?): Boolean = node != null
 
-    fun getPathSegments(): List<PathSegment> = pathSegments
+    /**
+     * Returns [List] of [PathSegment].
+     *
+     * @return [List] of [PathSegment]
+     */
+    fun getPathSegments(): List<PathSegment> = pathSegmentsWithNames.map { it.first }
 
+    /**
+     * Transforms objects to the [List] of objects.
+     *
+     * @param node Object or a [List] of objects
+     * @return [List] of objects
+     */
     @Suppress("UNCHECKED_CAST")
-    private fun asList(value: Any?): List<Any> =
-        if (value is List<*>) {
-            value as List<Any>
+    private fun asList(node: Any?): List<Any?> =
+        if (node is List<*>) {
+            node
         } else {
-            if (value == null) emptyList() else listOf(value)
+            if (node == null) emptyList() else listOf(node)
         }
 
+    /**
+     * Holds information about method key.
+     *
+     * @constructor Creates a new instance of [MethodKey]
+     * @param clazz [Class]
+     * @param propertyName Name of the property
+     */
     private data class MethodKey(val clazz: Class<*>, val propertyName: String) {
         override fun equals(other: Any?): Boolean =
             when {
@@ -131,5 +213,5 @@ open class SimplePathValueExtractor(path: String) : PathValueExtractor{
     }
 
     override fun toString(): String =
-        "${javaClass.simpleName}[${pathSegments.joinToString("/") { it.asPathSegment() }}]"
+        "${javaClass.simpleName}[${pathSegmentsWithNames.joinToString("/") { it.first.asPathSegment() }}]"
 }

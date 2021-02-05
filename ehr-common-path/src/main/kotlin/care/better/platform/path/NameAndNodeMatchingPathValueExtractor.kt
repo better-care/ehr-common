@@ -20,16 +20,30 @@ import org.openehr.rm.common.Locatable
 /**
  * @author Primoz Delopst
  * @since 3.1.0
+ *
+ * Instance of [SimplePathValueExtractor] that extract values for a path from a given object.
+ * Note that this extractor is comparing archetype id and name for [Locatable] objects.
+ *
+ * @constructor Creates a new instance of [NameAndNodeMatchingPathValueExtractor]
+ * @param path Path [String]
  */
 class NameAndNodeMatchingPathValueExtractor(path: String) : SimplePathValueExtractor(path) {
-    override fun elementMatches(element: Any?, archetypeId: String?, segmentNumber: Int): Boolean =
-        if (element is Locatable) {
-            if (archetypeId == element.archetypeNodeId) {
-                val segment = getPathSegments()[segmentNumber]
-                if (segment.name != null) {
+
+    /**
+     * Checks if the [PathSegment] matches with the object.
+     * Note that archetype id and name are compared only for [Locatable] objects.
+     *
+     * @param node Object
+     * @param pathSegment [PathSegment]
+     * @return [Boolean] indicating if [PathSegment] matches with the objects.
+     */
+    override fun elementMatches(node: Any, pathSegment: PathSegment): Boolean =
+        if (node is Locatable) {
+            if (pathSegment.archetypeNodeId == node.archetypeNodeId) {
+                if (pathSegment.name != null) {
                     when {
-                        segment.prefix == null -> element.name?.value == segment.name
-                        "uid/value".equals(segment.prefix, ignoreCase = true) -> element.uid?.value == segment.name
+                        pathSegment.prefix == null -> node.name?.value == pathSegment.name
+                        "uid/value".equals(pathSegment.prefix, ignoreCase = true) -> node.uid?.value == pathSegment.name
                         else -> false
                     }
                 } else {
@@ -39,6 +53,6 @@ class NameAndNodeMatchingPathValueExtractor(path: String) : SimplePathValueExtra
                 false
             }
         } else {
-            super.elementMatches(element, archetypeId, segmentNumber)
+            super.elementMatches(node, pathSegment)
         }
 }
