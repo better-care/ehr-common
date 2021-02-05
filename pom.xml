@@ -12,6 +12,8 @@
         <module>ehr-common-xml-moxy</module>
         <module>ehr-common-utils</module>
         <module>ehr-common-terminology</module>
+        <module>ehr-common-path</module>
+        <module>ehr-common-amnode</module>
     </modules>
 
     <name>EHR common modules</name>
@@ -24,6 +26,7 @@
         <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
 
         <guava.version>29.0-jre</guava.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
         <joda.version>2.10.8</joda.version>
         <jackson.version>2.11.3</jackson.version>
         <moxy.version>2.7.7</moxy.version>
@@ -90,6 +93,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
 
             <dependency>
