@@ -11,9 +11,18 @@
 
     <artifactId>ehr-common-amnode</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>care.better.platform</groupId>
+            <artifactId>ehr-common-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>care.better.platform</groupId>
+            <artifactId>ehr-common-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>care.better.platform</groupId>
+            <artifactId>ehr-common-path</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -44,7 +44,7 @@ data class PathSegment(val element: String, val archetypeNodeId: String?, val na
         if (archetypeNodeId == null)
             PathUtils.underscorePath(element)
         else
-            PathUtils.underscorePath(element) + '[' + archetypeNodeId + ']'
+            "${PathUtils.underscorePath(element)}[${archetypeNodeId}]"
 
     /**
      * Formats this [PathSegment] to be used in AQL paths. Note no leading '/' is added.
