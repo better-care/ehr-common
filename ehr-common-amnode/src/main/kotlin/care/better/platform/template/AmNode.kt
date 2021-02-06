@@ -18,6 +18,7 @@ package care.better.platform.template
 import care.better.platform.template.exception.AmException
 import care.better.platform.template.type.CollectionType
 import care.better.platform.template.type.TypeInfo
+import org.apache.commons.lang3.builder.ToStringBuilder
 import org.openehr.am.aom.*
 import org.openehr.am.aom.Annotation
 import org.openehr.base.foundationtypes.IntervalOfInteger
@@ -35,7 +36,7 @@ class AmNode constructor(
     val cObject: CObject? = null,
     val archetypeNodeId: String? = null,
     var nodeId: String? = null,
-    val rmType: String,
+    val rmType: String? = null,
     var name: String? = null,
     private var terms: List<ArchetypeTerm>? = null,
     private var termDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
@@ -43,9 +44,9 @@ class AmNode constructor(
     private var termBindings: Map<String, Collection<TermBindingItem>>? = null,
     val attributes: LinkedHashMap<String, AmAttribute> = linkedMapOf(),
     var occurrences: IntervalOfInteger? = null,
-    var getter: Method? = null,
-    var setter: Method? = null,
-    var type: TypeInfo? = null,
+    private var getter: Method? = null,
+    private var setter: Method? = null,
+    private var type: TypeInfo? = null,
     var constraints: List<TAttribute>? = null,
     var annotations: List<Annotation>? = null,
     var viewConstraints: List<TView.Constraints.Items>? = null,
@@ -60,34 +61,34 @@ class AmNode constructor(
         occurrences = cObject.occurrences ?: AmUtils.createInterval(0, null)
     )
 
-    constructor(parent: AmNode?, rmType: String) : this(parent, rmType, 1, null)
+    constructor(parent: AmNode?, rmType: String?) : this(parent, rmType, 1, null)
 
-    constructor(parent: AmNode?, rmType: String, minOccurences: Int, maxOccurences: Int?) : this(
+    constructor(parent: AmNode?, rmType: String?, minOccurences: Int, maxOccurences: Int?) : this(
         parent = parent,
         rmType = rmType,
         occurrences = AmUtils.createInterval(minOccurences, maxOccurences)
     )
 
 
-    fun getTerms(): List<ArchetypeTerm>? = terms ?: parent?.getTerms()
+    fun getTerms(): List<ArchetypeTerm>? = terms ?: (parent?.getTerms() ?: emptyList())
 
     fun setTerms(terms: List<ArchetypeTerm>) {
         this.terms = terms
     }
 
-    fun getTermDefinitions(): Map<String, Collection<ArchetypeTerm>>? = termDefinitions ?: parent?.getTermDefinitions()
+    fun getTermDefinitions(): Map<String, Collection<ArchetypeTerm>> = termDefinitions ?: (parent?.getTermDefinitions() ?: emptyMap())
 
     fun setTermDefinitions(termDefinitions: Map<String, Collection<ArchetypeTerm>>) {
         this.termDefinitions = termDefinitions
     }
 
-    fun getConstraintDefinitions(): Map<String, Collection<ArchetypeTerm>>? = constraintDefinitions ?: parent?.getConstraintDefinitions()
+    fun getConstraintDefinitions(): Map<String, Collection<ArchetypeTerm>> = constraintDefinitions ?: (parent?.getConstraintDefinitions() ?: emptyMap())
 
     fun setConstraintDefinitions(constraintDefinitions: Map<String, Collection<ArchetypeTerm>>) {
         this.constraintDefinitions = constraintDefinitions
     }
 
-    fun getTermBindings(): Map<String, Collection<TermBindingItem>>? = termBindings ?: parent?.getTermBindings()
+    fun getTermBindings(): Map<String, Collection<TermBindingItem>>? = (termBindings ?: parent?.getTermBindings() ?: emptyMap())
 
     fun setTermBindings(termBindings: Map<String, Collection<TermBindingItem>>) {
         this.termBindings = termBindings
@@ -103,6 +104,22 @@ class AmNode constructor(
                     { it.value.codeString ?: throw AmException("Code must be set.") }) ?: emptyMap()
         }
 
+    fun setGetter(getter: Method?) {
+        this.getter = getter
+    }
+
+    fun setSetter(setter: Method?) {
+        this.setter = setter
+    }
+
+    fun setType(type: TypeInfo?){
+        this.type = type
+    }
+
+    fun isPropertyOnParent(): Boolean {
+        return getter != null
+    }
+
     fun getOnParent(parent: Any) =
         try {
             if (getter != null)
@@ -117,7 +134,10 @@ class AmNode constructor(
 
     fun setOnParent(parent: Any, value: Any?) {
         try {
-            setter?.invoke(parent, value) ?: throw AmException("Setter for $this  not found.")
+            if (setter != null)
+                setter?.invoke(parent, value)
+            else
+                throw AmException("Setter for $this  not found.")
         } catch (ex: IllegalAccessException) {
             throw AmException(ex)
         } catch (ex: InvocationTargetException) {
@@ -164,4 +184,10 @@ class AmNode constructor(
         return amNode
     }
 
+    override fun toString(): String =
+         ToStringBuilder(this)
+             .append("archetypeNodeId", archetypeNodeId)
+             .append("rmType", rmType)
+             .append("name", name)
+             .toString()
 }

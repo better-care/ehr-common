@@ -121,19 +121,19 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun setGetterAndSetter(parent: AmNode, attributeName: String, amNode: AmNode) {
         try {
-            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(parent.rmType)
+            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(parent.rmType!!)
             val getter: Method? = RmUtils.getGetterForAttribute(attributeName, rmClass)
 
-            amNode.getter = getter
-            amNode.setter = RmUtils.getSetterForAttribute(attributeName, rmClass)
+            amNode.setGetter(getter)
+            amNode.setSetter(RmUtils.getSetterForAttribute(attributeName, rmClass))
 
             if (getter != null) {
                 val returnType = getter.returnType
                 if (MutableCollection::class.java.isAssignableFrom(returnType)) {
                     val collectionType = if (MutableList::class.java.isAssignableFrom(returnType)) CollectionType.LIST else CollectionType.SET
-                    amNode.type = TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType))
+                    amNode.setType(TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType)))
                 } else {
-                    amNode.type = TypeInfo(returnType)
+                    amNode.setType(TypeInfo(returnType))
                 }
             }
         } catch (ignored: RmClassCastException) {
@@ -143,7 +143,7 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun addRmAttributes(amNode: AmNode) {
         try {
-            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(amNode.rmType)
+            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(amNode.rmType!!)
 
             if (!DataValue::class.java.isAssignableFrom(rmClass)) {
                 val requiredFields: Collection<Field> = RmUtils.getRequiredFields(amNode.rmType)
@@ -154,17 +154,16 @@ class AmTreeBuilder(private val template: Template) {
                         val child = AmNode(amNode, RmUtils.getRmTypeName(RmUtils.getFieldType(rmClass, field.name)), minExistence, 1)
 
                         val getter: Method? = RmUtils.getGetterForAttribute(attributeName, rmClass)
-                        child.getter = getter
-                        child.setter = RmUtils.getSetterForAttribute(attributeName, rmClass)
+                        child.setGetter(getter)
+                        child.setSetter(RmUtils.getSetterForAttribute(attributeName, rmClass))
 
                         if (getter != null) {
                             val returnType = getter.returnType
                             if (MutableCollection::class.java.isAssignableFrom(returnType)) {
                                 val collectionType = if (MutableList::class.java.isAssignableFrom(returnType)) CollectionType.LIST else CollectionType.SET
-                                child.type =
-                                    TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType))
+                                child.setType(TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType)))
                             } else {
-                                child.type = TypeInfo(returnType)
+                                child.setType(TypeInfo(returnType))
                             }
                         }
 
