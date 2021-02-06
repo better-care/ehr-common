@@ -142,7 +142,7 @@ class AmNode constructor(
     }
 
     fun copyForReference(parent: AmNode?): AmNode {
-        val amNode = AmNode(cObject ?: throw AmException("CCobject is required for referenced AM nodes."), parent)
+        val amNode = if (cObject == null) AmNode(parent, rmType) else AmNode(cObject, parent)
 
         amNode.nodeId = nodeId
         amNode.name = name

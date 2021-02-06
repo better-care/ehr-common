@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder
 import java.util.*
 
 /**
+ * @author Bostjan Lah
  * @author Primoz Delopst
  * @since 3.1.0
  *

@@ -16,6 +16,7 @@
 package care.better.platform.path
 
 /**
+ * @author Bostjan Lah
  * @author Primoz Delopst
  * @since 3.1.0
  *

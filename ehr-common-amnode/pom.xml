@@ -24,5 +24,24 @@
             <groupId>care.better.platform</groupId>
             <artifactId>ehr-common-path</artifactId>
         </dependency>
+        <dependency>
+            <groupId>care.better.platform</groupId>
+            <artifactId>ehr-common-xml-moxy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

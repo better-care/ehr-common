@@ -23,6 +23,7 @@ import java.util.*
 import java.util.regex.Pattern
 
 /**
+ * @author Bostjan Lah
  * @author Primoz Delopst
  * @since 3.1.0
  *

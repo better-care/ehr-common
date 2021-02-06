@@ -1,3 +1,18 @@
+/* Copyright 2021 Better Ltd (www.better.care)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package care.better.platform.template
 
 import care.better.openehr.rm.RmObject
@@ -23,6 +38,11 @@ import java.lang.reflect.Method
  * @author Bostjan Lah
  * @author Primoz Delopst
  * @since 3.1.0
+ *
+ * Builder used to build [AmNode] from the template.
+ *
+ * @constructor Creates a new instance of [AmTreeBuilder]
+ * @param template [Template]
  */
 class AmTreeBuilder(private val template: Template) {
 
@@ -31,8 +51,17 @@ class AmTreeBuilder(private val template: Template) {
         private const val DEFINING_CODE_ATTRIBUTE = "defining_code"
     }
 
+    /**
+     * Builds and returns [AmNode] for the [Template].
+     *
+     * @return  [AmNode] for the [Template]
+     */
     fun build(): AmNode =
-        build(template.definition ?: throw AmException("Template ${template.templateId} does not have definition."), null, "", ArchetypeNodeContext.root()).apply {
+        build(
+            template.definition ?: throw AmException("Template ${template.templateId} does not have definition."),
+            null,
+            "",
+            ArchetypeNodeContext.root()).apply {
             template.language?.codeString?.also { this.setTemplateLanguage(it) }
             template.ontology?.also { copyOntology(it, this) }
             addAnnotations(this, template.annotations)
@@ -57,8 +86,8 @@ class AmTreeBuilder(private val template: Template) {
             cObject.attributes.forEach {
                 val name = it.rmAttributeName
                 if (name != null) {
-                    val amAttribute = buildAmAttribute(amNode, it, name , context)
-                    val amAttributeName = it.rmAttributeName ?:  throw AmException("RM attribute name is mandatory.")
+                    val amAttribute = buildAmAttribute(amNode, it, name, context)
+                    val amAttributeName = it.rmAttributeName ?: throw AmException("RM attribute name is mandatory.")
                     amNode.attributes[amAttributeName] = amAttribute
 
                 }
@@ -132,7 +161,8 @@ class AmTreeBuilder(private val template: Template) {
                             val returnType = getter.returnType
                             if (MutableCollection::class.java.isAssignableFrom(returnType)) {
                                 val collectionType = if (MutableList::class.java.isAssignableFrom(returnType)) CollectionType.LIST else CollectionType.SET
-                                child.type = TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType))
+                                child.type =
+                                    TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType))
                             } else {
                                 child.type = TypeInfo(returnType)
                             }
@@ -164,7 +194,7 @@ class AmTreeBuilder(private val template: Template) {
     }
 
     private fun convertDefinitions(ontologyDefinitions: List<CodeDefinitionSet>): Map<String, Collection<ArchetypeTerm>> =
-        ontologyDefinitions.associateBy({it.language}, {it.items})
+        ontologyDefinitions.associateBy({ it.language }, { it.items })
 
     private fun getName(amNode: AmNode): String? {
         val nameValueNode: AmNode? = AmUtils.getAmNode(amNode, NAME_ATTRIBUTE, AmUtils.VALUE_ATTRIBUTE)
@@ -183,9 +213,9 @@ class AmTreeBuilder(private val template: Template) {
         for (child in attribute.children) {
             children.add(build(child, parent, attributeName, archetypeNodeContext))
         }
-        val amAttribute = AmAttribute(attribute.existence!!, children)
+        val amAttribute = AmAttribute(attribute.existence, children)
         if (attribute is CMultipleAttribute) {
-            amAttribute.setCardinality(attribute.cardinality!!)
+            amAttribute.setCardinality(attribute.cardinality)
         }
         return amAttribute
     }

@@ -18,6 +18,7 @@ package care.better.platform.path
 import org.openehr.rm.common.Locatable
 
 /**
+ * @author Bostjan Lah
  * @author Primoz Delopst
  * @since 3.1.0
  *

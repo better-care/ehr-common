@@ -23,7 +23,7 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  * @author Primoz Delopst
  * @since 3.1.0
  */
-class AmAttribute(val existence: IntervalOfInteger, children: List<AmNode>) {
+class AmAttribute(val existence: IntervalOfInteger?, children: List<AmNode>) {
 
     private val children: MutableList<AmNode> = mutableListOf<AmNode>().apply { this.addAll(children) }
 
@@ -39,7 +39,7 @@ class AmAttribute(val existence: IntervalOfInteger, children: List<AmNode>) {
 
     fun getCardinality(): Cardinality? = cardinality
 
-    fun setCardinality(cardinality: Cardinality) {
+    fun setCardinality(cardinality: Cardinality?) {
         this.cardinality = cardinality
     }
 

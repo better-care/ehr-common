@@ -20,7 +20,6 @@ import care.better.platform.template.AmNode
 /**
  * @author Primoz Delopst
  * @since 3.1.0
- *
  */
 class ArchetypeNodeContext(val archetypeRootNode: AmNode?, val parent: ArchetypeNodeContext?) {
     companion object {

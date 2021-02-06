@@ -18,6 +18,7 @@ package care.better.platform.path
 import java.util.*
 
 /**
+ * @author Bostjan Lah
  * @author Primoz Delopst
  * @since 3.1.0
  *
