@@ -19,6 +19,7 @@ import care.better.platform.template.exception.AmException
 import care.better.platform.template.type.CollectionType
 import care.better.platform.template.type.TypeInfo
 import org.openehr.am.aom.*
+import org.openehr.am.aom.Annotation
 import org.openehr.base.foundationtypes.IntervalOfInteger
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
@@ -140,7 +141,7 @@ class AmNode constructor(
         this.templateLanguage = templateLanguage
     }
 
-    fun copyForReference(parent: AmNode): AmNode {
+    fun copyForReference(parent: AmNode?): AmNode {
         val amNode = AmNode(cObject ?: throw AmException("CCobject is required for referenced AM nodes."), parent)
 
         amNode.nodeId = nodeId

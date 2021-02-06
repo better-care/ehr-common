@@ -14,6 +14,7 @@ import care.better.platform.utils.RmUtils
 import care.better.platform.utils.exception.RmClassCastException
 import care.better.platform.utils.exception.RmClassFieldNotFoundException
 import org.openehr.am.aom.*
+import org.openehr.am.aom.Annotation
 import org.openehr.rm.datatypes.DataValue
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -54,8 +55,9 @@ class AmTreeBuilder(private val template: Template) {
         parent?.also { setGetterAndSetter(it, attributeName, amNode) }
         if (cObject is CComplexObject) {
             cObject.attributes.forEach {
-                if (it.rmAttributeName != null) {
-                    val amAttribute = buildAmAttribute(amNode, it, it.rmAttributeName, context)
+                val name = it.rmAttributeName
+                if (name != null) {
+                    val amAttribute = buildAmAttribute(amNode, it, name , context)
                     val amAttributeName = it.rmAttributeName ?:  throw AmException("RM attribute name is mandatory.")
                     amNode.attributes[amAttributeName] = amAttribute
 
@@ -78,8 +80,11 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun postProcessArchetypeNodeReferences(archetypeNodeContext: ArchetypeNodeContext) {
         archetypeNodeContext.getReferences().forEach { context ->
-            val amNode: AmNode = AmUtils.resolvePath(archetypeNodeContext.archetypeRootNode, context.path).copyForReference(context.targetedAmNode)
-            context.targetedAmNode?.attributes?.get(context.attributeName)?.also {
+            val archetypeRootNode = archetypeNodeContext.archetypeRootNode ?: throw AmException("Template can not be referenced.")
+            val referencedNode: AmNode = AmUtils.resolvePath(archetypeRootNode, context.path) ?: throw AmException("Referenced AM node on path ${context.path} not found.")
+
+            val amNode: AmNode = referencedNode.copyForReference(context.targetedAmNode ?: throw AmException("Target AM node not found"))
+            context.targetedAmNode.attributes[context.attributeName]?.also {
                 it.postProcessReference(context.referencedAmNode, amNode)
             }
         }
@@ -136,7 +141,7 @@ class AmTreeBuilder(private val template: Template) {
                         child.name = attributeName
                         val amAttribute = AmAttribute(AmUtils.createInterval(minExistence, 1), com.google.common.collect.Lists.newArrayList(child))
                         amAttribute.setRmOnly(true)
-                        amNode.attributes.put(attributeName, amAttribute)
+                        amNode.attributes[attributeName] = amAttribute
                     }
                 }
             }
@@ -173,10 +178,10 @@ class AmTreeBuilder(private val template: Template) {
         return nameBuilder.getName(amNode)
     }
 
-    private fun buildAmAttribute(parent: AmNode, attribute: CAttribute, attributeName: String?, archetypeNodeContext: ArchetypeNodeContext): AmAttribute {
+    private fun buildAmAttribute(parent: AmNode, attribute: CAttribute, attributeName: String, archetypeNodeContext: ArchetypeNodeContext): AmAttribute {
         val children: MutableList<AmNode> = ArrayList()
-        for (`object` in attribute.children) {
-            children.add(build(`object`, parent, attributeName, archetypeNodeContext))
+        for (child in attribute.children) {
+            children.add(build(child, parent, attributeName, archetypeNodeContext))
         }
         val amAttribute = AmAttribute(attribute.existence!!, children)
         if (attribute is CMultipleAttribute) {
@@ -186,19 +191,15 @@ class AmTreeBuilder(private val template: Template) {
     }
 
     private fun addAnnotations(amNode: AmNode, annotations: List<Annotation>) {
-        for ((key, value) in convertAnnotations(amNode, annotations)) {
-            key.setAnnotations(value)
-        }
+        convertAnnotations(amNode, annotations).forEach { (key, value) -> key.annotations = value }
     }
 
     private fun convertAnnotations(root: AmNode, annotations: List<Annotation>): Map<AmNode, MutableList<Annotation>> {
         val mappedAnnotations: MutableMap<AmNode, MutableList<Annotation>> = HashMap()
         for (annotation in annotations) {
-            val node: AmNode = AmUtils.resolvePath(root, annotation.path)
+            val node: AmNode? = AmUtils.resolvePath(root, annotation.path)
             if (node != null) {
-                val nodeAnnotations = mappedAnnotations.computeIfAbsent(
-                    node
-                ) { ignore: AmNode? -> ArrayList() }
+                val nodeAnnotations = mappedAnnotations.computeIfAbsent(node) { mutableListOf() }
                 nodeAnnotations.add(annotation)
             }
         }
@@ -207,9 +208,7 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun addConstraints(amNode: AmNode, constraints: TConstraints?) {
         if (constraints != null) {
-            for ((key, value) in convertConstraints(amNode, constraints)) {
-                key.setConstraints(value)
-            }
+            convertConstraints(amNode, constraints).forEach { (key, value) -> key.constraints = value }
         }
     }
 
@@ -217,11 +216,9 @@ class AmTreeBuilder(private val template: Template) {
         val mappedConstraints: MutableMap<AmNode, MutableList<TAttribute>> = HashMap()
         for (attribute in constraints.attributes) {
             val path = if (attribute.rmAttributeName == null) attribute.differentialPath else attribute.differentialPath + '/' + attribute.rmAttributeName
-            val node: AmNode = AmUtils.resolvePath(root, path)
+            val node: AmNode? = AmUtils.resolvePath(root, path)
             if (node != null) {
-                val nodeAttributes = mappedConstraints.computeIfAbsent(
-                    node
-                ) { k: AmNode? -> ArrayList() }
+                val nodeAttributes = mappedConstraints.computeIfAbsent(node) { mutableListOf() }
                 nodeAttributes.add(attribute)
             }
         }
@@ -230,21 +227,17 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun addViewConstraints(amNode: AmNode, tView: TView?) {
         if (tView != null) {
-            for ((key, value) in convertViewConstraints(amNode, tView)) {
-                key.setViewConstraints(value)
-            }
+            convertViewConstraints(amNode, tView).forEach { (key, value) -> key.viewConstraints = value }
         }
     }
 
     private fun convertViewConstraints(root: AmNode, tView: TView): Map<AmNode, MutableList<TView.Constraints.Items>> {
         val mappedConstraints: MutableMap<AmNode, MutableList<TView.Constraints.Items>> = HashMap()
         for (viewConstraint in tView.constraints) {
-            if (!viewConstraint.items.isEmpty()) {
-                val node: AmNode = AmUtils.resolvePath(root, viewConstraint.path)
+            if (viewConstraint.items.isNotEmpty()) {
+                val node: AmNode? = AmUtils.resolvePath(root, viewConstraint.path)
                 if (node != null) {
-                    val itemsList = mappedConstraints.computeIfAbsent(
-                        node
-                    ) { k: AmNode? -> ArrayList() }
+                    val itemsList = mappedConstraints.computeIfAbsent(node) { mutableListOf() }
                     itemsList.addAll(viewConstraint.items)
                 }
             }
@@ -252,22 +245,16 @@ class AmTreeBuilder(private val template: Template) {
         return mappedConstraints
     }
 
-    private fun convertBindingItems(cArchetypeRoot: CArchetypeRoot?): Map<String, Collection<TermBindingItem>>? {
-        val result: MutableMap<String, Collection<TermBindingItem>>?
-        if (cArchetypeRoot!!.termBindings != null && !cArchetypeRoot.termBindings.isEmpty()) {
-            result = LinkedHashMap(cArchetypeRoot.termBindings.size)
+    private fun convertBindingItems(cArchetypeRoot: CArchetypeRoot): Map<String, Collection<TermBindingItem>>? {
+        return if (cArchetypeRoot.termBindings.isNotEmpty()) {
+            val result: MutableMap<String, Collection<TermBindingItem>> = LinkedHashMap(cArchetypeRoot.termBindings.size)
             for (termBindingSet in cArchetypeRoot.termBindings) {
-                var items: List<TermBindingItem>
-                items = if (termBindingSet.items != null) {
-                    ArrayList(termBindingSet.items)
-                } else {
-                    emptyList()
-                }
+                val items: List<TermBindingItem> = termBindingSet.items.toList()
                 result[termBindingSet.terminology] = items
             }
+            result
         } else {
-            result = null
+            null
         }
-        return result
     }
 }
