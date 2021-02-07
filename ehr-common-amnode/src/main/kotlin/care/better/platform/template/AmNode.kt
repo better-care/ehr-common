@@ -36,7 +36,7 @@ class AmNode constructor(
     val cObject: CObject? = null,
     val archetypeNodeId: String? = null,
     var nodeId: String? = null,
-    val rmType: String? = null,
+    val rmType: String,
     var name: String? = null,
     private var terms: List<ArchetypeTerm>? = null,
     private var termDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
@@ -61,9 +61,9 @@ class AmNode constructor(
         occurrences = cObject.occurrences ?: AmUtils.createInterval(0, null)
     )
 
-    constructor(parent: AmNode?, rmType: String?) : this(parent, rmType, 1, null)
+    constructor(parent: AmNode?, rmType: String) : this(parent, rmType, 1, null)
 
-    constructor(parent: AmNode?, rmType: String?, minOccurences: Int, maxOccurences: Int?) : this(
+    constructor(parent: AmNode?, rmType: String, minOccurences: Int, maxOccurences: Int?) : this(
         parent = parent,
         rmType = rmType,
         occurrences = AmUtils.createInterval(minOccurences, maxOccurences)
@@ -145,9 +145,13 @@ class AmNode constructor(
         }
     }
 
-    fun getTypeOnParent(): TypeInfo? = type
+    fun getTypeOnParentOrNull(): TypeInfo? = type
+
+    fun getTypeOnParent(): TypeInfo = type ?: throw AmException("Type for $this  not found.")
 
     fun isCollectionOnParent(): Boolean = type?.isCollection() ?: false
+
+    fun isNotCollectionOnParent(): Boolean = !isCollectionOnParent()
 
     fun createMutableCollection(): MutableCollection<Any> =
         when {
@@ -161,7 +165,7 @@ class AmNode constructor(
         this.templateLanguage = templateLanguage
     }
 
-    fun copyForReference(parent: AmNode?): AmNode {
+    internal fun copyForReference(parent: AmNode?): AmNode {
         val amNode = if (cObject == null) AmNode(parent, rmType) else AmNode(cObject, parent)
 
         amNode.nodeId = nodeId
