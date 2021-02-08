@@ -17,17 +17,23 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "TermBindingSet", propOrder = ["items"])
 class TermBindingSet : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(type = TermBindingItem::class)
     var items: MutableList<TermBindingItem> = mutableListOf()
+
+    @XmlAttribute(name = "terminology", required = true)
     lateinit var terminology: String
 }

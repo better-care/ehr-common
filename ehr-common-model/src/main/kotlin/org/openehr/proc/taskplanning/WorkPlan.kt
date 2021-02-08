@@ -24,11 +24,25 @@ import org.openehr.base.basetypes.UidBasedId
 import org.openehr.rm.composition.ContentItem
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "WORK_PLAN", propOrder = [
+    "description",
+    "topLevelPlanUids",
+    "topLevelPlans",
+    "carePathway",
+    "carePlan",
+    "orderList",
+    "calendar",
+    "timeline",
+    "context",
+    "eventWaitStates",
+    "indications",
+    "classification"])
 @Open
 class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     companion object {
@@ -36,20 +50,39 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
         private val serialVersionUID: Long = 0L
     }
 
-
+    @XmlElement(required = true)
     @Required
     var description: DvText? = null
 
+    @XmlElement(name = "care_pathway")
     var carePathway: ItemStructure? = null
+
+    @XmlElement(name = "top_level_plan_uids")
     var topLevelPlanUids: LinkedHashSet<UidBasedId> = linkedSetOf()
+
+    @XmlElement(name = "top_level_plans")
     var topLevelPlans: LinkedHashSet<TaskPlan> = linkedSetOf()
+
+    @XmlElement(name = "care_plan")
     var carePlan: LocatableRef? = null
+
+    @XmlElement(name = "order_list")
     var orderList: MutableList<OrderRef> = mutableListOf()
+
+    @XmlElement(required = true)
     var calendar: PlanCalendar = PlanCalendar()
+
+    @XmlElement(required = true)
     var timeline: PlanTimeline = PlanTimeline()
+
     var context: PlanDataContext? = null
+
+    @XmlElement(name = "event_wait_states")
     var eventWaitStates: MutableList<EventWait<out PlanEvent>> = mutableListOf()
+
+    @XmlElement(name = "indications")
     var indications: MutableList<DvText> = mutableListOf()
+
     var classification: ItemStructure? = null
 
     constructor(description: DvText?)  : this() {

@@ -18,19 +18,33 @@ package org.openehr.am.aom
 import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "T_ATTRIBUTE", propOrder = [
+    "rmAttributeName",
+    "children",
+    "differentialPath"])
 class TAttribute : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "rm_attribute_name", required = true)
     @Required
     var rmAttributeName: String? = null
+
+    @XmlElement(type = TComplexObject::class)
     var children: MutableList<TComplexObject> = mutableListOf()
+
+    @XmlElement(name = "differential_path", required = true)
     lateinit var differentialPath: String
 }

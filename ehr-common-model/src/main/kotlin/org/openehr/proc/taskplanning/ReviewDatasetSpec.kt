@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "REVIEW_DATASET_SPEC", propOrder = ["captureDatasets"])
 @Open
 class ReviewDatasetSpec : DatasetSpec {
     companion object {
@@ -30,6 +32,7 @@ class ReviewDatasetSpec : DatasetSpec {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "capture_datasets")
     var captureDatasets: MutableList<CaptureDatasetSpec> = mutableListOf()
 
     constructor()

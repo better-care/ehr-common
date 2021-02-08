@@ -21,11 +21,20 @@ import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ARCHETYPED", propOrder = [
+    "archetypeId",
+    "templateId",
+    "rmVersion"])
 @Open
 class Archetyped : RmObject(), Serializable {
     companion object {
@@ -33,8 +42,13 @@ class Archetyped : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "archetype_id", required = true)
     @Required
     var archetypeId: ArchetypeId? = null
+
+    @XmlElement(name = "template_id")
     var templateId: TemplateId? = null
+
+    @XmlElement(name = "rm_version", required = true)
     var rmVersion: String = RM_VERSION.version
 }

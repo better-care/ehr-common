@@ -18,11 +18,12 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "ADHOC_GROUP")
 @Open
 class AdhocGroup : ChoiceGroup<AdhocBranch> {
     companion object {

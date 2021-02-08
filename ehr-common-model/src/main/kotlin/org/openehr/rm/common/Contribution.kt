@@ -20,11 +20,15 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.HierObjectId
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CONTRIBUTION", propOrder = ["uid", "versions", "audit"])
+@XmlRootElement
 @Open
 class Contribution : RmObject(), Serializable {
     companion object {
@@ -32,12 +36,15 @@ class Contribution : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var uid: HierObjectId? = null
 
+    @XmlElement(required = true)
     @Required
     var versions: MutableList<RmObject> = mutableListOf()
 
+    @XmlElement(required = true)
     @Required
     var audit: AuditDetails? = null
 }

@@ -21,11 +21,19 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvEhrUri
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "LINK", propOrder = [
+    "meaning",
+    "type",
+    "target"])
 @Open
 class Link : RmObject(), Serializable {
 
@@ -48,12 +56,15 @@ class Link : RmObject(), Serializable {
         fun quote(parameter: String): String = parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
     }
 
+    @XmlElement(required = true)
     @Required
     var meaning: DvText? = null
 
+    @XmlElement(required = true)
     @Required
     var type: DvText? = null
 
+    @XmlElement(required = true)
     @Required
     var target: DvEhrUri? = null
 }

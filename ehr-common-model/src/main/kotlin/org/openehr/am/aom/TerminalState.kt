@@ -15,10 +15,16 @@
 
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
+
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "TERMINAL_STATE")
 class TerminalState : State() {
     companion object {
         @JvmStatic

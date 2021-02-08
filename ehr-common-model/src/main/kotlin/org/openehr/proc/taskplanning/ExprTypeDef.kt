@@ -19,11 +19,27 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import java.io.Serializable
 import java.util.*
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "EXPR_TYPE_DEF", propOrder = ["typeName"])
+@XmlSeeAlso(value = [
+        TypeDefBoolean::class,
+        TypeDefReal::class,
+        TypeDefInteger::class,
+        TypeDefDate::class,
+        TypeDefDateTime::class,
+        TypeDefDuration::class,
+        TypeDefObject::class,
+        TypeDefObjectRef::class,
+        TypeDefString::class,
+        TypeDefVoid::class,
+        TypeDefTerminologyCode::class,
+        TypeDefUri::class])
 @Open
 abstract class ExprTypeDef<T>(private var typeName: String) : RmObject(), Serializable {
 
@@ -32,6 +48,7 @@ abstract class ExprTypeDef<T>(private var typeName: String) : RmObject(), Serial
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "type_name", required = true)
     fun getTypeName(): String? = typeName
 
     fun setTypeName(typeName: String) {
@@ -41,14 +58,14 @@ abstract class ExprTypeDef<T>(private var typeName: String) : RmObject(), Serial
     override fun hashCode(): Int = Objects.hash(typeName)
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                other == null || javaClass != other.javaClass -> false
-                else -> (other as ExprTypeDef<*>).typeName == typeName
-            }
+        when {
+            this === other -> true
+            other == null || javaClass != other.javaClass -> false
+            else -> (other as ExprTypeDef<*>).typeName == typeName
+        }
 
     override fun toString(): String =
-            "ExprTypeDef{" +
-                    "typeName='$typeName'" +
-                    '}'
+        "ExprTypeDef{" +
+                "typeName='$typeName'" +
+                '}'
 }

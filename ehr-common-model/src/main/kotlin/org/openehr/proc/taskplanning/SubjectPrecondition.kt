@@ -21,11 +21,15 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "SUBJECT_PRECONDITION", propOrder = [
+    "description",
+    "expression"])
 @Open
 class SubjectPrecondition() : RmObject(), Serializable, VisitableByModelVisitor, ExpressionNamesProvider {
     companion object {
@@ -33,6 +37,7 @@ class SubjectPrecondition() : RmObject(), Serializable, VisitableByModelVisitor,
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var description: String? = null
 

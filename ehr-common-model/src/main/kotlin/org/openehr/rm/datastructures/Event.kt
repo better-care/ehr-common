@@ -19,11 +19,17 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "EVENT", propOrder = [
+    "time",
+    "data",
+    "state"])
+@XmlSeeAlso(value = [PointEvent::class, IntervalEvent::class])
 @Open
 abstract class Event : Locatable() {
     companion object {
@@ -31,10 +37,13 @@ abstract class Event : Locatable() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var time: DvDateTime? = null
 
+    @XmlElement(required = true)
     @Required
     var data: ItemStructure? = null
+
     var state: ItemStructure? = null
 }

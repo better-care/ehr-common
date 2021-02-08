@@ -21,11 +21,22 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvEncapsulated
 import org.openehr.rm.datatypes.DvIdentifier
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "FEEDER_AUDIT", propOrder = [
+    "originatingSystemItemIds",
+    "feederSystemItemIds",
+    "originalContent",
+    "originatingSystemAudit",
+    "feederSystemAudit"])
 @Open
 class FeederAudit : RmObject(), Serializable {
     companion object {
@@ -33,11 +44,19 @@ class FeederAudit : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "originating_system_item_ids")
     var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
+
+    @XmlElement(name = "feeder_system_item_ids")
     var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
+
+    @XmlElement(name = "original_content")
     var originalContent: DvEncapsulated? = null
 
+    @XmlElement(name = "originating_system_audit", required = true)
     @Required
     var originatingSystemAudit: FeederAuditDetails? = null
+
+    @XmlElement(name = "feeder_system_audit")
     var feederSystemAudit: FeederAuditDetails? = null
 }

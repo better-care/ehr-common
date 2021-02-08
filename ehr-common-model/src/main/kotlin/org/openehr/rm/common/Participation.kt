@@ -22,11 +22,20 @@ import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvInterval
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "PARTICIPATION", propOrder = [
+    "function",
+    "performer",
+    "time",
+    "mode"])
 @Open
 class Participation : RmObject(), Serializable {
     companion object {
@@ -34,11 +43,15 @@ class Participation : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var function: DvText? = null
 
+    @XmlElement(required = true)
     @Required
     var performer: PartyProxy? = null
+
     var time: DvInterval? = null
+
     var mode: DvCodedText? = null
 }

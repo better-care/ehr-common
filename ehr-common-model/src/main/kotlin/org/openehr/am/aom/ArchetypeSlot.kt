@@ -15,16 +15,28 @@
 
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ARCHETYPE_SLOT", propOrder = [
+    "includes",
+    "excludes"])
 class ArchetypeSlot : CObject() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(type = Assertion::class)
     var includes: MutableList<Assertion> = mutableListOf()
+
+    @XmlElement(type = Assertion::class)
     var excludes: MutableList<Assertion> = mutableListOf()
 }

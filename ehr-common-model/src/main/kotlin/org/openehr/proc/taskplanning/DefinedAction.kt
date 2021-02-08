@@ -19,11 +19,16 @@ import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.composition.Entry
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "DEFINED_ACTION", propOrder = [
+    "prototype",
+    "optionality"
+])
 @Open
 class DefinedAction : PerformableAction {
     companion object {
@@ -31,7 +36,10 @@ class DefinedAction : PerformableAction {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "prototype")
     var prototype: MutableList<Entry> = mutableListOf()
+
+    @XmlElement(name = "optionality")
     var optionality: ValidityKind? = null
 
     constructor()

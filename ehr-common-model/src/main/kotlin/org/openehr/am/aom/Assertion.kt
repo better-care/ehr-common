@@ -17,11 +17,21 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ASSERTION", propOrder = [
+    "tag",
+    "stringExpression",
+    "expression",
+    "variables"])
 class Assertion : AmObject(), Serializable {
     companion object {
         @JvmStatic
@@ -29,7 +39,13 @@ class Assertion : AmObject(), Serializable {
     }
 
     var tag: String? = null
+
+    @XmlElement(name = "string_expression")
     var stringExpression: String? = null
+
+    @XmlElement(required = true, type = ExprItem::class)
     lateinit var expression: ExprItem
+
+    @XmlElement(type = AssertionVariable::class)
     var variables: MutableList<AssertionVariable> = mutableListOf()
 }

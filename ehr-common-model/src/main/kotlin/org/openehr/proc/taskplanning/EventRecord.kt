@@ -19,11 +19,16 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@SuppressWarnings("ClassReferencesSubclass")
+@XmlType(name = "EVENT_RECORD", propOrder = ["time", "description"])
+@XmlSeeAlso(value = [TaskPlanEventRecord::class, TaskEventRecord::class])
 @Open
 abstract class EventRecord() : RmObject(), Serializable {
     companion object {
@@ -31,8 +36,11 @@ abstract class EventRecord() : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var time: String? = null
+
+    @XmlElement
     var description: String? = null
 
     constructor(time: String?) : this() {

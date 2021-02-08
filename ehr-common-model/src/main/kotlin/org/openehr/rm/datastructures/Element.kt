@@ -18,11 +18,18 @@ package org.openehr.rm.datastructures
 import care.better.platform.annotation.Open
 import org.openehr.rm.datatypes.DataValue
 import org.openehr.rm.datatypes.DvCodedText
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ELEMENT", propOrder = [
+    "value",
+    "nullFlavour"])
 @Open
 class Element : Item() {
     companion object {
@@ -31,5 +38,7 @@ class Element : Item() {
     }
 
     var value: DataValue? = null
+
+    @XmlElement(name = "null_flavour")
     var nullFlavour: DvCodedText? = null
 }

@@ -16,11 +16,15 @@
 package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "SECTION", propOrder = ["items"])
 @Open
 class Section : ContentItem() {
     companion object {

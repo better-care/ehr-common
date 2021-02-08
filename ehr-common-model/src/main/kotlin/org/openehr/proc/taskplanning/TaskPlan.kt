@@ -25,11 +25,26 @@ import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvIdentifier
 import org.openehr.rm.datatypes.DvText
 import org.openehr.rm.datatypes.DvUri
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_PLAN", propOrder = [
+    "subject",
+    "description",
+    "principalPerformer",
+    "definition",
+    "trainingLevel",
+    "guideline",
+    "bestPracticeRef",
+    "orderSetId",
+    "orderSetType",
+    "expiryTime",
+    "dueTime",
+    "indications",
+    "executionHistory"])
 @Open
 class TaskPlan() : ContentItem(), VisitableByModelVisitor {
     companion object {
@@ -37,22 +52,45 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement
     var subject: PartyProxy? = null
 
+    @XmlElement(required = true)
     @Required
     var description: DvText? = null
+
+    @XmlElement
     var guideline: ItemStructure? = null
+
+    @XmlElement(name = "principal_performer")
     var principalPerformer: TaskParticipation? = null
 
+    @XmlElement(required = true)
     @Required
     var definition: TaskGroup<out PlanItem>? = null
+
+    @XmlElement(name = "execution_history")
     var executionHistory: TaskPlanExecutionHistory? = null
+
+    @XmlElement(name = "training_level")
     var trainingLevel: Int? = null
+
+    @XmlElement(name = "best_practice_ref")
     var bestPracticeRef: DvUri? = null
+
+    @XmlElement(name = "expiry_time")
     var expiryTime: String? = null
+
+    @XmlElement(name = "due_time")
     var dueTime: String? = null
+
+    @XmlElement(name = "order_set_type")
     var orderSetType: DvIdentifier? = null
+
+    @XmlElement(name = "order_set_id")
     var orderSetId: DvIdentifier? = null
+
+    @XmlElement(name = "indications")
     var indications: MutableList<DvText> = mutableListOf()
 
     constructor(description: DvText?, definition: TaskGroup<out PlanItem>?) : this() {

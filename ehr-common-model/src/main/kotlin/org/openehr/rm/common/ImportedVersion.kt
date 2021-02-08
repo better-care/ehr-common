@@ -17,11 +17,16 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "IMPORTED_VERSION", propOrder = ["item"])
 @Open
 class ImportedVersion : Version() {
     companion object {
@@ -29,6 +34,7 @@ class ImportedVersion : Version() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var item: OriginalVersion? = null
 }

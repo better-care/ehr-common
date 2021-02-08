@@ -17,17 +17,22 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ConstraintBindingSet", propOrder = ["items"])
 class ConstraintBindingSet : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(type = ConstraintBindingItem::class)
     var items: MutableList<ConstraintBindingItem> = mutableListOf()
+
+    @XmlAttribute(name = "terminology", required = true)
     lateinit var terminology: String
 }

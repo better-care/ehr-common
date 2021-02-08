@@ -20,11 +20,22 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "FEEDER_AUDIT_DETAILS", propOrder = [
+    "systemId",
+    "location",
+    "provider",
+    "subject",
+    "time",
+    "versionId"])
 @Open
 class FeederAuditDetails : RmObject(), Serializable {
     companion object {
@@ -32,11 +43,18 @@ class FeederAuditDetails : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "system_id", required = true)
     @Required
     var systemId: String? = null
+
     var location: PartyIdentified? = null
+
     var provider: PartyIdentified? = null
+
     var subject: PartyProxy? = null
+
     var time: DvDateTime? = null
+
+    @XmlElement(name = "version_id")
     var versionId: String? = null
 }

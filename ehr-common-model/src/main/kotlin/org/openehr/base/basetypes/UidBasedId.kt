@@ -16,11 +16,17 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "UID_BASED_ID")
+@XmlSeeAlso(value = [ObjectVersionId::class, HierObjectId::class])
 @Open
 abstract class UidBasedId : ObjectId() {
     companion object {

@@ -23,30 +23,70 @@ import org.openehr.rm.common.ResourceDescription
 import org.openehr.rm.common.RevisionHistory
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "OPERATIONAL_TEMPLATE", propOrder = [
+    "language",
+    "isControlled",
+    "description",
+    "revisionHistory",
+    "uid",
+    "templateId",
+    "concept",
+    "definition",
+    "ontology",
+    "componentOntologies",
+    "annotations",
+    "constraints",
+    "view"])
+@XmlRootElement
 class Template : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var language: CodePhrase? = null
+
+    @XmlElement(name = "is_controlled")
     var isControlled: Boolean? = null
+
     var description: ResourceDescription? = null
+
+    @XmlElement(name = "revision_history")
     var revisionHistory: RevisionHistory? = null
+
     var uid: HierObjectId? = null
+
+    @XmlElement(name = "template_id", required = true)
     lateinit var templateId: TemplateId
+
+    @XmlElement(required = true)
     lateinit var concept: String
+
+    @XmlElement(required = true, type = CArchetypeRoot::class)
     @Required
     var definition: CArchetypeRoot? = null
+
+    @XmlElement(type = FlatArchetypeOntology::class)
     var ontology: FlatArchetypeOntology? = null
+
+    @XmlElement(name = "component_ontologies", type = FlatArchetypeOntology::class)
     var componentOntologies: MutableList<FlatArchetypeOntology> = mutableListOf()
+
+    @XmlElement(type = Annotation::class)
     var annotations: MutableList<Annotation> = mutableListOf()
+
+    @XmlElement(type = TConstraints::class)
     var constraints: TConstraints? = null
+
+    @XmlElement(type = TView::class)
     var view: TView? = null
 }

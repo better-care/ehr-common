@@ -17,17 +17,25 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ASSERTION_VARIABLE", propOrder = ["name", "definition"])
 class AssertionVariable : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     lateinit var name: String
+
+    @XmlElement(required = true)
     lateinit var definition: String
 }

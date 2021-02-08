@@ -18,11 +18,13 @@ package org.openehr.am.aom
 import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "T_VIEW", propOrder = ["constraints"])
 class TView : AmObject(), Serializable {
     companion object {
         @JvmStatic
@@ -31,23 +33,34 @@ class TView : AmObject(), Serializable {
 
     var constraints: MutableList<Constraints> = mutableListOf()
 
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = ["items"])
     class Constraints : AmObject(), Serializable {
         companion object {
             @JvmStatic
             private val serialVersionUID: Long = 0L
         }
 
+        @XmlElement(required = true)
         @Required
         var items: MutableList<Items> = mutableListOf()
+
+        @XmlAttribute(name = "path", required = true)
         lateinit var path: String
 
+        @XmlAccessorType(XmlAccessType.FIELD)
+        @XmlType(name = "", propOrder = ["value"])
         class Items : AmObject(), Serializable {
             companion object {
                 @JvmStatic
                 private val serialVersionUID: Long = 0L
             }
 
+            @XmlElement(required = true)
+            @XmlSchemaType(name = "anySimpleType")
             lateinit var value: Any
+
+            @XmlAttribute(name = "id", required = true)
             lateinit var id: String
         }
     }

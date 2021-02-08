@@ -14,15 +14,23 @@
  */
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "EXPR_UNARY_OPERATOR", propOrder = ["operand"])
 class ExprUnaryOperator : ExprOperator() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true, type = ExprItem::class)
     lateinit var operand: ExprItem
 }

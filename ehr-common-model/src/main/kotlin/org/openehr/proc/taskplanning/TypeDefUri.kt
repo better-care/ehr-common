@@ -17,11 +17,12 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import java.net.URI
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TYPE_DEF_URI")
 @Open
 class TypeDefUri : ExprTypeDef<URI>("Uri") {
 

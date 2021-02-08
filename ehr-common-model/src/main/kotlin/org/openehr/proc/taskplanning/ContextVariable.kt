@@ -17,11 +17,15 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@SuppressWarnings("ClassReferencesSubclass")
+@XmlType(name = "CONTEXT_VARIABLE")
+@XmlSeeAlso(value = [ExternalVariable::class, LocalVariable::class])
 @Open
 abstract class ContextVariable<T> : ContextValue<T> {
     companion object {

@@ -16,11 +16,12 @@
 package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TIMER_WAIT")
 @Open
 class TimerWait : EventWait<TimerEvent> {
     companion object {

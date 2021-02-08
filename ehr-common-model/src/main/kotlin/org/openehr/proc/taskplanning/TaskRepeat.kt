@@ -19,11 +19,16 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import org.openehr.base.foundationtypes.IntervalOfInteger
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_REPEAT", propOrder = [
+    "repeats",
+    "terminateCondition",
+    "period"])
 @Open
 class TaskRepeat() : RmObject(), Serializable {
     companion object {
@@ -31,8 +36,13 @@ class TaskRepeat() : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "repeats")
     var repeats: IntervalOfInteger? = null
+
+    @XmlElement(name = "terminate_condition")
     var terminateCondition: PlanEvent? = null
+
+    @XmlElement(name = "period")
     var period: String? = null
 
     constructor(terminateCondition: PlanEvent?) : this() {

@@ -18,11 +18,17 @@ package org.openehr.proc.taskplanning
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_WAIT", propOrder = [
+    "eventRelation",
+    "events",
+    "timeout",
+    "nextState"])
 @Open
 class TaskWait() : RmObject(), Serializable {
     companion object {
@@ -30,9 +36,16 @@ class TaskWait() : RmObject(), Serializable {
         private val serialVersionUID: Long = 1L
     }
 
+    @XmlElement
     var events: MutableList<PlanEvent> = mutableListOf()
+
+    @XmlElement(name = "event_relation")
     var eventRelation: TemporalRelation? = null
+
+    @XmlElement(name = "event_relation")
     var timeout: TimerWait? = null
+
+    @XmlElement(name = "next_state")
     var nextState: TaskLifecycle? = null
 
     constructor(eventRelation: TemporalRelation?, timeout: TimerWait) : this() {

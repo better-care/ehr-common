@@ -19,11 +19,19 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDuration
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "INTERVAL_EVENT", propOrder = [
+    "width",
+    "sampleCount",
+    "mathFunction"])
 @Open
 class IntervalEvent : Event() {
     companion object {
@@ -31,10 +39,14 @@ class IntervalEvent : Event() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var width: DvDuration? = null
+
+    @XmlElement(name = "sample_count")
     var sampleCount: Int? = null
 
+    @XmlElement(name = "math_function", required = true)
     @Required
     var mathFunction: DvCodedText? = null
 }

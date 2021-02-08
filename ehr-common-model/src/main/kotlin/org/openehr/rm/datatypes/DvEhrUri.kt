@@ -16,11 +16,16 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_EHR_URI")
 @Open
 class DvEhrUri : DvUri() {
     companion object {

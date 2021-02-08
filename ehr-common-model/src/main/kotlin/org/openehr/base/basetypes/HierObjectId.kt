@@ -16,11 +16,16 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "HIER_OBJECT_ID")
 @Open
 class HierObjectId : UidBasedId() {
     companion object {

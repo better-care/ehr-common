@@ -19,11 +19,19 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "OBJECT_REF", propOrder = [
+    "id",
+    "namespace",
+    "type"])
+@XmlSeeAlso(value = [PartyRef::class, AccessGroupRef::class, LocatableRef::class])
 @Open
 class ObjectRef : RmObject(), Serializable {
 
@@ -59,10 +67,19 @@ class ObjectRef : RmObject(), Serializable {
                 }
     }
 
+    @XmlElement(required = true)
     @Required
     var id: ObjectId? = null
 
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "token")
     @Required
     var namespace: String? = null
+
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "token")
+    @Required
     var type: String? = null
 }

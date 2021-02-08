@@ -19,11 +19,19 @@ import care.better.openehr.am.AmObject
 import org.openehr.base.foundationtypes.IntervalOfInteger
 import org.openehr.base.foundationtypes.IntervalOfReal
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_QUANTITY_ITEM", propOrder = [
+    "magnitude",
+    "precision",
+    "units"])
 class CQuantityItem : AmObject(), Serializable {
     companion object {
         @JvmStatic
@@ -31,6 +39,9 @@ class CQuantityItem : AmObject(), Serializable {
     }
 
     var magnitude: IntervalOfReal? = null
+
     var precision: IntervalOfInteger? = null
+
+    @XmlElement(required = true)
     lateinit var units: String
 }

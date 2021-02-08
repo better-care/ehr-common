@@ -18,11 +18,16 @@ package org.openehr.rm.common
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "PARTY_RELATED", propOrder = ["relationship"])
 @Open
 class PartyRelated : PartyIdentified() {
     companion object {
@@ -30,6 +35,7 @@ class PartyRelated : PartyIdentified() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var relationship: DvCodedText? = null
 }

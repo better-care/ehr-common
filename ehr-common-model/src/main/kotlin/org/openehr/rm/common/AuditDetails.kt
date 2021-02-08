@@ -22,11 +22,20 @@ import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AUDIT_DETAILS", propOrder = [
+    "systemId",
+    "committer",
+    "timeCommitted",
+    "changeType",
+    "description"])
+@XmlSeeAlso(Attestation::class)
 @Open
 class AuditDetails : RmObject(), Serializable {
     companion object {
@@ -34,16 +43,21 @@ class AuditDetails : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "system_id", required = true)
     @Required
     var systemId: String? = null
 
+    @XmlElement(required = true)
     @Required
     var committer: PartyProxy? = null
 
+    @XmlElement(name = "time_committed", required = true)
     @Required
     var timeCommitted: DvDateTime? = null
 
+    @XmlElement(name = "change_type", required = true)
     @Required
     var changeType: DvCodedText? = null
+
     var description: DvText? = null
 }

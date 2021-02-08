@@ -15,12 +15,22 @@
 
 package org.openehr.rm.composition
 
+import org.openehr.proc.taskplanning.TaskPlan
+import org.openehr.proc.taskplanning.WorkPlan
 import org.openehr.rm.common.Locatable
+import org.openehr.rm.integration.GenericEntry
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CONTENT_ITEM")
+@XmlSeeAlso(value = [Section::class, GenericEntry::class, Entry::class, WorkPlan::class, TaskPlan::class])
 abstract class ContentItem : Locatable() {
     companion object {
         @JvmStatic

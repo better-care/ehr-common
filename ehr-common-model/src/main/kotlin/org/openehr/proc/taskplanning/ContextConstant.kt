@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CONTEXT_CONSTANT")
 @Open
 class ContextConstant<T : Any> : ContextValue<T> {
     companion object {
@@ -30,6 +32,7 @@ class ContextConstant<T : Any> : ContextValue<T> {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var value: T? = null
 

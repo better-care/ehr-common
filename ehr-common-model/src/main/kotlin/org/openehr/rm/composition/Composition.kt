@@ -21,11 +21,21 @@ import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.CodePhrase
 import org.openehr.rm.datatypes.DvCodedText
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "COMPOSITION", propOrder = [
+    "language",
+    "territory",
+    "category",
+    "composer",
+    "context",
+    "content"])
+@XmlRootElement
 @Open
 class Composition : Locatable() {
     companion object {
@@ -33,17 +43,23 @@ class Composition : Locatable() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var language: CodePhrase? = null
 
+    @XmlElement(required = true)
     @Required
     var territory: CodePhrase? = null
 
+    @XmlElement(required = true)
     @Required
     var category: DvCodedText? = null
 
+    @XmlElement(required = true)
     @Required
     var composer: PartyProxy? = null
+
     var context: EventContext? = null
+
     var content: MutableList<ContentItem> = mutableListOf()
 }

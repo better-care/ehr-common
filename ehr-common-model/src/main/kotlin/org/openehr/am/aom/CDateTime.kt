@@ -17,11 +17,22 @@ package org.openehr.am.aom
 
 import org.openehr.base.foundationtypes.IntervalOfDateTime
 import java.math.BigInteger
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_DATE_TIME", propOrder = [
+    "pattern",
+    "timezoneValidity",
+    "range",
+    "assumedValue",
+    "defaultValue"])
 class CDateTime : CPrimitive() {
     companion object {
         @JvmStatic
@@ -29,8 +40,15 @@ class CDateTime : CPrimitive() {
     }
 
     var pattern: String? = null
+
+    @XmlElement(name = "timezone_validity")
     var timezoneValidity: BigInteger? = null
+
     var range: IntervalOfDateTime? = null
+
+    @XmlElement(name = "assumed_value")
     var assumedValue: String? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: String? = null
 }

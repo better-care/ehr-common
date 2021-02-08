@@ -17,19 +17,33 @@ package org.openehr.am.aom
 
 import org.openehr.base.basetypes.TerminologyId
 import org.openehr.rm.datatypes.CodePhrase
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_CODE_PHRASE", propOrder = [
+    "assumedValue",
+    "defaultValue",
+    "terminologyId",
+    "codeList"])
+@XmlSeeAlso(CCodeReference::class)
 open class CCodePhrase : CDomainType() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "assumed_value")
     var assumedValue: CodePhrase? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: CodePhrase? = null
+
+    @XmlElement(name = "terminology_id")
     var terminologyId: TerminologyId? = null
+
+    @XmlElement(name = "code_list")
     var codeList: MutableList<String> = mutableListOf()
 }

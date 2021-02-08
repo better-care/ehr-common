@@ -18,11 +18,15 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CALENDAR_EVENT", propOrder = [
+    "entryId",
+    "time"])
 @Open
 class CalendarEvent() : PlanEvent() {
     companion object {
@@ -30,8 +34,10 @@ class CalendarEvent() : PlanEvent() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "entry_id")
     var entryId: UidBasedId? = null
 
+    @XmlElement(required = true)
     @Required
     var time: String? = null
 

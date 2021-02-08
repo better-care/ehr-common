@@ -19,25 +19,43 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectVersionId
 import org.openehr.rm.datatypes.DvCodedText
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ORIGINAL_VERSION", propOrder = [
+    "uid",
+    "data",
+    "precedingVersionUid",
+    "otherInputVersionUids",
+    "attestations",
+    "lifecycleState"])
 @Open
 class OriginalVersion : Version() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
-
+    @XmlElement(required = true)
     @Required
     var uid: ObjectVersionId? = null
+
     var data: Any? = null
+
+    @XmlElement(name = "preceding_version_uid")
     var precedingVersionUid: ObjectVersionId? = null
+
+    @XmlElement(name = "other_input_version_uids")
     var otherInputVersionUids: MutableList<ObjectVersionId> = mutableListOf()
+
     var attestations: MutableList<Attestation> = mutableListOf()
 
+    @XmlElement(name = "lifecycle_state", required = true)
     @Required
     var lifecycleState: DvCodedText? = null
 }

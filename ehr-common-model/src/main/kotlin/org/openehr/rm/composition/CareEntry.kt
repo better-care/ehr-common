@@ -18,11 +18,17 @@ package org.openehr.rm.composition
 import care.better.platform.annotation.Open
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CARE_ENTRY", propOrder = [
+    "protocol",
+    "guidelineId"])
+@XmlSeeAlso(value = [Evaluation::class, Observation::class, Instruction::class, Action::class])
 @Open
 abstract class CareEntry : Entry() {
     companion object {
@@ -31,5 +37,7 @@ abstract class CareEntry : Entry() {
     }
 
     var protocol: ItemStructure? = null
+
+    @XmlElement(name = "guideline_id")
     var guidelineId: ObjectRef? = null
 }

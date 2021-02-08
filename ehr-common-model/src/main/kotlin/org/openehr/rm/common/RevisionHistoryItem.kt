@@ -20,11 +20,18 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectVersionId
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "REVISION_HISTORY_ITEM", propOrder = [
+    "versionId",
+    "audits"])
 @Open
 class RevisionHistoryItem : RmObject(), Serializable {
     companion object {
@@ -32,9 +39,11 @@ class RevisionHistoryItem : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "version_id", required = true)
     @Required
     var versionId: ObjectVersionId? = null
 
+    @XmlElement(required = true)
     @Required
     var audits: MutableList<AuditDetails> = mutableListOf()
 }

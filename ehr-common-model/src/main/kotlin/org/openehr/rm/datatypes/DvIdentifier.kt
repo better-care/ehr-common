@@ -18,11 +18,22 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(
+    name = "DV_IDENTIFIER", propOrder = [
+        "issuer",
+        "assigner",
+        "id",
+        "type"])
 @Open
 class DvIdentifier : DataValue() {
     companion object {
@@ -31,10 +42,13 @@ class DvIdentifier : DataValue() {
     }
 
     var issuer: String? = null
+
     var assigner: String? = null
 
+    @XmlElement(required = true)
     @Required
     var id: String? = null
+
     var type: String? = null
 
     override fun equals(other: Any?): Boolean =

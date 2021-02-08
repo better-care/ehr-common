@@ -21,11 +21,20 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.common.StringDictionaryItem
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "TRANSLATION_DETAILS", propOrder = [
+    "language",
+    "author",
+    "accreditation",
+    "otherDetails"])
 @Open
 class TranslationDetails : RmObject(), Serializable {
     companion object {
@@ -33,11 +42,16 @@ class TranslationDetails : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var language: CodePhrase? = null
 
+    @XmlElement(required = true)
     @Required
     var author: MutableList<StringDictionaryItem> = mutableListOf()
+
     var accreditation: String? = null
+
+    @XmlElement(name = "other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 }

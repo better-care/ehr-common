@@ -16,11 +16,20 @@
 package org.openehr.am.aom
 
 import org.openehr.base.foundationtypes.IntervalOfDuration
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_DURATION", propOrder = [
+    "pattern",
+    "range",
+    "assumedValue",
+    "defaultValue"])
 class CDuration : CPrimitive() {
     companion object {
         @JvmStatic
@@ -28,7 +37,12 @@ class CDuration : CPrimitive() {
     }
 
     var pattern: String? = null
+
     var range: IntervalOfDuration? = null
+
+    @XmlElement(name = "assumed_value")
     var assumedValue: String? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: String? = null
 }

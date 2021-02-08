@@ -19,11 +19,21 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ACTION", propOrder = [
+    "time",
+    "description",
+    "ismTransition",
+    "instructionDetails"])
 @Open
 class Action : CareEntry() {
     companion object {
@@ -31,13 +41,18 @@ class Action : CareEntry() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var time: DvDateTime? = null
 
+    @XmlElement(required = true)
     @Required
     var description: ItemStructure? = null
 
+    @XmlElement(name = "ism_transition", required = true)
     @Required
     var ismTransition: IsmTransition? = null
+
+    @XmlElement(name = "instruction_details")
     var instructionDetails: InstructionDetails? = null
 }

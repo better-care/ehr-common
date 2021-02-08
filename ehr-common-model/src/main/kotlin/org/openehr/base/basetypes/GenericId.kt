@@ -17,11 +17,17 @@ package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "GENERIC_ID", propOrder = ["scheme"])
 @Open
 class GenericId : ObjectId() {
     companion object {
@@ -29,6 +35,7 @@ class GenericId : ObjectId() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var scheme: String? = null
 }

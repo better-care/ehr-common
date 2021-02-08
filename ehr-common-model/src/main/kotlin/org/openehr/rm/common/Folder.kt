@@ -18,11 +18,19 @@ package org.openehr.rm.common
 import care.better.platform.annotation.Open
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "FOLDER", propOrder = [
+    "folders",
+    "items",
+    "details"])
 @Open
 class Folder : Locatable() {
     companion object {

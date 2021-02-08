@@ -18,11 +18,19 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_ORDINAL", propOrder = [
+    "value",
+    "symbol"])
 @Open
 class DvOrdinal : DvOrdered() {
 
@@ -48,6 +56,7 @@ class DvOrdinal : DvOrdered() {
 
     var value: Int = 0
 
+    @XmlElement(required = true)
     @Required
     var symbol: DvCodedText? = null
 

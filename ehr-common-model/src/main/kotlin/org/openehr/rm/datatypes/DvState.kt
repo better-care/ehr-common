@@ -18,11 +18,19 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_STATE", propOrder = [
+    "value",
+    "isTerminal"])
 @Open
 class DvState : DataValue() {
     companion object {
@@ -30,8 +38,11 @@ class DvState : DataValue() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var value: DvCodedText? = null
+
+    @XmlElement(name = "is_terminal")
     var isTerminal = false
 
     override fun equals(other: Any?): Boolean =

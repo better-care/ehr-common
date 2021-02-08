@@ -18,11 +18,12 @@ package org.openehr.proc.taskplanning
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_COSTING")
 @Open
 class TaskCosting : RmObject(), Serializable {
     companion object {

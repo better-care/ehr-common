@@ -17,11 +17,18 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_PRIMITIVE")
+@XmlSeeAlso(value = [CBoolean::class, CString::class, CInteger::class, CReal::class, CDate::class, CDateTime::class, CTime::class, CDuration::class])
 abstract class CPrimitive : AmObject(), Serializable {
     companion object {
         @JvmStatic

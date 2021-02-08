@@ -21,11 +21,19 @@ import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CODE_PHRASE", propOrder = [
+    "terminologyId",
+    "codeString"])
 @Open
 class CodePhrase : RmObject(), Serializable {
 
@@ -76,9 +84,11 @@ class CodePhrase : RmObject(), Serializable {
         fun createEncodingPhrase(encodingCode: String): CodePhrase = create("IANA_character-sets", encodingCode)
     }
 
+    @XmlElement(name = "terminology_id", required = true)
     @Required
     var terminologyId: TerminologyId? = null
 
+    @XmlElement(name = "code_string", required = true)
     @Required
     var codeString: String? = null
 

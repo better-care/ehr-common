@@ -16,15 +16,23 @@
 package org.openehr.proc.taskplanning
 
 import org.openehr.base.basetypes.UidBasedId
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
+@XmlType(name = "LINKED_PLAN", propOrder = ["target", "targetUid"])
+@XmlSeeAlso(value = [SubPlan::class, HandOff::class])
+
 interface LinkedPlan {
+    @XmlElement
     fun getTarget(): TaskPlan?
 
     fun setTarget(target: TaskPlan?)
 
+    @XmlElement(name = "target_uid")
     fun getTargetUid(): UidBasedId?
 
     fun setTargetUid(targetUid: UidBasedId?)

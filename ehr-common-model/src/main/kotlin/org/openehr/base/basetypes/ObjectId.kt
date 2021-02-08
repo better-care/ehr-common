@@ -20,11 +20,17 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
 import java.util.*
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "OBJECT_ID", propOrder = ["value"])
+@XmlSeeAlso(value = [ArchetypeId::class, TemplateId::class, TerminologyId::class, UidBasedId::class, GenericId::class])
 @Open
 abstract class ObjectId : RmObject(), Serializable {
     companion object {
@@ -32,6 +38,9 @@ abstract class ObjectId : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "token")
     @Required
     var value: String? = null
 

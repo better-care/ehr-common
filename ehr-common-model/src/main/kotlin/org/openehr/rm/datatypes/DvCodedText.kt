@@ -18,11 +18,17 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_CODED_TEXT", propOrder = ["definingCode"])
 @Open
 class DvCodedText : DvText() {
     companion object {
@@ -65,6 +71,7 @@ class DvCodedText : DvText() {
         fun createWithOpenEHRTerminology(code: String, value: String?): DvCodedText = create("openehr", code, value)
     }
 
+    @XmlElement(name = "defining_code", required = true)
     @Required
     var definingCode: CodePhrase? = null
 

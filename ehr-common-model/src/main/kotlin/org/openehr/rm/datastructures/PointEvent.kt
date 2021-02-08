@@ -16,11 +16,15 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "POINT_EVENT")
 @Open
 class PointEvent : Event() {
     companion object {

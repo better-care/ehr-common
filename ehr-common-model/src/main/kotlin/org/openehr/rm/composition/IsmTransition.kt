@@ -21,11 +21,20 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ISM_TRANSITION", propOrder = [
+    "currentState",
+    "transition",
+    "careflowStep",
+    "reason"])
 @Open
 class IsmTransition : RmObject(), Serializable {
     companion object {
@@ -33,9 +42,14 @@ class IsmTransition : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "current_state", required = true)
     @Required
     var currentState: DvCodedText? = null
+
     var transition: DvCodedText? = null
+
+    @XmlElement(name = "careflow_step")
     var careflowStep: DvCodedText? = null
+
     var reason: MutableList<DvText> = mutableListOf()
 }

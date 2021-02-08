@@ -18,11 +18,17 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "PERFORMABLE_ACTION", propOrder = [
+    "resources",
+    "otherParticipations"])
+@XmlSeeAlso(value = [DefinedAction::class, SubPlan::class ])
 @Open
 abstract class PerformableAction : TaskAction {
     companion object {
@@ -31,6 +37,8 @@ abstract class PerformableAction : TaskAction {
     }
 
     var resources: MutableList<ResourceParticipation> = mutableListOf()
+
+    @XmlElement(name = "other_participations")
     var otherParticipations: MutableList<TaskParticipation> = mutableListOf()
 
     constructor()

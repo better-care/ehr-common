@@ -17,17 +17,22 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CodeDefinitionSet", propOrder = ["items"])
 class CodeDefinitionSet : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(type = ArchetypeTerm::class)
     var items: MutableList<ArchetypeTerm> = mutableListOf()
+
+    @XmlAttribute(name = "language", required = true)
     lateinit var language: String
 }

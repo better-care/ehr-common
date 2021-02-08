@@ -21,11 +21,20 @@ import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.CodePhrase
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ENTRY", propOrder = [
+    "language",
+    "encoding",
+    "subject",
+    "provider",
+    "otherParticipations",
+    "workFlowId"])
+@XmlSeeAlso(value = [AdminEntry::class, CareEntry::class])
 @Open
 abstract class Entry : ContentItem() {
     companion object {
@@ -33,15 +42,23 @@ abstract class Entry : ContentItem() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var language: CodePhrase? = null
 
+    @XmlElement(required = true)
     @Required
     var encoding: CodePhrase? = null
 
+    @XmlElement(required = true)
     @Required
     var subject: PartyProxy? = null
+
     var provider: PartyProxy? = null
+
+    @XmlElement(name = "other_participations")
     var otherParticipations: MutableList<Participation> = mutableListOf()
+
+    @XmlElement(name = "work_flow_id")
     var workFlowId: ObjectRef? = null
 }

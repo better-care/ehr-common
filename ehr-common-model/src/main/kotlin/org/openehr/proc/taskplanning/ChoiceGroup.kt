@@ -19,11 +19,15 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CHOICE_GROUP", propOrder = ["overrideType", "timeout" ])
+@XmlSeeAlso(value = [ConditionGroup::class, DecisionGroup::class, AdhocGroup::class, EventGroup::class])
 @Open
 abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
     companion object {
@@ -31,8 +35,11 @@ abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var overrideType: OverrideType? = null
+
+    @XmlElement
     var timeout: TimerWait? = null
 
     constructor()

@@ -17,11 +17,13 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "STATE_VARIABLE", propOrder = ["requiredCurrency"])
 @Open
 class StateVariable<T> : ExternalVariable<T> {
     companion object {
@@ -29,6 +31,7 @@ class StateVariable<T> : ExternalVariable<T> {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "required_currency")
     var requiredCurrency: String? = null
 
     constructor()

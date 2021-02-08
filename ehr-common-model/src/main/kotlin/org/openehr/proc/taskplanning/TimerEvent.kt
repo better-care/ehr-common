@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TIMER_EVENT", propOrder = ["duration", "purpose"])
 @Open
 class TimerEvent : PlanEvent {
     companion object {
@@ -30,8 +32,10 @@ class TimerEvent : PlanEvent {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var duration: String? = null
+
     var purpose: String? = null
 
     constructor()

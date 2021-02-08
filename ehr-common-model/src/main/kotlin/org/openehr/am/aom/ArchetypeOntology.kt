@@ -18,20 +18,37 @@ package org.openehr.am.aom
 import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ARCHETYPE_ONTOLOGY", propOrder = [
+    "termDefinitions",
+    "constraintDefinitions",
+    "termBindings",
+    "constraintBindings"])
 open class ArchetypeOntology : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "term_definitions", required = true)
     @Required
     var termDefinitions: MutableList<CodeDefinitionSet> = mutableListOf()
+
+    @XmlElement(name = "constraint_definitions")
     var constraintDefinitions: MutableList<CodeDefinitionSet> = mutableListOf()
+
+    @XmlElement(name = "term_bindings")
     var termBindings: MutableList<TermBindingSet> = mutableListOf()
+
+    @XmlElement(name = "constraint_bindings")
     var constraintBindings: MutableList<ConstraintBindingSet> = mutableListOf()
 }

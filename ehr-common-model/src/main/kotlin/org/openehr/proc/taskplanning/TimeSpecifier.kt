@@ -17,10 +17,14 @@ package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
+@XmlType(name = "TIME_SPECIFIER")
+@XmlSeeAlso(value = [ClockTime::class, CustomaryTime::class])
 
 abstract class TimeSpecifier : RmObject(), Serializable {
     companion object {

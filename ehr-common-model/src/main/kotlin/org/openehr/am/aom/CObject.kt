@@ -17,22 +17,36 @@ package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
 import org.openehr.base.foundationtypes.IntervalOfInteger
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_OBJECT", propOrder = [
+    "rmTypeName",
+    "occurrences",
+    "nodeId",
+    "siblingOrder"])
+@XmlSeeAlso(value = [ArchetypeSlot::class, ConstraintRef::class, ArchetypeInternalRef::class, CDefinedObject::class])
 abstract class CObject : ArchetypeConstraint() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "rm_type_name", required = true)
     @Required
     var rmTypeName: String? = null
+
+    @XmlElement(required = true)
     @Required
     var occurrences: IntervalOfInteger? = null
+
+    @XmlElement(name = "node_id", required = true)
     @Required
     var nodeId: String? = null
+
+    @XmlElement(name = "sibling_order", type = SiblingOrder::class)
     var siblingOrder: SiblingOrder? = null
 }

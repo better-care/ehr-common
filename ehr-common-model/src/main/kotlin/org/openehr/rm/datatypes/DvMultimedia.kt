@@ -17,11 +17,26 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_MULTIMEDIA", propOrder = [
+    "alternateText",
+    "uri",
+    "data",
+    "mediaType",
+    "compressionAlgorithm",
+    "integrityCheck",
+    "integrityCheckAlgorithm",
+    "size",
+    "thumbnail"])
 @Open
 class DvMultimedia : DvEncapsulated() {
     companion object {
@@ -29,15 +44,27 @@ class DvMultimedia : DvEncapsulated() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "alternate_text")
     var alternateText: String? = null
+
     var uri: DvUri? = null
+
     var data: ByteArray? = null
 
+    @XmlElement(name = "media_type", required = true)
     @Required
     var mediaType: CodePhrase? = null
+
+    @XmlElement(name = "compression_algorithm")
     var compressionAlgorithm: CodePhrase? = null
+
+    @XmlElement(name = "integrity_check")
     var integrityCheck: ByteArray? = null
+
+    @XmlElement(name = "integrity_check_algorithm")
     var integrityCheckAlgorithm: CodePhrase? = null
+
     var size: Int = 0
+
     var thumbnail: DvMultimedia? = null
 }

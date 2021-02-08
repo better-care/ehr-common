@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "STATE_TRIGGER", propOrder = ["expression"])
 @Open
 class StateTrigger : PlanEvent, ExpressionNamesProvider {
     companion object {
@@ -30,6 +32,7 @@ class StateTrigger : PlanEvent, ExpressionNamesProvider {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var expression: BooleanContextExpression? = null
 

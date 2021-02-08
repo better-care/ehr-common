@@ -17,16 +17,21 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "STATE", propOrder = ["name"])
+@XmlSeeAlso(value = [NonTerminalState::class, TerminalState::class])
 abstract class State : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     lateinit var name: String
 }

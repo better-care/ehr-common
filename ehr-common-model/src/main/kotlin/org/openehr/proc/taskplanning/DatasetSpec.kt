@@ -21,11 +21,20 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "DATASET_SPEC", propOrder = [
+    "templateId",
+    "formId",
+    "otherDetails",
+    "populatingCall",
+    "formSectionPath"])
+@XmlSeeAlso(value = [CaptureDatasetSpec::class, ReviewDatasetSpec::class])
 @Open
 abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -33,10 +42,19 @@ abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisito
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "form_id")
     var formId: String? = null
+
+    @XmlElement(name = "template_id")
     var templateId: String? = null
+
+    @XmlElement(name = "other_details")
     var otherDetails: ItemStructure? = null
+
+    @XmlElement(name = "populating_call")
     var populatingCall: SystemCall? = null
+
+    @XmlElement(name = "form_section_path")
     var formSectionPath: String? = null
 
     constructor(formId: String?, templateId: String?) : this() {

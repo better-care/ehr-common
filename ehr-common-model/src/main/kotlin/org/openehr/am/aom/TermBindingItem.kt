@@ -18,17 +18,23 @@ package org.openehr.am.aom
 import care.better.openehr.am.AmObject
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "TERM_BINDING_ITEM", propOrder = ["value"])
 class TermBindingItem : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     lateinit var value: CodePhrase
+
+    @XmlAttribute(name = "code", required = true)
     lateinit var code: String
 }

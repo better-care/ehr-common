@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "PERFORMABLE_TASK", propOrder = ["captureDataset"])
 @Open
 class PerformableTask<A : PerformableAction> : Task<A> {
     companion object {
@@ -30,6 +32,7 @@ class PerformableTask<A : PerformableAction> : Task<A> {
         private val serialVersionUID: Long = -2716744970112165763L
     }
 
+    @XmlElement(name = "capture_dataset")
     var captureDataset: MutableList<CaptureDatasetSpec> = mutableListOf()
 
     constructor()

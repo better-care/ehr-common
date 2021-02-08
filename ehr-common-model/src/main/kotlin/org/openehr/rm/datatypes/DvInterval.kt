@@ -18,11 +18,23 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RangeParameters
 import care.better.platform.annotation.Open
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_INTERVAL", propOrder = [
+    "lower",
+    "upper",
+    "lowerIncluded",
+    "upperIncluded",
+    "lowerUnbounded",
+    "upperUnbounded"])
 @Open
 class DvInterval : DataValue(), RangeParameters {
     companion object {
@@ -31,10 +43,19 @@ class DvInterval : DataValue(), RangeParameters {
     }
 
     var lower: DvOrdered? = null
+
     var upper: DvOrdered? = null
+
+    @XmlElement(name = "lower_included")
     var lowerIncluded: Boolean? = null
+
+    @XmlElement(name = "upper_included")
     var upperIncluded: Boolean? = null
+
+    @XmlElement(name = "lower_unbounded")
     var lowerUnbounded: Boolean = false
+
+    @XmlElement(name = "upper_unbounded")
     var upperUnbounded: Boolean = false
 
 

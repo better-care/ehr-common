@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvCodedText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CUSTOMARY_TIME", propOrder = arrayOf("time"))
 @Open
 class CustomaryTime() : TimeSpecifier() {
     companion object {
@@ -30,6 +32,7 @@ class CustomaryTime() : TimeSpecifier() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var time: DvCodedText? = null
 

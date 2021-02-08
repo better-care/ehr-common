@@ -19,11 +19,17 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "EVENT_ACTION", propOrder = [
+    "systemCall",
+    "message",
+    "resumeAction",
+    "receiverThreadNextState"])
 @Open
 class EventAction() : RmObject(), Serializable {
     companion object {
@@ -31,9 +37,15 @@ class EventAction() : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "system_call")
     var systemCall: MutableList<SystemCall> = mutableListOf()
+
     var message: DvText? = null
+
+    @XmlElement(name = "resume_action")
     var resumeAction: ResumeAction? = null
+
+    @XmlElement(name = "receiver_thread_next_state")
     var receiverThreadNextState: TaskLifecycle? = null
 
     constructor(systemCall: MutableList<SystemCall>, message: DvText?, resumeAction: ResumeAction?, receiverThreadNextState: TaskLifecycle?) : this() {

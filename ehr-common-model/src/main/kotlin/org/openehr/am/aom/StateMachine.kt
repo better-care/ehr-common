@@ -18,17 +18,24 @@ package org.openehr.am.aom
 import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "STATE_MACHINE", propOrder = ["states"])
 class StateMachine : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true, type = State::class)
     @Required
     var states: MutableList<State> = mutableListOf()
 }

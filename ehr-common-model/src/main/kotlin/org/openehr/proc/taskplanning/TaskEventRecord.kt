@@ -18,11 +18,20 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.LocatableRef
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_EVENT_RECORD", propOrder = [
+    "taskId",
+    "lifecycleState",
+    "preconditionsSatisfied",
+    "waitConditionsSatisfied",
+    "notificationsSent",
+    "entryInstances",
+    "lifecycleTransitionReason"])
 @Open
 class TaskEventRecord : EventRecord {
     companion object {
@@ -30,15 +39,27 @@ class TaskEventRecord : EventRecord {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "task_id", required = true)
     @Required
     var taskId: String? = null
 
+    @XmlElement(name = "lifecycle_state", required = true)
     @Required
     var lifecycleState: TaskLifecycle? = null
+
+    @XmlElement(name = "notifications_sent")
     var notificationsSent: MutableList<TaskNotificationRecord> = mutableListOf()
+
+    @XmlElement(name = "entry_instances")
     var entryInstances: MutableList<LocatableRef> = mutableListOf()
+
+    @XmlElement(name = "preconditions_satisfied", required = true)
     var preconditionsSatisfied = false
+
+    @XmlElement(name = "wait_conditions_satisfied", required = true)
     var waitConditionsSatisfied = false
+
+    @XmlElement(name = "lifecycle_transition_reason")
     var lifecycleTransitionReason: String? = null
 
     constructor()

@@ -17,12 +17,19 @@ package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
+import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@SuppressWarnings("ClassReferencesSubclass")
+@XmlType(name = "CONTEXT_VALUE", propOrder = ["name", "type"])
+@XmlSeeAlso(value = [ContextVariable::class, ContextExpression::class, ContextConstant::class])
 @Open
 abstract class ContextValue<T>() : RmObject(), VisitableByModelVisitor {
     companion object {
@@ -30,7 +37,12 @@ abstract class ContextValue<T>() : RmObject(), VisitableByModelVisitor {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
+    @Required
     var name: String? = null
+
+    @XmlElement(required = true)
+    @Required
     private var type: ExprTypeDef<T>? = null
 
     protected constructor(type: ExprTypeDef<T>?) : this() {

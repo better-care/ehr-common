@@ -15,10 +15,17 @@
 
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
+
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_DOMAIN_TYPE")
+@XmlSeeAlso(value = [CDvOrdinal::class, CDvQuantity::class, CDvState::class, CCodePhrase::class])
 abstract class CDomainType : CDefinedObject() {
     companion object {
         @JvmStatic

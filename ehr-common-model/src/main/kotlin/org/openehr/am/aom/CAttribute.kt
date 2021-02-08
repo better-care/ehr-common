@@ -17,22 +17,42 @@ package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
 import org.openehr.base.foundationtypes.IntervalOfInteger
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_ATTRIBUTE", propOrder = [
+    "rmAttributeName",
+    "existence",
+    "differentialPath",
+    "matchNegated",
+    "children"])
 abstract class CAttribute : ArchetypeConstraint() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "rm_attribute_name", required = true)
     @Required
     var rmAttributeName: String? = null
+
+    @XmlElement(required = true)
     @Required
     var existence: IntervalOfInteger? = null
+
+    @XmlElement(name = "differential_path")
     var differentialPath: String? = null
+
+    @XmlElement(name = "match_negated")
     var matchNegated = false
+
+    @XmlElement(type = CObject::class)
     var children: MutableList<CObject> = mutableListOf()
 }

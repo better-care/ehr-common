@@ -19,11 +19,17 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.composition.ContentItem
 import org.openehr.rm.datastructures.ItemTree
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "GENERIC_ENTRY", propOrder = ["data"])
 @Open
 class GenericEntry : ContentItem() {
     companion object {
@@ -31,6 +37,7 @@ class GenericEntry : ContentItem() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var data: ItemTree? = null
 }

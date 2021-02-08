@@ -20,12 +20,16 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
-
+@XmlType(name = "EXTERNAL_REQUEST", propOrder = [
+    "organisation",
+    "requestId",
+    "otherDetails"])
 @Open
 class ExternalRequest() : DispatchableAction() {
     companion object {
@@ -33,11 +37,15 @@ class ExternalRequest() : DispatchableAction() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var organisation: PartyProxy? = null
 
+    @XmlElement(name = "request_id", required = true)
     @Required
     var requestId: String? = null
+
+    @XmlElement(name = "other_details")
     var otherDetails: ItemStructure? = null
 
     constructor(organisation: PartyProxy?, requestId: String?) : this() {

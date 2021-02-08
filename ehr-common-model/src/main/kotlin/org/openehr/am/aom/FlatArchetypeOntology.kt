@@ -15,15 +15,23 @@
 
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlAttribute
+import javax.xml.bind.annotation.XmlType
+
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "FLAT_ARCHETYPE_ONTOLOGY")
 class FlatArchetypeOntology : ArchetypeOntology() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlAttribute(name = "archetype_id", required = true)
     lateinit var archetypeId: String
 }

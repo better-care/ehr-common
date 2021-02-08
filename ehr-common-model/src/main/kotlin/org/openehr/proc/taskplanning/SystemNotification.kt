@@ -18,11 +18,16 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "SYSTEM_NOTIFICATION", propOrder = [
+    "systemId",
+    "notificationType",
+    "referenceId"])
 @Open
 class SystemNotification : PlanEvent {
     companion object {
@@ -30,9 +35,14 @@ class SystemNotification : PlanEvent {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "system_id", required = true)
     @Required
     var systemId: String? = null
+
+    @XmlElement(name = "notification_type")
     var notificationType: String? = null
+
+    @XmlElement(name = "reference_id")
     var referenceId: String? = null
 
     constructor()

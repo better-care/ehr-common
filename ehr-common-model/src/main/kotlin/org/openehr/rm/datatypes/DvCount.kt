@@ -17,11 +17,16 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_COUNT", propOrder = ["magnitude"])
 @Open
 class DvCount : DvAmount() {
     companion object {

@@ -18,11 +18,15 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "DISPATCHABLE_TASK", propOrder = [
+    "wait",
+    "callback"])
 @Open
 class DispatchableTask<A : DispatchableAction> : Task<A> {
     companion object {
@@ -30,7 +34,10 @@ class DispatchableTask<A : DispatchableAction> : Task<A> {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     var wait = false
+
+    @XmlElement
     var callback: CallbackWait? = null
 
     constructor()

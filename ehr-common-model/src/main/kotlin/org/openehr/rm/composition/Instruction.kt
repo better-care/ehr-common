@@ -20,11 +20,21 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvParsable
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "INSTRUCTION", propOrder = [
+    "narrative",
+    "expiryTime",
+    "wfDefinition",
+    "activities"
+])
 @Open
 class Instruction : CareEntry() {
     companion object {
@@ -32,9 +42,15 @@ class Instruction : CareEntry() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var narrative: DvText? = null
+
+    @XmlElement(name = "expiry_time")
     var expiryTime: DvDateTime? = null
+
+    @XmlElement(name = "wf_definition")
     var wfDefinition: DvParsable? = null
+
     var activities: MutableList<Activity> = mutableListOf()
 }

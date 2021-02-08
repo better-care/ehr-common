@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.UidBasedId
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "HAND_OFF", propOrder = ["target", "targetUid"])
 @Open
 class HandOff() : DispatchableAction(), LinkedPlan {
     companion object {
@@ -30,7 +32,10 @@ class HandOff() : DispatchableAction(), LinkedPlan {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement
     private var target: TaskPlan? = null
+
+    @XmlElement(name = "target_uid")
     private var targetUid: UidBasedId? = null
 
     constructor(target: TaskPlan?) : this() {

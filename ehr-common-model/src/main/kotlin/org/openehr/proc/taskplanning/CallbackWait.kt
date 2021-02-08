@@ -16,11 +16,15 @@
 package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
+import care.better.platform.jaxb.MapStringAdapter
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CALLBACK_WAIT", propOrder = ["failAction", "customActions"])
 @Open
 class CallbackWait : EventWait<CallbackNotification> {
     companion object {
@@ -28,7 +32,11 @@ class CallbackWait : EventWait<CallbackNotification> {
         private val serialVersionUID: Long = 1L
     }
 
+    @XmlElement(name = "event_action")
     var failAction: EventAction? = null
+
+    @XmlElement(name = "custom_action")
+    @XmlJavaTypeAdapter(MapStringAdapter::class)
     var customActions: MutableMap<String, EventAction> = mutableMapOf()
 
     constructor()

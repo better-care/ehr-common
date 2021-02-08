@@ -23,11 +23,15 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "RESOURCE_PARTICIPATION", propOrder = [
+    "resourceType",
+    "externalRef"])
 @Open
 class ResourceParticipation() : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -35,8 +39,11 @@ class ResourceParticipation() : RmObject(), Serializable, VisitableByModelVisito
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "resource_type", required = true)
     @Required
     var resourceType: DvText? = null
+
+    @XmlElement(name = "external_ref")
     var externalRef: ObjectRef? = null
 
     constructor(resourceType: DvText?) : this() {

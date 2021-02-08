@@ -17,17 +17,23 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CONSTRAINT_BINDING_ITEM", propOrder = ["value"])
 class ConstraintBindingItem : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "anyURI")
     lateinit var value: String
+
+    @XmlAttribute(name = "code", required = true)
     lateinit var code: String
 }

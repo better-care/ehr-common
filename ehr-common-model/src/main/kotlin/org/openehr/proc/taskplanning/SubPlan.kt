@@ -19,12 +19,14 @@ import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.base.basetypes.UidBasedId
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "SUB_PLAN", propOrder = ["target", "targetUid"])
 @Open
 class SubPlan : PerformableAction, LinkedPlan {
     companion object {
@@ -32,7 +34,10 @@ class SubPlan : PerformableAction, LinkedPlan {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement
     private var target: TaskPlan? = null
+
+    @XmlElement(name = "target_uid")
     private var targetUid: UidBasedId? = null
 
     constructor()

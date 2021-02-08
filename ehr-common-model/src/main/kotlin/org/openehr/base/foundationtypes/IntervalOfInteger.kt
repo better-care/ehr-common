@@ -16,11 +16,17 @@
 package org.openehr.base.foundationtypes
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "IntervalOfInteger", propOrder = [
+    "lower",
+    "upper"])
 @Open
 class IntervalOfInteger : Interval() {
     companion object {
@@ -29,5 +35,6 @@ class IntervalOfInteger : Interval() {
     }
 
     var lower: Int? = null
+
     var upper: Int? = null
 }

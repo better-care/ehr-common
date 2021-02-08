@@ -18,11 +18,17 @@ package org.openehr.rm.composition
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ADMIN_ENTRY", propOrder = ["data"])
 @Open
 class AdminEntry : Entry() {
     companion object {
@@ -30,6 +36,7 @@ class AdminEntry : Entry() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var data: ItemStructure? = null
 }

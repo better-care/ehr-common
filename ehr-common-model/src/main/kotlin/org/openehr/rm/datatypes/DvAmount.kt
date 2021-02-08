@@ -17,11 +17,17 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import java.util.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_AMOUNT", propOrder = [
+    "accuracy",
+    "accuracyIsPercent"])
+@XmlSeeAlso(value = [DvCount::class, DvQuantity::class, DvProportion::class, DvDuration::class])
 @Open
 class DvAmount : DvQuantified() {
     companion object {
@@ -29,7 +35,10 @@ class DvAmount : DvQuantified() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(defaultValue = "-1.0")
     var accuracy: Float? = null
+
+    @XmlElement(name = "accuracy_is_percent")
     var accuracyIsPercent: Boolean? = null
 
     override fun equals(other: Any?): Boolean =

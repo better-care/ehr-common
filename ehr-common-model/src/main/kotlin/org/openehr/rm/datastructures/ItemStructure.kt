@@ -16,11 +16,17 @@
 package org.openehr.rm.datastructures
 
 import org.openehr.rm.common.Locatable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ITEM_STRUCTURE")
+@XmlSeeAlso(value = [ItemSingle::class, ItemList::class, ItemTree::class, ItemTable::class])
 abstract class ItemStructure : Locatable() {
     companion object {
         @JvmStatic

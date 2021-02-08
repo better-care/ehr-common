@@ -19,11 +19,18 @@ import care.better.openehr.rm.RangeParameters
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Interval", propOrder = [
+    "lowerIncluded",
+    "upperIncluded",
+    "lowerUnbounded",
+    "upperUnbounded"])
+@XmlSeeAlso(value = [IntervalOfInteger::class, IntervalOfReal::class, IntervalOfDate::class, IntervalOfDateTime::class, IntervalOfTime::class, IntervalOfDuration::class])
 @Open
 abstract class Interval : RmObject(), Serializable, RangeParameters {
     companion object {
@@ -31,9 +38,16 @@ abstract class Interval : RmObject(), Serializable, RangeParameters {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "lower_included")
     var lowerIncluded: Boolean? = null
+
+    @XmlElement(name = "upper_included")
     var upperIncluded: Boolean? = null
+
+    @XmlElement(name = "lower_unbounded")
     var lowerUnbounded = false
+
+    @XmlElement(name = "upper_unbounded")
     var upperUnbounded = false
 
     override fun isLowerIncluded(): Boolean? = lowerIncluded

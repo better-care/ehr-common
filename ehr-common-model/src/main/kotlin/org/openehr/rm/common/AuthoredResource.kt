@@ -21,11 +21,22 @@ import care.better.platform.annotation.Required
 import org.openehr.base.resource.TranslationDetails
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AUTHORED_RESOURCE", propOrder = [
+    "originalLanguage",
+    "isControlled",
+    "description",
+    "translations",
+    "revisionHistory"])
 @Open
 abstract class AuthoredResource : RmObject(), Serializable {
     companion object {
@@ -33,10 +44,17 @@ abstract class AuthoredResource : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "original_language", required = true)
     @Required
     var originalLanguage: CodePhrase? = null
+
+    @XmlElement(name = "is_controlled")
     var isControlled: Boolean? = null
+
     var description: ResourceDescription? = null
+
     var translations: MutableList<TranslationDetails> = mutableListOf()
+
+    @XmlElement(name = "revision_history")
     var revisionHistory: RevisionHistory? = null
 }

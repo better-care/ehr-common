@@ -17,11 +17,14 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "EVENT_VARIABLE")
+@XmlSeeAlso(ContinuousEventVariable::class)
 @Open
 class EventVariable<T> : ExternalVariable<T> {
     companion object {

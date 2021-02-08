@@ -17,11 +17,15 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "EXTERNAL_VARIABLE", propOrder = [ "populatingRequest" ])
+@XmlSeeAlso(value = [EventVariable::class, StateVariable::class])
 @Open
 abstract class ExternalVariable<T> : ContextVariable<T> {
     companion object {
@@ -29,6 +33,7 @@ abstract class ExternalVariable<T> : ContextVariable<T> {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "populating_request")
     var populatingRequest: SystemCall? = null
 
     constructor()

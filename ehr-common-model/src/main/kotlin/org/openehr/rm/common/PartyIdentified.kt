@@ -17,11 +17,19 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import org.openehr.rm.datatypes.DvIdentifier
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "PARTY_IDENTIFIED", propOrder = [
+    "name",
+    "identifiers"])
+@XmlSeeAlso(PartyRelated::class)
 @Open
 class PartyIdentified : PartyProxy() {
 
@@ -41,5 +49,6 @@ class PartyIdentified : PartyProxy() {
     }
 
     var name: String? = null
+
     var identifiers: MutableList<DvIdentifier> = mutableListOf()
 }

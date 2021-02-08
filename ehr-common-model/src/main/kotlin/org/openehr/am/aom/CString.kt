@@ -15,10 +15,21 @@
 
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_STRING", propOrder = [
+    "pattern",
+    "list",
+    "listOpen",
+    "assumedValue",
+    "defaultValue"])
 class CString : CPrimitive() {
     companion object {
         @JvmStatic
@@ -26,8 +37,15 @@ class CString : CPrimitive() {
     }
 
     var pattern: String? = null
+
     var list: MutableList<String> = mutableListOf()
+
+    @XmlElement(name = "list_open")
     var listOpen: Boolean? = null
+
+    @XmlElement(name = "assumed_value")
     var assumedValue: String? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: String? = null
 }

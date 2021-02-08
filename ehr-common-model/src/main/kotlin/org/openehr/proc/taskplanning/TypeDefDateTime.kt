@@ -17,11 +17,12 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import java.time.LocalDateTime
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TYPE_DEF_DATE_TIME")
 @Open
 class TypeDefDateTime : ExprTypeDef<LocalDateTime>("Date_time") {
 

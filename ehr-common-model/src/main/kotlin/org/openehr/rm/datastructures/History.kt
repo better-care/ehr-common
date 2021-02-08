@@ -20,11 +20,22 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvDuration
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "HISTORY", propOrder = [
+    "origin",
+    "period",
+    "duration",
+    "events",
+    "summary"])
 @Open
 class History : Locatable() {
     companion object {
@@ -32,10 +43,15 @@ class History : Locatable() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var origin: DvDateTime? = null
+
     var period: DvDuration? = null
+
     var duration: DvDuration? = null
+
     var events: MutableList<Event> = mutableListOf()
+
     var summary: ItemStructure? = null
 }

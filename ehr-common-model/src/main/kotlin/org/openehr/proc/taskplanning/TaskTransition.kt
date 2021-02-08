@@ -18,11 +18,15 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_TRANSITION", propOrder = [
+    "taskId",
+    "transitions"])
 @Open
 class TaskTransition() : PlanEvent(), TaskReferencingEvent {
     companion object {
@@ -30,9 +34,11 @@ class TaskTransition() : PlanEvent(), TaskReferencingEvent {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "task_id", required = true)
     @Required
     private var taskId: UidBasedId? = null
 
+    @XmlElement(name = "transitions", required = true)
     @Required
     var transitions: MutableList<TaskLifecycle> = mutableListOf()
 

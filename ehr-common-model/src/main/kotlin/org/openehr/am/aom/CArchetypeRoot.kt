@@ -17,19 +17,36 @@ package org.openehr.am.aom
 
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_ARCHETYPE_ROOT", propOrder = [
+    "archetypeId",
+    "templateId",
+    "termDefinitions",
+    "termBindings"])
 class CArchetypeRoot : CComplexObject() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "archetype_id", required = true)
     lateinit var archetypeId: ArchetypeId
+
+    @XmlElement(name = "template_id")
     var templateId: TemplateId? = null
+
+    @XmlElement(name = "term_definitions", type = ArchetypeTerm::class)
     var termDefinitions: MutableList<ArchetypeTerm> = mutableListOf()
+
+    @XmlElement(name = "term_bindings")
     var termBindings: MutableList<TermBindingSet> = mutableListOf()
 }

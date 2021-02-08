@@ -17,19 +17,35 @@ package org.openehr.am.aom
 
 import org.openehr.rm.datatypes.CodePhrase
 import org.openehr.rm.datatypes.DvQuantity
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_DV_QUANTITY", propOrder = [
+    "assumedValue",
+    "defaultValue",
+    "property",
+    "list"])
 class CDvQuantity : CDomainType() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "assumed_value")
     var assumedValue: DvQuantity? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: DvQuantity? = null
+
     var property: CodePhrase? = null
+
+    @XmlElement(type = CQuantityItem::class)
     var list: MutableList<CQuantityItem> = mutableListOf()
 }

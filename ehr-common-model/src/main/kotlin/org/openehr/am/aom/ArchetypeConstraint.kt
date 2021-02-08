@@ -17,11 +17,18 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ARCHETYPE_CONSTRAINT")
+@XmlSeeAlso(value = [CAttribute::class, CObjectGroup::class, CObject::class])
 abstract class ArchetypeConstraint : AmObject(), Serializable {
     companion object {
         @JvmStatic

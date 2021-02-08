@@ -23,11 +23,18 @@ import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_PARTICIPATION", propOrder = [
+    "function",
+    "role",
+    "mode",
+    "performer",
+    "optionality"])
 @Open
 class TaskParticipation() : Locatable(), VisitableByModelVisitor {
     companion object {
@@ -35,12 +42,20 @@ class TaskParticipation() : Locatable(), VisitableByModelVisitor {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var function: DvText? = null
+
+    @XmlElement
     var role: MutableList<DvText> = mutableListOf()
+
+    @XmlElement
     var mode: DvCodedText? = null
+
+    @XmlElement
     var performer: PartyProxy? = null
 
+    @XmlElement(required = true)
     @Required
     var optionality: ValidityKind? = null
 

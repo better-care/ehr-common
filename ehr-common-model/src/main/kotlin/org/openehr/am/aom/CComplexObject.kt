@@ -15,16 +15,21 @@
 
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.*
+
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_COMPLEX_OBJECT", propOrder = ["attributes"])
+@XmlSeeAlso(value = [CArchetypeRoot::class, TComplexObject::class ])
 open class CComplexObject : CDefinedObject() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(type = CAttribute::class)
     var attributes: MutableList<CAttribute> = mutableListOf()
 }

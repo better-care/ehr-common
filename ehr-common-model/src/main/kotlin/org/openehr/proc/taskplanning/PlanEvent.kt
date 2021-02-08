@@ -18,11 +18,22 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "PLAN_EVENT", propOrder = ["delay", "otherDetails"])
+@XmlSeeAlso(value = [
+                ManualNotification::class,
+                SystemNotification::class,
+                CallbackNotification::class,
+                StateTrigger::class,
+                TimerEvent::class,
+                CalendarEvent::class,
+                TimelineMoment::class])
 @Open
 abstract class PlanEvent constructor() : Locatable() {
     companion object {
@@ -30,7 +41,10 @@ abstract class PlanEvent constructor() : Locatable() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "other_details")
     var otherDetails: ItemStructure? = null
+
+    @XmlElement
     var delay: String? = null
 
     protected constructor(otherDetails: ItemStructure?) : this() {

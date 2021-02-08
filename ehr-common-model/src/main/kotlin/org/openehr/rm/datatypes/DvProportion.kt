@@ -19,11 +19,20 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.math.BigInteger
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_PROPORTION", propOrder = [
+    "numerator",
+    "denominator",
+    "type",
+    "precision"])
 @Open
 class DvProportion : DvAmount() {
     companion object {
@@ -32,10 +41,14 @@ class DvProportion : DvAmount() {
     }
 
     var numerator: Float = 0f
+
     var denominator: Float = 0f
 
+    @XmlElement(required = true)
     @Required
     var type: BigInteger? = null
+
+    @XmlElement(defaultValue = "-1")
     var precision: Int? = null
 
     override fun equals(other: Any?): Boolean =

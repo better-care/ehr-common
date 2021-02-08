@@ -18,11 +18,15 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.util.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_TIME_SPECIFICATION", propOrder = ["value"])
+@XmlSeeAlso(value = [DvPeriodicTimeSpecification::class, DvGeneralTimeSpecification::class])
 @Open
 abstract class DvTimeSpecification : DataValue() {
     companion object {
@@ -30,6 +34,7 @@ abstract class DvTimeSpecification : DataValue() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var value: DvParsable? = null
 

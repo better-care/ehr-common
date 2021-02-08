@@ -17,11 +17,16 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_PARAGRAPH", propOrder = ["items"])
 @Open
 class DvParagraph : DataValue() {
     companion object {
@@ -29,6 +34,7 @@ class DvParagraph : DataValue() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var items: MutableList<DvText> = mutableListOf()
 }

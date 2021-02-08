@@ -22,11 +22,23 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "PLAN_ITEM", propOrder = [
+    "description",
+    "repeatSpec",
+    "waitSpec",
+    "otherDetails",
+    "reviewDataset",
+    "classification",
+    "guidelineStep",
+    "reminders"])
+@XmlSeeAlso(value = [TaskGroup::class, Task::class])
 @Open
 abstract class PlanItem : Locatable, VisitableByModelVisitor {
     companion object {
@@ -34,14 +46,28 @@ abstract class PlanItem : Locatable, VisitableByModelVisitor {
         private val serialVersionUID: Long = 1L
     }
 
+    @XmlElement(required = true)
     @Required
     var description: DvText? = null
+
+    @XmlElement(name = "repeat_spec")
     var repeatSpec: TaskRepeat? = null
+
+    @XmlElement(name = "other_details")
     var otherDetails: ItemStructure? = null
+
+    @XmlElement(name = "wait_spec")
     private var waitSpec: TaskWait? = null
+
+    @XmlElement(name = "review_dataset")
     var reviewDataset: MutableList<ReviewDatasetSpec> = mutableListOf()
+
     var classification: ItemStructure? = null
+
+    @XmlElement(name = "guideline_step")
     var guidelineStep: String? = null
+
+    @XmlElement(name = "reminders")
     var reminders: MutableList<Reminder> = mutableListOf()
 
     constructor()

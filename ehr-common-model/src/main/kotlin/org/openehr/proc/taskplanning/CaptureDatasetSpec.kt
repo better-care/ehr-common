@@ -17,11 +17,13 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CAPTURE_DATASET_SPEC", propOrder = ["commitGroup"])
 @Open
 class CaptureDatasetSpec : DatasetSpec() {
     companion object {
@@ -29,6 +31,7 @@ class CaptureDatasetSpec : DatasetSpec() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "commit_group")
     var commitGroup: DatasetCommitGroup? = null
 
     override fun accept(visitor: TaskModelVisitor) {

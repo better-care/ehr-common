@@ -16,17 +16,26 @@
 package org.openehr.am.aom
 
 import java.math.BigInteger
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "EXPR_OPERATOR", propOrder = [
+    "operator",
+    "precedenceOverridden"])
+@XmlSeeAlso(value = [ExprUnaryOperator::class, ExprBinaryOperator::class])
 abstract class ExprOperator : ExprItem() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     lateinit var operator: BigInteger
+
+    @XmlElement(name = "precedence_overridden")
     var precedenceOverridden: Boolean = false
 }

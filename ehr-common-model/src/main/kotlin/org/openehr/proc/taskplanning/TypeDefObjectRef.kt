@@ -17,11 +17,12 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import org.openehr.base.basetypes.ObjectRef
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TYPE_DEF_OBJECT_REF")
 @Open
 class TypeDefObjectRef : ExprTypeDef<ObjectRef>("Object_ref") {
 

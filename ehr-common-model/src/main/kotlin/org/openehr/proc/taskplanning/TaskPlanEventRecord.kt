@@ -17,11 +17,15 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.jaxb.MapStringAdapter
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_PLAN_EVENT_RECORD", propOrder = ["details"])
 @Open
 class TaskPlanEventRecord : EventRecord {
     companion object {
@@ -29,7 +33,8 @@ class TaskPlanEventRecord : EventRecord {
         private val serialVersionUID: Long = 0L
     }
 
-
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(MapStringAdapter::class)
     @Required
     var details: LinkedHashMap<String, String> = LinkedHashMap()
 

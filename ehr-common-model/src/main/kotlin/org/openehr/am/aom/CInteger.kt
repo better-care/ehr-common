@@ -16,19 +16,34 @@
 package org.openehr.am.aom
 
 import org.openehr.base.foundationtypes.IntervalOfInteger
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_INTEGER", propOrder = [
+    "list",
+    "range",
+    "assumedValue",
+    "defaultValue"])
 class CInteger : CPrimitive() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(type = Integer::class)
     var list: MutableList<Int> = mutableListOf()
+
     var range: IntervalOfInteger? = null
+
+    @XmlElement(name = "assumed_value")
     var assumedValue: Int? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: Int? = null
 }

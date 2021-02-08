@@ -17,11 +17,17 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import java.util.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_ORDERED", propOrder = [
+    "normalRange",
+    "otherReferenceRanges",
+    "normalStatus"])
+@XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class])
 @Open
 abstract class DvOrdered : DataValue() {
     companion object {
@@ -29,8 +35,13 @@ abstract class DvOrdered : DataValue() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "normal_range")
     var normalRange: DvInterval? = null
+
+    @XmlElement(name = "other_reference_ranges")
     var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf()
+
+    @XmlElement(name = "normal_status")
     var normalStatus: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =

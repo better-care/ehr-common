@@ -19,11 +19,18 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "EVENT_WAIT", propOrder = [
+    "event",
+    "successAction",
+    "timeout"])
+@XmlSeeAlso(value = [TimerWait::class, CallbackWait::class, Reminder::class])
 @Open
 class EventWait<E : PlanEvent>() : RmObject(), Serializable {
     companion object {
@@ -31,9 +38,14 @@ class EventWait<E : PlanEvent>() : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var event: E? = null
+
+    @XmlElement(name = "successAction")
     var successAction: EventAction? = null
+
+    @XmlElement
     var timeout: TimerWait? = null
 
     constructor(event: E?) : this() {

@@ -20,11 +20,15 @@ import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "PLAN_DATA_CONTEXT", propOrder = [
+    "variables",
+    "expressions",
+    "constants"])
 @Open
 class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -33,7 +37,9 @@ class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
     }
 
     var variables: MutableList<ContextVariable<*>> = mutableListOf()
+
     var expressions: MutableList<ContextExpression<*>> = mutableListOf()
+
     var constants: MutableList<ContextConstant<*>> = mutableListOf()
 
     override fun accept(visitor: TaskModelVisitor) {

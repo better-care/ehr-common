@@ -17,11 +17,13 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CLOCK_TIME", propOrder = ["time"])
 @Open
 class ClockTime() : TimeSpecifier() {
     companion object {
@@ -29,6 +31,7 @@ class ClockTime() : TimeSpecifier() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var time: String? = null
 

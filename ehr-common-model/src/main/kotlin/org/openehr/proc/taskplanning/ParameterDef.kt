@@ -21,11 +21,16 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "PARAMETER_DEF", propOrder = [
+    "name",
+    "type",
+    "value"])
 @Open
 class ParameterDef<T : Any>() : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -33,12 +38,15 @@ class ParameterDef<T : Any>() : RmObject(), Serializable, VisitableByModelVisito
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var name: String? = null
 
+    @XmlElement(required = true)
     @Required
     var type: ExprTypeDef<T>? = null
 
+    @XmlElement(required = true)
     @Required
     var value: T? = null
 

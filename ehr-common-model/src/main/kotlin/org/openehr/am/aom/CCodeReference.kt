@@ -16,18 +16,22 @@
 package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.*
 
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_CODE_REFERENCE", propOrder = ["referenceSetUri"])
 class CCodeReference : CCodePhrase() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "anyURI")
     @Required
     var referenceSetUri: String? = null
 }

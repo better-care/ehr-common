@@ -16,18 +16,31 @@
 package org.openehr.am.aom
 
 import org.openehr.base.foundationtypes.IntervalOfInteger
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_OBJECT_GROUP", propOrder = [
+    "range",
+    "cardinality",
+    "occurrences"])
 class CObjectGroup : ArchetypeConstraint() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     lateinit var range: IntervalOfInteger
+
+    @XmlElement(required = true, type = Cardinality::class)
     lateinit var cardinality: Cardinality
+
+    @XmlElement(required = true)
     lateinit var occurrences: IntervalOfInteger
 }

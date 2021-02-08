@@ -16,17 +16,24 @@
 package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "NON_TERMINAL_STATE", propOrder = ["transitions"])
 class NonTerminalState : State() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true, type = Transition::class)
     @Required
     var transitions: MutableList<Transition> = mutableListOf()
 }

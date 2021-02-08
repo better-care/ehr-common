@@ -17,19 +17,35 @@ package org.openehr.am.aom
 
 import org.openehr.base.foundationtypes.IntervalOfReal
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_REAL", propOrder = [
+    "list",
+    "range",
+    "assumedValue",
+    "defaultValue"])
 class CReal : CPrimitive(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(type = Float::class)
     var list: MutableList<Float> = mutableListOf()
+
     var range: IntervalOfReal? = null
+
+    @XmlElement(name = "assumed_value")
     var assumedValue: Float? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: Float? = null
 }

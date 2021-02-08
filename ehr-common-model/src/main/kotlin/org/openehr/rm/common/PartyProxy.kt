@@ -19,11 +19,14 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import org.openehr.base.basetypes.PartyRef
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "PARTY_PROXY", propOrder = ["externalRef"])
+@XmlSeeAlso(value = [PartyIdentified::class, PartySelf::class])
 @Open
 abstract class PartyProxy : RmObject(), Serializable {
     companion object {
@@ -31,5 +34,6 @@ abstract class PartyProxy : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "external_ref")
     var externalRef: PartyRef? = null
 }

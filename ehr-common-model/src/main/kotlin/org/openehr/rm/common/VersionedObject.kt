@@ -21,19 +21,29 @@ import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "VERSIONED_OBJECT", namespace = "http://schemas.openehr.org/v1", propOrder = ["uid", "ownerId", "timeCreated", "trunkLifecycleState"])
+@XmlRootElement(namespace = "http://schemas.openehr.org/v1")
 class VersionedObject : RmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement
     var uid: HierObjectId? = null
+
+    @XmlElement(name = "owner_id")
     var ownerId: ObjectRef? = null
+
+    @XmlElement(name = "time_created")
     var timeCreated: DvDateTime? = null
+
+    @XmlElement(name = "trunk_lifecycle_state")
     var trunkLifecycleState: DvCodedText? = null
 }

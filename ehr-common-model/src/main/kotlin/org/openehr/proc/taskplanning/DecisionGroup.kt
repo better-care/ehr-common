@@ -19,11 +19,13 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "DECISION_GROUP", propOrder = ["test"])
 @Open
 class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
     companion object {
@@ -31,6 +33,7 @@ class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var test: ContextExpression<*>? = null
 

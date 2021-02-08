@@ -19,19 +19,24 @@ import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.StringDictionaryItem
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ARCHETYPE_TERM", propOrder = ["items"])
 class ArchetypeTerm : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var items: MutableList<StringDictionaryItem> = mutableListOf()
 
+    @XmlAttribute(name = "code", required = true)
     lateinit var code: String
 }

@@ -20,11 +20,19 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvParsable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ACTIVITY", propOrder = [
+    "description",
+    "timing",
+    "actionArchetypeId"])
 @Open
 class Activity : Locatable() {
     companion object {
@@ -32,10 +40,13 @@ class Activity : Locatable() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var description: ItemStructure? = null
+
     var timing: DvParsable? = null
 
+    @XmlElement(name = "action_archetype_id", required = true)
     @Required
     var actionArchetypeId: String? = null
 }

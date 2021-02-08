@@ -19,11 +19,20 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_GROUP", propOrder = [
+    "members",
+    "executionType",
+    "concurrencyMode",
+    "executionRules",
+    "trainingLevel"])
+@XmlSeeAlso(value = [ChoiceGroup::class, ChoiceBranch::class])
 @Open
 class TaskGroup<I : PlanItem> : PlanItem {
     companion object {
@@ -31,11 +40,20 @@ class TaskGroup<I : PlanItem> : PlanItem {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var members: MutableList<I> = mutableListOf()
+
+    @XmlElement(name = "execution_type")
     private var executionType: ExecutionType? = null
+
+    @XmlElement(name = "training_level")
     var trainingLevel: Int? = null
+
+    @XmlElement(name = "execution_rules")
     var executionRules: MutableList<ExecutionRule> = mutableListOf()
+
+    @XmlElement(name = "concurrency_mode")
     var concurrencyMode: ConcurrencyMode? = null
 
     constructor()

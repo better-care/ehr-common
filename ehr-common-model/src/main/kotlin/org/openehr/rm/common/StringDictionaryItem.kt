@@ -19,20 +19,23 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "StringDictionaryItem", propOrder = ["value"])
 @Open
 class StringDictionaryItem : RmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
-
+    @XmlValue
     var value: String? = null
 
+    @XmlAttribute(name = "id", required = true)
     @Required
     var id: String? = null
 }

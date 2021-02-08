@@ -21,11 +21,19 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "SYSTEM_CALL", propOrder = [
+    "systemId",
+    "callName",
+    "parameterMap",
+    "boundParameters"])
+@XmlSeeAlso(value = [ApiCall::class, QueryCall::class])
 @Open
 abstract class SystemCall() : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -33,12 +41,18 @@ abstract class SystemCall() : RmObject(), Serializable, VisitableByModelVisitor 
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "system_id", required = true)
     @Required
     var systemId: String? = null
 
+    @XmlElement(name = "call_name", required = true)
     @Required
     var callName: String? = null
+
+    @XmlElement(name = "parameter_map")
     var parameterMap: MutableList<ParameterMapping> = mutableListOf()
+
+    @XmlElement(name = "bound_parameters")
     var boundParameters: MutableList<ParameterDef<*>> = mutableListOf()
 
     protected constructor(systemId: String?, callName: String?) : this() {

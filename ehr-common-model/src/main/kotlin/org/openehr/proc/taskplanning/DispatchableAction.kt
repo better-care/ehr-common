@@ -17,11 +17,14 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "DISPATCHABLE_ACTION")
+@XmlSeeAlso(value = [HandOff::class, ExternalRequest::class, SystemRequest::class])
 @Open
 class DispatchableAction : TaskAction() {
     companion object {

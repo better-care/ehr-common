@@ -20,11 +20,15 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "RESUME_ACTION", propOrder = [
+    "resumeType",
+    "resumeLocation"])
 @Open
 class ResumeAction() : RmObject(), Serializable {
     companion object {
@@ -32,8 +36,11 @@ class ResumeAction() : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "resume_type", required = true)
     @Required
     var resumeType: ResumeType? = null
+
+    @XmlElement(name = "resume_location")
     var resumeLocation: UidBasedId? = null
 
     constructor(resumeType: ResumeType) : this() {

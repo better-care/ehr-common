@@ -16,18 +16,28 @@
 package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_MULTIPLE_ATTRIBUTE", propOrder = [
+    "cardinality",
+    "groups"])
 class CMultipleAttribute : CAttribute() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true, type = Cardinality::class)
     @Required
     var cardinality: Cardinality? = null
+
+    @XmlElement(type = CObjectGroup::class)
     var groups: MutableList<CObjectGroup> = mutableListOf()
 }

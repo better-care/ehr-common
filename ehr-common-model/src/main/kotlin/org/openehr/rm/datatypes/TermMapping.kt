@@ -19,11 +19,19 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "TERM_MAPPING", propOrder = [
+    "match",
+    "purpose",
+    "target"])
 @Open
 class TermMapping : RmObject(), Serializable {
     companion object {
@@ -31,9 +39,13 @@ class TermMapping : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true, defaultValue = "?")
+    @Required
     var match: String? = null
+
     var purpose: DvCodedText? = null
 
+    @XmlElement(required = true)
     @Required
     var target: CodePhrase? = null
 }

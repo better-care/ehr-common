@@ -17,11 +17,14 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import java.util.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_URI", propOrder = ["value"])
+@XmlSeeAlso(DvEhrUri::class)
 @Open
 class DvUri : DataValue() {
     companion object {
@@ -29,6 +32,7 @@ class DvUri : DataValue() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlSchemaType(name = "anyURI")
     var value: String? = null
 
     override fun equals(other: Any?): Boolean =

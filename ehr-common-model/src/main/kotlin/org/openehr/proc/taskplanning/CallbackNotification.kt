@@ -18,24 +18,35 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CALLBACK_NOTIFICATION", propOrder = [
+    "taskId",
+    "requestId",
+    "subjectId",
+    "manuallyNotified"])
 @Open
 class CallbackNotification() : PlanEvent(), TaskReferencingEvent {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 1L
     }
+
+    @XmlElement(name = "task_id", required = true)
     @Required
     private var taskId: UidBasedId? = null
 
+    @XmlElement(name = "request_id")
     var requestId: String? = null
 
+    @XmlElement(name = "subject_id")
     var subjectId: String? = null
 
+    @XmlElement(name = "manually_notified")
     var manuallyNotified: Boolean? = null
 
     constructor(taskId: UidBasedId?) : this() {

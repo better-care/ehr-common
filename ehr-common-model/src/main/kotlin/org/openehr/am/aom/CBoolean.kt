@@ -15,18 +15,36 @@
 
 package org.openehr.am.aom
 
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "C_BOOLEAN", propOrder = [
+    "trueValid",
+    "falseValid",
+    "assumedValue",
+    "defaultValue"])
 class CBoolean : CPrimitive() {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "true_valid")
     var trueValid: Boolean = false
+
+    @XmlElement(name = "false_valid")
     var falseValid: Boolean = false
+
+    @XmlElement(name = "assumed_value")
     var assumedValue: Boolean? = null
+
+    @XmlElement(name = "default_value")
     var defaultValue: Boolean? = null
 }

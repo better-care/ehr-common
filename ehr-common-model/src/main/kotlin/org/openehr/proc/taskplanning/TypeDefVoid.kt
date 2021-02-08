@@ -16,11 +16,12 @@
 package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TYPE_DEF_VOID")
 @Open
 class TypeDefVoid : ExprTypeDef<Void>("Void") {
 

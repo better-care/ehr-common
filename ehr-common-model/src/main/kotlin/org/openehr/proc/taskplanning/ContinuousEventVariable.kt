@@ -18,11 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import java.math.BigDecimal
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "CONTINUOUS_EVENT_VARIABLE", propOrder = ["updateVariation"])
 @Open
 class ContinuousEventVariable<T> : EventVariable<T> {
     companion object {
@@ -30,6 +32,7 @@ class ContinuousEventVariable<T> : EventVariable<T> {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "update_variation")
     var updateVariation: BigDecimal? = null
 
     constructor()

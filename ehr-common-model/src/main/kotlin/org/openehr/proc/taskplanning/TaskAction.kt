@@ -20,11 +20,18 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.common.Locatable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_ACTION", propOrder = [
+    "subjectPreconditions",
+    "instructionActivity",
+    "costingData"])
+@XmlSeeAlso(value = [PerformableAction::class, DispatchableAction::class ])
 @Open
 abstract class TaskAction() : Locatable(), VisitableByModelVisitor {
     companion object {
@@ -32,8 +39,13 @@ abstract class TaskAction() : Locatable(), VisitableByModelVisitor {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "instruction_activity")
     var instructionActivity: LocatableRef? = null
+
+    @XmlElement(name = "subject_preconditions")
     var subjectPreconditions: MutableList<SubjectPrecondition> = mutableListOf()
+
+    @XmlElement(name = "costing_data")
     var costingData: TaskCosting? = null
 
     protected constructor(instructionActivity: LocatableRef?) : this() {

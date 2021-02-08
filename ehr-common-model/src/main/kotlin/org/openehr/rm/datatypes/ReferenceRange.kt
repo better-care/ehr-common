@@ -19,11 +19,18 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "REFERENCE_RANGE", propOrder = [
+    "meaning",
+    "range"])
 @Open
 class ReferenceRange : RmObject(), Serializable {
     companion object {
@@ -31,9 +38,11 @@ class ReferenceRange : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var meaning: DvText? = null
 
+    @XmlElement(required = true)
     @Required
     var range: DvInterval? = null
 }

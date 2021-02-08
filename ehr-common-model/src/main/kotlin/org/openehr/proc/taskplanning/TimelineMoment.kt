@@ -17,11 +17,16 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import org.openehr.rm.datastructures.ItemStructure
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TIMELINE_MOMENT", propOrder = [
+    "timelineOffset",
+    "fixedTime",
+    "timelineOrigin"])
 @Open
 class TimelineMoment : PlanEvent {
     companion object {
@@ -29,8 +34,13 @@ class TimelineMoment : PlanEvent {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "timeline_offset")
     var timelineOffset: String? = null
+
+    @XmlElement(name = "fixed_time")
     var fixedTime: TimeSpecifier? = null
+
+    @XmlElement(name = "timeline_origin")
     var timelineOrigin: PlanTimeOrigin? = null
 
     constructor()

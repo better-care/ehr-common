@@ -17,11 +17,15 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "QUERY_CALL", propOrder = [
+    "queryId",
+    "queryText"])
 @Open
 class QueryCall : SystemCall {
     companion object {
@@ -29,7 +33,10 @@ class QueryCall : SystemCall {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "query_id")
     var queryId: String? = null
+
+    @XmlElement(name = "query_text")
     var queryText: String? = null
 
     constructor()

@@ -17,11 +17,12 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "BOOLEAN_CONTEXT_EXPRESSION")
 @Open
 class BooleanContextExpression : ContextExpression<Boolean> {
     companion object {

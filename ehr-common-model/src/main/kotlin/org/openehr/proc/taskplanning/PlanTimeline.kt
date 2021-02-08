@@ -18,11 +18,15 @@ package org.openehr.proc.taskplanning
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "PLAN_TIMELINE", propOrder = [
+    "plannedItems",
+    "timers"])
 @Open
 class PlanTimeline : RmObject(), Serializable {
     companion object {
@@ -30,7 +34,9 @@ class PlanTimeline : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "planned_items")
     var plannedItems: MutableList<PlanItem> = mutableListOf()
+
     var timers: MutableList<TimerWait> = mutableListOf()
 
     override fun toString(): String =

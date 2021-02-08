@@ -20,11 +20,24 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "RESOURCE_DESCRIPTION_ITEM", propOrder = [
+    "language",
+    "purpose",
+    "keywords",
+    "use",
+    "misuse",
+    "copyright",
+    "originalResourceUri",
+    "otherDetails"])
 @Open
 class ResourceDescriptionItem : RmObject(), Serializable {
     companion object {
@@ -32,15 +45,25 @@ class ResourceDescriptionItem : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var language: CodePhrase? = null
 
+    @XmlElement(required = true)
     @Required
     var purpose: String? = null
+
     var keywords: MutableList<String> = mutableListOf()
+
     var use: String? = null
+
     var misuse: String? = null
+
     var copyright: String? = null
+
+    @XmlElement(name = "original_resource_uri")
     var originalResourceUri: MutableList<StringDictionaryItem> = mutableListOf()
+
+    @XmlElement(name = "other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 }

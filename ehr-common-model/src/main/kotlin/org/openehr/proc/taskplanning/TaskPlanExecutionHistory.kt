@@ -17,11 +17,16 @@ package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK_PLAN_EXECUTION_HISTORY", propOrder = [
+    "planEvents",
+    "taskEvents"
+])
 @Open
 class TaskPlanExecutionHistory : RmObject() {
     companion object {
@@ -29,7 +34,10 @@ class TaskPlanExecutionHistory : RmObject() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "task_events")
     var taskEvents: MutableList<TaskEventRecord> = mutableListOf()
+
+    @XmlElement(name = "plan_events")
     var planEvents: MutableList<TaskPlanEventRecord> = mutableListOf()
 
     override fun toString(): String =

@@ -18,11 +18,20 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_QUANTITY", propOrder = [
+    "magnitude",
+    "units",
+    "precision"])
 @Open
 class DvQuantity : DvAmount() {
 
@@ -59,8 +68,11 @@ class DvQuantity : DvAmount() {
 
     var magnitude: Double = 0.0
 
+    @XmlElement(required = true)
     @Required
     var units: String? = null
+
+    @XmlElement(defaultValue = "-1")
     var precision: Int? = null
 
     override fun equals(other: Any?): Boolean =

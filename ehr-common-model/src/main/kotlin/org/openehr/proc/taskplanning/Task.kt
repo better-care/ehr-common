@@ -19,11 +19,17 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "TASK", propOrder = [
+    "action",
+    "orderTags"])
+@XmlSeeAlso(value = [DispatchableTask::class, PerformableTask::class])
 @Open
 abstract class Task<A : TaskAction> : PlanItem {
     companion object {
@@ -31,8 +37,11 @@ abstract class Task<A : TaskAction> : PlanItem {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var action: A? = null
+
+    @XmlElement(name = "order_tags")
     var orderTags: MutableList<String> = mutableListOf()
 
     constructor()

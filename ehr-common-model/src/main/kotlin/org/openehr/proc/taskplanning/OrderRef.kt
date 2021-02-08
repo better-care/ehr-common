@@ -21,10 +21,20 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.common.Locatable
 import java.io.Serializable
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  */
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ORDER_REF", propOrder = [
+    "orderTag",
+    "instructionArchetypeId",
+    "actionArchetypeId",
+    "orderRef"])
 
 @Open
 class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
@@ -33,9 +43,22 @@ class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "order_tag")
     var orderTag: String? = null
+
+    @XmlElement
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "instruction_archetype_id")
     var instructionArchetypeId: String? = null
+
+    @XmlElement
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "action_archetype_id")
     var actionArchetypeId: String? = null
+
+    @XmlElement(name = "order_ref")
     var orderRef: LocatableRef? = null
 
     override fun accept(visitor: TaskModelVisitor) {

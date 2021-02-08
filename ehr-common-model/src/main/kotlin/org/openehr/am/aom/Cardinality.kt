@@ -18,19 +18,28 @@ package org.openehr.am.aom
 import care.better.openehr.am.AmObject
 import org.openehr.base.foundationtypes.IntervalOfInteger
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CARDINALITY", propOrder = ["isOrdered", "isUnique", "interval"])
 class Cardinality : AmObject(), Serializable {
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "is_ordered")
     var isOrdered: Boolean = false
+
+    @XmlElement(name = "is_unique")
     var isUnique: Boolean = false
 
+    @XmlElement(required = true)
     lateinit var interval: IntervalOfInteger
 }

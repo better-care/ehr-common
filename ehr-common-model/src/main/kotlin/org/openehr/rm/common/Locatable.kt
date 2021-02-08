@@ -19,13 +19,44 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.UidBasedId
+import org.openehr.proc.taskplanning.*
+import org.openehr.rm.composition.Activity
+import org.openehr.rm.composition.Composition
+import org.openehr.rm.composition.ContentItem
+import org.openehr.rm.datastructures.Event
+import org.openehr.rm.datastructures.History
+import org.openehr.rm.datastructures.Item
+import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "LOCATABLE", propOrder = [
+    "name",
+    "uid",
+    "links",
+    "archetypeDetails",
+    "feederAudit"])
+@XmlSeeAlso(value = [
+                Composition::class,
+                Folder::class,
+                History::class,
+                Event::class,
+                ItemStructure::class,
+                Item::class,
+                ContentItem::class,
+                Activity::class,
+                PlanEvent::class,
+                PlanItem::class,
+                TaskAction::class,
+                TaskParticipation::class,
+                OrderRef::class,
+                DatasetSpec::class,])
+@XmlRootElement
 @Open
 abstract class Locatable : RmObject(), Serializable {
     companion object {
@@ -33,13 +64,21 @@ abstract class Locatable : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @Required
     var name: DvText? = null
+
     var uid: UidBasedId? = null
+
     var links: MutableList<Link> = mutableListOf()
+
+    @XmlElement(name = "archetype_details")
     var archetypeDetails: Archetyped? = null
+
+    @XmlElement(name = "feeder_audit")
     var feederAudit: FeederAudit? = null
 
+    @XmlAttribute(name = "archetype_node_id", required = true)
     @Required
     var archetypeNodeId: String? = null
 }

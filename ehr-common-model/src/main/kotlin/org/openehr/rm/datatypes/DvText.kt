@@ -18,11 +18,20 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.util.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_TEXT", propOrder = [
+    "value",
+    "hyperlink",
+    "formatting",
+    "mappings",
+    "language",
+    "encoding"])
+@XmlSeeAlso(DvCodedText::class)
 @Open
 class DvText : DataValue() {
 
@@ -40,12 +49,18 @@ class DvText : DataValue() {
         fun create(value: String?): DvText = DvText().apply { this.value = value }
     }
 
+    @XmlElement(required = true)
     @Required
     var value: String? = null
+
     var hyperlink: DvUri? = null
+
     var formatting: String? = null
+
     var mappings: MutableList<TermMapping> = mutableListOf()
+
     var language: CodePhrase? = null
+
     var encoding: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =

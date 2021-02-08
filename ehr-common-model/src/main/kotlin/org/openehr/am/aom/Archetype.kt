@@ -18,10 +18,23 @@ package org.openehr.am.aom
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.common.AuthoredResource
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "ARCHETYPE", propOrder = [
+    "uid",
+    "archetypeId",
+    "adlVersion",
+    "concept",
+    "parentArchetypeId",
+    "definition",
+    "invariants",
+    "ontology"])
+@XmlRootElement
 
 class Archetype : AuthoredResource() {
     companion object {
@@ -30,11 +43,23 @@ class Archetype : AuthoredResource() {
     }
 
     var uid: HierObjectId? = null
+
+    @XmlElement(name = "archetype_id", required = true)
     lateinit var archetypeId: ArchetypeId
+
+    @XmlElement(name = "adl_version")
     var adlVersion: String? = null
+
     lateinit var concept: String
+    @XmlElement(name = "parent_archetype_id")
     var parentArchetypeId: ArchetypeId? = null
+
+    @XmlElement(required = true, type = CComplexObject::class)
     lateinit var definition: CComplexObject
+
+    @XmlElement(type = Assertion::class)
     var invariants: MutableList<Assertion> = mutableListOf()
+
+    @XmlElement(required = true, type = ArchetypeOntology::class)
     lateinit var ontology: ArchetypeOntology
 }

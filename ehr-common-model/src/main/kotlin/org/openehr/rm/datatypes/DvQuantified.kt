@@ -17,11 +17,14 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import java.util.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_QUANTIFIED", propOrder = ["magnitudeStatus"])
+@XmlSeeAlso(value = [DvTemporal::class, DvAmount::class])
 @Open
 abstract class DvQuantified : DvOrdered() {
     companion object {
@@ -29,6 +32,7 @@ abstract class DvQuantified : DvOrdered() {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "magnitude_status")
     var magnitudeStatus: String? = null
 
     override fun equals(other: Any?): Boolean =

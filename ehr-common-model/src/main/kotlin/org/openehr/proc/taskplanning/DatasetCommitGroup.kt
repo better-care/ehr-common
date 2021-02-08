@@ -21,11 +21,15 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlType(name = "DATASET_COMMIT_GROUP", propOrder = ["groupId", "completionStep"])
 @Open
 class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -33,9 +37,12 @@ class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
         private val serialVersionUID: Long = 0L
     }
 
-
+    @XmlElement(name = "group_id", required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
     @Required
     var groupId: String? = null
+
+    @XmlElement(name = "completion_step", required = true)
     var completionStep: Boolean = false
 
     constructor(groupId: String?, completionStep: Boolean) : this() {

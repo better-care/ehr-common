@@ -19,11 +19,23 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "RESOURCE_DESCRIPTION", propOrder = [
+    "originalAuthor",
+    "otherContributors",
+    "lifecycleState",
+    "resourcePackageUri",
+    "otherDetails",
+    "details",
+    "parentResource"])
 @Open
 class ResourceDescription : RmObject(), Serializable {
     companion object {
@@ -31,16 +43,27 @@ class ResourceDescription : RmObject(), Serializable {
         private val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "original_author", required = true)
     @Required
     var originalAuthor: MutableList<StringDictionaryItem> = mutableListOf()
+
+    @XmlElement(name = "other_contributors")
     var otherContributors: MutableList<String> = mutableListOf()
 
+    @XmlElement(name = "lifecycle_state", required = true)
     @Required
     var lifecycleState: String? = null
+
+    @XmlElement(name = "resource_package_uri")
     var resourcePackageUri: String? = null
+
+    @XmlElement(name = "other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
+    @XmlElement(required = true)
     @Required
     var details: MutableList<ResourceDescriptionItem> = mutableListOf()
+
+    @XmlElement(name = "parent_resource")
     var parentResource: AuthoredResource? = null
 }

@@ -17,11 +17,28 @@ package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DATA_VALUE")
+@XmlSeeAlso(value = [
+                DvBoolean::class,
+                DvIdentifier::class,
+                DvState::class,
+                DvInterval::class,
+                DvParagraph::class,
+                DvText::class,
+                DvOrdered::class,
+                DvTimeSpecification::class,
+                DvEncapsulated::class,
+                DvUri::class])
 abstract class DataValue : RmObject(), Serializable {
     companion object {
         @JvmStatic

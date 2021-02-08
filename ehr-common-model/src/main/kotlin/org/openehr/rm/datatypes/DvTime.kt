@@ -21,11 +21,16 @@ import java.time.LocalTime
 import java.time.OffsetTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DV_TIME", propOrder = ["value"])
 @Open
 class DvTime : DvTemporal() {
 
@@ -58,6 +63,7 @@ class DvTime : DvTemporal() {
                 }
     }
 
+    @XmlElement(required = true)
     @Required
     var value: String? = null
 
