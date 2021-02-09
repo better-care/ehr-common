@@ -35,7 +35,7 @@ abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
         private val serialVersionUID: Long = 0L
     }
 
-    @XmlElement(required = true)
+    @XmlElement(required = true, name = "override_type")
     @Required
     var overrideType: OverrideType? = null
 

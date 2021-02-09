@@ -9,11 +9,11 @@
     <modules>
         <module>ehr-common-model</module>
         <module>ehr-common-json-jackson</module>
-        <module>ehr-common-xml-moxy</module>
         <module>ehr-common-utils</module>
         <module>ehr-common-terminology</module>
         <module>ehr-common-path</module>
         <module>ehr-common-amnode</module>
+        <module>ehr-common-xml-jaxb</module>
     </modules>
 
     <name>EHR common modules</name>
@@ -29,7 +29,6 @@
         <commons-lang3.version>3.11</commons-lang3.version>
         <joda.version>2.10.8</joda.version>
         <jackson.version>2.11.3</jackson.version>
-        <moxy.version>2.7.7</moxy.version>
 
         <jupiter.version>5.6.3</jupiter.version>
         <assertj.version>3.17.2</assertj.version>
@@ -97,7 +96,7 @@
 
             <dependency>
                 <groupId>care.better.platform</groupId>
-                <artifactId>ehr-common-xml-moxy</artifactId>
+                <artifactId>ehr-common-xml-jaxb</artifactId>
                 <version>3.1.0-SNAPSHOT</version>
             </dependency>
 
@@ -129,12 +128,6 @@
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
                 <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.eclipse.persistence</groupId>
-                <artifactId>org.eclipse.persistence.moxy</artifactId>
-                <version>${moxy.version}</version>
             </dependency>
 
             <dependency>

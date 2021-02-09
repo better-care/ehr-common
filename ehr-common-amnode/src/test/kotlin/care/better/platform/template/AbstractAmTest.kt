@@ -15,7 +15,7 @@
 
 package care.better.platform.template
 
-import care.better.platform.moxy.MoxyRegistry
+import care.better.platform.jaxb.JaxbRegistry
 import org.openehr.am.aom.Template
 import java.io.IOException
 import java.io.InputStream
@@ -36,9 +36,9 @@ abstract class AbstractAmTest {
         private const val XML_START_CHAR = '<'.toInt()
     }
 
-    private val moxyRegistry =
+    private val jaxbRegistry =
         try {
-            MoxyRegistry.getInstance()
+            JaxbRegistry.getInstance()
         } catch (e: JAXBException) {
             throw IllegalStateException("Error creating JAXB context", e)
         }
@@ -48,7 +48,7 @@ abstract class AbstractAmTest {
 
     @Throws(JAXBException::class)
     private fun getUnmarshaller(): Unmarshaller =
-        moxyRegistry.createUnmarshaller().apply {
+        jaxbRegistry.createUnmarshaller().apply {
             this.schema = null
         }
 

@@ -41,14 +41,13 @@ import javax.xml.bind.annotation.XmlType
         TypeDefTerminologyCode::class,
         TypeDefUri::class])
 @Open
-abstract class ExprTypeDef<T>(private var typeName: String) : RmObject(), Serializable {
+abstract class ExprTypeDef<T>(@XmlElement(name = "type_name", required = true) private var typeName: String) : RmObject(), Serializable {
 
     companion object {
         @JvmStatic
         private val serialVersionUID: Long = 0L
     }
 
-    @XmlElement(name = "type_name", required = true)
     fun getTypeName(): String? = typeName
 
     fun setTypeName(typeName: String) {

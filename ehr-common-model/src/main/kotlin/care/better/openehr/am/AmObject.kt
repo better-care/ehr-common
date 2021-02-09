@@ -15,10 +15,13 @@
 
 package care.better.openehr.am
 
+import javax.xml.bind.annotation.XmlTransient
+
 /**
  * @author Primoz Delopst
  */
 
+@XmlTransient
 abstract class AmObject {
     companion object {
         const val AM_VERSION = "1.0.1"
