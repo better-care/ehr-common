@@ -125,19 +125,22 @@ open class SimplePathValueExtractor(path: String) : PathValueExtractor {
     private fun getMethod(methodKey: MethodKey, ignoreExceptions: Boolean): (Any) -> Any? {
         val methodName: String = StringUtils.capitalize(methodKey.propertyName)
         try {
-            return { invoke(methodKey.clazz.getMethod("get$methodName"), it) }
+            val method = methodKey.clazz.getMethod("get$methodName")
+            return { invoke(method, it) }
         } catch (ignored: NoSuchMethodException) {
         } catch (ignored: SecurityException) {
         }
 
         try {
-            return { invoke(methodKey.clazz.getMethod("is$methodName"), it) }
+            val method = methodKey.clazz.getMethod("is$methodName")
+            return { invoke(method, it) }
         } catch (ignored: NoSuchMethodException) {
         } catch (ignored: SecurityException) {
         }
 
         try {
-            return { invoke(methodKey.clazz.getMethod(methodName), it) }
+            val method = methodKey.clazz.getMethod(methodName)
+            return { invoke(method, it) }
         } catch (e: NoSuchMethodException) {
             return if (ignoreExceptions) { _ -> null } else throw PathValueExtractorException(e)
         }

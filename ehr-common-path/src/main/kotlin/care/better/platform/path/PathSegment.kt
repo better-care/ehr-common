@@ -1,5 +1,6 @@
 package care.better.platform.path
 
+import care.better.platform.annotation.Open
 import org.apache.commons.lang3.builder.ToStringBuilder
 import java.util.*
 
@@ -18,7 +19,8 @@ import java.util.*
  * @param name Additional condition value (/items[at0001,**'Name'**] or /items[at0001 and uid/value=**'Name'**])
  * @param prefix Additional condition prefix - specified after archetype node (/items[at0001 and **uid/value**='Name']).
  */
-data class PathSegment(val element: String, val archetypeNodeId: String?, val name: String?, val prefix: String?) {
+@Open
+class PathSegment(val element: String?, val archetypeNodeId: String?, val name: String?, val prefix: String?) {
 
     /**
      * Creates a new instance of [PathSegment].
@@ -26,7 +28,7 @@ data class PathSegment(val element: String, val archetypeNodeId: String?, val na
      * @param element First part of a path segment (**items**[at0001,'Name'])
      * @param archetypeNodeId Archetype node id part of the archetype predicate (/items[**at0001**,'Name'])
      */
-    constructor(element: String, archetypeNodeId: String?) : this(element, archetypeNodeId, null)
+    constructor(element: String?, archetypeNodeId: String?) : this(element, archetypeNodeId, null)
 
     /**
      * Creates a new instance of [PathSegment].
@@ -34,7 +36,7 @@ data class PathSegment(val element: String, val archetypeNodeId: String?, val na
      * @param archetypeNodeId Archetype node id part of the archetype predicate (/items[**at0001**,'Name'])
      * @param name Additional condition value (/items[at0001,**'Name'**] or /items[at0001 and uid/value=**'Name'**])
      */
-    constructor(element: String, archetypeNodeId: String?, name: String?) : this(element, archetypeNodeId, name, null)
+    constructor(element: String?, archetypeNodeId: String?, name: String?) : this(element, archetypeNodeId, name, null)
 
     /**
      * Returns [PathSegment] [String].
@@ -43,9 +45,9 @@ data class PathSegment(val element: String, val archetypeNodeId: String?, val na
      */
     fun getSegment(): String =
         if (archetypeNodeId == null)
-            PathUtils.underscorePath(element)
+            PathUtils.underscorePath(element!!)
         else
-            "${PathUtils.underscorePath(element)}[${archetypeNodeId}]"
+            "${PathUtils.underscorePath(element!!)}[${archetypeNodeId}]"
 
     /**
      * Formats this [PathSegment] to be used in AQL paths. Note no leading '/' is added.
@@ -53,7 +55,7 @@ data class PathSegment(val element: String, val archetypeNodeId: String?, val na
      * @return [PathSegment] formatted for use in AQL path
      */
     fun asPathSegment(): String {
-        val path = StringBuilder(PathUtils.underscorePath(element))
+        val path = StringBuilder(PathUtils.underscorePath(element!!))
         if (archetypeNodeId != null) {
             path.append('[').append(archetypeNodeId)
             if (name != null) {
@@ -62,7 +64,7 @@ data class PathSegment(val element: String, val archetypeNodeId: String?, val na
                 } else {
                     path.append(" and ").append(prefix).append("='")
                 }
-                path.append(name.replace("'", "\\'")).append('\'')
+                path.append(name!!.replace("'", "\\'")).append('\'')
             }
             path.append(']')
         }
