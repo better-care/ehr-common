@@ -16,7 +16,6 @@
 package care.better.platform.template
 
 import care.better.platform.template.exception.AmException
-import care.better.platform.template.type.CollectionType
 import care.better.platform.template.type.TypeInfo
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.openehr.am.aom.*
@@ -150,14 +149,6 @@ class AmNode constructor(
     fun getTypeOnParent(): TypeInfo = type ?: throw AmException("Type for $this  not found.")
 
     fun isCollectionOnParent(): Boolean = type?.isCollection() ?: false
-
-    fun isNotCollectionOnParent(): Boolean = !isCollectionOnParent()
-
-    fun createMutableCollection(): MutableCollection<Any> =
-        when {
-            type?.collection == null || CollectionType.LIST == type?.collection?.collectionType -> mutableListOf()
-            else -> mutableSetOf()
-        }
 
     fun getTemplateLangugage(): String? = if (templateLanguage == null && parent != null) parent.getTemplateLangugage() else templateLanguage
 

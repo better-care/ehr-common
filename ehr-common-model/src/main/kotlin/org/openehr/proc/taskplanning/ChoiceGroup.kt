@@ -20,6 +20,7 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
 import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlElements
 import javax.xml.bind.annotation.XmlSeeAlso
 import javax.xml.bind.annotation.XmlType
 
@@ -35,7 +36,7 @@ abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
         private val serialVersionUID: Long = 0L
     }
 
-    @XmlElement(required = true, name = "override_type")
+    @XmlElements(value = [XmlElement(required = true, name = "overrideType"), XmlElement(required = true, name = "override_type")])
     @Required
     var overrideType: OverrideType? = null
 
