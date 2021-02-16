@@ -27,6 +27,7 @@
 
         <guava.version>29.0-jre</guava.version>
         <commons-lang3.version>3.11</commons-lang3.version>
+        <jaxb.version>2.3.1</jaxb.version>
         <joda.version>2.10.8</joda.version>
         <jackson.version>2.11.3</jackson.version>
 
@@ -105,6 +106,13 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
