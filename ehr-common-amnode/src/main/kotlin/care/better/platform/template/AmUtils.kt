@@ -151,7 +151,7 @@ object AmUtils {
      * @return [ArchetypeTerm] text
      */
     @JvmStatic
-    fun findText(amNode: AmNode, language: String, archetypeNodeId: String): String? = findTermText(amNode, language, archetypeNodeId, TEXT_ID)
+    fun findText(amNode: AmNode, language: String, archetypeNodeId: String?): String? = findTermText(amNode, language, archetypeNodeId, TEXT_ID)
 
     /**
      * Finds and returns [ArchetypeTerm] description.
@@ -162,7 +162,7 @@ object AmUtils {
      * @return [ArchetypeTerm] description
      */
     @JvmStatic
-    fun findDescription(amNode: AmNode, language: String, archetypeNodeId: String): String? = findTermText(amNode, language, archetypeNodeId, DESCRIPTION_ID)
+    fun findDescription(amNode: AmNode, language: String, archetypeNodeId: String?): String? = findTermText(amNode, language, archetypeNodeId, DESCRIPTION_ID)
 
     /**
      * Finds and returns [ArchetypeTerm] text.
@@ -172,12 +172,12 @@ object AmUtils {
      * @return [ArchetypeTerm] text
      */
     @JvmStatic
-    fun findTermText(amNode: AmNode, archetypeNodeId: String): String? = amNode.getTerms()?.let { findTerm(it, archetypeNodeId, TEXT_ID) }
+    fun findTermText(amNode: AmNode, archetypeNodeId: String?): String? = amNode.getTerms()?.let { findTerm(it, archetypeNodeId, TEXT_ID) }
 
-    private fun findTermText(amNode: AmNode, language: String, archetypeNodeId: String, id: String): String? {
+    private fun findTermText(amNode: AmNode, language: String, archetypeNodeId: String?, id: String): String? {
         val termDefinitions = amNode.getTermDefinitions()
         return when{
-            termDefinitions != null && termDefinitions.containsKey(language) -> findTerm(termDefinitions[language] ?: emptyList(),archetypeNodeId,  id)
+            termDefinitions != null && termDefinitions.containsKey(language) -> findTerm(termDefinitions[language] ?: emptyList(), archetypeNodeId,  id)
             language == amNode.getTemplateLangugage() -> findTerm(amNode.getTerms() ?: emptyList(), archetypeNodeId, id)
             else -> null
         }
