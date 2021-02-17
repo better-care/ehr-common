@@ -103,6 +103,10 @@ class AmNode constructor(
                     { it.value.codeString ?: throw AmException("Code must be set.") }) ?: emptyMap()
         }
 
+    fun getSetter(): Method? = setter
+
+    fun getGetter(): Method? = getter
+
     fun setGetter(getter: Method?) {
         this.getter = getter
     }

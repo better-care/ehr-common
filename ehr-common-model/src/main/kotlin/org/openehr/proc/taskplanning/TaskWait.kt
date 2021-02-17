@@ -42,7 +42,6 @@ class TaskWait() : RmObject(), Serializable {
     @XmlElement(name = "event_relation")
     var eventRelation: TemporalRelation? = null
 
-    @XmlElement(name = "event_relation")
     var timeout: TimerWait? = null
 
     @XmlElement(name = "next_state")
