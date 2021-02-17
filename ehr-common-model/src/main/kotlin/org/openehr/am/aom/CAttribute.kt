@@ -17,10 +17,7 @@ package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
 import org.openehr.base.foundationtypes.IntervalOfInteger
-import javax.xml.bind.annotation.XmlAccessType
-import javax.xml.bind.annotation.XmlAccessorType
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
@@ -33,6 +30,7 @@ import javax.xml.bind.annotation.XmlType
     "differentialPath",
     "matchNegated",
     "children"])
+@XmlSeeAlso(value = [CSingleAttribute::class, CMultipleAttribute::class])
 abstract class CAttribute : ArchetypeConstraint() {
     companion object {
         @JvmStatic
