@@ -70,7 +70,7 @@ object AmUtils {
      */
     @JvmStatic
     fun getAmNode(amNode: AmNode, vararg pathSegments: String): AmNode? =
-        with(getAmNodesRecursively(listOf(amNode), pathSegments.toList(), 0)) {
+        with(getAmNodes(amNode, *pathSegments)) {
             if (this.isEmpty()) null else this.iterator().next()
         }
 
@@ -82,7 +82,11 @@ object AmUtils {
      * @return [List] of [AmNode]
      */
     @JvmStatic
-    fun getAmNodes(amNode: AmNode, vararg pathSegments: String): List<AmNode> = getAmNodesRecursively(listOf(amNode), pathSegments.toList(), 0)
+    fun getAmNodes(amNode: AmNode, vararg pathSegments: String): List<AmNode> =
+        if (pathSegments.isEmpty())
+            listOf(amNode)
+        else
+            getAmNodesRecursively(listOf(amNode), pathSegments.toList(), 0)
 
     private fun getAmNodesRecursively(amNodes: List<AmNode>, pathSegments: List<String>, index: Int): List<AmNode> {
         if (amNodes.isEmpty()) {
@@ -436,7 +440,11 @@ object AmUtils {
      * @return [AmNode] if found, otherwise null
      */
     @JvmStatic
-    fun resolvePath(amNode: AmNode, path: String): AmNode? = resolvePathRecursively(amNode, PathUtils.getPathSegments(path), 0)
+    fun resolvePath(amNode: AmNode, path: String?): AmNode? =
+        if (path.isNullOrBlank())
+            amNode
+        else
+            resolvePathRecursively(amNode, PathUtils.getPathSegments(path), 0)
 
     private fun resolvePathRecursively(amNode: AmNode, pathSegments: List<PathSegment>, index: Int): AmNode? {
         if (index > pathSegments.size - 1) {

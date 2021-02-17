@@ -47,34 +47,36 @@ object PathUtils {
      * @return [List] of [PathSegment]
      */
     @JvmStatic
-    fun getPathSegments(path: String): List<PathSegment> {
+    fun getPathSegments(path: String?): List<PathSegment> {
+        if (path.isNullOrBlank()) {
+            return emptyList()
+        }
         val pathSegments: MutableList<PathSegment> = ArrayList<PathSegment>()
 
-        if (path.isNotBlank()) {
-            val nodeMatcher = NODE_PATTERN.matcher("/$path")
-            while (nodeMatcher.find()) {
-                val segment = if (nodeMatcher.groupCount() == 1) {
-                    PathSegment(nodeMatcher.group(1), null)
-                } else if (nodeMatcher.groupCount() >= 10) {
-                    val quotedName = nodeMatcher.group(10)
-                    if (quotedName == null) {
-                        PathSegment(nodeMatcher.group(1), nodeMatcher.group(3))
-                    } else {
-                        val name = quotedName.replace("\\'", "'").replace("\\\"", "\"").replace("\\\\", "\\")
-                        val fullPrefix = nodeMatcher.group(7)
-                        if (fullPrefix == null) {
-                            PathSegment(nodeMatcher.group(1), nodeMatcher.group(3), name, null)
-                        } else {
-                            val prefix = getPrefixPath(fullPrefix)
-                            PathSegment(nodeMatcher.group(1), nodeMatcher.group(3), name, if (("name/value" == prefix)) null else prefix)
-                        }
-                    }
-                } else {
+        val nodeMatcher = NODE_PATTERN.matcher("/$path")
+        while (nodeMatcher.find()) {
+            val segment = if (nodeMatcher.groupCount() == 1) {
+                PathSegment(nodeMatcher.group(1), null)
+            } else if (nodeMatcher.groupCount() >= 10) {
+                val quotedName = nodeMatcher.group(10)
+                if (quotedName == null) {
                     PathSegment(nodeMatcher.group(1), nodeMatcher.group(3))
+                } else {
+                    val name = quotedName.replace("\\'", "'").replace("\\\"", "\"").replace("\\\\", "\\")
+                    val fullPrefix = nodeMatcher.group(7)
+                    if (fullPrefix == null) {
+                        PathSegment(nodeMatcher.group(1), nodeMatcher.group(3), name, null)
+                    } else {
+                        val prefix = getPrefixPath(fullPrefix)
+                        PathSegment(nodeMatcher.group(1), nodeMatcher.group(3), name, if (("name/value" == prefix)) null else prefix)
+                    }
                 }
-                pathSegments.add(segment)
+            } else {
+                PathSegment(nodeMatcher.group(1), nodeMatcher.group(3))
             }
+            pathSegments.add(segment)
         }
+
         return pathSegments.toList()
     }
 
