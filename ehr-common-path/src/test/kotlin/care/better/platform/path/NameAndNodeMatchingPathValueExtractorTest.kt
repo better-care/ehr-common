@@ -17,7 +17,7 @@ package care.better.platform.path
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.openehr.base.basetypes.HierObjectId.Companion.create
+import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.composition.AdminEntry
 import org.openehr.rm.composition.Section
 import org.openehr.rm.datatypes.DvText
@@ -31,7 +31,7 @@ class NameAndNodeMatchingPathValueExtractorTest {
         this.items.add(AdminEntry().apply {
             this.archetypeNodeId = "at0001"
             this.name = DvText.create("Name")
-            this.uid = create("12345")
+            this.uid = HierObjectId("12345")
         })
     }
 

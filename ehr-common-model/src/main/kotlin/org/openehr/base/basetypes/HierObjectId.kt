@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HIER_OBJECT_ID")
 @Open
-class HierObjectId(value: String? = null) : ObjectId(value) {
+class HierObjectId(value: String? = null) : UidBasedId(value) {
     companion object {
         private const val serialVersionUID: Long = 0L
 
