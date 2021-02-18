@@ -54,12 +54,14 @@ open class SimplePathValueExtractor(path: String) : PathValueExtractor {
      * @param ignoreExceptions [Boolean] indicating if the exception will be thrown
      * @return [List] of extracted values
      */
-    open fun getValue(node: Any?, ignoreExceptions: Boolean): List<Any> {
-        if (node == null || !rootMatches(node)) {
-            return listOf()
+    open fun getValue(node: Any?, ignoreExceptions: Boolean): List<Any> =
+        if (node == null || ! rootMatches(node)) {
+            listOf()
+        } else if (pathSegmentsWithNames.isEmpty()) {
+            listOf(node)
+        } else {
+            getValuesRecursively(listOf(node), 0, ignoreExceptions)
         }
-        return getValuesRecursively(listOf(node), 0, ignoreExceptions)
-    }
 
     /**
      * Extract and returns [List] of values using the path.
