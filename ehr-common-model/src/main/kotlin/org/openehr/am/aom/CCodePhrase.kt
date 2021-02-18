@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.*
 @XmlSeeAlso(CCodeReference::class)
 open class CCodePhrase : CDomainType() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "assumed_value")

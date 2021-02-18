@@ -42,8 +42,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class PlanItem : Locatable, VisitableByModelVisitor {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 1L
+        private const val serialVersionUID: Long = 1L
     }
 
     @XmlElement(required = true)

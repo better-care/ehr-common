@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType
     "defaultValue"])
 class CTime : CPrimitive() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var pattern: String? = null

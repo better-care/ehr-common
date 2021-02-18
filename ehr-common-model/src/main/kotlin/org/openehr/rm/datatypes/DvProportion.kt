@@ -28,39 +28,45 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_PROPORTION", propOrder = [
-    "numerator",
-    "denominator",
-    "type",
-    "precision"])
+@XmlType(
+    name = "DV_PROPORTION", propOrder = [
+        "numerator",
+        "denominator",
+        "type",
+        "precision"]
+)
 @Open
-class DvProportion : DvAmount() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
-    var numerator: Float = 0f
-
-    var denominator: Float = 0f
-
+class DvProportion
+@JvmOverloads
+constructor(
+    var numerator: Float = 0f,
+    var denominator: Float = 0f,
     @XmlElement(required = true)
     @Required
-    var type: BigInteger? = null
-
+    var type: BigInteger? = null,
     @XmlElement(defaultValue = "-1")
-    var precision: Int? = null
+    var precision: Int? = null,
+    accuracy: Float? = null,
+    accuracyIsPercent: Boolean? = null,
+    magnitudeStatus: String? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null,
+) : DvAmount(accuracy, accuracyIsPercent, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                (other as DvProportion).numerator != numerator -> false
-                other.denominator != denominator -> false
-                other.precision != precision -> false
-                else -> other.type == type
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            (other as DvProportion).numerator != numerator -> false
+            other.denominator != denominator -> false
+            other.precision != precision -> false
+            else -> other.type == type
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(numerator, type, precision, denominator)
 }

@@ -34,8 +34,7 @@ import javax.xml.bind.annotation.XmlType
     "variables"])
 class Assertion : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var tag: String? = null

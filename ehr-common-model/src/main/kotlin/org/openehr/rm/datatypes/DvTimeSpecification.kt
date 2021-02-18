@@ -28,22 +28,21 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "DV_TIME_SPECIFICATION", propOrder = ["value"])
 @XmlSeeAlso(value = [DvPeriodicTimeSpecification::class, DvGeneralTimeSpecification::class])
 @Open
-abstract class DvTimeSpecification : DataValue() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+abstract class DvTimeSpecification(
     @XmlElement(required = true)
     @Required
     var value: DvParsable? = null
+) : DataValue() {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                else -> (other as DvTimeSpecification).value == value
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            else -> (other as DvTimeSpecification).value == value
+        }
 
     override fun hashCode(): Int = Objects.hash(value)
 }

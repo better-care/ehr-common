@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "T_VIEW", propOrder = ["constraints"])
 class TView : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var constraints: MutableList<Constraints> = mutableListOf()
@@ -37,8 +36,7 @@ class TView : AmObject(), Serializable {
     @XmlType(name = "", propOrder = ["items"])
     class Constraints : AmObject(), Serializable {
         companion object {
-            @JvmStatic
-            private val serialVersionUID: Long = 0L
+            private const val serialVersionUID: Long = 0L
         }
 
         @XmlElement(required = true)
@@ -52,8 +50,7 @@ class TView : AmObject(), Serializable {
         @XmlType(name = "", propOrder = ["value"])
         class Items : AmObject(), Serializable {
             companion object {
-                @JvmStatic
-                private val serialVersionUID: Long = 0L
+                private const val serialVersionUID: Long = 0L
             }
 
             @XmlElement(required = true)

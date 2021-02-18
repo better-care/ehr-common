@@ -28,9 +28,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "UID_BASED_ID")
 @XmlSeeAlso(value = [ObjectVersionId::class, HierObjectId::class])
 @Open
-abstract class UidBasedId : ObjectId() {
+abstract class UidBasedId(value: String? = null) : ObjectId(value) {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 }

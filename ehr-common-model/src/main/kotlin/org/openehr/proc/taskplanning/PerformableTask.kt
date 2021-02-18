@@ -28,8 +28,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class PerformableTask<A : PerformableAction> : Task<A> {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = -2716744970112165763L
+        private const val serialVersionUID: Long = -2716744970112165763L
     }
 
     @XmlElement(name = "capture_dataset")

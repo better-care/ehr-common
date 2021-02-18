@@ -20,7 +20,6 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.datatypes.DvEhrUri
 import org.openehr.rm.datatypes.DvText
-import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -30,17 +29,29 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LINK", propOrder = [
-    "meaning",
-    "type",
-    "target"])
+@XmlType(
+    name = "LINK", propOrder = [
+        "meaning",
+        "type",
+        "target"]
+)
 @Open
-class Link : RmObject(), Serializable {
+class Link
+@JvmOverloads
+constructor(
+    @XmlElement(required = true)
+    @Required
+    var meaning: DvText? = null,
+    @XmlElement(required = true)
+    @Required
+    var type: DvText? = null,
+    @XmlElement(required = true)
+    @Required
+    var target: DvEhrUri? = null
+) : RmObject(), java.io.Serializable {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates a name suffix suitable for use in LINKs (i.e. /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
@@ -55,16 +66,4 @@ class Link : RmObject(), Serializable {
         @JvmStatic
         fun quote(parameter: String): String = parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
     }
-
-    @XmlElement(required = true)
-    @Required
-    var meaning: DvText? = null
-
-    @XmlElement(required = true)
-    @Required
-    var type: DvText? = null
-
-    @XmlElement(required = true)
-    @Required
-    var target: DvEhrUri? = null
 }

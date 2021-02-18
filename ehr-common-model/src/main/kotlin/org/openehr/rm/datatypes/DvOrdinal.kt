@@ -26,17 +26,25 @@ import javax.xml.bind.annotation.XmlType
 /**
  * @author Primoz Delopst
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_ORDINAL", propOrder = [
-    "value",
-    "symbol"])
+@XmlType(
+    name = "DV_ORDINAL", propOrder = [
+        "value",
+        "symbol"]
+)
 @Open
-class DvOrdinal : DvOrdered() {
+class DvOrdinal(
+    var value: Int = 0,
+    @XmlElement(required = true)
+    @Required
+    var symbol: DvCodedText? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null
+) : DvOrdered(normalRange, otherReferenceRanges, normalStatus) {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates [DvOrdinal] from value and symbol
@@ -46,28 +54,17 @@ class DvOrdinal : DvOrdered() {
          * @return [DvOrdinal] object
          */
         @JvmStatic
-        fun create(value: Int, symbol: DvCodedText): DvOrdinal =
-                DvOrdinal().apply {
-                    this.value = value
-                    this.symbol = symbol
-                }
-
+        fun create(value: Int, symbol: DvCodedText): DvOrdinal = DvOrdinal(value, symbol)
     }
 
-    var value: Int = 0
-
-    @XmlElement(required = true)
-    @Required
-    var symbol: DvCodedText? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                (other as DvOrdinal).value != value -> false
-                else -> other.symbol == symbol
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            (other as DvOrdinal).value != value -> false
+            else -> other.symbol == symbol
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, symbol)
 }

@@ -30,10 +30,21 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_CODED_TEXT", propOrder = ["definingCode"])
 @Open
-class DvCodedText : DvText() {
+class DvCodedText
+@JvmOverloads
+constructor(
+    @XmlElement(name = "defining_code", required = true)
+    @Required
+    var definingCode: CodePhrase? = null,
+    value: String? = null,
+    hyperlink: DvUri? = null,
+    formatting: String? = null,
+    mappings: MutableList<TermMapping> = mutableListOf(),
+    language: CodePhrase? = null,
+    encoding: CodePhrase? = null
+) : DvText(value, hyperlink, formatting, mappings, language, encoding) {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates a [DvCodedText] from terminology id, code and value
@@ -45,10 +56,7 @@ class DvCodedText : DvText() {
          */
         @JvmStatic
         fun create(terminology: String, code: String, value: String?): DvCodedText =
-                DvCodedText().apply {
-                    this.definingCode = CodePhrase.create(terminology, code)
-                    this.value = value
-                }
+            DvCodedText(value = value, definingCode = CodePhrase.create(terminology, code))
 
         /**
          * Creates a [DvCodedText] with local terminology, code and value
@@ -71,16 +79,12 @@ class DvCodedText : DvText() {
         fun createWithOpenEHRTerminology(code: String, value: String?): DvCodedText = create("openehr", code, value)
     }
 
-    @XmlElement(name = "defining_code", required = true)
-    @Required
-    var definingCode: CodePhrase? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                else -> (other as DvCodedText).definingCode == definingCode
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            else -> (other as DvCodedText).definingCode == definingCode
+        }
 
     override fun hashCode(): Int = Objects.hash(definingCode)
 }

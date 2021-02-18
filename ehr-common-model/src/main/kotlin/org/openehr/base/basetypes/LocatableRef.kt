@@ -28,8 +28,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class LocatableRef : ObjectRef() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var path: String? = null

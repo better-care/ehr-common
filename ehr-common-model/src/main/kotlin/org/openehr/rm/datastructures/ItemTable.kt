@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class ItemTable : ItemStructure() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var rows: MutableList<Cluster> = mutableListOf()

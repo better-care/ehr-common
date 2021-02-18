@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class ExecutionRule : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "ExecutionRule{}"

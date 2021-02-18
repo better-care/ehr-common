@@ -26,21 +26,20 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "DV_URI", propOrder = ["value"])
 @XmlSeeAlso(DvEhrUri::class)
 @Open
-class DvUri : DataValue() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class DvUri(
     @XmlSchemaType(name = "anyURI")
     var value: String? = null
+) : DataValue() {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                else -> (other as DvUri).value == value
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            else -> (other as DvUri).value == value
+        }
 
     override fun hashCode(): Int = Objects.hash(value)
 }

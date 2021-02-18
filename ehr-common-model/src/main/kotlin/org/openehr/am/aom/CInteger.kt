@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType
     "defaultValue"])
 class CInteger : CPrimitive() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(type = Integer::class)

@@ -44,8 +44,7 @@ import javax.xml.bind.annotation.XmlType
 abstract class ExprTypeDef<T>(@XmlElement(name = "type_name", required = true) private var typeName: String) : RmObject(), Serializable {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     fun getTypeName(): String? = typeName

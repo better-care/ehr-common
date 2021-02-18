@@ -37,8 +37,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class SystemCall() : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "system_id", required = true)

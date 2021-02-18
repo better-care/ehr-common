@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlType
     "excludes"])
 class ArchetypeSlot : CObject() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(type = Assertion::class)

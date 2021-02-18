@@ -28,8 +28,7 @@ import javax.xml.bind.annotation.*
 @XmlSeeAlso(value = [ExprLeaf::class, ExprOperator::class])
 abstract class ExprItem : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

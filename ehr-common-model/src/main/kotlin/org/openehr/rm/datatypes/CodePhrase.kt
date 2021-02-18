@@ -31,16 +31,25 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CODE_PHRASE", propOrder = [
-    "terminologyId",
-    "codeString"])
+@XmlType(
+    name = "CODE_PHRASE", propOrder = [
+        "terminologyId",
+        "codeString"]
+)
 @Open
-class CodePhrase : RmObject(), Serializable {
+class CodePhrase
+@JvmOverloads
+constructor(
+    @XmlElement(name = "terminology_id", required = true)
+    @Required
+    var terminologyId: TerminologyId? = null,
+    @XmlElement(name = "code_string", required = true)
+    @Required
+    var codeString: String? = null
+) : RmObject(), Serializable {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates a [CodePhrase] from terminology id and code
@@ -50,11 +59,7 @@ class CodePhrase : RmObject(), Serializable {
          * @return [CodePhrase] object
          */
         @JvmStatic
-        fun create(terminology: String, code: String): CodePhrase =
-                CodePhrase().apply {
-                    this.terminologyId = TerminologyId().apply { this.value = terminology }
-                    this.codeString = code
-                }
+        fun create(terminology: String, code: String): CodePhrase = CodePhrase(TerminologyId(terminology), code)
 
         /**
          * Gets language [CodePhrase]
@@ -83,14 +88,6 @@ class CodePhrase : RmObject(), Serializable {
         @JvmStatic
         fun createEncodingPhrase(encodingCode: String): CodePhrase = create("IANA_character-sets", encodingCode)
     }
-
-    @XmlElement(name = "terminology_id", required = true)
-    @Required
-    var terminologyId: TerminologyId? = null
-
-    @XmlElement(name = "code_string", required = true)
-    @Required
-    var codeString: String? = null
 
     override fun equals(other: Any?): Boolean =
         when {

@@ -17,9 +17,7 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.rm.datatypes.DvEhrUri
-import org.openehr.rm.datatypes.DvMultimedia
-import org.openehr.rm.datatypes.DvText
+import org.openehr.rm.datatypes.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -30,30 +28,34 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ATTESTATION", propOrder = [
-    "attestedView",
-    "proof",
-    "items",
-    "reason",
-    "isPending"])
+@XmlType(
+    name = "ATTESTATION", propOrder = [
+        "attestedView",
+        "proof",
+        "items",
+        "reason",
+        "isPending"]
+)
 @Open
-class Attestation : AuditDetails() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class Attestation
+@JvmOverloads
+constructor(
     @XmlElement(name = "attested_view")
-    var attestedView: DvMultimedia? = null
-
-    var proof: String? = null
-
-    var items: MutableList<DvEhrUri> = mutableListOf()
-
+    var attestedView: DvMultimedia? = null,
+    var proof: String? = null,
+    var items: MutableList<DvEhrUri> = mutableListOf(),
     @XmlElement(required = true)
     @Required
-    var reason: DvText? = null
-
+    var reason: DvText? = null,
     @XmlElement(name = "is_pending", defaultValue = "false")
-    var isPending: Boolean = false
+    var isPending: Boolean = false,
+    systemId: String? = null,
+    committer: PartyProxy? = null,
+    timeCommitted: DvDateTime? = null,
+    changeType: DvCodedText? = null,
+    description: DvText? = null
+) : AuditDetails(systemId, committer, timeCommitted, changeType, description) {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 }

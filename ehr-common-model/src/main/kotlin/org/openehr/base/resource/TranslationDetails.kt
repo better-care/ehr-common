@@ -30,16 +30,17 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TRANSLATION_DETAILS", propOrder = [
-    "language",
-    "author",
-    "accreditation",
-    "otherDetails"])
+@XmlType(
+    name = "TRANSLATION_DETAILS", propOrder = [
+        "language",
+        "author",
+        "accreditation",
+        "otherDetails"]
+)
 @Open
 class TranslationDetails : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

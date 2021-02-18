@@ -28,24 +28,25 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TERM_MAPPING", propOrder = [
-    "match",
-    "purpose",
-    "target"])
+@XmlType(
+    name = "TERM_MAPPING", propOrder = [
+        "match",
+        "purpose",
+        "target"]
+)
 @Open
-class TermMapping : RmObject(), Serializable {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class TermMapping
+@JvmOverloads
+constructor(
     @XmlElement(required = true, defaultValue = "?")
     @Required
-    var match: String? = null
-
-    var purpose: DvCodedText? = null
-
+    var match: String? = null,
+    var purpose: DvCodedText? = null,
     @XmlElement(required = true)
     @Required
     var target: CodePhrase? = null
+) : RmObject(), Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 }

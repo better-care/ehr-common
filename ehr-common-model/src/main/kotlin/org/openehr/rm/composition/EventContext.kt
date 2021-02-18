@@ -45,8 +45,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class EventContext : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "start_time", required = true)

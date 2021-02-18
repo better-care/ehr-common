@@ -33,33 +33,32 @@ import javax.xml.bind.annotation.XmlType
         "issuer",
         "assigner",
         "id",
-        "type"])
+        "type"]
+)
 @Open
-class DvIdentifier : DataValue() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
-    var issuer: String? = null
-
-    var assigner: String? = null
-
+class DvIdentifier
+@JvmOverloads
+constructor(
+    var issuer: String? = null,
+    var assigner: String? = null,
     @XmlElement(required = true)
     @Required
-    var id: String? = null
-
+    var id: String? = null,
     var type: String? = null
+) : DataValue() {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                (other as DvIdentifier).id != id -> false
-                other.assigner != assigner -> false
-                other.issuer != issuer -> false
-                else -> other.type == type
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            (other as DvIdentifier).id != id -> false
+            other.assigner != assigner -> false
+            other.issuer != issuer -> false
+            else -> other.type == type
+        }
 
     override fun hashCode(): Int = Objects.hash(id, type, issuer, assigner)
 }

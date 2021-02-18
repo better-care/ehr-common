@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "T_COMPLEX_OBJECT", propOrder = ["defaultValue"])
 class TComplexObject : CComplexObject() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "default_value")

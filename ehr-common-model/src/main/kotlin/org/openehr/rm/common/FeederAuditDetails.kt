@@ -29,32 +29,31 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FEEDER_AUDIT_DETAILS", propOrder = [
-    "systemId",
-    "location",
-    "provider",
-    "subject",
-    "time",
-    "versionId"])
+@XmlType(
+    name = "FEEDER_AUDIT_DETAILS", propOrder = [
+        "systemId",
+        "location",
+        "provider",
+        "subject",
+        "time",
+        "versionId"]
+)
 @Open
-class FeederAuditDetails : RmObject(), Serializable {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class FeederAuditDetails
+@JvmOverloads
+constructor(
     @XmlElement(name = "system_id", required = true)
     @Required
-    var systemId: String? = null
-
-    var location: PartyIdentified? = null
-
-    var provider: PartyIdentified? = null
-
-    var subject: PartyProxy? = null
-
-    var time: DvDateTime? = null
-
+    var systemId: String? = null,
+    var location: PartyIdentified? = null,
+    var provider: PartyIdentified? = null,
+    var subject: PartyProxy? = null,
+    var time: DvDateTime? = null,
     @XmlElement(name = "version_id")
     var versionId: String? = null
+) : RmObject(), Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
+
 }

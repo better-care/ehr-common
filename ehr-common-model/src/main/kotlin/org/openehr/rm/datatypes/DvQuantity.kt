@@ -28,16 +28,32 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_QUANTITY", propOrder = [
-    "magnitude",
-    "units",
-    "precision"])
+@XmlType(
+    name = "DV_QUANTITY", propOrder = [
+        "magnitude",
+        "units",
+        "precision"]
+)
 @Open
-class DvQuantity : DvAmount() {
+class DvQuantity
+@JvmOverloads
+constructor(
+    var magnitude: Double = 0.0,
+    @XmlElement(required = true)
+    @Required
+    var units: String? = null,
+    @XmlElement(defaultValue = "-1")
+    var precision: Int? = null,
+    accuracy: Float? = null,
+    accuracyIsPercent: Boolean? = null,
+    magnitudeStatus: String? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null,
+) : DvAmount(accuracy, accuracyIsPercent, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates [DvQuantity] from a magnitude (numeric value), unit string and precision. Precision can be null.
@@ -48,12 +64,7 @@ class DvQuantity : DvAmount() {
          * @return [DvQuantity] object
          */
         @JvmStatic
-        fun create(magnitude: Double, units: String, precision: Int?): DvQuantity =
-                DvQuantity().apply {
-                    this.magnitude = magnitude
-                    this.precision = precision
-                    this.units = units
-                }
+        fun create(magnitude: Double, units: String, precision: Int?): DvQuantity = DvQuantity(magnitude, units, precision)
 
         /**
          * Creates [DvQuantity] from a magnitude (numeric value) and unit string. Precision is not set.
@@ -66,24 +77,15 @@ class DvQuantity : DvAmount() {
         fun create(magnitude: Double, units: String): DvQuantity = create(magnitude, units, null)
     }
 
-    var magnitude: Double = 0.0
-
-    @XmlElement(required = true)
-    @Required
-    var units: String? = null
-
-    @XmlElement(defaultValue = "-1")
-    var precision: Int? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                (other as DvQuantity).magnitude != magnitude -> false
-                other.units != units -> false
-                else -> other.precision == precision
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            (other as DvQuantity).magnitude != magnitude -> false
+            other.units != units -> false
+            else -> other.precision == precision
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude, precision, units)
 }

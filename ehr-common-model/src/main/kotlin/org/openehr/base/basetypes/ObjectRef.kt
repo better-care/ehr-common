@@ -27,17 +27,34 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OBJECT_REF", propOrder = [
-    "id",
-    "namespace",
-    "type"])
+@XmlType(
+    name = "OBJECT_REF", propOrder = [
+        "id",
+        "namespace",
+        "type"]
+)
 @XmlSeeAlso(value = [PartyRef::class, AccessGroupRef::class, LocatableRef::class])
 @Open
-class ObjectRef : RmObject(), Serializable {
+class ObjectRef
+@JvmOverloads
+constructor(
+    @XmlElement(required = true)
+    @Required
+    var id: ObjectId? = null,
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "token")
+    @Required
+    var namespace: String? = null,
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "token")
+    @Required
+    var type: String? = null
+) : RmObject(), Serializable {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
 
         /**
@@ -60,26 +77,11 @@ class ObjectRef : RmObject(), Serializable {
          */
         @JvmStatic
         fun create(type: String, uid: String, namespace: String): ObjectRef =
-                ObjectRef().apply {
-                    this.id = ObjectVersionId.create(uid)
-                    this.namespace = namespace
-                    this.type = type
-                }
+            ObjectRef().apply {
+                this.id = ObjectVersionId.create(uid)
+                this.namespace = namespace
+                this.type = type
+            }
     }
 
-    @XmlElement(required = true)
-    @Required
-    var id: ObjectId? = null
-
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "token")
-    @Required
-    var namespace: String? = null
-
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "token")
-    @Required
-    var type: String? = null
 }

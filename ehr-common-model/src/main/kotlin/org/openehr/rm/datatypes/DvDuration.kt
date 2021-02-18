@@ -30,24 +30,31 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_DURATION", propOrder = ["value"])
 @Open
-class DvDuration : DvAmount() {
-
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class DvDuration
+@JvmOverloads
+constructor(
     @XmlElement(required = true)
     @Required
-    var value: String? = null
+    var value: String? = null,
+    accuracy: Float? = null,
+    accuracyIsPercent: Boolean? = null,
+    magnitudeStatus: String? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null,
+) : DvAmount(accuracy, accuracyIsPercent, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                else -> (other as DvDuration).value == value
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            else -> (other as DvDuration).value == value
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 }

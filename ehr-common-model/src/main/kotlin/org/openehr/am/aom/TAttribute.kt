@@ -34,8 +34,7 @@ import javax.xml.bind.annotation.XmlType
     "differentialPath"])
 class TAttribute : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "rm_attribute_name", required = true)

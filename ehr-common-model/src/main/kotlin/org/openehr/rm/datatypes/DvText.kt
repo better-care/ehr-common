@@ -24,20 +24,32 @@ import javax.xml.bind.annotation.*
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_TEXT", propOrder = [
-    "value",
-    "hyperlink",
-    "formatting",
-    "mappings",
-    "language",
-    "encoding"])
+@XmlType(
+    name = "DV_TEXT", propOrder = [
+        "value",
+        "hyperlink",
+        "formatting",
+        "mappings",
+        "language",
+        "encoding"]
+)
 @XmlSeeAlso(DvCodedText::class)
 @Open
-class DvText : DataValue() {
+class DvText
+@JvmOverloads
+constructor(
+    @XmlElement(required = true)
+    @Required
+    var value: String? = null,
+    var hyperlink: DvUri? = null,
+    var formatting: String? = null,
+    var mappings: MutableList<TermMapping> = mutableListOf(),
+    var language: CodePhrase? = null,
+    var encoding: CodePhrase? = null
+) : DataValue() {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates a [DvText] from a string
@@ -46,33 +58,19 @@ class DvText : DataValue() {
          * @return [DvText] object
          */
         @JvmStatic
-        fun create(value: String?): DvText = DvText().apply { this.value = value }
+        fun create(value: String?): DvText = DvText(value)
     }
 
-    @XmlElement(required = true)
-    @Required
-    var value: String? = null
-
-    var hyperlink: DvUri? = null
-
-    var formatting: String? = null
-
-    var mappings: MutableList<TermMapping> = mutableListOf()
-
-    var language: CodePhrase? = null
-
-    var encoding: CodePhrase? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                (other as DvText).value != value -> false
-                other.hyperlink != hyperlink -> false
-                other.formatting != formatting -> false
-                other.language != language -> false
-                else -> other.encoding == encoding
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            (other as DvText).value != value -> false
+            other.hyperlink != hyperlink -> false
+            other.formatting != formatting -> false
+            other.language != language -> false
+            else -> other.encoding == encoding
+        }
 
     override fun hashCode(): Int = Objects.hash(value, encoding, formatting, hyperlink, language)
 }

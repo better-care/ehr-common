@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class ExternalVariable<T> : ContextVariable<T> {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "populating_request")

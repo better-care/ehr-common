@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "NON_TERMINAL_STATE", propOrder = ["transitions"])
 class NonTerminalState : State() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true, type = Transition::class)

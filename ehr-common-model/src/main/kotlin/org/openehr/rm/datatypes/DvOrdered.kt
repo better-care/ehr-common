@@ -23,34 +23,34 @@ import javax.xml.bind.annotation.*
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_ORDERED", propOrder = [
-    "normalRange",
-    "otherReferenceRanges",
-    "normalStatus"])
+@XmlType(
+    name = "DV_ORDERED", propOrder = [
+        "normalRange",
+        "otherReferenceRanges",
+        "normalStatus"]
+)
 @XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class])
 @Open
-abstract class DvOrdered : DataValue() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+abstract class DvOrdered(
     @XmlElement(name = "normal_range")
-    var normalRange: DvInterval? = null
-
+    var normalRange: DvInterval? = null,
     @XmlElement(name = "other_reference_ranges")
-    var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf()
-
+    var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
     @XmlElement(name = "normal_status")
     var normalStatus: CodePhrase? = null
+) : DataValue() {
+
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                (other as DvOrdered).normalRange != normalRange -> false
-                else -> normalStatus == other.normalStatus
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            (other as DvOrdered).normalRange != normalRange -> false
+            else -> normalStatus == other.normalStatus
+        }
 
     override fun hashCode(): Int = Objects.hash(normalRange, normalStatus)
 }

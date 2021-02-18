@@ -30,8 +30,7 @@ class TypeDefDateTime : ExprTypeDef<LocalDateTime>("Date_time") {
         @JvmField
         val INSTANCE: TypeDefDateTime = TypeDefDateTime()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefDateTime{} ${super.toString()}"

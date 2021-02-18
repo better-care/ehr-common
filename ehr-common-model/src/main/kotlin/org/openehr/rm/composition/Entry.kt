@@ -38,8 +38,7 @@ import javax.xml.bind.annotation.*
 @Open
 abstract class Entry : ContentItem() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

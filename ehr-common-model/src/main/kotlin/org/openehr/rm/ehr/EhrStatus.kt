@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.*
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
 class EhrStatus : Locatable() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

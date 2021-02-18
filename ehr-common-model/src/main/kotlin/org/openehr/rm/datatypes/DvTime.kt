@@ -32,11 +32,21 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_TIME", propOrder = ["value"])
 @Open
-class DvTime : DvTemporal() {
+class DvTime
+@JvmOverloads
+constructor(
+    @XmlElement(required = true)
+    @Required
+    var value: String? = null,
+    accuracy: DvDuration? = null,
+    magnitudeStatus: String? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null
+) : DvTemporal(accuracy, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Converts [LocalTime] to [DvTime]
@@ -45,10 +55,7 @@ class DvTime : DvTemporal() {
          * @return [DvTime]
          */
         @JvmStatic
-        fun create(time: LocalTime): DvTime =
-                DvTime().apply {
-                    this.value = DateTimeFormatter.ISO_LOCAL_TIME.format(time)
-                }
+        fun create(time: LocalTime): DvTime = DvTime(DateTimeFormatter.ISO_LOCAL_TIME.format(time))
 
         /**
          * Converts [OffsetTime] to [DvTime]
@@ -57,23 +64,16 @@ class DvTime : DvTemporal() {
          * @return [DvTime]
          */
         @JvmStatic
-        fun create(time: OffsetTime): DvTime =
-                DvTime().apply {
-                    this.value = DateTimeFormatter.ISO_OFFSET_TIME.format(time)
-                }
+        fun create(time: OffsetTime): DvTime = DvTime(DateTimeFormatter.ISO_OFFSET_TIME.format(time))
     }
 
-    @XmlElement(required = true)
-    @Required
-    var value: String? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                else -> (other as DvTime).value == value
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            else -> (other as DvTime).value == value
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 }

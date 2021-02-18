@@ -27,44 +27,42 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_MULTIMEDIA", propOrder = [
-    "alternateText",
-    "uri",
-    "data",
-    "mediaType",
-    "compressionAlgorithm",
-    "integrityCheck",
-    "integrityCheckAlgorithm",
-    "size",
-    "thumbnail"])
+@XmlType(
+    name = "DV_MULTIMEDIA", propOrder = [
+        "alternateText",
+        "uri",
+        "data",
+        "mediaType",
+        "compressionAlgorithm",
+        "integrityCheck",
+        "integrityCheckAlgorithm",
+        "size",
+        "thumbnail"]
+)
 @Open
-class DvMultimedia : DvEncapsulated() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class DvMultimedia
+@JvmOverloads
+constructor(
     @XmlElement(name = "alternate_text")
-    var alternateText: String? = null
-
-    var uri: DvUri? = null
-
-    var data: ByteArray? = null
-
+    var alternateText: String? = null,
+    var uri: DvUri? = null,
+    var data: ByteArray? = null,
     @XmlElement(name = "media_type", required = true)
     @Required
-    var mediaType: CodePhrase? = null
-
+    var mediaType: CodePhrase? = null,
     @XmlElement(name = "compression_algorithm")
-    var compressionAlgorithm: CodePhrase? = null
-
+    var compressionAlgorithm: CodePhrase? = null,
     @XmlElement(name = "integrity_check")
-    var integrityCheck: ByteArray? = null
-
+    var integrityCheck: ByteArray? = null,
     @XmlElement(name = "integrity_check_algorithm")
-    var integrityCheckAlgorithm: CodePhrase? = null
+    var integrityCheckAlgorithm: CodePhrase? = null,
+    var size: Int = 0,
+    var thumbnail: DvMultimedia? = null,
+    charset: CodePhrase? = null,
+    language: CodePhrase? = null
+) : DvEncapsulated(charset, language) {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 
-    var size: Int = 0
-
-    var thumbnail: DvMultimedia? = null
 }

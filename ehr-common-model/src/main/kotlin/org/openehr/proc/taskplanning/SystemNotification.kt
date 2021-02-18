@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class SystemNotification : PlanEvent {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "system_id", required = true)

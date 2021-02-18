@@ -31,27 +31,27 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PARTICIPATION", propOrder = [
-    "function",
-    "performer",
-    "time",
-    "mode"])
+@XmlType(
+    name = "PARTICIPATION", propOrder = [
+        "function",
+        "performer",
+        "time",
+        "mode"]
+)
 @Open
-class Participation : RmObject(), Serializable {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class Participation
+@JvmOverloads
+constructor(
     @XmlElement(required = true)
     @Required
-    var function: DvText? = null
-
+    var function: DvText? = null,
     @XmlElement(required = true)
     @Required
-    var performer: PartyProxy? = null
-
-    var time: DvInterval? = null
-
+    var performer: PartyProxy? = null,
+    var time: DvInterval? = null,
     var mode: DvCodedText? = null
+) : RmObject(), Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 }

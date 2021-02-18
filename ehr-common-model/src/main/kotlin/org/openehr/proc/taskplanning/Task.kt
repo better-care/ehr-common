@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class Task<A : TaskAction> : PlanItem {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

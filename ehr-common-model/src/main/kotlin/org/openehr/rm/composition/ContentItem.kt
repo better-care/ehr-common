@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlType
 @XmlSeeAlso(value = [Section::class, GenericEntry::class, Entry::class, WorkPlan::class, TaskPlan::class])
 abstract class ContentItem : Locatable() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 }

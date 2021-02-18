@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "CONSTRAINT_BINDING_ITEM", propOrder = ["value"])
 class ConstraintBindingItem : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

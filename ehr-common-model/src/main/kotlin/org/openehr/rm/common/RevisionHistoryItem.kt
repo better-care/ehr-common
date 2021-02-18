@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class RevisionHistoryItem : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "version_id", required = true)

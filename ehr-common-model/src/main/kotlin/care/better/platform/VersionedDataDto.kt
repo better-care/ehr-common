@@ -25,8 +25,7 @@ import java.io.Serializable
  */
 class VersionedDataDto : Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var version: OriginalVersion? = null

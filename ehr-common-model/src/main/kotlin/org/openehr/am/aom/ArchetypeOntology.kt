@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType
     "constraintBindings"])
 open class ArchetypeOntology : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "term_definitions", required = true)

@@ -26,11 +26,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OBJECT_VERSION_ID")
 @Open
-class ObjectVersionId : UidBasedId() {
+class ObjectVersionId(value: String? = null) : UidBasedId(value) {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates an [ObjectVersionId]
@@ -39,7 +37,7 @@ class ObjectVersionId : UidBasedId() {
          * @return [ObjectVersionId] object
          */
         @JvmStatic
-        fun create(uid: String): ObjectVersionId = ObjectVersionId().apply { this.value = uid }
+        fun create(uid: String): ObjectVersionId = ObjectVersionId(uid)
 
         /**
          * Creates an [ObjectVersionId] from versioned object id, system id and version number.
@@ -50,7 +48,6 @@ class ObjectVersionId : UidBasedId() {
          * @return [ObjectVersionId] object
          */
         @JvmStatic
-        fun create(versionedObjectUid: String, systemId: String, version: Int): ObjectVersionId =
-                create("$versionedObjectUid::$systemId::$version")
+        fun create(versionedObjectUid: String, systemId: String, version: Int): ObjectVersionId = create("$versionedObjectUid::$systemId::$version")
     }
 }

@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "T_CONSTRAINT", propOrder = ["attributes"])
 class TConstraints : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(type = TAttribute::class)

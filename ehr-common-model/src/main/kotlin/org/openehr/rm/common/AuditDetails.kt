@@ -29,35 +29,34 @@ import javax.xml.bind.annotation.*
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AUDIT_DETAILS", propOrder = [
-    "systemId",
-    "committer",
-    "timeCommitted",
-    "changeType",
-    "description"])
+@XmlType(
+    name = "AUDIT_DETAILS", propOrder = [
+        "systemId",
+        "committer",
+        "timeCommitted",
+        "changeType",
+        "description"]
+)
 @XmlSeeAlso(Attestation::class)
 @Open
-class AuditDetails : RmObject(), Serializable {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class AuditDetails
+@JvmOverloads
+constructor(
     @XmlElement(name = "system_id", required = true)
     @Required
-    var systemId: String? = null
-
+    var systemId: String? = null,
     @XmlElement(required = true)
     @Required
-    var committer: PartyProxy? = null
-
+    var committer: PartyProxy? = null,
     @XmlElement(name = "time_committed", required = true)
     @Required
-    var timeCommitted: DvDateTime? = null
-
+    var timeCommitted: DvDateTime? = null,
     @XmlElement(name = "change_type", required = true)
     @Required
-    var changeType: DvCodedText? = null
-
+    var changeType: DvCodedText? = null,
     var description: DvText? = null
+) : RmObject(), Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 }

@@ -24,25 +24,32 @@ import javax.xml.bind.annotation.XmlType
 /**
  * @author Primoz Delopst
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_COUNT", propOrder = ["magnitude"])
 @Open
-class DvCount : DvAmount() {
+class DvCount
+@JvmOverloads
+constructor(
+    var magnitude: Long = 0L,
+    accuracy: Float? = null,
+    accuracyIsPercent: Boolean? = null,
+    magnitudeStatus: String? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null,
+) : DvAmount(accuracy, accuracyIsPercent, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
-    var magnitude: Long = 0L
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                else -> (other as DvCount).magnitude == magnitude
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            else -> (other as DvCount).magnitude == magnitude
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude)
 }

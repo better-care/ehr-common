@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class ClockTime() : TimeSpecifier() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

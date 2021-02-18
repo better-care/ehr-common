@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class QueryCall : SystemCall {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "query_id")

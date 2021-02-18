@@ -39,8 +39,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class ResourceDescription : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "original_author", required = true)
