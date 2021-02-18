@@ -29,7 +29,7 @@ enum class TpVersion(val version: String, private val possibleValues: Set<String
                 when {
                     TP1_5_0.possibleValues.contains(version) -> TP1_5_0
                     TP1_5_1.possibleValues.contains(version) -> TP1_5_1
-                    else -> throw IllegalArgumentException("Unknown TP version $version.")
+                    else -> throw IllegalArgumentException("Unknown TP model version $version.")
                 }
     }
 }

@@ -165,7 +165,7 @@ class RmUtils {
                     if (this == -1)
                         name
                     else
-                        name.substring(this + 1, with(name.indexOf('>')) { if (this == -1) name.length else name.length - 1 })
+                        name.substring(this + 1, if (name.last() == '>') name.length - 1 else name.length)
                 }
 
         private fun getAllNonStaticFields(clazz: Class<out RmObject>): Collection<Field> =

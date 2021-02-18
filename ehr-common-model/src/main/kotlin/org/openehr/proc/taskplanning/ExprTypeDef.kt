@@ -51,7 +51,9 @@ abstract class ExprTypeDef<T>(@XmlElement(name = "type_name", required = true) p
     fun getTypeName(): String? = typeName
 
     fun setTypeName(typeName: String) {
-        this.typeName = typeName
+        if(typeName != this.typeName) {
+            throw UnsupportedOperationException("The type name has to be ${this.typeName}")
+        }
     }
 
     override fun hashCode(): Int = Objects.hash(typeName)
