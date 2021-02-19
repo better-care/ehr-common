@@ -28,12 +28,10 @@ import org.openehr.am.aom.CObject
 class CodedNameBuilder(cObject: CObject?) : TermNameBuilder() {
     private var nameConstraint: CCodePhrase? = if (cObject is CCodePhrase) cObject else null
 
-    override fun getName(amNode: AmNode): String? {
-        return if (nameConstraint == null || nameConstraint?.codeList.isNullOrEmpty()) {
+    override fun getName(amNode: AmNode): String? =
+        if (nameConstraint == null || nameConstraint?.codeList.isNullOrEmpty()) {
             super.getName(amNode)
         } else {
-            val codeId = nameConstraint?.codeList?.get(0)
-            AmUtils.findTerm(amNode.getTerms() ?: emptyList(), codeId, "text")
+            nameConstraint?.codeList?.get(0)?.let { AmUtils.findTerm(amNode.terms, it, "text") }
         }
-    }
 }

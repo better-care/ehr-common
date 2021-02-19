@@ -32,7 +32,6 @@ import org.openehr.am.aom.*
 import org.openehr.am.aom.Annotation
 import org.openehr.rm.datatypes.DataValue
 import java.lang.reflect.Field
-import java.lang.reflect.Method
 
 /**
  * @author Bostjan Lah
@@ -61,8 +60,9 @@ class AmTreeBuilder(private val template: Template) {
             template.definition ?: throw AmException("Template ${template.templateId} does not have definition."),
             null,
             "",
-            ArchetypeNodeContext.root()).apply {
-            template.language?.codeString?.also { this.setTemplateLanguage(it) }
+            ArchetypeNodeContext.root()
+        ).apply {
+            template.language?.codeString?.also { this.templateLanguage = it }
             template.ontology?.also { copyOntology(it, this) }
             addAnnotations(this, template.annotations)
             addConstraints(this, template.constraints)
@@ -71,14 +71,14 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun build(cObject: CObject, parent: AmNode?, attributeName: String, archetypeNodeContext: ArchetypeNodeContext): AmNode {
         val amNode = AmNode(cObject, parent)
-        val archetypeRoot = cObject is CArchetypeRoot
-        if (archetypeRoot) {
-            val cArchetypeRoot = cObject as CArchetypeRoot
-            amNode.setTerms(cArchetypeRoot.termDefinitions)
-            convertBindingItems(cArchetypeRoot)?.also { amNode.setTermBindings(it) }
+        val archetypeRoot = if (cObject is CArchetypeRoot) {
+            amNode.terms = cObject.termDefinitions
+            convertBindingItems(cObject)?.also { amNode.termBindings = it }
             findOntology(amNode)?.also { copyOntology(it, amNode) }
+            true
+        } else {
+            false
         }
-
 
         val context: ArchetypeNodeContext = if (archetypeRoot) ArchetypeNodeContext(amNode, archetypeNodeContext) else archetypeNodeContext
         parent?.also { setGetterAndSetter(it, attributeName, amNode) }
@@ -120,27 +120,12 @@ class AmTreeBuilder(private val template: Template) {
         }
     }
 
-    private fun setGetterAndSetter(parent: AmNode, attributeName: String, amNode: AmNode) {
+    private fun setGetterAndSetter(parent: AmNode, attributeName: String, amNode: AmNode) =
         try {
-            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(parent.rmType)
-            val getter: Method? = RmUtils.getGetterForAttribute(attributeName, rmClass)
-
-            amNode.setGetter(getter)
-            amNode.setSetter(RmUtils.getSetterForAttribute(attributeName, rmClass))
-
-            if (getter != null) {
-                val returnType = getter.returnType
-                if (MutableCollection::class.java.isAssignableFrom(returnType)) {
-                    val collectionType = if (MutableList::class.java.isAssignableFrom(returnType)) CollectionType.LIST else CollectionType.SET
-                    amNode.setType(TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType)))
-                } else {
-                    amNode.setType(TypeInfo(returnType))
-                }
-            }
+            setGetterSetterAndType(amNode, attributeName, RmUtils.getRmClass(parent.rmType))
         } catch (ignored: RmClassCastException) {
         } catch (ignored: RmClassFieldNotFoundException) {
         }
-    }
 
     private fun addRmAttributes(amNode: AmNode) {
         try {
@@ -154,26 +139,11 @@ class AmTreeBuilder(private val template: Template) {
                         val minExistence = if (requiredFields.contains(field)) 1 else 0
                         val child = AmNode(amNode, RmUtils.getRmTypeName(RmUtils.getFieldType(rmClass, field.name)), minExistence, 1)
 
-                        val getter: Method? = RmUtils.getGetterForAttribute(attributeName, rmClass)
-                        child.setGetter(getter)
-                        child.setSetter(RmUtils.getSetterForAttribute(attributeName, rmClass))
-
-                        if (getter != null) {
-                            val returnType = getter.returnType
-                            if (MutableCollection::class.java.isAssignableFrom(returnType)) {
-                                val collectionType = if (MutableList::class.java.isAssignableFrom(returnType)) CollectionType.LIST else CollectionType.SET
-                                child.setType(
-                                    TypeInfo(
-                                        RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)),
-                                        CollectionInfo(collectionType)))
-                            } else {
-                                child.setType(TypeInfo(returnType))
-                            }
-                        }
+                        setGetterSetterAndType(child, attributeName, rmClass)
 
                         child.name = attributeName
-                        val amAttribute = AmAttribute(AmUtils.createInterval(minExistence, 1), com.google.common.collect.Lists.newArrayList(child))
-                        amAttribute.setRmOnly(true)
+                        val amAttribute = AmAttribute(AmUtils.createInterval(minExistence, 1), mutableListOf(child))
+                        amAttribute.rmOnly = true
                         amNode.attributes[attributeName] = amAttribute
                     }
                 }
@@ -183,16 +153,31 @@ class AmTreeBuilder(private val template: Template) {
         }
     }
 
+    private fun setGetterSetterAndType(amNode: AmNode, attributeName: String, rmClass: Class<out RmObject?>) {
+        amNode.setter = RmUtils.getSetterForAttribute(attributeName, rmClass)
+        RmUtils.getGetterForAttribute(attributeName, rmClass)?.let {
+            amNode.getter = it
+
+            val returnType = it.returnType
+            if (MutableCollection::class.java.isAssignableFrom(returnType)) {
+                val collectionType = if (MutableList::class.java.isAssignableFrom(returnType)) CollectionType.LIST else CollectionType.SET
+                amNode.setType(TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType)))
+            } else {
+                amNode.setType(TypeInfo(returnType))
+            }
+        }
+    }
+
     private fun findOntology(amNode: AmNode): FlatArchetypeOntology? =
         template.componentOntologies.firstOrNull { it.archetypeId == amNode.archetypeNodeId }
 
 
     private fun copyOntology(ontology: FlatArchetypeOntology, amNode: AmNode) {
         if (ontology.termDefinitions.isNotEmpty()) {
-            amNode.setTermDefinitions(convertDefinitions(ontology.termDefinitions))
+            amNode.termDefinitions = convertDefinitions(ontology.termDefinitions)
         }
         if (ontology.constraintDefinitions.isNotEmpty()) {
-            amNode.setConstraintDefinitions(convertDefinitions(ontology.constraintDefinitions))
+            amNode.constraintDefinitions = convertDefinitions(ontology.constraintDefinitions)
         }
     }
 
@@ -218,7 +203,7 @@ class AmTreeBuilder(private val template: Template) {
         }
         val amAttribute = AmAttribute(attribute.existence, children)
         if (attribute is CMultipleAttribute) {
-            amAttribute.setCardinality(attribute.cardinality)
+            amAttribute.cardinality = attribute.cardinality
         }
         return amAttribute
     }
