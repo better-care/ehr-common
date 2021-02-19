@@ -37,7 +37,6 @@ open class SerializationTest {
         assertThat(compositionString).contains("<uid xsi:type=\"OBJECT_VERSION_ID\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><value>f74c649e-3259-4b43-9943-67c86b8ee13a::default::1</value></uid>")
     }
 
-/*
     @Test
     fun testDateWithJvmOveraloadsSerialization() {
         val date = DvDate(value = "2020-01-01")
@@ -107,7 +106,6 @@ open class SerializationTest {
         assertThat(termBindingSet2.items[0].code).isNotNull
         assertThat(termBindingSet2.items[0].value).isNotNull
     }
-*/
 
     @Throws(JAXBException::class, IOException::class)
     protected open fun getComposition(compositionFile: String): Composition =
