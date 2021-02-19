@@ -27,7 +27,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_GENERAL_TIME_SPECIFICATION")
 @Open
-class DvGeneralTimeSpecification(value: DvParsable? = null) : DvTimeSpecification(value) {
+class DvGeneralTimeSpecification() : DvTimeSpecification() {
+    constructor(value: DvParsable) : this() {
+        this.value = value
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }

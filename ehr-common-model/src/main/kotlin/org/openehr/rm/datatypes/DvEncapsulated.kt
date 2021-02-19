@@ -34,10 +34,7 @@ import javax.xml.bind.annotation.XmlType
 )
 @XmlSeeAlso(value = [DvMultimedia::class, DvParsable::class])
 @Open
-abstract class DvEncapsulated(
-    var charset: CodePhrase? = null,
-    var language: CodePhrase? = null
-) : DataValue() {
+abstract class DvEncapsulated(var charset: CodePhrase? = null, var language: CodePhrase? = null) : DataValue() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

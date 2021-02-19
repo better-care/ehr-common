@@ -36,26 +36,47 @@ import javax.xml.bind.annotation.XmlType
         "precision"]
 )
 @Open
-class DvProportion
-@JvmOverloads
-constructor(
-    var numerator: Float = 0f,
-    var denominator: Float = 0f,
-    @XmlElement(required = true)
-    @Required
-    var type: BigInteger? = null,
-    @XmlElement(defaultValue = "-1")
-    var precision: Int? = null,
-    accuracy: Float? = null,
-    accuracyIsPercent: Boolean? = null,
-    magnitudeStatus: String? = null,
-    normalRange: DvInterval? = null,
-    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-    normalStatus: CodePhrase? = null,
-) : DvAmount(accuracy, accuracyIsPercent, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+class DvProportion() : DvAmount() {
+    @JvmOverloads
+    constructor(
+        numerator: Float,
+        denominator: Float,
+        type: BigInteger? = null,
+        precision: Int? = null,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null,
+    ) : this() {
+        this.numerator = numerator
+        this.denominator = denominator
+        this.type = type
+        this.precision = precision
+        this.accuracy = accuracy
+        this.accuracyIsPercent = accuracyIsPercent
+        this.magnitudeStatus = magnitudeStatus
+        this.normalRange = normalRange
+        this.otherReferenceRanges = otherReferenceRanges
+        this.normalStatus = normalStatus
+
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    var numerator: Float = 0f
+
+    var denominator: Float = 0f
+
+    @XmlElement(required = true)
+    @Required
+    var type: BigInteger? = null
+
+    @XmlElement(defaultValue = "-1")
+    var precision: Int? = null
 
     override fun equals(other: Any?): Boolean =
         when {

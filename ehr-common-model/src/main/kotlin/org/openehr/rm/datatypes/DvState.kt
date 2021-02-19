@@ -34,18 +34,23 @@ import javax.xml.bind.annotation.XmlType
         "isTerminal"]
 )
 @Open
-class DvState
-@JvmOverloads
-constructor(
-    @XmlElement(required = true)
-    @Required
-    var value: DvCodedText? = null,
-    @XmlElement(name = "is_terminal")
-    var isTerminal: Boolean = false
-) : DataValue() {
+class DvState() : DataValue() {
+    @JvmOverloads
+    constructor(value: DvCodedText, isTerminal: Boolean = false) : this() {
+        this.value = value
+        this.isTerminal = isTerminal
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(required = true)
+    @Required
+    var value: DvCodedText? = null
+
+    @XmlElement(name = "is_terminal")
+    var isTerminal: Boolean = false
 
     override fun equals(other: Any?): Boolean =
         when {

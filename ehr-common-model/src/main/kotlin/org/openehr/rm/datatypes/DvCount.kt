@@ -27,21 +27,31 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_COUNT", propOrder = ["magnitude"])
 @Open
-class DvCount
-@JvmOverloads
-constructor(
-    var magnitude: Long = 0L,
-    accuracy: Float? = null,
-    accuracyIsPercent: Boolean? = null,
-    magnitudeStatus: String? = null,
-    normalRange: DvInterval? = null,
-    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-    normalStatus: CodePhrase? = null,
-) : DvAmount(accuracy, accuracyIsPercent, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+class DvCount() : DvAmount() {
+    @JvmOverloads
+    constructor(
+        magnitude: Long,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null,
+    ) : this() {
+        this.magnitude = magnitude
+        this.accuracy = accuracy
+        this.accuracyIsPercent = accuracyIsPercent
+        this.magnitudeStatus = magnitudeStatus
+        this.normalRange = normalRange
+        this.otherReferenceRanges = otherReferenceRanges
+        this.normalStatus = normalStatus
+    }
 
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    var magnitude: Long = 0L
 
     override fun equals(other: Any?): Boolean =
         when {

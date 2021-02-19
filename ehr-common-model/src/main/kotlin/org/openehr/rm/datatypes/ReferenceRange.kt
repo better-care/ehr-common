@@ -34,17 +34,21 @@ import javax.xml.bind.annotation.XmlType
         "range"]
 )
 @Open
-class ReferenceRange
-@JvmOverloads
-constructor(
-    @XmlElement(required = true)
-    @Required
-    var meaning: DvText? = null,
-    @XmlElement(required = true)
-    @Required
-    var range: DvInterval? = null
-) : RmObject(), Serializable {
+class ReferenceRange() : RmObject(), Serializable {
+    constructor(meaning: DvText, range: DvInterval) : this() {
+        this.meaning = meaning
+        this.range = range
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(required = true)
+    @Required
+    var meaning: DvText? = null
+
+    @XmlElement(required = true)
+    @Required
+    var range: DvInterval? = null
 }

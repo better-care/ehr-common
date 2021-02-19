@@ -37,16 +37,20 @@ import javax.xml.bind.annotation.XmlType
         "codeString"]
 )
 @Open
-class CodePhrase
-@JvmOverloads
-constructor(
+class CodePhrase() : RmObject(), Serializable {
+    @JvmOverloads
+    constructor(terminologyId: TerminologyId, codeString: String? = null) : this() {
+        this.terminologyId = terminologyId
+        this.codeString = codeString
+    }
+
     @XmlElement(name = "terminology_id", required = true)
     @Required
-    var terminologyId: TerminologyId? = null,
+    var terminologyId: TerminologyId? = null
+
     @XmlElement(name = "code_string", required = true)
     @Required
     var codeString: String? = null
-) : RmObject(), Serializable {
 
     companion object {
         private const val serialVersionUID: Long = 0L

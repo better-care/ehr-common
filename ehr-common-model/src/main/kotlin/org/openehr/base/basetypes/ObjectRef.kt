@@ -35,27 +35,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 )
 @XmlSeeAlso(value = [PartyRef::class, AccessGroupRef::class, LocatableRef::class])
 @Open
-class ObjectRef
-@JvmOverloads
-constructor(
-    @XmlElement(required = true)
-    @Required
-    var id: ObjectId? = null,
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "token")
-    @Required
-    var namespace: String? = null,
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "token")
-    @Required
-    var type: String? = null
-) : RmObject(), Serializable {
+class ObjectRef() : RmObject(), Serializable {
+    @JvmOverloads
+    constructor(id: ObjectId, namespace: String? = null, type: String? = null) : this() {
+        this.id = id
+        this.namespace = namespace
+        this.type = type
+    }
 
     companion object {
         private const val serialVersionUID: Long = 0L
-
 
         /**
          * Creates a person [ObjectRef].
@@ -65,7 +54,7 @@ constructor(
          * @return [ObjectRef] object
          */
         @JvmStatic
-        fun create(uid: String, namespace: String): ObjectRef = create("PERSON", uid, namespace)
+        fun createPerson(uid: String, namespace: String? = null): ObjectRef = create("PERSON", uid, namespace)
 
         /**
          * Creates an [ObjectRef].
@@ -76,12 +65,22 @@ constructor(
          * @return [ObjectRef] object
          */
         @JvmStatic
-        fun create(type: String, uid: String, namespace: String): ObjectRef =
-            ObjectRef().apply {
-                this.id = ObjectVersionId.create(uid)
-                this.namespace = namespace
-                this.type = type
-            }
+        fun create(type: String, uid: String, namespace: String? = null): ObjectRef = ObjectRef(id = ObjectVersionId(uid), namespace = namespace, type = type)
     }
 
+    @XmlElement(required = true)
+    @Required
+    var id: ObjectId? = null
+
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "token")
+    @Required
+    var namespace: String? = null
+
+    @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+    @XmlSchemaType(name = "token")
+    @Required
+    var type: String? = null
 }

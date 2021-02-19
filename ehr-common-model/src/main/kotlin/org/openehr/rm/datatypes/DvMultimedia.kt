@@ -40,29 +40,82 @@ import javax.xml.bind.annotation.XmlType
         "thumbnail"]
 )
 @Open
-class DvMultimedia
-@JvmOverloads
-constructor(
-    @XmlElement(name = "alternate_text")
-    var alternateText: String? = null,
-    var uri: DvUri? = null,
-    var data: ByteArray? = null,
-    @XmlElement(name = "media_type", required = true)
-    @Required
-    var mediaType: CodePhrase? = null,
-    @XmlElement(name = "compression_algorithm")
-    var compressionAlgorithm: CodePhrase? = null,
-    @XmlElement(name = "integrity_check")
-    var integrityCheck: ByteArray? = null,
-    @XmlElement(name = "integrity_check_algorithm")
-    var integrityCheckAlgorithm: CodePhrase? = null,
-    var size: Int = 0,
-    var thumbnail: DvMultimedia? = null,
-    charset: CodePhrase? = null,
-    language: CodePhrase? = null
-) : DvEncapsulated(charset, language) {
+class DvMultimedia() : DvEncapsulated() {
+    @JvmOverloads
+    constructor(
+        uri: DvUri,
+        data: ByteArray? = null,
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
+    ) : this() {
+        this.uri = uri
+        this.data = data
+        this.alternateText = alternateText
+        this.mediaType = mediaType
+        this.compressionAlgorithm = compressionAlgorithm
+        this.integrityCheck = integrityCheck
+        this.integrityCheckAlgorithm = integrityCheckAlgorithm
+        this.size = size
+        this.thumbnail = thumbnail
+        this.charset = charset
+        this.language = language
+    }
+
+    @JvmOverloads
+    constructor(
+        data: ByteArray,
+        uri: DvUri? = null,
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
+    ) : this() {
+        this.data = data
+        this.uri = uri
+        this.alternateText = alternateText
+        this.mediaType = mediaType
+        this.compressionAlgorithm = compressionAlgorithm
+        this.integrityCheck = integrityCheck
+        this.integrityCheckAlgorithm = integrityCheckAlgorithm
+        this.size = size
+        this.thumbnail = thumbnail
+        this.charset = charset
+        this.language = language
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(name = "alternate_text")
+    var alternateText: String? = null
+    var uri: DvUri? = null
+    var data: ByteArray? = null
+
+    @XmlElement(name = "media_type", required = true)
+    @Required
+    var mediaType: CodePhrase? = null
+
+    @XmlElement(name = "compression_algorithm")
+    var compressionAlgorithm: CodePhrase? = null
+
+    @XmlElement(name = "integrity_check")
+    var integrityCheck: ByteArray? = null
+
+    @XmlElement(name = "integrity_check_algorithm")
+    var integrityCheckAlgorithm: CodePhrase? = null
+    var size: Int = 0
+    var thumbnail: DvMultimedia? = null
 }

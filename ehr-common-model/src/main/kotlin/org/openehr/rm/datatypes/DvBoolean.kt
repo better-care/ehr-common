@@ -28,7 +28,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_BOOLEAN", propOrder = ["value"])
 @Open
-class DvBoolean(var value: Boolean = false) : DataValue() {
+class DvBoolean() : DataValue() {
+    constructor(value: Boolean) : this() {
+        this.value = value
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
 
@@ -41,6 +45,8 @@ class DvBoolean(var value: Boolean = false) : DataValue() {
         @JvmStatic
         fun create(value: Boolean): DvBoolean = DvBoolean(value)
     }
+
+    var value: Boolean = false
 
     override fun equals(other: Any?): Boolean =
         when {

@@ -28,12 +28,16 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_PARAGRAPH", propOrder = ["items"])
 @Open
-class DvParagraph(
-    @XmlElement(required = true)
-    @Required
-    var items: MutableList<DvText> = mutableListOf()
-) : DataValue() {
+class DvParagraph() : DataValue() {
+    constructor(items: MutableList<DvText>) : this() {
+        this.items = items
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(required = true)
+    @Required
+    var items: MutableList<DvText> = mutableListOf()
 }

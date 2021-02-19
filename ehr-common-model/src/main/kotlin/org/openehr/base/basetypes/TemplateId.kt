@@ -26,7 +26,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TEMPLATE_ID")
 @Open
-class TemplateId(value: String? = null) : ObjectId(value) {
+class TemplateId() : ObjectId() {
+    constructor(value: String) : this() {
+        this.value = value
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }

@@ -30,7 +30,7 @@ class NameAndNodeMatchingPathValueExtractorTest {
     private var section: Section = Section().apply {
         this.items.add(AdminEntry().apply {
             this.archetypeNodeId = "at0001"
-            this.name = DvText.create("Name")
+            this.name = DvText("Name")
             this.uid = HierObjectId("12345")
         })
     }

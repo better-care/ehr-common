@@ -35,18 +35,25 @@ import javax.xml.bind.annotation.XmlType
         "target"]
 )
 @Open
-class TermMapping
-@JvmOverloads
-constructor(
-    @XmlElement(required = true, defaultValue = "?")
-    @Required
-    var match: String? = null,
-    var purpose: DvCodedText? = null,
-    @XmlElement(required = true)
-    @Required
-    var target: CodePhrase? = null
-) : RmObject(), Serializable {
+class TermMapping() : RmObject(), Serializable {
+    @JvmOverloads
+    constructor(match: String, purpose: DvCodedText? = null, target: CodePhrase? = null) : this() {
+        this.match = match
+        this.purpose = purpose
+        this.target = target
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(required = true, defaultValue = "?")
+    @Required
+    var match: String? = null
+
+    var purpose: DvCodedText? = null
+
+    @XmlElement(required = true)
+    @Required
+    var target: CodePhrase? = null
 }

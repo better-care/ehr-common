@@ -27,7 +27,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_EHR_URI")
 @Open
-class DvEhrUri(value: String? = null) : DvUri(value) {
+class DvEhrUri() : DvUri() {
+    constructor(value: String) : this() {
+        this.value = value
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
 

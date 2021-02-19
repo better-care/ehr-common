@@ -37,23 +37,42 @@ import javax.xml.bind.annotation.XmlType
         "upperUnbounded"]
 )
 @Open
-class DvInterval
-@JvmOverloads
-constructor(
-    var lower: DvOrdered? = null,
-    var upper: DvOrdered? = null,
-    @XmlElement(name = "lower_included")
-    var lowerIncluded: Boolean? = null,
-    @XmlElement(name = "upper_included")
-    var upperIncluded: Boolean? = null,
-    @XmlElement(name = "lower_unbounded")
-    var lowerUnbounded: Boolean = false,
-    @XmlElement(name = "upper_unbounded")
-    var upperUnbounded: Boolean = false
-) : DataValue(), RangeParameters {
+class DvInterval() : DataValue(), RangeParameters {
+    @JvmOverloads
+    constructor(
+        lower: DvOrdered?,
+        upper: DvOrdered?,
+        lowerIncluded: Boolean? = null,
+        upperIncluded: Boolean? = null,
+        lowerUnbounded: Boolean = false,
+        upperUnbounded: Boolean = false
+    ) : this() {
+        this.lower = lower
+        this.upper = upper
+        this.lowerIncluded = lowerIncluded
+        this.upperIncluded = upperIncluded
+        this.lowerUnbounded = lowerUnbounded
+        this.upperUnbounded = upperUnbounded
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    var lower: DvOrdered? = null
+    var upper: DvOrdered? = null
+
+    @XmlElement(name = "lower_included")
+    var lowerIncluded: Boolean? = null
+
+    @XmlElement(name = "upper_included")
+    var upperIncluded: Boolean? = null
+
+    @XmlElement(name = "lower_unbounded")
+    var lowerUnbounded: Boolean = false
+
+    @XmlElement(name = "upper_unbounded")
+    var upperUnbounded: Boolean = false
 
     override fun isLowerIncluded(): Boolean? = lowerIncluded
 

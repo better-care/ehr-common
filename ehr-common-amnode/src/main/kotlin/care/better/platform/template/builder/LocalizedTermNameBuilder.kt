@@ -25,7 +25,7 @@ import care.better.platform.template.AmUtils
  */
 class LocalizedTermNameBuilder(private val language: String): NameBuilder {
     override fun getName(amNode: AmNode): String? {
-        val termDefinitions = amNode.getTermDefinitions()?.let { it[language] }
+        val termDefinitions = amNode.getTermDefinitions()[language]
         if (termDefinitions != null) {
             val term = AmUtils.findTerm(termDefinitions, amNode.nodeId, "text")
             return if (term == null && amNode.cObject != null) {

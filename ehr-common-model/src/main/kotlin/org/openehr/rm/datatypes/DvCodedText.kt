@@ -30,19 +30,26 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_CODED_TEXT", propOrder = ["definingCode"])
 @Open
-class DvCodedText
-@JvmOverloads
-constructor(
-    @XmlElement(name = "defining_code", required = true)
-    @Required
-    var definingCode: CodePhrase? = null,
-    value: String? = null,
-    hyperlink: DvUri? = null,
-    formatting: String? = null,
-    mappings: MutableList<TermMapping> = mutableListOf(),
-    language: CodePhrase? = null,
-    encoding: CodePhrase? = null
-) : DvText(value, hyperlink, formatting, mappings, language, encoding) {
+class DvCodedText() : DvText() {
+    @JvmOverloads
+    constructor(
+        definingCode: CodePhrase,
+        value: String? = null,
+        hyperlink: DvUri? = null,
+        formatting: String? = null,
+        mappings: MutableList<TermMapping> = mutableListOf(),
+        language: CodePhrase? = null,
+        encoding: CodePhrase? = null
+    ) : this() {
+        this.definingCode = definingCode
+        this.value = value
+        this.hyperlink = hyperlink
+        this.formatting = formatting
+        this.mappings = mappings
+        this.language = language
+        this.encoding = encoding
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
 
@@ -56,7 +63,7 @@ constructor(
          */
         @JvmStatic
         fun create(terminology: String, code: String, value: String?): DvCodedText =
-            DvCodedText(value = value, definingCode = CodePhrase.create(terminology, code))
+            DvCodedText(definingCode = CodePhrase.create(terminology, code), value = value)
 
         /**
          * Creates a [DvCodedText] with local terminology, code and value
@@ -78,6 +85,10 @@ constructor(
         @JvmStatic
         fun createWithOpenEHRTerminology(code: String, value: String?): DvCodedText = create("openehr", code, value)
     }
+
+    @XmlElement(name = "defining_code", required = true)
+    @Required
+    var definingCode: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =
         when {

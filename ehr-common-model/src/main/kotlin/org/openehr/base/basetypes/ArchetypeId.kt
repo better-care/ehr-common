@@ -27,7 +27,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ARCHETYPE_ID")
 @Open
-class ArchetypeId(value: String? = null) : ObjectId(value) {
+class ArchetypeId() : ObjectId() {
+    constructor(value: String) : this() {
+        this.value = value
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }

@@ -12,8 +12,6 @@ import org.openehr.rm.composition.Section
 import org.openehr.rm.datastructures.Cluster
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
-import java.util.*
-import kotlin.collections.HashMap
 import kotlin.collections.set
 
 /**
@@ -158,7 +156,7 @@ class OpenEhrObjectMapperSerializationTest {
 
     @Test
     fun simpleRm() {
-        val dvText: DvText = DvText.create("hello")
+        val dvText = DvText("hello")
         val list: List<Any> = ImmutableList.of(dvText)
         val jsonString = objectMapper.writeValueAsString(list)
         val fromJson: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>() {})

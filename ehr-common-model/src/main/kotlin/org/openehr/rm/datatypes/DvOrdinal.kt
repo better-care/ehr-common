@@ -33,29 +33,31 @@ import javax.xml.bind.annotation.XmlType
         "symbol"]
 )
 @Open
-class DvOrdinal(
-    var value: Int = 0,
-    @XmlElement(required = true)
-    @Required
-    var symbol: DvCodedText? = null,
-    normalRange: DvInterval? = null,
-    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-    normalStatus: CodePhrase? = null
-) : DvOrdered(normalRange, otherReferenceRanges, normalStatus) {
+class DvOrdinal() : DvOrdered() {
+    @JvmOverloads
+    constructor(
+        value: Int,
+        symbol: DvCodedText,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null
+    ) : this() {
+        this.value = value
+        this.symbol = symbol
+        this.normalRange = normalRange
+        this.otherReferenceRanges = otherReferenceRanges
+        this.normalStatus = normalStatus
+    }
 
     companion object {
         private const val serialVersionUID: Long = 0L
-
-        /**
-         * Creates [DvOrdinal] from value and symbol
-         *
-         * @param value  numeric value
-         * @param symbol [DvCodedText] symbol
-         * @return [DvOrdinal] object
-         */
-        @JvmStatic
-        fun create(value: Int, symbol: DvCodedText): DvOrdinal = DvOrdinal(value, symbol)
     }
+
+    var value: Int = 0
+
+    @XmlElement(required = true)
+    @Required
+    var symbol: DvCodedText? = null
 
     override fun equals(other: Any?): Boolean =
         when {

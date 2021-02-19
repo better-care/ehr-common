@@ -26,7 +26,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TERMINOLOGY_ID")
 @Open
-class TerminologyId(value: String? = null) : ObjectId(value) {
+class TerminologyId() : ObjectId() {
+    constructor(value: String) : this() {
+        this.value = value
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }

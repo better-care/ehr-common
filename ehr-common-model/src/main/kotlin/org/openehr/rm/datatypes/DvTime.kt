@@ -32,18 +32,23 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_TIME", propOrder = ["value"])
 @Open
-class DvTime
-@JvmOverloads
-constructor(
-    @XmlElement(required = true)
-    @Required
-    var value: String? = null,
-    accuracy: DvDuration? = null,
-    magnitudeStatus: String? = null,
-    normalRange: DvInterval? = null,
-    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-    normalStatus: CodePhrase? = null
-) : DvTemporal(accuracy, magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+class DvTime() : DvTemporal() {
+    @JvmOverloads
+    constructor(
+        value: String,
+        accuracy: DvDuration? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null
+    ) : this() {
+        this.value = value
+        this.accuracy = accuracy
+        this.magnitudeStatus = magnitudeStatus
+        this.normalRange = normalRange
+        this.otherReferenceRanges = otherReferenceRanges
+        this.normalStatus = normalStatus
+    }
 
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -66,6 +71,10 @@ constructor(
         @JvmStatic
         fun create(time: OffsetTime): DvTime = DvTime(DateTimeFormatter.ISO_OFFSET_TIME.format(time))
     }
+
+    @XmlElement(required = true)
+    @Required
+    var value: String? = null
 
     override fun equals(other: Any?): Boolean =
         when {

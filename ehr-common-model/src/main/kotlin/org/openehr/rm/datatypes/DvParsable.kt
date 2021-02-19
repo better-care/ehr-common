@@ -34,32 +34,31 @@ import javax.xml.bind.annotation.XmlType
         "formalism"]
 )
 @Open
-class DvParsable
-@JvmOverloads
-constructor(
-    @XmlElement(required = true)
-    @Required
-    var value: String? = null,
-    @XmlElement(required = true)
-    @Required
-    var formalism: String? = null,
-    charset: CodePhrase? = null,
-    language: CodePhrase? = null
-) : DvEncapsulated(charset, language) {
+class DvParsable() : DvEncapsulated() {
+    @JvmOverloads
+    constructor(
+        value: String,
+        formalism: String? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
+    ) : this() {
+        this.value = value
+        this.formalism = formalism
+        this.charset = charset
+        this.language = language
+    }
 
     companion object {
         private const val serialVersionUID: Long = 0L
-
-        /**
-         * Creates [DvParsable] from a value and formalism.
-         *
-         * @param value     parsable content
-         * @param formalism parsable formalism
-         * @return [DvParsable] object
-         */
-        @JvmStatic
-        fun create(value: String, formalism: String): DvParsable = DvParsable(value = value, formalism = formalism)
     }
+
+    @XmlElement(required = true)
+    @Required
+    var value: String? = null
+
+    @XmlElement(required = true)
+    @Required
+    var formalism: String? = null
 
     override fun equals(other: Any?): Boolean =
         when {

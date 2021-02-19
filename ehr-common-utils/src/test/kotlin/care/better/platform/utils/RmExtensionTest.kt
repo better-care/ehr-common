@@ -25,7 +25,7 @@ class RmExtensionTest {
 
     @Test
     fun dvText() {
-        val dvText = DvText.create("a")
+        val dvText = DvText("a")
         evaluateDvText(dvText, "a")
     }
 
@@ -64,7 +64,7 @@ class RmExtensionTest {
 
     @Test
     fun ordinal() {
-        val ordinal: DvOrdinal = DvOrdinal.create(1, DvCodedText.create("openehr", "mm", "mm"))
+        val ordinal = DvOrdinal(1, DvCodedText.create("openehr", "mm", "mm"))
         evaluateDvCodedText(ordinal.symbol!!, "openehr", "mm", "mm")
         assertThat(ordinal.value).isEqualTo(1)
         assertThat(ordinal.normalRange).isNull()
@@ -74,14 +74,14 @@ class RmExtensionTest {
 
     @Test
     fun quantity() {
-        val quantity: DvQuantity = DvQuantity.create(1.0, "mm")
+        val quantity = DvQuantity(1.0, "mm")
         assertThat(quantity.magnitude).isEqualTo(1.0)
         assertThat(quantity.units).isEqualTo("mm")
         assertThat(quantity.precision).isNull()
         assertThat(quantity.normalRange).isNull()
         assertThat(quantity.normalStatus).isNull()
         assertThat(quantity.otherReferenceRanges).isEmpty()
-        val quantity1: DvQuantity = DvQuantity.create(1.0, "mm", 2)
+        val quantity1 = DvQuantity(1.0, "mm", 2)
         assertThat(quantity1.magnitude).isEqualTo(1.0)
         assertThat(quantity1.units).isEqualTo("mm")
         assertThat(quantity1.precision).isEqualTo(2)
@@ -152,7 +152,7 @@ class RmExtensionTest {
 
     @Test
     fun parsable() {
-        val parsable: DvParsable = DvParsable.create("value", "formalism")
+        val parsable = DvParsable("value", "formalism")
         assertThat(parsable.value).isEqualTo("value")
         assertThat(parsable.formalism).isEqualTo("formalism")
     }
@@ -161,9 +161,9 @@ class RmExtensionTest {
     @Test
     fun booleanConversion() {
         val dvBooleanT: DvBoolean = DvBoolean.create(true)
-        assertThat(dvBooleanT.value).isTrue()
+        assertThat(dvBooleanT.value).isTrue
         val dvBooleanF: DvBoolean = DvBoolean.create(false)
-        assertThat(dvBooleanF.value).isFalse()
+        assertThat(dvBooleanF.value).isFalse
     }
 
     @Test
@@ -190,7 +190,7 @@ class RmExtensionTest {
 
     @Test
     fun objectVersionId() {
-        val uid: ObjectVersionId = ObjectVersionId.create("uid")
+        val uid = ObjectVersionId("uid")
         assertThat(uid.value).isEqualTo("uid")
     }
 
@@ -202,7 +202,7 @@ class RmExtensionTest {
 
     @Test
     fun hierObjectId() {
-        val uid: HierObjectId = HierObjectId.create("uid")
+        val uid = HierObjectId("uid")
         assertThat(uid.value).isEqualTo("uid")
     }
 
@@ -277,11 +277,11 @@ class RmExtensionTest {
         assertThat(offsetDateTime2).isEqualTo(offsetDateTime1)
         val dvDateTime3 = DvDateTime()
         dvDateTime3.value = "2015-01-01T12:00:00.000000001"
-        assertThat(dvDateTime3.toZonedDateTime()).isNotNull()
+        assertThat(dvDateTime3.toZonedDateTime()).isNotNull
         val dvDateTime4 = DvDateTime()
         dvDateTime4.value = "2015-01-01T12:00:00"
-        assertThat(dvDateTime4.toZonedDateTime()).isNotNull()
-        assertThat(dvDateTime4.toOffsetDateTime()).isNotNull()
+        assertThat(dvDateTime4.toZonedDateTime()).isNotNull
+        assertThat(dvDateTime4.toOffsetDateTime()).isNotNull
     }
 
     @Test

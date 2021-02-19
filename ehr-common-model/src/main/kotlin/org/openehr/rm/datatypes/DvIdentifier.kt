@@ -26,7 +26,6 @@ import javax.xml.bind.annotation.XmlType
 /**
  * @author Primoz Delopst
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_IDENTIFIER", propOrder = [
@@ -36,19 +35,33 @@ import javax.xml.bind.annotation.XmlType
         "type"]
 )
 @Open
-class DvIdentifier
-@JvmOverloads
-constructor(
-    var issuer: String? = null,
-    var assigner: String? = null,
-    @XmlElement(required = true)
-    @Required
-    var id: String? = null,
-    var type: String? = null
-) : DataValue() {
+class DvIdentifier() : DataValue() {
+    @JvmOverloads
+    constructor(
+        id: String,
+        issuer: String? = null,
+        assigner: String? = null,
+        type: String? = null
+    ) : this() {
+        this.id = id
+        this.issuer = issuer
+        this.assigner = assigner
+        this.type = type
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    var issuer: String? = null
+
+    var assigner: String? = null
+
+    @XmlElement(required = true)
+    @Required
+    var id: String? = null
+
+    var type: String? = null
 
     override fun equals(other: Any?): Boolean =
         when {
