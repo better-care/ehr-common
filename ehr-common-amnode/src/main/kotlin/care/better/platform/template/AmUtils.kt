@@ -118,7 +118,7 @@ object AmUtils {
      * @return [ArchetypeTerm] if found, otherwise, null
      */
     @JvmStatic
-    fun findTerm(terms: Collection<ArchetypeTerm>, code: String): ArchetypeTerm? = terms.firstOrNull { it.code == code }
+    fun findTerm(terms: Collection<ArchetypeTerm>, code: String?): ArchetypeTerm? = if (code == null) null else terms.firstOrNull { it.code == code }
 
     /**
      * Finds and returns [ArchetypeTerm] dictionary item value.
@@ -129,7 +129,7 @@ object AmUtils {
      * @return [StringDictionaryItem] value if found, otherwise, null
      */
     @JvmStatic
-    fun findTerm(terms: Collection<ArchetypeTerm>, nodeId: String, id: String): String? = findTerm(terms, nodeId)?.let { findDictionaryItem(it, id) }
+    fun findTerm(terms: Collection<ArchetypeTerm>, nodeId: String?, id: String): String? = findTerm(terms, nodeId)?.let { findDictionaryItem(it, id) }
 
     /**
      * Finds and returns [ArchetypeTerm] dictionary item value.
@@ -151,7 +151,7 @@ object AmUtils {
      * @return [ArchetypeTerm] text
      */
     @JvmStatic
-    fun findText(amNode: AmNode, language: String, archetypeNodeId: String): String? = findTermText(amNode, language, archetypeNodeId, TEXT_ID)
+    fun findText(amNode: AmNode, language: String, archetypeNodeId: String?): String? = findTermText(amNode, language, archetypeNodeId, TEXT_ID)
 
     /**
      * Finds and returns [ArchetypeTerm] description.
@@ -162,7 +162,7 @@ object AmUtils {
      * @return [ArchetypeTerm] description
      */
     @JvmStatic
-    fun findDescription(amNode: AmNode, language: String, archetypeNodeId: String): String? = findTermText(amNode, language, archetypeNodeId, DESCRIPTION_ID)
+    fun findDescription(amNode: AmNode, language: String, archetypeNodeId: String?): String? = findTermText(amNode, language, archetypeNodeId, DESCRIPTION_ID)
 
     /**
      * Finds and returns [ArchetypeTerm] text.
@@ -172,14 +172,18 @@ object AmUtils {
      * @return [ArchetypeTerm] text
      */
     @JvmStatic
-    fun findTermText(amNode: AmNode, archetypeNodeId: String): String? = findTerm(amNode.terms, archetypeNodeId, TEXT_ID)
+    fun findTermText(amNode: AmNode, archetypeNodeId: String?): String? = findTerm(amNode.terms, archetypeNodeId, TEXT_ID)
 
-    private fun findTermText(amNode: AmNode, language: String, archetypeNodeId: String, id: String): String? {
-        val termDefinitions = amNode.termDefinitions
-        return when {
-            termDefinitions.containsKey(language) -> findTerm(termDefinitions[language] ?: emptyList(), archetypeNodeId, id)
-            language == amNode.templateLanguage -> findTerm(amNode.terms, archetypeNodeId, id)
-            else -> null
+    private fun findTermText(amNode: AmNode, language: String, archetypeNodeId: String?, id: String): String? {
+        return if (archetypeNodeId == null) {
+            null
+        } else {
+            val termDefinitions = amNode.termDefinitions
+            when {
+                termDefinitions.containsKey(language) -> findTerm(termDefinitions[language] ?: emptyList(), archetypeNodeId, id)
+                language == amNode.templateLanguage -> findTerm(amNode.terms, archetypeNodeId, id)
+                else -> null
+            }
         }
     }
 
@@ -191,14 +195,18 @@ object AmUtils {
      * @return [Map] of [TermBindingItem]
      */
     @JvmStatic
-    fun findTermBindings(amNode: AmNode, nodeId: String): Map<String, TermBindingItem> =
-        amNode.termBindings.let {
-            val map: LinkedHashMap<String, TermBindingItem> = linkedMapOf()
-            it.forEach { (key, value) -> findTermBindings(nodeId, value)?.also { term -> map[key] = term } }
-            map
-        }
+    fun findTermBindings(amNode: AmNode, nodeId: String?): Map<String, TermBindingItem> =
+        if (nodeId == null)
+            mapOf()
+        else
+            amNode.termBindings.let {
+                val map: LinkedHashMap<String, TermBindingItem> = linkedMapOf()
+                it.forEach { (key, value) -> findTermBindings(nodeId, value)?.also { term -> map[key] = term } }
+                map
+            }
 
-    private fun findTermBindings(nodeId: String, bindings: Collection<TermBindingItem>) = bindings.firstOrNull { nodeId == it.code }
+    private fun findTermBindings(nodeId: String?, bindings: Collection<TermBindingItem>) =
+        if (nodeId == null) null else bindings.firstOrNull { nodeId == it.code }
 
     /**
      * Finds and returns [CPrimitive] for path segments.
