@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "CodeDefinitionSet", propOrder = ["items"])
 class CodeDefinitionSet : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(type = ArchetypeTerm::class)

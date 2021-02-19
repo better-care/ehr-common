@@ -30,10 +30,28 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_CODED_TEXT", propOrder = ["definingCode"])
 @Open
-class DvCodedText : DvText() {
+class DvCodedText() : DvText() {
+    @JvmOverloads
+    constructor(
+        definingCode: CodePhrase,
+        value: String,
+        hyperlink: DvUri? = null,
+        formatting: String? = null,
+        mappings: MutableList<TermMapping> = mutableListOf(),
+        language: CodePhrase? = null,
+        encoding: CodePhrase? = null
+    ) : this() {
+        this.definingCode = definingCode
+        this.value = value
+        this.hyperlink = hyperlink
+        this.formatting = formatting
+        this.mappings = mappings
+        this.language = language
+        this.encoding = encoding
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates a [DvCodedText] from terminology id, code and value
@@ -44,11 +62,8 @@ class DvCodedText : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun create(terminology: String, code: String, value: String?): DvCodedText =
-                DvCodedText().apply {
-                    this.definingCode = CodePhrase.create(terminology, code)
-                    this.value = value
-                }
+        fun create(terminology: String, code: String, value: String): DvCodedText =
+            DvCodedText(definingCode = CodePhrase.create(terminology, code), value = value)
 
         /**
          * Creates a [DvCodedText] with local terminology, code and value
@@ -58,7 +73,7 @@ class DvCodedText : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun createWithLocalTerminology(code: String, value: String?): DvCodedText = create("local", code, value)
+        fun createWithLocalTerminology(code: String, value: String): DvCodedText = create("local", code, value)
 
         /**
          * Creates a [DvCodedText] with openEHR terminology, code and value
@@ -68,7 +83,7 @@ class DvCodedText : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun createWithOpenEHRTerminology(code: String, value: String?): DvCodedText = create("openehr", code, value)
+        fun createWithOpenEHRTerminology(code: String, value: String): DvCodedText = create("openehr", code, value)
     }
 
     @XmlElement(name = "defining_code", required = true)
@@ -76,11 +91,11 @@ class DvCodedText : DvText() {
     var definingCode: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                else -> (other as DvCodedText).definingCode == definingCode
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            else -> (other as DvCodedText).definingCode == definingCode
+        }
 
     override fun hashCode(): Int = Objects.hash(definingCode)
 }

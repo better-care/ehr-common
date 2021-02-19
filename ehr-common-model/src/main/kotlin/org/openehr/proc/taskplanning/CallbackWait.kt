@@ -28,8 +28,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @Open
 class CallbackWait : EventWait<CallbackNotification> {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 1L
+        private const val serialVersionUID: Long = 1L
     }
 
     @XmlElement(name = "event_action")

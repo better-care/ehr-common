@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.*
 @XmlSeeAlso(value = [CSingleAttribute::class, CMultipleAttribute::class])
 abstract class CAttribute : ArchetypeConstraint() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "rm_attribute_name", required = true)

@@ -95,8 +95,8 @@ object AmUtils {
 
         val pathSegment = pathSegments[index]
         val amNode = getAmNodeWithAttribute(amNodes, pathSegment)
-        val children =  amNode?.attributes?.get(pathSegment)?.getChildren() ?: emptyList()
-        return if (index == pathSegments.size -1) children else getAmNodesRecursively(children, pathSegments, index + 1)
+        val children = amNode?.attributes?.get(pathSegment)?.getChildren() ?: emptyList()
+        return if (index == pathSegments.size - 1) children else getAmNodesRecursively(children, pathSegments, index + 1)
     }
 
     /**
@@ -176,8 +176,8 @@ object AmUtils {
 
     private fun findTermText(amNode: AmNode, language: String, archetypeNodeId: String?, id: String): String? {
         val termDefinitions = amNode.getTermDefinitions()
-        return when{
-            termDefinitions != null && termDefinitions.containsKey(language) -> findTerm(termDefinitions[language] ?: emptyList(), archetypeNodeId,  id)
+        return when {
+            termDefinitions.containsKey(language) -> findTerm(termDefinitions[language] ?: emptyList(), archetypeNodeId, id)
             language == amNode.getTemplateLangugage() -> findTerm(amNode.getTerms() ?: emptyList(), archetypeNodeId, id)
             else -> null
         }
@@ -237,7 +237,7 @@ object AmUtils {
      */
     @JvmStatic
     fun <T : CObject> getCObjectItems(amNode: AmNode, clazz: Class<T>, vararg pathSegments: String): List<T> =
-        getAmNodes(amNode, *pathSegments).asSequence().filter {  clazz.isInstance(it.cObject)  }.map { clazz.cast(it.cObject) }.toList()
+        getAmNodes(amNode, *pathSegments).asSequence().filter { clazz.isInstance(it.cObject) }.map { clazz.cast(it.cObject) }.toList()
 
     /**
      * Returns [IntervalOfInteger] lower bound.
@@ -482,7 +482,7 @@ object AmUtils {
      */
     @JvmStatic
     fun segmentMatches(amNode: AmNode, segmentArchetypeNodeId: String?, segmentName: String?): Boolean =
-         (segmentArchetypeNodeId == null || segmentArchetypeNodeId == amNode.archetypeNodeId) &&
+        (segmentArchetypeNodeId == null || segmentArchetypeNodeId == amNode.archetypeNodeId) &&
                 (segmentName == null || !isNameConstrained(amNode) || nameMatches(amNode, NAME_SUFFIX.matcher(segmentName).replaceAll("")))
 
     /**

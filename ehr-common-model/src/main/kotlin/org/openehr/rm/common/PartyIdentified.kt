@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import org.openehr.base.basetypes.PartyRef
 import org.openehr.rm.datatypes.DvIdentifier
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -26,16 +27,23 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PARTY_IDENTIFIED", propOrder = [
-    "name",
-    "identifiers"])
+@XmlType(
+    name = "PARTY_IDENTIFIED", propOrder = [
+        "name",
+        "identifiers"]
+)
 @XmlSeeAlso(PartyRelated::class)
 @Open
-class PartyIdentified : PartyProxy() {
+class PartyIdentified
+@JvmOverloads
+constructor(
+    var name: String? = null,
+    var identifiers: MutableList<DvIdentifier> = mutableListOf(),
+    externalRef: PartyRef? = null
+) : PartyProxy(externalRef) {
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
 
         /**
@@ -45,10 +53,6 @@ class PartyIdentified : PartyProxy() {
          * @return [PartyIdentified]
          */
         @JvmStatic
-        fun create(name: String): PartyIdentified = PartyIdentified().apply { this.name = name }
+        fun create(name: String): PartyIdentified = PartyIdentified(name = name)
     }
-
-    var name: String? = null
-
-    var identifiers: MutableList<DvIdentifier> = mutableListOf()
 }

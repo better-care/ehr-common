@@ -29,8 +29,7 @@ class TypeDefString : ExprTypeDef<String>("String") {
         @JvmField
         val INSTANCE: TypeDefString = TypeDefString()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefString{} ${super.toString()}"

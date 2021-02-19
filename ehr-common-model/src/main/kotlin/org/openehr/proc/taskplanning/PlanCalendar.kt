@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class PlanCalendar : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var entries: MutableList<CalendarEntry> = mutableListOf()

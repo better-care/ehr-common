@@ -31,32 +31,32 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FEEDER_AUDIT", propOrder = [
-    "originatingSystemItemIds",
-    "feederSystemItemIds",
-    "originalContent",
-    "originatingSystemAudit",
-    "feederSystemAudit"])
+@XmlType(
+    name = "FEEDER_AUDIT", propOrder = [
+        "originatingSystemItemIds",
+        "feederSystemItemIds",
+        "originalContent",
+        "originatingSystemAudit",
+        "feederSystemAudit"]
+)
 @Open
-class FeederAudit : RmObject(), Serializable {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class FeederAudit
+@JvmOverloads
+constructor(
     @XmlElement(name = "originating_system_item_ids")
-    var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
-
+    var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
     @XmlElement(name = "feeder_system_item_ids")
-    var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
-
+    var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
     @XmlElement(name = "original_content")
-    var originalContent: DvEncapsulated? = null
-
+    var originalContent: DvEncapsulated? = null,
     @XmlElement(name = "originating_system_audit", required = true)
     @Required
-    var originatingSystemAudit: FeederAuditDetails? = null
-
+    var originatingSystemAudit: FeederAuditDetails? = null,
     @XmlElement(name = "feeder_system_audit")
     var feederSystemAudit: FeederAuditDetails? = null
+) : RmObject(), Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
+
 }

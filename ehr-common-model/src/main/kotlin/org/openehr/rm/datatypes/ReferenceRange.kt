@@ -28,14 +28,20 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "REFERENCE_RANGE", propOrder = [
-    "meaning",
-    "range"])
+@XmlType(
+    name = "REFERENCE_RANGE", propOrder = [
+        "meaning",
+        "range"]
+)
 @Open
-class ReferenceRange : RmObject(), Serializable {
+class ReferenceRange() : RmObject(), Serializable {
+    constructor(meaning: DvText, range: DvInterval) : this() {
+        this.meaning = meaning
+        this.range = range
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

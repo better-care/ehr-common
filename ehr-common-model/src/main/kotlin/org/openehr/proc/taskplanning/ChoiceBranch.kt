@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class ChoiceBranch<I : PlanItem> : TaskGroup<I> {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     constructor()

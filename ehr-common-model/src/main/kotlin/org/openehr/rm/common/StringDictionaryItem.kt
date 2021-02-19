@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.*
 @Open
 class StringDictionaryItem : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
     @XmlValue
     var value: String? = null

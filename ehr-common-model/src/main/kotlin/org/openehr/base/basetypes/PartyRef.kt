@@ -27,9 +27,19 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_REF")
 @Open
-class PartyRef : ObjectRef() {
+class PartyRef() : ObjectRef() {
+    @JvmOverloads
+    constructor(
+        id: ObjectId,
+        namespace: String? = null,
+        type: String? = null
+    ) : this() {
+        this.id = id
+        this.namespace = namespace
+        this.type = type
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 }

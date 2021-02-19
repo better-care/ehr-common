@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "C_PRIMITIVE_OBJECT", propOrder = ["item"])
 class CPrimitiveObject : CDefinedObject() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(type = CPrimitive::class)

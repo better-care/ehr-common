@@ -20,7 +20,6 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.jaxb.MapStringAdapter
 import org.openehr.rm.common.PartyProxy
-import java.util.*
 import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlType
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
@@ -35,8 +34,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @Open
 class TaskNotificationRecord() : RmObject() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

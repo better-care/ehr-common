@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class PerformableAction : TaskAction {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var resources: MutableList<ResourceParticipation> = mutableListOf()

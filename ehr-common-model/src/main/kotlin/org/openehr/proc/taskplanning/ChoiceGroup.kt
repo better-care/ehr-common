@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElements(value = [XmlElement(required = true, name = "overrideType"), XmlElement(required = true, name = "override_type")])

@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "C_CODE_REFERENCE", propOrder = ["referenceSetUri"])
 class CCodeReference : CCodePhrase() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

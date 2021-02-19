@@ -121,7 +121,7 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun setGetterAndSetter(parent: AmNode, attributeName: String, amNode: AmNode) {
         try {
-            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(parent.rmType!!)
+            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(parent.rmType)
             val getter: Method? = RmUtils.getGetterForAttribute(attributeName, rmClass)
 
             amNode.setGetter(getter)
@@ -143,7 +143,7 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun addRmAttributes(amNode: AmNode) {
         try {
-            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(amNode.rmType!!)
+            val rmClass: Class<out RmObject?> = RmUtils.getRmClass(amNode.rmType)
 
             if (!DataValue::class.java.isAssignableFrom(rmClass)) {
                 val requiredFields: Collection<Field> = RmUtils.getRequiredFields(amNode.rmType)

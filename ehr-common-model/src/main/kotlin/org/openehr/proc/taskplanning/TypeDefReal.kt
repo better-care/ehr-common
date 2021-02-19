@@ -29,8 +29,7 @@ class TypeDefReal : ExprTypeDef<Double>("Real") {
         @JvmField
         val INSTANCE: TypeDefReal = TypeDefReal()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefReal{} ${super.toString()}"

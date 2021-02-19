@@ -29,8 +29,7 @@ class TypeDefVoid : ExprTypeDef<Void>("Void") {
         @JvmField
         val INSTANCE: TypeDefVoid = TypeDefVoid()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefVoid{} ${super.toString()}"

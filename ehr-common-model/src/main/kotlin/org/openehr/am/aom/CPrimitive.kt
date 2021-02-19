@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlType
 @XmlSeeAlso(value = [CBoolean::class, CString::class, CInteger::class, CReal::class, CDate::class, CDateTime::class, CTime::class, CDuration::class])
 abstract class CPrimitive : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 }

@@ -28,14 +28,21 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_STATE", propOrder = [
-    "value",
-    "isTerminal"])
+@XmlType(
+    name = "DV_STATE", propOrder = [
+        "value",
+        "isTerminal"]
+)
 @Open
-class DvState : DataValue() {
+class DvState() : DataValue() {
+    @JvmOverloads
+    constructor(value: DvCodedText, isTerminal: Boolean = false) : this() {
+        this.value = value
+        this.isTerminal = isTerminal
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)
@@ -43,15 +50,15 @@ class DvState : DataValue() {
     var value: DvCodedText? = null
 
     @XmlElement(name = "is_terminal")
-    var isTerminal = false
+    var isTerminal: Boolean = false
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                (other as DvState).value != value -> false
-                else -> isTerminal == other.isTerminal
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            (other as DvState).value != value -> false
+            else -> isTerminal == other.isTerminal
+        }
 
     override fun hashCode(): Int = Objects.hash(value, isTerminal)
 }

@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.*
 @XmlSeeAlso(value = [CArchetypeRoot::class, TComplexObject::class ])
 open class CComplexObject : CDefinedObject() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(type = CAttribute::class)

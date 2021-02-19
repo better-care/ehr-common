@@ -29,8 +29,7 @@ class TypeDefTerminologyCode : ExprTypeDef<String>("Terminology_code") {
         @JvmField
         val INSTANCE: TypeDefTerminologyCode = TypeDefTerminologyCode()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefTerminologyCode{} ${super.toString()}"

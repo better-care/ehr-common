@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class TaskAction() : Locatable(), VisitableByModelVisitor {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "instruction_activity")

@@ -28,8 +28,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "FLAT_ARCHETYPE_ONTOLOGY")
 class FlatArchetypeOntology : ArchetypeOntology() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlAttribute(name = "archetype_id", required = true)

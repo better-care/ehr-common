@@ -23,7 +23,7 @@ import org.openehr.rm.common.Locatable
 import org.openehr.rm.composition.Observation
 import org.openehr.rm.datastructures.Element
 import org.openehr.rm.datatypes.DvCodedText.Companion.create
-import org.openehr.rm.datatypes.DvText.Companion.create
+import org.openehr.rm.datatypes.DvText
 import java.io.IOException
 
 /**
@@ -45,7 +45,7 @@ class AmUtilsTest : AbstractAmTest() {
         archetypeId.value = "openEHR-EHR-OBSERVATION.eye_exam.v1"
         archetyped.archetypeId = archetypeId
         locatable.archetypeDetails = archetyped
-        locatable.name = create("Светоощущение")
+        locatable.name = DvText("Светоощущение")
         locatable.archetypeNodeId = "at0000"
         val match = AmUtils.findMatchingNode(node?.attributes?.get("items")?.getChildren() ?: emptyList(), locatable)
         assertThat(AmUtils.isNameConstrained(match!!)).isTrue
@@ -82,7 +82,7 @@ class AmUtilsTest : AbstractAmTest() {
 
         val element = Element()
         element.archetypeNodeId = firstNode.nodeId
-        element.name = create("Name")
+        element.name = DvText("Name")
         assertThat(AmUtils.matches(firstNode, element)).isFalse
 
         val secondNode = AmUtils.resolvePath(root, "/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.testing.v1, 'Fixed name']")

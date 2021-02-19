@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class CallbackNotification() : PlanEvent(), TaskReferencingEvent {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 1L
+        private const val serialVersionUID: Long = 1L
     }
 
     @XmlElement(name = "task_id", required = true)

@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType
     "rightOperand"])
 class ExprBinaryOperator : ExprOperator() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "left_operand", required = true, type = ExprItem::class)

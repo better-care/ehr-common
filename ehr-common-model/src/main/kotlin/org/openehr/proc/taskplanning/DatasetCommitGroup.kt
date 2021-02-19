@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @Open
 class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "group_id", required = true)

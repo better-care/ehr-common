@@ -27,10 +27,13 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_EHR_URI")
 @Open
-class DvEhrUri : DvUri() {
+class DvEhrUri() : DvUri() {
+    constructor(value: String) : this() {
+        this.value = value
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates [DvEhrUri].
@@ -54,9 +57,6 @@ class DvEhrUri : DvUri() {
          */
         @JvmStatic
         fun create(ehrUid: String, compositionUid: String, path: String?): DvEhrUri =
-                DvEhrUri().apply {
-                    this.value = "ehr://$ehrUid/$compositionUid${path?.let { if (it.startsWith("/")) it else "/$it" } ?: ""}"
-                }
-
+            DvEhrUri("ehr://$ehrUid/$compositionUid" + (path?.let { if (it.startsWith("/")) it else "/$it" } ?: ""))
     }
 }

@@ -29,10 +29,15 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GENERIC_ID", propOrder = ["scheme"])
 @Open
-class GenericId : ObjectId() {
+class GenericId() : ObjectId() {
+    @JvmOverloads
+    constructor(value: String, scheme: String? = null) : this() {
+        this.value = value
+        this.scheme = scheme
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

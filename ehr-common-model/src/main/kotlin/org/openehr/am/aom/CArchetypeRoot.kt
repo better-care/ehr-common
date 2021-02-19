@@ -34,8 +34,7 @@ import javax.xml.bind.annotation.XmlType
     "termBindings"])
 class CArchetypeRoot : CComplexObject() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "archetype_id", required = true)

@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "STATE_MACHINE", propOrder = ["states"])
 class StateMachine : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true, type = State::class)

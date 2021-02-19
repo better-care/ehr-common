@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.annotation.Required
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -26,21 +27,26 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "DV_URI", propOrder = ["value"])
 @XmlSeeAlso(DvEhrUri::class)
 @Open
-class DvUri : DataValue() {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+class DvUri() : DataValue() {
+    constructor(value: String) : this() {
+        this.value = value
     }
 
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
+
+    @XmlElement(required = true)
     @XmlSchemaType(name = "anyURI")
+    @Required
     var value: String? = null
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                else -> (other as DvUri).value == value
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            else -> (other as DvUri).value == value
+        }
 
     override fun hashCode(): Int = Objects.hash(value)
 }

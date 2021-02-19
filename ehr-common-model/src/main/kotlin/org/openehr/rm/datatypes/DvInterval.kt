@@ -26,24 +26,40 @@ import javax.xml.bind.annotation.XmlType
 /**
  * @author Primoz Delopst
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_INTERVAL", propOrder = [
-    "lower",
-    "upper",
-    "lowerIncluded",
-    "upperIncluded",
-    "lowerUnbounded",
-    "upperUnbounded"])
+@XmlType(
+    name = "DV_INTERVAL", propOrder = [
+        "lower",
+        "upper",
+        "lowerIncluded",
+        "upperIncluded",
+        "lowerUnbounded",
+        "upperUnbounded"]
+)
 @Open
-class DvInterval : DataValue(), RangeParameters {
+class DvInterval() : DataValue(), RangeParameters {
+    @JvmOverloads
+    constructor(
+        lower: DvOrdered?,
+        upper: DvOrdered?,
+        lowerIncluded: Boolean? = null,
+        upperIncluded: Boolean? = null,
+        lowerUnbounded: Boolean = false,
+        upperUnbounded: Boolean = false
+    ) : this() {
+        this.lower = lower
+        this.upper = upper
+        this.lowerIncluded = lowerIncluded
+        this.upperIncluded = upperIncluded
+        this.lowerUnbounded = lowerUnbounded
+        this.upperUnbounded = upperUnbounded
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var lower: DvOrdered? = null
-
     var upper: DvOrdered? = null
 
     @XmlElement(name = "lower_included")
@@ -58,7 +74,6 @@ class DvInterval : DataValue(), RangeParameters {
     @XmlElement(name = "upper_unbounded")
     var upperUnbounded: Boolean = false
 
-
     override fun isLowerIncluded(): Boolean? = lowerIncluded
 
     override fun isUpperIncluded(): Boolean? = upperIncluded
@@ -69,16 +84,16 @@ class DvInterval : DataValue(), RangeParameters {
 
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                (other as DvInterval).lower != lower -> false
-                other.upper != upper -> false
-                other.lowerIncluded != lowerIncluded -> false
-                other.upperIncluded != upperIncluded -> false
-                other.lowerUnbounded != lowerUnbounded -> false
-                else -> other.upperUnbounded == upperUnbounded
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            (other as DvInterval).lower != lower -> false
+            other.upper != upper -> false
+            other.lowerIncluded != lowerIncluded -> false
+            other.upperIncluded != upperIncluded -> false
+            other.lowerUnbounded != lowerUnbounded -> false
+            else -> other.upperUnbounded == upperUnbounded
+        }
 
     override fun hashCode(): Int = Objects.hash(lower, upper, lowerIncluded, upperIncluded, lowerUnbounded, upperUnbounded)
 }

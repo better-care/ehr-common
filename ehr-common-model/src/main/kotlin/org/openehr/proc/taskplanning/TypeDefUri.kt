@@ -30,8 +30,7 @@ class TypeDefUri : ExprTypeDef<URI>("Uri") {
         @JvmField
         val INSTANCE: TypeDefUri = TypeDefUri()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefUri{} ${super.toString()}"

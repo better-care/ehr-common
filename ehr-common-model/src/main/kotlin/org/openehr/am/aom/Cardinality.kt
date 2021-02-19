@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "CARDINALITY", propOrder = ["isOrdered", "isUnique", "interval"])
 class Cardinality : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "is_ordered")

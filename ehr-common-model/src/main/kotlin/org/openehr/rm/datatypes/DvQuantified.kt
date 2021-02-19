@@ -26,22 +26,25 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "DV_QUANTIFIED", propOrder = ["magnitudeStatus"])
 @XmlSeeAlso(value = [DvTemporal::class, DvAmount::class])
 @Open
-abstract class DvQuantified : DvOrdered() {
+abstract class DvQuantified(
+    @XmlElement(name = "magnitude_status")
+    var magnitudeStatus: String? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null
+) : DvOrdered(normalRange, otherReferenceRanges, normalStatus) {
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
-    @XmlElement(name = "magnitude_status")
-    var magnitudeStatus: String? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                else -> (other as DvQuantified).magnitudeStatus == magnitudeStatus
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            else -> (other as DvQuantified).magnitudeStatus == magnitudeStatus
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitudeStatus)
 }

@@ -29,8 +29,7 @@ class TypeDefBoolean : ExprTypeDef<Boolean>("Boolean") {
         @JvmField
         val INSTANCE: TypeDefBoolean = TypeDefBoolean()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefBoolean{} ${super.toString()}"

@@ -19,7 +19,7 @@ open class SerializationTest {
     private val marshaller: Marshaller = JaxbRegistry.getInstance().marshaller
 
     @Test
-    fun testCompositionDeserialization(){
+    fun testCompositionDeserialization() {
         val composition = getComposition("/composition.xml")
         assertThat(composition).isNotNull
         assertThat(composition.content).isNotEmpty
@@ -27,7 +27,7 @@ open class SerializationTest {
     }
 
     @Test
-    fun testCompositionSerialization(){
+    fun testCompositionSerialization() {
         val composition = getComposition("/composition.xml")
 
         val stringWriter = StringWriter()
@@ -36,6 +36,78 @@ open class SerializationTest {
         assertThat(compositionString).startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
         assertThat(compositionString).contains("<uid xsi:type=\"OBJECT_VERSION_ID\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><value>f74c649e-3259-4b43-9943-67c86b8ee13a::default::1</value></uid>")
     }
+
+/*
+    @Test
+    fun testDateWithJvmOveraloadsSerialization() {
+        val date = DvDate(value = "2020-01-01")
+
+        val stringWriter = StringWriter()
+        marshaller.marshal(JAXBElement(QName("date"), DvDate::class.java, date), stringWriter)
+        val rmString = stringWriter.toString()
+
+        val date2 = unmarshaller.unmarshal(StreamSource(StringReader(rmString)), DvDate::class.java).value
+        assertThat(date2.value).isEqualTo("2020-01-01")
+
+        val codePhrase = CodePhrase(terminologyId = TerminologyId("test"), codeString = "x221")
+        val stringWriter1 = StringWriter()
+        marshaller.marshal(JAXBElement(QName("code_phrase"), CodePhrase::class.java, codePhrase), stringWriter1)
+        val rmString1 = stringWriter1.toString()
+
+        val codePhrase2 = unmarshaller.unmarshal(StreamSource(StringReader(rmString1)), CodePhrase::class.java).value
+        assertThat(codePhrase2.terminologyId).isNotNull
+        assertThat(codePhrase2.codeString).isNotNull
+    }
+
+    @Test
+    fun testCodePhraseWithJvmOveraloadsSerialization() {
+        val codePhrase = CodePhrase(terminologyId = TerminologyId("test"), codeString = "x221")
+        val stringWriter = StringWriter()
+        marshaller.marshal(JAXBElement(QName("code_phrase"), CodePhrase::class.java, codePhrase), stringWriter)
+        val rmString = stringWriter.toString()
+
+        val codePhrase2 = unmarshaller.unmarshal(StreamSource(StringReader(rmString)), CodePhrase::class.java).value
+        assertThat(codePhrase2.terminologyId).isNotNull
+        assertThat(codePhrase2.codeString).isNotNull
+    }
+
+    @Test
+    fun testTermBindingItemWithJvmOveraloadsSerialization() {
+        val termBindingItem = TermBindingItem().apply {
+            code = "code"
+            value = CodePhrase(terminologyId = TerminologyId("test"), codeString = "x221")
+        }
+
+        val stringWriter = StringWriter()
+        marshaller.marshal(JAXBElement(QName("term_binding_item"), TermBindingItem::class.java, termBindingItem), stringWriter)
+        val rmString = stringWriter.toString()
+
+        val termBindingItem2 = unmarshaller.unmarshal(StreamSource(StringReader(rmString)), TermBindingItem::class.java).value
+        assertThat(termBindingItem2.code).isNotNull
+        assertThat(termBindingItem2.value).isNotNull
+    }
+
+    @Test
+    fun testTermBindingSetWithJvmOveraloadsSerialization() {
+        val termBindingItem = TermBindingItem().apply {
+            code = "code"
+            value = CodePhrase(terminologyId = TerminologyId("test"), codeString = "x221")
+        }
+        val termBindingSet = TermBindingSet()
+        termBindingSet.items.add(termBindingItem)
+        termBindingSet.terminology = "terminology"
+
+        val stringWriter = StringWriter()
+        marshaller.marshal(JAXBElement(QName("term_binding_set"), TermBindingSet::class.java, termBindingSet), stringWriter)
+        val rmString = stringWriter.toString()
+
+        val termBindingSet2 = unmarshaller.unmarshal(StreamSource(StringReader(rmString)), TermBindingSet::class.java).value
+        assertThat(termBindingSet2.terminology).isEqualTo("terminology")
+        assertThat(termBindingSet2.items).isNotEmpty
+        assertThat(termBindingSet2.items[0].code).isNotNull
+        assertThat(termBindingSet2.items[0].value).isNotNull
+    }
+*/
 
     @Throws(JAXBException::class, IOException::class)
     protected open fun getComposition(compositionFile: String): Composition =

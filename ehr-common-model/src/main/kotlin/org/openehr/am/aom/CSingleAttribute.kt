@@ -27,7 +27,6 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "C_SINGLE_ATTRIBUTE")
 class CSingleAttribute : CAttribute() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 }

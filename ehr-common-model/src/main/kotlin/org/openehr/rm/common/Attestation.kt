@@ -17,9 +17,7 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.rm.datatypes.DvEhrUri
-import org.openehr.rm.datatypes.DvMultimedia
-import org.openehr.rm.datatypes.DvText
+import org.openehr.rm.datatypes.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -30,24 +28,48 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ATTESTATION", propOrder = [
-    "attestedView",
-    "proof",
-    "items",
-    "reason",
-    "isPending"])
+@XmlType(
+    name = "ATTESTATION", propOrder = [
+        "attestedView",
+        "proof",
+        "items",
+        "reason",
+        "isPending"]
+)
 @Open
-class Attestation : AuditDetails() {
+class Attestation() : AuditDetails() {
+    @JvmOverloads
+    constructor(
+        reason: DvText,
+        attestedView: DvMultimedia? = null,
+        proof: String? = null,
+        items: MutableList<DvEhrUri> = mutableListOf(),
+        isPending: Boolean = false,
+        systemId: String? = null,
+        committer: PartyProxy? = null,
+        timeCommitted: DvDateTime? = null,
+        changeType: DvCodedText? = null,
+        description: DvText? = null
+    ) : this() {
+        this.reason = reason
+        this.attestedView = attestedView
+        this.proof = proof
+        this.items = items
+        this.isPending = isPending
+        this.systemId = systemId
+        this.committer = committer
+        this.timeCommitted = timeCommitted
+        this.changeType = changeType
+        this.description = description
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "attested_view")
     var attestedView: DvMultimedia? = null
-
     var proof: String? = null
-
     var items: MutableList<DvEhrUri> = mutableListOf()
 
     @XmlElement(required = true)

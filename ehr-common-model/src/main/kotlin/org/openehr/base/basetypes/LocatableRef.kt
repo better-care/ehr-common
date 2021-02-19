@@ -26,10 +26,22 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LOCATABLE_REF", propOrder = ["path"])
 @Open
-class LocatableRef : ObjectRef() {
+class LocatableRef() : ObjectRef() {
+    @JvmOverloads
+    constructor(
+        id: ObjectId,
+        namespace: String,
+        type: String,
+        path: String? = null
+    ) : this() {
+        this.id = id
+        this.namespace = namespace
+        this.type = type
+        this.path = path
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var path: String? = null

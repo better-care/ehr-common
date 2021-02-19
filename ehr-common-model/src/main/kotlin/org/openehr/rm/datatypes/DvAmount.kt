@@ -24,31 +24,35 @@ import javax.xml.bind.annotation.*
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_AMOUNT", propOrder = [
-    "accuracy",
-    "accuracyIsPercent"])
+@XmlType(
+    name = "DV_AMOUNT", propOrder = [
+        "accuracy",
+        "accuracyIsPercent"]
+)
 @XmlSeeAlso(value = [DvCount::class, DvQuantity::class, DvProportion::class, DvDuration::class])
 @Open
-class DvAmount : DvQuantified() {
+abstract class DvAmount(
+    @XmlElement(defaultValue = "-1.0")
+    var accuracy: Float? = null,
+    @XmlElement(name = "accuracy_is_percent")
+    var accuracyIsPercent: Boolean? = null,
+    magnitudeStatus: String? = null,
+    normalRange: DvInterval? = null,
+    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+    normalStatus: CodePhrase? = null,
+) : DvQuantified(magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
-    @XmlElement(defaultValue = "-1.0")
-    var accuracy: Float? = null
-
-    @XmlElement(name = "accuracy_is_percent")
-    var accuracyIsPercent: Boolean? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                (other as DvAmount).accuracy != accuracy -> false
-                else -> accuracyIsPercent == other.accuracyIsPercent
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            (other as DvAmount).accuracy != accuracy -> false
+            else -> accuracyIsPercent == other.accuracyIsPercent
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy, accuracyIsPercent)
 }

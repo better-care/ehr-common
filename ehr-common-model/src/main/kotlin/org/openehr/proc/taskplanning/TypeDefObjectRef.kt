@@ -30,8 +30,7 @@ class TypeDefObjectRef : ExprTypeDef<ObjectRef>("Object_ref") {
         @JvmField
         val INSTANCE: TypeDefObjectRef = TypeDefObjectRef()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefObjectRef{} ${super.toString()}"

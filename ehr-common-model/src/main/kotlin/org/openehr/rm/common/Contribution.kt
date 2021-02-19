@@ -30,21 +30,20 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "CONTRIBUTION", propOrder = ["uid", "versions", "audit"])
 @XmlRootElement
 @Open
-class Contribution : RmObject(), Serializable {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+class Contribution
+@JvmOverloads
+constructor(
     @XmlElement(required = true)
     @Required
-    var uid: HierObjectId? = null
-
+    var uid: HierObjectId? = null,
     @XmlElement(required = true)
     @Required
-    var versions: MutableList<RmObject> = mutableListOf()
-
+    var versions: MutableList<RmObject> = mutableListOf(),
     @XmlElement(required = true)
     @Required
     var audit: AuditDetails? = null
+) : RmObject(), Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 }

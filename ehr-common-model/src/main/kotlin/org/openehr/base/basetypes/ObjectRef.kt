@@ -27,18 +27,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OBJECT_REF", propOrder = [
-    "id",
-    "namespace",
-    "type"])
+@XmlType(
+    name = "OBJECT_REF", propOrder = [
+        "id",
+        "namespace",
+        "type"]
+)
 @XmlSeeAlso(value = [PartyRef::class, AccessGroupRef::class, LocatableRef::class])
 @Open
-class ObjectRef : RmObject(), Serializable {
+class ObjectRef() : RmObject(), Serializable {
+    @JvmOverloads
+    constructor(id: ObjectId, namespace: String? = null, type: String? = null) : this() {
+        this.id = id
+        this.namespace = namespace
+        this.type = type
+    }
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-
+        private const val serialVersionUID: Long = 0L
 
         /**
          * Creates a person [ObjectRef].
@@ -48,7 +54,7 @@ class ObjectRef : RmObject(), Serializable {
          * @return [ObjectRef] object
          */
         @JvmStatic
-        fun create(uid: String, namespace: String): ObjectRef = create("PERSON", uid, namespace)
+        fun createPerson(uid: String, namespace: String? = null): ObjectRef = create("PERSON", uid, namespace)
 
         /**
          * Creates an [ObjectRef].
@@ -59,12 +65,7 @@ class ObjectRef : RmObject(), Serializable {
          * @return [ObjectRef] object
          */
         @JvmStatic
-        fun create(type: String, uid: String, namespace: String): ObjectRef =
-                ObjectRef().apply {
-                    this.id = ObjectVersionId.create(uid)
-                    this.namespace = namespace
-                    this.type = type
-                }
+        fun create(type: String, uid: String, namespace: String? = null): ObjectRef = ObjectRef(id = ObjectVersionId(uid), namespace = namespace, type = type)
     }
 
     @XmlElement(required = true)

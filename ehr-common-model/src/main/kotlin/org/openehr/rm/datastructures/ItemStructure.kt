@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.XmlType
 @XmlSeeAlso(value = [ItemSingle::class, ItemList::class, ItemTree::class, ItemTable::class])
 abstract class ItemStructure : Locatable() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 }

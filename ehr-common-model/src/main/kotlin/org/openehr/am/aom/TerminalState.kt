@@ -27,7 +27,6 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "TERMINAL_STATE")
 class TerminalState : State() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 }

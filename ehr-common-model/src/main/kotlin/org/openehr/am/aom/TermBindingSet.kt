@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "TermBindingSet", propOrder = ["items"])
 class TermBindingSet : AmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(type = TermBindingItem::class)

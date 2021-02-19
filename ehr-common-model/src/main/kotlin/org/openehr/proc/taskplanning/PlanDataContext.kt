@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var variables: MutableList<ContextVariable<*>> = mutableListOf()

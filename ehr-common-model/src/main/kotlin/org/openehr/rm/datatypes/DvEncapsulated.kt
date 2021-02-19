@@ -27,27 +27,25 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_ENCAPSULATED", propOrder = [
-    "charset",
-    "language"])
+@XmlType(
+    name = "DV_ENCAPSULATED", propOrder = [
+        "charset",
+        "language"]
+)
 @XmlSeeAlso(value = [DvMultimedia::class, DvParsable::class])
 @Open
-abstract class DvEncapsulated : DataValue() {
+abstract class DvEncapsulated(var charset: CodePhrase? = null, var language: CodePhrase? = null) : DataValue() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
-    var charset: CodePhrase? = null
-    var language: CodePhrase? = null
-
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                (other as DvEncapsulated).charset != charset -> false
-                else -> language == other.language
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            (other as DvEncapsulated).charset != charset -> false
+            else -> language == other.language
+        }
 
     override fun hashCode(): Int = Objects.hash(charset, language)
 }

@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlType
     "groups"])
 class CMultipleAttribute : CAttribute() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true, type = Cardinality::class)

@@ -30,8 +30,7 @@ class TypeDefDuration : ExprTypeDef<Duration>("Duration") {
         @JvmField
         val INSTANCE: TypeDefDuration = TypeDefDuration()
 
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TypeDefDuration{} ${super.toString()}"

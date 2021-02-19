@@ -28,29 +28,28 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_PARSABLE", propOrder = [
-    "value",
-    "formalism"])
+@XmlType(
+    name = "DV_PARSABLE", propOrder = [
+        "value",
+        "formalism"]
+)
 @Open
-class DvParsable : DvEncapsulated() {
+class DvParsable() : DvEncapsulated() {
+    @JvmOverloads
+    constructor(
+        value: String,
+        formalism: String,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
+    ) : this() {
+        this.value = value
+        this.formalism = formalism
+        this.charset = charset
+        this.language = language
+    }
 
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-
-        /**
-         * Creates [DvParsable] from a value and formalism.
-         *
-         * @param value     parsable content
-         * @param formalism parsable formalism
-         * @return [DvParsable] object
-         */
-        @JvmStatic
-        fun create(value: String, formalism: String): DvParsable =
-                DvParsable().apply {
-                    this.formalism = formalism
-                    this.value = value
-                }
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)
@@ -62,13 +61,13 @@ class DvParsable : DvEncapsulated() {
     var formalism: String? = null
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                (other as DvParsable).value != value -> false
-                else -> formalism == other.formalism
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            (other as DvParsable).value != value -> false
+            else -> formalism == other.formalism
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, formalism)
 }

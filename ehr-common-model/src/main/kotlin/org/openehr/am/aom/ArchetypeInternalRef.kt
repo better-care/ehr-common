@@ -28,8 +28,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "ARCHETYPE_INTERNAL_REF", propOrder = ["targetPath"])
 class ArchetypeInternalRef : CObject() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "target_path", required = true)

@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "EXPR_UNARY_OPERATOR", propOrder = ["operand"])
 class ExprUnaryOperator : ExprOperator() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true, type = ExprItem::class)

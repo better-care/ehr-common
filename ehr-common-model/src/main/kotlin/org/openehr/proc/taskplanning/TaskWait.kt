@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class TaskWait() : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 1L
+        private const val serialVersionUID: Long = 1L
     }
 
     @XmlElement

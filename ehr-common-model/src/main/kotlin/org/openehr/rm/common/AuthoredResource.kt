@@ -31,30 +31,29 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AUTHORED_RESOURCE", propOrder = [
-    "originalLanguage",
-    "isControlled",
-    "description",
-    "translations",
-    "revisionHistory"])
+@XmlType(
+    name = "AUTHORED_RESOURCE", propOrder = [
+        "originalLanguage",
+        "isControlled",
+        "description",
+        "translations",
+        "revisionHistory"]
+)
 @Open
-abstract class AuthoredResource : RmObject(), Serializable {
-    companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-    }
-
+abstract class AuthoredResource
+@JvmOverloads
+constructor(
     @XmlElement(name = "original_language", required = true)
     @Required
-    var originalLanguage: CodePhrase? = null
-
+    var originalLanguage: CodePhrase? = null,
     @XmlElement(name = "is_controlled")
-    var isControlled: Boolean? = null
-
-    var description: ResourceDescription? = null
-
-    var translations: MutableList<TranslationDetails> = mutableListOf()
-
+    var isControlled: Boolean? = null,
+    var description: ResourceDescription? = null,
+    var translations: MutableList<TranslationDetails> = mutableListOf(),
     @XmlElement(name = "revision_history")
     var revisionHistory: RevisionHistory? = null
+) : RmObject(), Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
 }

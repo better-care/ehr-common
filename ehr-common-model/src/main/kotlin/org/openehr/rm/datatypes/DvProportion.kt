@@ -28,16 +28,43 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DV_PROPORTION", propOrder = [
-    "numerator",
-    "denominator",
-    "type",
-    "precision"])
+@XmlType(
+    name = "DV_PROPORTION", propOrder = [
+        "numerator",
+        "denominator",
+        "type",
+        "precision"]
+)
 @Open
-class DvProportion : DvAmount() {
+class DvProportion() : DvAmount() {
+    @JvmOverloads
+    constructor(
+        numerator: Float,
+        denominator: Float,
+        type: BigInteger,
+        precision: Int? = null,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null,
+    ) : this() {
+        this.numerator = numerator
+        this.denominator = denominator
+        this.type = type
+        this.precision = precision
+        this.accuracy = accuracy
+        this.accuracyIsPercent = accuracyIsPercent
+        this.magnitudeStatus = magnitudeStatus
+        this.normalRange = normalRange
+        this.otherReferenceRanges = otherReferenceRanges
+        this.normalStatus = normalStatus
+
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     var numerator: Float = 0f
@@ -52,15 +79,15 @@ class DvProportion : DvAmount() {
     var precision: Int? = null
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                !super.equals(other) -> false
-                (other as DvProportion).numerator != numerator -> false
-                other.denominator != denominator -> false
-                other.precision != precision -> false
-                else -> other.type == type
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            !super.equals(other) -> false
+            (other as DvProportion).numerator != numerator -> false
+            other.denominator != denominator -> false
+            other.precision != precision -> false
+            else -> other.type == type
+        }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(numerator, type, precision, denominator)
 }

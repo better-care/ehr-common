@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.*
 @XmlSeeAlso(value = [ArchetypeSlot::class, ConstraintRef::class, ArchetypeInternalRef::class, CDefinedObject::class])
 abstract class CObject : ArchetypeConstraint() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "rm_type_name", required = true)

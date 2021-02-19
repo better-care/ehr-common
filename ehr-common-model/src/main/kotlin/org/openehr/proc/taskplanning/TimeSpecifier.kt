@@ -28,8 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 abstract class TimeSpecifier : RmObject(), Serializable {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     override fun toString(): String = "TimeSpecifier{}"

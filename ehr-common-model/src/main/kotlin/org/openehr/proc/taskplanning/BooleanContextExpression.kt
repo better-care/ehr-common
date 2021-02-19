@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class BooleanContextExpression : ContextExpression<Boolean> {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     constructor() : super(TypeDefBoolean.INSTANCE)

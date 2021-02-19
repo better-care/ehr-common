@@ -27,19 +27,12 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HIER_OBJECT_ID")
 @Open
-class HierObjectId : UidBasedId() {
+class HierObjectId() : UidBasedId() {
+    constructor(value: String) : this() {
+        this.value = value
+    }
+
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
-
-
-        /**
-         * Creates a [HierObjectId]
-         *
-         * @param uid uid
-         * @return [HierObjectId]] object
-         */
-        @JvmStatic
-        fun create(uid: String): HierObjectId = HierObjectId().apply { this.value = uid }
+        private const val serialVersionUID: Long = 0L
     }
 }

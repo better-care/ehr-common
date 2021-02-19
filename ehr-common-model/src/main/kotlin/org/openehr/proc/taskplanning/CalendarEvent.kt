@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class CalendarEvent() : PlanEvent() {
     companion object {
-        @JvmStatic
-        private val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "entry_id")
