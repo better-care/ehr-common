@@ -88,14 +88,14 @@ object AmUtils {
         else
             getAmNodesRecursively(listOf(amNode), pathSegments.toList(), 0)
 
-    private fun getAmNodesRecursively(amNodes: List<AmNode>, pathSegments: List<String>, index: Int): List<AmNode> {
+    private tailrec fun getAmNodesRecursively(amNodes: List<AmNode>, pathSegments: List<String>, index: Int): List<AmNode> {
         if (amNodes.isEmpty()) {
             return emptyList()
         }
 
         val pathSegment = pathSegments[index]
         val amNode = getAmNodeWithAttribute(amNodes, pathSegment)
-        val children = amNode?.attributes?.get(pathSegment)?.getChildren() ?: emptyList()
+        val children = amNode?.attributes?.get(pathSegment)?.children ?: emptyList()
         return if (index == pathSegments.size - 1) children else getAmNodesRecursively(children, pathSegments, index + 1)
     }
 
@@ -118,7 +118,7 @@ object AmUtils {
      * @return [ArchetypeTerm] if found, otherwise, null
      */
     @JvmStatic
-    fun findTerm(terms: Collection<ArchetypeTerm>, code: String?): ArchetypeTerm? = terms.firstOrNull { it.code == code }
+    fun findTerm(terms: Collection<ArchetypeTerm>, code: String): ArchetypeTerm? = terms.firstOrNull { it.code == code }
 
     /**
      * Finds and returns [ArchetypeTerm] dictionary item value.
@@ -129,7 +129,7 @@ object AmUtils {
      * @return [StringDictionaryItem] value if found, otherwise, null
      */
     @JvmStatic
-    fun findTerm(terms: Collection<ArchetypeTerm>, nodeId: String?, id: String): String? = findTerm(terms, nodeId)?.let { findDictionaryItem(it, id) }
+    fun findTerm(terms: Collection<ArchetypeTerm>, nodeId: String, id: String): String? = findTerm(terms, nodeId)?.let { findDictionaryItem(it, id) }
 
     /**
      * Finds and returns [ArchetypeTerm] dictionary item value.
@@ -151,7 +151,7 @@ object AmUtils {
      * @return [ArchetypeTerm] text
      */
     @JvmStatic
-    fun findText(amNode: AmNode, language: String, archetypeNodeId: String?): String? = findTermText(amNode, language, archetypeNodeId, TEXT_ID)
+    fun findText(amNode: AmNode, language: String, archetypeNodeId: String): String? = findTermText(amNode, language, archetypeNodeId, TEXT_ID)
 
     /**
      * Finds and returns [ArchetypeTerm] description.
@@ -162,7 +162,7 @@ object AmUtils {
      * @return [ArchetypeTerm] description
      */
     @JvmStatic
-    fun findDescription(amNode: AmNode, language: String, archetypeNodeId: String?): String? = findTermText(amNode, language, archetypeNodeId, DESCRIPTION_ID)
+    fun findDescription(amNode: AmNode, language: String, archetypeNodeId: String): String? = findTermText(amNode, language, archetypeNodeId, DESCRIPTION_ID)
 
     /**
      * Finds and returns [ArchetypeTerm] text.
@@ -172,13 +172,13 @@ object AmUtils {
      * @return [ArchetypeTerm] text
      */
     @JvmStatic
-    fun findTermText(amNode: AmNode, archetypeNodeId: String?): String? = amNode.getTerms()?.let { findTerm(it, archetypeNodeId, TEXT_ID) }
+    fun findTermText(amNode: AmNode, archetypeNodeId: String): String? = findTerm(amNode.terms, archetypeNodeId, TEXT_ID)
 
-    private fun findTermText(amNode: AmNode, language: String, archetypeNodeId: String?, id: String): String? {
-        val termDefinitions = amNode.getTermDefinitions()
+    private fun findTermText(amNode: AmNode, language: String, archetypeNodeId: String, id: String): String? {
+        val termDefinitions = amNode.termDefinitions
         return when {
             termDefinitions.containsKey(language) -> findTerm(termDefinitions[language] ?: emptyList(), archetypeNodeId, id)
-            language == amNode.getTemplateLangugage() -> findTerm(amNode.getTerms() ?: emptyList(), archetypeNodeId, id)
+            language == amNode.templateLanguage -> findTerm(amNode.terms, archetypeNodeId, id)
             else -> null
         }
     }
@@ -191,15 +191,14 @@ object AmUtils {
      * @return [Map] of [TermBindingItem]
      */
     @JvmStatic
-    fun findTermBindings(amNode: AmNode, nodeId: String?): Map<String, TermBindingItem>? =
-        amNode.getTermBindings()?.let {
+    fun findTermBindings(amNode: AmNode, nodeId: String): Map<String, TermBindingItem> =
+        amNode.termBindings.let {
             val map: LinkedHashMap<String, TermBindingItem> = linkedMapOf()
             it.forEach { (key, value) -> findTermBindings(nodeId, value)?.also { term -> map[key] = term } }
             map
         }
 
-    private fun findTermBindings(nodeId: String?, bindings: Collection<TermBindingItem>) =
-        bindings.firstOrNull { Objects.equals(nodeId, it.code) }
+    private fun findTermBindings(nodeId: String, bindings: Collection<TermBindingItem>) = bindings.firstOrNull { nodeId == it.code }
 
     /**
      * Finds and returns [CPrimitive] for path segments.
@@ -215,6 +214,9 @@ object AmUtils {
             .firstOrNull { it.cObject is CPrimitiveObject && it.cObject.item != null && clazz.isInstance(it.cObject.item) }
             ?.let { clazz.cast((it.cObject as CPrimitiveObject).item) }
 
+    inline fun <reified T : CPrimitive> getPrimitiveItem(amNode: AmNode, vararg pathSegments: String): T? =
+        getPrimitiveItem(amNode, T::class.java, *pathSegments)
+
     /**
      * Finds and returns [CObject] item for path segments.
      *
@@ -227,6 +229,8 @@ object AmUtils {
     fun <T : CObject> getCObjectItem(amNode: AmNode, clazz: Class<T>, vararg pathSegments: String): T? =
         getAmNodes(amNode, *pathSegments).firstOrNull { clazz.isInstance(it.cObject) }?.let { clazz.cast(it.cObject) }
 
+    inline fun <reified T : CObject> getCObjectItem(amNode: AmNode, vararg pathSegments: String): T? = getCObjectItem(amNode, T::class.java, *pathSegments)
+
     /**
      * Finds and returns [List] of [CObject] items for path segments.
      *
@@ -238,6 +242,9 @@ object AmUtils {
     @JvmStatic
     fun <T : CObject> getCObjectItems(amNode: AmNode, clazz: Class<T>, vararg pathSegments: String): List<T> =
         getAmNodes(amNode, *pathSegments).asSequence().filter { clazz.isInstance(it.cObject) }.map { clazz.cast(it.cObject) }.toList()
+
+    inline fun <reified T : CObject> getCObjectItems(amNode: AmNode, vararg pathSegments: String): List<T> =
+        getCObjectItems(amNode, T::class.java, *pathSegments)
 
     /**
      * Returns [IntervalOfInteger] lower bound.
@@ -275,7 +282,7 @@ object AmUtils {
      * @returns [AmNode] parent attribute name of the first attribute that contains [AmNode] child
      */
     @JvmStatic
-    fun attributeNameOf(parent: AmNode, child: AmNode): String? = parent.attributes.entries.firstOrNull { it.value.getChildren().contains(child) }?.key
+    fun attributeNameOf(parent: AmNode, child: AmNode): String? = parent.attributes.entries.firstOrNull { it.value.children.contains(child) }?.key
 
     /**
      * Returns [AmNode] parent attribute of the first attribute that contains [AmNode] child.
@@ -285,7 +292,7 @@ object AmUtils {
      * @returns [AmNode] parent attribute of the first attribute that contains [AmNode] child
      */
     @JvmStatic
-    fun attributeOf(parent: AmNode, child: AmNode): AmAttribute? = parent.attributes.entries.firstOrNull { it.value.getChildren().contains(child) }?.value
+    fun attributeOf(parent: AmNode, child: AmNode): AmAttribute? = parent.attributes.entries.firstOrNull { it.value.children.contains(child) }?.value
 
     /**
      * Returns [AmNode] [AmAttribute] names for the range (lower and upper range are inclusive).
@@ -334,7 +341,7 @@ object AmUtils {
      * @return [List] of optionally [AmAttribute]
      */
     @JvmStatic
-    fun getOptOnlyAttributes(amNode: AmNode): List<AmAttribute> = amNode.attributes.values.filter { !it.isRmOnly() }
+    fun getOptOnlyAttributes(amNode: AmNode): List<AmAttribute> = amNode.attributes.values.filter { !it.rmOnly }
 
     /**
      * Checks if [AmAttribute] name is constrained (not optional).
@@ -343,7 +350,7 @@ object AmUtils {
      * @return [Boolean] indicating if [AmAttribute] name is constrained
      */
     @JvmStatic
-    fun isNameConstrained(amNode: AmNode): Boolean = amNode.attributes[NAME_ATTRIBUTE].let { it != null && !it.isRmOnly() }
+    fun isNameConstrained(amNode: AmNode): Boolean = amNode.attributes[NAME_ATTRIBUTE].let { it != null && !it.rmOnly }
 
     /**
      * Checks if [DvText] (for name attribute) matches with [AmNode].
@@ -458,11 +465,11 @@ object AmUtils {
         val archetypeNodeId = pathSegment.archetypeNodeId
 
         val constrainedAmNode = name?.let {
-            amAttribute.getChildren()
+            amAttribute.children
                 .firstOrNull { child -> isNameConstrained(child) && segmentMatches(child, archetypeNodeId, NAME_SUFFIX.matcher(name).replaceAll("")) }
         }
         return if (constrainedAmNode == null) {
-            val child = amAttribute.getChildren().firstOrNull { segmentMatches(it, archetypeNodeId, name) }
+            val child = amAttribute.children.firstOrNull { segmentMatches(it, archetypeNodeId, name) }
             if (child == null)
                 null
             else

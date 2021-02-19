@@ -30,26 +30,22 @@ import java.lang.reflect.Method
  * @since 3.1.0
  */
 @Suppress("SpellCheckingInspection")
-class AmNode constructor(
+class AmNode private constructor(
     val parent: AmNode? = null,
     val cObject: CObject? = null,
     val archetypeNodeId: String? = null,
     var nodeId: String? = null,
     val rmType: String,
     var name: String? = null,
-    private var terms: List<ArchetypeTerm>? = null,
-    private var termDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
-    private var constraintDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
-    private var termBindings: Map<String, Collection<TermBindingItem>>? = null,
     val attributes: LinkedHashMap<String, AmAttribute> = linkedMapOf(),
-    var occurrences: IntervalOfInteger? = null,
-    private var getter: Method? = null,
-    private var setter: Method? = null,
+    var occurrences: IntervalOfInteger,
+    var getter: Method? = null,
+    var setter: Method? = null,
     private var type: TypeInfo? = null,
     var constraints: List<TAttribute>? = null,
     var annotations: List<Annotation>? = null,
-    var viewConstraints: List<TView.Constraints.Items>? = null,
-    private var templateLanguage: String? = null) {
+    var viewConstraints: List<TView.Constraints.Items>? = null
+) {
 
     constructor(cObject: CObject, parent: AmNode?) : this(
         parent = parent,
@@ -68,54 +64,49 @@ class AmNode constructor(
         occurrences = AmUtils.createInterval(minOccurences, maxOccurences)
     )
 
-
-    fun getTerms(): List<ArchetypeTerm>? = terms ?: (parent?.getTerms() ?: emptyList())
-
-    fun setTerms(terms: List<ArchetypeTerm>) {
-        this.terms = terms
-    }
-
-    fun getTermDefinitions(): Map<String, Collection<ArchetypeTerm>> = termDefinitions ?: (parent?.getTermDefinitions() ?: emptyMap())
-
-    fun setTermDefinitions(termDefinitions: Map<String, Collection<ArchetypeTerm>>) {
-        this.termDefinitions = termDefinitions
-    }
-
-    fun getConstraintDefinitions(): Map<String, Collection<ArchetypeTerm>> = constraintDefinitions ?: (parent?.getConstraintDefinitions() ?: emptyMap())
-
-    fun setConstraintDefinitions(constraintDefinitions: Map<String, Collection<ArchetypeTerm>>) {
-        this.constraintDefinitions = constraintDefinitions
-    }
-
-    fun getTermBindings(): Map<String, Collection<TermBindingItem>>? = (termBindings ?: parent?.getTermBindings() ?: emptyMap())
-
-    fun setTermBindings(termBindings: Map<String, Collection<TermBindingItem>>) {
-        this.termBindings = termBindings
-    }
-
-    fun getTermBindings(atCode: String): Map<String, String> =
-        with(getTermBindings()) {
-            this?.entries?.asSequence()
-                ?.flatMap { it.value.asSequence() }
-                ?.filter { atCode == it.code }?.map { it }
-                ?.associateBy(
-                    { it.value.terminologyId?.value ?: throw AmException("Terminology must be set.") },
-                    { it.value.codeString ?: throw AmException("Code must be set.") }) ?: emptyMap()
+    private var _terms: List<ArchetypeTerm>? = null
+    var terms: List<ArchetypeTerm>
+        get() = _terms ?: parent?.terms ?: emptyList()
+        set(value) {
+            _terms = value
         }
 
-    fun getSetter(): Method? = setter
+    private var _termDefinitions: Map<String, Collection<ArchetypeTerm>>? = null
+    var termDefinitions: Map<String, Collection<ArchetypeTerm>>
+        get() = _termDefinitions ?: parent?.termDefinitions ?: emptyMap()
+        set(value) {
+            _termDefinitions = value
+        }
 
-    fun getGetter(): Method? = getter
+    private var _constraintDefinitions: Map<String, Collection<ArchetypeTerm>>? = null
+    var constraintDefinitions: Map<String, Collection<ArchetypeTerm>>
+        get() = _constraintDefinitions ?: parent?.constraintDefinitions ?: emptyMap()
+        set(value) {
+            _constraintDefinitions = value
+        }
 
-    fun setGetter(getter: Method?) {
-        this.getter = getter
-    }
+    var templateLanguage: String? = null
+        get() = field ?: parent?.templateLanguage
 
-    fun setSetter(setter: Method?) {
-        this.setter = setter
-    }
+    private var _termBindings: Map<String, Collection<TermBindingItem>>? = null
+    var termBindings: Map<String, Collection<TermBindingItem>>
+        get() = _termBindings ?: parent?.termBindings ?: emptyMap()
+        set(value) {
+            _termBindings = value
+        }
 
-    fun setType(type: TypeInfo?){
+
+    fun getTermBindings(atCode: String): Map<String, String> =
+        with(termBindings) {
+            this.entries.asSequence()
+                .flatMap { it.value.asSequence() }
+                .filter { atCode == it.code }.map { it }
+                .associateBy(
+                    { it.value.terminologyId?.value ?: throw AmException("Terminology must be set.") },
+                    { it.value.codeString ?: throw AmException("Code must be set.") })
+        }
+
+    fun setType(type: TypeInfo?) {
         this.type = type
     }
 
@@ -150,15 +141,9 @@ class AmNode constructor(
 
     fun getTypeOnParentOrNull(): TypeInfo? = type
 
-    fun getTypeOnParent(): TypeInfo = type ?: throw AmException("Type for $this  not found.")
+    fun getTypeOnParent(): TypeInfo = type ?: throw AmException("Type for $this not found.")
 
     fun isCollectionOnParent(): Boolean = type?.isCollection() ?: false
-
-    fun getTemplateLangugage(): String? = if (templateLanguage == null && parent != null) parent.getTemplateLangugage() else templateLanguage
-
-    fun setTemplateLanguage(templateLanguage: String) {
-        this.templateLanguage = templateLanguage
-    }
 
     internal fun copyForReference(parent: AmNode?): AmNode {
         val amNode = if (cObject == null) AmNode(parent, rmType) else AmNode(cObject, parent)
@@ -178,15 +163,15 @@ class AmNode constructor(
         amNode.templateLanguage = templateLanguage
 
         attributes.entries.forEach {
-            amNode.attributes[it.key] = AmAttribute(it.value.existence, it.value.getChildren().map { child -> child.copyForReference(amNode) })
+            amNode.attributes[it.key] = AmAttribute(it.value.existence, it.value.children.map { child -> child.copyForReference(amNode) })
         }
         return amNode
     }
 
     override fun toString(): String =
-         ToStringBuilder(this)
-             .append("archetypeNodeId", archetypeNodeId)
-             .append("rmType", rmType)
-             .append("name", name)
-             .toString()
+        ToStringBuilder(this)
+            .append("archetypeNodeId", archetypeNodeId)
+            .append("rmType", rmType)
+            .append("name", name)
+            .toString()
 }

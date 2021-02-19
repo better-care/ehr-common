@@ -24,33 +24,19 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  * @since 3.1.0
  */
 class AmAttribute(val existence: IntervalOfInteger?, children: List<AmNode>) {
+    private val _children = children.toMutableList()
+    val children: List<AmNode>
+        get() = _children.toList()
 
-    private val children: MutableList<AmNode> = mutableListOf<AmNode>().apply { this.addAll(children) }
-
-    private var cardinality: Cardinality? = null
+    var cardinality: Cardinality? = null
 
     /**
      * Indicates that attribute is not constrained in the template (is just part of RM)
      */
-    private var rmOnly = false
+    var rmOnly = false
 
-
-    fun getChildren(): List<AmNode> = children.toList()
-
-    fun getCardinality(): Cardinality? = cardinality
-
-    fun setCardinality(cardinality: Cardinality?) {
-        this.cardinality = cardinality
-    }
-
-    fun isRmOnly(): Boolean = rmOnly
-
-    fun setRmOnly(rmOnly: Boolean) {
-        this.rmOnly = rmOnly
-    }
-
-    fun postProcessReference(reference: AmNode?, amNode: AmNode?) {
+    fun postProcessReference(reference: AmNode, amNode: AmNode) {
         val i = children.indexOf(reference)
-        children[i] = amNode!!
+        _children[i] = amNode
     }
 }

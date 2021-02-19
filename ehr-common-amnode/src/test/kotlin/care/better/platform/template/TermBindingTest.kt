@@ -33,13 +33,14 @@ class TermBindingTest : AbstractAmTest() {
         val root = AmTreeBuilder(loadTemplate("/DogAPTrace-annot.opt")).build()
         val extTermNode = AmUtils.resolvePath(
             root,
-            "/content[openEHR-EHR-OBSERVATION.ap_clamp.v9]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value")
+            "/content[openEHR-EHR-OBSERVATION.ap_clamp.v9]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value"
+        )
         assertThat(extTermNode).isNotNull
         assertThat(extTermNode!!.rmType).isEqualTo("DV_QUANTITY")
-        assertThat(extTermNode.getTermBindings()).isNotNull
-        assertThat(extTermNode.getTermBindings()!!.containsKey("MTH")).isTrue
+        assertThat(extTermNode.termBindings).isNotNull
+        assertThat(extTermNode.termBindings.containsKey("MTH")).isTrue
 
-        val items: List<TermBindingItem> = extTermNode.getTermBindings()?.let { it["MTH"] as List<TermBindingItem> } ?: emptyList()
+        val items: List<TermBindingItem> = extTermNode.termBindings.let { it["MTH"] as List<TermBindingItem> }
         assertThat(items).hasSize(2)
         assertThat(items[0].code).isEqualTo("at0004")
         assertThat(items[0].value.codeString).isEqualTo("123456")
@@ -55,11 +56,12 @@ class TermBindingTest : AbstractAmTest() {
         val root = AmTreeBuilder(loadTemplate("/KorayClinical3.opt")).build()
         val extTermNode = AmUtils.resolvePath(
             root,
-            "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data[at0001]/events[at0006]/state[at0007]/items[openEHR-EHR-CLUSTER.level_of_exertion.v1]")
+            "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data[at0001]/events[at0006]/state[at0007]/items[openEHR-EHR-CLUSTER.level_of_exertion.v1]"
+        )
 
         assertThat(extTermNode).isNotNull
-        assertThat(extTermNode!!.getTermBindings()).isNotNull
-        assertThat(extTermNode.getTermBindings()!!.containsKey("SNOMED-CT")).isTrue
-        assertThat(extTermNode.getTermBindings()!!["SNOMED-CT"]).hasSize(4)
+        assertThat(extTermNode!!.termBindings).isNotNull
+        assertThat(extTermNode.termBindings.containsKey("SNOMED-CT")).isTrue
+        assertThat(extTermNode.termBindings["SNOMED-CT"]).hasSize(4)
     }
 }

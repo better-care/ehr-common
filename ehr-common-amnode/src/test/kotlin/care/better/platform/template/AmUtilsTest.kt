@@ -47,7 +47,7 @@ class AmUtilsTest : AbstractAmTest() {
         locatable.archetypeDetails = archetyped
         locatable.name = DvText("Светоощущение")
         locatable.archetypeNodeId = "at0000"
-        val match = AmUtils.findMatchingNode(node?.attributes?.get("items")?.getChildren() ?: emptyList(), locatable)
+        val match = AmUtils.findMatchingNode(node?.attributes?.get("items")?.children ?: emptyList(), locatable)
         assertThat(AmUtils.isNameConstrained(match!!)).isTrue
     }
 
@@ -107,7 +107,7 @@ class AmUtilsTest : AbstractAmTest() {
         assertThat(extTermNode).isNotNull
         var termBindings = AmUtils.findTermBindings(extTermNode!!, "at0004")
         assertThat(termBindings).hasSize(1)
-        assertThat(termBindings!!.containsKey("MTH")).isTrue
+        assertThat(termBindings.containsKey("MTH")).isTrue
         var item = termBindings["MTH"]
         assertThat(item!!.code).isEqualTo("at0004")
         assertThat(item.value.codeString).isEqualTo("123456")
@@ -121,7 +121,7 @@ class AmUtilsTest : AbstractAmTest() {
         assertThat(extTermNode).isNotNull
         termBindings = AmUtils.findTermBindings(extTermNode!!, "at0005")
         assertThat(termBindings).hasSize(1)
-        assertThat(termBindings!!.containsKey("MTH")).isTrue
+        assertThat(termBindings.containsKey("MTH")).isTrue
         item = termBindings["MTH"]
         assertThat(item!!.code).isEqualTo("at0005")
         assertThat(item.value.codeString).isEqualTo("654321")

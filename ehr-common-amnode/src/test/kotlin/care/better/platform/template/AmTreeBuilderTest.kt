@@ -42,7 +42,7 @@ class AmTreeBuilderTest : AbstractAmTest() {
         val treeBuilder = AmTreeBuilder(template)
         val root = treeBuilder.build()
         assertThat(root.name).isEqualTo("Initial Medication Safety Report")
-        assertThat(root.attributes["context"]!!.getChildren()[0].attributes.containsKey("end_time")).isTrue
+        assertThat(root.attributes["context"]!!.children[0].attributes.containsKey("end_time")).isTrue
     }
 
     @Test
@@ -51,7 +51,7 @@ class AmTreeBuilderTest : AbstractAmTest() {
         val template = loadTemplate("/ISPEK - MSE - Initial Medication Safety Report.opt")
         val treeBuilder = AmTreeBuilder(template)
         val root = treeBuilder.build()
-        assertThat(root.attributes["links"]!!.getChildren()[0].rmType).isEqualTo("LINK")
+        assertThat(root.attributes["links"]!!.children[0].rmType).isEqualTo("LINK")
     }
 
     @Test
@@ -235,7 +235,7 @@ class AmTreeBuilderTest : AbstractAmTest() {
             root,
             "[openEHR-EHR-COMPOSITION.encounter.v1]/content[openEHR-EHR-INSTRUCTION.vaccination_instruction.v0]/expiry_time")
 
-        assertThat(node!!.occurrences!!.upper).isEqualTo(1)
+        assertThat(node!!.occurrences.upper).isEqualTo(1)
     }
 
     @Test

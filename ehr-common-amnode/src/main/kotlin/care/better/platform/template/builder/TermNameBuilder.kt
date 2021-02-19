@@ -25,11 +25,7 @@ import care.better.platform.template.AmUtils
  */
 open class TermNameBuilder : NameBuilder {
     override fun getName(amNode: AmNode): String? {
-        val term: String? = AmUtils.findTerm(amNode.getTerms() ?: emptyList(), amNode.nodeId, "text")
-
-        if (term == null && amNode.cObject != null) {
-            return AmUtils.findTerm(amNode.getTerms() ?: emptyList(), amNode.cObject.nodeId, "text")
-        }
-        return term
+        val nodeId = amNode.nodeId ?: amNode.cObject?.nodeId
+        return if (nodeId == null) null else AmUtils.findTerm(amNode.terms, nodeId, "text")
     }
 }
