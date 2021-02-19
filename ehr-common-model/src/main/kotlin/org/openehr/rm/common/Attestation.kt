@@ -37,25 +37,45 @@ import javax.xml.bind.annotation.XmlType
         "isPending"]
 )
 @Open
-class Attestation
-@JvmOverloads
-constructor(
-    @XmlElement(name = "attested_view")
-    var attestedView: DvMultimedia? = null,
-    var proof: String? = null,
-    var items: MutableList<DvEhrUri> = mutableListOf(),
-    @XmlElement(required = true)
-    @Required
-    var reason: DvText? = null,
-    @XmlElement(name = "is_pending", defaultValue = "false")
-    var isPending: Boolean = false,
-    systemId: String? = null,
-    committer: PartyProxy? = null,
-    timeCommitted: DvDateTime? = null,
-    changeType: DvCodedText? = null,
-    description: DvText? = null
-) : AuditDetails(systemId, committer, timeCommitted, changeType, description) {
+class Attestation() : AuditDetails() {
+    @JvmOverloads
+    constructor(
+        reason: DvText,
+        attestedView: DvMultimedia? = null,
+        proof: String? = null,
+        items: MutableList<DvEhrUri> = mutableListOf(),
+        isPending: Boolean = false,
+        systemId: String? = null,
+        committer: PartyProxy? = null,
+        timeCommitted: DvDateTime? = null,
+        changeType: DvCodedText? = null,
+        description: DvText? = null
+    ) : this() {
+        this.reason = reason
+        this.attestedView = attestedView
+        this.proof = proof
+        this.items = items
+        this.isPending = isPending
+        this.systemId = systemId
+        this.committer = committer
+        this.timeCommitted = timeCommitted
+        this.changeType = changeType
+        this.description = description
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(name = "attested_view")
+    var attestedView: DvMultimedia? = null
+    var proof: String? = null
+    var items: MutableList<DvEhrUri> = mutableListOf()
+
+    @XmlElement(required = true)
+    @Required
+    var reason: DvText? = null
+
+    @XmlElement(name = "is_pending", defaultValue = "false")
+    var isPending: Boolean = false
 }

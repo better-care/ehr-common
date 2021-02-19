@@ -41,6 +41,28 @@ import javax.xml.bind.annotation.XmlType
 )
 @Open
 class DvMultimedia() : DvEncapsulated() {
+    private constructor(
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
+    ) : this() {
+        this.alternateText = alternateText
+        this.mediaType = mediaType
+        this.compressionAlgorithm = compressionAlgorithm
+        this.integrityCheck = integrityCheck
+        this.integrityCheckAlgorithm = integrityCheckAlgorithm
+        this.size = size
+        this.thumbnail = thumbnail
+        this.charset = charset
+        this.language = language
+    }
+
     @JvmOverloads
     constructor(
         uri: DvUri,
@@ -54,18 +76,9 @@ class DvMultimedia() : DvEncapsulated() {
         thumbnail: DvMultimedia? = null,
         charset: CodePhrase? = null,
         language: CodePhrase? = null
-    ) : this() {
+    ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
         this.data = data
-        this.alternateText = alternateText
-        this.mediaType = mediaType
-        this.compressionAlgorithm = compressionAlgorithm
-        this.integrityCheck = integrityCheck
-        this.integrityCheckAlgorithm = integrityCheckAlgorithm
-        this.size = size
-        this.thumbnail = thumbnail
-        this.charset = charset
-        this.language = language
     }
 
     @JvmOverloads
@@ -81,18 +94,9 @@ class DvMultimedia() : DvEncapsulated() {
         thumbnail: DvMultimedia? = null,
         charset: CodePhrase? = null,
         language: CodePhrase? = null
-    ) : this() {
-        this.data = data
+    ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
-        this.alternateText = alternateText
-        this.mediaType = mediaType
-        this.compressionAlgorithm = compressionAlgorithm
-        this.integrityCheck = integrityCheck
-        this.integrityCheckAlgorithm = integrityCheckAlgorithm
-        this.size = size
-        this.thumbnail = thumbnail
-        this.charset = charset
-        this.language = language
+        this.data = data
     }
 
     companion object {

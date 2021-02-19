@@ -41,7 +41,7 @@ class DvProportion() : DvAmount() {
     constructor(
         numerator: Float,
         denominator: Float,
-        type: BigInteger? = null,
+        type: BigInteger,
         precision: Int? = null,
         accuracy: Float? = null,
         accuracyIsPercent: Boolean? = null,

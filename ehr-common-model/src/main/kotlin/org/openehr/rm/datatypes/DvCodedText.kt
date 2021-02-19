@@ -34,7 +34,7 @@ class DvCodedText() : DvText() {
     @JvmOverloads
     constructor(
         definingCode: CodePhrase,
-        value: String? = null,
+        value: String,
         hyperlink: DvUri? = null,
         formatting: String? = null,
         mappings: MutableList<TermMapping> = mutableListOf(),
@@ -62,7 +62,7 @@ class DvCodedText() : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun create(terminology: String, code: String, value: String?): DvCodedText =
+        fun create(terminology: String, code: String, value: String): DvCodedText =
             DvCodedText(definingCode = CodePhrase.create(terminology, code), value = value)
 
         /**
@@ -73,7 +73,7 @@ class DvCodedText() : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun createWithLocalTerminology(code: String, value: String?): DvCodedText = create("local", code, value)
+        fun createWithLocalTerminology(code: String, value: String): DvCodedText = create("local", code, value)
 
         /**
          * Creates a [DvCodedText] with openEHR terminology, code and value
@@ -83,7 +83,7 @@ class DvCodedText() : DvText() {
          * @return [DvCodedText] object
          */
         @JvmStatic
-        fun createWithOpenEHRTerminology(code: String, value: String?): DvCodedText = create("openehr", code, value)
+        fun createWithOpenEHRTerminology(code: String, value: String): DvCodedText = create("openehr", code, value)
     }
 
     @XmlElement(name = "defining_code", required = true)

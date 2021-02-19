@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.annotation.Required
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -35,7 +36,9 @@ class DvUri() : DataValue() {
         private const val serialVersionUID: Long = 0L
     }
 
+    @XmlElement(required = true)
     @XmlSchemaType(name = "anyURI")
+    @Required
     var value: String? = null
 
     override fun equals(other: Any?): Boolean =

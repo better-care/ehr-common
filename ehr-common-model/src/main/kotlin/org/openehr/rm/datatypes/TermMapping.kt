@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class TermMapping() : RmObject(), Serializable {
     @JvmOverloads
-    constructor(match: String, purpose: DvCodedText? = null, target: CodePhrase? = null) : this() {
+    constructor(match: String, purpose: DvCodedText? = null, target: CodePhrase) : this() {
         this.match = match
         this.purpose = purpose
         this.target = target

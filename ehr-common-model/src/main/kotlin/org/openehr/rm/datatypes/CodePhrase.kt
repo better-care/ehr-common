@@ -38,19 +38,10 @@ import javax.xml.bind.annotation.XmlType
 )
 @Open
 class CodePhrase() : RmObject(), Serializable {
-    @JvmOverloads
-    constructor(terminologyId: TerminologyId, codeString: String? = null) : this() {
+    constructor(terminologyId: TerminologyId, codeString: String) : this() {
         this.terminologyId = terminologyId
         this.codeString = codeString
     }
-
-    @XmlElement(name = "terminology_id", required = true)
-    @Required
-    var terminologyId: TerminologyId? = null
-
-    @XmlElement(name = "code_string", required = true)
-    @Required
-    var codeString: String? = null
 
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -92,6 +83,14 @@ class CodePhrase() : RmObject(), Serializable {
         @JvmStatic
         fun createEncodingPhrase(encodingCode: String): CodePhrase = create("IANA_character-sets", encodingCode)
     }
+
+    @XmlElement(name = "terminology_id", required = true)
+    @Required
+    var terminologyId: TerminologyId? = null
+
+    @XmlElement(name = "code_string", required = true)
+    @Required
+    var codeString: String? = null
 
     override fun equals(other: Any?): Boolean =
         when {

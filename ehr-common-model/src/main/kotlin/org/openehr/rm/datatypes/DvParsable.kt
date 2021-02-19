@@ -38,7 +38,7 @@ class DvParsable() : DvEncapsulated() {
     @JvmOverloads
     constructor(
         value: String,
-        formalism: String? = null,
+        formalism: String,
         charset: CodePhrase? = null,
         language: CodePhrase? = null
     ) : this() {

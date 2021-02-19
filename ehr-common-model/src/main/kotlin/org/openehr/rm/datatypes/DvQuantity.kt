@@ -39,7 +39,7 @@ class DvQuantity() : DvAmount() {
     @JvmOverloads
     constructor(
         magnitude: Double,
-        units: String? = null,
+        units: String,
         precision: Int? = null,
         accuracy: Float? = null,
         accuracyIsPercent: Boolean? = null,

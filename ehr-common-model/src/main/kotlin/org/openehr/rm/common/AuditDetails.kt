@@ -39,24 +39,41 @@ import javax.xml.bind.annotation.*
 )
 @XmlSeeAlso(Attestation::class)
 @Open
-class AuditDetails
-@JvmOverloads
-constructor(
-    @XmlElement(name = "system_id", required = true)
-    @Required
-    var systemId: String? = null,
-    @XmlElement(required = true)
-    @Required
-    var committer: PartyProxy? = null,
-    @XmlElement(name = "time_committed", required = true)
-    @Required
-    var timeCommitted: DvDateTime? = null,
-    @XmlElement(name = "change_type", required = true)
-    @Required
-    var changeType: DvCodedText? = null,
-    var description: DvText? = null
-) : RmObject(), Serializable {
+class AuditDetails() : RmObject(), Serializable {
+    @JvmOverloads
+    constructor(
+        systemId: String,
+        committer: PartyProxy,
+        timeCommitted: DvDateTime,
+        changeType: DvCodedText,
+        description: DvText? = null
+    ) : this() {
+        this.systemId = systemId
+        this.committer = committer
+        this.timeCommitted = timeCommitted
+        this.changeType = changeType
+        this.description = description
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(name = "system_id", required = true)
+    @Required
+    var systemId: String? = null
+
+    @XmlElement(required = true)
+    @Required
+    var committer: PartyProxy? = null
+
+    @XmlElement(name = "time_committed", required = true)
+    @Required
+    var timeCommitted: DvDateTime? = null
+
+    @XmlElement(name = "change_type", required = true)
+    @Required
+    var changeType: DvCodedText? = null
+
+    var description: DvText? = null
 }
