@@ -23,10 +23,11 @@ import java.time.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 
-class JSR310ConversionUtils  {
+class JSR310ConversionUtils {
 
     companion object {
         /**

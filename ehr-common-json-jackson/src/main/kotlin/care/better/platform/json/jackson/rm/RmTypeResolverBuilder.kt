@@ -30,31 +30,32 @@ import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 class RmTypeResolverBuilder(defaultTyping: DefaultTyping) : ObjectMapper.DefaultTypeResolverBuilder(defaultTyping, LaissezFaireSubTypeValidator.instance) {
 
     override fun buildTypeSerializer(config: SerializationConfig, baseType: JavaType, subtypes: Collection<NamedType?>?): TypeSerializer? =
-            when {
-                _idType == Id.NONE -> null
-                !useForType(baseType) -> null
-                _includeAs == JsonTypeInfo.As.PROPERTY -> {
-                    val idRes: TypeIdResolver = idResolver(config, baseType, LaissezFaireSubTypeValidator.instance, subtypes, forSer = true, forDeser = false)
-                    RmObjectAsPropertyTypeSerializer(idRes, null, _typeProperty)
-                }
-                else -> super.buildTypeSerializer(config, baseType, subtypes)
+        when {
+            _idType == Id.NONE -> null
+            !useForType(baseType) -> null
+            _includeAs == JsonTypeInfo.As.PROPERTY -> {
+                val idRes: TypeIdResolver = idResolver(config, baseType, LaissezFaireSubTypeValidator.instance, subtypes, forSer = true, forDeser = false)
+                RmObjectAsPropertyTypeSerializer(idRes, null, _typeProperty)
             }
+            else -> super.buildTypeSerializer(config, baseType, subtypes)
+        }
 
     override fun buildTypeDeserializer(config: DeserializationConfig?, baseType: JavaType?, subtypes: Collection<NamedType?>?): TypeDeserializer? =
-            with(super.buildTypeDeserializer(config, baseType, subtypes)) {
-                return if (this is AsPropertyTypeDeserializer) {
-                    RmAwareAsPropertyTypeDeserializer(this, null)
-                } else this
-            }
+        with(super.buildTypeDeserializer(config, baseType, subtypes)) {
+            return if (this is AsPropertyTypeDeserializer) {
+                RmAwareAsPropertyTypeDeserializer(this, null)
+            } else this
+        }
 
     override fun useForType(t: JavaType): Boolean =
-            if (!RmObject::class.java.isAssignableFrom(t.rawClass) && t.rawClass != Any::class.java)
-                false
-            else super.useForType(t)
+        if (!RmObject::class.java.isAssignableFrom(t.rawClass) && t.rawClass != Any::class.java)
+            false
+        else super.useForType(t)
 
 
     override fun idResolver(

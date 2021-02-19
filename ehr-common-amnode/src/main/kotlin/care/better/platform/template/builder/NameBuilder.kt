@@ -18,6 +18,7 @@ package care.better.platform.template.builder
 import care.better.platform.template.AmNode
 
 /**
+ * @author Bostjan Lah
  * @author Primoz Delopst
  * @since 3.1.0
  *

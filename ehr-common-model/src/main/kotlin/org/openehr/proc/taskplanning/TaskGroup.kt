@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_GROUP", propOrder = [
     "members",
@@ -67,7 +68,7 @@ class TaskGroup<I : PlanItem> : PlanItem {
         this.executionType = executionType
     }
 
-    fun setExecutionType(executionType: ExecutionType?){
+    fun setExecutionType(executionType: ExecutionType?) {
         this.executionType = executionType
     }
 
@@ -93,7 +94,7 @@ class TaskGroup<I : PlanItem> : PlanItem {
     }
 
     override fun toString(): String =
-            "TaskGroup{" +
+        "TaskGroup{" +
                 "members=$members" +
                 ", executionType=$executionType" +
                 ", trainingLevel=$trainingLevel" +

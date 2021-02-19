@@ -55,7 +55,7 @@ open class SimplePathValueExtractor(path: String) : PathValueExtractor {
      * @return [List] of extracted values
      */
     open fun getValue(node: Any?, ignoreExceptions: Boolean): List<Any> =
-        if (node == null || ! rootMatches(node)) {
+        if (node == null || !rootMatches(node)) {
             listOf()
         } else if (pathSegmentsWithNames.isEmpty()) {
             listOf(node)

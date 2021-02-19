@@ -17,6 +17,7 @@ package care.better.openehr.processmodel.taskplanning
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 enum class TpVersion(val version: String, private val possibleValues: Set<String>) {
@@ -26,10 +27,10 @@ enum class TpVersion(val version: String, private val possibleValues: Set<String
 
     companion object {
         fun from(version: String): TpVersion =
-                when {
-                    TP1_5_0.possibleValues.contains(version) -> TP1_5_0
-                    TP1_5_1.possibleValues.contains(version) -> TP1_5_1
-                    else -> throw IllegalArgumentException("Unknown TP model version $version.")
-                }
+            when {
+                TP1_5_0.possibleValues.contains(version) -> TP1_5_0
+                TP1_5_1.possibleValues.contains(version) -> TP1_5_1
+                else -> throw IllegalArgumentException("Unknown TP model version $version.")
+            }
     }
 }

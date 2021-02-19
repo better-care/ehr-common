@@ -22,12 +22,14 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CARE_ENTRY", propOrder = [
-    "protocol",
-    "guidelineId"])
+@XmlType(
+    name = "CARE_ENTRY", propOrder = [
+        "protocol",
+        "guidelineId"])
 @XmlSeeAlso(value = [Evaluation::class, Observation::class, Instruction::class, Action::class])
 @Open
 abstract class CareEntry : Entry() {

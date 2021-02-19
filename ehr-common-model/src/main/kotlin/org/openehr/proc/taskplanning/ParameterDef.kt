@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "PARAMETER_DEF", propOrder = [
     "name",
@@ -65,9 +66,9 @@ class ParameterDef<T : Any>() : RmObject(), Serializable, VisitableByModelVisito
     }
 
     override fun toString(): String =
-            "ParameterDef{" +
-                    "name='$name'" +
-                    ", type=$type" +
-                    ", value=$value" +
-                    "} ${super.toString()}"
+        "ParameterDef{" +
+                "name='$name'" +
+                ", type=$type" +
+                ", value=$value" +
+                "} ${super.toString()}"
 }

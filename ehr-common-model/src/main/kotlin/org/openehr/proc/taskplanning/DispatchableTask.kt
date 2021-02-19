@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "DISPATCHABLE_TASK", propOrder = [
     "wait",
@@ -57,8 +58,8 @@ class DispatchableTask<A : DispatchableAction> : Task<A> {
     }
 
     override fun toString(): String =
-            "DispatchableTask{" +
-                    "wait=$wait" + wait +
-                    ", callback=$callback" + callback +
-                    "} ${super.toString()}"
+        "DispatchableTask{" +
+                "wait=$wait" + wait +
+                ", callback=$callback" + callback +
+                "} ${super.toString()}"
 }

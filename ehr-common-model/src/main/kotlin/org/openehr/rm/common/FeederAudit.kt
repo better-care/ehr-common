@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,8 +38,7 @@ import javax.xml.bind.annotation.XmlType
         "feederSystemItemIds",
         "originalContent",
         "originatingSystemAudit",
-        "feederSystemAudit"]
-)
+        "feederSystemAudit"])
 @Open
 class FeederAudit
 @JvmOverloads

@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "PLAN_TIMELINE", propOrder = [
     "plannedItems",
@@ -39,8 +40,8 @@ class PlanTimeline : RmObject(), Serializable {
     var timers: MutableList<TimerWait> = mutableListOf()
 
     override fun toString(): String =
-            "PlanTimeline{" +
-                    "plannedItems=$plannedItems" +
-                    ", timers=$timers" +
-                    '}'
+        "PlanTimeline{" +
+                "plannedItems=$plannedItems" +
+                ", timers=$timers" +
+                '}'
 }

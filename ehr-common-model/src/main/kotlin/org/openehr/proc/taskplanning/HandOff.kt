@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "HAND_OFF", propOrder = ["target", "targetUid"])
 @Open
@@ -66,8 +67,8 @@ class HandOff() : DispatchableAction(), LinkedPlan {
     }
 
     override fun toString(): String =
-            "HandOff{" +
-                    "target=$target" + target +
-                    "targetUid=$targetUid" + targetUid +
-                    "} ${super.toString()}"
+        "HandOff{" +
+                "target=$target" + target +
+                "targetUid=$targetUid" + targetUid +
+                "} ${super.toString()}"
 }

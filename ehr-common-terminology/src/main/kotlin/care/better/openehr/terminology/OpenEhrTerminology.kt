@@ -23,6 +23,7 @@ import javax.xml.parsers.SAXParserFactory
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val terms: Map<TermKey, String>) {
@@ -96,9 +97,9 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
      * @return collection of children codes
      */
     fun getGroupChildren(groupCode: String?): Collection<String> =
-            with(groups[groupCode]) {
-                this?.termCodes?.toList() ?: emptyList()
-            }
+        with(groups[groupCode]) {
+            this?.termCodes?.toList() ?: emptyList()
+        }
 
     /**
      * Gets id of the child in specified group by specified name

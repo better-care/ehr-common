@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -36,22 +37,20 @@ import javax.xml.bind.annotation.XmlType
         "provider",
         "subject",
         "time",
-        "versionId"]
-)
+        "versionId"])
 @Open
 class FeederAuditDetails
 @JvmOverloads
 constructor(
-    @XmlElement(name = "system_id", required = true)
-    @Required
-    var systemId: String? = null,
-    var location: PartyIdentified? = null,
-    var provider: PartyIdentified? = null,
-    var subject: PartyProxy? = null,
-    var time: DvDateTime? = null,
-    @XmlElement(name = "version_id")
-    var versionId: String? = null
-) : RmObject(), Serializable {
+        @XmlElement(name = "system_id", required = true)
+        @Required
+        var systemId: String? = null,
+        var location: PartyIdentified? = null,
+        var provider: PartyIdentified? = null,
+        var subject: PartyProxy? = null,
+        var time: DvDateTime? = null,
+        @XmlElement(name = "version_id")
+        var versionId: String? = null) : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

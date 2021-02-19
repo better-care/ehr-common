@@ -17,6 +17,7 @@ package care.better.platform.proc.taskplanning.visitor
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 fun interface VisitableByModelVisitor {

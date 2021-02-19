@@ -26,13 +26,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "REFERENCE_RANGE", propOrder = [
         "meaning",
-        "range"]
-)
+        "range"])
 @Open
 class ReferenceRange() : RmObject(), Serializable {
     constructor(meaning: DvText, range: DvInterval) : this() {

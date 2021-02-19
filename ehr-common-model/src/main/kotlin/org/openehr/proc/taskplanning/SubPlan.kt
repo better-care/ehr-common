@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "SUB_PLAN", propOrder = ["target", "targetUid"])
 @Open
@@ -85,8 +86,8 @@ class SubPlan : PerformableAction, LinkedPlan {
     }
 
     override fun toString(): String =
-            "SubPlan{" +
-                    "target=$target" +
-                    "targetUid=$targetUid" +
-                    "} ${super.toString()}"
+        "SubPlan{" +
+                "target=$target" +
+                "targetUid=$targetUid" +
+                "} ${super.toString()}"
 }

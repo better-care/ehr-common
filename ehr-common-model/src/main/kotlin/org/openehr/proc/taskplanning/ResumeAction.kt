@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "RESUME_ACTION", propOrder = [
-    "resumeType",
-    "resumeLocation"])
+@XmlType(
+    name = "RESUME_ACTION", propOrder = [
+        "resumeType",
+        "resumeLocation"])
 @Open
 class ResumeAction() : RmObject(), Serializable {
     companion object {
@@ -51,8 +53,8 @@ class ResumeAction() : RmObject(), Serializable {
     }
 
     override fun toString(): String =
-            "ResumeAction{" +
-                    "resumeType=$resumeType" +
-                    ", resumeLocation=$resumeLocation" +
-                    '}'
+        "ResumeAction{" +
+                "resumeType=$resumeType" +
+                ", resumeLocation=$resumeLocation" +
+                '}'
 }

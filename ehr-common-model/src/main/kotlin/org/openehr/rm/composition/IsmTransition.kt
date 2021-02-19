@@ -28,13 +28,15 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ISM_TRANSITION", propOrder = [
-    "currentState",
-    "transition",
-    "careflowStep",
-    "reason"])
+@XmlType(
+    name = "ISM_TRANSITION", propOrder = [
+        "currentState",
+        "transition",
+        "careflowStep",
+        "reason"])
 @Open
 class IsmTransition : RmObject(), Serializable {
     companion object {

@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VERSIONED_OBJECT", namespace = "http://schemas.openehr.org/v1", propOrder = ["uid", "ownerId", "timeCreated", "trunkLifecycleState"])

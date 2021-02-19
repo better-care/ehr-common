@@ -24,11 +24,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "DEFINED_ACTION", propOrder = [
-    "prototype",
-    "optionality"
-])
+@XmlType(
+    name = "DEFINED_ACTION", propOrder = [
+        "prototype",
+        "optionality"
+    ])
 @Open
 class DefinedAction : PerformableAction {
     companion object {
@@ -66,8 +68,8 @@ class DefinedAction : PerformableAction {
     }
 
     override fun toString(): String =
-            "DefinedAction{" +
-                    "prototype=$prototype" +
-                    ", optionality=$optionality" +
-                    "} ${super.toString()}"
+        "DefinedAction{" +
+                "prototype=$prototype" +
+                ", optionality=$optionality" +
+                "} ${super.toString()}"
 }

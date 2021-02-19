@@ -1,6 +1,22 @@
+/* Copyright 2021 Better Ltd (www.better.care)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package care.better.platform.json.jackson
 
 import care.better.platform.json.jackson.better.BetterObjectMapper
+import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.common.collect.ImmutableList
@@ -16,9 +32,10 @@ import kotlin.collections.set
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 class RmAwareObjectMapperJsonSerializationTest {
-    private val objectMapper: ObjectMapper = BetterObjectMapper()
+    private val objectMapper: ObjectMapper = BetterObjectMapper().apply { this.enable(JsonParser.Feature.ALLOW_COMMENTS) }
 
     @Test
     fun simple() {
@@ -61,7 +78,7 @@ class RmAwareObjectMapperJsonSerializationTest {
         assertThat(node.path(2).textValue()).isEqualTo("String")
         assertThat(node.path(3).intValue()).isEqualTo(1)
         assertThat(node.path(4).longValue()).isEqualTo(2L)
-        val fromJson: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>(){})
+        val fromJson: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>() {})
         assertThat(fromJson[0]).usingRecursiveComparison().isEqualTo(composition)
         assertThat(fromJson[1]).usingRecursiveComparison().isEqualTo(cluster)
         assertThat(fromJson[2]).isEqualTo("String")
@@ -88,7 +105,7 @@ class RmAwareObjectMapperJsonSerializationTest {
         assertThat(node.path(4).longValue()).isEqualTo(2L)
         assertThat(node.path(5).path("@class").isMissingNode).isTrue
         assertThat(node.path(5).path("hello").textValue()).isEqualTo("world")
-        val fromJson: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>(){})
+        val fromJson: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>() {})
         assertThat(fromJson[0]).usingRecursiveComparison().isEqualTo(composition)
         assertThat(fromJson[1]).usingRecursiveComparison().isEqualTo(cluster)
         assertThat(fromJson[2]).isEqualTo("String")
@@ -106,9 +123,9 @@ class RmAwareObjectMapperJsonSerializationTest {
         assertThat(node.isArray).isTrue
         assertThat(node.path(0).path("@class").isMissingNode).isTrue
         assertThat(node.path(0).path("hello").textValue()).isEqualTo("world")
-        val fromJson1: Map<String, Any?> = objectMapper.readValue(objectMapper.writeValueAsString(map), object : TypeReference<Map<String, Any?>>(){})
+        val fromJson1: Map<String, Any?> = objectMapper.readValue(objectMapper.writeValueAsString(map), object : TypeReference<Map<String, Any?>>() {})
         assertThat(fromJson1).usingRecursiveComparison().isEqualTo(map)
-        val fromJson2: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>(){})
+        val fromJson2: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>() {})
         assertThat(fromJson2[0]).usingRecursiveComparison().isEqualTo(map)
     }
 
@@ -118,7 +135,7 @@ class RmAwareObjectMapperJsonSerializationTest {
         val map2: Map<String, Any> = ImmutableMap.of<String, Any>("one", "two", "three", 1)
         val list: List<Any> = ImmutableList.of<Any>(map1, map2)
         val jsonString = objectMapper.writeValueAsString(list)
-        val fromJson = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>(){})
+        val fromJson = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>() {})
         assertThat(fromJson[0]).usingRecursiveComparison().isEqualTo(map1)
         assertThat(fromJson[1]).usingRecursiveComparison().isEqualTo(map2)
     }
@@ -140,14 +157,15 @@ class RmAwareObjectMapperJsonSerializationTest {
       }
     ]
   }
-]""", object : TypeReference<List<Any>>(){})
+]""", object : TypeReference<List<Any>>() {})
         assertThat(fromJson).hasSize(1)
         assertThat(fromJson[0]).isInstanceOf(MutableMap::class.java)
         val map = fromJson[0] as Map<*, *>
         assertThat(map["tags"]).isInstanceOf(MutableList::class.java)
         val tags = map["tags"] as List<*>
-        assertThat(tags).containsExactly(ImmutableMap.of("tag", "abc1", "value", "val1", "aqlPath", "/"),
-                                         ImmutableMap.of("tag", "abc2", "value", "val2", "aqlPath", "/"))
+        assertThat(tags).containsExactly(
+            ImmutableMap.of("tag", "abc1", "value", "val1", "aqlPath", "/"),
+            ImmutableMap.of("tag", "abc2", "value", "val2", "aqlPath", "/"))
     }
 
     @Test
@@ -155,7 +173,7 @@ class RmAwareObjectMapperJsonSerializationTest {
         val dvText = DvText("hello")
         val list: List<Any> = ImmutableList.of(dvText)
         val jsonString = objectMapper.writeValueAsString(list)
-        val fromJson: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>(){})
+        val fromJson: List<Any> = objectMapper.readValue(jsonString, object : TypeReference<List<Any>>() {})
         assertThat(fromJson[0]).usingRecursiveComparison().isEqualTo(dvText)
     }
 
@@ -182,7 +200,7 @@ class RmAwareObjectMapperJsonSerializationTest {
         assertThat(node.path("composition").path("@class").textValue()).isEqualTo("COMPOSITION")
         assertThat(node.path("cluster").path("@class").textValue()).isEqualTo("CLUSTER")
         assertThat(node.path("cluster").path("name").path("@class").textValue()).isEqualTo("DV_CODED_TEXT")
-        val fromJson: Map<String, Any?> = objectMapper.readValue(jsonString, object : TypeReference<Map<String, Any?>>(){})
+        val fromJson: Map<String, Any?> = objectMapper.readValue(jsonString, object : TypeReference<Map<String, Any?>>() {})
         assertThat(fromJson["composition"]).usingRecursiveComparison().isEqualTo(composition)
         assertThat(fromJson["cluster"]).usingRecursiveComparison().isEqualTo(cluster)
     }
@@ -195,7 +213,7 @@ class RmAwareObjectMapperJsonSerializationTest {
         val cluster: Cluster = buildCluster()
         map["cluster"] = cluster
         val jsonString = objectMapper.writeValueAsString(ImmutableMap.of<String, Map<String, Any>>("result", map))
-        val fromJson: Map<String, Any?> = objectMapper.readValue(jsonString, object : TypeReference<Map<String, Any?>>(){})
+        val fromJson: Map<String, Any?> = objectMapper.readValue(jsonString, object : TypeReference<Map<String, Any?>>() {})
         assertThat(fromJson["result"]).isInstanceOf(MutableMap::class.java)
         val subMap = fromJson["result"] as Map<*, *>
         assertThat(subMap["composition"]).usingRecursiveComparison().isEqualTo(composition)
@@ -205,8 +223,8 @@ class RmAwareObjectMapperJsonSerializationTest {
     @Test
     fun resultSetWithTags() {
         val fromJson: List<*> = objectMapper.readValue(
-                RmAwareObjectMapperJsonSerializationTest::class.java.getResource("/simple.json"),
-                MutableList::class.java)
+            RmAwareObjectMapperJsonSerializationTest::class.java.getResource("/simple.json"),
+            MutableList::class.java)
 
         assertThat(fromJson).isNotNull
         assertThat(fromJson).hasSize(1)
@@ -235,13 +253,13 @@ class RmAwareObjectMapperJsonSerializationTest {
     private fun buildCluster(): Cluster = Cluster().apply { this.name = DvCodedText.createWithLocalTerminology("at0001", "Name") }
 
     private fun buildComposition(): Composition =
-            Composition().apply {
-                this.name = DvCodedText.createWithLocalTerminology("111", "Name")
-                this.archetypeNodeId = "at0000"
-                this.content.add(Section().apply {
-                    this.name = DvCodedText.createWithLocalTerminology("222", "Name")
-                })
-            }
+        Composition().apply {
+            this.name = DvCodedText.createWithLocalTerminology("111", "Name")
+            this.archetypeNodeId = "at0000"
+            this.content.add(Section().apply {
+                this.name = DvCodedText.createWithLocalTerminology("222", "Name")
+            })
+        }
 
     private class Result() {
         var resultSet: MutableList<Map<String, Any?>> = mutableListOf()

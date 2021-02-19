@@ -21,13 +21,15 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_OBJECT", propOrder = [
-    "rmTypeName",
-    "occurrences",
-    "nodeId",
-    "siblingOrder"])
+@XmlType(
+    name = "C_OBJECT", propOrder = [
+        "rmTypeName",
+        "occurrences",
+        "nodeId",
+        "siblingOrder"])
 @XmlSeeAlso(value = [ArchetypeSlot::class, ConstraintRef::class, ArchetypeInternalRef::class, CDefinedObject::class])
 abstract class CObject : ArchetypeConstraint() {
     companion object {

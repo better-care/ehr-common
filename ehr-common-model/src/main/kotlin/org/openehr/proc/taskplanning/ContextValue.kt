@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @SuppressWarnings("ClassReferencesSubclass")
@@ -59,8 +60,8 @@ abstract class ContextValue<T>() : RmObject(), VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "ContextValue{" +
-                    "name='$name'" +
-                    ", type=$type" +
-                    "} ${super.toString()}"
+        "ContextValue{" +
+                "name='$name'" +
+                ", type=$type" +
+                "} ${super.toString()}"
 }

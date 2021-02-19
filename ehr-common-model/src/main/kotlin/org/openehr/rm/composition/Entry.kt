@@ -25,15 +25,17 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ENTRY", propOrder = [
-    "language",
-    "encoding",
-    "subject",
-    "provider",
-    "otherParticipations",
-    "workFlowId"])
+@XmlType(
+    name = "ENTRY", propOrder = [
+        "language",
+        "encoding",
+        "subject",
+        "provider",
+        "otherParticipations",
+        "workFlowId"])
 @XmlSeeAlso(value = [AdminEntry::class, CareEntry::class])
 @Open
 abstract class Entry : ContentItem() {

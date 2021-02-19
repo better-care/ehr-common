@@ -23,13 +23,15 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Interval", propOrder = [
-    "lowerIncluded",
-    "upperIncluded",
-    "lowerUnbounded",
-    "upperUnbounded"])
+@XmlType(
+    name = "Interval", propOrder = [
+        "lowerIncluded",
+        "upperIncluded",
+        "lowerUnbounded",
+        "upperUnbounded"])
 @XmlSeeAlso(value = [IntervalOfInteger::class, IntervalOfReal::class, IntervalOfDate::class, IntervalOfDateTime::class, IntervalOfTime::class, IntervalOfDuration::class])
 @Open
 abstract class Interval : RmObject(), Serializable, RangeParameters {

@@ -24,21 +24,23 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DATA_VALUE")
-@XmlSeeAlso(value = [
-                DvBoolean::class,
-                DvIdentifier::class,
-                DvState::class,
-                DvInterval::class,
-                DvParagraph::class,
-                DvText::class,
-                DvOrdered::class,
-                DvTimeSpecification::class,
-                DvEncapsulated::class,
-                DvUri::class])
+@XmlSeeAlso(
+    value = [
+        DvBoolean::class,
+        DvIdentifier::class,
+        DvState::class,
+        DvInterval::class,
+        DvParagraph::class,
+        DvText::class,
+        DvOrdered::class,
+        DvTimeSpecification::class,
+        DvEncapsulated::class,
+        DvUri::class])
 abstract class DataValue : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L

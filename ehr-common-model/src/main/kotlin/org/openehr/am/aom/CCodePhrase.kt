@@ -21,13 +21,15 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_CODE_PHRASE", propOrder = [
-    "assumedValue",
-    "defaultValue",
-    "terminologyId",
-    "codeList"])
+@XmlType(
+    name = "C_CODE_PHRASE", propOrder = [
+        "assumedValue",
+        "defaultValue",
+        "terminologyId",
+        "codeList"])
 @XmlSeeAlso(CCodeReference::class)
 open class CCodePhrase : CDomainType() {
     companion object {

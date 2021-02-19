@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "EXPR_TYPE_DEF", propOrder = ["typeName"])
 @XmlSeeAlso(value = [
@@ -50,7 +51,7 @@ abstract class ExprTypeDef<T>(@XmlElement(name = "type_name", required = true) p
     fun getTypeName(): String? = typeName
 
     fun setTypeName(typeName: String) {
-        if(typeName != this.typeName) {
+        if (typeName != this.typeName) {
             throw UnsupportedOperationException("The type name has to be ${this.typeName}")
         }
     }

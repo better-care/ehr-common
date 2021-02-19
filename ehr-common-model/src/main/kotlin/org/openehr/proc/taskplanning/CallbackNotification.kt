@@ -23,12 +23,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "CALLBACK_NOTIFICATION", propOrder = [
-    "taskId",
-    "requestId",
-    "subjectId",
-    "manuallyNotified"])
+@XmlType(
+    name = "CALLBACK_NOTIFICATION", propOrder = [
+        "taskId",
+        "requestId",
+        "subjectId",
+        "manuallyNotified"])
 @Open
 class CallbackNotification() : PlanEvent(), TaskReferencingEvent {
     companion object {
@@ -63,10 +65,10 @@ class CallbackNotification() : PlanEvent(), TaskReferencingEvent {
     }
 
     override fun toString(): String =
-            "CallbackNotification{" +
-                    "taskId=" +
-                    ", requestId='$requestId'" +
-                    ", subjectId='$subjectId'" +
-                    ", manuallyNotified=$manuallyNotified'" +
-                    "} ${super.toString()}"
+        "CallbackNotification{" +
+                "taskId=" +
+                ", requestId='$requestId'" +
+                ", subjectId='$subjectId'" +
+                ", manuallyNotified=$manuallyNotified'" +
+                "} ${super.toString()}"
 }

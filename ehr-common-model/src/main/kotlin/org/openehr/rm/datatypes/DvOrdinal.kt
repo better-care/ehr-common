@@ -25,23 +25,22 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_ORDINAL", propOrder = [
         "value",
-        "symbol"]
-)
+        "symbol"])
 @Open
 class DvOrdinal() : DvOrdered() {
     @JvmOverloads
     constructor(
-        value: Int,
-        symbol: DvCodedText,
-        normalRange: DvInterval? = null,
-        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-        normalStatus: CodePhrase? = null
-    ) : this() {
+            value: Int,
+            symbol: DvCodedText,
+            normalRange: DvInterval? = null,
+            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+            normalStatus: CodePhrase? = null) : this() {
         this.value = value
         this.symbol = symbol
         this.normalRange = normalRange

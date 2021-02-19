@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,21 +38,19 @@ import javax.xml.bind.annotation.XmlType
         "integrityCheck",
         "integrityCheckAlgorithm",
         "size",
-        "thumbnail"]
-)
+        "thumbnail"])
 @Open
 class DvMultimedia() : DvEncapsulated() {
     private constructor(
-        alternateText: String? = null,
-        mediaType: CodePhrase? = null,
-        compressionAlgorithm: CodePhrase? = null,
-        integrityCheck: ByteArray? = null,
-        integrityCheckAlgorithm: CodePhrase? = null,
-        size: Int = 0,
-        thumbnail: DvMultimedia? = null,
-        charset: CodePhrase? = null,
-        language: CodePhrase? = null
-    ) : this() {
+            alternateText: String? = null,
+            mediaType: CodePhrase? = null,
+            compressionAlgorithm: CodePhrase? = null,
+            integrityCheck: ByteArray? = null,
+            integrityCheckAlgorithm: CodePhrase? = null,
+            size: Int = 0,
+            thumbnail: DvMultimedia? = null,
+            charset: CodePhrase? = null,
+            language: CodePhrase? = null) : this() {
         this.alternateText = alternateText
         this.mediaType = mediaType
         this.compressionAlgorithm = compressionAlgorithm
@@ -65,17 +64,17 @@ class DvMultimedia() : DvEncapsulated() {
 
     @JvmOverloads
     constructor(
-        uri: DvUri,
-        data: ByteArray? = null,
-        alternateText: String? = null,
-        mediaType: CodePhrase? = null,
-        compressionAlgorithm: CodePhrase? = null,
-        integrityCheck: ByteArray? = null,
-        integrityCheckAlgorithm: CodePhrase? = null,
-        size: Int = 0,
-        thumbnail: DvMultimedia? = null,
-        charset: CodePhrase? = null,
-        language: CodePhrase? = null
+            uri: DvUri,
+            data: ByteArray? = null,
+            alternateText: String? = null,
+            mediaType: CodePhrase? = null,
+            compressionAlgorithm: CodePhrase? = null,
+            integrityCheck: ByteArray? = null,
+            integrityCheckAlgorithm: CodePhrase? = null,
+            size: Int = 0,
+            thumbnail: DvMultimedia? = null,
+            charset: CodePhrase? = null,
+            language: CodePhrase? = null
     ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
         this.data = data
@@ -83,17 +82,17 @@ class DvMultimedia() : DvEncapsulated() {
 
     @JvmOverloads
     constructor(
-        data: ByteArray,
-        uri: DvUri? = null,
-        alternateText: String? = null,
-        mediaType: CodePhrase? = null,
-        compressionAlgorithm: CodePhrase? = null,
-        integrityCheck: ByteArray? = null,
-        integrityCheckAlgorithm: CodePhrase? = null,
-        size: Int = 0,
-        thumbnail: DvMultimedia? = null,
-        charset: CodePhrase? = null,
-        language: CodePhrase? = null
+            data: ByteArray,
+            uri: DvUri? = null,
+            alternateText: String? = null,
+            mediaType: CodePhrase? = null,
+            compressionAlgorithm: CodePhrase? = null,
+            integrityCheck: ByteArray? = null,
+            integrityCheckAlgorithm: CodePhrase? = null,
+            size: Int = 0,
+            thumbnail: DvMultimedia? = null,
+            charset: CodePhrase? = null,
+            language: CodePhrase? = null
     ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
         this.data = data

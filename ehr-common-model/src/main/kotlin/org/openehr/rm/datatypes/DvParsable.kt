@@ -25,23 +25,22 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_PARSABLE", propOrder = [
         "value",
-        "formalism"]
-)
+        "formalism"])
 @Open
 class DvParsable() : DvEncapsulated() {
     @JvmOverloads
     constructor(
-        value: String,
-        formalism: String,
-        charset: CodePhrase? = null,
-        language: CodePhrase? = null
-    ) : this() {
+            value: String,
+            formalism: String,
+            charset: CodePhrase? = null,
+            language: CodePhrase? = null) : this() {
         this.value = value
         this.formalism = formalism
         this.charset = charset

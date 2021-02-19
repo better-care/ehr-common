@@ -22,18 +22,20 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ARCHETYPE", propOrder = [
-    "uid",
-    "archetypeId",
-    "adlVersion",
-    "concept",
-    "parentArchetypeId",
-    "definition",
-    "invariants",
-    "ontology"])
+@XmlType(
+    name = "ARCHETYPE", propOrder = [
+        "uid",
+        "archetypeId",
+        "adlVersion",
+        "concept",
+        "parentArchetypeId",
+        "definition",
+        "invariants",
+        "ontology"])
 @XmlRootElement
 
 class Archetype : AuthoredResource() {
@@ -50,6 +52,7 @@ class Archetype : AuthoredResource() {
     var adlVersion: String? = null
 
     lateinit var concept: String
+
     @XmlElement(name = "parent_archetype_id")
     var parentArchetypeId: ArchetypeId? = null
 

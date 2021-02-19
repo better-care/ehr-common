@@ -83,7 +83,7 @@ class PathSegment(val element: String?, val archetypeNodeId: String?, val name: 
             element != other.element -> false
             other.archetypeNodeId != null && archetypeNodeId != null && archetypeNodeId != other.archetypeNodeId -> false
             other.name != null && name != null && name != other.name -> false
-            else  ->other.prefix == null || prefix == null || prefix == other.prefix
+            else -> other.prefix == null || prefix == null || prefix == other.prefix
         }
 
     override fun toString(): String =

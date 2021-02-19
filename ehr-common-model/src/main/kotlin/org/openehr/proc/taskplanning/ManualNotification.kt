@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "MANUAL_NOTIFICATION", propOrder = ["description"])
 @Open
@@ -46,7 +47,7 @@ class ManualNotification : PlanEvent {
     }
 
     override fun toString(): String =
-            "ManualNotification{" +
-                    "description='$description'" +
-                    "} ${super.toString()}"
+        "ManualNotification{" +
+                "description='$description'" +
+                "} ${super.toString()}"
 }

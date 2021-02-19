@@ -23,15 +23,17 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "TASK_EVENT_RECORD", propOrder = [
-    "taskId",
-    "lifecycleState",
-    "preconditionsSatisfied",
-    "waitConditionsSatisfied",
-    "notificationsSent",
-    "entryInstances",
-    "lifecycleTransitionReason"])
+@XmlType(
+    name = "TASK_EVENT_RECORD", propOrder = [
+        "taskId",
+        "lifecycleState",
+        "preconditionsSatisfied",
+        "waitConditionsSatisfied",
+        "notificationsSent",
+        "entryInstances",
+        "lifecycleTransitionReason"])
 @Open
 class TaskEventRecord : EventRecord {
     companion object {
@@ -69,13 +71,13 @@ class TaskEventRecord : EventRecord {
     }
 
     override fun toString(): String =
-            "TaskEventRecord{" +
-                    "taskId='$taskId'" +
-                    ", lifecycleState=$lifecycleState" +
-                    ", notificationsSent=$notificationsSent" + notificationsSent +
-                    ", entryInstances=$entryInstances" + entryInstances +
-                    ", preconditionsSatisfied=$preconditionsSatisfied" +
-                    ", waitConditionsSatisfied=$waitConditionsSatisfied" +
-                    ", lifecycleTransitionReason='$lifecycleTransitionReason'" +
-                    "} ${super.toString()}"
+        "TaskEventRecord{" +
+                "taskId='$taskId'" +
+                ", lifecycleState=$lifecycleState" +
+                ", notificationsSent=$notificationsSent" + notificationsSent +
+                ", entryInstances=$entryInstances" + entryInstances +
+                ", preconditionsSatisfied=$preconditionsSatisfied" +
+                ", waitConditionsSatisfied=$waitConditionsSatisfied" +
+                ", lifecycleTransitionReason='$lifecycleTransitionReason'" +
+                "} ${super.toString()}"
 }

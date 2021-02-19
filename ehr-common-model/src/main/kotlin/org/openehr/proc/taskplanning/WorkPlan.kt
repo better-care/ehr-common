@@ -29,20 +29,22 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "WORK_PLAN", propOrder = [
-    "description",
-    "topLevelPlanUids",
-    "topLevelPlans",
-    "carePathway",
-    "carePlan",
-    "orderList",
-    "calendar",
-    "timeline",
-    "context",
-    "eventWaitStates",
-    "indications",
-    "classification"])
+@XmlType(
+    name = "WORK_PLAN", propOrder = [
+        "description",
+        "topLevelPlanUids",
+        "topLevelPlans",
+        "carePathway",
+        "carePlan",
+        "orderList",
+        "calendar",
+        "timeline",
+        "context",
+        "eventWaitStates",
+        "indications",
+        "classification"])
 @Open
 class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     companion object {
@@ -84,7 +86,7 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
 
     var classification: ItemStructure? = null
 
-    constructor(description: DvText?)  : this() {
+    constructor(description: DvText?) : this() {
         this.description = description
     }
 
@@ -102,22 +104,22 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "WorkPlan{" +
-                    "description=$description" +
-                    ", carePathway=$carePathway" +
-                    ", topLevelPlanUids=$topLevelPlanUids" +
-                    ", topLevelPlans=$topLevelPlans" +
-                    ", carePlan=$carePlan" +
-                    ", orderList=$orderList" +
-                    ", calendar=$calendar" +
-                    ", timeline=$timeline" +
-                    ", context=$context" +
-                    ", eventWaitStates=$eventWaitStates" +
-                    ", name=$name" +
-                    ", uid=$uid" +
-                    ", indications=$indications" +
-                    ", archetypeDetails=$archetypeDetails" +
-                    ", archetypeNodeId='$archetypeNodeId'" +
-                    ", classification=$classification" +
-                    '}'
+        "WorkPlan{" +
+                "description=$description" +
+                ", carePathway=$carePathway" +
+                ", topLevelPlanUids=$topLevelPlanUids" +
+                ", topLevelPlans=$topLevelPlans" +
+                ", carePlan=$carePlan" +
+                ", orderList=$orderList" +
+                ", calendar=$calendar" +
+                ", timeline=$timeline" +
+                ", context=$context" +
+                ", eventWaitStates=$eventWaitStates" +
+                ", name=$name" +
+                ", uid=$uid" +
+                ", indications=$indications" +
+                ", archetypeDetails=$archetypeDetails" +
+                ", archetypeNodeId='$archetypeNodeId'" +
+                ", classification=$classification" +
+                '}'
 }

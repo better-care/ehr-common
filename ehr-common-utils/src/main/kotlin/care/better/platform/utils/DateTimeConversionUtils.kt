@@ -27,6 +27,7 @@ import java.util.regex.Pattern
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @Suppress("MemberVisibilityCanBePrivate", "unused", "DuplicatedCode")
@@ -49,31 +50,31 @@ class DateTimeConversionUtils {
         @JvmStatic
         @JvmOverloads
         fun toLocalDate(value: String, strict: Boolean = false): LocalDate =
-                if (strict) {
-                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_DATE_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                } else {
-                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                }.let {
-                    when (it) {
-                        is ZonedDateTime -> it.toLocalDate()
-                        is OffsetDateTime -> it.toLocalDate()
-                        is LocalDateTime -> it.toLocalDate()
-                        is LocalDate -> it
-                        else -> throw DateTimeException("Invalid local date value: $value")
-                    }
+            if (strict) {
+                DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_DATE_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            } else {
+                DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            }.let {
+                when (it) {
+                    is ZonedDateTime -> it.toLocalDate()
+                    is OffsetDateTime -> it.toLocalDate()
+                    is LocalDateTime -> it.toLocalDate()
+                    is LocalDate -> it
+                    else -> throw DateTimeException("Invalid local date value: $value")
                 }
+            }
 
 
         /**
@@ -89,42 +90,42 @@ class DateTimeConversionUtils {
         @JvmStatic
         @JvmOverloads
         fun toLocalTime(value: String, strict: Boolean = false): LocalTime =
-                if (strict) {
-                    try {
-                        DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
-                    } catch (ex: DateTimeParseException) {
-                        DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_TIME_FORMATTER
-                                .parseBest(
-                                        value,
-                                        { ZonedDateTime.from(it) },
-                                        { OffsetDateTime.from(it) },
-                                        { LocalDateTime.from(it) },
-                                        { OffsetTime.from(it) },
-                                        { LocalTime.from(it) })
-                    }
-                } else {
-                    try {
-                        DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
-                    } catch (ex: DateTimeParseException) {
-                        DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
-                                .parseBest(
-                                        value,
-                                        { ZonedDateTime.from(it) },
-                                        { OffsetDateTime.from(it) },
-                                        { LocalDateTime.from(it) },
-                                        { OffsetTime.from(it) },
-                                        { LocalTime.from(it) })
-                    }
-                }.let {
-                    when (it) {
-                        is ZonedDateTime -> it.toLocalTime()
-                        is OffsetDateTime -> it.toLocalTime()
-                        is LocalDateTime -> it.toLocalTime()
-                        is OffsetTime -> it.toLocalTime()
-                        is LocalTime -> it
-                        else -> throw DateTimeException("Invalid local time value: $value")
-                    }
+            if (strict) {
+                try {
+                    DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                } catch (ex: DateTimeParseException) {
+                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_TIME_FORMATTER
+                        .parseBest(
+                            value,
+                            { ZonedDateTime.from(it) },
+                            { OffsetDateTime.from(it) },
+                            { LocalDateTime.from(it) },
+                            { OffsetTime.from(it) },
+                            { LocalTime.from(it) })
                 }
+            } else {
+                try {
+                    DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                } catch (ex: DateTimeParseException) {
+                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
+                        .parseBest(
+                            value,
+                            { ZonedDateTime.from(it) },
+                            { OffsetDateTime.from(it) },
+                            { LocalDateTime.from(it) },
+                            { OffsetTime.from(it) },
+                            { LocalTime.from(it) })
+                }
+            }.let {
+                when (it) {
+                    is ZonedDateTime -> it.toLocalTime()
+                    is OffsetDateTime -> it.toLocalTime()
+                    is LocalDateTime -> it.toLocalTime()
+                    is OffsetTime -> it.toLocalTime()
+                    is LocalTime -> it
+                    else -> throw DateTimeException("Invalid local time value: $value")
+                }
+            }
 
         /**
          * Parses a date time in openEHR format without an offset.
@@ -140,31 +141,31 @@ class DateTimeConversionUtils {
         @JvmStatic
         @JvmOverloads
         fun toLocalDateTime(value: String, strict: Boolean = false): LocalDateTime =
-                if (strict) {
-                    DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                } else {
-                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                }.let {
-                    when (it) {
-                        is ZonedDateTime -> it.toLocalDateTime()
-                        is OffsetDateTime -> it.toLocalDateTime()
-                        is LocalDateTime -> it
-                        is LocalDate -> LocalDateTime.of(it, LocalTime.of(0, 0, 0, 0))
-                        else -> throw DateTimeException("Invalid offset date time value: $value")
-                    }
+            if (strict) {
+                DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            } else {
+                DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            }.let {
+                when (it) {
+                    is ZonedDateTime -> it.toLocalDateTime()
+                    is OffsetDateTime -> it.toLocalDateTime()
+                    is LocalDateTime -> it
+                    is LocalDate -> LocalDateTime.of(it, LocalTime.of(0, 0, 0, 0))
+                    else -> throw DateTimeException("Invalid offset date time value: $value")
                 }
+            }
 
         /**
          * Parses a time in openEHR format with an offset.
@@ -180,47 +181,47 @@ class DateTimeConversionUtils {
         @JvmStatic
         @JvmOverloads
         fun toOffsetTime(value: String, strict: Boolean = false): OffsetTime =
-                if (strict) {
-                    try {
-                        DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
-                    } catch (ex: DateTimeParseException) {
-                        DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_TIME_FORMATTER
-                                .parseBest(
-                                        value,
-                                        { ZonedDateTime.from(it) },
-                                        { OffsetDateTime.from(it) },
-                                        { LocalDateTime.from(it) },
-                                        { OffsetTime.from(it) },
-                                        { LocalTime.from(it) })
-                    }
-                } else {
-                    try {
-                        DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
-                    } catch (ex: DateTimeParseException) {
-                        DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
-                                .parseBest(
-                                        value,
-                                        { ZonedDateTime.from(it) },
-                                        { OffsetDateTime.from(it) },
-                                        { LocalDateTime.from(it) },
-                                        { OffsetTime.from(it) },
-                                        { LocalTime.from(it) })
-                    }
-                }.let {
-                    when (it) {
-                        is ZonedDateTime -> it.toOffsetDateTime().toOffsetTime()
-                        is OffsetDateTime -> it.toOffsetTime()
-                        is LocalDateTime -> OffsetTime.of(
-                                it.toLocalTime(),
-                                if (strict)
-                                    throw DateTimeException("Invalid offset time value: $value")
-                                else
-                                    ZoneOffset.UTC)
-                        is OffsetTime -> it
-                        is LocalTime -> OffsetTime.of(it, if (strict) throw DateTimeException("Invalid offset time value: $value") else ZoneOffset.UTC)
-                        else -> throw DateTimeException("Invalid offset time value: $value")
-                    }
+            if (strict) {
+                try {
+                    DateTimeFormatters.STRICT_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                } catch (ex: DateTimeParseException) {
+                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_WITH_STRICT_TIME_FORMATTER
+                        .parseBest(
+                            value,
+                            { ZonedDateTime.from(it) },
+                            { OffsetDateTime.from(it) },
+                            { LocalDateTime.from(it) },
+                            { OffsetTime.from(it) },
+                            { LocalTime.from(it) })
                 }
+            } else {
+                try {
+                    DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER.parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+                } catch (ex: DateTimeParseException) {
+                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
+                        .parseBest(
+                            value,
+                            { ZonedDateTime.from(it) },
+                            { OffsetDateTime.from(it) },
+                            { LocalDateTime.from(it) },
+                            { OffsetTime.from(it) },
+                            { LocalTime.from(it) })
+                }
+            }.let {
+                when (it) {
+                    is ZonedDateTime -> it.toOffsetDateTime().toOffsetTime()
+                    is OffsetDateTime -> it.toOffsetTime()
+                    is LocalDateTime -> OffsetTime.of(
+                        it.toLocalTime(),
+                        if (strict)
+                            throw DateTimeException("Invalid offset time value: $value")
+                        else
+                            ZoneOffset.UTC)
+                    is OffsetTime -> it
+                    is LocalTime -> OffsetTime.of(it, if (strict) throw DateTimeException("Invalid offset time value: $value") else ZoneOffset.UTC)
+                    else -> throw DateTimeException("Invalid offset time value: $value")
+                }
+            }
 
         /**
          * Parses a date time in openEHR format with an offset.
@@ -236,31 +237,31 @@ class DateTimeConversionUtils {
         @JvmStatic
         @JvmOverloads
         fun toOffsetDateTime(value: String, strict: Boolean = false): OffsetDateTime =
-                if (strict) {
-                    DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                } else {
-                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                }.let {
-                    when (it) {
-                        is ZonedDateTime -> it.toOffsetDateTime()
-                        is OffsetDateTime -> it
-                        is LocalDateTime -> ZonedDateTime.of(it, ZoneId.systemDefault()).toOffsetDateTime()
-                        is LocalDate -> ZonedDateTime.of(LocalDateTime.of(it, LocalTime.of(0, 0, 0, 0)), ZoneId.systemDefault()).toOffsetDateTime()
-                        else -> throw DateTimeException("Invalid offset date time value: $value")
-                    }
+            if (strict) {
+                DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            } else {
+                DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            }.let {
+                when (it) {
+                    is ZonedDateTime -> it.toOffsetDateTime()
+                    is OffsetDateTime -> it
+                    is LocalDateTime -> ZonedDateTime.of(it, ZoneId.systemDefault()).toOffsetDateTime()
+                    is LocalDate -> ZonedDateTime.of(LocalDateTime.of(it, LocalTime.of(0, 0, 0, 0)), ZoneId.systemDefault()).toOffsetDateTime()
+                    else -> throw DateTimeException("Invalid offset date time value: $value")
                 }
+            }
 
         /**
          * Parses a date time in openEHR format with an offset and zone.
@@ -276,31 +277,31 @@ class DateTimeConversionUtils {
         @JvmStatic
         @JvmOverloads
         fun toZonedDateTime(value: String, strict: Boolean = false): ZonedDateTime =
-                if (strict) {
-                    DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                } else {
-                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { LocalDate.from(it) })
-                }.let {
-                    when (it) {
-                        is ZonedDateTime -> it
-                        is OffsetDateTime -> ZonedDateTime.of(it.toLocalDateTime(), ZoneId.systemDefault())
-                        is LocalDateTime -> ZonedDateTime.of(it, ZoneId.systemDefault())
-                        is LocalDate -> ZonedDateTime.of(LocalDateTime.of(it, LocalTime.of(0, 0, 0, 0)), ZoneId.systemDefault())
-                        else -> throw DateTimeException("Invalid zoned date time value: $value")
-                    }
+            if (strict) {
+                DateTimeFormatters.STRICT_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            } else {
+                DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { LocalDate.from(it) })
+            }.let {
+                when (it) {
+                    is ZonedDateTime -> it
+                    is OffsetDateTime -> ZonedDateTime.of(it.toLocalDateTime(), ZoneId.systemDefault())
+                    is LocalDateTime -> ZonedDateTime.of(it, ZoneId.systemDefault())
+                    is LocalDate -> ZonedDateTime.of(LocalDateTime.of(it, LocalTime.of(0, 0, 0, 0)), ZoneId.systemDefault())
+                    else -> throw DateTimeException("Invalid zoned date time value: $value")
                 }
+            }
 
         /**
          * This method returns true if supplied string contains a time zone.
@@ -310,28 +311,28 @@ class DateTimeConversionUtils {
          */
         @JvmStatic
         fun isOffsetTime(value: String): Boolean =
-                try {
-                    DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER
-                            .parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
-                } catch (ex: DateTimeParseException) {
-                    DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
-                            .parseBest(
-                                    value,
-                                    { ZonedDateTime.from(it) },
-                                    { OffsetDateTime.from(it) },
-                                    { LocalDateTime.from(it) },
-                                    { OffsetTime.from(it) },
-                                    { LocalTime.from(it) })
-                }.let {
-                    when (it) {
-                        is ZonedDateTime -> true
-                        is OffsetDateTime -> true
-                        is LocalDateTime -> true
-                        is OffsetTime -> true
-                        is LocalTime -> false
-                        else -> throw DateTimeException("Invalid offset time value: $value")
-                    }
+            try {
+                DateTimeFormatters.PARTIAL_OFFSET_TIME_FORMATTER
+                    .parseBest(value, { OffsetTime.from(it) }, { LocalTime.from(it) })
+            } catch (ex: DateTimeParseException) {
+                DateTimeFormatters.PARTIAL_ZONE_DATE_TIME_FORMATTER
+                    .parseBest(
+                        value,
+                        { ZonedDateTime.from(it) },
+                        { OffsetDateTime.from(it) },
+                        { LocalDateTime.from(it) },
+                        { OffsetTime.from(it) },
+                        { LocalTime.from(it) })
+            }.let {
+                when (it) {
+                    is ZonedDateTime -> true
+                    is OffsetDateTime -> true
+                    is LocalDateTime -> true
+                    is OffsetTime -> true
+                    is LocalTime -> false
+                    else -> throw DateTimeException("Invalid offset time value: $value")
                 }
+            }
 
         /**
          * Converts [OffsetDateTime] to [DateTime]
@@ -359,15 +360,15 @@ class DateTimeConversionUtils {
          */
         @JvmStatic
         fun plusPeriod(offsetDateTime: OffsetDateTime, period: Period): OffsetDateTime =
-                offsetDateTime
-                        .plus(period.years.toLong(), ChronoUnit.YEARS)
-                        .plus(period.months.toLong(), ChronoUnit.MONTHS)
-                        .plus(period.weeks.toLong(), ChronoUnit.WEEKS)
-                        .plus(period.days.toLong(), ChronoUnit.DAYS)
-                        .plus(period.hours.toLong(), ChronoUnit.HOURS)
-                        .plus(period.minutes.toLong(), ChronoUnit.MINUTES)
-                        .plus(period.seconds.toLong(), ChronoUnit.SECONDS)
-                        .plus(period.millis.toLong(), ChronoUnit.MILLIS)
+            offsetDateTime
+                .plus(period.years.toLong(), ChronoUnit.YEARS)
+                .plus(period.months.toLong(), ChronoUnit.MONTHS)
+                .plus(period.weeks.toLong(), ChronoUnit.WEEKS)
+                .plus(period.days.toLong(), ChronoUnit.DAYS)
+                .plus(period.hours.toLong(), ChronoUnit.HOURS)
+                .plus(period.minutes.toLong(), ChronoUnit.MINUTES)
+                .plus(period.seconds.toLong(), ChronoUnit.SECONDS)
+                .plus(period.millis.toLong(), ChronoUnit.MILLIS)
 
 
         /**
@@ -378,15 +379,15 @@ class DateTimeConversionUtils {
          */
         @JvmStatic
         fun minusPeriod(offsetDateTime: OffsetDateTime, period: Period): OffsetDateTime =
-                offsetDateTime
-                        .minus(period.years.toLong(), ChronoUnit.YEARS)
-                        .minus(period.months.toLong(), ChronoUnit.MONTHS)
-                        .minus(period.weeks.toLong(), ChronoUnit.WEEKS)
-                        .minus(period.days.toLong(), ChronoUnit.DAYS)
-                        .minus(period.hours.toLong(), ChronoUnit.HOURS)
-                        .minus(period.minutes.toLong(), ChronoUnit.MINUTES)
-                        .minus(period.seconds.toLong(), ChronoUnit.SECONDS)
-                        .minus(period.millis.toLong(), ChronoUnit.MILLIS)
+            offsetDateTime
+                .minus(period.years.toLong(), ChronoUnit.YEARS)
+                .minus(period.months.toLong(), ChronoUnit.MONTHS)
+                .minus(period.weeks.toLong(), ChronoUnit.WEEKS)
+                .minus(period.days.toLong(), ChronoUnit.DAYS)
+                .minus(period.hours.toLong(), ChronoUnit.HOURS)
+                .minus(period.minutes.toLong(), ChronoUnit.MINUTES)
+                .minus(period.seconds.toLong(), ChronoUnit.SECONDS)
+                .minus(period.millis.toLong(), ChronoUnit.MILLIS)
 
         /**
          * Returns true if date is partial (missing days or days and months)

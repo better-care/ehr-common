@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @SuppressWarnings("ClassReferencesSubclass")
 @XmlType(name = "EVENT_RECORD", propOrder = ["time", "description"])
@@ -51,8 +52,8 @@ abstract class EventRecord() : RmObject(), Serializable {
     }
 
     override fun toString(): String =
-            "EventRecord{" +
-                    "time=$time" +
-                    ", description='$description'" +
-                    '}'
+        "EventRecord{" +
+                "time=$time" +
+                ", description='$description'" +
+                '}'
 }

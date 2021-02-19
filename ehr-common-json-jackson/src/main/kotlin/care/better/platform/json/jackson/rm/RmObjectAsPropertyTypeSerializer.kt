@@ -26,23 +26,25 @@ import java.io.IOException
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-class RmObjectAsPropertyTypeSerializer(idRes: TypeIdResolver?, property: BeanProperty?, propName: String?) : AsPropertyTypeSerializer(idRes, property, propName) {
+class RmObjectAsPropertyTypeSerializer(idRes: TypeIdResolver?, property: BeanProperty?, propName: String?) :
+    AsPropertyTypeSerializer(idRes, property, propName) {
 
     override fun forProperty(prop: BeanProperty?): AsPropertyTypeSerializer? =
-            if (_property === prop)
-                this
-            else
-                RmObjectAsPropertyTypeSerializer(_idResolver, prop, _typePropertyName)
+        if (_property === prop)
+            this
+        else
+            RmObjectAsPropertyTypeSerializer(_idResolver, prop, _typePropertyName)
 
     @Throws(IOException::class)
     override fun writeTypePrefix(g: JsonGenerator?, typeIdDef: WritableTypeId): WritableTypeId? =
-            if (isRmObject(typeIdDef.forValue)) {
-                super.writeTypePrefix(g, typeIdDef)
-            } else {
-                _generateTypeId(typeIdDef)
-                writeNonRmTypePrefix(g!!, typeIdDef)
-            }
+        if (isRmObject(typeIdDef.forValue)) {
+            super.writeTypePrefix(g, typeIdDef)
+        } else {
+            _generateTypeId(typeIdDef)
+            writeNonRmTypePrefix(g!!, typeIdDef)
+        }
 
     @Throws(IOException::class)
     override fun writeTypeSuffix(g: JsonGenerator?, typeIdDef: WritableTypeId): WritableTypeId? {
@@ -65,7 +67,8 @@ class RmObjectAsPropertyTypeSerializer(idRes: TypeIdResolver?, property: BeanPro
             typeIdDef.wrapperWritten = true
             var incl = typeIdDef.include
             if (valueShape != JsonToken.START_OBJECT
-                    && incl.requiresObjectContext()) {
+                && incl.requiresObjectContext()
+            ) {
                 incl = WritableTypeId.Inclusion.WRAPPER_ARRAY
                 typeIdDef.include = incl
             }

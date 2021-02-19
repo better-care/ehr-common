@@ -24,11 +24,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "PLAN_DATA_CONTEXT", propOrder = [
-    "variables",
-    "expressions",
-    "constants"])
+@XmlType(
+    name = "PLAN_DATA_CONTEXT", propOrder = [
+        "variables",
+        "expressions",
+        "constants"])
 @Open
 class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -51,7 +53,7 @@ class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-         "PlanDataContext{" +
+        "PlanDataContext{" +
                 "variables=$variables" +
                 ", expressions=$expressions" +
                 '}'

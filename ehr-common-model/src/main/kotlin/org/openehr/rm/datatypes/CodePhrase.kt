@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "CODE_PHRASE", propOrder = [
         "terminologyId",
-        "codeString"]
-)
+        "codeString"])
 @Open
 class CodePhrase() : RmObject(), Serializable {
     constructor(terminologyId: TerminologyId, codeString: String) : this() {

@@ -23,8 +23,9 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "EXTERNAL_VARIABLE", propOrder = [ "populatingRequest" ])
+@XmlType(name = "EXTERNAL_VARIABLE", propOrder = ["populatingRequest"])
 @XmlSeeAlso(value = [EventVariable::class, StateVariable::class])
 @Open
 abstract class ExternalVariable<T> : ContextVariable<T> {
@@ -51,7 +52,7 @@ abstract class ExternalVariable<T> : ContextVariable<T> {
     }
 
     override fun toString(): String =
-            "ExternalVariable{" +
-                    "populatingRequest=$populatingRequest" +
-                    "} ${super.toString()}"
+        "ExternalVariable{" +
+                "populatingRequest=$populatingRequest" +
+                "} ${super.toString()}"
 }

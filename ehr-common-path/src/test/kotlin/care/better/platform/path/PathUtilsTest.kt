@@ -23,6 +23,7 @@ import java.util.regex.Pattern
  * @author Primoz Delopst
  * @since 3.1.0
  */
+
 class PathUtilsTest {
     @Test
     fun testGetSegments() {
@@ -166,7 +167,8 @@ class PathUtilsTest {
 
     @Test
     fun testDoubleArchetype() {
-        val pathSegments = PathUtils.getPathSegments("[openEHR-EHR-COMPOSITION.encounter.v1]/content[openEHR-EHR-OBSERVATION.glasgow_coma_scale.v1]/protocol[at0038]/items[at0039][openEHR-EHR-CLUSTER.exam_eye_pupil.v0]/items[at0002]")
+        val pathSegments =
+            PathUtils.getPathSegments("[openEHR-EHR-COMPOSITION.encounter.v1]/content[openEHR-EHR-OBSERVATION.glasgow_coma_scale.v1]/protocol[at0038]/items[at0039][openEHR-EHR-CLUSTER.exam_eye_pupil.v0]/items[at0002]")
         assertThat(pathSegments[2].archetypeNodeId).isEqualTo("openEHR-EHR-CLUSTER.exam_eye_pupil.v0")
     }
 }

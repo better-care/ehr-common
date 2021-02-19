@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "STATE_VARIABLE", propOrder = ["requiredCurrency"])
 @Open
@@ -47,7 +48,7 @@ class StateVariable<T> : ExternalVariable<T> {
     }
 
     override fun toString(): String =
-            "StateVariable{" +
-                    "requiredCurrency=$requiredCurrency" +
-                    "} ${super.toString()}"
+        "StateVariable{" +
+                "requiredCurrency=$requiredCurrency" +
+                "} ${super.toString()}"
 }

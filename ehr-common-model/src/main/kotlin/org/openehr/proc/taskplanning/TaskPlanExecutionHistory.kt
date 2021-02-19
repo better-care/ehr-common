@@ -22,11 +22,12 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "TASK_PLAN_EXECUTION_HISTORY", propOrder = [
-    "planEvents",
-    "taskEvents"
-])
+@XmlType(
+    name = "TASK_PLAN_EXECUTION_HISTORY", propOrder = [
+        "planEvents",
+        "taskEvents"])
 @Open
 class TaskPlanExecutionHistory : RmObject() {
     companion object {
@@ -40,8 +41,8 @@ class TaskPlanExecutionHistory : RmObject() {
     var planEvents: MutableList<TaskPlanEventRecord> = mutableListOf()
 
     override fun toString(): String =
-            "TaskPlanExecutionHistory{" +
-                    "taskEvents=$taskEvents" +
-                    ", planEvents=$planEvents" +
-                    '}'
+        "TaskPlanExecutionHistory{" +
+                "taskEvents=$taskEvents" +
+                ", planEvents=$planEvents" +
+                '}'
 }

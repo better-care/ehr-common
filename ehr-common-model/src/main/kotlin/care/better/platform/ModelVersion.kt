@@ -20,6 +20,7 @@ import care.better.openehr.rm.RmVersion
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 class ModelVersion(val rmVersion: RmVersion, val tpVersion: TpVersion?) {

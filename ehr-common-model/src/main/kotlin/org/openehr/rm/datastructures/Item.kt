@@ -24,10 +24,11 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ITEM")
-@XmlSeeAlso(value = [Cluster::class, Element::class ])
+@XmlSeeAlso(value = [Cluster::class, Element::class])
 @Open
 abstract class Item : Locatable() {
     companion object {

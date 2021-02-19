@@ -1,6 +1,22 @@
+/* Copyright 2021 Better Ltd (www.better.care)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package care.better.platform.json.jackson
 
 import care.better.platform.json.jackson.openehr.OpenEhrObjectMapper
+import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.common.collect.ImmutableList
@@ -16,10 +32,13 @@ import kotlin.collections.set
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 class OpenEhrObjectMapperSerializationTest {
 
-    private val objectMapper: ObjectMapper = OpenEhrObjectMapper()
+    private val objectMapper: ObjectMapper = OpenEhrObjectMapper().apply {
+        this.enable(JsonParser.Feature.ALLOW_COMMENTS)
+    }
 
     @Test
     fun testSimple() {
@@ -128,7 +147,7 @@ class OpenEhrObjectMapperSerializationTest {
     @Test
     fun simpleMapInList1() {
         val fromJson = objectMapper.readValue(
-                """[
+            """[
                                 {
                                     "tags": [
                                         {
@@ -144,14 +163,15 @@ class OpenEhrObjectMapperSerializationTest {
                                     ]
                                 }
                             ]""",
-                object : TypeReference<List<Any>>() {})
+            object : TypeReference<List<Any>>() {})
         assertThat(fromJson).hasSize(1)
         assertThat(fromJson[0]).isInstanceOf(MutableMap::class.java)
         val map = fromJson[0] as Map<*, *>
         assertThat(map["tags"]).isInstanceOf(MutableList::class.java)
         val tags = map["tags"] as List<*>
-        assertThat(tags).containsExactly(ImmutableMap.of("tag", "abc1", "value", "val1", "aqlPath", "/"),
-                                         ImmutableMap.of("tag", "abc2", "value", "val2", "aqlPath", "/"))
+        assertThat(tags).containsExactly(
+            ImmutableMap.of("tag", "abc1", "value", "val1", "aqlPath", "/"),
+            ImmutableMap.of("tag", "abc2", "value", "val2", "aqlPath", "/"))
     }
 
     @Test
@@ -209,8 +229,8 @@ class OpenEhrObjectMapperSerializationTest {
     @Test
     fun resultSetWithTags() {
         val fromJson: List<*> = objectMapper.readValue(
-                OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-simple.json"),
-                object : TypeReference<List<Any>>() {})
+            OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-simple.json"),
+            object : TypeReference<List<Any>>() {})
         assertThat(fromJson).isNotNull()
         assertThat(fromJson).hasSize(1)
         assertThat(fromJson[0]).isInstanceOf(MutableMap::class.java)
@@ -224,7 +244,7 @@ class OpenEhrObjectMapperSerializationTest {
     @Test
     fun wrappedResultSetWithTags() {
         val fromJson: Result =
-                objectMapper.readValue(OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-result.json"), Result::class.java)
+            objectMapper.readValue(OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-result.json"), Result::class.java)
         assertThat(fromJson).isNotNull()
         assertThat(fromJson.resultSet).hasSize(1)
         assertThat(fromJson.resultSet[0]).isInstanceOf(MutableMap::class.java)
@@ -239,8 +259,8 @@ class OpenEhrObjectMapperSerializationTest {
     @Test
     fun wrappedResultSetWithoutTypeWithTags() {
         val fromJson: Result = objectMapper.readValue(
-                OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-without-type-result.json"),
-                Result::class.java)
+            OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-without-type-result.json"),
+            Result::class.java)
 
         assertThat(fromJson).isNotNull()
         assertThat(fromJson.resultSet).hasSize(1)
@@ -256,13 +276,13 @@ class OpenEhrObjectMapperSerializationTest {
     private fun buildCluster(): Cluster = Cluster().apply { this.name = DvCodedText.createWithLocalTerminology("at0001", "Name") }
 
     private fun buildComposition(): Composition =
-            Composition().apply {
-                this.name = DvCodedText.createWithLocalTerminology("111", "Name")
-                this.archetypeNodeId = "at0000"
-                this.content.add(Section().apply {
-                    this.name = DvCodedText.createWithLocalTerminology("222", "Name")
-                })
-            }
+        Composition().apply {
+            this.name = DvCodedText.createWithLocalTerminology("111", "Name")
+            this.archetypeNodeId = "at0000"
+            this.content.add(Section().apply {
+                this.name = DvCodedText.createWithLocalTerminology("222", "Name")
+            })
+        }
 
     private class Result() {
         var resultSet: MutableList<Map<String, Any?>> = mutableListOf()

@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TIME_SPECIFIER")
 @XmlSeeAlso(value = [ClockTime::class, CustomaryTime::class])

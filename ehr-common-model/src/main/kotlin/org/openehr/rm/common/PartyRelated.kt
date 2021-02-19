@@ -27,19 +27,19 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_RELATED", propOrder = ["relationship"])
 @Open
 class PartyRelated
 constructor(
-    @XmlElement(required = true)
-    @Required
-    var relationship: DvCodedText? = null,
-    name: String? = null,
-    identifiers: MutableList<DvIdentifier> = mutableListOf(),
-    externalRef: PartyRef? = null
-) : PartyIdentified(name, identifiers, externalRef) {
+        @XmlElement(required = true)
+        @Required
+        var relationship: DvCodedText? = null,
+        name: String? = null,
+        identifiers: MutableList<DvIdentifier> = mutableListOf(),
+        externalRef: PartyRef? = null): PartyIdentified(name, identifiers, externalRef) {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

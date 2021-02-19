@@ -24,7 +24,9 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PATIENT_EHR", namespace = "http://schemas.openehr.org/v1", propOrder = ["systemId", "ehrId", "timeCreated", "ehrStatus"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
@@ -47,11 +49,11 @@ class Ehr : RmObject(), Serializable {
 
 
     override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                javaClass != other?.javaClass -> false
-                else -> (other as Ehr).ehrId == ehrId
-            }
+        when {
+            this === other -> true
+            javaClass != other?.javaClass -> false
+            else -> (other as Ehr).ehrId == ehrId
+        }
 
     override fun hashCode(): Int = Objects.hash(ehrId)
 }

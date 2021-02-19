@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -35,19 +36,17 @@ import javax.xml.bind.annotation.*
         "committer",
         "timeCommitted",
         "changeType",
-        "description"]
-)
+        "description"])
 @XmlSeeAlso(Attestation::class)
 @Open
 class AuditDetails() : RmObject(), Serializable {
     @JvmOverloads
     constructor(
-        systemId: String,
-        committer: PartyProxy,
-        timeCommitted: DvDateTime,
-        changeType: DvCodedText,
-        description: DvText? = null
-    ) : this() {
+            systemId: String,
+            committer: PartyProxy,
+            timeCommitted: DvDateTime,
+            changeType: DvCodedText,
+            description: DvText? = null) : this() {
         this.systemId = systemId
         this.committer = committer
         this.timeCommitted = timeCommitted

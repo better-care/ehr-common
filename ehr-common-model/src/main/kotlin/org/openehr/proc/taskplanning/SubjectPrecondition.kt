@@ -26,10 +26,12 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "SUBJECT_PRECONDITION", propOrder = [
-    "description",
-    "expression"])
+@XmlType(
+    name = "SUBJECT_PRECONDITION", propOrder = [
+        "description",
+        "expression"])
 @Open
 class SubjectPrecondition() : RmObject(), Serializable, VisitableByModelVisitor, ExpressionNamesProvider {
     companion object {
@@ -60,8 +62,8 @@ class SubjectPrecondition() : RmObject(), Serializable, VisitableByModelVisitor,
     override fun getExpressionNames(): Sequence<String> = expression?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun toString(): String =
-            "SubjectPrecondition{" +
-                    "description='$description'" +
-                    ", expression=$expression" +
-                    '}'
+        "SubjectPrecondition{" +
+                "description='$description'" +
+                ", expression=$expression" +
+                '}'
 }

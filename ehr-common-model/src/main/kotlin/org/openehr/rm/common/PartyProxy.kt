@@ -23,15 +23,15 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_PROXY", propOrder = ["externalRef"])
 @XmlSeeAlso(value = [PartyIdentified::class, PartySelf::class])
 @Open
 abstract class PartyProxy(
-    @XmlElement(name = "external_ref")
-    var externalRef: PartyRef? = null
-) : RmObject(), Serializable {
+        @XmlElement(name = "external_ref")
+        var externalRef: PartyRef? = null) : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

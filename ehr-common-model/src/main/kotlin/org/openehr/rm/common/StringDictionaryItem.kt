@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StringDictionaryItem", propOrder = ["value"])
@@ -31,6 +32,7 @@ class StringDictionaryItem : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
     @XmlValue
     var value: String? = null
 

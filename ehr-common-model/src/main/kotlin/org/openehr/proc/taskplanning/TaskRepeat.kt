@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_REPEAT", propOrder = [
     "repeats",
@@ -53,18 +54,18 @@ class TaskRepeat() : RmObject(), Serializable {
     }
 
     override fun toString(): String =
-            "TaskRepeat{" +
-                    "repeats=${intervalToStr(repeats)}" +
-                    ", terminateCondition=$terminateCondition" +
-                    ", period=$period" +
-                    '}'
+        "TaskRepeat{" +
+                "repeats=${intervalToStr(repeats)}" +
+                ", terminateCondition=$terminateCondition" +
+                ", period=$period" +
+                '}'
 
     private fun intervalToStr(repeats: IntervalOfInteger?): String? =
-            repeats?.let {
-                (if (it.lowerIncluded == true) '[' else '(') +
-                        (if (it.lowerUnbounded) "*" else java.lang.String.valueOf(it.lower)) +
-                        ".." +
-                        (if (it.upperUnbounded) "*" else java.lang.String.valueOf(it.upper)) +
-                        (if (it.upperIncluded == true) ']' else ')')
-            }
+        repeats?.let {
+            (if (it.lowerIncluded == true) '[' else '(') +
+                    (if (it.lowerUnbounded) "*" else java.lang.String.valueOf(it.lower)) +
+                    ".." +
+                    (if (it.upperUnbounded) "*" else java.lang.String.valueOf(it.upper)) +
+                    (if (it.upperIncluded == true) ']' else ')')
+        }
 }

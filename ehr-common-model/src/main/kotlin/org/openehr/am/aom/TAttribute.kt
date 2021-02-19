@@ -25,13 +25,15 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "T_ATTRIBUTE", propOrder = [
-    "rmAttributeName",
-    "children",
-    "differentialPath"])
+@XmlType(
+    name = "T_ATTRIBUTE", propOrder = [
+        "rmAttributeName",
+        "children",
+        "differentialPath"])
 class TAttribute : AmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L

@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlTransient
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlTransient

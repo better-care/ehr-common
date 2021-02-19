@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "CONDITION_BRANCH", propOrder = ["test"])
 @Open
@@ -64,7 +65,7 @@ class ConditionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
     override fun getExpressionNames(): Sequence<String> = test?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun toString(): String =
-            "ConditionBranch{" +
-                    "test=$test" + test +
-                    "} ${super.toString()}"
+        "ConditionBranch{" +
+                "test=$test" + test +
+                "} ${super.toString()}"
 }

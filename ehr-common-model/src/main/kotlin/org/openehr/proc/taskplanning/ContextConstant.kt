@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "CONTEXT_CONSTANT")
 @Open
@@ -48,7 +49,7 @@ class ContextConstant<T : Any> : ContextValue<T> {
     }
 
     override fun toString(): String =
-            "ContextConstant{" +
-                    "value=${value}" + value +
-                    "} ${super.toString()}"
+        "ContextConstant{" +
+                "value=${value}" + value +
+                "} ${super.toString()}"
 }

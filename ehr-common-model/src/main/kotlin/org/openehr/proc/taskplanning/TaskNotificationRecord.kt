@@ -26,11 +26,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "TASK_NOTIFICATION_RECORD", propOrder = [
-    "receiver",
-    "receiverTaskPlan",
-    "details"])
+@XmlType(
+    name = "TASK_NOTIFICATION_RECORD", propOrder = [
+        "receiver",
+        "receiverTaskPlan",
+        "details"])
 @Open
 class TaskNotificationRecord() : RmObject() {
     companion object {
@@ -54,9 +56,9 @@ class TaskNotificationRecord() : RmObject() {
     }
 
     override fun toString(): String =
-            "TaskNotificationRecord{" +
-                    "receiver= $receiver" +
-                    ", receiverTaskPlan='$receiverTaskPlan'" +
-                    ", details=$details" +
-                    '}'
+        "TaskNotificationRecord{" +
+                "receiver= $receiver" +
+                ", receiverTaskPlan='$receiverTaskPlan'" +
+                ", details=$details" +
+                '}'
 }

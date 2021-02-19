@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_COUNT", propOrder = ["magnitude"])
@@ -30,14 +31,13 @@ import javax.xml.bind.annotation.XmlType
 class DvCount() : DvAmount() {
     @JvmOverloads
     constructor(
-        magnitude: Long,
-        accuracy: Float? = null,
-        accuracyIsPercent: Boolean? = null,
-        magnitudeStatus: String? = null,
-        normalRange: DvInterval? = null,
-        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-        normalStatus: CodePhrase? = null,
-    ) : this() {
+            magnitude: Long,
+            accuracy: Float? = null,
+            accuracyIsPercent: Boolean? = null,
+            magnitudeStatus: String? = null,
+            normalRange: DvInterval? = null,
+            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+            normalStatus: CodePhrase? = null, ) : this() {
         this.magnitude = magnitude
         this.accuracy = accuracy
         this.accuracyIsPercent = accuracyIsPercent

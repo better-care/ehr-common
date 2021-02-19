@@ -23,12 +23,14 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "VERSION", propOrder = [
-    "contribution",
-    "commitAudit",
-    "signature"])
+@XmlType(
+    name = "VERSION", propOrder = [
+        "contribution",
+        "commitAudit",
+        "signature"])
 @XmlSeeAlso(value = [OriginalVersion::class, ImportedVersion::class])
 @XmlRootElement
 abstract class Version : RmObject(), Serializable {

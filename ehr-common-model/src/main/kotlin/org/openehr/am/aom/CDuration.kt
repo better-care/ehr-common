@@ -23,13 +23,15 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_DURATION", propOrder = [
-    "pattern",
-    "range",
-    "assumedValue",
-    "defaultValue"])
+@XmlType(
+    name = "C_DURATION", propOrder = [
+        "pattern",
+        "range",
+        "assumedValue",
+        "defaultValue"])
 class CDuration : CPrimitive() {
     companion object {
         private const val serialVersionUID: Long = 0L

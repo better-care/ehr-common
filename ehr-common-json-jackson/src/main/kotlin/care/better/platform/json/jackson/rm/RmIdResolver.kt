@@ -31,18 +31,19 @@ import java.util.concurrent.ExecutionException
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @Suppress("UNCHECKED_CAST")
 class RmIdResolver(private val typeFactory: TypeFactory) : TypeIdResolver {
     private var baseType: JavaType? = null
 
     private val rmClassNames = CacheBuilder.newBuilder()
-            .maximumSize(1000L)
-            .build(object : CacheLoader<Class<*>?, String?>() {
-                override fun load(clazz: Class<*>): String {
-                    return RmUtils.getRmTypeName(clazz as Class<out RmObject>)
-                }
-            })
+        .maximumSize(1000L)
+        .build(object : CacheLoader<Class<*>?, String?>() {
+            override fun load(clazz: Class<*>): String {
+                return RmUtils.getRmTypeName(clazz as Class<out RmObject>)
+            }
+        })
 
 
     override fun init(baseType: JavaType?) {
@@ -77,12 +78,12 @@ class RmIdResolver(private val typeFactory: TypeFactory) : TypeIdResolver {
             typeFactory.constructType(rmClass)
         } catch (ignored: ClassNotFoundException) {
             val classNameIdResolver = ClassNameIdResolver(
-                    null,
-                    if (context != null)
-                        context.typeFactory
-                    else
-                        typeFactory,
-                    LaissezFaireSubTypeValidator.instance)
+                null,
+                if (context != null)
+                    context.typeFactory
+                else
+                    typeFactory,
+                LaissezFaireSubTypeValidator.instance)
             classNameIdResolver.typeFromId(context, id)
         }
     }

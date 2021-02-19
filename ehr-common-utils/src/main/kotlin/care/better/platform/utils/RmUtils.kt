@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @Suppress("UNCHECKED_CAST", "unused")
 class RmUtils {
@@ -34,17 +35,17 @@ class RmUtils {
         private val CLASS_MAP: ConcurrentHashMap<String, ClassInfo> = ConcurrentHashMap()
 
         private val PACKAGE_NAMES: List<String> = listOf(
-                "org.openehr.am.aom",
-                "org.openehr.base.basetypes",
-                "org.openehr.base.foundationtypes",
-                "org.openehr.base.resource",
-                "org.openehr.proc.taskplanning",
-                "org.openehr.rm.common",
-                "org.openehr.rm.composition",
-                "org.openehr.rm.datastructures",
-                "org.openehr.rm.datatypes",
-                "org.openehr.rm.ehr",
-                "org.openehr.rm.integration")
+            "org.openehr.am.aom",
+            "org.openehr.base.basetypes",
+            "org.openehr.base.foundationtypes",
+            "org.openehr.base.resource",
+            "org.openehr.proc.taskplanning",
+            "org.openehr.rm.common",
+            "org.openehr.rm.composition",
+            "org.openehr.rm.datastructures",
+            "org.openehr.rm.datatypes",
+            "org.openehr.rm.ehr",
+            "org.openehr.rm.integration")
 
         @JvmStatic
         @Throws(RmClassCastException::class)
@@ -78,110 +79,110 @@ class RmUtils {
         @JvmStatic
         @Throws(RmClassCastException::class)
         fun getGetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
-                getGetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+            getGetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
         @Throws(RmClassCastException::class)
         fun getGetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
-                getGetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+            getGetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
         @Throws(RmClassCastException::class)
         fun getSetterForAttribute(attributeName: String, clazz: Class<out RmObject>): Method? =
-                getSetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+            getSetter(attributeName, { CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
         @Throws(RmClassCastException::class)
         fun getSetterForField(fieldName: String, clazz: Class<out RmObject>): Method? =
-                getSetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
+            getSetter(fieldName, { CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, it) }, clazz)
 
         @JvmStatic
         @Throws(RmClassCastException::class, RmClassFieldNotFoundException::class)
         fun getFieldType(clazz: Class<out RmObject>, fieldName: String) =
-                getClassInfo(clazz).fieldTypes[fieldName] ?: throw RmClassFieldNotFoundException(clazz.name, fieldName)
+            getClassInfo(clazz).fieldTypes[fieldName] ?: throw RmClassFieldNotFoundException(clazz.name, fieldName)
 
         @JvmStatic
         fun isRmClass(clazz: Class<*>): Boolean = PACKAGE_NAMES.contains(clazz.`package`.name)
 
         private fun getGetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
-                with(getClassInfo(clazz).getter) {
-                    val getMethod: Method? = this["get${nameTransformer.invoke(name)}"]
-                    val setMethod: Method? = this["is${nameTransformer.invoke(name)}"]
+            with(getClassInfo(clazz).getter) {
+                val getMethod: Method? = this["get${nameTransformer.invoke(name)}"]
+                val setMethod: Method? = this["is${nameTransformer.invoke(name)}"]
 
-                    if (getMethod != null || setMethod != null) {
-                        getMethod ?: setMethod
-                    } else {
-                        null
-                    }
+                if (getMethod != null || setMethod != null) {
+                    getMethod ?: setMethod
+                } else {
+                    null
                 }
+            }
 
         private fun getSetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
-                getClassInfo(clazz).setter["set${nameTransformer.invoke(name)}"]
+            getClassInfo(clazz).setter["set${nameTransformer.invoke(name)}"]
 
 
         @Throws(RmClassCastException::class)
         private fun getClassInfo(name: String): ClassInfo =
-                with(getNonGenericRmNamePart(name)) {
-                    CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, this)) {
-                        for (packageName in PACKAGE_NAMES) {
-                            try {
-                                val clazz = Class.forName("$packageName.${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)}") as Class<out RmObject>
-                                return@computeIfAbsent ClassInfo(
-                                        clazz,
-                                        getAllNonStaticFields(clazz),
-                                        getAllRequiredFields(clazz),
-                                        getFieldTypes(clazz),
-                                        getGetters(clazz),
-                                        getSetters(clazz))
+            with(getNonGenericRmNamePart(name)) {
+                CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, this)) {
+                    for (packageName in PACKAGE_NAMES) {
+                        try {
+                            val clazz = Class.forName("$packageName.${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)}") as Class<out RmObject>
+                            return@computeIfAbsent ClassInfo(
+                                clazz,
+                                getAllNonStaticFields(clazz),
+                                getAllRequiredFields(clazz),
+                                getFieldTypes(clazz),
+                                getGetters(clazz),
+                                getSetters(clazz))
 
-                            } catch (ignore: ClassNotFoundException) {
-                            }
+                        } catch (ignore: ClassNotFoundException) {
                         }
-                        throw RmClassCastException(name)
                     }
+                    throw RmClassCastException(name)
                 }
+            }
 
         private fun getClassInfo(clazz: Class<out RmObject>): ClassInfo =
-                CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)) {
-                    return@computeIfAbsent ClassInfo(
-                            clazz,
-                            getAllNonStaticFields(clazz),
-                            getAllRequiredFields(clazz),
-                            getFieldTypes(clazz),
-                            getGetters(clazz),
-                            getSetters(clazz))
-                }
+            CLASS_MAP.computeIfAbsent(CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, clazz.simpleName)) {
+                return@computeIfAbsent ClassInfo(
+                    clazz,
+                    getAllNonStaticFields(clazz),
+                    getAllRequiredFields(clazz),
+                    getFieldTypes(clazz),
+                    getGetters(clazz),
+                    getSetters(clazz))
+            }
 
         fun getNonGenericRmNamePart(name: String): String =
-                with(name.indexOf('<')) {
-                    if (this == -1)
-                        name
-                    else
-                       name.substring(0, this)
-                }
+            with(name.indexOf('<')) {
+                if (this == -1)
+                    name
+                else
+                    name.substring(0, this)
+            }
 
         fun getGenericRmNamePart(name: String): String =
-                with(name.indexOf('<')) {
-                    if (this == -1)
-                        name
-                    else
-                        name.substring(this + 1, if (name.last() == '>') name.length - 1 else name.length)
-                }
+            with(name.indexOf('<')) {
+                if (this == -1)
+                    name
+                else
+                    name.substring(this + 1, if (name.last() == '>') name.length - 1 else name.length)
+            }
 
         private fun getAllNonStaticFields(clazz: Class<out RmObject>): Collection<Field> =
-                with(mutableListOf<Field>()) {
-                    addFieldsRecursive(clazz, { !Modifier.isStatic(it.modifiers) }, this)
-                    this.toList()
-                }
+            with(mutableListOf<Field>()) {
+                addFieldsRecursive(clazz, { !Modifier.isStatic(it.modifiers) }, this)
+                this.toList()
+            }
 
         private fun getAllRequiredFields(clazz: Class<out RmObject>): Collection<Field> =
-                with(mutableListOf<Field>()) {
-                    addFieldsRecursive(
-                            clazz,
-                            { it.getAnnotation(Required::class.java) != null },
-                            this)
-                    this.toList()
-                }
+            with(mutableListOf<Field>()) {
+                addFieldsRecursive(
+                    clazz,
+                    { it.getAnnotation(Required::class.java) != null },
+                    this)
+                this.toList()
+            }
 
         private fun addFieldsRecursive(clazz: Class<*>?, predicate: (Field) -> Boolean, list: MutableList<Field>) {
             if (clazz == null) {
@@ -193,18 +194,18 @@ class RmUtils {
         }
 
         private fun getGetters(clazz: Class<out RmObject>): Map<String, Method> =
-                clazz.methods.filter { it.name.startsWith("get") || it.name.startsWith("is") }.associateBy { it.name }
+            clazz.methods.filter { it.name.startsWith("get") || it.name.startsWith("is") }.associateBy { it.name }
 
 
         private fun getSetters(clazz: Class<out RmObject>): Map<String, Method> =
-                clazz.methods.filter { it.name.startsWith("set") }.associateBy { it.name }
+            clazz.methods.filter { it.name.startsWith("set") }.associateBy { it.name }
 
 
         private fun getFieldTypes(clazz: Class<out RmObject>): Map<String, Class<*>> =
-                with(mutableListOf<Field>()){
-                    addFieldsRecursive(clazz, { true }, this)
-                    this.associate { Pair(it.name, getParametrizedClass(it.genericType) ?: it.type) }
-                }
+            with(mutableListOf<Field>()) {
+                addFieldsRecursive(clazz, { true }, this)
+                this.associate { Pair(it.name, getParametrizedClass(it.genericType) ?: it.type) }
+            }
 
         private fun getParametrizedClass(type: Type?): Class<*>? {
             if (type is ParameterizedType) {

@@ -26,15 +26,17 @@ import org.openehr.proc.taskplanning.BooleanContextExpression
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @Open
 class OpenEhrObjectMapper : ObjectMapper() {
     init {
-        setDefaultTyping(RmTypeResolverBuilder(DefaultTyping.NON_FINAL)
-                                 .init(JsonTypeInfo.Id.CLASS, null)
-                                 .typeProperty("_type")
-                                 .inclusion(JsonTypeInfo.As.PROPERTY))
+        setDefaultTyping(
+            RmTypeResolverBuilder(DefaultTyping.NON_FINAL)
+                .init(JsonTypeInfo.Id.CLASS, null)
+                .typeProperty("_type")
+                .inclusion(JsonTypeInfo.As.PROPERTY))
 
         registerModule(KotlinModule())
         configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)

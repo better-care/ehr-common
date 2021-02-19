@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -33,16 +34,15 @@ import javax.xml.bind.annotation.*
 class Contribution
 @JvmOverloads
 constructor(
-    @XmlElement(required = true)
-    @Required
-    var uid: HierObjectId? = null,
-    @XmlElement(required = true)
-    @Required
-    var versions: MutableList<RmObject> = mutableListOf(),
-    @XmlElement(required = true)
-    @Required
-    var audit: AuditDetails? = null
-) : RmObject(), Serializable {
+        @XmlElement(required = true)
+        @Required
+        var uid: HierObjectId? = null,
+        @XmlElement(required = true)
+        @Required
+        var versions: MutableList<RmObject> = mutableListOf(),
+        @XmlElement(required = true)
+        @Required
+        var audit: AuditDetails? = null) : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

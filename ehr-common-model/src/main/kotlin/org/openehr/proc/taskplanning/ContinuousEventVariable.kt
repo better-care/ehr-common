@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "CONTINUOUS_EVENT_VARIABLE", propOrder = ["updateVariation"])
 @Open
@@ -50,7 +51,7 @@ class ContinuousEventVariable<T> : EventVariable<T> {
     }
 
     override fun toString(): String =
-            "ContinuousEventVariable{" +
-                    "updateVariation=$updateVariation" +
-                    "} ${super.toString()}"
+        "ContinuousEventVariable{" +
+                "updateVariation=$updateVariation" +
+                "} ${super.toString()}"
 }

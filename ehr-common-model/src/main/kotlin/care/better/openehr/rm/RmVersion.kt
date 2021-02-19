@@ -17,6 +17,7 @@ package care.better.openehr.rm
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 enum class RmVersion(val version: String, private val possibleValues: Set<String>) {
 
@@ -27,12 +28,12 @@ enum class RmVersion(val version: String, private val possibleValues: Set<String
 
     companion object {
         fun from(version: String): RmVersion =
-                when {
-                    RM1_0_1.possibleValues.contains(version) -> RM1_0_1
-                    RM1_0_2.possibleValues.contains(version) -> RM1_0_2
-                    RM1_0_3.possibleValues.contains(version) -> RM1_0_3
-                    RM1_0_4.possibleValues.contains(version) -> RM1_0_4
-                    else -> throw IllegalArgumentException("Unknown RM version $version.")
-                }
+            when {
+                RM1_0_1.possibleValues.contains(version) -> RM1_0_1
+                RM1_0_2.possibleValues.contains(version) -> RM1_0_2
+                RM1_0_3.possibleValues.contains(version) -> RM1_0_3
+                RM1_0_4.possibleValues.contains(version) -> RM1_0_4
+                else -> throw IllegalArgumentException("Unknown RM version $version.")
+            }
     }
 }

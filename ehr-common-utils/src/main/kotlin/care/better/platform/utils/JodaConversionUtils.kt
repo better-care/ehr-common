@@ -28,6 +28,7 @@ import org.openehr.rm.datatypes.DvTime
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 
@@ -51,12 +52,12 @@ class JodaConversionUtils {
          */
         @JvmStatic
         fun createDvDuration(value: String?): DvDuration? =
-                value?.let {
-                    DvDuration().apply {
-                        ISOPeriodFormat.standard().parsePeriod(value)
-                        this.value = value
-                    }
+            value?.let {
+                DvDuration().apply {
+                    ISOPeriodFormat.standard().parsePeriod(value)
+                    this.value = value
                 }
+            }
 
         /**
          * Converts duration string value to [Period]
@@ -112,14 +113,14 @@ class JodaConversionUtils {
          */
         @JvmStatic
         fun toLocalTime(time: DvTime): LocalTime =
-                with(requireNotNull(time.value)) {
-                    val timeIndex = this.indexOf('T')
-                    ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
-                            if (timeIndex == -1)
-                                this
-                            else
-                                this.substring(timeIndex + 1))
-                }
+            with(requireNotNull(time.value)) {
+                val timeIndex = this.indexOf('T')
+                ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
+                    if (timeIndex == -1)
+                        this
+                    else
+                        this.substring(timeIndex + 1))
+            }
 
         /**
          * Converts [DvDate] to [LocalDate]
@@ -238,6 +239,7 @@ fun DvDateTime.toDateTime(): DateTime = JodaConversionUtils.toDateTime(this)
  */
 @JvmSynthetic
 fun DvTime.toJodaLocalTime(): LocalTime = JodaConversionUtils.toLocalTime(this)
+
 /**
  * Converts [DvDate] to [LocalDate]
  *

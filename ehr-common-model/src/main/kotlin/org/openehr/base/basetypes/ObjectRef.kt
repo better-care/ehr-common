@@ -25,14 +25,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "OBJECT_REF", propOrder = [
         "id",
         "namespace",
-        "type"]
-)
+        "type"])
 @XmlSeeAlso(value = [PartyRef::class, AccessGroupRef::class, LocatableRef::class])
 @Open
 class ObjectRef() : RmObject(), Serializable {

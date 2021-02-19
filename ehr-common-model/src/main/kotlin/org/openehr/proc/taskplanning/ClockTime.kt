@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "CLOCK_TIME", propOrder = ["time"])
 @Open
@@ -39,7 +40,7 @@ class ClockTime() : TimeSpecifier() {
     }
 
     override fun toString(): String =
-            "ClockTime{" +
-                    "time=$time" +
-                    "} ${super.toString()}"
+        "ClockTime{" +
+                "time=$time" +
+                "} ${super.toString()}"
 }

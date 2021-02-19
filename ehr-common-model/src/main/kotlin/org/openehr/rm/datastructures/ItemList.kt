@@ -20,10 +20,11 @@ import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
 
-
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ITEM_LIST", propOrder = ["items"])
 @Open

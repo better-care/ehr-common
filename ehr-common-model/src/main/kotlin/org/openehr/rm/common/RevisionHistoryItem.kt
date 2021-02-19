@@ -27,11 +27,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "REVISION_HISTORY_ITEM", propOrder = [
-    "versionId",
-    "audits"])
+@XmlType(
+    name = "REVISION_HISTORY_ITEM", propOrder = [
+        "versionId",
+        "audits"])
 @Open
 class RevisionHistoryItem : RmObject(), Serializable {
     companion object {

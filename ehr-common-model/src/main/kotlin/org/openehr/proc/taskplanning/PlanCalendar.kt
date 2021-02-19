@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "PLAN_CALENDAR", propOrder = ["entries"])
 @Open
@@ -33,7 +34,7 @@ class PlanCalendar : RmObject(), Serializable {
     var entries: MutableList<CalendarEntry> = mutableListOf()
 
     override fun toString(): String =
-            "PlanCalendar{" +
-                    "entries=$entries" +
-                    '}'
+        "PlanCalendar{" +
+                "entries=$entries" +
+                '}'
 }

@@ -26,8 +26,9 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "CHOICE_GROUP", propOrder = ["overrideType", "timeout" ])
+@XmlType(name = "CHOICE_GROUP", propOrder = ["overrideType", "timeout"])
 @XmlSeeAlso(value = [ConditionGroup::class, DecisionGroup::class, AdhocGroup::class, EventGroup::class])
 @Open
 abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
@@ -59,10 +60,10 @@ abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
     }
 
     override fun setExecutionType(executionType: ExecutionType?) =
-            if (executionType != null && executionType !== ExecutionType.PARALLEL)
-                throw UnsupportedOperationException("Choice groups only support parallel type.")
-            else
-                super.setExecutionType(executionType)
+        if (executionType != null && executionType !== ExecutionType.PARALLEL)
+            throw UnsupportedOperationException("Choice groups only support parallel type.")
+        else
+            super.setExecutionType(executionType)
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)
@@ -75,9 +76,9 @@ abstract class ChoiceGroup<B : ChoiceBranch<out PlanItem>> : TaskGroup<B> {
     }
 
     override fun toString(): String =
-            "ChoiceGroup{" +
-                    "overrideType=$overrideType" +
-                    ", timeout=$timeout" +
-                    "} ${super.toString()}"
+        "ChoiceGroup{" +
+                "overrideType=$overrideType" +
+                ", timeout=$timeout" +
+                "} ${super.toString()}"
 
 }

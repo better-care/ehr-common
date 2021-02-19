@@ -27,28 +27,27 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "LINK", propOrder = [
         "meaning",
         "type",
-        "target"]
-)
+        "target"])
 @Open
 class Link
 @JvmOverloads
 constructor(
-    @XmlElement(required = true)
-    @Required
-    var meaning: DvText? = null,
-    @XmlElement(required = true)
-    @Required
-    var type: DvText? = null,
-    @XmlElement(required = true)
-    @Required
-    var target: DvEhrUri? = null
-) : RmObject(), java.io.Serializable {
+        @XmlElement(required = true)
+        @Required
+        var meaning: DvText? = null,
+        @XmlElement(required = true)
+        @Required
+        var type: DvText? = null,
+        @XmlElement(required = true)
+        @Required
+        var target: DvEhrUri? = null) : RmObject(), java.io.Serializable {
 
     companion object {
         private const val serialVersionUID: Long = 0L

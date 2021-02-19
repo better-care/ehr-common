@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "CHOICE_BRANCH")
 @XmlSeeAlso(value = [DecisionBranch::class, ConditionBranch::class, EventBranch::class, AdhocBranch::class])

@@ -22,11 +22,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IntervalOfDuration", propOrder = [
-    "lower",
-    "upper"])
+@XmlType(
+    name = "IntervalOfDuration", propOrder = [
+        "lower",
+        "upper"])
 @Open
 class IntervalOfDuration : Interval() {
     companion object {

@@ -23,22 +23,23 @@ import org.openehr.rm.ehr.EhrStatus
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 class OpenEhrPropertyNamingStrategy : PropertyNamingStrategy.SnakeCaseStrategy() {
     private val ehrStatusClass: Class<EhrStatus> = EhrStatus::class.java
 
     override fun nameForGetterMethod(config: MapperConfig<*>, method: AnnotatedMethod?, defaultName: String): String? =
-            if (method != null && method.declaringClass != null && isRmClass(method.declaringClass))
-                getOpenEhrName(method) ?: super.nameForSetterMethod(config, method, defaultName)
-            else
-                super.nameForGetterMethod(config, method, defaultName)
+        if (method != null && method.declaringClass != null && isRmClass(method.declaringClass))
+            getOpenEhrName(method) ?: super.nameForSetterMethod(config, method, defaultName)
+        else
+            super.nameForGetterMethod(config, method, defaultName)
 
     override fun nameForSetterMethod(config: MapperConfig<*>, method: AnnotatedMethod?, defaultName: String): String? =
-            if (method != null && method.declaringClass != null && isRmClass(method.declaringClass))
-                getOpenEhrName(method) ?: super.nameForSetterMethod(config, method, defaultName)
-            else
-                super.nameForSetterMethod(config, method, defaultName)
+        if (method != null && method.declaringClass != null && isRmClass(method.declaringClass))
+            getOpenEhrName(method) ?: super.nameForSetterMethod(config, method, defaultName)
+        else
+            super.nameForSetterMethod(config, method, defaultName)
 
     private fun getOpenEhrName(method: AnnotatedMethod): String? = method.getAnnotation(OpenEhrName::class.java)?.name
 

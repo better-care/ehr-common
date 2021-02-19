@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -33,23 +34,21 @@ import javax.xml.bind.annotation.XmlType
         "numerator",
         "denominator",
         "type",
-        "precision"]
-)
+        "precision"])
 @Open
 class DvProportion() : DvAmount() {
     @JvmOverloads
     constructor(
-        numerator: Float,
-        denominator: Float,
-        type: BigInteger,
-        precision: Int? = null,
-        accuracy: Float? = null,
-        accuracyIsPercent: Boolean? = null,
-        magnitudeStatus: String? = null,
-        normalRange: DvInterval? = null,
-        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-        normalStatus: CodePhrase? = null,
-    ) : this() {
+            numerator: Float,
+            denominator: Float,
+            type: BigInteger,
+            precision: Int? = null,
+            accuracy: Float? = null,
+            accuracyIsPercent: Boolean? = null,
+            magnitudeStatus: String? = null,
+            normalRange: DvInterval? = null,
+            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+            normalStatus: CodePhrase? = null) : this() {
         this.numerator = numerator
         this.denominator = denominator
         this.type = type

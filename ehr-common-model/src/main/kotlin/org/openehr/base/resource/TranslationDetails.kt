@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -35,8 +36,7 @@ import javax.xml.bind.annotation.XmlType
         "language",
         "author",
         "accreditation",
-        "otherDetails"]
-)
+        "otherDetails"])
 @Open
 class TranslationDetails : RmObject(), Serializable {
     companion object {

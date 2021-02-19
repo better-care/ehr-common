@@ -25,11 +25,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OBSERVATION", propOrder = [
-    "data",
-    "state"])
+@XmlType(
+    name = "OBSERVATION", propOrder = [
+        "data",
+        "state"])
 @Open
 class Observation : CareEntry() {
     companion object {

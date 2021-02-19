@@ -21,15 +21,17 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_ATTRIBUTE", propOrder = [
-    "rmAttributeName",
-    "existence",
-    "differentialPath",
-    "matchNegated",
-    "children"])
+@XmlType(
+    name = "C_ATTRIBUTE", propOrder = [
+        "rmAttributeName",
+        "existence",
+        "differentialPath",
+        "matchNegated",
+        "children"])
 @XmlSeeAlso(value = [CSingleAttribute::class, CMultipleAttribute::class])
 abstract class CAttribute : ArchetypeConstraint() {
     companion object {

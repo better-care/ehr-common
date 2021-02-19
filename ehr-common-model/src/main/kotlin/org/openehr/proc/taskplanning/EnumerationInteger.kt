@@ -17,6 +17,7 @@ package org.openehr.proc.taskplanning
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 interface EnumerationInteger {
@@ -24,15 +25,15 @@ interface EnumerationInteger {
     companion object {
         @JvmStatic
         fun <T : EnumerationInteger> fromInteger(enumClass: Class<T>, value: Int): T =
-                enumClass.enumConstants.firstOrNull { it.integerValue() == value }
-                        ?: throw IllegalArgumentException("No such " + enumClass.simpleName + ": " + value)
+            enumClass.enumConstants.firstOrNull { it.integerValue() == value }
+                ?: throw IllegalArgumentException("No such " + enumClass.simpleName + ": " + value)
     }
 
     @JvmDefault
     fun integerValue(): Int =
-            if (this is Enum<*>)
-                (this as Enum<*>).ordinal
-            else
-                throw AssertionError("EnumerationInteger " + javaClass.simpleName + " is not an Enum")
+        if (this is Enum<*>)
+            (this as Enum<*>).ordinal
+        else
+            throw AssertionError("EnumerationInteger " + javaClass.simpleName + " is not an Enum")
 
 }

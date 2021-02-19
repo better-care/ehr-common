@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "DATASET_COMMIT_GROUP", propOrder = ["groupId", "completionStep"])
 @Open
@@ -56,8 +57,8 @@ class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "DatasetCommitGroup{" +
-                    "groupId='$groupId'" +
-                    ", completionStep=$completionStep" +
-                    '}'
+        "DatasetCommitGroup{" +
+                "groupId='$groupId'" +
+                ", completionStep=$completionStep" +
+                '}'
 }

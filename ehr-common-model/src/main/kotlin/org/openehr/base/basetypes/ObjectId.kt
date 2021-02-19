@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -33,12 +34,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlSeeAlso(value = [ArchetypeId::class, TemplateId::class, TerminologyId::class, UidBasedId::class, GenericId::class])
 @Open
 abstract class ObjectId(
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "token")
-    @Required
-    var value: String? = null
-) : RmObject(), Serializable {
+        @XmlElement(required = true)
+        @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
+        @XmlSchemaType(name = "token")
+        @Required
+        var value: String? = null) : RmObject(), Serializable {
 
     companion object {
         private const val serialVersionUID: Long = 0L

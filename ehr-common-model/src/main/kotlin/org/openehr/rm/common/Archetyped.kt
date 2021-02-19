@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -35,20 +36,18 @@ import javax.xml.bind.annotation.XmlType
     name = "ARCHETYPED", propOrder = [
         "archetypeId",
         "templateId",
-        "rmVersion"]
-)
+        "rmVersion"])
 @Open
 class Archetyped
 @JvmOverloads
 constructor(
-    @XmlElement(name = "archetype_id", required = true)
-    @Required
-    var archetypeId: ArchetypeId? = null,
-    @XmlElement(name = "template_id")
-    var templateId: TemplateId? = null,
-    @XmlElement(name = "rm_version", required = true)
-    var rmVersion: String = RM_VERSION.version
-) : RmObject(), Serializable {
+        @XmlElement(name = "archetype_id", required = true)
+        @Required
+        var archetypeId: ArchetypeId? = null,
+        @XmlElement(name = "template_id")
+        var templateId: TemplateId? = null,
+        @XmlElement(name = "rm_version", required = true)
+        var rmVersion: String = RM_VERSION.version) : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

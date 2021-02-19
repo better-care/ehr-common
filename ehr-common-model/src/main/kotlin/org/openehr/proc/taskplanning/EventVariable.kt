@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "EVENT_VARIABLE")
 @XmlSeeAlso(ContinuousEventVariable::class)

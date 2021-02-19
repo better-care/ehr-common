@@ -27,15 +27,17 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "HISTORY", propOrder = [
-    "origin",
-    "period",
-    "duration",
-    "events",
-    "summary"])
+@XmlType(
+    name = "HISTORY", propOrder = [
+        "origin",
+        "period",
+        "duration",
+        "events",
+        "summary"])
 @Open
 class History : Locatable() {
     companion object {

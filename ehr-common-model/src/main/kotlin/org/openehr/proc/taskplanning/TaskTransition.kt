@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_TRANSITION", propOrder = [
     "taskId",
@@ -56,8 +57,8 @@ class TaskTransition() : PlanEvent(), TaskReferencingEvent {
     }
 
     override fun toString(): String =
-            "TaskTransition{" +
-                    "taskId=$taskId" +
-                    ", transitions=$transitions" +
-                    "} ${super.toString()}"
+        "TaskTransition{" +
+                "taskId=$taskId" +
+                ", transitions=$transitions" +
+                "} ${super.toString()}"
 }

@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_ACTION", propOrder = [
     "subjectPreconditions",
@@ -67,7 +68,7 @@ abstract class TaskAction() : Locatable(), VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "TaskAction{" +
+        "TaskAction{" +
                 ", instructionActivity=$instructionActivity" +
                 ", subjectPreconditions=$subjectPreconditions" +
                 ", costingData=$costingData" +

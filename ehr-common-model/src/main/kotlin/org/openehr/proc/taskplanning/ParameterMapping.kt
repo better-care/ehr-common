@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "PARAMETER_MAPPING", propOrder = [
     "name",
@@ -56,8 +57,8 @@ class ParameterMapping() : RmObject(), Serializable, VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "ParameterMapping{" +
-                    "name='$name'" +
-                    ", contextName='$contextName'" +
-                    "} ${super.toString()}"
+        "ParameterMapping{" +
+                "name='$name'" +
+                ", contextName='$contextName'" +
+                "} ${super.toString()}"
 }

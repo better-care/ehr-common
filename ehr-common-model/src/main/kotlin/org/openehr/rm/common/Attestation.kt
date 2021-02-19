@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -34,23 +35,21 @@ import javax.xml.bind.annotation.XmlType
         "proof",
         "items",
         "reason",
-        "isPending"]
-)
+        "isPending"])
 @Open
 class Attestation() : AuditDetails() {
     @JvmOverloads
     constructor(
-        reason: DvText,
-        attestedView: DvMultimedia? = null,
-        proof: String? = null,
-        items: MutableList<DvEhrUri> = mutableListOf(),
-        isPending: Boolean = false,
-        systemId: String? = null,
-        committer: PartyProxy? = null,
-        timeCommitted: DvDateTime? = null,
-        changeType: DvCodedText? = null,
-        description: DvText? = null
-    ) : this() {
+            reason: DvText,
+            attestedView: DvMultimedia? = null,
+            proof: String? = null,
+            items: MutableList<DvEhrUri> = mutableListOf(),
+            isPending: Boolean = false,
+            systemId: String? = null,
+            committer: PartyProxy? = null,
+            timeCommitted: DvDateTime? = null,
+            changeType: DvCodedText? = null,
+            description: DvText? = null) : this() {
         this.reason = reason
         this.attestedView = attestedView
         this.proof = proof

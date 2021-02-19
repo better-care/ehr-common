@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -34,19 +35,17 @@ import javax.xml.bind.annotation.XmlType
         "lowerIncluded",
         "upperIncluded",
         "lowerUnbounded",
-        "upperUnbounded"]
-)
+        "upperUnbounded"])
 @Open
 class DvInterval() : DataValue(), RangeParameters {
     @JvmOverloads
     constructor(
-        lower: DvOrdered?,
-        upper: DvOrdered?,
-        lowerIncluded: Boolean? = null,
-        upperIncluded: Boolean? = null,
-        lowerUnbounded: Boolean = false,
-        upperUnbounded: Boolean = false
-    ) : this() {
+            lower: DvOrdered?,
+            upper: DvOrdered?,
+            lowerIncluded: Boolean? = null,
+            upperIncluded: Boolean? = null,
+            lowerUnbounded: Boolean = false,
+            upperUnbounded: Boolean = false) : this() {
         this.lower = lower
         this.upper = upper
         this.lowerIncluded = lowerIncluded

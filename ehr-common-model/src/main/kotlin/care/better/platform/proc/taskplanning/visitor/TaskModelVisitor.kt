@@ -21,6 +21,7 @@ import org.openehr.rm.common.PartyProxy
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 interface TaskModelVisitor {

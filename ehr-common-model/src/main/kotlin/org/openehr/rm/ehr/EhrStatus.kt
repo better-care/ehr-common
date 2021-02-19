@@ -24,7 +24,9 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EHR_STATUS", namespace = "http://schemas.openehr.org/v1", propOrder = ["subject", "queryable", "modifiable", "otherDetails"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")

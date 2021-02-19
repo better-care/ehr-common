@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "EXTERNAL_REQUEST", propOrder = [
     "organisation",
@@ -60,9 +61,9 @@ class ExternalRequest() : DispatchableAction() {
     }
 
     override fun toString(): String =
-            "ExternalRequest{" +
-                    "organisation=$organisation" +
-                    ", requestId='$requestId'" +
-                    ", otherDetails=$otherDetails" +
-                    "} ${super.toString()}"
+        "ExternalRequest{" +
+                "organisation=$organisation" +
+                ", requestId='$requestId'" +
+                ", otherDetails=$otherDetails" +
+                "} ${super.toString()}"
 }

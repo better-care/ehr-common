@@ -26,12 +26,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_QUANTITY_ITEM", propOrder = [
-    "magnitude",
-    "precision",
-    "units"])
+@XmlType(
+    name = "C_QUANTITY_ITEM", propOrder = [
+        "magnitude",
+        "precision",
+        "units"])
 class CQuantityItem : AmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L

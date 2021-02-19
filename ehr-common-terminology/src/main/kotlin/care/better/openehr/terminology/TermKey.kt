@@ -17,5 +17,6 @@ package care.better.openehr.terminology
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 data class TermKey(val language: String, val code: String)

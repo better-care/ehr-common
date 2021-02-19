@@ -31,25 +31,25 @@ import java.lang.reflect.Method
  */
 @Suppress("SpellCheckingInspection")
 class AmNode constructor(
-    val parent: AmNode? = null,
-    val cObject: CObject? = null,
-    val archetypeNodeId: String? = null,
-    var nodeId: String? = null,
-    val rmType: String,
-    var name: String? = null,
-    private var terms: List<ArchetypeTerm>? = null,
-    private var termDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
-    private var constraintDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
-    private var termBindings: Map<String, Collection<TermBindingItem>>? = null,
-    val attributes: LinkedHashMap<String, AmAttribute> = linkedMapOf(),
-    var occurrences: IntervalOfInteger? = null,
-    private var getter: Method? = null,
-    private var setter: Method? = null,
-    private var type: TypeInfo? = null,
-    var constraints: List<TAttribute>? = null,
-    var annotations: List<Annotation>? = null,
-    var viewConstraints: List<TView.Constraints.Items>? = null,
-    private var templateLanguage: String? = null) {
+        val parent: AmNode? = null,
+        val cObject: CObject? = null,
+        val archetypeNodeId: String? = null,
+        var nodeId: String? = null,
+        val rmType: String,
+        var name: String? = null,
+        private var terms: List<ArchetypeTerm>? = null,
+        private var termDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
+        private var constraintDefinitions: Map<String, Collection<ArchetypeTerm>>? = null,
+        private var termBindings: Map<String, Collection<TermBindingItem>>? = null,
+        val attributes: LinkedHashMap<String, AmAttribute> = linkedMapOf(),
+        var occurrences: IntervalOfInteger? = null,
+        private var getter: Method? = null,
+        private var setter: Method? = null,
+        private var type: TypeInfo? = null,
+        var constraints: List<TAttribute>? = null,
+        var annotations: List<Annotation>? = null,
+        var viewConstraints: List<TView.Constraints.Items>? = null,
+        private var templateLanguage: String? = null) {
 
     constructor(cObject: CObject, parent: AmNode?) : this(
         parent = parent,
@@ -115,7 +115,7 @@ class AmNode constructor(
         this.setter = setter
     }
 
-    fun setType(type: TypeInfo?){
+    fun setType(type: TypeInfo?) {
         this.type = type
     }
 
@@ -184,9 +184,9 @@ class AmNode constructor(
     }
 
     override fun toString(): String =
-         ToStringBuilder(this)
-             .append("archetypeNodeId", archetypeNodeId)
-             .append("rmType", rmType)
-             .append("name", name)
-             .toString()
+        ToStringBuilder(this)
+            .append("archetypeNodeId", archetypeNodeId)
+            .append("rmType", rmType)
+            .append("name", name)
+            .toString()
 }

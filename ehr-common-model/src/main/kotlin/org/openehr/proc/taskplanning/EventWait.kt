@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "EVENT_WAIT", propOrder = [
     "event",
@@ -57,9 +58,9 @@ class EventWait<E : PlanEvent>() : RmObject(), Serializable {
     }
 
     override fun toString(): String =
-            "EventWait{" +
-                    "event=$event" +
-                    ", successAction=$successAction" +
-                    ", timeout=$timeout" +
-                    "} ${super.toString()}"
+        "EventWait{" +
+                "event=$event" +
+                ", successAction=$successAction" +
+                ", timeout=$timeout" +
+                "} ${super.toString()}"
 }

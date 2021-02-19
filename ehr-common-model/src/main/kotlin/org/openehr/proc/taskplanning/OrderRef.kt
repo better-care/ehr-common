@@ -27,15 +27,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ORDER_REF", propOrder = [
-    "orderTag",
-    "instructionArchetypeId",
-    "actionArchetypeId",
-    "orderRef"])
-
+@XmlType(
+    name = "ORDER_REF", propOrder = [
+        "orderTag",
+        "instructionArchetypeId",
+        "actionArchetypeId",
+        "orderRef"])
 @Open
 class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
     companion object {
@@ -67,10 +68,10 @@ class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "OrderRef{" +
-                    "orderTag='$orderTag'" +
-                    ", instructionArchetypeId='$instructionArchetypeId'" +
-                    ", actionArchetypeId='$actionArchetypeId'" +
-                    ", orderRef=$orderRef" +
-                    "} ${super.toString()}"
+        "OrderRef{" +
+                "orderTag='$orderTag'" +
+                ", instructionArchetypeId='$instructionArchetypeId'" +
+                ", actionArchetypeId='$actionArchetypeId'" +
+                ", orderRef=$orderRef" +
+                "} ${super.toString()}"
 }

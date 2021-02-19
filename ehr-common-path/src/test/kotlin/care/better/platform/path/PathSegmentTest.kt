@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test
  * @author Primoz Delopst
  * @since 3.1.0
  */
+
 class PathSegmentTest {
     @Test
     fun testMatchSegment() {

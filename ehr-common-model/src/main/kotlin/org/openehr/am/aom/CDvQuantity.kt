@@ -24,14 +24,16 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_DV_QUANTITY", propOrder = [
-    "assumedValue",
-    "defaultValue",
-    "property",
-    "list"])
+@XmlType(
+    name = "C_DV_QUANTITY", propOrder = [
+        "assumedValue",
+        "defaultValue",
+        "property",
+        "list"])
 class CDvQuantity : CDomainType() {
     companion object {
         private const val serialVersionUID: Long = 0L

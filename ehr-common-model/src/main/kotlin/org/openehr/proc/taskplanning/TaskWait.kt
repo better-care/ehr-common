@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_WAIT", propOrder = [
     "eventRelation",
@@ -52,10 +53,10 @@ class TaskWait() : RmObject(), Serializable {
     }
 
     override fun toString(): String =
-            "TaskWait{" +
-                    "events=$events" +
-                    ", eventRelation=$eventRelation" +
-                    ", timeout=$timeout" +
-                    ", nextState=$nextState" +
-                    '}'
+        "TaskWait{" +
+                "events=$events" +
+                ", eventRelation=$eventRelation" +
+                ", timeout=$timeout" +
+                ", nextState=$nextState" +
+                '}'
 }

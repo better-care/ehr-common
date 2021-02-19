@@ -22,10 +22,12 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "QUERY_CALL", propOrder = [
-    "queryId",
-    "queryText"])
+@XmlType(
+    name = "QUERY_CALL", propOrder = [
+        "queryId",
+        "queryText"])
 @Open
 class QueryCall : SystemCall {
     companion object {
@@ -52,8 +54,8 @@ class QueryCall : SystemCall {
     }
 
     override fun toString(): String =
-            "QueryCall{" +
-                    "queryId='$queryId'" +
-                    ", queryText='$queryText'" +
-                    "} ${super.toString()}"
+        "QueryCall{" +
+                "queryId='$queryId'" +
+                ", queryText='$queryText'" +
+                "} ${super.toString()}"
 }

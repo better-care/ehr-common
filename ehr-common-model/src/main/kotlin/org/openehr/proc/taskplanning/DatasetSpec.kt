@@ -27,13 +27,15 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "DATASET_SPEC", propOrder = [
-    "templateId",
-    "formId",
-    "otherDetails",
-    "populatingCall",
-    "formSectionPath"])
+@XmlType(
+    name = "DATASET_SPEC", propOrder = [
+        "templateId",
+        "formId",
+        "otherDetails",
+        "populatingCall",
+        "formSectionPath"])
 @XmlSeeAlso(value = [CaptureDatasetSpec::class, ReviewDatasetSpec::class])
 @Open
 abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisitor {
@@ -73,11 +75,11 @@ abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisito
     }
 
     override fun toString(): String =
-            "DatasetSpec{" +
-                    "formId='$formId'" +
-                    ", templateId='$templateId'" +
-                    ", otherDetails=$otherDetails" +
-                    ", populatingCall=$populatingCall" +
-                    ", formSectionPath=$formSectionPath" +
-                    '}'
+        "DatasetSpec{" +
+                "formId='$formId'" +
+                ", templateId='$templateId'" +
+                ", otherDetails=$otherDetails" +
+                ", populatingCall=$populatingCall" +
+                ", formSectionPath=$formSectionPath" +
+                '}'
 }

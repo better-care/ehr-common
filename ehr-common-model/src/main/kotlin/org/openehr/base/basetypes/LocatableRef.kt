@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LOCATABLE_REF", propOrder = ["path"])
@@ -29,11 +30,10 @@ import javax.xml.bind.annotation.XmlType
 class LocatableRef() : ObjectRef() {
     @JvmOverloads
     constructor(
-        id: ObjectId,
-        namespace: String,
-        type: String,
-        path: String? = null
-    ) : this() {
+            id: ObjectId,
+            namespace: String,
+            type: String,
+            path: String? = null) : this() {
         this.id = id
         this.namespace = namespace
         this.type = type

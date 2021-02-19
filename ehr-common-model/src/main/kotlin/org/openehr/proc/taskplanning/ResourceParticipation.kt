@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "RESOURCE_PARTICIPATION", propOrder = [
     "resourceType",
@@ -60,8 +61,8 @@ class ResourceParticipation() : RmObject(), Serializable, VisitableByModelVisito
     }
 
     override fun toString(): String =
-            "ResourceParticipation{" +
-                    "resourceType=$resourceType" +
-                    ", externalRef=$externalRef" +
-                    '}'
+        "ResourceParticipation{" +
+                "resourceType=$resourceType" +
+                ", externalRef=$externalRef" +
+                '}'
 }

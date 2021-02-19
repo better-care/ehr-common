@@ -27,23 +27,25 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OPERATIONAL_TEMPLATE", propOrder = [
-    "language",
-    "isControlled",
-    "description",
-    "revisionHistory",
-    "uid",
-    "templateId",
-    "concept",
-    "definition",
-    "ontology",
-    "componentOntologies",
-    "annotations",
-    "constraints",
-    "view"])
+@XmlType(
+    name = "OPERATIONAL_TEMPLATE", propOrder = [
+        "language",
+        "isControlled",
+        "description",
+        "revisionHistory",
+        "uid",
+        "templateId",
+        "concept",
+        "definition",
+        "ontology",
+        "componentOntologies",
+        "annotations",
+        "constraints",
+        "view"])
 @XmlRootElement
 class Template : AmObject(), Serializable {
     companion object {

@@ -20,12 +20,14 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EXPR_OPERATOR", propOrder = [
-    "operator",
-    "precedenceOverridden"])
+@XmlType(
+    name = "EXPR_OPERATOR", propOrder = [
+        "operator",
+        "precedenceOverridden"])
 @XmlSeeAlso(value = [ExprUnaryOperator::class, ExprBinaryOperator::class])
 abstract class ExprOperator : ExprItem() {
     companion object {

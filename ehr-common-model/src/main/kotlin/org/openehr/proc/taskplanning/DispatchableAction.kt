@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "DISPATCHABLE_ACTION")
 @XmlSeeAlso(value = [HandOff::class, ExternalRequest::class, SystemRequest::class])
@@ -39,6 +40,6 @@ class DispatchableAction : TaskAction() {
     }
 
     override fun toString(): String =
-            "DispatchableAction{" +
-                    "} ${super.toString()}"
+        "DispatchableAction{" +
+                "} ${super.toString()}"
 }

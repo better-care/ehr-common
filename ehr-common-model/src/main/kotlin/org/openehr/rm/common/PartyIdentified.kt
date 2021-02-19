@@ -25,22 +25,21 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "PARTY_IDENTIFIED", propOrder = [
         "name",
-        "identifiers"]
-)
+        "identifiers"])
 @XmlSeeAlso(PartyRelated::class)
 @Open
 class PartyIdentified
 @JvmOverloads
 constructor(
-    var name: String? = null,
-    var identifiers: MutableList<DvIdentifier> = mutableListOf(),
-    externalRef: PartyRef? = null
-) : PartyProxy(externalRef) {
+        var name: String? = null,
+        var identifiers: MutableList<DvIdentifier> = mutableListOf(),
+        externalRef: PartyRef? = null) : PartyProxy(externalRef) {
 
     companion object {
         private const val serialVersionUID: Long = 0L

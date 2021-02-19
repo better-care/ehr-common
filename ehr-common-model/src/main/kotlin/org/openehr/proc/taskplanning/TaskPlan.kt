@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_PLAN", propOrder = [
     "subject",
@@ -110,23 +111,23 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "TaskPlan{" +
-                    "subject=$subject" +
-                    ", description=$description" +
-                    ", guideline=$guideline" +
-                    ", principalPerformer=$principalPerformer" +
-                    ", definition=$definition" +
-                    ", executionHistory=$executionHistory" +
-                    ", trainingLevel=$trainingLevel" +
-                    ", bestPracticeRef=$bestPracticeRef" +
-                    ", expiryTime=$expiryTime" +
-                    ", dueTime=$dueTime" +
-                    ", orderSetType=$orderSetType" +
-                    ", orderSetId=$orderSetId" +
-                    ", indications=$indications" +
-                    ", name=$name" +
-                    ", uid=$uid" +
-                    ", archetypeDetails=$archetypeDetails'" +
-                    ", archetypeNodeId='$archetypeNodeId'" +
-                    '}'
+        "TaskPlan{" +
+                "subject=$subject" +
+                ", description=$description" +
+                ", guideline=$guideline" +
+                ", principalPerformer=$principalPerformer" +
+                ", definition=$definition" +
+                ", executionHistory=$executionHistory" +
+                ", trainingLevel=$trainingLevel" +
+                ", bestPracticeRef=$bestPracticeRef" +
+                ", expiryTime=$expiryTime" +
+                ", dueTime=$dueTime" +
+                ", orderSetType=$orderSetType" +
+                ", orderSetId=$orderSetId" +
+                ", indications=$indications" +
+                ", name=$name" +
+                ", uid=$uid" +
+                ", archetypeDetails=$archetypeDetails'" +
+                ", archetypeNodeId='$archetypeNodeId'" +
+                '}'
 }

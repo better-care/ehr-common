@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "SYSTEM_NOTIFICATION", propOrder = [
     "systemId",
@@ -59,9 +60,9 @@ class SystemNotification : PlanEvent {
     }
 
     override fun toString(): String =
-            "SystemNotification{" +
-                    "systemId='$systemId'" +
-                    ", notificationType='$notificationType'" +
-                    ", referenceId='$referenceId'" +
-                    "} ${super.toString()}"
+        "SystemNotification{" +
+                "systemId='$systemId'" +
+                ", notificationType='$notificationType'" +
+                ", referenceId='$referenceId'" +
+                "} ${super.toString()}"
 }

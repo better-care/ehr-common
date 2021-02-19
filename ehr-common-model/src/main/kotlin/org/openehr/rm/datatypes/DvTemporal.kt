@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -31,12 +32,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlSeeAlso(value = [DvDateTime::class, DvTime::class, DvDate::class])
 @Open
 abstract class DvTemporal(
-    var accuracy: DvDuration? = null,
-    magnitudeStatus: String? = null,
-    normalRange: DvInterval? = null,
-    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-    normalStatus: CodePhrase? = null
-) : DvQuantified(magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+        var accuracy: DvDuration? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null) : DvQuantified(magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

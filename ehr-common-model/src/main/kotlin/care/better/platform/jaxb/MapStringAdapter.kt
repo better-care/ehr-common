@@ -19,15 +19,17 @@ import javax.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 class MapStringAdapter : XmlAdapter<MapStringAdapter.StringAdaptedMap, MutableMap<String, String>>() {
 
-    override fun unmarshal(adapterMapString: StringAdaptedMap): MutableMap<String, String> = adapterMapString.stringAdaptedEntry.associateTo(mutableMapOf(), { Pair(it.key, it.value) })
+    override fun unmarshal(adapterMapString: StringAdaptedMap): MutableMap<String, String> =
+        adapterMapString.stringAdaptedEntry.associateTo(mutableMapOf(), { Pair(it.key, it.value) })
 
     override fun marshal(map: MutableMap<String, String>): StringAdaptedMap = StringAdaptedMap(map.entries.map { StringAdaptedEntry(it.key, it.value) })
 
-    class StringAdaptedMap(){
+    class StringAdaptedMap() {
         var stringAdaptedEntry: MutableList<StringAdaptedEntry> = mutableListOf()
 
         constructor(stringAdaptedEntry: List<StringAdaptedEntry>) : this() {

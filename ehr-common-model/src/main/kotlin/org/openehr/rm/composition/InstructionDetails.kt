@@ -28,12 +28,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "INSTRUCTION_DETAILS", propOrder = [
-    "instructionId",
-    "activityId",
-    "wfDetails"])
+@XmlType(
+    name = "INSTRUCTION_DETAILS", propOrder = [
+        "instructionId",
+        "activityId",
+        "wfDetails"])
 @Open
 class InstructionDetails : RmObject(), Serializable {
     companion object {

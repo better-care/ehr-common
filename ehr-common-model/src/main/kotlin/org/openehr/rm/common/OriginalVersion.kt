@@ -26,20 +26,23 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ORIGINAL_VERSION", propOrder = [
-    "uid",
-    "data",
-    "precedingVersionUid",
-    "otherInputVersionUids",
-    "attestations",
-    "lifecycleState"])
+@XmlType(
+    name = "ORIGINAL_VERSION", propOrder = [
+        "uid",
+        "data",
+        "precedingVersionUid",
+        "otherInputVersionUids",
+        "attestations",
+        "lifecycleState"])
 @Open
 class OriginalVersion : Version() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
     @XmlElement(required = true)
     @Required
     var uid: ObjectVersionId? = null

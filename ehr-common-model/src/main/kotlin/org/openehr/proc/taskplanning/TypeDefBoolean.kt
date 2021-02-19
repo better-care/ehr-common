@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TYPE_DEF_BOOLEAN")
 @Open

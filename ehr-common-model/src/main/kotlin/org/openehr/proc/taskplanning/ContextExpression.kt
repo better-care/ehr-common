@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @SuppressWarnings("ClassReferencesSubclass")
 @XmlType(name = "CONTEXT_EXPRESSION", propOrder = ["expression"])
@@ -53,7 +54,7 @@ class ContextExpression<T> : ContextValue<T> {
     }
 
     override fun toString(): String =
-            "ContextExpression{" +
-                    "expression='$expression'" +
-                    "} ${super.toString()}"
+        "ContextExpression{" +
+                "expression='$expression'" +
+                "} ${super.toString()}"
 }

@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "DECISION_GROUP", propOrder = ["test"])
 @Open
@@ -68,7 +69,7 @@ class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
     }
 
     override fun toString(): String =
-            "DecisionGroup{" +
-                    "test=$test" +
-                    "} ${super.toString()}"
+        "DecisionGroup{" +
+                "test=$test" +
+                "} ${super.toString()}"
 }

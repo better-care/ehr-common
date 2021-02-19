@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,22 +38,20 @@ import javax.xml.bind.annotation.XmlType
         "isControlled",
         "description",
         "translations",
-        "revisionHistory"]
-)
+        "revisionHistory"])
 @Open
 abstract class AuthoredResource
 @JvmOverloads
 constructor(
-    @XmlElement(name = "original_language", required = true)
-    @Required
-    var originalLanguage: CodePhrase? = null,
-    @XmlElement(name = "is_controlled")
-    var isControlled: Boolean? = null,
-    var description: ResourceDescription? = null,
-    var translations: MutableList<TranslationDetails> = mutableListOf(),
-    @XmlElement(name = "revision_history")
-    var revisionHistory: RevisionHistory? = null
-) : RmObject(), Serializable {
+        @XmlElement(name = "original_language", required = true)
+        @Required
+        var originalLanguage: CodePhrase? = null,
+        @XmlElement(name = "is_controlled")
+        var isControlled: Boolean? = null,
+        var description: ResourceDescription? = null,
+        var translations: MutableList<TranslationDetails> = mutableListOf(),
+        @XmlElement(name = "revision_history")
+        var revisionHistory: RevisionHistory? = null) : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

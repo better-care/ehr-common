@@ -25,14 +25,16 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ARCHETYPE_ONTOLOGY", propOrder = [
-    "termDefinitions",
-    "constraintDefinitions",
-    "termBindings",
-    "constraintBindings"])
+@XmlType(
+    name = "ARCHETYPE_ONTOLOGY", propOrder = [
+        "termDefinitions",
+        "constraintDefinitions",
+        "termBindings",
+        "constraintBindings"])
 open class ArchetypeOntology : AmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L

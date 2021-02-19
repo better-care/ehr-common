@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "TASK", propOrder = [
-    "action",
-    "orderTags"])
+@XmlType(
+    name = "TASK", propOrder = [
+        "action",
+        "orderTags"])
 @XmlSeeAlso(value = [DispatchableTask::class, PerformableTask::class])
 @Open
 abstract class Task<A : TaskAction> : PlanItem {
@@ -67,8 +69,8 @@ abstract class Task<A : TaskAction> : PlanItem {
     }
 
     override fun toString(): String =
-            "Task{" +
-                    "action=$action" +
-                    ", orderTags=$orderTags" +
-                    '}'
+        "Task{" +
+                "action=$action" +
+                ", orderTags=$orderTags" +
+                '}'
 }

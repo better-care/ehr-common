@@ -22,6 +22,7 @@ import java.io.Serializable
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 class VersionedDataDto : Serializable {
     companion object {

@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "CUSTOMARY_TIME", propOrder = arrayOf("time"))
 @Open
@@ -40,7 +41,7 @@ class CustomaryTime() : TimeSpecifier() {
     }
 
     override fun toString(): String =
-            "CustomaryTime{" +
-                    "time=$time" +
-                    "} ${super.toString()}"
+        "CustomaryTime{" +
+                "time=$time" +
+                "} ${super.toString()}"
 }

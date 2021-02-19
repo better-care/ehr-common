@@ -21,6 +21,7 @@ import java.util.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 enum class ExpressionType(val expressionTypeDef: ExprTypeDef<*>?, val javaClass: Class<*>) {
     BOOLEAN(TypeDefBoolean.INSTANCE, Boolean::class.java),
@@ -40,6 +41,6 @@ enum class ExpressionType(val expressionTypeDef: ExprTypeDef<*>?, val javaClass:
 
     companion object {
         fun forExpressionType(expressionTypeDef: ExprTypeDef<*>?) =
-                values().firstOrNull { Objects.equals(it.expressionTypeDef, expressionTypeDef) }
+            values().firstOrNull { Objects.equals(it.expressionTypeDef, expressionTypeDef) }
     }
 }

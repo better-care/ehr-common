@@ -24,14 +24,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_ENCAPSULATED", propOrder = [
         "charset",
-        "language"]
-)
+        "language"])
 @XmlSeeAlso(value = [DvMultimedia::class, DvParsable::class])
 @Open
 abstract class DvEncapsulated(var charset: CodePhrase? = null, var language: CodePhrase? = null) : DataValue() {

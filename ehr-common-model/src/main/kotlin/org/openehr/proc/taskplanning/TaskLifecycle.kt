@@ -17,6 +17,7 @@ package org.openehr.proc.taskplanning
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 enum class TaskLifecycle(val code: Int) : EnumerationInteger, EnumerationString {
     PLANNED(0),

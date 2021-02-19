@@ -24,6 +24,7 @@ import java.time.temporal.ChronoField
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 class DateTimeFormatters {
 
@@ -36,14 +37,14 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_DATE_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .appendValue(ChronoField.YEAR, 4, 4, SignStyle.EXCEEDS_PAD)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
-                .parseDefaulting(ChronoField.MONTH_OF_YEAR, 1)
-                .parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
-                .toFormatter()
+            .appendValue(ChronoField.YEAR, 4, 4, SignStyle.EXCEEDS_PAD)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
+            .parseDefaulting(ChronoField.MONTH_OF_YEAR, 1)
+            .parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
+            .toFormatter()
 
         /**
          * The date formatter that formats or parses a date in openEHR format without an offset.
@@ -51,12 +52,12 @@ class DateTimeFormatters {
          */
         @JvmField
         val STRICT_DATE_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .appendValue(ChronoField.YEAR, 4, 4, SignStyle.EXCEEDS_PAD)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
-                .appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
-                .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
-                .toFormatter()
+            .appendValue(ChronoField.YEAR, 4, 4, SignStyle.EXCEEDS_PAD)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
+            .appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral("-").toFormatter())
+            .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
+            .toFormatter()
 
         /**
          * The time formatter that formats or parses a time in openEHR format without an offset.
@@ -65,18 +66,18 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.MINUTE_OF_HOUR, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.SECOND_OF_MINUTE, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(",").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(".").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
-                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-                .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
-                .parseDefaulting(ChronoField.NANO_OF_SECOND, 0)
-                .toFormatter()
+            .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.MINUTE_OF_HOUR, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.SECOND_OF_MINUTE, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(",").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(".").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
+            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+            .parseDefaulting(ChronoField.NANO_OF_SECOND, 0)
+            .toFormatter()
 
         /**
          * The time formatter that formats or parses a time in openEHR format without an offset.
@@ -84,16 +85,16 @@ class DateTimeFormatters {
          */
         @JvmField
         val STRICT_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .appendValue(ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NOT_NEGATIVE)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
-                .appendValue(ChronoField.MINUTE_OF_HOUR, 1, 2, SignStyle.NOT_NEGATIVE)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.SECOND_OF_MINUTE, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(",").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral(".").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
-                .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
-                .parseDefaulting(ChronoField.NANO_OF_SECOND, 0)
-                .toFormatter()
+            .appendValue(ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NOT_NEGATIVE)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
+            .appendValue(ChronoField.MINUTE_OF_HOUR, 1, 2, SignStyle.NOT_NEGATIVE)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(':').toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendValue(ChronoField.SECOND_OF_MINUTE, 1, 2, SignStyle.NOT_NEGATIVE).toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(",").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral(".").appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, false).toFormatter())
+            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+            .parseDefaulting(ChronoField.NANO_OF_SECOND, 0)
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses a date time in openEHR format without an offset.
@@ -103,10 +104,10 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_LOCAL_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendOptional(PARTIAL_DATE_FORMATTER)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").append(PARTIAL_TIME_FORMATTER).toFormatter())
-                .toFormatter()
+            .parseCaseInsensitive()
+            .appendOptional(PARTIAL_DATE_FORMATTER)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").append(PARTIAL_TIME_FORMATTER).toFormatter())
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses a date time in openEHR format without an offset.
@@ -115,11 +116,11 @@ class DateTimeFormatters {
          */
         @JvmField
         val STRICT_LOCAL_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .append(STRICT_DATE_FORMATTER)
-                .appendLiteral("T")
-                .append(STRICT_TIME_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .append(STRICT_DATE_FORMATTER)
+            .appendLiteral("T")
+            .append(STRICT_TIME_FORMATTER)
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses an offset.
@@ -127,25 +128,25 @@ class DateTimeFormatters {
          */
         @JvmField
         val OFFSET_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendOptional(DateTimeFormatter.ofPattern("XXXXX"))
-                .appendOptional(DateTimeFormatter.ofPattern("XXXX"))
-                .appendOptional(DateTimeFormatter.ofPattern("XXX"))
-                .appendOptional(DateTimeFormatter.ofPattern("XX"))
-                .appendOptional(DateTimeFormatter.ofPattern("X"))
-                .toFormatter()
+            .parseCaseInsensitive()
+            .appendOptional(DateTimeFormatter.ofPattern("XXXXX"))
+            .appendOptional(DateTimeFormatter.ofPattern("XXXX"))
+            .appendOptional(DateTimeFormatter.ofPattern("XXX"))
+            .appendOptional(DateTimeFormatter.ofPattern("XX"))
+            .appendOptional(DateTimeFormatter.ofPattern("X"))
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses a zone.
          */
         @JvmField
         val ZONE_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .optionalStart()
-                .appendLiteral('[')
-                .parseCaseSensitive()
-                .appendZoneRegionId()
-                .appendLiteral(']')
-                .toFormatter()
+            .optionalStart()
+            .appendLiteral('[')
+            .parseCaseSensitive()
+            .appendZoneRegionId()
+            .appendLiteral(']')
+            .toFormatter()
 
         /**
          * The time formatter that formats or parses a time in openEHR format with an offset.
@@ -155,10 +156,10 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_OFFSET_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendOptional(PARTIAL_TIME_FORMATTER)
-                .appendOptional(OFFSET_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .appendOptional(PARTIAL_TIME_FORMATTER)
+            .appendOptional(OFFSET_FORMATTER)
+            .toFormatter()
 
         /**
          * The time formatter that formats or parses a time in openEHR format with an offset.
@@ -166,10 +167,10 @@ class DateTimeFormatters {
          */
         @JvmField
         val STRICT_OFFSET_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .append(STRICT_TIME_FORMATTER)
-                .append(OFFSET_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .append(STRICT_TIME_FORMATTER)
+            .append(OFFSET_FORMATTER)
+            .toFormatter()
 
 
         /**
@@ -180,10 +181,10 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_OFFSET_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendOptional(PARTIAL_LOCAL_DATE_TIME_FORMATTER)
-                .appendOptional(OFFSET_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .appendOptional(PARTIAL_LOCAL_DATE_TIME_FORMATTER)
+            .appendOptional(OFFSET_FORMATTER)
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses a date time in openEHR format with an offset.
@@ -192,10 +193,10 @@ class DateTimeFormatters {
          */
         @JvmField
         val STRICT_OFFSET_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .append(STRICT_LOCAL_DATE_TIME_FORMATTER)
-                .append(OFFSET_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .append(STRICT_LOCAL_DATE_TIME_FORMATTER)
+            .append(OFFSET_FORMATTER)
+            .toFormatter()
 
 
         /**
@@ -206,10 +207,10 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_ZONE_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendOptional(PARTIAL_OFFSET_DATE_TIME_FORMATTER)
-                .appendOptional(ZONE_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .appendOptional(PARTIAL_OFFSET_DATE_TIME_FORMATTER)
+            .appendOptional(ZONE_FORMATTER)
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses a date time in openEHR format with an offset and zone.
@@ -218,10 +219,10 @@ class DateTimeFormatters {
          */
         @JvmField
         val STRICT_ZONE_DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .append(STRICT_OFFSET_DATE_TIME_FORMATTER)
-                .append(ZONE_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .append(STRICT_OFFSET_DATE_TIME_FORMATTER)
+            .append(ZONE_FORMATTER)
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses a date time in openEHR format with an offset and zone.
@@ -231,13 +232,13 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_ZONE_DATE_TIME_WITH_STRICT_DATE_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .append(STRICT_DATE_FORMATTER)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").toFormatter())
-                .appendOptional(PARTIAL_TIME_FORMATTER)
-                .appendOptional(OFFSET_FORMATTER)
-                .append(ZONE_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .append(STRICT_DATE_FORMATTER)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").toFormatter())
+            .appendOptional(PARTIAL_TIME_FORMATTER)
+            .appendOptional(OFFSET_FORMATTER)
+            .append(ZONE_FORMATTER)
+            .toFormatter()
 
         /**
          * The date time formatter that formats or parses a date time in openEHR format with an offset and zone.
@@ -247,13 +248,13 @@ class DateTimeFormatters {
          */
         @JvmField
         val PARTIAL_ZONE_DATE_TIME_WITH_STRICT_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .append(PARTIAL_DATE_FORMATTER)
-                .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").toFormatter())
-                .append(STRICT_TIME_FORMATTER)
-                .appendOptional(OFFSET_FORMATTER)
-                .appendOptional(ZONE_FORMATTER)
-                .toFormatter()
+            .parseCaseInsensitive()
+            .append(PARTIAL_DATE_FORMATTER)
+            .appendOptional(DateTimeFormatterBuilder().appendLiteral("T").toFormatter())
+            .append(STRICT_TIME_FORMATTER)
+            .appendOptional(OFFSET_FORMATTER)
+            .appendOptional(ZONE_FORMATTER)
+            .toFormatter()
 
     }
 }

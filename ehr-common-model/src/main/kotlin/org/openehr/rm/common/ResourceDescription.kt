@@ -26,16 +26,18 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RESOURCE_DESCRIPTION", propOrder = [
-    "originalAuthor",
-    "otherContributors",
-    "lifecycleState",
-    "resourcePackageUri",
-    "otherDetails",
-    "details",
-    "parentResource"])
+@XmlType(
+    name = "RESOURCE_DESCRIPTION", propOrder = [
+        "originalAuthor",
+        "otherContributors",
+        "lifecycleState",
+        "resourcePackageUri",
+        "otherDetails",
+        "details",
+        "parentResource"])
 @Open
 class ResourceDescription : RmObject(), Serializable {
     companion object {

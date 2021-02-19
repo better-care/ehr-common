@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -30,10 +31,9 @@ import javax.xml.bind.annotation.XmlType
 class PartyRef() : ObjectRef() {
     @JvmOverloads
     constructor(
-        id: ObjectId,
-        namespace: String? = null,
-        type: String? = null
-    ) : this() {
+            id: ObjectId,
+            namespace: String? = null,
+            type: String? = null) : this() {
         this.id = id
         this.namespace = namespace
         this.type = type

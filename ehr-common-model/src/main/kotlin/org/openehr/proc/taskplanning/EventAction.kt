@@ -24,12 +24,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "EVENT_ACTION", propOrder = [
-    "systemCall",
-    "message",
-    "resumeAction",
-    "receiverThreadNextState"])
+@XmlType(
+    name = "EVENT_ACTION", propOrder = [
+        "systemCall",
+        "message",
+        "resumeAction",
+        "receiverThreadNextState"])
 @Open
 class EventAction() : RmObject(), Serializable {
     companion object {
@@ -55,10 +57,10 @@ class EventAction() : RmObject(), Serializable {
     }
 
     override fun toString(): String =
-            "EventAction{" +
-                    "systemCall=$systemCall" +
-                    ", message=$message" +
-                    ", resumeAction=$resumeAction" +
-                    ", receiverThreadNextState=$receiverThreadNextState" +
-                    '}'
+        "EventAction{" +
+                "systemCall=$systemCall" +
+                ", message=$message" +
+                ", resumeAction=$resumeAction" +
+                ", receiverThreadNextState=$receiverThreadNextState" +
+                '}'
 }

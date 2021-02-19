@@ -25,16 +25,18 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "COMPOSITION", propOrder = [
-    "language",
-    "territory",
-    "category",
-    "composer",
-    "context",
-    "content"])
+@XmlType(
+    name = "COMPOSITION", propOrder = [
+        "language",
+        "territory",
+        "category",
+        "composer",
+        "context",
+        "content"])
 @XmlRootElement
 @Open
 class Composition : Locatable() {

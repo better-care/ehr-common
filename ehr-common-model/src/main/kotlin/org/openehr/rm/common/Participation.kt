@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -36,21 +37,19 @@ import javax.xml.bind.annotation.XmlType
         "function",
         "performer",
         "time",
-        "mode"]
-)
+        "mode"])
 @Open
 class Participation
 @JvmOverloads
 constructor(
-    @XmlElement(required = true)
-    @Required
-    var function: DvText? = null,
-    @XmlElement(required = true)
-    @Required
-    var performer: PartyProxy? = null,
-    var time: DvInterval? = null,
-    var mode: DvCodedText? = null
-) : RmObject(), Serializable {
+        @XmlElement(required = true)
+        @Required
+        var function: DvText? = null,
+        @XmlElement(required = true)
+        @Required
+        var performer: PartyProxy? = null,
+        var time: DvInterval? = null,
+        var mode: DvCodedText? = null) : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

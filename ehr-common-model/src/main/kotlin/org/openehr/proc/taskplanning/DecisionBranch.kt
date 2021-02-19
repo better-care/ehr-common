@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "DECISION_BRANCH", propOrder = ["valueConstraint"])
 @Open
@@ -50,7 +51,7 @@ class DecisionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
         }
     }
 
-    override fun getExpressionNames(): Sequence<String> = valueConstraint?.name?.let { listOf(it).asSequence()} ?: emptySequence()
+    override fun getExpressionNames(): Sequence<String> = valueConstraint?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun accept(visitor: TaskModelVisitor) {
         visitor.visit(this)
@@ -64,7 +65,7 @@ class DecisionBranch : ChoiceBranch<PlanItem>, ExpressionNamesProvider {
     }
 
     override fun toString(): String =
-            "DecisionBranch{" +
-                    "valueConstraint=$valueConstraint" + valueConstraint +
-                    "} ${super.toString()}"
+        "DecisionBranch{" +
+                "valueConstraint=$valueConstraint" + valueConstraint +
+                "} ${super.toString()}"
 }

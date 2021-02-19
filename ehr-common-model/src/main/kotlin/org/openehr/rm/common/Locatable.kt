@@ -33,29 +33,33 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LOCATABLE", propOrder = [
-    "name",
-    "uid",
-    "links",
-    "archetypeDetails",
-    "feederAudit"])
-@XmlSeeAlso(value = [
-                Composition::class,
-                Folder::class,
-                History::class,
-                Event::class,
-                ItemStructure::class,
-                Item::class,
-                ContentItem::class,
-                Activity::class,
-                PlanEvent::class,
-                PlanItem::class,
-                TaskAction::class,
-                TaskParticipation::class,
-                OrderRef::class,
-                DatasetSpec::class,])
+@XmlType(
+    name = "LOCATABLE", propOrder = [
+        "name",
+        "uid",
+        "links",
+        "archetypeDetails",
+        "feederAudit"])
+@XmlSeeAlso(
+    value = [
+        Composition::class,
+        Folder::class,
+        History::class,
+        Event::class,
+        ItemStructure::class,
+        Item::class,
+        ContentItem::class,
+        Activity::class,
+        PlanEvent::class,
+        PlanItem::class,
+        TaskAction::class,
+        TaskParticipation::class,
+        OrderRef::class,
+        DatasetSpec::class,
+    ])
 @XmlRootElement
 @Open
 abstract class Locatable : RmObject(), Serializable {

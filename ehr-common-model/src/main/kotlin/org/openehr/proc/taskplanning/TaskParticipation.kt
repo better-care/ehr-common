@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_PARTICIPATION", propOrder = [
     "function",
@@ -70,15 +71,15 @@ class TaskParticipation() : Locatable(), VisitableByModelVisitor {
     }
 
     override fun toString(): String =
-            "TaskParticipation{" +
-                    "function=$function" +
-                    ", role=$role" +
-                    ", mode=$mode" +
-                    ", performer=$performer" +
-                    ", optionality=$optionality" +
-                    ", name=$name" +
-                    ", uid=$uid" +
-                    ", archetypeDetails=$archetypeDetails" +
-                    ", archetypeNodeId='$archetypeNodeId'" +
-                    '}'
+        "TaskParticipation{" +
+                "function=$function" +
+                ", role=$role" +
+                ", mode=$mode" +
+                ", performer=$performer" +
+                ", optionality=$optionality" +
+                ", name=$name" +
+                ", uid=$uid" +
+                ", archetypeDetails=$archetypeDetails" +
+                ", archetypeNodeId='$archetypeNodeId'" +
+                '}'
 }

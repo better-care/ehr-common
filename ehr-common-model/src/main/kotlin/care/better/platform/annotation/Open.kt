@@ -17,6 +17,7 @@ package care.better.platform.annotation
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @Target(AnnotationTarget.CLASS)

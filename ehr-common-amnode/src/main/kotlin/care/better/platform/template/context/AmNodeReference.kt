@@ -31,7 +31,7 @@ import org.openehr.am.aom.Template
  * @param path Path [String]
  */
 data class AmNodeReference(
-    val referencedAmNode: AmNode,
-    val targetedAmNode: AmNode?,
-    val attributeName: String?,
-    val path: String)
+        val referencedAmNode: AmNode,
+        val targetedAmNode: AmNode?,
+        val attributeName: String?,
+        val path: String)

@@ -23,11 +23,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_MULTIPLE_ATTRIBUTE", propOrder = [
-    "cardinality",
-    "groups"])
+@XmlType(
+    name = "C_MULTIPLE_ATTRIBUTE", propOrder = [
+        "cardinality",
+        "groups"])
 class CMultipleAttribute : CAttribute() {
     companion object {
         private const val serialVersionUID: Long = 0L

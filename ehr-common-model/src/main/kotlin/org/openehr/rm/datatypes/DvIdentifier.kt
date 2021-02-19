@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -32,17 +33,15 @@ import javax.xml.bind.annotation.XmlType
         "issuer",
         "assigner",
         "id",
-        "type"]
-)
+        "type"])
 @Open
 class DvIdentifier() : DataValue() {
     @JvmOverloads
     constructor(
-        id: String,
-        issuer: String? = null,
-        assigner: String? = null,
-        type: String? = null
-    ) : this() {
+            id: String,
+            issuer: String? = null,
+            assigner: String? = null,
+            type: String? = null) : this() {
         this.id = id
         this.issuer = issuer
         this.assigner = assigner

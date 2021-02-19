@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -29,10 +30,9 @@ import javax.xml.bind.annotation.*
 @XmlSeeAlso(value = [DvPeriodicTimeSpecification::class, DvGeneralTimeSpecification::class])
 @Open
 abstract class DvTimeSpecification(
-    @XmlElement(required = true)
-    @Required
-    var value: DvParsable? = null
-) : DataValue() {
+        @XmlElement(required = true)
+        @Required
+        var value: DvParsable? = null) : DataValue() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

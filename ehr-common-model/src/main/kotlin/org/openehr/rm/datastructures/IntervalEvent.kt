@@ -26,12 +26,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "INTERVAL_EVENT", propOrder = [
-    "width",
-    "sampleCount",
-    "mathFunction"])
+@XmlType(
+    name = "INTERVAL_EVENT", propOrder = [
+        "width",
+        "sampleCount",
+        "mathFunction"])
 @Open
 class IntervalEvent : Event() {
     companion object {

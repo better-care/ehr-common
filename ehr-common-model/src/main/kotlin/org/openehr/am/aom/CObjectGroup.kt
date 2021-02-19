@@ -23,12 +23,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_OBJECT_GROUP", propOrder = [
-    "range",
-    "cardinality",
-    "occurrences"])
+@XmlType(
+    name = "C_OBJECT_GROUP", propOrder = [
+        "range",
+        "cardinality",
+        "occurrences"])
 class CObjectGroup : ArchetypeConstraint() {
     companion object {
         private const val serialVersionUID: Long = 0L

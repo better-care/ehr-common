@@ -24,16 +24,17 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "PLAN_EVENT", propOrder = ["delay", "otherDetails"])
 @XmlSeeAlso(value = [
-                ManualNotification::class,
-                SystemNotification::class,
-                CallbackNotification::class,
-                StateTrigger::class,
-                TimerEvent::class,
-                CalendarEvent::class,
-                TimelineMoment::class])
+    ManualNotification::class,
+    SystemNotification::class,
+    CallbackNotification::class,
+    StateTrigger::class,
+    TimerEvent::class,
+    CalendarEvent::class,
+    TimelineMoment::class])
 @Open
 abstract class PlanEvent constructor() : Locatable() {
     companion object {
@@ -51,9 +52,9 @@ abstract class PlanEvent constructor() : Locatable() {
     }
 
     override fun toString(): String =
-            "PlanEvent{" +
-                    "otherDetails=$otherDetails" +
-                    ", delay='$delay" +
-                    ", uid=$uid" +
-                    '}'
+        "PlanEvent{" +
+                "otherDetails=$otherDetails" +
+                ", delay='$delay" +
+                ", uid=$uid" +
+                '}'
 }

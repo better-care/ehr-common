@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_TIME", propOrder = ["value"])
@@ -35,13 +36,12 @@ import javax.xml.bind.annotation.XmlType
 class DvTime() : DvTemporal() {
     @JvmOverloads
     constructor(
-        value: String,
-        accuracy: DvDuration? = null,
-        magnitudeStatus: String? = null,
-        normalRange: DvInterval? = null,
-        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-        normalStatus: CodePhrase? = null
-    ) : this() {
+            value: String,
+            accuracy: DvDuration? = null,
+            magnitudeStatus: String? = null,
+            normalRange: DvInterval? = null,
+            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+            normalStatus: CodePhrase? = null) : this() {
         this.value = value
         this.accuracy = accuracy
         this.magnitudeStatus = magnitudeStatus

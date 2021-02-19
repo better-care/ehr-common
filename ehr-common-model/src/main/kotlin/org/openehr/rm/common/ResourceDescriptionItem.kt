@@ -27,17 +27,19 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RESOURCE_DESCRIPTION_ITEM", propOrder = [
-    "language",
-    "purpose",
-    "keywords",
-    "use",
-    "misuse",
-    "copyright",
-    "originalResourceUri",
-    "otherDetails"])
+@XmlType(
+    name = "RESOURCE_DESCRIPTION_ITEM", propOrder = [
+        "language",
+        "purpose",
+        "keywords",
+        "use",
+        "misuse",
+        "copyright",
+        "originalResourceUri",
+        "otherDetails"])
 @Open
 class ResourceDescriptionItem : RmObject(), Serializable {
     companion object {

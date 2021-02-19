@@ -24,15 +24,17 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_TIME", propOrder = [
-    "pattern",
-    "timezoneValidity",
-    "range",
-    "assumedValue",
-    "defaultValue"])
+@XmlType(
+    name = "C_TIME", propOrder = [
+        "pattern",
+        "timezoneValidity",
+        "range",
+        "assumedValue",
+        "defaultValue"])
 class CTime : CPrimitive() {
     companion object {
         private const val serialVersionUID: Long = 0L

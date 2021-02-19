@@ -21,26 +21,25 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_AMOUNT", propOrder = [
         "accuracy",
-        "accuracyIsPercent"]
-)
+        "accuracyIsPercent"])
 @XmlSeeAlso(value = [DvCount::class, DvQuantity::class, DvProportion::class, DvDuration::class])
 @Open
 abstract class DvAmount(
-    @XmlElement(defaultValue = "-1.0")
-    var accuracy: Float? = null,
-    @XmlElement(name = "accuracy_is_percent")
-    var accuracyIsPercent: Boolean? = null,
-    magnitudeStatus: String? = null,
-    normalRange: DvInterval? = null,
-    otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-    normalStatus: CodePhrase? = null,
-) : DvQuantified(magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+        @XmlElement(defaultValue = "-1.0")
+        var accuracy: Float? = null,
+        @XmlElement(name = "accuracy_is_percent")
+        var accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null) : DvQuantified(magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

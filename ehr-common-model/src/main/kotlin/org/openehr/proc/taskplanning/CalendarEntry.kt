@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "CALENDAR_ENTRY", propOrder = [])
 @Open
@@ -29,5 +30,6 @@ class CalendarEntry : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
     override fun toString(): String = "CalendarEntry{}"
 }

@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "TASK_PLAN_EVENT_RECORD", propOrder = ["details"])
 @Open
@@ -44,7 +45,7 @@ class TaskPlanEventRecord : EventRecord {
     constructor(time: String?, description: String?) : super(time, description)
 
     override fun toString(): String =
-            "TaskPlanEventRecord{" +
-                    "details=$details" +
-                    "} ${super.toString()}"
+        "TaskPlanEventRecord{" +
+                "details=$details" +
+                "} ${super.toString()}"
 }

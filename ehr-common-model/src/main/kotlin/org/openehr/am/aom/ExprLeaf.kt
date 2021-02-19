@@ -22,12 +22,14 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EXPR_LEAF", propOrder = [
-    "item",
-    "referenceType"])
+@XmlType(
+    name = "EXPR_LEAF", propOrder = [
+        "item",
+        "referenceType"])
 class ExprLeaf : ExprItem() {
     companion object {
         private const val serialVersionUID: Long = 0L

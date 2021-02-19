@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "STATE_TRIGGER", propOrder = ["expression"])
 @Open
@@ -48,7 +49,7 @@ class StateTrigger : PlanEvent, ExpressionNamesProvider {
     override fun getExpressionNames(): Sequence<String> = expression?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun toString(): String =
-            "StateTrigger{" +
-                    "expression=$expression" +
-                    "} ${super.toString()}"
+        "StateTrigger{" +
+                "expression=$expression" +
+                "} ${super.toString()}"
 }

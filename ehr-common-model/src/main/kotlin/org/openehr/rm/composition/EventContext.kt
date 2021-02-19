@@ -31,17 +31,19 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EVENT_CONTEXT", propOrder = [
-    "startTime",
-    "endTime",
-    "location",
-    "setting",
-    "otherContext",
-    "healthCareFacility",
-    "participations"])
+@XmlType(
+    name = "EVENT_CONTEXT", propOrder = [
+        "startTime",
+        "endTime",
+        "location",
+        "setting",
+        "otherContext",
+        "healthCareFacility",
+        "participations"])
 @Open
 class EventContext : RmObject(), Serializable {
     companion object {

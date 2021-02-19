@@ -23,12 +23,14 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EVENT", propOrder = [
-    "time",
-    "data",
-    "state"])
+@XmlType(
+    name = "EVENT", propOrder = [
+        "time",
+        "data",
+        "state"])
 @XmlSeeAlso(value = [PointEvent::class, IntervalEvent::class])
 @Open
 abstract class Event : Locatable() {

@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlType(name = "PERFORMABLE_ACTION", propOrder = [
     "resources",
@@ -63,10 +64,9 @@ abstract class PerformableAction : TaskAction {
         resources.forEach { it.accept(visitor) }
     }
 
-
     override fun toString(): String =
-            "PerformableAction{" +
-                    "resources=$resources" +
-                    ", otherParticipations=$otherParticipations" +
-                    "} ${super.toString()}"
+        "PerformableAction{" +
+                "resources=$resources" +
+                ", otherParticipations=$otherParticipations" +
+                "} ${super.toString()}"
 }

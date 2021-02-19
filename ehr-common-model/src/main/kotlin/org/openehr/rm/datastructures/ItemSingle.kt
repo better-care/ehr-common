@@ -24,7 +24,9 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ITEM_SINGLE", propOrder = ["item"])
 @Open

@@ -21,24 +21,23 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_ORDERED", propOrder = [
         "normalRange",
         "otherReferenceRanges",
-        "normalStatus"]
-)
+        "normalStatus"])
 @XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class])
 @Open
 abstract class DvOrdered(
-    @XmlElement(name = "normal_range")
-    var normalRange: DvInterval? = null,
-    @XmlElement(name = "other_reference_ranges")
-    var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-    @XmlElement(name = "normal_status")
-    var normalStatus: CodePhrase? = null
-) : DataValue() {
+        @XmlElement(name = "normal_range")
+        var normalRange: DvInterval? = null,
+        @XmlElement(name = "other_reference_ranges")
+        var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        @XmlElement(name = "normal_status")
+        var normalStatus: CodePhrase? = null) : DataValue() {
 
     companion object {
         private const val serialVersionUID: Long = 0L

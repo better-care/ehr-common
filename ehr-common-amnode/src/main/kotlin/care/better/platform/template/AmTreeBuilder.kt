@@ -110,7 +110,8 @@ class AmTreeBuilder(private val template: Template) {
     private fun postProcessArchetypeNodeReferences(archetypeNodeContext: ArchetypeNodeContext) {
         archetypeNodeContext.getReferences().forEach { context ->
             val archetypeRootNode = archetypeNodeContext.archetypeRootNode ?: throw AmException("Template can not be referenced.")
-            val referencedNode: AmNode = AmUtils.resolvePath(archetypeRootNode, context.path) ?: throw AmException("Referenced AM node on path ${context.path} not found.")
+            val referencedNode: AmNode =
+                AmUtils.resolvePath(archetypeRootNode, context.path) ?: throw AmException("Referenced AM node on path ${context.path} not found.")
 
             val amNode: AmNode = referencedNode.copyForReference(context.targetedAmNode ?: throw AmException("Target AM node not found"))
             context.targetedAmNode.attributes[context.attributeName]?.also {
@@ -161,7 +162,10 @@ class AmTreeBuilder(private val template: Template) {
                             val returnType = getter.returnType
                             if (MutableCollection::class.java.isAssignableFrom(returnType)) {
                                 val collectionType = if (MutableList::class.java.isAssignableFrom(returnType)) CollectionType.LIST else CollectionType.SET
-                                child.setType(TypeInfo(RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)), CollectionInfo(collectionType)))
+                                child.setType(
+                                    TypeInfo(
+                                        RmUtils.getFieldType(rmClass, RmUtils.getFieldForAttribute(attributeName)),
+                                        CollectionInfo(collectionType)))
                             } else {
                                 child.setType(TypeInfo(returnType))
                             }

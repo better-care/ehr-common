@@ -30,6 +30,7 @@ import java.io.IOException
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, property: BeanProperty?) : AsPropertyTypeDeserializer(src, property) {
 
@@ -49,10 +50,10 @@ class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, proper
 
     @Throws(IOException::class)
     override fun deserializeTypedFromAny(p: JsonParser, ctxt: DeserializationContext): Any? =
-            if (p.currentToken == JsonToken.START_ARRAY)
-                ctxt.findRootValueDeserializer(ctxt.typeFactory.constructType(MutableCollection::class.java)).deserialize(p, ctxt)
-            else
-                deserializeTypedFromObject(p, ctxt)
+        if (p.currentToken == JsonToken.START_ARRAY)
+            ctxt.findRootValueDeserializer(ctxt.typeFactory.constructType(MutableCollection::class.java)).deserialize(p, ctxt)
+        else
+            deserializeTypedFromObject(p, ctxt)
 
 
     override fun forProperty(prop: BeanProperty?): TypeDeserializer? {

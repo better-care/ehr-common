@@ -20,10 +20,11 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "C_COMPLEX_OBJECT", propOrder = ["attributes"])
-@XmlSeeAlso(value = [CArchetypeRoot::class, TComplexObject::class ])
+@XmlSeeAlso(value = [CArchetypeRoot::class, TComplexObject::class])
 open class CComplexObject : CDefinedObject() {
     companion object {
         private const val serialVersionUID: Long = 0L

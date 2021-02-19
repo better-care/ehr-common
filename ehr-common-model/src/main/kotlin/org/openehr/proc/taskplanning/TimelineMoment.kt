@@ -22,11 +22,13 @@ import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
-@XmlType(name = "TIMELINE_MOMENT", propOrder = [
-    "timelineOffset",
-    "fixedTime",
-    "timelineOrigin"])
+@XmlType(
+    name = "TIMELINE_MOMENT", propOrder = [
+        "timelineOffset",
+        "fixedTime",
+        "timelineOrigin"])
 @Open
 class TimelineMoment : PlanEvent {
     companion object {
@@ -52,9 +54,9 @@ class TimelineMoment : PlanEvent {
     }
 
     override fun toString(): String =
-            "TimelineMoment{" +
-                    "timelineOffset='$timelineOffset'" +
-                    ", fixedTime=$fixedTime" +
-                    ", timelineOrigin=$timelineOffset" +
-                    "} ${super.toString()}"
+        "TimelineMoment{" +
+                "timelineOffset='$timelineOffset'" +
+                ", fixedTime=$fixedTime" +
+                ", timelineOrigin=$timelineOffset" +
+                "} ${super.toString()}"
 }

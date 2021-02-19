@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
+ * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -31,20 +32,18 @@ import javax.xml.bind.annotation.*
         "formatting",
         "mappings",
         "language",
-        "encoding"]
-)
+        "encoding"])
 @XmlSeeAlso(DvCodedText::class)
 @Open
 class DvText() : DataValue() {
     @JvmOverloads
     constructor(
-        value: String,
-        hyperlink: DvUri? = null,
-        formatting: String? = null,
-        mappings: MutableList<TermMapping> = mutableListOf(),
-        language: CodePhrase? = null,
-        encoding: CodePhrase? = null
-    ) : this() {
+            value: String,
+            hyperlink: DvUri? = null,
+            formatting: String? = null,
+            mappings: MutableList<TermMapping> = mutableListOf(),
+            language: CodePhrase? = null,
+            encoding: CodePhrase? = null) : this() {
         this.value = value
         this.hyperlink = hyperlink
         this.formatting = formatting
