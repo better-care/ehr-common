@@ -39,20 +39,39 @@ import javax.xml.bind.annotation.XmlType
         "time",
         "versionId"])
 @Open
-class FeederAuditDetails
-@JvmOverloads
-constructor(
-        @XmlElement(name = "system_id", required = true)
-        @Required
-        var systemId: String? = null,
-        var location: PartyIdentified? = null,
-        var provider: PartyIdentified? = null,
-        var subject: PartyProxy? = null,
-        var time: DvDateTime? = null,
-        @XmlElement(name = "version_id")
-        var versionId: String? = null) : RmObject(), Serializable {
+class FeederAuditDetails() : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
 
+    @JvmOverloads
+    constructor(
+            systemId: String,
+            location: PartyIdentified? = null,
+            provider: PartyIdentified? = null,
+            subject: PartyProxy? = null,
+            time: DvDateTime? = null,
+            versionId: String? = null) : this() {
+        this.systemId = systemId
+        this.location = location
+        this.provider = provider
+        this.subject = subject
+        this.time = time
+        this.versionId = versionId
+    }
+
+    @XmlElement(name = "system_id", required = true)
+    @Required
+    var systemId: String? = null
+
+    var location: PartyIdentified? = null
+
+    var provider: PartyIdentified? = null
+
+    var subject: PartyProxy? = null
+
+    var time: DvDateTime? = null
+
+    @XmlElement(name = "version_id")
+    var versionId: String? = null
 }

@@ -36,18 +36,7 @@ import javax.xml.bind.annotation.XmlType
         "type",
         "target"])
 @Open
-class Link
-@JvmOverloads
-constructor(
-        @XmlElement(required = true)
-        @Required
-        var meaning: DvText? = null,
-        @XmlElement(required = true)
-        @Required
-        var type: DvText? = null,
-        @XmlElement(required = true)
-        @Required
-        var target: DvEhrUri? = null) : RmObject(), java.io.Serializable {
+class Link() : RmObject(), java.io.Serializable {
 
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -65,4 +54,23 @@ constructor(
         @JvmStatic
         fun quote(parameter: String): String = parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
     }
+
+    @JvmOverloads
+    constructor(meaning: DvText, type: DvText, target: DvEhrUri) : this() {
+        this.meaning = meaning
+        this.type = type
+        this.target = target
+    }
+
+    @XmlElement(required = true)
+    @Required
+    var meaning: DvText? = null
+
+    @XmlElement(required = true)
+    @Required
+    var type: DvText? = null
+
+    @XmlElement(required = true)
+    @Required
+    var target: DvEhrUri? = null
 }

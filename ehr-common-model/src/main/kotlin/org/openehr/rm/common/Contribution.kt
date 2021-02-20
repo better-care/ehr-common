@@ -31,19 +31,27 @@ import javax.xml.bind.annotation.*
 @XmlType(name = "CONTRIBUTION", propOrder = ["uid", "versions", "audit"])
 @XmlRootElement
 @Open
-class Contribution
-@JvmOverloads
-constructor(
-        @XmlElement(required = true)
-        @Required
-        var uid: HierObjectId? = null,
-        @XmlElement(required = true)
-        @Required
-        var versions: MutableList<RmObject> = mutableListOf(),
-        @XmlElement(required = true)
-        @Required
-        var audit: AuditDetails? = null) : RmObject(), Serializable {
+class Contribution() : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @JvmOverloads
+    constructor(uid: HierObjectId, versions: MutableList<RmObject> = mutableListOf(), audit: AuditDetails) : this() {
+        this.uid = uid
+        this.versions = versions
+        this.audit = audit
+    }
+
+    @XmlElement(required = true)
+    @Required
+    var uid: HierObjectId? = null
+
+    @XmlElement(required = true)
+    @Required
+    var versions: MutableList<RmObject> = mutableListOf()
+
+    @XmlElement(required = true)
+    @Required
+    var audit: AuditDetails? = null
 }

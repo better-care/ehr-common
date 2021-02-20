@@ -39,18 +39,28 @@ import javax.xml.bind.annotation.XmlType
         "time",
         "mode"])
 @Open
-class Participation
-@JvmOverloads
-constructor(
-        @XmlElement(required = true)
-        @Required
-        var function: DvText? = null,
-        @XmlElement(required = true)
-        @Required
-        var performer: PartyProxy? = null,
-        var time: DvInterval? = null,
-        var mode: DvCodedText? = null) : RmObject(), Serializable {
+class Participation() : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @JvmOverloads
+    constructor(function: DvText, performer: PartyProxy, time: DvInterval? = null, mode: DvCodedText? = null) : this(){
+        this.function = function
+        this.performer = performer
+        this.time = time
+        this.mode = mode
+    }
+
+    @XmlElement(required = true)
+    @Required
+    var function: DvText? = null
+
+    @XmlElement(required = true)
+    @Required
+    var performer: PartyProxy? = null
+
+    var time: DvInterval? = null
+
+    var mode: DvCodedText? = null
 }

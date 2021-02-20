@@ -31,17 +31,20 @@ import javax.xml.bind.annotation.*
         "normalStatus"])
 @XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class])
 @Open
-abstract class DvOrdered(
-        @XmlElement(name = "normal_range")
-        var normalRange: DvInterval? = null,
-        @XmlElement(name = "other_reference_ranges")
-        var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-        @XmlElement(name = "normal_status")
-        var normalStatus: CodePhrase? = null) : DataValue() {
+abstract class DvOrdered() : DataValue() {
 
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(name = "normal_range")
+    var normalRange: DvInterval? = null
+
+    @XmlElement(name = "other_reference_ranges")
+    var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf()
+
+    @XmlElement(name = "normal_status")
+    var normalStatus: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =
         when {

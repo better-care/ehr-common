@@ -40,23 +40,39 @@ import javax.xml.bind.annotation.XmlType
         "originatingSystemAudit",
         "feederSystemAudit"])
 @Open
-class FeederAudit
-@JvmOverloads
-constructor(
-    @XmlElement(name = "originating_system_item_ids")
-    var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
-    @XmlElement(name = "feeder_system_item_ids")
-    var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
-    @XmlElement(name = "original_content")
-    var originalContent: DvEncapsulated? = null,
-    @XmlElement(name = "originating_system_audit", required = true)
-    @Required
-    var originatingSystemAudit: FeederAuditDetails? = null,
-    @XmlElement(name = "feeder_system_audit")
-    var feederSystemAudit: FeederAuditDetails? = null
-) : RmObject(), Serializable {
+class FeederAudit() : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @JvmOverloads
+    constructor(
+            originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
+            feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
+            originalContent: DvEncapsulated? = null,
+            originatingSystemAudit: FeederAuditDetails,
+            feederSystemAudit: FeederAuditDetails? = null) : this() {
+        this.originatingSystemAudit = originatingSystemAudit
+        this.feederSystemItemIds = feederSystemItemIds
+        this.originalContent = originalContent
+        this.originatingSystemAudit = originatingSystemAudit
+        this.feederSystemAudit = feederSystemAudit
+    }
+
+    @XmlElement(name = "originating_system_item_ids")
+    var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
+
+    @XmlElement(name = "feeder_system_item_ids")
+    var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
+
+    @XmlElement(name = "original_content")
+    var originalContent: DvEncapsulated? = null
+
+    @XmlElement(name = "originating_system_audit", required = true)
+    @Required
+    var originatingSystemAudit: FeederAuditDetails? = null
+
+    @XmlElement(name = "feeder_system_audit")
+    var feederSystemAudit: FeederAuditDetails? = null
 
 }

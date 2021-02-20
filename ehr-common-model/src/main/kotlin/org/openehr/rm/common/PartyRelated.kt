@@ -33,14 +33,23 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "PARTY_RELATED", propOrder = ["relationship"])
 @Open
 class PartyRelated
-constructor(
-        @XmlElement(required = true)
-        @Required
-        var relationship: DvCodedText? = null,
-        name: String? = null,
-        identifiers: MutableList<DvIdentifier> = mutableListOf(),
-        externalRef: PartyRef? = null): PartyIdentified(name, identifiers, externalRef) {
+constructor(): PartyIdentified() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    constructor(
+            relationship: DvCodedText? = null,
+            name: String? = null,
+            identifiers: MutableList<DvIdentifier> = mutableListOf(),
+            externalRef: PartyRef? = null): this() {
+                this.name = name
+                this.identifiers = identifiers
+                this.externalRef = externalRef
+                this.relationship = relationship
+            }
+
+    @XmlElement(required = true)
+    @Required
+    var relationship: DvCodedText? = null
 }

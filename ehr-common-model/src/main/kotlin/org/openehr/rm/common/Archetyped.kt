@@ -38,17 +38,26 @@ import javax.xml.bind.annotation.XmlType
         "templateId",
         "rmVersion"])
 @Open
-class Archetyped
-@JvmOverloads
-constructor(
-        @XmlElement(name = "archetype_id", required = true)
-        @Required
-        var archetypeId: ArchetypeId? = null,
-        @XmlElement(name = "template_id")
-        var templateId: TemplateId? = null,
-        @XmlElement(name = "rm_version", required = true)
-        var rmVersion: String = RM_VERSION.version) : RmObject(), Serializable {
+class Archetyped constructor() : RmObject(), Serializable {
+
+    @JvmOverloads
+    constructor(archetypeId: ArchetypeId, templateId: TemplateId? = null, rmVersion: String = RM_VERSION.version) : this() {
+        this.archetypeId = archetypeId
+        this.templateId = templateId
+        this.rmVersion = rmVersion
+    }
+
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @XmlElement(name = "archetype_id", required = true)
+    @Required
+    var archetypeId: ArchetypeId? = null
+
+    @XmlElement(name = "template_id")
+    var templateId: TemplateId? = null
+
+    @XmlElement(name = "rm_version", required = true)
+    var rmVersion: String = RM_VERSION.version
 }

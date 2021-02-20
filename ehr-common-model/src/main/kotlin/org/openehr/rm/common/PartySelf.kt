@@ -28,8 +28,12 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_SELF")
 @Open
-class PartySelf(externalRef: PartyRef? = null) : PartyProxy(externalRef) {
+class PartySelf() : PartyProxy() {
     companion object {
         private const val serialVersionUID: Long = 0L
+    }
+
+    constructor(externalRef: PartyRef): this(){
+        this.externalRef = externalRef
     }
 }

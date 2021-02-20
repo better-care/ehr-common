@@ -40,19 +40,36 @@ import javax.xml.bind.annotation.XmlType
         "translations",
         "revisionHistory"])
 @Open
-abstract class AuthoredResource
-@JvmOverloads
-constructor(
-        @XmlElement(name = "original_language", required = true)
-        @Required
-        var originalLanguage: CodePhrase? = null,
-        @XmlElement(name = "is_controlled")
-        var isControlled: Boolean? = null,
-        var description: ResourceDescription? = null,
-        var translations: MutableList<TranslationDetails> = mutableListOf(),
-        @XmlElement(name = "revision_history")
-        var revisionHistory: RevisionHistory? = null) : RmObject(), Serializable {
+abstract class AuthoredResource() : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    @JvmOverloads
+    constructor(
+            originalLanguage: CodePhrase,
+            isControlled: Boolean? = null,
+            description: ResourceDescription? = null,
+            translations: MutableList<TranslationDetails> = mutableListOf(),
+            revisionHistory: RevisionHistory? = null) : this() {
+        this.originalLanguage = originalLanguage
+        this.isControlled = isControlled
+        this.description = description
+        this.translations = translations
+        this.revisionHistory = revisionHistory
+    }
+
+    @XmlElement(name = "original_language", required = true)
+    @Required
+    var originalLanguage: CodePhrase? = null
+
+    @XmlElement(name = "is_controlled")
+    var isControlled: Boolean? = null
+
+    var description: ResourceDescription? = null
+
+    var translations: MutableList<TranslationDetails> = mutableListOf()
+
+    @XmlElement(name = "revision_history")
+    var revisionHistory: RevisionHistory? = null
 }

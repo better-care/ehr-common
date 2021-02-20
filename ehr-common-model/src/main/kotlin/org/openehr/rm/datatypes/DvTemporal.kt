@@ -31,15 +31,12 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "DV_TEMPORAL", propOrder = ["accuracy"])
 @XmlSeeAlso(value = [DvDateTime::class, DvTime::class, DvDate::class])
 @Open
-abstract class DvTemporal(
-        var accuracy: DvDuration? = null,
-        magnitudeStatus: String? = null,
-        normalRange: DvInterval? = null,
-        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-        normalStatus: CodePhrase? = null) : DvQuantified(magnitudeStatus, normalRange, otherReferenceRanges, normalStatus) {
+abstract class DvTemporal() : DvQuantified() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    var accuracy: DvDuration? = null
 
     override fun equals(other: Any?): Boolean =
         when {

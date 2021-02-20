@@ -34,12 +34,7 @@ import javax.xml.bind.annotation.XmlType
         "identifiers"])
 @XmlSeeAlso(PartyRelated::class)
 @Open
-class PartyIdentified
-@JvmOverloads
-constructor(
-        var name: String? = null,
-        var identifiers: MutableList<DvIdentifier> = mutableListOf(),
-        externalRef: PartyRef? = null) : PartyProxy(externalRef) {
+class PartyIdentified() : PartyProxy() {
 
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -52,6 +47,20 @@ constructor(
          * @return [PartyIdentified]
          */
         @JvmStatic
-        fun create(name: String): PartyIdentified = PartyIdentified(name = name)
+        fun create(name: String): PartyIdentified = PartyIdentified(name)
     }
+
+    @JvmOverloads
+    constructor(
+            name: String,
+            identifiers: MutableList<DvIdentifier> = mutableListOf(),
+            externalRef: PartyRef? = null) : this() {
+        this.name = name
+        this.identifiers = identifiers
+        super.externalRef = externalRef
+    }
+
+    var name: String? = null
+
+    var identifiers: MutableList<DvIdentifier> = mutableListOf()
 }

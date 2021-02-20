@@ -59,6 +59,7 @@ class DvInterval() : DataValue(), RangeParameters {
     }
 
     var lower: DvOrdered? = null
+
     var upper: DvOrdered? = null
 
     @XmlElement(name = "lower_included")
