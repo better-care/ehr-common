@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.*
         "accuracyIsPercent"])
 @XmlSeeAlso(value = [DvCount::class, DvQuantity::class, DvProportion::class, DvDuration::class])
 @Open
-abstract class DvAmount() : DvQuantified() {
+class DvAmount : DvQuantified() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

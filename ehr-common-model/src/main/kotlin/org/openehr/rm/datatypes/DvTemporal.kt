@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "DV_TEMPORAL", propOrder = ["accuracy"])
 @XmlSeeAlso(value = [DvDateTime::class, DvTime::class, DvDate::class])
 @Open
-abstract class DvTemporal() : DvQuantified() {
+class DvTemporal : DvQuantified() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
