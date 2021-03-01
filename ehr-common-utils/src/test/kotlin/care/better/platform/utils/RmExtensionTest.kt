@@ -198,7 +198,7 @@ class RmExtensionTest {
 
     @Test
     fun ehrObjectRef() {
-        val ehrObjectRef: ObjectRef = ObjectRef.create("ehrUid", "ns")
+        val ehrObjectRef: ObjectRef = ObjectRef.createPerson("ehrUid", "ns")
         assertThat(ehrObjectRef.id?.value).isEqualTo("ehrUid")
         assertThat(ehrObjectRef.namespace).isEqualTo("ns")
     }

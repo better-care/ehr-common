@@ -17,7 +17,6 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import java.math.BigInteger
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -41,7 +40,7 @@ class DvProportion() : DvAmount() {
     constructor(
             numerator: Float,
             denominator: Float,
-            type: BigInteger,
+            type: Int,
             precision: Int? = null,
             accuracy: Float? = null,
             accuracyIsPercent: Boolean? = null,
@@ -72,7 +71,7 @@ class DvProportion() : DvAmount() {
 
     @XmlElement(required = true)
     @Required
-    var type: BigInteger? = null
+    var type: Int? = null
 
     @XmlElement(defaultValue = "-1")
     var precision: Int? = null

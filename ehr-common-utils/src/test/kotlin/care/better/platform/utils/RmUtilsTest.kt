@@ -15,6 +15,7 @@
 
 package care.better.platform.utils
 
+import care.better.platform.utils.exception.RmClassCastException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -33,7 +34,7 @@ class RmUtilsTest {
 
     @Test
     fun getRmClassTestFailed() {
-        assertThatThrownBy { RmUtils.getRmClass("String") }.isInstanceOf(ClassNotFoundException::class.java)
+        assertThatThrownBy { RmUtils.getRmClass("String") }.isInstanceOf(RmClassCastException::class.java)
     }
 
     @Test
