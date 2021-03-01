@@ -47,7 +47,7 @@ class PartyIdentified() : PartyProxy() {
          * @return [PartyIdentified]
          */
         @JvmStatic
-        fun create(name: String): PartyIdentified = PartyIdentified(name)
+        fun forName(name: String): PartyIdentified = PartyIdentified(name)
     }
 
     @JvmOverloads

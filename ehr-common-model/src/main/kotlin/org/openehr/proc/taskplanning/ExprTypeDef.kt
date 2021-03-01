@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlType
  * @since 3.1.0
  */
 @XmlType(name = "EXPR_TYPE_DEF", propOrder = ["typeName"])
-@XmlSeeAlso(value = [
+@XmlSeeAlso(
+    value = [
         TypeDefBoolean::class,
         TypeDefReal::class,
         TypeDefInteger::class,
@@ -42,13 +43,11 @@ import javax.xml.bind.annotation.XmlType
         TypeDefTerminologyCode::class,
         TypeDefUri::class])
 @Open
-abstract class ExprTypeDef<T>(@XmlElement(name = "type_name", required = true) private var typeName: String) : RmObject(), Serializable {
+abstract class ExprTypeDef<T>(@XmlElement(name = "type_name", required = true) val typeName: String) : RmObject(), Serializable {
 
     companion object {
         private const val serialVersionUID: Long = 0L
     }
-
-    fun getTypeName(): String? = typeName
 
     fun setTypeName(typeName: String) {
         if (typeName != this.typeName) {

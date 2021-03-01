@@ -56,7 +56,7 @@ class RmExtensionTest {
 
     @Test
     fun partyIdentified() {
-        val partyIdentified: PartyIdentified = PartyIdentified.create("a")
+        val partyIdentified: PartyIdentified = PartyIdentified.forName("a")
         assertThat(partyIdentified.name).isEqualTo("a")
         assertThat(partyIdentified.externalRef).isNull()
         assertThat(partyIdentified.identifiers).isEmpty()
