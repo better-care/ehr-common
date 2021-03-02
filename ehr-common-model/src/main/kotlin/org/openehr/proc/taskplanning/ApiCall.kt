@@ -37,9 +37,11 @@ class ApiCall : SystemCall {
     constructor(systemId: String?, callName: String?, parameterMap: MutableList<ParameterMapping>) : super(systemId, callName, parameterMap)
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptParameters(visitor)
+        if (visited) {
+            acceptParameters(visitor)
+        }
         visitor.afterAccept(this)
     }
 

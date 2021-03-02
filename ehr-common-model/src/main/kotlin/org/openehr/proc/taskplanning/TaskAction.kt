@@ -57,9 +57,11 @@ abstract class TaskAction() : Locatable(), VisitableByModelVisitor {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptPreconditions(visitor)
+        if (visited) {
+            acceptPreconditions(visitor)
+        }
         visitor.afterAccept(this)
     }
 

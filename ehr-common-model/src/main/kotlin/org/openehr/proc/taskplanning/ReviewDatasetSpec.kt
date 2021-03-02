@@ -42,10 +42,12 @@ class ReviewDatasetSpec : DatasetSpec {
     constructor(formId: String?, templateId: String?, otherDetails: ItemStructure?) : super(formId, templateId, otherDetails)
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        populatingCall?.also { it.accept(visitor) }
-        captureDatasets.forEach { it.accept(visitor) }
+        if (visited) {
+            populatingCall?.also { it.accept(visitor) }
+            captureDatasets.forEach { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

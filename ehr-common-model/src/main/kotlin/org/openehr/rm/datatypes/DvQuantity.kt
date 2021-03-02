@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlType
     name = "DV_QUANTITY", propOrder = [
         "magnitude",
         "units",
-        "precision"])
+        "precision",
+        "unitsSystem",
+        "unitsDisplayName"])
 @Open
 class DvQuantity() : DvAmount() {
     @JvmOverloads
@@ -46,7 +48,9 @@ class DvQuantity() : DvAmount() {
             magnitudeStatus: String? = null,
             normalRange: DvInterval? = null,
             otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null) : this() {
+            normalStatus: CodePhrase? = null,
+            unitsSystem: String? = null,
+            unitsDisplayName: String? = null) : this() {
         this.magnitude = magnitude
         this.units = units
         this.precision = precision
@@ -56,6 +60,8 @@ class DvQuantity() : DvAmount() {
         this.normalRange = normalRange
         this.otherReferenceRanges = otherReferenceRanges
         this.normalStatus = normalStatus
+        this.unitsSystem = unitsSystem
+        this.unitsDisplayName = unitsDisplayName
     }
 
     companion object {
@@ -70,6 +76,12 @@ class DvQuantity() : DvAmount() {
 
     @XmlElement(defaultValue = "-1")
     var precision: Int? = null
+
+    @XmlElement(name = "units_system")
+    var unitsSystem: String? = null
+
+    @XmlElement(name = "units_display_name")
+    var unitsDisplayName: String? = null
 
     override fun equals(other: Any?): Boolean =
         when {

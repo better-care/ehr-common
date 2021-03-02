@@ -68,9 +68,11 @@ abstract class DatasetSpec() : Locatable(), Serializable, VisitableByModelVisito
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        populatingCall?.also { it.accept(visitor) }
+        if (visited) {
+            populatingCall?.also { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

@@ -23,4 +23,11 @@
 
     <artifactId>ehr-common-terminology</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>care.better.platform</groupId>
+            <artifactId>ehr-common-utils</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

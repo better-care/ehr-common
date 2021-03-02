@@ -23,105 +23,106 @@ import org.openehr.rm.common.PartyProxy
  * @author Primoz Delopst
  * @since 3.1.0
  */
-
 interface TaskModelVisitor {
-    fun visit(workPlan: WorkPlan)
+    fun visit(workPlan: WorkPlan): Boolean
 
-    fun visit(planDataContext: PlanDataContext)
+    fun visit(planDataContext: PlanDataContext): Boolean
 
-    fun visit(contextConstant: ContextConstant<*>)
+    fun visit(contextConstant: ContextConstant<*>): Boolean
 
-    fun visit(contextVariable: ContextVariable<*>)
+    fun visit(contextVariable: ContextVariable<*>): Boolean
 
-    fun visit(contextVariable: LocalVariable<*>)
+    fun visit(contextVariable: LocalVariable<*>): Boolean
 
-    fun visit(contextVariable: ExternalVariable<*>)
+    fun visit(contextVariable: ExternalVariable<*>): Boolean
 
-    fun visit(contextVariable: StateVariable<*>)
+    fun visit(contextVariable: StateVariable<*>): Boolean
 
-    fun visit(contextVariable: EventVariable<*>)
+    fun visit(contextVariable: EventVariable<*>): Boolean
 
-    fun visit(contextVariable: ContinuousEventVariable<*>)
+    fun visit(contextVariable: ContinuousEventVariable<*>): Boolean
 
-    fun visit(contextExpression: ContextExpression<*>)
+    fun visit(contextExpression: ContextExpression<*>): Boolean
 
-    fun visit(contextExpression: BooleanContextExpression)
+    fun visit(contextExpression: BooleanContextExpression): Boolean
 
-    fun visit(systemCall: SystemCall)
+    fun visit(systemCall: SystemCall): Boolean
 
-    fun visit(apiCall: ApiCall)
+    fun visit(apiCall: ApiCall): Boolean
 
-    fun visit(queryCall: QueryCall)
+    fun visit(queryCall: QueryCall): Boolean
 
-    fun visit(taskPlan: TaskPlan)
+    fun visit(taskPlan: TaskPlan): Boolean
 
-    fun visit(planItem: PlanItem)
+    fun visit(planItem: PlanItem): Boolean
 
-    fun visit(taskGroup: TaskGroup<*>)
+    fun visit(taskGroup: TaskGroup<*>): Boolean
 
-    fun visit(decisionGroup: DecisionGroup)
+    fun visit(decisionGroup: DecisionGroup): Boolean
 
-    fun visit(conditionGroup: ConditionGroup)
+    fun visit(conditionGroup: ConditionGroup): Boolean
 
-    fun visit(eventGroup: EventGroup)
+    fun visit(eventGroup: EventGroup): Boolean
 
-    fun visit(decisionBranch: DecisionBranch)
+    fun visit(decisionBranch: DecisionBranch): Boolean
 
-    fun visit(conditionBranch: ConditionBranch)
+    fun visit(conditionBranch: ConditionBranch): Boolean
 
-    fun visit(eventBranch: EventBranch)
+    fun visit(eventBranch: EventBranch): Boolean
 
-    fun visit(task: Task<*>)
+    fun visit(task: Task<*>): Boolean
 
-    fun visit(taskAction: TaskAction)
+    fun visit(taskAction: TaskAction): Boolean
 
-    fun visit(dispatchableAction: DispatchableAction)
+    @Suppress("SpellCheckingInspection")
+    fun visit(dispatchableAction: DispatchableAction): Boolean
 
-    fun visit(systemRequest: SystemRequest)
+    fun visit(systemRequest: SystemRequest): Boolean
 
-    fun visit(externalRequest: ExternalRequest)
+    fun visit(externalRequest: ExternalRequest): Boolean
 
-    fun visit(handOff: HandOff)
+    fun visit(handOff: HandOff): Boolean
 
-    fun visit(performableAction: PerformableAction)
+    fun visit(performableAction: PerformableAction): Boolean
 
-    fun visit(definedAction: DefinedAction)
+    fun visit(definedAction: DefinedAction): Boolean
 
-    fun visit(subPlan: SubPlan)
+    fun visit(subPlan: SubPlan): Boolean
 
-    fun visit(partyProxy: PartyProxy)
+    fun visit(partyProxy: PartyProxy): Boolean
 
-    fun visit(taskParticipation: TaskParticipation)
+    fun visit(taskParticipation: TaskParticipation): Boolean
 
-    fun visit(subjectPrecondition: SubjectPrecondition)
+    fun visit(subjectPrecondition: SubjectPrecondition): Boolean
 
-    fun visit(reviewDatasetSpec: ReviewDatasetSpec)
+    fun visit(reviewDatasetSpec: ReviewDatasetSpec): Boolean
 
-    fun visit(captureDatasetSpec: CaptureDatasetSpec)
+    fun visit(captureDatasetSpec: CaptureDatasetSpec): Boolean
 
-    fun visit(datasetSpec: DatasetSpec)
+    fun visit(datasetSpec: DatasetSpec): Boolean
 
-    fun visit(resourceParticipation: ResourceParticipation)
+    fun visit(resourceParticipation: ResourceParticipation): Boolean
 
-    fun visit(parameterDef: ParameterDef<*>)
+    fun visit(parameterDef: ParameterDef<*>): Boolean
 
-    fun visit(parameterMapping: ParameterMapping)
+    fun visit(parameterMapping: ParameterMapping): Boolean
 
-    fun visit(choiceGroup: ChoiceGroup<*>)
+    fun visit(choiceGroup: ChoiceGroup<*>): Boolean
 
-    fun visit(choiceBranch: ChoiceBranch<*>)
+    fun visit(choiceBranch: ChoiceBranch<*>): Boolean
 
-    fun visit(adhocGroup: AdhocGroup)
+    fun visit(adhocGroup: AdhocGroup): Boolean
 
-    fun visit(adhocBranch: AdhocBranch)
+    fun visit(adhocBranch: AdhocBranch): Boolean
 
-    fun visit(performableTask: PerformableTask<*>)
+    fun visit(performableTask: PerformableTask<*>): Boolean
 
-    fun visit(dispatchableTask: DispatchableTask<*>)
+    @Suppress("SpellCheckingInspection")
+    fun visit(dispatchableTask: DispatchableTask<*>): Boolean
 
-    fun visit(orderRef: OrderRef)
+    fun visit(orderRef: OrderRef): Boolean
 
-    fun visit(datasetCommitGroup: DatasetCommitGroup)
+    fun visit(datasetCommitGroup: DatasetCommitGroup): Boolean
 
     fun afterVisit(`object`: RmObject)
 

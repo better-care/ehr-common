@@ -59,10 +59,10 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     var carePathway: ItemStructure? = null
 
     @XmlElement(name = "top_level_plan_uids")
-    var topLevelPlanUids: LinkedHashSet<UidBasedId> = linkedSetOf()
+    var topLevelPlanUids: MutableList<UidBasedId> = mutableListOf()
 
     @XmlElement(name = "top_level_plans")
-    var topLevelPlans: LinkedHashSet<TaskPlan> = linkedSetOf()
+    var topLevelPlans: MutableList<TaskPlan> = mutableListOf()
 
     @XmlElement(name = "care_plan")
     var carePlan: LocatableRef? = null
@@ -95,11 +95,13 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        context?.also { it.accept(visitor) }
-        orderList.forEach { it.accept(visitor) }
-        topLevelPlans.forEach { it.accept(visitor) }
+        if (visited) {
+            context?.also { it.accept(visitor) }
+            orderList.forEach { it.accept(visitor) }
+            topLevelPlans.forEach { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

@@ -47,7 +47,6 @@ class Ehr : RmObject(), Serializable {
     @XmlElement(name = "ehr_status")
     var ehrStatus: EhrStatus? = null
 
-
     override fun equals(other: Any?): Boolean =
         when {
             this === other -> true

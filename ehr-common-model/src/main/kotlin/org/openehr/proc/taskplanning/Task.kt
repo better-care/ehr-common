@@ -60,11 +60,13 @@ abstract class Task<A : TaskAction> : PlanItem {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptRepeatAndWaitSpec(visitor)
-        acceptReviewDataset(visitor)
-        action?.accept(visitor)
+        if (visited) {
+            acceptRepeatAndWaitSpec(visitor)
+            acceptReviewDataset(visitor)
+            action?.accept(visitor)
+        }
         visitor.afterAccept(this)
     }
 

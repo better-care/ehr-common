@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "C_DOMAIN_TYPE")
-@XmlSeeAlso(value = [CDvOrdinal::class, CDvQuantity::class, CDvState::class, CCodePhrase::class])
+@XmlSeeAlso(value = [CDvOrdinal::class, CDvQuantity::class, CDvState::class, CCodePhrase::class, CDvScale::class])
 abstract class CDomainType : CDefinedObject() {
     companion object {
         private const val serialVersionUID: Long = 0L

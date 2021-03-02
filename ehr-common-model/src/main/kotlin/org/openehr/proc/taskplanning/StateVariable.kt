@@ -41,9 +41,11 @@ class StateVariable<T> : ExternalVariable<T> {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        populatingRequest?.also { it.accept(visitor) }
+        if (visited) {
+            populatingRequest?.also { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

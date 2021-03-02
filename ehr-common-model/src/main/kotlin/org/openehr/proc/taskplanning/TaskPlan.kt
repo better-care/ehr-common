@@ -20,6 +20,7 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.PartyProxy
+import org.openehr.rm.common.PartySelf
 import org.openehr.rm.composition.ContentItem
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvIdentifier
@@ -32,22 +33,23 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
-@XmlType(name = "TASK_PLAN", propOrder = [
-    "subject",
-    "description",
-    "principalPerformer",
-    "definition",
-    "trainingLevel",
-    "guideline",
-    "bestPracticeRef",
-    "orderSetId",
-    "orderSetType",
-    "expiryTime",
-    "dueTime",
-    "indications",
-    "executionHistory"])
+@XmlType(
+    name = "TASK_PLAN", propOrder = [
+        "subject",
+        "description",
+        "principalPerformer",
+        "definition",
+        "trainingLevel",
+        "guideline",
+        "bestPracticeRef",
+        "orderSetId",
+        "orderSetType",
+        "expiryTime",
+        "dueTime",
+        "indications",
+        "executionHistory"])
 @Open
-class TaskPlan() : ContentItem(), VisitableByModelVisitor {
+class TaskPlan : ContentItem, VisitableByModelVisitor {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
@@ -93,6 +95,10 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
     @XmlElement(name = "indications")
     var indications: MutableList<DvText> = mutableListOf()
 
+    constructor() : super() {
+        this.subject = PartySelf()
+    }
+
     constructor(description: DvText?, definition: TaskGroup<out PlanItem>?) : this() {
         this.description = description
         this.definition = definition
@@ -103,10 +109,12 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        principalPerformer?.also { it.accept(visitor) }
-        definition?.accept(visitor)
+        if (visited) {
+            principalPerformer?.also { it.accept(visitor) }
+            definition?.accept(visitor)
+        }
         visitor.afterAccept(this)
     }
 

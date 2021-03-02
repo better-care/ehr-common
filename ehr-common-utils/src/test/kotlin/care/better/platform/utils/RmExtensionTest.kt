@@ -40,7 +40,7 @@ import java.time.ZonedDateTime
 class RmExtensionTest {
 
     @Test
-    fun dvText() {
+    fun testDvText() {
         val dvText = DvText("a")
         evaluateDvText(dvText, "a")
     }
@@ -55,7 +55,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun partyIdentified() {
+    fun testPartyIdentified() {
         val partyIdentified: PartyIdentified = PartyIdentified.forName("a")
         assertThat(partyIdentified.name).isEqualTo("a")
         assertThat(partyIdentified.externalRef).isNull()
@@ -63,7 +63,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun codedText() {
+    fun testCodedText() {
         val codedText: DvCodedText = DvCodedText.create("openehr", "1", "value")
         evaluateDvCodedText(codedText, "openehr", "1", "value")
     }
@@ -79,7 +79,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun ordinal() {
+    fun testOrdinal() {
         val ordinal = DvOrdinal(1, DvCodedText.create("openehr", "mm", "mm"))
         evaluateDvCodedText(ordinal.symbol!!, "openehr", "mm", "mm")
         assertThat(ordinal.value).isEqualTo(1)
@@ -89,7 +89,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun quantity() {
+    fun testQuantity() {
         val quantity = DvQuantity(1.0, "mm")
         assertThat(quantity.magnitude).isEqualTo(1.0)
         assertThat(quantity.units).isEqualTo("mm")
@@ -107,7 +107,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun duration() {
+    fun testDuration() {
         val period = Period(DateTime(2011, 1, 1, 1, 0, 0), DateTime(2011, 1, 1, 2, 0, 0))
         val duration: DvDuration = DvDuration.create(period)
         assertThat(duration.value).isEqualTo("PT1H")
@@ -121,12 +121,17 @@ class RmExtensionTest {
     }
 
     @Test
-    fun invalidDuration() {
+    fun testNegativeDuration(){
+        assertThat(DvDuration.create("P-1YT1H")?.value).isEqualTo("P-1YT1H")
+    }
+
+    @Test
+    fun testInvalidDuration() {
         assertThatThrownBy { DvDuration.create("P1YX1H") }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @Test
-    fun dateTime() {
+    fun testDateTime() {
         val dateTime = DateTime(2011, 1, 1, 1, 0, 0, DateTimeZone.UTC)
         val dvDateTime: DvDateTime = DvDateTime.create(dateTime)
         assertThat(dvDateTime.value).isEqualTo("2011-01-01T01:00:00.000Z")
@@ -137,7 +142,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun localDate() {
+    fun testLocalDate() {
         val date = LocalDate(2012, 3, 17)
         val dvDate: DvDate = DvDate.create(date)
         assertThat(dvDate.value).isEqualTo("2012-03-17")
@@ -149,7 +154,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun localTime() {
+    fun testLocalTime() {
         val time = LocalTime(13, 39, 17, 776)
         val dvTime: DvTime = DvTime.create(time)
         assertThat(dvTime.value).isEqualTo("13:39:17.776")
@@ -161,13 +166,13 @@ class RmExtensionTest {
     }
 
     @Test
-    fun localTimeFromDateTime() {
+    fun testLocalTimeFromDateTime() {
         val time = DvTime().apply { this.value = "2011-01-01T13:39:17.776Z" }
         assertThat(time.toJodaLocalTime()).isEqualTo(LocalTime(13, 39, 17, 776))
     }
 
     @Test
-    fun parsable() {
+    fun testParsable() {
         val parsable = DvParsable("value", "formalism")
         assertThat(parsable.value).isEqualTo("value")
         assertThat(parsable.formalism).isEqualTo("formalism")
@@ -175,7 +180,7 @@ class RmExtensionTest {
 
 
     @Test
-    fun booleanConversion() {
+    fun testBooleanConversion() {
         val dvBooleanT: DvBoolean = DvBoolean.create(true)
         assertThat(dvBooleanT.value).isTrue
         val dvBooleanF: DvBoolean = DvBoolean.create(false)
@@ -183,7 +188,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun ehrUriNoPath() {
+    fun testEhrUriNoPath() {
         val ehrUri1: DvEhrUri = DvEhrUri.create("ehrUid", "compositionUid")
         assertThat(ehrUri1.value).isEqualTo("ehr://ehrUid/compositionUid")
         val ehrUri2: DvEhrUri = DvEhrUri.create("ehrUid", "compositionUid", null)
@@ -191,13 +196,13 @@ class RmExtensionTest {
     }
 
     @Test
-    fun ehrUriWithPath() {
+    fun testEhrUriWithPath() {
         val ehrUri: DvEhrUri = DvEhrUri.create("ehrUid", "compositionUid", "content[at0001]/name/value")
         assertThat(ehrUri.value).isEqualTo("ehr://ehrUid/compositionUid/content[at0001]/name/value")
     }
 
     @Test
-    fun ehrObjectRef() {
+    fun testEhrObjectRef() {
         val ehrObjectRef: ObjectRef = ObjectRef.createPerson("ehrUid", "ns")
         assertThat(ehrObjectRef.id?.value).isEqualTo("ehrUid")
         assertThat(ehrObjectRef.namespace).isEqualTo("ns")
@@ -205,46 +210,46 @@ class RmExtensionTest {
 
 
     @Test
-    fun objectVersionId() {
+    fun testObjectVersionId() {
         val uid = ObjectVersionId("uid")
         assertThat(uid.value).isEqualTo("uid")
     }
 
     @Test
-    fun objectVersionIdFull() {
+    fun testObjectVersionIdFull() {
         val uid: ObjectVersionId = ObjectVersionId.create("uid", "pek.marand.si", 12)
         assertThat(uid.value).isEqualTo("uid::pek.marand.si::12")
     }
 
     @Test
-    fun hierObjectId() {
+    fun testHierObjectId() {
         val uid = HierObjectId("uid")
         assertThat(uid.value).isEqualTo("uid")
     }
 
     @Test
-    fun language() {
+    fun testLanguage() {
         val cp: CodePhrase = CodePhrase.createLanguagePhrase("sl")
         assertThat(cp.terminologyId?.value).isEqualTo("ISO_639-1")
         assertThat(cp.codeString).isEqualTo("sl")
     }
 
     @Test
-    fun territory() {
+    fun testTerritory() {
         val cp: CodePhrase = CodePhrase.createTerritoryPhrase("SI")
         assertThat(cp.terminologyId?.value).isEqualTo("ISO_3166-1")
         assertThat(cp.codeString).isEqualTo("SI")
     }
 
     @Test
-    fun encoding() {
+    fun testEncoding() {
         val cp: CodePhrase = CodePhrase.createEncodingPhrase("UTF-8")
         assertThat(cp.terminologyId?.value).isEqualTo("IANA_character-sets")
         assertThat(cp.codeString).isEqualTo("UTF-8")
     }
 
     @Test
-    fun toDvDateTimeZone() {
+    fun testToDvDateTimeZone() {
         val formatter = ISODateTimeFormat.dateTime().withOffsetParsed()
         val dateTime1 = DateTime(2015, 1, 1, 12, 0, DateTimeZone.UTC)
         val dvDateTime1: DvDateTime = DvDateTime.create(dateTime1)
@@ -255,7 +260,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun fromDvDateTimeZone() {
+    fun testFromDvDateTimeZone() {
         val dateTime1 = DateTime(2015, 1, 1, 12, 0, DateTimeZone.UTC)
         val dvDateTime1: DvDateTime = DvDateTime.create(dateTime1)
         val dateTime2: DateTime = dvDateTime1.toDateTime()
@@ -263,7 +268,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun jsr310DateTimeUTC() {
+    fun testJsr310DateTimeUTC() {
         val zonedDateTime1 = ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneId.of("Z"))
         val dvDateTime1: DvDateTime = DvDateTime.create(zonedDateTime1)
         assertThat(dvDateTime1.value).isEqualTo("2015-01-01T12:00:00.000000001Z")
@@ -279,7 +284,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun jsr310DateTime() {
+    fun testJsr310DateTime() {
         val zonedDateTime1 = ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneId.systemDefault())
         val dvDateTime1: DvDateTime = DvDateTime.create(zonedDateTime1)
         assertThat(dvDateTime1.value).isEqualTo("2015-01-01T12:00:00.000000001+01:00")
@@ -301,7 +306,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun jsr310LocalDate() {
+    fun testJsr310LocalDate() {
         val date1 = LocalDate.of(2015, 1, 1)
         val dvDate1: DvDate = DvDate.create(date1)
         assertThat(dvDate1.value).isEqualTo("2015-01-01")
@@ -310,7 +315,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun jsr310LocalTime() {
+    fun testJsr310LocalTime() {
         val time1 = LocalTime.of(11, 19, 30)
         val dvTime1: DvTime = DvTime.create(time1)
         assertThat(dvTime1.value).isEqualTo("11:19:30")
@@ -319,7 +324,7 @@ class RmExtensionTest {
     }
 
     @Test
-    fun nameSuffix() {
+    fun testNameSuffix() {
         assertThat(Link.getNameSuffix("Hello", 0)).isEqualTo("'Hello'")
         assertThat(Link.getNameSuffix("Hello", 1)).isEqualTo("'Hello #2'")
         assertThat(Link.getNameSuffix("Hell'o", 1)).isEqualTo("'Hell\\'o #2'")

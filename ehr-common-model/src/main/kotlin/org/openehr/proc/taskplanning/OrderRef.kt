@@ -43,19 +43,19 @@ class OrderRef : Locatable(), Serializable, VisitableByModelVisitor {
         private const val serialVersionUID: Long = 0L
     }
 
-    @XmlElement(required = true)
+    @XmlElements(value = [XmlElement(required = true, name = "orderTag"), XmlElement(required = true, name = "order_tag")])
     @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "order_tag")
+    @XmlSchemaType(name = "token")
     var orderTag: String? = null
 
-    @XmlElement
+    @XmlElements(value = [XmlElement(name = "instructionArchetypeId"), XmlElement(name = "instruction_archetype_id")])
     @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "instruction_archetype_id")
+    @XmlSchemaType(name = "token")
     var instructionArchetypeId: String? = null
 
-    @XmlElement
+    @XmlElements(value = [XmlElement(name = "actionArchetypeId"), XmlElement(name = "action_archetype_id")])
     @XmlJavaTypeAdapter(CollapsedStringAdapter::class)
-    @XmlSchemaType(name = "action_archetype_id")
+    @XmlSchemaType(name = "token")
     var actionArchetypeId: String? = null
 
     @XmlElement(name = "order_ref")

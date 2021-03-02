@@ -34,7 +34,7 @@ import java.io.IOException
 class AmUtilsTest : AbstractAmTest() {
     @Test
     @Throws(IOException::class)
-    fun findMatch() {
+    fun testFindMatch() {
         val template = loadTemplate("/openEHR-EHR-COMPOSITION.t_ophthalmologist_examination.v1.opt")
         val builder = AmTreeBuilder(template)
         val root = builder.build()
@@ -53,7 +53,7 @@ class AmUtilsTest : AbstractAmTest() {
 
     @Test
     @Throws(IOException::class)
-    fun constrainedNameCheck() {
+    fun testConstrainedNameCheck() {
         val template = loadTemplate("/Blood pressure.opt")
         val builder = AmTreeBuilder(template)
         val root = builder.build()
@@ -65,7 +65,7 @@ class AmUtilsTest : AbstractAmTest() {
 
     @Test
     @Throws(IOException::class)
-    fun constrainedCodedTextNameCheck() {
+    fun testConstrainedCodedTextNameCheck() {
         val template = loadTemplate("/Testing Template1.opt")
         val builder = AmTreeBuilder(template)
         val root = builder.build()
@@ -94,7 +94,7 @@ class AmUtilsTest : AbstractAmTest() {
 
     @Test
     @Throws(IOException::class)
-    fun findTermBindings() {
+    fun testFindTermBindings() {
         val template = loadTemplate("/DogAPTrace-annot.opt")
         assertThat(template).isNotNull
 

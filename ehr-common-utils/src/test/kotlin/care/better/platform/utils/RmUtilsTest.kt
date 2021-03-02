@@ -28,12 +28,12 @@ import org.openehr.rm.composition.Composition
 class RmUtilsTest {
 
     @Test
-    fun getRmClassTest() {
+    fun testGetRmClassTest() {
         assertThat(RmUtils.getRmClass("Composition")).isEqualTo(Composition::class.java)
     }
 
     @Test
-    fun getRmClassTestFailed() {
+    fun testGetRmClassTestFailed() {
         assertThatThrownBy { RmUtils.getRmClass("String") }.isInstanceOf(RmClassCastException::class.java)
     }
 
@@ -43,17 +43,23 @@ class RmUtilsTest {
     }
 
     @Test
-    fun fieldForAttributeTest() {
+    fun testFieldForAttributeTest() {
         assertThat(RmUtils.getFieldForAttribute("test_attribute")).isEqualTo("testAttribute")
     }
 
     @Test
-    fun attributeForFieldTest() {
+    fun testAttributeForFieldTest() {
         assertThat(RmUtils.getAttributeForField("testAttribute")).isEqualTo("test_attribute")
     }
 
     @Test
-    fun rmTypeNameTest() {
+    fun testRmTypeNameTest() {
         assertThat(RmUtils.getRmTypeName(Composition::class.java)).isEqualTo("COMPOSITION")
+    }
+
+    @Test
+    fun testGetAllFieldsForCodePhrase() {
+        val fields = RmUtils.getAllFields("CODE_PHRASE")
+        assertThat(fields).hasSize(3)
     }
 }

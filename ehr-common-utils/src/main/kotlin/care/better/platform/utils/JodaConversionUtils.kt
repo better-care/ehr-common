@@ -35,6 +35,8 @@ import org.openehr.rm.datatypes.DvTime
 class JodaConversionUtils {
     companion object {
 
+        private val STANDARD_PERIOD_FORMATTER = ISOPeriodFormat.standard()
+
         /**
          * Converts a ReadablePeriod to [DvDuration]
          *
@@ -42,7 +44,7 @@ class JodaConversionUtils {
          * @return [DvDuration] object
          */
         @JvmStatic
-        fun createDvDuration(period: ReadablePeriod): DvDuration = DvDuration().apply { this.value = ISOPeriodFormat.standard().print(period) }
+        fun createDvDuration(period: ReadablePeriod): DvDuration = DvDuration().apply { this.value = STANDARD_PERIOD_FORMATTER.print(period) }
 
         /**
          * Converts a string duration to [DvDuration]
@@ -54,7 +56,7 @@ class JodaConversionUtils {
         fun createDvDuration(value: String?): DvDuration? =
             value?.let {
                 DvDuration().apply {
-                    ISOPeriodFormat.standard().parsePeriod(value)
+                    toPeriod(value)
                     this.value = value
                 }
             }
@@ -66,7 +68,20 @@ class JodaConversionUtils {
          * @return [Period]
          */
         @JvmStatic
-        fun toPeriod(durationValue: String): Period = ISOPeriodFormat.standard().parsePeriod(durationValue)
+        fun toPeriod(durationValue: String): Period {
+            val (value, negative) =
+                if (durationValue.startsWith("-P")) {
+                    Pair(durationValue.substring(1), true)
+                } else {
+                    Pair(durationValue, false)
+                }
+            val period = STANDARD_PERIOD_FORMATTER.parsePeriod(value)
+
+            return if (negative)
+                period.negated()
+            else
+                period
+        }
 
         /**
          * Converts Joda DateTime to DV_DATETIME
@@ -147,7 +162,7 @@ class JodaConversionUtils {
          * @return [Period]
          */
         @JvmStatic
-        fun toPeriod(duration: DvDuration): Period = ISOPeriodFormat.standard().parsePeriod(requireNotNull(duration.value))
+        fun toPeriod(duration: DvDuration): Period = toPeriod(requireNotNull(duration.value))
     }
 }
 

@@ -35,12 +35,15 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(
     name = "CODE_PHRASE", propOrder = [
         "terminologyId",
-        "codeString"])
+        "codeString",
+        "preferredTerm"])
 @Open
 class CodePhrase() : RmObject(), Serializable {
-    constructor(terminologyId: TerminologyId, codeString: String) : this() {
+    @JvmOverloads
+    constructor(terminologyId: TerminologyId, codeString: String, preferredTerm: String? = null) : this() {
         this.terminologyId = terminologyId
         this.codeString = codeString
+        this.preferredTerm = preferredTerm
     }
 
     companion object {
@@ -92,6 +95,9 @@ class CodePhrase() : RmObject(), Serializable {
     @Required
     var codeString: String? = null
 
+    @XmlElement(name = "preferred_term")
+    var preferredTerm: String? = null
+
     override fun equals(other: Any?): Boolean =
         when {
             this === other -> true
@@ -100,5 +106,5 @@ class CodePhrase() : RmObject(), Serializable {
             else -> codeString == other.codeString
         }
 
-    override fun hashCode(): Int = Objects.hash(terminologyId, codeString)
+    override fun hashCode(): Int = Objects.hash(terminologyId, codeString, preferredTerm)
 }

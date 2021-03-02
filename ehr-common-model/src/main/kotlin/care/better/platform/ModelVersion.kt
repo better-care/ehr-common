@@ -15,37 +15,41 @@
 
 package care.better.platform
 
-import care.better.openehr.processmodel.taskplanning.TpVersion
-import care.better.openehr.rm.RmVersion
-
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+abstract class ModelVersion(vararg versions: Version<*>?) {
 
-class ModelVersion(val rmVersion: RmVersion, val tpVersion: TpVersion?) {
+    private var versionMap: MutableMap<Class<*>, Version<*>> = linkedMapOf()
 
-    constructor(rmVersion: RmVersion) : this(rmVersion, null)
-
-    companion object {
-        @JvmField
-        val CURRENT_VERSION = ModelVersion(RmVersion.RM1_0_4, TpVersion.TP1_5_1)
-
-        @JvmField
-        val LEGACY_VERSION = ModelVersion(RmVersion.RM1_0_2)
-
-        @JvmField
-        val CURRENT_VERSION_STRING = CURRENT_VERSION.toString()
-
-        @JvmStatic
-        fun from(versionString: String): ModelVersion = with(versionString.split(",")) {
-            if (this.size > 1) {
-                ModelVersion(RmVersion.from(this[0]), TpVersion.from(this[1]))
-            } else {
-                ModelVersion(RmVersion.from(this[0]))
-            }
+    init {
+        if (versions.isNullOrEmpty() || versions.all { it == null }) {
+            throw IllegalArgumentException("Must specify at least one valid version.")
         }
+        versions.asSequence().filterNotNull().forEach { versionMap[it::class.java] = it }
     }
 
-    override fun toString(): String = "${rmVersion.version}${tpVersion?.let { ",${tpVersion.version}" } ?: ""}"
+    companion object {
+        const val IDENTIFIER: String = "MVer"
+    }
+
+    fun getVersionMap(): Map<Class<*>, Version<*>> = versionMap
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T : Version<*>> getVersion(versionClass: Class<T>): T? = versionMap[versionClass] as T?
+
+    @Suppress("UNCHECKED_CAST")
+    operator fun <T : Version<*>> compareTo(other: T): Int {
+        val versionClass = other::class.java
+        if (versionMap.containsKey(versionClass)) {
+            val version: Version<T> = requireNotNull(versionMap[versionClass]) as Version<T>
+            return version.compareTo(other)
+        }
+        throw IllegalArgumentException("Missing Version ${versionClass::class.java.simpleName} from ${this::class.java.simpleName}.")
+    }
+
+    fun getIdentifier(): String = IDENTIFIER
+
+    override fun toString(): String = versionMap.values.joinToString(",") { it.getVersion() }
 }

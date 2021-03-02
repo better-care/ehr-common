@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType
 class Archetyped constructor() : RmObject(), Serializable {
 
     @JvmOverloads
-    constructor(archetypeId: ArchetypeId, templateId: TemplateId? = null, rmVersion: String = RM_VERSION.version) : this() {
+    constructor(archetypeId: ArchetypeId, templateId: TemplateId? = null, rmVersion: String = RM_VERSION.getVersion()) : this() {
         this.archetypeId = archetypeId
         this.templateId = templateId
         this.rmVersion = rmVersion
@@ -59,5 +59,5 @@ class Archetyped constructor() : RmObject(), Serializable {
     var templateId: TemplateId? = null
 
     @XmlElement(name = "rm_version", required = true)
-    var rmVersion: String = RM_VERSION.version
+    var rmVersion: String = RM_VERSION.getVersion()
 }

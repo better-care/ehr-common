@@ -15,12 +15,14 @@
 
 package care.better.openehr.processmodel.taskplanning
 
+import care.better.platform.Version
+
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
 
-enum class TpVersion(val version: String, private val possibleValues: Set<String>) {
+enum class TpVersion(private val tpVersion: String, private val possibleValues: Set<String>) : Version<TpVersion> {
 
     TP1_5_0("tp1.5.0", setOf("tp1.5.0", "TP1.5.0", "tp1_5_0", "TP1_5_0")),
     TP1_5_1("tp1.5.1", setOf("tp1.5.1", "TP1.5.1", "tp1_5_1", "TP1_5_1"));
@@ -33,4 +35,6 @@ enum class TpVersion(val version: String, private val possibleValues: Set<String
                 else -> throw IllegalArgumentException("Unknown TP model version $version.")
             }
     }
+
+    override fun getVersion(): String = tpVersion
 }

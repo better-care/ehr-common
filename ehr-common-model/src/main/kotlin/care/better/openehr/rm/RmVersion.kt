@@ -15,16 +15,19 @@
 
 package care.better.openehr.rm
 
+import care.better.platform.Version
+
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
-enum class RmVersion(val version: String, private val possibleValues: Set<String>) {
+enum class RmVersion(private val rmVersion: String, private val possibleValues: Set<String>) : Version<RmVersion> {
 
     RM1_0_1("1.0.1", setOf("1.0.1", "RM1.0.1", "rm1.0.1", "1_0_1", "RM1_0_1", "rm1_0_1")),
     RM1_0_2("1.0.2", setOf("1.0.2", "RM1.0.2", "rm1.0.2", "1_0_2", "RM1_0_2", "rm1_0_2")),
     RM1_0_3("1.0.3", setOf("1.0.3", "RM1.0.3", "rm1.0.3", "1_0_3", "RM1_0_3", "rm1_0_3")),
-    RM1_0_4("1.0.4", setOf("1.0.4", "RM1.0.4", "rm1.0.4", "1_0_4", "RM1_0_4", "rm1_0_4"));
+    RM1_0_4("1.0.4", setOf("1.0.4", "RM1.0.4", "rm1.0.4", "1_0_4", "RM1_0_4", "rm1_0_4")),
+    RM1_1_0("1.1.0", setOf("1.1.0", "RM1.1.0", "rm1.1.0", "1_1_0", "RM1_1_0", "rm1_1_0"));
 
     companion object {
         fun from(version: String): RmVersion =
@@ -33,7 +36,10 @@ enum class RmVersion(val version: String, private val possibleValues: Set<String
                 RM1_0_2.possibleValues.contains(version) -> RM1_0_2
                 RM1_0_3.possibleValues.contains(version) -> RM1_0_3
                 RM1_0_4.possibleValues.contains(version) -> RM1_0_4
+                RM1_1_0.possibleValues.contains(version) -> RM1_1_0
                 else -> throw IllegalArgumentException("Unknown RM version $version.")
             }
     }
+
+    override fun getVersion(): String = rmVersion
 }

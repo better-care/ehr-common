@@ -27,12 +27,13 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
-@XmlType(name = "TASK_GROUP", propOrder = [
-    "members",
-    "executionType",
-    "concurrencyMode",
-    "executionRules",
-    "trainingLevel"])
+@XmlType(
+    name = "TASK_GROUP", propOrder = [
+        "members",
+        "executionType",
+        "concurrencyMode",
+        "executionRules",
+        "trainingLevel"])
 @XmlSeeAlso(value = [ChoiceGroup::class, ChoiceBranch::class])
 @Open
 class TaskGroup<I : PlanItem> : PlanItem {
@@ -76,12 +77,14 @@ class TaskGroup<I : PlanItem> : PlanItem {
 
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptRepeatAndWaitSpec(visitor)
-        acceptReviewDataset(visitor)
-        acceptExecutionRules(visitor)
-        acceptMembers(visitor)
+        if (visited) {
+            acceptRepeatAndWaitSpec(visitor)
+            acceptReviewDataset(visitor)
+            acceptExecutionRules(visitor)
+            acceptMembers(visitor)
+        }
         visitor.afterAccept(this)
     }
 

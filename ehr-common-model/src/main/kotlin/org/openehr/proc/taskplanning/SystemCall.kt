@@ -29,11 +29,12 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
-@XmlType(name = "SYSTEM_CALL", propOrder = [
-    "systemId",
-    "callName",
-    "parameterMap",
-    "boundParameters"])
+@XmlType(
+    name = "SYSTEM_CALL", propOrder = [
+        "systemId",
+        "callName",
+        "parameterMap",
+        "boundParameters"])
 @XmlSeeAlso(value = [ApiCall::class, QueryCall::class])
 @Open
 abstract class SystemCall() : RmObject(), Serializable, VisitableByModelVisitor {
@@ -65,9 +66,11 @@ abstract class SystemCall() : RmObject(), Serializable, VisitableByModelVisitor 
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptParameters(visitor)
+        if (visited) {
+            acceptParameters(visitor)
+        }
         visitor.afterAccept(this)
     }
 

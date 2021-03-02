@@ -15,11 +15,10 @@
 
 package care.better.openehr.terminology
 
+import care.better.platform.utils.XmlUtils
 import org.xml.sax.Attributes
 import org.xml.sax.InputSource
 import org.xml.sax.helpers.DefaultHandler
-import javax.xml.XMLConstants
-import javax.xml.parsers.SAXParserFactory
 
 /**
  * @author Primoz Delopst
@@ -34,15 +33,15 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
         private val MAGNITUDE_STATUS_CODES: Set<String> = setOf("=", "<", ">", "<=", ">=", "~")
 
 
-        private val instance = with(SAXParserFactory.newInstance()) {
-            this.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)
+        private val instance = with(XmlUtils.createSAXParserFactory()) {
             val xmlReader = this.newSAXParser().xmlReader
-
-            val handler = TerminologyHandler()
-            xmlReader.contentHandler = handler
-            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResource("/care/better/openehr/terminology/openehr-terminology.xml").toExternalForm()))
-
-            OpenEhrTerminology(handler.getGroups(), handler.getTerms())
+            val terminologyHandler = TerminologyHandler()
+            xmlReader.contentHandler = terminologyHandler
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/openehr_external_terminologies.xml")))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/en/openehr_terminology.xml")))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/ja/openehr_terminology.xml")))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/pt/openehr_terminology.xml")))
+            OpenEhrTerminology(terminologyHandler.getGroups(), terminologyHandler.getTerms())
         }
 
         /**
@@ -84,33 +83,33 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
      * Get group term value for the specified language and group code
      *
      * @param language  language
-     * @param groupCode group code
+     * @param groupName group name
      * @return group term value
      */
-    fun getGroupTerm(language: String, groupCode: String): String? = groups[groupCode]?.let { terms[TermKey(language, it.groupTermCode)] }
+    fun getGroupTerm(language: String, groupName: String): String? = groups[groupName]?.let { terms[TermKey(language, it.name)] }
 
 
     /**
      * Get group children codes for the specified group code
      *
-     * @param groupCode group code
+     * @param groupName group code
      * @return collection of children codes
      */
-    fun getGroupChildren(groupCode: String?): Collection<String> =
-        with(groups[groupCode]) {
+    fun getGroupChildren(groupName: String?): Collection<String> =
+        with(groups[groupName]) {
             this?.termCodes?.toList() ?: emptyList()
         }
 
     /**
      * Gets id of the child in specified group by specified name
      *
-     * @param groupId group id
+     * @param groupName group name
      * @param name    name
      * @return child id (or null if not found)
      */
-    fun getId(groupId: String, name: String?): String? {
+    fun getId(groupName: String, name: String?): String? {
         if (name != null) {
-            for (id in getGroupChildren(groupId)) {
+            for (id in getGroupChildren(groupName)) {
                 if (name.equals(getText(DEFAULT_LANGUAGE, id), ignoreCase = true)) {
                     return id
                 }
@@ -119,23 +118,40 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
         return null
     }
 
-
     private class TerminologyHandler : DefaultHandler() {
         private val terms: MutableMap<TermKey, String> = mutableMapOf()
         private val groups: MutableMap<String, TermGroup> = mutableMapOf()
+        var currentParent: Any? = null
+        var currentLanguage: String? = null
 
         override fun startElement(uri: String?, localName: String?, qName: String, attributes: Attributes) {
             when (qName) {
-                "Concept" -> terms[TermKey(attributes.getValue("Language"), attributes.getValue("ConceptID"))] = attributes.getValue("Rubric")
-                "Grouper" -> getTermGroup(attributes.getValue("id")).groupTermCode = attributes.getValue("ConceptID")
-                "GroupedConcept" -> getTermGroup(attributes.getValue("GrouperID")).termCodes.add(attributes.getValue("ChildID"))
+                "group" -> {
+                    val name = attributes.getValue("name")
+                    val termGroup = getTermGroup(name)
+                    termGroup.name = name
+                    currentParent = termGroup
+                }
+                "concept" -> {
+                    if (currentParent is TermGroup) {
+                        val id = attributes.getValue("id")
+                        terms[TermKey(currentLanguage!!, id)] = attributes.getValue("rubric")
+                        (currentParent as TermGroup).termCodes.add(id)
+                    }
+                }
+                "terminology" -> currentLanguage = attributes.getValue("language")
             }
         }
 
-        private fun getTermGroup(id: String): TermGroup = groups.computeIfAbsent(id) { TermGroup() }
+        override fun endElement(uri: String?, localName: String?, qName: String?) {
+            when (qName) {
+                "group" -> currentParent = null
+                "terminology" -> currentLanguage = null
+            }
+        }
 
-        fun getGroups(): Map<String, TermGroup> = groups.toMap()
-
+        private fun getTermGroup(name: String): TermGroup = groups.computeIfAbsent(name) { TermGroup() }
         fun getTerms(): Map<TermKey, String> = terms.toMap()
+        fun getGroups(): Map<String, TermGroup> = groups.toMap()
     }
 }
