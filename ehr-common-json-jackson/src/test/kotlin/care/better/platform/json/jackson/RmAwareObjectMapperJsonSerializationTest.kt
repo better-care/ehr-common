@@ -38,7 +38,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     private val objectMapper: ObjectMapper = BetterObjectMapper().apply { this.enable(JsonParser.Feature.ALLOW_COMMENTS) }
 
     @Test
-    fun simple() {
+    fun testSimple() {
         val composition: Composition = buildComposition()
         val compositionJson = objectMapper.writeValueAsString(composition)
         val compositionFromJson: Composition = objectMapper.readValue(compositionJson, Composition::class.java)
@@ -50,7 +50,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun inArray() {
+    fun teseInArray() {
         val composition: Composition = buildComposition()
         val compositions: MutableList<Composition> = ArrayList<Composition>()
         compositions.add(composition)
@@ -63,7 +63,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun inArrayMultipleClasses() {
+    fun testInArrayMultipleClasses() {
         val composition: Composition = buildComposition()
         val cluster: Cluster = buildCluster()
         val list: List<Any> = ImmutableList.of<Any>(composition, cluster, "String", 1, 2L)
@@ -87,7 +87,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun inArrayMultipleClassesWithUntyped() {
+    fun testInArrayMultipleClassesWithUntyped() {
         val composition: Composition = buildComposition()
         val cluster: Cluster = buildCluster()
         val map: Map<String, String> = ImmutableMap.of("hello", "world")
@@ -115,7 +115,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun simpleMap() {
+    fun testSimpleMap() {
         val map: Map<String, Any> = ImmutableMap.of<String, Any>("hello", "world")
         val list: List<Any> = ImmutableList.of<Any>(map)
         val jsonString = objectMapper.writeValueAsString(list)
@@ -130,7 +130,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun simpleMapInList() {
+    fun testSimpleMapInList() {
         val map1: Map<String, Any> = ImmutableMap.of<String, Any>("hello", "world", "goodbye", "sweet")
         val map2: Map<String, Any> = ImmutableMap.of<String, Any>("one", "two", "three", 1)
         val list: List<Any> = ImmutableList.of<Any>(map1, map2)
@@ -141,23 +141,25 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun simpleMapInList1() {
-        val fromJson = objectMapper.readValue("""[
-  {
-    "tags": [
-      {
-        "tag": "abc1",
-        "value": "val1",
-        "aqlPath": "/"
-      },
-      {
-        "tag": "abc2",
-        "value": "val2",
-        "aqlPath": "/"
-      }
-    ]
-  }
-]""", object : TypeReference<List<Any>>() {})
+    fun testSimpleMapInList1() {
+        val fromJson = objectMapper.readValue(
+            """[
+                          {
+                            "tags": [
+                              {
+                                "tag": "abc1",
+                                "value": "val1",
+                                "aqlPath": "/"
+                              },
+                              {
+                                "tag": "abc2",
+                                "value": "val2",
+                                "aqlPath": "/"
+                              }
+                            ]
+                          }
+                        ]""",
+            object : TypeReference<List<Any>>() {})
         assertThat(fromJson).hasSize(1)
         assertThat(fromJson[0]).isInstanceOf(MutableMap::class.java)
         val map = fromJson[0] as Map<*, *>
@@ -169,7 +171,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun simpleRm() {
+    fun testSimpleRm() {
         val dvText = DvText("hello")
         val list: List<Any> = ImmutableList.of(dvText)
         val jsonString = objectMapper.writeValueAsString(list)
@@ -178,7 +180,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun inMap() {
+    fun testInMap() {
         val compositions: MutableMap<String, Composition> = mutableMapOf()
         compositions["data"] = buildComposition()
         val jsonString = objectMapper.writeValueAsString(compositions)
@@ -188,7 +190,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun inMapMultipleClasses() {
+    fun testInMapMultipleClasses() {
         val map: MutableMap<String, Any> = HashMap()
         val composition: Composition = buildComposition()
         map["composition"] = composition
@@ -206,7 +208,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun mapInMapMultipleClasses() {
+    fun testMapInMapMultipleClasses() {
         val map: MutableMap<String, Any> = HashMap()
         val composition: Composition = buildComposition()
         map["composition"] = composition
@@ -221,7 +223,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun resultSetWithTags() {
+    fun testResultSetWithTags() {
         val fromJson: List<*> = objectMapper.readValue(
             RmAwareObjectMapperJsonSerializationTest::class.java.getResource("/simple.json"),
             MutableList::class.java)
@@ -237,7 +239,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     }
 
     @Test
-    fun wrappedResultSetWithTags() {
+    fun testWrappedResultSetWithTags() {
         val fromJson = objectMapper.readValue(RmAwareObjectMapperJsonSerializationTest::class.java.getResource("/result.json"), Result::class.java)
         assertThat(fromJson).isNotNull
         assertThat(fromJson.resultSet).hasSize(1)

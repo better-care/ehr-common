@@ -22,6 +22,10 @@ import org.openehr.rm.datatypes.DvDuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * @author Botjan Lah
+ * @since 3.1.0
+ */
 public class JavaInteropTest {
 
     @Test

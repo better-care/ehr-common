@@ -67,7 +67,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun inArrayMultipleClasses() {
+    fun testInArrayMultipleClasses() {
         val composition: Composition = buildComposition()
         val cluster: Cluster = buildCluster()
         val list: List<Any> = ImmutableList.of<Any>(composition, cluster, "String", 1, 2L)
@@ -91,7 +91,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun inArrayMultipleClassesWithUntyped() {
+    fun testInArrayMultipleClassesWithUntyped() {
         val composition: Composition = buildComposition()
         val cluster: Cluster = buildCluster()
         val map: Map<String, String> = ImmutableMap.of("hello", "world")
@@ -119,7 +119,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun simpleMap() {
+    fun testSimpleMap() {
         val map: Map<String, Any> = ImmutableMap.of<String, Any>("hello", "world")
         val list: List<Any> = ImmutableList.of<Any>(map)
         val jsonString = objectMapper.writeValueAsString(list)
@@ -134,7 +134,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun simpleMapInList() {
+    fun testSimpleMapInList() {
         val map1: Map<String, Any> = ImmutableMap.of<String, Any>("hello", "world", "goodbye", "sweet")
         val map2: Map<String, Any> = ImmutableMap.of<String, Any>("one", "two", "three", 1)
         val list: List<Any> = ImmutableList.of<Any>(map1, map2)
@@ -145,7 +145,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun simpleMapInList1() {
+    fun testSimpleMapInList1() {
         val fromJson = objectMapper.readValue(
             """[
                                 {
@@ -175,7 +175,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun simpleRm() {
+    fun testSimpleRm() {
         val dvText = DvText("hello")
         val list: List<Any> = ImmutableList.of(dvText)
         val jsonString = objectMapper.writeValueAsString(list)
@@ -184,7 +184,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun inMap() {
+    fun testInMap() {
         val compositions: MutableMap<String, Composition> = mutableMapOf()
         compositions["data"] = buildComposition()
         val jsonString = objectMapper.writeValueAsString(compositions)
@@ -194,7 +194,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun inMapMultipleClasses() {
+    fun testInMapMultipleClasses() {
         val map: MutableMap<String, Any> = HashMap()
         val composition: Composition = buildComposition()
         map["composition"] = composition
@@ -212,7 +212,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun mapInMapMultipleClasses() {
+    fun testMapInMapMultipleClasses() {
         val map: MutableMap<String, Any> = HashMap()
         val composition: Composition = buildComposition()
         map["composition"] = composition
@@ -227,7 +227,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun resultSetWithTags() {
+    fun testResultSetWithTags() {
         val fromJson: List<*> = objectMapper.readValue(
             OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-simple.json"),
             object : TypeReference<List<Any>>() {})
@@ -242,7 +242,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun wrappedResultSetWithTags() {
+    fun testWrappedResultSetWithTags() {
         val fromJson: Result =
             objectMapper.readValue(OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-result.json"), Result::class.java)
         assertThat(fromJson).isNotNull()
@@ -257,7 +257,7 @@ class OpenEhrObjectMapperSerializationTest {
     }
 
     @Test
-    fun wrappedResultSetWithoutTypeWithTags() {
+    fun testWrappedResultSetWithoutTypeWithTags() {
         val fromJson: Result = objectMapper.readValue(
             OpenEhrObjectMapperSerializationTest::class.java.getResource("/openehr-without-type-result.json"),
             Result::class.java)
