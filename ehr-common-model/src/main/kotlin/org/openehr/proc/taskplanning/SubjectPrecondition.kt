@@ -53,9 +53,11 @@ class SubjectPrecondition() : RmObject(), Serializable, VisitableByModelVisitor,
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        expression?.also { it.accept(visitor) }
+        if (visited) {
+            expression?.also { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

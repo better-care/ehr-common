@@ -58,13 +58,15 @@ class DecisionGroup : ChoiceGroup<DecisionBranch>, ExpressionNamesProvider {
     override fun getExpressionNames(): Sequence<String> = test?.name?.let { listOf(it).asSequence() } ?: emptySequence()
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptRepeatAndWaitSpec(visitor)
-        acceptReviewDataset(visitor)
-        acceptExecutionRules(visitor)
-        test?.accept(visitor)
-        acceptMembers(visitor)
+        if (visited) {
+            acceptRepeatAndWaitSpec(visitor)
+            acceptReviewDataset(visitor)
+            acceptExecutionRules(visitor)
+            test?.accept(visitor)
+            acceptMembers(visitor)
+        }
         visitor.afterAccept(this)
     }
 

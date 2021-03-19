@@ -44,11 +44,13 @@ class PlanDataContext : RmObject(), Serializable, VisitableByModelVisitor {
     var constants: MutableList<ContextConstant<*>> = mutableListOf()
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        variables.forEach { it.accept(visitor) }
-        constants.forEach { it.accept(visitor) }
-        expressions.forEach { it.accept(visitor) }
+        if (visited) {
+            variables.forEach { it.accept(visitor) }
+            constants.forEach { it.accept(visitor) }
+            expressions.forEach { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

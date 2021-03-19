@@ -89,10 +89,12 @@ abstract class PlanItem : Locatable, VisitableByModelVisitor {
 
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptRepeatAndWaitSpec(visitor)
-        acceptReviewDataset(visitor)
+        if (visited) {
+            acceptRepeatAndWaitSpec(visitor)
+            acceptReviewDataset(visitor)
+        }
         visitor.afterAccept(this)
     }
 

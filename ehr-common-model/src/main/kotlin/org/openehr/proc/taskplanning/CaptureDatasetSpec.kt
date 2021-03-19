@@ -35,16 +35,18 @@ class CaptureDatasetSpec : DatasetSpec() {
     var commitGroup: DatasetCommitGroup? = null
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        populatingCall?.also { it.accept(visitor) }
-        commitGroup?.also { it.accept(visitor) }
+        if (visited) {
+            populatingCall?.also { it.accept(visitor) }
+            commitGroup?.also { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 
     override fun toString(): String =
-            "CaptureDatasetSpec{" +
-                    "commitGroup=$commitGroup" +
-                    "} ${super.toString()}"
+        "CaptureDatasetSpec{" +
+                "commitGroup=$commitGroup" +
+                "} ${super.toString()}"
 
 }

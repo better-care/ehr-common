@@ -76,12 +76,14 @@ class SubPlan : PerformableAction, LinkedPlan {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptPreconditions(visitor)
-        acceptOtherParticipations(visitor)
-        acceptResources(visitor)
-        target?.also { it.accept(visitor) }
+        if (visited) {
+            acceptPreconditions(visitor)
+            acceptOtherParticipations(visitor)
+            acceptResources(visitor)
+            target?.also { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

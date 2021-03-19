@@ -59,10 +59,12 @@ class HandOff() : DispatchableAction(), LinkedPlan {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptPreconditions(visitor)
-        target?.also { it.accept(visitor) }
+        if (visited) {
+            acceptPreconditions(visitor)
+            target?.also { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

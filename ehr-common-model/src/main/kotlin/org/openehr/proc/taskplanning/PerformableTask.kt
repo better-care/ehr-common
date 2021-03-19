@@ -44,12 +44,14 @@ class PerformableTask<A : PerformableAction> : Task<A> {
     constructor(description: DvText?, repeatSpec: TaskRepeat?, waitSpec: TaskWait?, action: A?) : super(description, repeatSpec, waitSpec, action)
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptRepeatAndWaitSpec(visitor)
-        acceptReviewDataset(visitor)
-        acceptCaptureDataset(visitor)
-        action?.accept(visitor)
+        if (visited) {
+            acceptRepeatAndWaitSpec(visitor)
+            acceptReviewDataset(visitor)
+            acceptCaptureDataset(visitor)
+            action?.accept(visitor)
+        }
         visitor.afterAccept(this)
     }
 

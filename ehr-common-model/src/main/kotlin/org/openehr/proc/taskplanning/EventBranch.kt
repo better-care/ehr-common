@@ -47,12 +47,14 @@ class EventBranch : ChoiceBranch<PlanItem> {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptRepeatAndWaitSpec(visitor)
-        acceptReviewDataset(visitor)
-        acceptExecutionRules(visitor)
-        acceptMembers(visitor)
+        if (visited) {
+            acceptRepeatAndWaitSpec(visitor)
+            acceptReviewDataset(visitor)
+            acceptExecutionRules(visitor)
+            acceptMembers(visitor)
+        }
         visitor.afterAccept(this)
     }
 

@@ -32,20 +32,21 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
-@XmlType(name = "TASK_PLAN", propOrder = [
-    "subject",
-    "description",
-    "principalPerformer",
-    "definition",
-    "trainingLevel",
-    "guideline",
-    "bestPracticeRef",
-    "orderSetId",
-    "orderSetType",
-    "expiryTime",
-    "dueTime",
-    "indications",
-    "executionHistory"])
+@XmlType(
+    name = "TASK_PLAN", propOrder = [
+        "subject",
+        "description",
+        "principalPerformer",
+        "definition",
+        "trainingLevel",
+        "guideline",
+        "bestPracticeRef",
+        "orderSetId",
+        "orderSetType",
+        "expiryTime",
+        "dueTime",
+        "indications",
+        "executionHistory"])
 @Open
 class TaskPlan() : ContentItem(), VisitableByModelVisitor {
     companion object {
@@ -103,10 +104,12 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        principalPerformer?.also { it.accept(visitor) }
-        definition?.accept(visitor)
+        if (visited) {
+            principalPerformer?.also { it.accept(visitor) }
+            definition?.accept(visitor)
+        }
         visitor.afterAccept(this)
     }
 

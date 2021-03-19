@@ -22,10 +22,7 @@ import care.better.openehr.rm.RmVersion
  * @author Primoz Delopst
  * @since 3.1.0
  */
-
-class ModelVersion(val rmVersion: RmVersion, val tpVersion: TpVersion?) {
-
-    constructor(rmVersion: RmVersion) : this(rmVersion, null)
+class ModelVersion(vararg versions: Version<*>?) {
 
     companion object {
         @JvmField
@@ -38,7 +35,7 @@ class ModelVersion(val rmVersion: RmVersion, val tpVersion: TpVersion?) {
         val CURRENT_VERSION_STRING = CURRENT_VERSION.toString()
 
         @JvmStatic
-        fun from(versionString: String): ModelVersion = with(versionString.split(",")) {
+        fun fromRmAndTpVersionString(versionString: String): ModelVersion = with(versionString.split(",")) {
             if (this.size > 1) {
                 ModelVersion(RmVersion.from(this[0]), TpVersion.from(this[1]))
             } else {
@@ -47,5 +44,18 @@ class ModelVersion(val rmVersion: RmVersion, val tpVersion: TpVersion?) {
         }
     }
 
-    override fun toString(): String = "${rmVersion.version}${tpVersion?.let { ",${tpVersion.version}" } ?: ""}"
+    private var versionMap: MutableMap<Class<*>, Version<*>> = linkedMapOf()
+
+    init {
+        if (versions.isNullOrEmpty() || versions.all { it == null }) {
+            throw IllegalArgumentException("Must specify at least one valid version.")
+        }
+        versions.asSequence().filterNotNull().forEach { versionMap[it::class.java] = it }
+    }
+
+    fun getRmVersion(): RmVersion? = versionMap[RmVersion::class.java] as RmVersion?
+
+    fun getTpVersion(): TpVersion? = versionMap[TpVersion::class.java] as TpVersion?
+
+    override fun toString(): String = versionMap.values.joinToString(",") { it.toVersionString() }
 }

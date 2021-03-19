@@ -41,10 +41,12 @@ class SystemRequest() : DispatchableAction() {
     }
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptPreconditions(visitor)
-        systemCall?.accept(visitor)
+        if (visited) {
+            acceptPreconditions(visitor)
+            systemCall?.accept(visitor)
+        }
         visitor.afterAccept(this)
     }
 

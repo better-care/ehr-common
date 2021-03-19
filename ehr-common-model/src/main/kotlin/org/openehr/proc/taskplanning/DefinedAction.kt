@@ -59,11 +59,13 @@ class DefinedAction : PerformableAction {
 
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        acceptPreconditions(visitor)
-        acceptOtherParticipations(visitor)
-        acceptResources(visitor)
+        if (visited) {
+            acceptPreconditions(visitor)
+            acceptOtherParticipations(visitor)
+            acceptResources(visitor)
+        }
         visitor.afterAccept(this)
     }
 

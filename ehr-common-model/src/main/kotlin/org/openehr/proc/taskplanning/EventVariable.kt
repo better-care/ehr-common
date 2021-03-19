@@ -39,9 +39,11 @@ class EventVariable<T> : ExternalVariable<T> {
     constructor(type: ExprTypeDef<T>?, name: String?, populatingRequest: SystemCall?) : super(type, name, populatingRequest)
 
     override fun accept(visitor: TaskModelVisitor) {
-        visitor.visit(this)
+        val visited = visitor.visit(this)
         visitor.afterVisit(this)
-        populatingRequest?.also { it.accept(visitor) }
+        if (visited) {
+            populatingRequest?.also { it.accept(visitor) }
+        }
         visitor.afterAccept(this)
     }
 

@@ -15,11 +15,13 @@
 
 package care.better.openehr.rm
 
+import care.better.platform.Version
+
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
-enum class RmVersion(val version: String, private val possibleValues: Set<String>) {
+enum class RmVersion(val version: String, private val possibleValues: Set<String>) : Version<RmVersion> {
 
     RM1_0_1("1.0.1", setOf("1.0.1", "RM1.0.1", "rm1.0.1", "1_0_1", "RM1_0_1", "rm1_0_1")),
     RM1_0_2("1.0.2", setOf("1.0.2", "RM1.0.2", "rm1.0.2", "1_0_2", "RM1_0_2", "rm1_0_2")),
@@ -36,4 +38,6 @@ enum class RmVersion(val version: String, private val possibleValues: Set<String
                 else -> throw IllegalArgumentException("Unknown RM version $version.")
             }
     }
+
+    override fun toVersionString(): String = version
 }
