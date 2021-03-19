@@ -53,9 +53,12 @@ class ModelVersion(vararg versions: Version<*>?) {
         versions.asSequence().filterNotNull().forEach { versionMap[it::class.java] = it }
     }
 
-    fun getRmVersion(): RmVersion? = versionMap[RmVersion::class.java] as RmVersion?
+    @Suppress("UNCHECKED_CAST")
+    fun <T : Version<*>> getVersion(versionClass: Class<T>): T? = versionMap[versionClass] as T?
 
-    fun getTpVersion(): TpVersion? = versionMap[TpVersion::class.java] as TpVersion?
+    fun getRmVersion(): RmVersion? = getVersion(RmVersion::class.java)
+
+    fun getTpVersion(): TpVersion? = getVersion(TpVersion::class.java)
 
     override fun toString(): String = versionMap.values.joinToString(",") { it.toVersionString() }
 }
