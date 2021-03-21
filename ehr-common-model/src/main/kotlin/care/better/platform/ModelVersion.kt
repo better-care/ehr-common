@@ -26,7 +26,7 @@ class ModelVersion(vararg versions: Version<*>?) {
 
     companion object {
         @JvmField
-        val CURRENT_VERSION = ModelVersion(RmVersion.RM1_0_4, TpVersion.TP1_5_1)
+        val CURRENT_VERSION = ModelVersion(RmVersion.RM1_1_0, TpVersion.TP1_5_1)
 
         @JvmField
         val LEGACY_VERSION = ModelVersion(RmVersion.RM1_0_2)

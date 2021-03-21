@@ -17,6 +17,7 @@ package org.openehr.rm.ehr
 
 import care.better.openehr.rm.RmObject
 import org.openehr.base.basetypes.HierObjectId
+import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
 import java.util.*
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.*
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PATIENT_EHR", namespace = "http://schemas.openehr.org/v1", propOrder = ["systemId", "ehrId", "timeCreated", "ehrStatus"])
+@XmlType(name = "PATIENT_EHR", namespace = "http://schemas.openehr.org/v1", propOrder = ["systemId", "ehrId", "timeCreated", "ehrStatus", "folders"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
 class Ehr : RmObject(), Serializable {
     companion object {
@@ -46,6 +47,9 @@ class Ehr : RmObject(), Serializable {
 
     @XmlElement(name = "ehr_status")
     var ehrStatus: EhrStatus? = null
+
+    @XmlElement(name = "folders")
+    var folders: MutableList<ObjectRef> = mutableListOf()
 
 
     override fun equals(other: Any?): Boolean =

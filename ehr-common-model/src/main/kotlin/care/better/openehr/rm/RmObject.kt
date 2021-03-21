@@ -28,6 +28,6 @@ import javax.xml.bind.annotation.XmlTransient
 abstract class RmObject {
     companion object {
         @JvmField
-        val RM_VERSION = RmVersion.RM1_0_4
+        val RM_VERSION = RmVersion.RM1_1_0
     }
 }

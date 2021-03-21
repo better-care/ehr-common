@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -37,7 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "provider",
         "subject",
         "time",
-        "versionId"])
+        "versionId",
+        "otherDetails"])
 @Open
 class FeederAuditDetails() : RmObject(), Serializable {
     companion object {
@@ -51,13 +53,15 @@ class FeederAuditDetails() : RmObject(), Serializable {
             provider: PartyIdentified? = null,
             subject: PartyProxy? = null,
             time: DvDateTime? = null,
-            versionId: String? = null) : this() {
+            versionId: String? = null,
+            otherDetails: ItemStructure? = null) : this() {
         this.systemId = systemId
         this.location = location
         this.provider = provider
         this.subject = subject
         this.time = time
         this.versionId = versionId
+        this.otherDetails = otherDetails
     }
 
     @XmlElement(name = "system_id", required = true)
@@ -74,4 +78,7 @@ class FeederAuditDetails() : RmObject(), Serializable {
 
     @XmlElement(name = "version_id")
     var versionId: String? = null
+
+    @XmlElement(name = "other_details")
+    var otherDetails: ItemStructure? = null
 }
