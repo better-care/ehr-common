@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.*
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PATIENT_EHR", namespace = "http://schemas.openehr.org/v1", propOrder = ["systemId", "ehrId", "timeCreated", "ehrStatus", "folders"])
+@XmlType(name = "PATIENT_EHR", namespace = "http://schemas.openehr.org/v1", propOrder = ["systemId", "ehrId", "timeCreated", "ehrStatus"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
 class Ehr : RmObject(), Serializable {
     companion object {
