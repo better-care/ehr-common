@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlType
         "preferredTerm"])
 @Open
 class CodePhrase() : RmObject(), Serializable {
+    @JvmOverloads
     constructor(terminologyId: TerminologyId, codeString: String, preferredTerm: String? = null) : this() {
         this.terminologyId = terminologyId
         this.codeString = codeString
