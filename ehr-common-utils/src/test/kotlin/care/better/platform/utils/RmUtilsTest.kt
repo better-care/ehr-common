@@ -56,4 +56,10 @@ class RmUtilsTest {
     fun testRmTypeNameTest() {
         assertThat(RmUtils.getRmTypeName(Composition::class.java)).isEqualTo("COMPOSITION")
     }
+
+    @Test
+    fun testGetAllFieldsForCodePhrase() {
+        val fields = RmUtils.getAllFields("CODE_PHRASE")
+        assertThat(fields).hasSize(3)
+    }
 }
