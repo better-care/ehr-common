@@ -13,14 +13,10 @@
  * limitations under the License.
  */
 
-package org.openehr.rm.common
+package org.openehr.rm.datatypes
 
-import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.base.basetypes.ArchetypeId
-import org.openehr.base.basetypes.TemplateId
-import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -33,31 +29,31 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "ARCHETYPED", propOrder = [
-        "archetypeId",
-        "templateId",
-        "rmVersion"])
+    name = "DV_SCALE", propOrder = [
+        "symbol",
+        "value"])
 @Open
-class Archetyped constructor() : RmObject(), Serializable {
+class DvScale() : DvOrdered() {
 
     @JvmOverloads
-    constructor(archetypeId: ArchetypeId, templateId: TemplateId? = null, rmVersion: String = RM_VERSION.getVersion()) : this() {
-        this.archetypeId = archetypeId
-        this.templateId = templateId
-        this.rmVersion = rmVersion
+    constructor(
+            value: Double,
+            symbol: DvCodedText,
+            normalRange: DvInterval? = null,
+            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+            normalStatus: CodePhrase? = null) : this() {
+        this.value = value
+        this.symbol = symbol
+        this.normalRange = normalRange
+        this.otherReferenceRanges = otherReferenceRanges
+        this.normalStatus = normalStatus
     }
 
-    companion object {
-        private const val serialVersionUID: Long = 0L
-    }
-
-    @XmlElement(name = "archetype_id", required = true)
+    @XmlElement(required = true)
     @Required
-    var archetypeId: ArchetypeId? = null
+    var symbol: DvCodedText? = null
 
-    @XmlElement(name = "template_id")
-    var templateId: TemplateId? = null
-
-    @XmlElement(name = "rm_version", required = true)
-    var rmVersion: String = RM_VERSION.getVersion()
+    @XmlElement(required = true)
+    @Required
+    var value: Double? = null
 }

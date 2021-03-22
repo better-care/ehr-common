@@ -15,34 +15,11 @@
 
 package care.better.platform
 
-import care.better.openehr.processmodel.taskplanning.TpVersion
-import care.better.openehr.rm.RmVersion
-
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
-class ModelVersion(vararg versions: Version<*>?) {
-
-    companion object {
-        @JvmField
-        val CURRENT_VERSION = ModelVersion(RmVersion.RM1_1_0, TpVersion.TP1_5_1)
-
-        @JvmField
-        val LEGACY_VERSION = ModelVersion(RmVersion.RM1_0_2)
-
-        @JvmField
-        val CURRENT_VERSION_STRING = CURRENT_VERSION.toString()
-
-        @JvmStatic
-        fun fromRmAndTpVersionString(versionString: String): ModelVersion = with(versionString.split(",")) {
-            if (this.size > 1) {
-                ModelVersion(RmVersion.from(this[0]), TpVersion.from(this[1]))
-            } else {
-                ModelVersion(RmVersion.from(this[0]))
-            }
-        }
-    }
+abstract class ModelVersion(vararg versions: Version<*>?) {
 
     private var versionMap: MutableMap<Class<*>, Version<*>> = linkedMapOf()
 
@@ -53,12 +30,22 @@ class ModelVersion(vararg versions: Version<*>?) {
         versions.asSequence().filterNotNull().forEach { versionMap[it::class.java] = it }
     }
 
+    fun getVersionMap(): Map<Class<*>, Version<*>> = versionMap
+
     @Suppress("UNCHECKED_CAST")
     fun <T : Version<*>> getVersion(versionClass: Class<T>): T? = versionMap[versionClass] as T?
 
-    fun getRmVersion(): RmVersion? = getVersion(RmVersion::class.java)
+    @Suppress("UNCHECKED_CAST")
+    operator fun <T> compareTo(other: Version<T>): Int {
+        val versionClass = other::class.java
+        if (versionMap.containsKey(versionClass)) {
+            val version: T = requireNotNull(versionMap[versionClass]) as T
+            return other.compareTo(version)
+        }
+        throw IllegalArgumentException("Missing Version ${versionClass::class.java.simpleName} from ${this::class.java.simpleName}.")
+    }
 
-    fun getTpVersion(): TpVersion? = getVersion(TpVersion::class.java)
+    abstract fun getIdentifier(): String
 
-    override fun toString(): String = versionMap.values.joinToString(",") { it.toVersionString() }
+    override fun toString(): String = versionMap.values.joinToString(",") { it.getVersion() }
 }

@@ -20,6 +20,6 @@ package care.better.platform
  *
  * @since 3.1.0
  */
-fun interface Version<T> {
-    fun toVersionString(): String
+interface Version<T> : Comparable<T>{
+    fun getVersion(): String
 }
