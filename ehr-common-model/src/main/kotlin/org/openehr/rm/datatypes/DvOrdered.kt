@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.*
         "normalRange",
         "otherReferenceRanges",
         "normalStatus"])
-@XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class])
+@XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class, DvScale::class])
 @Open
 abstract class DvOrdered() : DataValue() {
 
