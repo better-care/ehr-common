@@ -30,6 +30,10 @@ abstract class ModelVersion(vararg versions: Version<*>?) {
         versions.asSequence().filterNotNull().forEach { versionMap[it::class.java] = it }
     }
 
+    companion object {
+        const val IDENTIFIER: String = "MVer"
+    }
+
     fun getVersionMap(): Map<Class<*>, Version<*>> = versionMap
 
     @Suppress("UNCHECKED_CAST")
@@ -45,7 +49,7 @@ abstract class ModelVersion(vararg versions: Version<*>?) {
         throw IllegalArgumentException("Missing Version ${versionClass::class.java.simpleName} from ${this::class.java.simpleName}.")
     }
 
-    abstract fun getIdentifier(): String
+    fun getIdentifier(): String = IDENTIFIER
 
     override fun toString(): String = versionMap.values.joinToString(",") { it.getVersion() }
 }
