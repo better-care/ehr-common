@@ -46,4 +46,6 @@ class EhrModelVersion(vararg versions: Version<*>?) : ModelVersion(*versions) {
     fun getRmVersion(): RmVersion? = getVersion(RmVersion::class.java)
 
     fun getTpVersion(): TpVersion? = getVersion(TpVersion::class.java)
+
+    override fun getIdentifier(): String = "EHR_MODEL_VERSION"
 }

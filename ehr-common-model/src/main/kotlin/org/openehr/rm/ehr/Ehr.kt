@@ -17,7 +17,6 @@ package org.openehr.rm.ehr
 
 import care.better.openehr.rm.RmObject
 import org.openehr.base.basetypes.HierObjectId
-import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
 import java.util.*
@@ -47,10 +46,6 @@ class Ehr : RmObject(), Serializable {
 
     @XmlElement(name = "ehr_status")
     var ehrStatus: EhrStatus? = null
-
-    @XmlElement(name = "folders")
-    var folders: MutableList<ObjectRef> = mutableListOf()
-
 
     override fun equals(other: Any?): Boolean =
         when {
