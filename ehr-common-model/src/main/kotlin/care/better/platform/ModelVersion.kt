@@ -40,11 +40,11 @@ abstract class ModelVersion(vararg versions: Version<*>?) {
     fun <T : Version<*>> getVersion(versionClass: Class<T>): T? = versionMap[versionClass] as T?
 
     @Suppress("UNCHECKED_CAST")
-    operator fun <T> compareTo(other: Version<T>): Int {
+    operator fun <T : Version<*>> compareTo(other: T): Int {
         val versionClass = other::class.java
         if (versionMap.containsKey(versionClass)) {
-            val version: T = requireNotNull(versionMap[versionClass]) as T
-            return other.compareTo(version)
+            val version: Version<T> = requireNotNull(versionMap[versionClass]) as Version<T>
+            return version.compareTo(other)
         }
         throw IllegalArgumentException("Missing Version ${versionClass::class.java.simpleName} from ${this::class.java.simpleName}.")
     }
