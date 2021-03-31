@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package care.better.platform.jaxb
+package care.better.platform.utils
 
 import org.xml.sax.InputSource
 import org.xml.sax.SAXException

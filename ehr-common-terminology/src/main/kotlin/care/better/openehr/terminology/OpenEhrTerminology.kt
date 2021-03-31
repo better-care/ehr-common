@@ -15,7 +15,7 @@
 
 package care.better.openehr.terminology
 
-import care.better.platform.jaxb.XmlUtils
+import care.better.platform.utils.XmlUtils
 import org.xml.sax.Attributes
 import org.xml.sax.InputSource
 import org.xml.sax.helpers.DefaultHandler

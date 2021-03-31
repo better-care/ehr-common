@@ -26,7 +26,7 @@
     <dependencies>
         <dependency>
             <groupId>care.better.platform</groupId>
-            <artifactId>ehr-common-xml-jaxb</artifactId>
+            <artifactId>ehr-common-utils</artifactId>
         </dependency>
     </dependencies>
 
