@@ -40,9 +40,11 @@ import javax.xml.transform.sax.SAXSource
 object XmlUtils {
     private const val XML_START_CHAR = '<'.toInt()
 
+    @JvmStatic
     @Throws(ParserConfigurationException::class)
     fun createDocumentBuilder(): DocumentBuilder = createDocumentBuilderFactory().newDocumentBuilder()
 
+    @JvmStatic
     @Throws(ParserConfigurationException::class)
     fun createDocumentBuilderFactory(): DocumentBuilderFactory =
         DocumentBuilderFactory.newInstance().apply {
@@ -57,6 +59,7 @@ object XmlUtils {
             this.isNamespaceAware = true
         }
 
+    @JvmStatic
     @Throws(SAXNotSupportedException::class, SAXNotRecognizedException::class, ParserConfigurationException::class)
     fun createSAXParserFactory(): SAXParserFactory =
         SAXParserFactory.newInstance().apply {
@@ -68,12 +71,14 @@ object XmlUtils {
         }
 
 
+    @JvmStatic
     @Throws(JAXBException::class, ParserConfigurationException::class, SAXException::class, IOException::class)
     fun <T> unmarshal(saxParserFactory: SAXParserFactory, unmarshaller: Unmarshaller, stringToUnmarshall: String, declaredType: Class<T>): JAXBElement<T> =
         StringReader(stringToUnmarshall).use { reader ->
             unmarshallFromReader(saxParserFactory, unmarshaller, declaredType, reader)
         }
 
+    @JvmStatic
     @Throws(JAXBException::class, ParserConfigurationException::class, SAXException::class, IOException::class)
     fun <T> unmarshal(
             saxParserFactory: SAXParserFactory,
@@ -84,7 +89,7 @@ object XmlUtils {
             unmarshallFromReader(saxParserFactory, unmarshaller, declaredType, reader)
         }
 
-
+    @JvmStatic
     @Throws(JAXBException::class, SAXException::class, ParserConfigurationException::class)
     private fun <T> unmarshallFromReader(
             saxParserFactory: SAXParserFactory,
@@ -93,6 +98,7 @@ object XmlUtils {
             reader: Reader): JAXBElement<T> =
         unmarshaller.unmarshal(SAXSource(saxParserFactory.newSAXParser().xmlReader, InputSource(reader)), declaredType)
 
+    @JvmStatic
     @Throws(IOException::class)
     fun skipToXmlStart(baseInputStream: InputStream?): InputStream {
         val inputStream = PushbackInputStream(baseInputStream)
