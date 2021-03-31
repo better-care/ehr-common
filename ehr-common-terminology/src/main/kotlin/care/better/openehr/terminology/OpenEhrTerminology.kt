@@ -15,11 +15,10 @@
 
 package care.better.openehr.terminology
 
+import care.better.platform.jaxb.XmlUtils
 import org.xml.sax.Attributes
 import org.xml.sax.InputSource
 import org.xml.sax.helpers.DefaultHandler
-import javax.xml.XMLConstants
-import javax.xml.parsers.SAXParserFactory
 
 /**
  * @author Primoz Delopst
@@ -34,8 +33,7 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
         private val MAGNITUDE_STATUS_CODES: Set<String> = setOf("=", "<", ">", "<=", ">=", "~")
 
 
-        private val instance = with(SAXParserFactory.newInstance()) {
-            this.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)
+        private val instance = with(XmlUtils.createSAXParserFactory()) {
             val xmlReader = this.newSAXParser().xmlReader
 
             val handler = TerminologyHandler()
