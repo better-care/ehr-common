@@ -104,6 +104,9 @@ class RmUtils {
         @JvmStatic
         fun isRmClass(clazz: Class<*>): Boolean = PACKAGE_NAMES.contains(clazz.`package`.name)
 
+        @JvmStatic
+        fun isDataValue(rmType: String): Boolean = rmType.startsWith("DV_")
+
         private fun getGetter(name: String, nameTransformer: (String) -> String, clazz: Class<out RmObject>): Method? =
             with(getClassInfo(clazz).getter) {
                 val getMethod: Method? = this["get${nameTransformer.invoke(name)}"]
