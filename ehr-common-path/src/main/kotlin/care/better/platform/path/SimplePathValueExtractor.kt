@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentMap
  * @constructor Creates a new instance of [SimplePathValueExtractor]
  * @param path Path [String]
  */
-open class SimplePathValueExtractor(path: String) : PathValueExtractor {
+open class SimplePathValueExtractor(path: String?) : PathValueExtractor {
     private var pathSegmentsWithNames: List<Pair<PathSegment, String>> = PathUtils.getPathSegments(path).map { Pair(it, PathUtils.getPropertyName(it.element)) }
     private val propertyMethods: ConcurrentMap<MethodKey, (Any) -> Any?> = ConcurrentHashMap()
 

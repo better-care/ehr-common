@@ -28,7 +28,7 @@ import org.openehr.rm.common.Locatable
  * @constructor Creates a new instance of [NameAndNodeMatchingPathValueExtractor]
  * @param path Path [String]
  */
-class NameAndNodeMatchingPathValueExtractor(path: String) : SimplePathValueExtractor(path) {
+class NameAndNodeMatchingPathValueExtractor(path: String?) : SimplePathValueExtractor(path) {
 
     /**
      * Checks if the [PathSegment] matches with the object.
