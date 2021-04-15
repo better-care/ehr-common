@@ -66,7 +66,7 @@ object TemplateUtils {
          findTerm(termDefinitions, nodeId)?.let { findDictionaryItem(it, id) }
 
     @JvmStatic
-    fun findTemplateLanguages(template: Template): List<String>? {
+    fun findTemplateLanguages(template: Template): List<String> {
         val languages: MutableList<String> = mutableListOf()
         template.language?.codeString?.also { languages.add(it) }
 
