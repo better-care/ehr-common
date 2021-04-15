@@ -22,9 +22,6 @@ import org.openehr.am.aom.*
  */
 @Suppress("MemberVisibilityCanBePrivate")
 object TemplateUtils {
-    private const val NAME_ATTRIBUTE = "name"
-    private const val VALUE_ATTRIBUTE = "value"
-    private const val DEFINING_CODE_ATTRIBUTE = "defining_code"
     const val SEM_VER_PLACEHOLDER = "sem_ver"
 
     @JvmStatic
