@@ -15,7 +15,7 @@
 
 package org.openehr.am.aom
 
-import org.openehr.rm.datatypes.DvOrdinal
+import org.openehr.rm.datatypes.DvScale
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -26,15 +26,15 @@ import javax.xml.bind.annotation.XmlType
  * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "C_DV_ORDINAL", propOrder = [
+@XmlType(name = "C_DV_SCALE", propOrder = [
     "assumedValue",
     "list"])
-class CDvOrdinal : CDomainType() {
+class CDvScale : CDomainType() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "assumed_value")
-    var assumedValue: DvOrdinal? = null
-    var list: MutableList<DvOrdinal> = mutableListOf()
+    var assumedValue: DvScale? = null
+    var list: MutableList<DvScale> = mutableListOf()
 }
