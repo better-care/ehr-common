@@ -18,6 +18,8 @@ package care.better.platform.template
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.openehr.am.aom.CComplexObject
+import org.openehr.am.aom.CDvScale
 import java.io.IOException
 
 /**
@@ -276,5 +278,29 @@ class AmTreeBuilderTest : AbstractAmTest() {
         val fatherHeight = "/content[openEHR-EHR-SECTION.ispek_dialog.v1, 'Family history']/items[openEHR-EHR-OBSERVATION.parental_growth_mnd.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0005]/items[at0007]"
         assertThat(AmUtils.resolvePath(root, fatherAge)!!.name).isNotNull
         assertThat(AmUtils.resolvePath(root, fatherHeight)).isNotNull
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun testScale() {
+        val root = AmTreeBuilder(loadTemplate("/scaleTest.opt")).build()
+        assertThat(root).isNotNull
+
+        val scales = root.attributes["content"]?.children?.get(0)
+            ?.attributes?.get("data")?.children?.get(0)
+            ?.attributes?.get("events")?.children?.get(0)
+            ?.attributes?.get("data")?.children?.get(0)
+            ?.attributes?.get("items")?.children ?: emptyList()
+
+        assertThat(scales).hasSize(2)
+
+        val firstScale = scales[0].attributes["value"]?.children?.get(0)
+        assertThat(firstScale?.cObject).isInstanceOf(CDvScale::class.java)
+        assertThat(firstScale?.rmType).isEqualTo("DV_SCALE")
+        assertThat((firstScale?.cObject as CDvScale).list).hasSize(1)
+
+        val secondScale = scales[1].attributes["value"]?.children?.get(0)
+        assertThat(secondScale?.cObject).isInstanceOf(CComplexObject::class.java)
+        assertThat(secondScale?.rmType).isEqualTo("DV_SCALE")
     }
 }
