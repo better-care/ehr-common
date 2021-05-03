@@ -38,7 +38,7 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
 
             val handler = TerminologyHandler()
             xmlReader.contentHandler = handler
-            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResource("/care/better/openehr/terminology/openehr-terminology.xml").toExternalForm()))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/openehr-terminology.xml")))
 
             OpenEhrTerminology(handler.getGroups(), handler.getTerms())
         }
