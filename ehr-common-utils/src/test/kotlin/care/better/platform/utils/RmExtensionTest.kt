@@ -121,6 +121,11 @@ class RmExtensionTest {
     }
 
     @Test
+    fun testNegativeDuration(){
+        assertThat(DvDuration.create("P-1YT1H")?.value).isEqualTo("P-1YT1H")
+    }
+
+    @Test
     fun testInvalidDuration() {
         assertThatThrownBy { DvDuration.create("P1YX1H") }.isInstanceOf(IllegalArgumentException::class.java)
     }
