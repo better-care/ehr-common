@@ -20,6 +20,7 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.PartyProxy
+import org.openehr.rm.common.PartySelf
 import org.openehr.rm.composition.ContentItem
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvIdentifier
@@ -48,7 +49,7 @@ import javax.xml.bind.annotation.XmlType
         "indications",
         "executionHistory"])
 @Open
-class TaskPlan() : ContentItem(), VisitableByModelVisitor {
+class TaskPlan : ContentItem, VisitableByModelVisitor {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
@@ -93,6 +94,10 @@ class TaskPlan() : ContentItem(), VisitableByModelVisitor {
 
     @XmlElement(name = "indications")
     var indications: MutableList<DvText> = mutableListOf()
+
+    constructor() : super() {
+        this.subject = PartySelf()
+    }
 
     constructor(description: DvText?, definition: TaskGroup<out PlanItem>?) : this() {
         this.description = description
