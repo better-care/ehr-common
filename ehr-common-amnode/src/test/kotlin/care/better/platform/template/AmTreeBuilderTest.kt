@@ -303,4 +303,19 @@ class AmTreeBuilderTest : AbstractAmTest() {
         assertThat(secondScale?.cObject).isInstanceOf(CComplexObject::class.java)
         assertThat(secondScale?.rmType).isEqualTo("DV_SCALE")
     }
+
+    @Test
+    @Throws(IOException::class)
+    fun testNegativeDurations() {
+        val root = AmTreeBuilder(loadTemplate("/negativeDurations.opt")).build()
+        assertThat(root).isNotNull
+
+        val durations = root.attributes["content"]?.children?.get(0)
+            ?.attributes?.get("data")?.children?.get(0)
+            ?.attributes?.get("events")?.children?.get(0)
+            ?.attributes?.get("data")?.children?.get(0)
+            ?.attributes?.get("items")?.children ?: emptyList()
+
+        assertThat(durations).hasSize(3)
+    }
 }
