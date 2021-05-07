@@ -15,6 +15,7 @@
 
 package care.better.platform.template
 
+import care.better.platform.template.exception.AmException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -317,5 +318,12 @@ class AmTreeBuilderTest : AbstractAmTest() {
             ?.attributes?.get("items")?.children ?: emptyList()
 
         assertThat(durations).hasSize(3)
+    }
+
+    @Test
+    fun testMissingReference() {
+        assertThatThrownBy { AmTreeBuilder(loadTemplate("/ISPEK - ZN - Vital Functions Encounter (missing reference).opt")).build() }
+            .isInstanceOf(AmException::class.java)
+            .hasMessage("Referenced node on CLUSTER[openEHR-EHR-CLUSTER.distribution.v1] with path /items[at0003] not found.")
     }
 }
