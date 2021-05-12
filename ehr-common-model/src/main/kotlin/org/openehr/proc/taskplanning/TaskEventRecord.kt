@@ -18,6 +18,8 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.LocatableRef
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlType
 
@@ -25,6 +27,7 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "TASK_EVENT_RECORD", propOrder = [
         "taskId",
