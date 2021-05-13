@@ -55,5 +55,5 @@ class DvScale() : DvOrdered() {
 
     @XmlElement(required = true)
     @Required
-    var value: Double? = null
+    var value: Double = 0.0
 }

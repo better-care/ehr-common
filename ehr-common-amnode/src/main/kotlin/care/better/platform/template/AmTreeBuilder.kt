@@ -111,7 +111,8 @@ class AmTreeBuilder(private val template: Template) {
         archetypeNodeContext.getReferences().forEach { context ->
             val archetypeRootNode = archetypeNodeContext.archetypeRootNode ?: throw AmException("Template can not be referenced.")
             val referencedNode: AmNode =
-                AmUtils.resolvePath(archetypeRootNode, context.path) ?: throw AmException("Referenced AM node on path ${context.path} not found.")
+                AmUtils.resolvePath(archetypeRootNode, context.path)
+                    ?: throw AmException("Referenced node on ${archetypeNodeContext.archetypeRootNode.rmType}${archetypeNodeContext.archetypeRootNode.archetypeNodeId?.let { "[$it]" } ?: ""} with path ${context.path} not found.")
 
             val amNode: AmNode = referencedNode.copyForReference(context.targetedAmNode ?: throw AmException("Target AM node not found"))
             context.targetedAmNode.attributes[context.attributeName]?.also {
