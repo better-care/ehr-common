@@ -19,7 +19,6 @@ import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
-import org.joda.time.Period
 import org.joda.time.format.ISOPeriodFormat
 import org.junit.jupiter.api.Test
 import org.openehr.rm.datatypes.DvDateTime
@@ -284,24 +283,42 @@ class DateTimeConversionUtilsTest {
     @Test
     fun testOffsetAndPeriod() {
         val now = OffsetDateTime.now()
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("P1Y"))).isEqualTo(now.plusYears(1L))
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("P1M"))).isEqualTo(now.plusMonths(1L))
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("P1W"))).isEqualTo(now.plusWeeks(1L))
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("P1D"))).isEqualTo(now.plusDays(1L))
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("PT1H"))).isEqualTo(now.plusHours(1L))
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("PT1M"))).isEqualTo(now.plusMinutes(1L))
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("PT1S"))).isEqualTo(now.plusSeconds(1L))
-        assertThat(DateTimeConversionUtils.plusPeriod(now, Period.parse("P1Y1WT1S")))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("P1Y"))).isEqualTo(now.plusYears(1L))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("P1M"))).isEqualTo(now.plusMonths(1L))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("P1W"))).isEqualTo(now.plusWeeks(1L))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("P1D"))).isEqualTo(now.plusDays(1L))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("PT1H"))).isEqualTo(now.plusHours(1L))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("PT1M"))).isEqualTo(now.plusMinutes(1L))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("PT1S"))).isEqualTo(now.plusSeconds(1L))
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("P1Y1WT1S")))
             .isEqualTo(now.plusYears(1L).plusWeeks(1L).plusSeconds(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("P1Y"))).isEqualTo(now.minusYears(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("P1M"))).isEqualTo(now.minusMonths(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("P1W"))).isEqualTo(now.minusWeeks(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("P1D"))).isEqualTo(now.minusDays(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("PT1H"))).isEqualTo(now.minusHours(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("PT1M"))).isEqualTo(now.minusMinutes(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("PT1S"))).isEqualTo(now.minusSeconds(1L))
-        assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("P1Y1WT1S")))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("P1Y"))).isEqualTo(now.minusYears(1L))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("P1M"))).isEqualTo(now.minusMonths(1L))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("P1W"))).isEqualTo(now.minusWeeks(1L))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("P1D"))).isEqualTo(now.minusDays(1L))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("PT1H"))).isEqualTo(now.minusHours(1L))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("PT1M"))).isEqualTo(now.minusMinutes(1L))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("PT1S"))).isEqualTo(now.minusSeconds(1L))
+        assertThat(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod("P1Y1WT1S")))
             .isEqualTo(now.minusYears(1L).minusWeeks(1L).minusSeconds(1L))
+    }
+
+    @Test
+    fun testOffsetAndNegativePeriod() {
+        val now = OffsetDateTime.now()
+        validateNegativeDuration(now, "P1Y")
+        validateNegativeDuration(now, "P1M")
+        validateNegativeDuration(now, "P1W")
+        validateNegativeDuration(now, "P1D")
+        validateNegativeDuration(now, "PT1H")
+        validateNegativeDuration(now, "PT1M")
+        validateNegativeDuration(now, "PT1S")
+        validateNegativeDuration(now, "P1Y1WT1S")
+    }
+
+    private fun validateNegativeDuration(now: OffsetDateTime, positiveDurationPattern: String) {
+        assertThat(DateTimeConversionUtils.plusPeriod(now, JodaConversionUtils.toPeriod("-$positiveDurationPattern")))
+            .isEqualTo(DateTimeConversionUtils.minusPeriod(now, JodaConversionUtils.toPeriod(positiveDurationPattern)))
     }
 
     @Test

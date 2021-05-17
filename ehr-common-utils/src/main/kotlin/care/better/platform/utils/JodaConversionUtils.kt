@@ -54,12 +54,12 @@ class JodaConversionUtils {
          */
         @JvmStatic
         fun createDvDuration(value: String?): DvDuration? =
-                value?.let {
-                    DvDuration().apply {
-                        toPeriod(value)
-                        this.value = value
-                    }
+            value?.let {
+                DvDuration().apply {
+                    toPeriod(value)
+                    this.value = value
                 }
+            }
 
         /**
          * Converts duration string value to [Period]
@@ -69,12 +69,12 @@ class JodaConversionUtils {
          */
         @JvmStatic
         fun toPeriod(durationValue: String): Period {
-            var negative = false
-            var value = durationValue
-            if (durationValue.startsWith("-P")) {
-                value = durationValue.replace("-P", "P")
-                negative = true
-            }
+            val (value, negative) =
+                if (durationValue.startsWith("-P")) {
+                    Pair(durationValue.replace("-P", "P"), true)
+                } else {
+                    Pair(durationValue, false)
+                }
             val period = STANDARD_PERIOD_FORMATTER.parsePeriod(value)
 
             return if (negative)
@@ -128,14 +128,14 @@ class JodaConversionUtils {
          */
         @JvmStatic
         fun toLocalTime(time: DvTime): LocalTime =
-                with(requireNotNull(time.value)) {
-                    val timeIndex = this.indexOf('T')
-                    ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
-                            if (timeIndex == -1)
-                                this
-                            else
-                                this.substring(timeIndex + 1))
-                }
+            with(requireNotNull(time.value)) {
+                val timeIndex = this.indexOf('T')
+                ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
+                    if (timeIndex == -1)
+                        this
+                    else
+                        this.substring(timeIndex + 1))
+            }
 
         /**
          * Converts [DvDate] to [LocalDate]
