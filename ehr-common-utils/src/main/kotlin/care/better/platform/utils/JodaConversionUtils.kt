@@ -35,6 +35,8 @@ import org.openehr.rm.datatypes.DvTime
 class JodaConversionUtils {
     companion object {
 
+        private val STANDARD_PERIOD_FORMATTER = ISOPeriodFormat.standard()
+
         /**
          * Converts a ReadablePeriod to [DvDuration]
          *
@@ -42,7 +44,7 @@ class JodaConversionUtils {
          * @return [DvDuration] object
          */
         @JvmStatic
-        fun createDvDuration(period: ReadablePeriod): DvDuration = DvDuration().apply { this.value = ISOPeriodFormat.standard().print(period) }
+        fun createDvDuration(period: ReadablePeriod): DvDuration = DvDuration().apply { this.value = STANDARD_PERIOD_FORMATTER.print(period) }
 
         /**
          * Converts a string duration to [DvDuration]
@@ -52,12 +54,12 @@ class JodaConversionUtils {
          */
         @JvmStatic
         fun createDvDuration(value: String?): DvDuration? =
-            value?.let {
-                DvDuration().apply {
-                    ISOPeriodFormat.standard().parsePeriod(value)
-                    this.value = value
+                value?.let {
+                    DvDuration().apply {
+                        toPeriod(value)
+                        this.value = value
+                    }
                 }
-            }
 
         /**
          * Converts duration string value to [Period]
@@ -66,7 +68,20 @@ class JodaConversionUtils {
          * @return [Period]
          */
         @JvmStatic
-        fun toPeriod(durationValue: String): Period = ISOPeriodFormat.standard().parsePeriod(durationValue)
+        fun toPeriod(durationValue: String): Period {
+            var negative = false
+            var value = durationValue
+            if (durationValue.startsWith("-P")) {
+                value = durationValue.replace("-P", "P")
+                negative = true
+            }
+            val period = STANDARD_PERIOD_FORMATTER.parsePeriod(value)
+
+            return if (negative)
+                period.negated()
+            else
+                period
+        }
 
         /**
          * Converts Joda DateTime to DV_DATETIME
@@ -113,14 +128,14 @@ class JodaConversionUtils {
          */
         @JvmStatic
         fun toLocalTime(time: DvTime): LocalTime =
-            with(requireNotNull(time.value)) {
-                val timeIndex = this.indexOf('T')
-                ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
-                    if (timeIndex == -1)
-                        this
-                    else
-                        this.substring(timeIndex + 1))
-            }
+                with(requireNotNull(time.value)) {
+                    val timeIndex = this.indexOf('T')
+                    ISODateTimeFormat.timeParser().withOffsetParsed().parseLocalTime(
+                            if (timeIndex == -1)
+                                this
+                            else
+                                this.substring(timeIndex + 1))
+                }
 
         /**
          * Converts [DvDate] to [LocalDate]
@@ -147,7 +162,7 @@ class JodaConversionUtils {
          * @return [Period]
          */
         @JvmStatic
-        fun toPeriod(duration: DvDuration): Period = ISOPeriodFormat.standard().parsePeriod(requireNotNull(duration.value))
+        fun toPeriod(duration: DvDuration): Period = toPeriod(requireNotNull(duration.value))
     }
 }
 

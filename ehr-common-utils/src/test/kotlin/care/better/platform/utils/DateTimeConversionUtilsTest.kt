@@ -20,6 +20,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.joda.time.Period
+import org.joda.time.format.ISOPeriodFormat
 import org.junit.jupiter.api.Test
 import org.openehr.rm.datatypes.DvDateTime
 import java.time.*
@@ -301,5 +302,15 @@ class DateTimeConversionUtilsTest {
         assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("PT1S"))).isEqualTo(now.minusSeconds(1L))
         assertThat(DateTimeConversionUtils.minusPeriod(now, Period.parse("P1Y1WT1S")))
             .isEqualTo(now.minusYears(1L).minusWeeks(1L).minusSeconds(1L))
+    }
+
+    @Test
+    fun testNegativePeriod() {
+        val standard = ISOPeriodFormat.standard()
+        assertThat(standard.print(JodaConversionUtils.toPeriod("P0Y-1M0W1DT0H0M0S"))).isEqualTo("P-1M1D")
+        assertThat(standard.print(JodaConversionUtils.toPeriod("P0Y1M0W-1DT0H0M0S"))).isEqualTo("P1M-1D")
+        assertThat(standard.print(JodaConversionUtils.toPeriod("-P0Y1M1W1DT0H0M0S"))).isEqualTo("P-1M-1W-1D")
+        assertThat(standard.print(JodaConversionUtils.toPeriod("-P0Y-1M1W1DT0H0M0S"))).isEqualTo("P1M-1W-1D")
+        assertThat(standard.print(JodaConversionUtils.toPeriod("-P0Y-1M-1W-1DT0H0M0S"))).isEqualTo("P1M1W1D")
     }
 }
