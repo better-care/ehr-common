@@ -71,7 +71,7 @@ class JodaConversionUtils {
         fun toPeriod(durationValue: String): Period {
             val (value, negative) =
                 if (durationValue.startsWith("-P")) {
-                    Pair(durationValue.replace("-P", "P"), true)
+                    Pair(durationValue.replaceFirst("-P", "P"), true)
                 } else {
                     Pair(durationValue, false)
                 }
