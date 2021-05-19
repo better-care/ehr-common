@@ -19,14 +19,12 @@ import care.better.platform.utils.XmlUtils
 import org.xml.sax.Attributes
 import org.xml.sax.InputSource
 import org.xml.sax.helpers.DefaultHandler
-import java.io.File
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
 
-@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val terms: Map<TermKey, String>) {
 
     companion object {
@@ -36,17 +34,13 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
 
 
         private val instance = with(XmlUtils.createSAXParserFactory()) {
-            val rootDir = "/care/better/openehr/terminology/"
-            val terminologyFileName = "openehr_terminology.xml"
             val xmlReader = this.newSAXParser().xmlReader
             val terminologyHandler = TerminologyHandler()
             xmlReader.contentHandler = terminologyHandler
-            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("${rootDir}openehr_external_terminologies.xml")))
-            File(OpenEhrTerminology::class.java.getResource(rootDir).toURI()).walk().maxDepth(1)
-                .filter { it.isDirectory }
-                .filter { it.list() != null }
-                .filter { it.list().contains(terminologyFileName) }
-                .forEach { xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("$rootDir${it.name}${File.separator}$terminologyFileName"))) }
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/openehr_external_terminologies.xml")))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/en/openehr_terminology.xml")))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/ja/openehr_terminology.xml")))
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/pt/openehr_terminology.xml")))
             OpenEhrTerminology(terminologyHandler.getGroups(), terminologyHandler.getTerms())
         }
 
