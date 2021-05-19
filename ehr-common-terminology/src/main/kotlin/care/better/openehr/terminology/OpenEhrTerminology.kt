@@ -161,7 +161,3 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
         fun getGroups(): Map<String, TermGroup> = groups.toMap()
     }
 }
-
-fun main(args: Array<String>) {
-    val instance1 = OpenEhrTerminology.getInstance()
-}
