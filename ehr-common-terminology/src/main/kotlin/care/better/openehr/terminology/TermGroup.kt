@@ -21,6 +21,6 @@ package care.better.openehr.terminology
  */
 
 class TermGroup {
-    lateinit var groupTermCode: String
+    lateinit var name: String
     val termCodes: MutableList<String> = mutableListOf()
 }
