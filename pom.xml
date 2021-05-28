@@ -30,6 +30,7 @@
         <module>ehr-common-path</module>
         <module>ehr-common-amnode</module>
         <module>ehr-common-xml-jaxb</module>
+        <module>ehr-common-jacoco</module>
     </modules>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -51,15 +52,16 @@
         <jupiter.version>5.6.3</jupiter.version>
         <assertj.version>3.17.2</assertj.version>
 
-        <enforcer-plugin.version>3.0.0-M2</enforcer-plugin.version>
-
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <maven-dokka-plugin.version>1.4.32</maven-dokka-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     </properties>
 
@@ -104,6 +106,18 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
+                <version>3.1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-terminology</artifactId>
+                <version>3.1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-jacoco</artifactId>
                 <version>3.1.0-SNAPSHOT</version>
             </dependency>
 
@@ -262,7 +276,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${enforcer-plugin.version}</version>
+                <version>${maven-enforcer-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>enforce</id>
@@ -277,10 +291,52 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
+        <profile>
+            <id>code-coverage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>org/openehr/**/*</exclude>
+                                <exclude>care/better/openehr/**/*</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
         <profile>
             <id>central-release</id>
             <build>
@@ -353,7 +409,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
@@ -365,11 +420,13 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
     <scm>
         <connection>scm:git:git://github.com:better-care/ehr-common.git</connection>
         <developerConnection>scm:git:ssh://github.com:better-care/ehr-common.git</developerConnection>
         <url>https://github.com/better-care/ehr-common/tree/master</url>
     </scm>
+
     <developers>
         <developer>
             <name>Bostjan Lah</name>
@@ -377,30 +434,35 @@
             <organization>Better Ltd</organization>
             <organizationUrl>https://www.better.care/</organizationUrl>
         </developer>
+
         <developer>
             <name>Matija Polajnar</name>
             <email>matija.polajnar@better.care</email>
             <organization>Better Ltd</organization>
             <organizationUrl>https://www.better.care/</organizationUrl>
         </developer>
+
         <developer>
             <name>Primož Delopst</name>
             <email>primoz.delopst@better.care</email>
             <organization>Better Ltd</organization>
             <organizationUrl>https://www.better.care/</organizationUrl>
         </developer>
+
         <developer>
             <name>Dušan Marković</name>
             <email>dusan.markovic@better.care</email>
             <organization>Better Ltd</organization>
             <organizationUrl>https://www.better.care/</organizationUrl>
         </developer>
+
         <developer>
             <name>Domen Muren</name>
             <email>domen.muren@better.care</email>
             <organization>Better Ltd</organization>
             <organizationUrl>https://www.better.care/</organizationUrl>
         </developer>
+
         <developer>
             <name>Matic Ribič</name>
             <email>matic.ribic@better.care</email>
@@ -408,16 +470,16 @@
             <organizationUrl>https://www.better.care/</organizationUrl>
         </developer>
     </developers>
+
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+
         <repository>
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
-
 </project>
