@@ -3,7 +3,7 @@
 Common components of an openEHR-based system, like a Clinical Data Repository
 
 ## Licence
-[![License](https://img.shields.io/badge/license-apache%202.0-60C060.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![License](https://img.shields.io/badge/license-apache%202.0-60C060.svg)](https://choosealicense.com/licenses/apache-2.0/)
 
 ## Release 
 
@@ -14,3 +14,7 @@ Common components of an openEHR-based system, like a Clinical Data Repository
 
 ## Test Coverage
 [![codecov](https://codecov.io/gh/better-care/ehr-common/branch/master/graph/badge.svg?token=1Z801X8E0P)](https://codecov.io/gh/better-care/ehr-common)
+
+## Contributing
+
+See our [CONTRIBUTING](/CONTRIBUTING.md) guide.
