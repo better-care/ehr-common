@@ -41,7 +41,12 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
             xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/en/openehr_terminology.xml")))
             xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/ja/openehr_terminology.xml")))
             xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/pt/openehr_terminology.xml")))
-            OpenEhrTerminology(terminologyHandler.getGroups(), terminologyHandler.getTerms())
+            val mutableTerms = terminologyHandler.getTerms().toMutableMap()
+            val oldTerminologyHandler = OldTerminologyHandler()
+            xmlReader.contentHandler = oldTerminologyHandler
+            xmlReader.parse(InputSource(OpenEhrTerminology::class.java.getResourceAsStream("/care/better/openehr/terminology/openehr-terminology-old.xml")))
+            oldTerminologyHandler.getTerms().forEach { (key, value) -> mutableTerms.putIfAbsent(key, value) }
+            OpenEhrTerminology(terminologyHandler.getGroups(), mutableTerms)
         }
 
         /**
@@ -153,5 +158,24 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
         private fun getTermGroup(name: String): TermGroup = groups.computeIfAbsent(name) { TermGroup() }
         fun getTerms(): Map<TermKey, String> = terms.toMap()
         fun getGroups(): Map<String, TermGroup> = groups.toMap()
+    }
+
+    private class OldTerminologyHandler : DefaultHandler() {
+        private val terms: MutableMap<TermKey, String> = mutableMapOf()
+        private val groups: MutableMap<String, TermGroup> = mutableMapOf()
+
+        override fun startElement(uri: String?, localName: String?, qName: String, attributes: Attributes) {
+            when (qName) {
+                "Concept" -> terms[TermKey(attributes.getValue("Language"), attributes.getValue("ConceptID"))] = attributes.getValue("Rubric")
+                "Grouper" -> getTermGroup(attributes.getValue("id")).name = attributes.getValue("ConceptID")
+                "GroupedConcept" -> getTermGroup(attributes.getValue("GrouperID")).termCodes.add(attributes.getValue("ChildID"))
+            }
+        }
+
+        private fun getTermGroup(id: String): TermGroup = groups.computeIfAbsent(id) { TermGroup() }
+
+        fun getGroups(): Map<String, TermGroup> = groups.toMap()
+
+        fun getTerms(): Map<TermKey, String> = terms.toMap()
     }
 }
