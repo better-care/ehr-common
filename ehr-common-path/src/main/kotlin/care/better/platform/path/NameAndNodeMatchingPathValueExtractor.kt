@@ -52,7 +52,7 @@ class NameAndNodeMatchingPathValueExtractor(path: String?) : SimplePathValueExtr
             return true
         }
 
-        val regex = Regex("${pathSegment.name}(\\s#\\d+)?")
+        val regex = Regex("${Regex.escape(pathSegment.name.orEmpty())}(\\s#\\d+)?")
         return when {
             pathSegment.prefix == null -> regex.matches(node.name?.value.orEmpty())
             "uid/value".equals(pathSegment.prefix, ignoreCase = true) -> regex.matches(node.uid?.value.orEmpty())
