@@ -38,22 +38,25 @@ class NameAndNodeMatchingPathValueExtractor(path: String?) : SimplePathValueExtr
      * @param pathSegment [PathSegment]
      * @return [Boolean] indicating if [PathSegment] matches with the objects.
      */
-    override fun elementMatches(node: Any, pathSegment: PathSegment): Boolean =
-        if (node is Locatable) {
-            if (pathSegment.archetypeNodeId == node.archetypeNodeId) {
-                if (pathSegment.name != null) {
-                    when {
-                        pathSegment.prefix == null -> node.name?.value == pathSegment.name
-                        "uid/value".equals(pathSegment.prefix, ignoreCase = true) -> node.uid?.value == pathSegment.name
-                        else -> false
-                    }
-                } else {
-                    true
-                }
-            } else {
-                false
-            }
-        } else {
-            super.elementMatches(node, pathSegment)
+    override fun elementMatches(node: Any, pathSegment: PathSegment): Boolean {
+
+        if (node !is Locatable) {
+            return super.elementMatches(node, pathSegment)
         }
+
+        if (pathSegment.archetypeNodeId != node.archetypeNodeId) {
+            return false
+        }
+
+        if (pathSegment.name == null) {
+            return true
+        }
+
+        val regex = Regex("${pathSegment.name}(\\s#\\d+)?")
+        return when {
+            pathSegment.prefix == null -> regex.matches(node.name?.value.orEmpty())
+            "uid/value".equals(pathSegment.prefix, ignoreCase = true) -> regex.matches(node.uid?.value.orEmpty())
+            else -> false
+        }
+    }
 }
