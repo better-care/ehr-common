@@ -27,8 +27,10 @@ import org.openehr.rm.common.Locatable
  *
  * @constructor Creates a new instance of [NameAndNodeMatchingPathValueExtractor]
  * @param path Path [String]
+ * @param matchNumberedNodes [Boolean] indicating if numbered nodes will be matched
  */
-class NameAndNodeMatchingPathValueExtractor(path: String?) : SimplePathValueExtractor(path) {
+class NameAndNodeMatchingPathValueExtractor @JvmOverloads constructor(path: String?, private val matchNumberedNodes: Boolean = false) : SimplePathValueExtractor(path) {
+
 
     /**
      * Checks if the [PathSegment] matches with the object.
@@ -52,7 +54,7 @@ class NameAndNodeMatchingPathValueExtractor(path: String?) : SimplePathValueExtr
             return true
         }
 
-        val regex = Regex("${Regex.escape(pathSegment.name.orEmpty())}(\\s#\\d+)?")
+        val regex = Regex("${Regex.escape(pathSegment.name.orEmpty())}${if (matchNumberedNodes) "(\\s#\\d+)?" else ""}")
         return when {
             pathSegment.prefix == null -> regex.matches(node.name?.value.orEmpty())
             "uid/value".equals(pathSegment.prefix, ignoreCase = true) -> regex.matches(node.uid?.value.orEmpty())
