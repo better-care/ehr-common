@@ -33,6 +33,12 @@ class NameAndNodeMatchingPathValueExtractorTest {
             this.name = DvText("Name")
             this.uid = HierObjectId("12345")
         })
+
+        this.items.add(AdminEntry().apply {
+            this.archetypeNodeId = "at0001"
+            this.name = DvText("Name #2")
+            this.uid = HierObjectId("123456")
+        })
     }
 
     @Test
@@ -44,7 +50,7 @@ class NameAndNodeMatchingPathValueExtractorTest {
         assertThat(secondExtractor.getValue(section)).isEmpty()
 
         val thirdExtractor = NameAndNodeMatchingPathValueExtractor("/items[at0001]/name/value")
-        assertThat(thirdExtractor.getValue(section)).containsExactly("Name")
+        assertThat(thirdExtractor.getValue(section)).containsExactly("Name", "Name #2")
 
         val forthExtractor = NameAndNodeMatchingPathValueExtractor("/items[at0001 and name/value='Name']/name/value")
         assertThat(forthExtractor.getValue(section)).containsExactly("Name")
@@ -60,6 +66,13 @@ class NameAndNodeMatchingPathValueExtractorTest {
 
         val eightExtractor = NameAndNodeMatchingPathValueExtractor("/items[at0001 AND NAME/VALUE='Name1']/name/value")
         assertThat(eightExtractor.getValue(section)).isEmpty()
+
+        val ninthExtractor = NameAndNodeMatchingPathValueExtractor("/items[at0001, 'Name']/name/value", true)
+        assertThat(ninthExtractor.getValue(section)).containsExactly("Name", "Name #2")
+
+        val tenthExtractor = NameAndNodeMatchingPathValueExtractor("/items[at0001, 'Name1']/name/value", true)
+        assertThat(tenthExtractor.getValue(section)).isEmpty()
+
     }
 
     @Test

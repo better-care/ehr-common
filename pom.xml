@@ -44,16 +44,16 @@
         <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
 
         <guava.version>29.0-jre</guava.version>
-        <commons-lang3.version>3.11</commons-lang3.version>
-        <jaxb.version>2.3.1</jaxb.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
         <joda.version>2.10.8</joda.version>
         <jackson.version>2.11.3</jackson.version>
 
         <jupiter.version>5.6.3</jupiter.version>
         <assertj.version>3.17.2</assertj.version>
 
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <maven-dokka-plugin.version>1.4.32</maven-dokka-plugin.version>
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
@@ -146,11 +146,17 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.xml.bind</groupId>
-                <artifactId>jaxb-api</artifactId>
-                <version>${jaxb.version}</version>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>${jakarta.xml.bind-api.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jakarta.xml.bind-api.version}</version>
+                <scope>runtime</scope>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
