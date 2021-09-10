@@ -13,7 +13,8 @@
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	See the License for the specific language governing permissions and
 	limitations under the License.
---><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>ehr-common</artifactId>
         <groupId>care.better.platform</groupId>
@@ -21,32 +22,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ehr-common-utils</artifactId>
+    <artifactId>ehr-common-time</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>care.better.platform</groupId>
-            <artifactId>ehr-common-model</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>care.better.platform</groupId>
-            <artifactId>ehr-common-time</artifactId>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
         </dependency>
 
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
         </dependency>
 
         <dependency>

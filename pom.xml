@@ -31,6 +31,7 @@
         <module>ehr-common-amnode</module>
         <module>ehr-common-xml-jaxb</module>
         <module>ehr-common-jacoco</module>
+        <module>ehr-common-time</module>
     </modules>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -47,7 +48,7 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
         <joda.version>2.10.8</joda.version>
-        <jackson.version>2.11.3</jackson.version>
+        <jackson.version>2.12.3</jackson.version>
 
         <jupiter.version>5.6.3</jupiter.version>
         <assertj.version>3.17.2</assertj.version>
@@ -100,6 +101,12 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
+                <version>3.1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-time</artifactId>
                 <version>3.1.0-SNAPSHOT</version>
             </dependency>
 
@@ -183,6 +190,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
                 <version>${jupiter.version}</version>
@@ -192,6 +205,13 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
+                <version>${jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
                 <version>${jupiter.version}</version>
                 <scope>test</scope>
             </dependency>

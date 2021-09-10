@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.*
         "assumedValue",
         "defaultValue",
         "terminologyId",
-        "codeList"])
+        "codeList",
+        "preferredTerm"])
 @XmlSeeAlso(CCodeReference::class)
 open class CCodePhrase : CDomainType() {
     companion object {
@@ -47,4 +48,7 @@ open class CCodePhrase : CDomainType() {
 
     @XmlElement(name = "code_list")
     var codeList: MutableList<String> = mutableListOf()
+
+    @XmlElement(name = "preferred_term")
+    var preferredTerm: String? = null
 }
