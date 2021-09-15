@@ -21,7 +21,8 @@ import care.better.platform.json.jackson.rm.RmTypeResolverBuilder
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.openehr.proc.taskplanning.BooleanContextExpression
 
 /**
@@ -38,7 +39,8 @@ class OpenEhrObjectMapper : ObjectMapper() {
                 .typeProperty("_type")
                 .inclusion(JsonTypeInfo.As.PROPERTY))
 
-        registerModule(KotlinModule())
+        registerKotlinModule()
+        registerModule(JavaTimeModule())
         configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)
         configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         addMixIn(BooleanContextExpression::class.java, BooleanContextExpressionMixedIn::class.java)
