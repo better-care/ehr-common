@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.jsontype.TypeDeserializer
 import com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer
 import com.fasterxml.jackson.databind.util.TokenBuffer
 import java.io.IOException
+import com.fasterxml.jackson.databind.MapperFeature
 
 /**
  * @author Primoz Delopst
@@ -80,12 +81,18 @@ class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, proper
         } else if (t != JsonToken.FIELD_NAME) {
             return _deserializeTypedUsingDefaultImpl(jsonParser, ctxt, null)
         }
+
         var tb: TokenBuffer? = null
+        val ignoreCase = ctxt.isEnabled(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
+
         while (t == JsonToken.FIELD_NAME) {
             val name = jsonParser.currentName
             jsonParser.nextToken()
-            if (name == _typePropertyName) {
-                return _deserializeTypedForId(jsonParser, ctxt, tb)
+            if (name == _typePropertyName || (ignoreCase && name.equals(_typePropertyName, true))) {
+                val typeId = p.valueAsString
+                if (typeId != null) {
+                    return _deserializeTypedForId(jsonParser, ctxt, tb, typeId)
+                }
             }
             if (tb == null) {
                 tb = TokenBuffer(jsonParser, ctxt)
