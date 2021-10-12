@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlType
     name = "C_QUANTITY_ITEM", propOrder = [
         "magnitude",
         "precision",
-        "units"])
+        "units",
+        "unitsSystem",
+        "unitsDisplayName"])
 class CQuantityItem : AmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -45,4 +47,10 @@ class CQuantityItem : AmObject(), Serializable {
 
     @XmlElement(required = true)
     lateinit var units: String
+
+    @XmlElement(name = "units_system")
+    var unitsSystem: String? = null
+
+    @XmlElement(name = "units_display_name")
+    var unitsDisplayName: String? = null
 }

@@ -33,9 +33,7 @@ import javax.xml.bind.annotation.XmlType
         "assumedValue",
         "defaultValue",
         "property",
-        "list",
-        "unitsSystem",
-        "unitsDisplayName"])
+        "list"])
 class CDvQuantity : CDomainType() {
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -51,10 +49,4 @@ class CDvQuantity : CDomainType() {
 
     @XmlElement(type = CQuantityItem::class)
     var list: MutableList<CQuantityItem> = mutableListOf()
-
-    @XmlElement(name = "units_system")
-    var unitsSystem: String? = null
-
-    @XmlElement(name = "units_display_name")
-    var unitsDisplayName: String? = null
 }
