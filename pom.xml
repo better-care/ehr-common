@@ -260,8 +260,8 @@
                 <configuration>
                     <jvmTarget>${java.version}</jvmTarget>
                     <args>
-                        <arg>-Xjvm-default=compatibility</arg>
                         <arg>-Xjsr305=strict</arg>
+                        <arg>-Xjvm-default=all-compatibility</arg>
                     </args>
                     <compilerPlugins>
                         <plugin>all-open</plugin>
