@@ -29,6 +29,7 @@ import org.openehr.proc.taskplanning.BooleanContextExpression
  * @since 3.1.0
  */
 
+@Suppress("LeakingThis")
 @Open
 class OpenEhrObjectMapper : ObjectMapper() {
     init {
