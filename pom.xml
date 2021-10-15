@@ -47,7 +47,7 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
         <joda.version>2.10.8</joda.version>
-        <jackson.version>2.11.3</jackson.version>
+        <jackson.version>2.12.3</jackson.version>
 
         <jupiter.version>5.6.3</jupiter.version>
         <assertj.version>3.17.2</assertj.version>
@@ -179,6 +179,12 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
 
