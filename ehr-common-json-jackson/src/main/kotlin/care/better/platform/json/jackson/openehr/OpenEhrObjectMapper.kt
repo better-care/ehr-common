@@ -18,6 +18,7 @@ package care.better.platform.json.jackson.openehr
 import care.better.platform.annotation.Open
 import care.better.platform.json.jackson.mixedin.BooleanContextExpressionMixedIn
 import care.better.platform.json.jackson.rm.RmTypeResolverBuilder
+import care.better.platform.json.jackson.time.OpenEhrTimeModule
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -42,6 +43,8 @@ class OpenEhrObjectMapper : ObjectMapper() {
 
         registerModule(KotlinModule())
         registerModule(JavaTimeModule())
+        registerModule(OpenEhrTimeModule())
+
         configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)
         configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         addMixIn(BooleanContextExpression::class.java, BooleanContextExpressionMixedIn::class.java)
