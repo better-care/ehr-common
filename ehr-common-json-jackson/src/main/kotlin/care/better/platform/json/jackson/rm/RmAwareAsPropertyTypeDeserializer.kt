@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.util.JsonParserSequence
 import com.fasterxml.jackson.databind.BeanProperty
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
+import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer
 import com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer
 import com.fasterxml.jackson.databind.util.TokenBuffer
@@ -75,11 +76,12 @@ class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, proper
                 return _deserializeWithNativeTypeId(jsonParser, ctxt, typeId)
             }
         }
+
         var t = jsonParser.currentToken
         if (t == JsonToken.START_OBJECT) {
             t = jsonParser.nextToken()
         } else if (t != JsonToken.FIELD_NAME) {
-            return _deserializeTypedUsingDefaultImpl(jsonParser, ctxt, null)
+            return _deserializeTypedUsingDefaultImpl(jsonParser, ctxt, null, _msgForMissingId)
         }
 
         var tb: TokenBuffer? = null
