@@ -111,18 +111,6 @@
 
             <dependency>
                 <groupId>care.better.platform</groupId>
-                <artifactId>ehr-common-time</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>care.better.platform</groupId>
-                <artifactId>ehr-common-time</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
                 <version>3.1.7-SNAPSHOT</version>
             </dependency>
