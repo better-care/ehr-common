@@ -31,6 +31,7 @@
         <module>ehr-common-amnode</module>
         <module>ehr-common-xml-jaxb</module>
         <module>ehr-common-jacoco</module>
+        <module>ehr-common-time</module>
     </modules>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -100,6 +101,12 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
+                <version>3.1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-time</artifactId>
                 <version>3.1.0-SNAPSHOT</version>
             </dependency>
 
@@ -198,6 +205,13 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
+                <version>${jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
                 <version>${jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
