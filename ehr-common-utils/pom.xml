@@ -17,7 +17,7 @@
     <parent>
         <artifactId>ehr-common</artifactId>
         <groupId>care.better.platform</groupId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -27,6 +27,11 @@
         <dependency>
             <groupId>care.better.platform</groupId>
             <artifactId>ehr-common-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>care.better.platform</groupId>
+            <artifactId>ehr-common-time</artifactId>
         </dependency>
 
         <dependency>
@@ -53,6 +58,12 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
             <scope>test</scope>
         </dependency>
 
