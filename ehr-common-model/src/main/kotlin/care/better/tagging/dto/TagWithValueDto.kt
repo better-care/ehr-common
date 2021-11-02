@@ -22,17 +22,17 @@ class TagWithValueDto : TagDto {
         this.value = value
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
             return true
         }
-        if (o !is TagWithValueDto) {
+        if (other !is TagWithValueDto) {
             return false
         }
-        if (!super.equals(o)) {
+        if (!super.equals(other)) {
             return false
         }
-        return value == o.value
+        return value == other.value
     }
 
     override fun hashCode(): Int {

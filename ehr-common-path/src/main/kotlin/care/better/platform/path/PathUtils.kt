@@ -82,7 +82,7 @@ object PathUtils {
 
     private fun getPrefixPath(path: String): String? =
         with(PREDICATE_PATTERN.matcher(path)) {
-            if (this.matches()) this.group(1).toLowerCase() else null
+            if (this.matches()) this.group(1).lowercase() else null
         }
 
     /**
@@ -114,7 +114,7 @@ object PathUtils {
         with(StringBuilder()) {
             StringUtils.splitByCharacterTypeCamelCase(path).forEach {
                 if ("_" != it) {
-                    this.append('_').append(it.toLowerCase())
+                    this.append('_').append(it.lowercase())
                 }
             }
             if (this.isNotEmpty()) this.substring(1) else ""
@@ -130,7 +130,7 @@ object PathUtils {
     fun getGetter(pathSegmentName: String): String =
         with(StringBuilder()) {
             StringUtils.split(pathSegmentName, '_').forEach {
-                this.append(it.substring(0, 1).toUpperCase()).append(it.substring(1))
+                this.append(it.substring(0, 1).uppercase()).append(it.substring(1))
             }
             this.toString()
         }

@@ -28,7 +28,6 @@ import com.fasterxml.jackson.databind.jsontype.TypeDeserializer
 import com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer
 import com.fasterxml.jackson.databind.util.TokenBuffer
 import java.io.IOException
-import com.fasterxml.jackson.databind.MapperFeature
 
 /**
  * @author Primoz Delopst

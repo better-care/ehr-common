@@ -70,7 +70,7 @@ abstract class OpenEhrTemporal<T : Temporal>(
 
     fun withTemporalUnit(unit: TemporalUnit) =
         if (unit is ChronoUnit)
-            precisionField.takeUnless { unit.ordinal < it.unit.ordinal } ?: OpenEhrField.valueOf(unit as ChronoUnit)
+            precisionField.takeUnless { unit.ordinal < it.unit.ordinal } ?: OpenEhrField.valueOf(unit)
         else
             throw DateTimeException("Unit $unit must be instance of ChronoUnit (time value = $this)")
 
@@ -101,7 +101,7 @@ abstract class OpenEhrTemporal<T : Temporal>(
             }
             return builder.toString()
         } catch (e: Exception) {
-            return "$temporal [OpenEhr with ${precisionField.toString().toLowerCase()} precision]"
+            return "$temporal [OpenEhr with ${precisionField.toString().lowercase()} precision]"
         }
     }
 

@@ -65,14 +65,14 @@ open class TagDto : Serializable {
         this.aqlPath = aqlPath
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
             return true
         }
-        if (o == null || javaClass != o.javaClass) {
+        if (other == null || javaClass != other.javaClass) {
             return false
         }
-        val tagDto = o as TagDto
+        val tagDto = other as TagDto
         return if (if (aqlPath != null) aqlPath != tagDto.aqlPath else tagDto.aqlPath != null) {
             false
         } else tag == tagDto.tag

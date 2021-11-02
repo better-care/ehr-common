@@ -40,7 +40,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <kotlin.version>1.5.0</kotlin.version>
+        <kotlin.version>1.5.31</kotlin.version>
 
         <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
 
@@ -50,19 +50,19 @@
         <joda.version>2.10.8</joda.version>
         <jackson.version>2.12.5</jackson.version>
 
-        <jupiter.version>5.6.3</jupiter.version>
-        <assertj.version>3.17.2</assertj.version>
+        <jupiter.version>5.8.1</jupiter.version>
+        <assertj.version>3.21.0</assertj.version>
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <maven-dokka-plugin.version>1.4.32</maven-dokka-plugin.version>
-        <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
+        <maven-dokka-plugin.version>1.5.31</maven-dokka-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-jacoco-plugin.version>0.8.7</maven-jacoco-plugin.version>
         <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     </properties>
 
@@ -192,12 +192,6 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
 
@@ -336,7 +330,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco-maven-plugin.version}</version>
+                    <version>${maven-jacoco-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
