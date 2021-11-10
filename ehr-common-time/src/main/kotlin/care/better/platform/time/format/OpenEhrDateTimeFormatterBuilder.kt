@@ -127,7 +127,7 @@ class OpenEhrDateTimeFormatterBuilder {
             }
 
         fun getFieldStates(pattern: String): Map<OpenEhrField, OpenEhrFieldState> {
-            val matcher = DATE_TIME_REGEX_PATTERN.matcher(pattern.toUpperCase())
+            val matcher = DATE_TIME_REGEX_PATTERN.matcher(pattern.uppercase())
             if (!matcher.matches()) {
                 throw DateTimeException("Invalid pattern $pattern")
             }
@@ -179,7 +179,7 @@ class OpenEhrDateTimeFormatterBuilder {
             arrayOf(OpenEhrField.YEARS, OpenEhrField.MONTHS, OpenEhrField.DAYS).any { fieldStates[it] != null }
 
         fun isCompactPattern(pattern: String?) =
-            pattern?.isNotBlank() == true && pattern.toUpperCase().let { it != "YYYY" && it != "HH" }
+            pattern?.isNotBlank() == true && pattern.uppercase().let { it != "YYYY" && it != "HH" }
                     && COMPACT_PARTIAL_DATE_TIME_REGEX_PATTERN.matcher(pattern).matches()
 
         private fun putFieldState(
@@ -197,7 +197,7 @@ class OpenEhrDateTimeFormatterBuilder {
     }
 
     fun appendPattern(pattern: String?, strict: Boolean): OpenEhrDateTimeFormatterBuilder {
-        val matcher = DATE_TIME_REGEX_PATTERN.matcher(pattern?.toUpperCase() ?: "")
+        val matcher = DATE_TIME_REGEX_PATTERN.matcher(pattern?.uppercase() ?: "")
         if (pattern?.isNotBlank() == true && !matcher.matches()) {
             throw DateTimeException("Invalid pattern $pattern")
         }
