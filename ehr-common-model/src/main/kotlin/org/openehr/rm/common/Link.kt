@@ -55,7 +55,6 @@ class Link() : RmObject(), java.io.Serializable {
         fun quote(parameter: String): String = parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
     }
 
-    @JvmOverloads
     constructor(meaning: DvText, type: DvText, target: DvEhrUri) : this() {
         this.meaning = meaning
         this.type = type

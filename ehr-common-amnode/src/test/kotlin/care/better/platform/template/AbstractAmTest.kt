@@ -33,7 +33,7 @@ import javax.xml.transform.stream.StreamSource
 abstract class AbstractAmTest {
 
     companion object {
-        private const val XML_START_CHAR = '<'.toInt()
+        private const val XML_START_CHAR = '<'.code
     }
 
     private val jaxbRegistry =

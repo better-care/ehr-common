@@ -28,7 +28,6 @@ interface EnumerationString {
                 ?: throw IllegalArgumentException("No such " + enumClass.simpleName + ": " + value)
     }
 
-    @JvmDefault
     fun stringValue(): String =
         if (this is Enum<*>)
             (this as Enum<*>).name
