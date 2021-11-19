@@ -16,7 +16,7 @@
 package care.better.platform.json.jackson.openehr
 
 import care.better.platform.annotation.OpenEhrName
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.cfg.MapperConfig
 import com.fasterxml.jackson.databind.introspect.AnnotatedMethod
 import org.openehr.rm.ehr.EhrStatus
@@ -26,7 +26,7 @@ import org.openehr.rm.ehr.EhrStatus
  * @since 3.1.0
  */
 
-class OpenEhrPropertyNamingStrategy : PropertyNamingStrategy.SnakeCaseStrategy() {
+class OpenEhrPropertyNamingStrategy : PropertyNamingStrategies.SnakeCaseStrategy() {
     private val ehrStatusClass: Class<EhrStatus> = EhrStatus::class.java
 
     override fun nameForGetterMethod(config: MapperConfig<*>, method: AnnotatedMethod?, defaultName: String): String? =
