@@ -1,6 +1,7 @@
 package care.better.platform.time.format
 
 import care.better.platform.time.temporal.OpenEhrLocalTime
+import care.better.platform.time.temporal.OpenEhrOffsetTime
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -8,10 +9,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import java.time.DateTimeException
-import java.time.LocalDate
-import java.time.LocalTime
+import java.time.*
 import java.time.temporal.ChronoField
+import java.time.temporal.Temporal
 import java.time.temporal.TemporalAccessor
 import java.util.*
 import java.util.stream.Stream
@@ -252,8 +252,53 @@ class OpenEhrTimeFormattingTest {
                 args("HH:MM:SS", "02:03:04 +02:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
         )
 
-        private fun args(pattern: String?, Time: String, resultInLenientMode: String, resultInStrictMode: String) =
-            Arguments.of(pattern, Time, resultInLenientMode, resultInStrictMode)
+        @JvmStatic
+        @Suppress("unused")
+        fun providePatternTimeAndExpectedTemporal(): Stream<Arguments> = Stream.of(
+                args("HH:MM:SSZ", "23:17:35-04:00", OpenEhrOffsetTime.of(23, 17, 35, null, ZoneOffset.ofHours(-4))),
+                args("HH:MM:SS", "23:17:35", OpenEhrLocalTime.of(23, 17, 35)),
+
+                args("HH:MM", "23:17", OpenEhrLocalTime.of(23, 17)),
+                args("HH", "23", OpenEhrLocalTime.of(23)),
+                args("HH:MM:SS.SSSZ", "23:17:35.653-04:00", OffsetTime.of(23, 17, 35, 653_000_000, ZoneOffset.ofHours(-4))),
+                args("HH:MM:SS.SSS", "23:17:35.653", LocalTime.of(23, 17, 35, 653_000_000)),
+
+                args("HH:MM:SS.???Z", "23:17:35.653-04:00", OffsetTime.of(23, 17, 35, 653_000_000, ZoneOffset.ofHours(-4))),
+                args("HH:MM:SS.???Z", "23:17:35-04:00", OpenEhrOffsetTime.of(23, 17, 35, null, ZoneOffset.ofHours(-4))),
+                args("HH:MM:SS.???", "23:17:35.653", LocalTime.of(23, 17, 35, 653_000_000)),
+                args("HH:MM:SS.???", "23:17:35", OpenEhrLocalTime.of(23, 17, 35)),
+
+                args("HH:MM:??Z", "23:17:35Z", OpenEhrOffsetTime.of(23, 17, 35, null, ZoneOffset.of("Z"))),
+                args("HH:MM:??Z", "23:17Z", OpenEhrLocalTime.of(23, 17).atOffset(ZoneOffset.of("Z"))),
+                args("HH:MM:??", "23:17:35", OpenEhrLocalTime.of(23, 17, 35)),
+                args("HH:MM:??", "23:17", OpenEhrLocalTime.of(23, 17)),
+
+                args("HH:??:??Z", "23:17:35Z", OpenEhrOffsetTime.of(23, 17, 35, null, ZoneOffset.of("Z"))),
+                args("HH:??:??Z", "23:17Z", OpenEhrLocalTime.of(23, 17).atOffset(ZoneOffset.of("Z"))),
+                args("HH:??:??", "23:17:35", OpenEhrLocalTime.of(23, 17, 35)),
+                args("HH:??:??", "23:17", OpenEhrLocalTime.of(23, 17)),
+                args("HH:??:??", "23", OpenEhrLocalTime.of(23)),
+
+                args("HH:MM:xxZ", "23:17Z", OpenEhrLocalTime.of(23, 17).atOffset(ZoneOffset.of("Z"))),
+                args("HH:MM:xx", "23:17", OpenEhrLocalTime.of(23, 17)),
+
+                args("HH:??:xxZ", "23:17Z", OpenEhrLocalTime.of(23, 17).atOffset(ZoneOffset.of("Z"))),
+                args("HH:??:xx", "23:17", OpenEhrLocalTime.of(23, 17)),
+                args("HH:??:xx", "23", OpenEhrLocalTime.of(23)),
+
+                args("HH:xx:xx", "23", OpenEhrLocalTime.of(23)),
+
+                args("", "23:17:35Z", OpenEhrOffsetTime.of(23, 17, 35, null, ZoneOffset.of("Z"))),
+                args("", "23:17:35.653", LocalTime.of(23, 17, 35, 653_000_000)),
+                args("", "23:17:35", OpenEhrLocalTime.of(23, 17, 35)),
+                args("", "23:17Z", OpenEhrLocalTime.of(23, 17).atOffset(ZoneOffset.of("Z"))),
+                args("", "23:17", OpenEhrLocalTime.of(23, 17)),
+        )
+
+        private fun args(pattern: String?, time: String, resultInLenientMode: String, resultInStrictMode: String) =
+            Arguments.of(pattern, time, resultInLenientMode, resultInStrictMode)
+
+        private fun args(pattern: String?, time: String, expectedParsedDateTime: Temporal) = Arguments.of(pattern, time, expectedParsedDateTime)
     }
 
     @ParameterizedTest
@@ -266,6 +311,14 @@ class OpenEhrTimeFormattingTest {
     @MethodSource("providePatternTimeAndExpectedResult")
     fun handleTimeInStrictMode(pattern: String?, time: String, expectedResultInLenientMode: String, expectedResultInStrictMode: String) {
         handleTime(pattern, time, expectedResultInStrictMode, true)
+    }
+
+    @ParameterizedTest
+    @MethodSource("providePatternTimeAndExpectedTemporal")
+    fun parseTime(pattern: String?, timeString: String, expectedParsedTime: Temporal) {
+        val formatter = OpenEhrDateTimeFormatter.ofPattern(pattern, true)
+        val actualResult = formatter.parseTime(timeString)
+        assertThat(actualResult).describedAs("Parsing \"$timeString\" using pattern \"$pattern\"").isEqualTo(expectedParsedTime)
     }
 
     @Test

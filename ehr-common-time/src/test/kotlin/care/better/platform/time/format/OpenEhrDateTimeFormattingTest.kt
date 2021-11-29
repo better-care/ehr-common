@@ -2,6 +2,7 @@ package care.better.platform.time.format
 
 import care.better.platform.time.temporal.OpenEhrLocalDate
 import care.better.platform.time.temporal.OpenEhrLocalDateTime
+import care.better.platform.time.temporal.OpenEhrOffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.AfterAll
@@ -10,10 +11,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import java.time.DateTimeException
-import java.time.LocalDateTime
-import java.time.Year
+import java.time.*
 import java.time.temporal.ChronoField
+import java.time.temporal.Temporal
 import java.time.temporal.TemporalAccessor
 import java.util.*
 import java.util.stream.Stream
@@ -367,8 +367,75 @@ class OpenEhrDateTimeFormattingTest {
                 args("yyyy-mm-ddTHH:mm:SS", "06.08.2021 04:03:02+02:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
         )
 
+        @JvmStatic
+        @Suppress("unused")
+        fun providePatternDateTimeAndExpectedTemporal(): Stream<Arguments> = Stream.of(
+                // UTC datetime pattern
+                args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T23:17:35-04:00", OffsetDateTime.of(2021, 8, 6, 23, 17, 35, 0, ZoneOffset.ofHours(-4))),
+
+                // local datetime pattern
+                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T23:17:35-04:00", OffsetDateTime.of(2021, 8, 6, 23, 17, 35, 0, ZoneOffset.ofHours(-4))),
+                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T01:17:35", LocalDateTime.of(2021, 8, 6, 1, 17, 35, 0)),
+
+                // optional seconds pattern
+                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T23:17:35-04:00", OpenEhrOffsetDateTime.of(2021, 8, 6, 23, 17, 35, null, ZoneOffset.ofHours(-4))),
+                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T01:17:35", OpenEhrLocalDateTime.of(2021, 8, 6, 1, 17, 35)),
+                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T01:17", OpenEhrLocalDateTime.of(2021, 8, 6, 1, 17)),
+
+                // not allowed seconds pattern
+                args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T01:17", OpenEhrLocalDateTime.of(2021, 8, 6, 1, 17)),
+
+                // optional hour and minute and not allowed seconds pattern
+                args("yyyy-mm-ddT??:??:XX", "2021-08-06T01:17", OpenEhrLocalDateTime.of(2021, 8, 6, 1, 17)),
+                args("yyyy-mm-ddT??:??:XX", "2021-08-06T01", OpenEhrLocalDateTime.of(2021, 8, 6, 1)),
+
+                // not allowed pattern
+                args("yyyy-XX-XXTXX:XX:XX", "2021", Year.of(2021)),
+                args("yyyy-MM-ddTXX:XX:XX", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("yyyy-MM-ddTHH:XX:XX", "2021-08-06T01", OpenEhrLocalDateTime.of(2021, 8, 6, 1)),
+
+                // optional pattern
+                args("yyyy-??-??T??:??:??", "2021-08-06T01:17:35", OpenEhrLocalDateTime.of(2021, 8, 6, 1, 17, 35)),
+                args("yyyy-??-??T??:??:??", "2021-08-06T01:17", OpenEhrLocalDateTime.of(2021, 8, 6, 1, 17)),
+                args("yyyy-??-??T??:??:??", "2021-08-06T01", OpenEhrLocalDateTime.of(2021, 8, 6, 1)),
+                args("yyyy-??-??T??:??:??", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("yyyy-??-??T??:??:??", "2021-08", YearMonth.of(2021, 8)),
+                args("yyyy-??-??T??:??:??", "2021", Year.of(2021)),
+                args("yyyy-MM-??T??:??:??", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("yyyy-MM-??T??:??:??", "2021-08", YearMonth.of(2021, 8)),
+                args("yyyy-MM-ddT??:??:??", "2021-08-06", LocalDate.of(2021, 8, 6)),
+
+                // milliseconds pattern
+                args(
+                        "yyyy-mm-ddTHH:MM:SS.SSSZ",
+                        "2021-08-06T23:17:35.654-04:00",
+                        OffsetDateTime.of(2021, 8, 6, 23, 17, 35, 654_000_000, ZoneOffset.ofHours(-4))),
+                args("yyyy-mm-ddTHH:MM:SS.SSS", "2021-08-06T23:17:35.654", LocalDateTime.of(2021, 8, 6, 23, 17, 35, 654_000_000)),
+
+                // optional milliseconds pattern
+                args("yyyy-mm-ddTHH:MM:SS.???Z", "2021-08-06T23:17:35-04:00", OpenEhrOffsetDateTime.of(2021, 8, 6, 23, 17, 35, null, ZoneOffset.ofHours(-4))),
+                args(
+                        "yyyy-mm-ddTHH:MM:SS.???Z",
+                        "2021-08-06T23:17:35.654-04:00",
+                        OffsetDateTime.of(2021, 8, 6, 23, 17, 35, 654_000_000, ZoneOffset.ofHours(-4))),
+                args("yyyy-mm-ddTHH:MM:SS.???", "2021-08-06T23:17:35", OpenEhrLocalDateTime.of(2021, 8, 6, 23, 17, 35)),
+                args("yyyy-mm-ddTHH:MM:SS.???", "2021-08-06T23:17:35.654", LocalDateTime.of(2021, 8, 6, 23, 17, 35, 654_000_000)),
+
+                // undefined pattern
+                args("", "2021-08-06T23:17:35.000-04:00", OffsetDateTime.of(2021, 8, 6, 23, 17, 35, 0, ZoneOffset.ofHours(-4))),
+                args("", "2021-08-06T23:17:35.654", LocalDateTime.of(2021, 8, 6, 23, 17, 35, 654_000_000)),
+                args("", "2021-08-06T23:17:35", OpenEhrLocalDateTime.of(2021, 8, 6, 23, 17, 35)),
+                args("", "2021-08-06T23:17", OpenEhrLocalDateTime.of(2021, 8, 6, 23, 17)),
+                args("", "2021-08-06T23", OpenEhrLocalDateTime.of(2021, 8, 6, 23)),
+                args("", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("", "2021-08", YearMonth.of(2021, 8)),
+                args("", "2021", Year.of(2021))
+        )
+
         private fun args(pattern: String?, dateTime: String, resultInLenientMode: String, resultInStrictMode: String) =
             Arguments.of(pattern, dateTime, resultInLenientMode, resultInStrictMode)
+
+        private fun args(pattern: String?, dateTime: String, expectedParsedDateTime: Temporal) = Arguments.of(pattern, dateTime, expectedParsedDateTime)
     }
 
     @ParameterizedTest
@@ -381,6 +448,14 @@ class OpenEhrDateTimeFormattingTest {
     @MethodSource("providePatternDateTimeAndExpectedResult")
     fun handleDateTimeInStrictMode(pattern: String?, dateTime: String, expectedResultInLenientMode: String, expectedResultInStrictMode: String) {
         handleDateTime(pattern, dateTime, expectedResultInStrictMode, true)
+    }
+
+    @ParameterizedTest
+    @MethodSource("providePatternDateTimeAndExpectedTemporal")
+    fun parseDateTime(pattern: String?, dateTimeString: String, expectedParsedDateTime: Temporal) {
+        val formatter = OpenEhrDateTimeFormatter.ofPattern(pattern, true)
+        val actualResult = formatter.parseDateTime(dateTimeString)
+        assertThat(actualResult).describedAs("Parsing \"$dateTimeString\" using pattern \"$pattern\"").isEqualTo(expectedParsedDateTime)
     }
 
     @Test

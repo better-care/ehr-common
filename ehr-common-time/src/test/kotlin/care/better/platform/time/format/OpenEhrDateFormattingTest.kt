@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.time.*
 import java.time.temporal.ChronoField
+import java.time.temporal.Temporal
 import java.time.temporal.TemporalAccessor
 import java.util.*
 import java.util.stream.Stream
@@ -139,8 +140,38 @@ class OpenEhrDateFormattingTest {
                 args("yyyy-mm-dd", "6.8.2021", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
         )
 
+
+        @JvmStatic
+        @Suppress("unused")
+        fun providePatternDateAndExpectedTemporal(): Stream<Arguments> = Stream.of(
+                args("yyyy-mm-dd", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("yyyy-mm", "2021-08", YearMonth.of(2021, 8)),
+                args("yyyy", "2021", Year.of(2021)),
+
+                args("yyyy-mm-??", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("yyyy-mm-??", "2021-08", YearMonth.of(2021, 8)),
+
+                args("yyyy-??-??", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("yyyy-??-??", "2021-08", YearMonth.of(2021, 8)),
+                args("yyyy-??-??", "2021", Year.of(2021)),
+
+                args("yyyy-mm-xx", "2021-08", YearMonth.of(2021, 8)),
+
+                args("yyyy-??-xx", "2021-08", YearMonth.of(2021, 8)),
+                args("yyyy-??-xx", "2021", Year.of(2021)),
+
+                args("yyyy-xx-xx", "2021", Year.of(2021)),
+
+                // undefined pattern
+                args("", "2021-08-06", LocalDate.of(2021, 8, 6)),
+                args("", "2021-08", YearMonth.of(2021, 8)),
+                args("", "2021", Year.of(2021)),
+        )
+
         private fun args(pattern: String?, date: String, resultInLenientMode: String, resultInStrictMode: String) =
             Arguments.of(pattern, date, resultInLenientMode, resultInStrictMode)
+
+        private fun args(pattern: String?, date: String, expectedParsedDate: Temporal) = Arguments.of(pattern, date, expectedParsedDate)
     }
 
     @ParameterizedTest
@@ -153,6 +184,14 @@ class OpenEhrDateFormattingTest {
     @MethodSource("providePatternDateAndExpectedResult")
     fun handleDateInStrictMode(pattern: String?, date: String, expectedResultInLenientMode: String, expectedResultInStrictMode: String) {
         handleDate(pattern, date, expectedResultInStrictMode, true)
+    }
+
+    @ParameterizedTest
+    @MethodSource("providePatternDateAndExpectedTemporal")
+    fun parseDate(pattern: String?, dateString: String, expectedParsedDate: Temporal) {
+        val formatter = OpenEhrDateTimeFormatter.ofPattern(pattern, true)
+        val actualResult = formatter.parseDate(dateString)
+        assertThat(actualResult).describedAs("Parsing \"$dateString\" using pattern \"$pattern\"").isEqualTo(expectedParsedDate)
     }
 
     @Test

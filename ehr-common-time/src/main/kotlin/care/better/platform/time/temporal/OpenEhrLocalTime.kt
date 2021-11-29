@@ -19,11 +19,9 @@ import care.better.platform.time.OpenEhrDateTimeFormatterContext
 import java.io.Serializable
 import java.time.Clock
 import java.time.LocalTime
+import java.time.ZoneOffset
 import java.time.format.ResolverStyle
-import java.time.temporal.Temporal
-import java.time.temporal.TemporalAccessor
-import java.time.temporal.TemporalField
-import java.time.temporal.TemporalUnit
+import java.time.temporal.*
 
 /**
  * @author Matic Ribic
@@ -88,6 +86,18 @@ class OpenEhrLocalTime(time: LocalTime, precisionField: OpenEhrField, fieldState
         OpenEhrLocalTime(time.plus(amountToAdd, unit), withTemporalUnit(unit), fieldStates, resolverStyle)
 
     override fun toExactTemporal(): TemporalAccessor = this.takeUnless { precisionField == OpenEhrField.NANOS } ?: time
+
+    fun atOffset(offset: ZoneOffset): OpenEhrOffsetTime =
+        OpenEhrOffsetTime.of(
+                time.hour,
+                time.minute.takeIf { isStrictlySupportedUnit(ChronoUnit.MINUTES) },
+                time.second.takeIf { isStrictlySupportedUnit(ChronoUnit.SECONDS) },
+                time.nano.takeIf {
+                    isStrictlySupportedUnit(ChronoUnit.NANOS) || isStrictlySupportedUnit(ChronoUnit.MICROS) || isStrictlySupportedUnit(ChronoUnit.MILLIS)
+                },
+                offset,
+                fieldStates.plus(Pair(OpenEhrField.OFFSET_SECONDS, OpenEhrFieldState.OPTIONAL)),
+                resolverStyle)
 
     override fun compareTo(other: OpenEhrLocalTime): Int = time.compareTo(other.time)
 }
