@@ -26,6 +26,7 @@ import org.openehr.rm.datatypes.DvDate
 import java.io.IOException
 import java.io.StringReader
 import java.io.StringWriter
+import java.util.concurrent.Executors
 import javax.xml.bind.JAXBElement
 import javax.xml.bind.JAXBException
 import javax.xml.bind.Marshaller
@@ -38,10 +39,6 @@ import javax.xml.transform.stream.StreamSource
  * @since 3.1.0
  */
 open class SerializationTest {
-
-    private val unmarshaller: Unmarshaller = JaxbRegistry.getInstance().unmarshaller
-    private val marshaller: Marshaller = JaxbRegistry.getInstance().marshaller
-
     @Test
     fun testCompositionDeserialization() {
         val composition = getComposition("/composition.xml")
@@ -54,6 +51,7 @@ open class SerializationTest {
     fun testCompositionSerialization() {
         val composition = getComposition("/composition.xml")
 
+        val marshaller: Marshaller = JaxbRegistry.getInstance().marshaller
         val stringWriter = StringWriter()
         marshaller.marshal(composition, stringWriter)
         val compositionString = stringWriter.toString()
@@ -62,8 +60,11 @@ open class SerializationTest {
     }
 
     @Test
-    fun testDateWithJvmOveraloadsSerialization() {
+    fun testDateWithJvmOverloadsSerialization() {
         val date = DvDate(value = "2020-01-01")
+
+        val unmarshaller: Unmarshaller = JaxbRegistry.getInstance().unmarshaller
+        val marshaller: Marshaller = JaxbRegistry.getInstance().marshaller
 
         val stringWriter = StringWriter()
         marshaller.marshal(JAXBElement(QName("date"), DvDate::class.java, date), stringWriter)
@@ -83,7 +84,10 @@ open class SerializationTest {
     }
 
     @Test
-    fun testCodePhraseWithJvmOveraloadsSerialization() {
+    fun testCodePhraseWithJvmOverloadsSerialization() {
+        val unmarshaller: Unmarshaller = JaxbRegistry.getInstance().unmarshaller
+        val marshaller: Marshaller = JaxbRegistry.getInstance().marshaller
+
         val codePhrase = CodePhrase(terminologyId = TerminologyId("test"), codeString = "x221")
         val stringWriter = StringWriter()
         marshaller.marshal(JAXBElement(QName("code_phrase"), CodePhrase::class.java, codePhrase), stringWriter)
@@ -95,12 +99,14 @@ open class SerializationTest {
     }
 
     @Test
-    fun testTermBindingItemWithJvmOveraloadsSerialization() {
+    fun testTermBindingItemWithJvmOverloadsSerialization() {
         val termBindingItem = TermBindingItem().apply {
             code = "code"
             value = CodePhrase(terminologyId = TerminologyId("test"), codeString = "x221")
         }
 
+        val unmarshaller: Unmarshaller = JaxbRegistry.getInstance().unmarshaller
+        val marshaller: Marshaller = JaxbRegistry.getInstance().marshaller
         val stringWriter = StringWriter()
         marshaller.marshal(JAXBElement(QName("term_binding_item"), TermBindingItem::class.java, termBindingItem), stringWriter)
         val rmString = stringWriter.toString()
@@ -111,7 +117,7 @@ open class SerializationTest {
     }
 
     @Test
-    fun testTermBindingSetWithJvmOveraloadsSerialization() {
+    fun testTermBindingSetWithJvmOverloadsSerialization() {
         val termBindingItem = TermBindingItem().apply {
             code = "code"
             value = CodePhrase(terminologyId = TerminologyId("test"), codeString = "x221")
@@ -120,6 +126,8 @@ open class SerializationTest {
         termBindingSet.items.add(termBindingItem)
         termBindingSet.terminology = "terminology"
 
+        val unmarshaller: Unmarshaller = JaxbRegistry.getInstance().unmarshaller
+        val marshaller: Marshaller = JaxbRegistry.getInstance().marshaller
         val stringWriter = StringWriter()
         marshaller.marshal(JAXBElement(QName("term_binding_set"), TermBindingSet::class.java, termBindingSet), stringWriter)
         val rmString = stringWriter.toString()
@@ -131,13 +139,36 @@ open class SerializationTest {
         assertThat(termBindingSet2.items[0].value).isNotNull
     }
 
+    @Test
+    fun testParallelMarshalling() {
+        val composition = getComposition("/composition.xml")
+        val executor = Executors.newFixedThreadPool(20)
+
+        IntRange(0, 1000)
+                .map { Runnable { JaxbRegistry.getInstance().marshaller.marshal(composition, StringWriter()) } }
+                .forEach(executor::submit)
+
+        testCompositionSerialization()
+    }
+
+    @Test
+    fun testParallelUnmarshalling() {
+        val executor = Executors.newFixedThreadPool(20)
+
+        IntRange(0, 1000)
+                .map { Runnable { getComposition("/composition.xml") } }
+                .forEach(executor::submit)
+
+        testCompositionDeserialization()
+    }
+
     @Throws(JAXBException::class, IOException::class)
     protected open fun getComposition(compositionFile: String): Composition =
-        SerializationTest::class.java.getResourceAsStream(compositionFile).use { stream ->
-            if (stream == null)
-                throw RuntimeException("Composition resource was not found: $compositionFile.")
-            else
-                unmarshaller.unmarshal(StreamSource(stream), Composition::class.java).value
-        }
+            SerializationTest::class.java.getResourceAsStream(compositionFile).use { stream ->
+                if (stream == null)
+                    throw RuntimeException("Composition resource was not found: $compositionFile.")
+                else
+                    JaxbRegistry.getInstance().unmarshaller.unmarshal(StreamSource(stream), Composition::class.java).value
+            }
 
 }
