@@ -55,9 +55,9 @@ class JaxbRegistry(packages: List<String>) {
 
     private val context: JAXBContext = JAXBContext.newInstance(if (packages.isNotEmpty()) "$CONTEXT_PATH:${packages.joinToString(":")}" else CONTEXT_PATH)
 
-    val marshaller: Marshaller = createMarshaller()
+    val marshaller: Marshaller get() = createMarshaller()
 
-    val unmarshaller: Unmarshaller = createUnmarshaller()
+    val unmarshaller: Unmarshaller get() = createUnmarshaller()
 
     fun createMarshaller(): Marshaller = context.createMarshaller().apply { schema = null }
 
