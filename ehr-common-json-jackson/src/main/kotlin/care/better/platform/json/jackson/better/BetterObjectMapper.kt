@@ -43,6 +43,7 @@ class BetterObjectMapper : ObjectMapper() {
 
         configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)
         configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        configure(DeserializationFeature.FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY, false)
         addMixIn(BooleanContextExpression::class.java, BooleanContextExpressionMixedIn::class.java)
         propertyNamingStrategy = BetterPlatformPropertyNamingStrategy()
     }
