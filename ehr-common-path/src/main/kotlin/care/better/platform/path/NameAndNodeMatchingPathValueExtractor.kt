@@ -27,8 +27,10 @@ import org.openehr.rm.common.Locatable
  *
  * @constructor Creates a new instance of [NameAndNodeMatchingPathValueExtractor]
  * @param path Path [String]
+ * @param matchNumberedNodes [Boolean] indicating if numbered nodes will be matched
  */
-class NameAndNodeMatchingPathValueExtractor(path: String?) : SimplePathValueExtractor(path) {
+class NameAndNodeMatchingPathValueExtractor @JvmOverloads constructor(path: String?, private val matchNumberedNodes: Boolean = false) : SimplePathValueExtractor(path) {
+
 
     /**
      * Checks if the [PathSegment] matches with the object.
@@ -38,22 +40,25 @@ class NameAndNodeMatchingPathValueExtractor(path: String?) : SimplePathValueExtr
      * @param pathSegment [PathSegment]
      * @return [Boolean] indicating if [PathSegment] matches with the objects.
      */
-    override fun elementMatches(node: Any, pathSegment: PathSegment): Boolean =
-        if (node is Locatable) {
-            if (pathSegment.archetypeNodeId == node.archetypeNodeId) {
-                if (pathSegment.name != null) {
-                    when {
-                        pathSegment.prefix == null -> node.name?.value == pathSegment.name
-                        "uid/value".equals(pathSegment.prefix, ignoreCase = true) -> node.uid?.value == pathSegment.name
-                        else -> false
-                    }
-                } else {
-                    true
-                }
-            } else {
-                false
-            }
-        } else {
-            super.elementMatches(node, pathSegment)
+    override fun elementMatches(node: Any, pathSegment: PathSegment): Boolean {
+
+        if (node !is Locatable) {
+            return super.elementMatches(node, pathSegment)
         }
+
+        if (pathSegment.archetypeNodeId != node.archetypeNodeId) {
+            return false
+        }
+
+        if (pathSegment.name == null) {
+            return true
+        }
+
+        val regex = Regex("${Regex.escape(pathSegment.name.orEmpty())}${if (matchNumberedNodes) "(\\s#\\d+)?" else ""}")
+        return when {
+            pathSegment.prefix == null -> regex.matches(node.name?.value.orEmpty())
+            "uid/value".equals(pathSegment.prefix, ignoreCase = true) -> regex.matches(node.uid?.value.orEmpty())
+            else -> false
+        }
+    }
 }

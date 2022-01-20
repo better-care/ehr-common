@@ -1,0 +1,29 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+jobs:
+  build:
+    working_directory: ~/ehr-common
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    steps:
+      - checkout
+      - restore_cache:
+          key: ehr-common-{{ checksum "pom.xml" }}
+      - run: mvn clean install -P code-coverage -DskipTests
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: ehr-common-{{ checksum "pom.xml" }}
+      - run: mvn clean install -P code-coverage
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - codecov/upload:
+          file: ehr-common-jacoco/target/jacoco-report/jacoco.xml
+          token: $CODECOV_TOKEN

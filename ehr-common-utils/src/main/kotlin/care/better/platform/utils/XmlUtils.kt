@@ -38,7 +38,7 @@ import javax.xml.transform.sax.SAXSource
  */
 
 object XmlUtils {
-    private const val XML_START_CHAR = '<'.toInt()
+    private const val XML_START_CHAR = '<'.code
 
     @JvmStatic
     @Throws(ParserConfigurationException::class)

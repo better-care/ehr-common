@@ -29,7 +29,6 @@ interface EnumerationInteger {
                 ?: throw IllegalArgumentException("No such " + enumClass.simpleName + ": " + value)
     }
 
-    @JvmDefault
     fun integerValue(): Int =
         if (this is Enum<*>)
             (this as Enum<*>).ordinal
