@@ -15,7 +15,9 @@
 
 package care.better.platform.jaxb
 
-import javax.xml.bind.annotation.adapters.XmlAdapter
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Primoz Delopst
@@ -37,6 +39,7 @@ class MapStringAdapter : XmlAdapter<MapStringAdapter.StringAdaptedMap, MutableMa
         }
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     class StringAdaptedEntry() {
         lateinit var key: String
         lateinit var value: String

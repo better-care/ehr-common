@@ -29,7 +29,7 @@ import org.openehr.rm.datastructures.Item
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

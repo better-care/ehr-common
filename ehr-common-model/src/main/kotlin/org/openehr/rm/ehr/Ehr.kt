@@ -20,7 +20,7 @@ import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
 import java.util.*
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

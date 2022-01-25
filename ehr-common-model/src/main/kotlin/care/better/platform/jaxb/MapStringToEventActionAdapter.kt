@@ -16,7 +16,7 @@
 package care.better.platform.jaxb
 
 import org.openehr.proc.taskplanning.EventAction
-import javax.xml.bind.annotation.adapters.XmlAdapter
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Primoz Delopst

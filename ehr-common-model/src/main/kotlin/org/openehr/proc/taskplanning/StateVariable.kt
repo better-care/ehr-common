@@ -17,13 +17,16 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlType
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "STATE_VARIABLE", propOrder = ["requiredCurrency"])
 @Open
 class StateVariable<T> : ExternalVariable<T> {

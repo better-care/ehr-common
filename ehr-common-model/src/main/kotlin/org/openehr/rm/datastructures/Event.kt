@@ -19,7 +19,7 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

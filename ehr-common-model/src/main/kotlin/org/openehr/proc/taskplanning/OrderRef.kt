@@ -21,15 +21,14 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.common.Locatable
 import java.io.Serializable
-import javax.xml.bind.annotation.*
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import jakarta.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ORDER_REF", propOrder = [

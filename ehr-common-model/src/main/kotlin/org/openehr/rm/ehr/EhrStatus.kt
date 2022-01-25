@@ -20,7 +20,7 @@ import care.better.platform.annotation.Required
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartySelf
 import org.openehr.rm.datastructures.ItemStructure
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

@@ -18,7 +18,7 @@ package org.openehr.rm.composition
 import care.better.platform.annotation.Open
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datastructures.ItemStructure
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

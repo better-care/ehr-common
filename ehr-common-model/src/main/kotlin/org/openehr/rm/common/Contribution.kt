@@ -20,7 +20,7 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.HierObjectId
 import java.io.Serializable
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

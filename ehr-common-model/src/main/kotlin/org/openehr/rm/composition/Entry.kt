@@ -21,7 +21,7 @@ import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.CodePhrase
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

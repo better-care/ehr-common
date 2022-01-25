@@ -15,7 +15,7 @@
 
 package org.openehr.am.aom
 
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 
 /**

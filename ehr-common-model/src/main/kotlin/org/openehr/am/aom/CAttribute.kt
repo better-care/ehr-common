@@ -17,7 +17,7 @@ package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
 import org.openehr.base.foundationtypes.IntervalOfInteger
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

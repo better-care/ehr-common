@@ -19,14 +19,17 @@ import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.base.basetypes.UidBasedId
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlType
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlType
 
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SUB_PLAN", propOrder = ["target", "targetUid"])
 @Open
 class SubPlan : PerformableAction, LinkedPlan {

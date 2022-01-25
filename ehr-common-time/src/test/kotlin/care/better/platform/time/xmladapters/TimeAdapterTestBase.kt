@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.time.temporal.Temporal
 import java.util.*
-import javax.xml.bind.annotation.adapters.XmlAdapter
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Matic Ribic

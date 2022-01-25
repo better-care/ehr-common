@@ -26,13 +26,16 @@ import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvIdentifier
 import org.openehr.rm.datatypes.DvText
 import org.openehr.rm.datatypes.DvUri
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlType
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "TASK_PLAN", propOrder = [
         "subject",

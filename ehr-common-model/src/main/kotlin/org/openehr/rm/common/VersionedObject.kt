@@ -21,7 +21,7 @@ import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
-import javax.xml.bind.annotation.*
+import jakarta.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

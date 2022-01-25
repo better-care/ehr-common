@@ -18,14 +18,17 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.jaxb.MapStringAdapter
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlType
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlType
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TASK_PLAN_EVENT_RECORD", propOrder = ["details"])
 @Open
 class TaskPlanEventRecord : EventRecord {

@@ -21,15 +21,18 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlType
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlType
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DATASET_COMMIT_GROUP", propOrder = ["groupId", "completionStep"])
 @Open
 class DatasetCommitGroup() : RmObject(), Serializable, VisitableByModelVisitor {

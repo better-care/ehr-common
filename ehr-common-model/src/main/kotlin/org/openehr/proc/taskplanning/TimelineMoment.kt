@@ -17,13 +17,16 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import org.openehr.rm.datastructures.ItemStructure
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlType
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "TIMELINE_MOMENT", propOrder = [
         "timelineOffset",
