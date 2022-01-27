@@ -15,6 +15,7 @@
 
 package care.better.platform
 
+import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.OriginalVersion
 import org.openehr.rm.common.VersionedObject
 import org.openehr.rm.composition.Composition
@@ -31,5 +32,6 @@ class VersionedDataDto : Serializable {
 
     var version: OriginalVersion? = null
     var versionedObject: VersionedObject? = null
-    var composition: Composition? = null
+    var locatable: Locatable? = null
+    val composition: Composition? get() = locatable as Composition?
 }
