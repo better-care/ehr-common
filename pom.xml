@@ -39,7 +39,7 @@
     <url>https://github.com/better-care/ehr-common</url>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>16</java.version>
         <kotlin.version>1.5.30</kotlin.version>
 
         <kotlin-annotations.version>21.0.1</kotlin-annotations.version>
