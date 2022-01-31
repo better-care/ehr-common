@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## 3.1.4 - 2022-01-27
+
+- Refactor VersionedDataDto so it accepts any Locatable
+
 ## 3.1.3 - 2021-12-06
 
 - Fix an issue that JaxbRegistry was not thread-safe
