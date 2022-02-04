@@ -19,7 +19,7 @@ import care.better.openehr.rm.RangeParameters
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import java.io.Serializable
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

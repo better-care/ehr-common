@@ -18,7 +18,7 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

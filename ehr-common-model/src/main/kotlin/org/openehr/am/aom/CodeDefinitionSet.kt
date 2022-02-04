@@ -17,7 +17,7 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import java.io.Serializable
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

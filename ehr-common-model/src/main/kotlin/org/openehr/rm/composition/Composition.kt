@@ -21,7 +21,7 @@ import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.CodePhrase
 import org.openehr.rm.datatypes.DvCodedText
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

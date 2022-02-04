@@ -16,7 +16,7 @@
 package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 
 /**

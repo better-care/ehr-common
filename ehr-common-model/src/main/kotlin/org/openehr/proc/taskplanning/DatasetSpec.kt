@@ -21,7 +21,7 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import java.io.Serializable
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

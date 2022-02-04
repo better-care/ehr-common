@@ -15,9 +15,9 @@
 
 package care.better.platform.utils
 
-import jakarta.xml.bind.JAXBElement
-import jakarta.xml.bind.JAXBException
-import jakarta.xml.bind.Unmarshaller
+import javax.xml.bind.JAXBElement
+import javax.xml.bind.JAXBException
+import javax.xml.bind.Unmarshaller
 import org.xml.sax.InputSource
 import org.xml.sax.SAXException
 import org.xml.sax.SAXNotRecognizedException

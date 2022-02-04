@@ -17,7 +17,7 @@ package care.better.platform.jaxb
 
 import care.better.platform.utils.XmlUtils
 import care.better.platform.utils.XmlUtils.unmarshal
-import jakarta.xml.bind.*
+import javax.xml.bind.*
 import org.xml.sax.SAXException
 import java.io.IOException
 import java.io.InputStream

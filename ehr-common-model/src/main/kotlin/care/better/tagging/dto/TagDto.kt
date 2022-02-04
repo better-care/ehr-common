@@ -1,8 +1,8 @@
 package care.better.tagging.dto
 
 import java.io.Serializable
-import jakarta.xml.bind.annotation.XmlElement
-import jakarta.xml.bind.annotation.XmlRootElement
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlRootElement
 
 /**
  * An object containing a string tag and optional aqlPath that is tagged with the string tag.

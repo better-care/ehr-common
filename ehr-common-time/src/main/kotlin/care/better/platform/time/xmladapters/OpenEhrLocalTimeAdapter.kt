@@ -17,7 +17,7 @@ package care.better.platform.time.xmladapters
 
 import care.better.platform.time.format.OpenEhrDateTimeFormatter
 import care.better.platform.time.temporal.OpenEhrLocalTime
-import jakarta.xml.bind.annotation.adapters.XmlAdapter
+import javax.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Matic Ribic

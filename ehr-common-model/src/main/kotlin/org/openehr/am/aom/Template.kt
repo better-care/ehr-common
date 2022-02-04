@@ -23,7 +23,7 @@ import org.openehr.rm.common.ResourceDescription
 import org.openehr.rm.common.RevisionHistory
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

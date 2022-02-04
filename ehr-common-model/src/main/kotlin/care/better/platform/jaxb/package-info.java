@@ -17,7 +17,7 @@
 @XmlSchema(namespace = "http://schemas.openehr.org/v1", elementFormDefault = XmlNsForm.QUALIFIED)
 package care.better.platform.jaxb;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlNsForm;
-import jakarta.xml.bind.annotation.XmlSchema;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

@@ -19,10 +19,10 @@ import org.openehr.proc.taskplanning.TaskPlan
 import org.openehr.proc.taskplanning.WorkPlan
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.integration.GenericEntry
-import jakarta.xml.bind.annotation.XmlAccessType
-import jakarta.xml.bind.annotation.XmlAccessorType
-import jakarta.xml.bind.annotation.XmlSeeAlso
-import jakarta.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlSeeAlso
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst

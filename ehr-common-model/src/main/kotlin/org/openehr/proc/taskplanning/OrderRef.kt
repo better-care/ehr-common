@@ -21,9 +21,9 @@ import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.common.Locatable
 import java.io.Serializable
-import jakarta.xml.bind.annotation.*
-import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 /**
  * @author Primoz Delopst

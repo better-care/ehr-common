@@ -20,7 +20,7 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.common.Locatable
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

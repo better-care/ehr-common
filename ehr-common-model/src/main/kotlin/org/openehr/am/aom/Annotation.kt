@@ -19,7 +19,7 @@ import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
 import org.openehr.rm.common.StringDictionaryItem
 import java.io.Serializable
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

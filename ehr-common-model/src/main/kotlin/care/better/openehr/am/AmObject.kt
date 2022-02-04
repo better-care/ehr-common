@@ -15,7 +15,7 @@
 
 package care.better.openehr.am
 
-import jakarta.xml.bind.annotation.XmlTransient
+import javax.xml.bind.annotation.XmlTransient
 
 /**
  * @author Primoz Delopst

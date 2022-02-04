@@ -15,5 +15,5 @@
 @XmlSchema(namespace = "http://schemas.openehr.org/v1", elementFormDefault = XmlNsForm.QUALIFIED)
 package org.openehr.rm.common;
 
-import jakarta.xml.bind.annotation.XmlNsForm;
-import jakarta.xml.bind.annotation.XmlSchema;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

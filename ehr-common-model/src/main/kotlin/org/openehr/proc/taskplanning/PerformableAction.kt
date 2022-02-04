@@ -18,7 +18,7 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.base.basetypes.LocatableRef
-import jakarta.xml.bind.annotation.*
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

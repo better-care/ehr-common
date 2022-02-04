@@ -46,7 +46,8 @@
 
         <guava.version>29.0-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <jakarta.xml.version>3.0.1</jakarta.xml.version>
+        <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
+        <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
         <joda.version>2.10.8</joda.version>
         <jackson.version>2.13.1</jackson.version>
 
@@ -148,13 +149,13 @@
             <dependency>
                 <groupId>jakarta.xml.bind</groupId>
                 <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>${jakarta.xml.version}</version>
+                <version>${jakarta.xml.bind.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
-                <version>${jakarta.xml.version}</version>
+                <version>${jaxb-runtime.version}</version>
             </dependency>
 
             <dependency>
