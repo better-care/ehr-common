@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## 3.2.0 - 2022-06-23
+
+- Apply changes from 3.1 branch
+
 ## 3.1.4 - 2022-01-27
 
 - Refactor VersionedDataDto so it accepts any Locatable
