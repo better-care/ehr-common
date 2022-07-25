@@ -262,7 +262,7 @@ class DateTimeConversionUtils {
                     is LocalDate -> ZonedDateTime.of(LocalDateTime.of(it, LocalTime.of(0, 0, 0, 0)), ZoneId.systemDefault()).toOffsetDateTime()
                     else -> throw DateTimeException("Invalid offset date time value: $value")
                 }
-            }
+            }.truncatedTo(ChronoUnit.MICROS)
 
         /**
          * Parses a date time in openEHR format with an offset and zone.
@@ -351,7 +351,7 @@ class DateTimeConversionUtils {
          * @return [OffsetDateTime]
          */
         @JvmStatic
-        fun toOffsetDateTime(dateTime: DateTime): OffsetDateTime = dateTime.toGregorianCalendar().toZonedDateTime().toOffsetDateTime()
+        fun toOffsetDateTime(dateTime: DateTime): OffsetDateTime = dateTime.toGregorianCalendar().toZonedDateTime().toOffsetDateTime().truncatedTo(ChronoUnit.MICROS)
 
         /**
          * Adds [Period] to [OffsetDateTime]
