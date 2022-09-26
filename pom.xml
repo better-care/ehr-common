@@ -40,18 +40,19 @@
 
     <properties>
         <java.version>16</java.version>
-        <kotlin.version>1.5.30</kotlin.version>
-        <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
+        <kotlin.version>1.5.30</kotlin.version> <!--can't bump this because of kotlin jackson-->
 
-        <guava.version>29.0-jre</guava.version>
+        <jetbrains-annotations.version>20.1.0</jetbrains-annotations.version>
+
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <guava.version>31.1-jre</guava.version>
+        <jackson.version>2.13.4</jackson.version>
         <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
         <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
-        <joda.version>2.10.8</joda.version>
-        <jackson.version>2.13.1</jackson.version>
+        <joda.version>2.11.1</joda.version>
 
-        <jupiter.version>5.8.1</jupiter.version>
-        <assertj.version>3.22.0</assertj.version>
+        <jupiter.version>5.9.0</jupiter.version>
+        <assertj.version>3.23.1</assertj.version>
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -59,7 +60,7 @@
         <maven-dokka-plugin.version>${kotlin.version}</maven-dokka-plugin.version>
         <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-jacoco-plugin.version>0.8.7</maven-jacoco-plugin.version>
+        <maven-jacoco-plugin.version>0.8.8</maven-jacoco-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
@@ -82,7 +83,7 @@
             <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <version>${kotlin-annotations.version}</version>
+                <version>${jetbrains-annotations.version}</version>
             </dependency>
 
             <dependency>
