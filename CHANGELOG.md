@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Apply changes from 3.1 branch
 
+## 3.1.5 - 2022-10-??
+
+- Introduce NameUtils
+
 ## 3.1.4 - 2022-01-27
 
 - Refactor VersionedDataDto so it accepts any Locatable
