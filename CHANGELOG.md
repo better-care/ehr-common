@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## 3.1.6 - 2022-10-28
+
+- Add descendant node count to AmAttribute and AmNode
+
 ## 3.1.5 - 2022-10-28
 
 - Introduce NameUtils
