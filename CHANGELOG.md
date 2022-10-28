@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 
-## 3.1.5 - 2022-10-??
+## 3.1.5 - 2022-10-28
 
 - Introduce NameUtils
 
