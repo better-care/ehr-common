@@ -82,17 +82,19 @@ class AmTreeBuilder(private val template: Template) {
 
         val context: ArchetypeNodeContext = if (archetypeRoot) ArchetypeNodeContext(amNode, archetypeNodeContext) else archetypeNodeContext
         parent?.also { setGetterAndSetter(it, attributeName, amNode) }
+        var descendantCount = 0
         if (cObject is CComplexObject) {
             cObject.attributes.forEach {
                 val name = it.rmAttributeName
                 if (name != null) {
                     val amAttribute = buildAmAttribute(amNode, it, name, context)
+                    descendantCount += amAttribute.nodeCount + 1
                     val amAttributeName = it.rmAttributeName ?: throw AmException("RM attribute name is mandatory.")
                     amNode.attributes[amAttributeName] = amAttribute
-
                 }
             }
         }
+        amNode.nodeCount = descendantCount
 
         if (cObject is ArchetypeInternalRef) {
             context.addReference(AmNodeReference(amNode, parent, attributeName, cObject.targetPath))
@@ -199,13 +201,17 @@ class AmTreeBuilder(private val template: Template) {
 
     private fun buildAmAttribute(parent: AmNode, attribute: CAttribute, attributeName: String, archetypeNodeContext: ArchetypeNodeContext): AmAttribute {
         val children: MutableList<AmNode> = ArrayList()
+        var descendantCount = 0
         for (child in attribute.children) {
-            children.add(build(child, parent, attributeName, archetypeNodeContext))
+            val amNode = build(child, parent, attributeName, archetypeNodeContext)
+            descendantCount += amNode.nodeCount + 1
+            children.add(amNode)
         }
         val amAttribute = AmAttribute(attribute.existence, children)
         if (attribute is CMultipleAttribute) {
             amAttribute.cardinality = attribute.cardinality
         }
+        amAttribute.nodeCount = descendantCount
         return amAttribute
     }
 

@@ -23,8 +23,9 @@ import org.openehr.base.foundationtypes.IntervalOfInteger
  * @author Primoz Delopst
  * @since 3.1.0
  */
-class AmAttribute(val existence: IntervalOfInteger?, children: List<AmNode>) {
+class AmAttribute(val existence: IntervalOfInteger?, children: List<AmNode>) : NodeCount {
     private val _children = children.toMutableList()
+    override var nodeCount: Int = 0
     val children: List<AmNode>
         get() = _children.toList()
 
