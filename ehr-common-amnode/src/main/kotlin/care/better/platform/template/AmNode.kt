@@ -44,7 +44,8 @@ class AmNode private constructor(
     private var type: TypeInfo? = null,
     var constraints: List<TAttribute>? = null,
     var annotations: List<Annotation>? = null,
-    var viewConstraints: List<TView.Constraints.Items>? = null) {
+    var viewConstraints: List<TView.Constraints.Items>? = null) : NodeCount {
+    override var nodeCount: Int = 0
 
     constructor(cObject: CObject, parent: AmNode?) : this(
         parent = parent,
