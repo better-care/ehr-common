@@ -17,12 +17,15 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import java.time.Duration
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TYPE_DEF_DURATION")
 @Open
 class TypeDefDuration : ExprTypeDef<Duration>("Duration") {

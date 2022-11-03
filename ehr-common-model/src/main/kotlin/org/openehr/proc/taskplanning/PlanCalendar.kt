@@ -18,12 +18,15 @@ package org.openehr.proc.taskplanning
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PLAN_CALENDAR", propOrder = ["entries"])
 @Open
 class PlanCalendar : RmObject(), Serializable {

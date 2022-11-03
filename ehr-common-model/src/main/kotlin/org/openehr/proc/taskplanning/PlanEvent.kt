@@ -18,14 +18,13 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PLAN_EVENT", propOrder = ["delay", "otherDetails"])
 @XmlSeeAlso(value = [
     ManualNotification::class,

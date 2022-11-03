@@ -17,14 +17,13 @@ package org.openehr.proc.taskplanning
 
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EXTERNAL_VARIABLE", propOrder = ["populatingRequest"])
 @XmlSeeAlso(value = [EventVariable::class, StateVariable::class])
 @Open

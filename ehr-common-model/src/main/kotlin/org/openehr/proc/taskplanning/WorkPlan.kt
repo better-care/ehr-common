@@ -24,6 +24,8 @@ import org.openehr.base.basetypes.UidBasedId
 import org.openehr.rm.composition.ContentItem
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlType
 
@@ -31,6 +33,7 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "WORK_PLAN", propOrder = [
         "description",
