@@ -21,6 +21,8 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlType
 
@@ -28,6 +30,7 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARAMETER_MAPPING", propOrder = [
     "name",
     "contextName"])

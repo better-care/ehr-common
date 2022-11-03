@@ -18,6 +18,7 @@
 package care.better.platform.time.format
 
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatter.ISO_LOCAL_DATE
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.DecimalStyle
 import java.time.format.SignStyle
@@ -190,6 +191,38 @@ class DateTimeFormatters {
             .parseCaseInsensitive()
             .append(STRICT_LOCAL_DATE_TIME_FORMATTER)
             .append(OFFSET_FORMATTER)
+            .toFormatter()
+
+
+        /**
+         * The date time formatter that formats or parses a date time in openEHR format with an offset.
+         * This returns a formatter same as ISO_OFFSET_DATE_TIME but NANO_OF_SECOND trimmed to 6 digits
+         */
+        @JvmField
+        val ISO_DB_OFFSET_DATE_TIME: DateTimeFormatter = DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .append(
+                DateTimeFormatterBuilder()
+                    .parseCaseInsensitive()
+                    .append(ISO_LOCAL_DATE)
+                    .appendLiteral('T')
+                    .append(
+                        DateTimeFormatterBuilder()
+                            .appendValue(ChronoField.HOUR_OF_DAY, 2)
+                            .appendLiteral(':')
+                            .appendValue(ChronoField.MINUTE_OF_HOUR, 2)
+                            .optionalStart()
+                            .appendLiteral(':')
+                            .appendValue(ChronoField.SECOND_OF_MINUTE, 2)
+                            .optionalStart()
+                            .appendFraction(ChronoField.NANO_OF_SECOND, 0, 6, true)
+                            .toFormatter()
+                    )
+                    .toFormatter()
+            )
+            .parseLenient()
+            .appendOffsetId()
+            .parseStrict()
             .toFormatter()
 
 

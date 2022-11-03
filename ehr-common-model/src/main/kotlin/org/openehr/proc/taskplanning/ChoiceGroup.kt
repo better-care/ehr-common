@@ -19,15 +19,13 @@ import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import org.openehr.rm.datatypes.DvText
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlElements
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CHOICE_GROUP", propOrder = ["overrideType", "timeout"])
 @XmlSeeAlso(value = [ConditionGroup::class, DecisionGroup::class, AdhocGroup::class, EventGroup::class])
 @Open

@@ -19,14 +19,13 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import java.io.Serializable
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EVENT_WAIT", propOrder = [
     "event",
     "successAction",

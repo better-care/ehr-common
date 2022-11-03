@@ -15,10 +15,14 @@
 
 package care.better.platform.jaxb
 
-import javax.xml.bind.JAXBContext
-import javax.xml.bind.JAXBException
-import javax.xml.bind.Marshaller
-import javax.xml.bind.Unmarshaller
+import care.better.platform.utils.XmlUtils
+import care.better.platform.utils.XmlUtils.unmarshal
+import javax.xml.bind.*
+import org.xml.sax.SAXException
+import java.io.IOException
+import java.io.InputStream
+import javax.xml.parsers.ParserConfigurationException
+import javax.xml.parsers.SAXParserFactory
 
 /**
  * @author Primoz Delopst
@@ -54,6 +58,7 @@ class JaxbRegistry(packages: List<String>) {
     }
 
     private val context: JAXBContext = JAXBContext.newInstance(if (packages.isNotEmpty()) "$CONTEXT_PATH:${packages.joinToString(":")}" else CONTEXT_PATH)
+    private val saxParserFactory: SAXParserFactory = XmlUtils.createSAXParserFactory()
 
     val marshaller: Marshaller get() = createMarshaller()
 
@@ -62,4 +67,14 @@ class JaxbRegistry(packages: List<String>) {
     fun createMarshaller(): Marshaller = context.createMarshaller().apply { schema = null }
 
     fun createUnmarshaller(): Unmarshaller = context.createUnmarshaller().apply { schema = null }
+
+    @Throws(JAXBException::class, ParserConfigurationException::class, SAXException::class, IOException::class)
+    fun <T> unmarshal(stringToUnmarshall: String, clazz: Class<T>): JAXBElement<T> {
+        return unmarshal(saxParserFactory, createUnmarshaller(), stringToUnmarshall, clazz)
+    }
+
+    @Throws(JAXBException::class, ParserConfigurationException::class, SAXException::class, IOException::class)
+    fun <T> unmarshal(inputStream: InputStream, clazz: Class<T>): JAXBElement<T> {
+        return unmarshal(saxParserFactory, createUnmarshaller(), inputStream, clazz)
+    }
 }

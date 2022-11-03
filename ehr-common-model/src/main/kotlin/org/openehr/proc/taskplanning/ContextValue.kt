@@ -19,9 +19,7 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
@@ -29,6 +27,7 @@ import javax.xml.bind.annotation.XmlType
  */
 
 @SuppressWarnings("ClassReferencesSubclass")
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CONTEXT_VALUE", propOrder = ["name", "type"])
 @XmlSeeAlso(value = [ContextVariable::class, ContextExpression::class, ContextConstant::class])
 @Open

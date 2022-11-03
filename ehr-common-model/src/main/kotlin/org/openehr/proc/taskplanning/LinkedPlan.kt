@@ -16,14 +16,13 @@
 package org.openehr.proc.taskplanning
 
 import org.openehr.base.basetypes.UidBasedId
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LINKED_PLAN", propOrder = ["target", "targetUid"])
 @XmlSeeAlso(value = [SubPlan::class, HandOff::class])
 

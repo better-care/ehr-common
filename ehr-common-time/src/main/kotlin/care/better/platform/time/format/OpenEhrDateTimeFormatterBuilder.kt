@@ -58,7 +58,7 @@ class OpenEhrDateTimeFormatterBuilder {
         private val APPEND_SECOND: (DateTimeFormatterBuilder) -> DateTimeFormatterBuilder =
             { it.appendValue(ChronoField.SECOND_OF_MINUTE, 2, 2, SignStyle.NOT_NEGATIVE) }
         private val APPEND_NANO: (DateTimeFormatterBuilder) -> DateTimeFormatterBuilder =
-            { it.appendFraction(ChronoField.NANO_OF_SECOND, 3, 9, true) }
+            { it.appendFraction(ChronoField.NANO_OF_SECOND, 3, 6, true) }
 
         private fun appendPattern(
                 formatterBuilder: DateTimeFormatterBuilder,

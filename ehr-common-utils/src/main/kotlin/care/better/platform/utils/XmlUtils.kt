@@ -15,6 +15,9 @@
 
 package care.better.platform.utils
 
+import javax.xml.bind.JAXBElement
+import javax.xml.bind.JAXBException
+import javax.xml.bind.Unmarshaller
 import org.xml.sax.InputSource
 import org.xml.sax.SAXException
 import org.xml.sax.SAXNotRecognizedException
@@ -22,9 +25,6 @@ import org.xml.sax.SAXNotSupportedException
 import java.io.*
 import java.nio.charset.StandardCharsets
 import javax.xml.XMLConstants
-import javax.xml.bind.JAXBElement
-import javax.xml.bind.JAXBException
-import javax.xml.bind.Unmarshaller
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException

@@ -23,6 +23,8 @@ import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlType
 
@@ -30,6 +32,7 @@ import javax.xml.bind.annotation.XmlType
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TASK_PARTICIPATION", propOrder = [
     "function",
     "role",

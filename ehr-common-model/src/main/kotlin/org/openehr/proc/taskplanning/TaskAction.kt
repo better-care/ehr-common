@@ -20,14 +20,13 @@ import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.common.Locatable
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TASK_ACTION", propOrder = [
     "subjectPreconditions",
     "instructionActivity",

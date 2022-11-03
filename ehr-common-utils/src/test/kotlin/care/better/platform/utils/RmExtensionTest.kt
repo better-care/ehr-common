@@ -27,6 +27,7 @@ import org.openehr.rm.common.Link
 import org.openehr.rm.common.PartyIdentified
 import org.openehr.rm.datatypes.*
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -271,33 +272,42 @@ class RmExtensionTest {
     fun testJsr310DateTimeUTC() {
         val zonedDateTime1 = ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneId.of("Z"))
         val dvDateTime1: DvDateTime = DvDateTime.create(zonedDateTime1)
-        assertThat(dvDateTime1.value).isEqualTo("2015-01-01T12:00:00.000000001Z")
+        assertThat(dvDateTime1.value).isEqualTo("2015-01-01T12:00:00.000000Z")
         val zonedDateTime2 = dvDateTime1.toZonedDateTime()
         assertThat(zonedDateTime2.zone).isEqualTo(zonedDateTime1.zone)
-        assertThat(zonedDateTime2).isEqualTo(zonedDateTime1)
-        val offsetDateTime1 = OffsetDateTime.of(2015, 1, 1, 12, 0, 0, 1, ZoneOffset.UTC)
+        assertThat(zonedDateTime2).isNotEqualTo(zonedDateTime1)
+        assertThat(zonedDateTime2).isEqualTo(ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 0, ZoneId.of("Z")))
+        val offsetDateTime0 = OffsetDateTime.of(2015, 1, 1, 12, 0, 0, 0, ZoneOffset.UTC)
+        val offsetDateTime1 = OffsetDateTime.of(2015, 1, 1, 12, 0, 0, 1000, ZoneOffset.UTC)
         val dvDateTime2: DvDateTime = DvDateTime.create(offsetDateTime1)
-        assertThat(dvDateTime2.value).isEqualTo("2015-01-01T12:00:00.000000001Z")
+        assertThat(dvDateTime2.value).isEqualTo("2015-01-01T12:00:00.000001Z")
         val offsetDateTime2 = dvDateTime2.toOffsetDateTime()
+        assertThat(offsetDateTime2.offset).isEqualTo(offsetDateTime0.offset)
         assertThat(offsetDateTime2.offset).isEqualTo(offsetDateTime1.offset)
+        assertThat(offsetDateTime2).isNotEqualTo(offsetDateTime0)
         assertThat(offsetDateTime2).isEqualTo(offsetDateTime1)
     }
 
     @Test
     fun testJsr310DateTime() {
         val systemDefaultZoneId = ZoneId.systemDefault()
+        val zonedDateTime0 = ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 0, systemDefaultZoneId)
         val zonedDateTime1 = ZonedDateTime.of(2015, 1, 1, 12, 0, 0, 1, systemDefaultZoneId)
         val dvDateTime1: DvDateTime = DvDateTime.create(zonedDateTime1)
-        assertThat(DateTimeConversionUtils.toZonedDateTime(dvDateTime1.value!!)).isEqualTo(zonedDateTime1)
+        assertThat(DateTimeConversionUtils.toZonedDateTime(dvDateTime1.value!!)).isNotEqualTo(zonedDateTime1)
+        assertThat(DateTimeConversionUtils.toZonedDateTime(dvDateTime1.value!!)).isEqualTo(zonedDateTime0)
         val zonedDateTime2 = dvDateTime1.toZonedDateTime()
-        assertThat(zonedDateTime2.toOffsetDateTime()).isEqualTo(zonedDateTime1.toOffsetDateTime())
-        val localDateTime = java.time.LocalDateTime.of(2015, 1, 1, 12, 0, 0, 1)
-        val offsetDateTime1 = OffsetDateTime.of(localDateTime, systemDefaultZoneId.rules.getOffset(localDateTime))
+        assertThat(zonedDateTime2.toOffsetDateTime()).isEqualTo(zonedDateTime0.toOffsetDateTime())
+        val localDateTime0 = LocalDateTime.of(2015, 1, 1, 12, 0, 0, 0)
+        val offsetDateTime0 = OffsetDateTime.of(localDateTime0, systemDefaultZoneId.rules.getOffset(localDateTime0))
+        val localDateTime1 = LocalDateTime.of(2015, 1, 1, 12, 0, 0, 1)
+        val offsetDateTime1 = OffsetDateTime.of(localDateTime1, systemDefaultZoneId.rules.getOffset(localDateTime1))
         val dvDateTime2: DvDateTime = DvDateTime.create(offsetDateTime1)
-        assertThat(DateTimeConversionUtils.toOffsetDateTime(dvDateTime2.value!!)).isEqualTo(offsetDateTime1)
+        assertThat(DateTimeConversionUtils.toOffsetDateTime(dvDateTime2.value!!)).isEqualTo(offsetDateTime0)
+        assertThat(DateTimeConversionUtils.toOffsetDateTime(dvDateTime2.value!!)).isNotEqualTo(offsetDateTime1)
         val offsetDateTime2 = dvDateTime2.toOffsetDateTime()
-        assertThat(offsetDateTime2.offset).isEqualTo(offsetDateTime1.offset)
-        assertThat(offsetDateTime2).isEqualTo(offsetDateTime1)
+        assertThat(offsetDateTime2.offset).isEqualTo(offsetDateTime0.offset)
+        assertThat(offsetDateTime2).isEqualTo(offsetDateTime0)
         val dvDateTime3 = DvDateTime()
         dvDateTime3.value = "2015-01-01T12:00:00.000000001"
         assertThat(dvDateTime3.toZonedDateTime()).isNotNull

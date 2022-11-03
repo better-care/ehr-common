@@ -21,14 +21,13 @@ import care.better.platform.annotation.Required
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
 import java.io.Serializable
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "SYSTEM_CALL", propOrder = [
         "systemId",

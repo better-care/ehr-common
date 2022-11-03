@@ -19,7 +19,7 @@
 
     <groupId>care.better.platform</groupId>
     <artifactId>ehr-common</artifactId>
-    <version>3.2.1-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -39,27 +39,28 @@
     <url>https://github.com/better-care/ehr-common</url>
 
     <properties>
-        <java.version>1.8</java.version>
-        <kotlin.version>1.5.30</kotlin.version>
+        <java.version>17</java.version>
+        <kotlin.version>1.6.10</kotlin.version>
 
-        <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
+        <jetbrains-annotations.version>20.1.0</jetbrains-annotations.version>
 
-        <guava.version>29.0-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
-        <joda.version>2.10.8</joda.version>
-        <jackson.version>2.13.4</jackson.version>
+        <guava.version>31.1-jre</guava.version>
+        <jackson.version>2.14.0-rc3</jackson.version>
+        <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
+        <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
+        <joda-time.version>2.11.1</joda-time.version>
 
-        <jupiter.version>5.8.1</jupiter.version>
-        <assertj.version>3.21.0</assertj.version>
+        <jupiter.version>5.9.0</jupiter.version>
+        <assertj.version>3.23.1</assertj.version>
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <maven-dokka-plugin.version>1.5.30</maven-dokka-plugin.version>
+        <maven-dokka-plugin.version>${kotlin.version}</maven-dokka-plugin.version>
         <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-jacoco-plugin.version>0.8.7</maven-jacoco-plugin.version>
+        <maven-jacoco-plugin.version>0.8.8</maven-jacoco-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
@@ -80,69 +81,63 @@
             </dependency>
 
             <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-stdlib-jdk8</artifactId>
-                <version>${kotlin.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <version>${kotlin-annotations.version}</version>
+                <version>${jetbrains-annotations.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-model</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-time</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terminology</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-jacoco</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-amnode</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-xml-jaxb</artifactId>
-                <version>3.2.1-SNAPSHOT</version>
+                <version>4.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
@@ -154,14 +149,13 @@
             <dependency>
                 <groupId>jakarta.xml.bind</groupId>
                 <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>${jakarta.xml.bind-api.version}</version>
+                <version>${jakarta.xml.bind.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.sun.xml.bind</groupId>
-                <artifactId>jaxb-impl</artifactId>
-                <version>${jakarta.xml.bind-api.version}</version>
-                <scope>runtime</scope>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>${jaxb-runtime.version}</version>
             </dependency>
 
             <dependency>
@@ -191,12 +185,6 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
 
@@ -234,11 +222,6 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
 
         <dependency>
@@ -314,6 +297,9 @@
                         <configuration>
                             <rules>
                                 <dependencyConvergence/>
+                                <requireMavenVersion>
+                                    <version>[3.6.2,)</version> <!-- https://issues.apache.org/jira/browse/MNG-6506 -->
+                                </requireMavenVersion>
                             </rules>
                         </configuration>
                         <goals>

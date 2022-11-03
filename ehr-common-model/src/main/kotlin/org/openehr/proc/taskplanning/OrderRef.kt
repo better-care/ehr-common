@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
  * @author Primoz Delopst
  * @since 3.1.0
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ORDER_REF", propOrder = [
