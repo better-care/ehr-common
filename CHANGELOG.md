@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.1 - 2022-12-22
+
+- A 3.2.x version based on 3.1.7
+
+## 3.2.0 - 2022-06-23
+
+- Initial 3.2.x version based on 3.1.4
 
 ## 3.1.7 - 2022-10-28
 
