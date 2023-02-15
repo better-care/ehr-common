@@ -18,3 +18,5 @@ jboss.identity
 /.project
 generated.ddl
 *.lck
+
+.java-version
