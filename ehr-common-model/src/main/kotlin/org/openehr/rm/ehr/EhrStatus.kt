@@ -17,6 +17,8 @@ package org.openehr.rm.ehr
 
 import care.better.platform.annotation.OpenEhrName
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartySelf
 import org.openehr.rm.datastructures.ItemStructure
@@ -30,6 +32,8 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EHR_STATUS", namespace = "http://schemas.openehr.org/v1", propOrder = ["subject", "queryable", "modifiable", "otherDetails"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
+@Serializable
+@SerialName("EHR_STATUS")
 class EhrStatus : Locatable() {
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -41,12 +45,15 @@ class EhrStatus : Locatable() {
 
     @XmlElement(name = "is_queryable")
     @OpenEhrName("is_queryable")
+    @SerialName("is_queryable")
     var queryable: Boolean = true
 
     @XmlElement(name = "is_modifiable")
     @OpenEhrName("is_modifiable")
+    @SerialName("is_modifiable")
     var modifiable: Boolean = true
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: ItemStructure? = null
 }

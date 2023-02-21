@@ -18,6 +18,7 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
 import java.util.*
@@ -37,6 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "terminologyId",
         "codeString",
         "preferredTerm"])
+@kotlinx.serialization.Serializable
+@SerialName("CODE_PHRASE")
 @Open
 class CodePhrase() : RmObject(), Serializable {
     @JvmOverloads
@@ -89,13 +92,16 @@ class CodePhrase() : RmObject(), Serializable {
 
     @XmlElement(name = "terminology_id", required = true)
     @Required
+    @SerialName("terminology_id")
     var terminologyId: TerminologyId? = null
 
     @XmlElement(name = "code_string", required = true)
     @Required
+    @SerialName("code_string")
     var codeString: String? = null
 
     @XmlElement(name = "preferred_term")
+    @SerialName("preferred_term")
     var preferredTerm: String? = null
 
     override fun equals(other: Any?): Boolean =

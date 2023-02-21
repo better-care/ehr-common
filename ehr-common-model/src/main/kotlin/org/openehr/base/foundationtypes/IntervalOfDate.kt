@@ -16,6 +16,8 @@
 package org.openehr.base.foundationtypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
@@ -29,6 +31,8 @@ import javax.xml.bind.annotation.XmlType
     name = "IntervalOfDate", propOrder = [
         "lower",
         "upper"])
+@Serializable
+@SerialName("INTERVAL_OF_DATE")
 @Open
 class IntervalOfDate : Interval() {
     companion object {

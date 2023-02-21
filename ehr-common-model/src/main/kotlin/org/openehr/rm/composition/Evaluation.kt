@@ -17,6 +17,8 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datastructures.ItemStructure
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -29,6 +31,8 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EVALUATION", propOrder = ["data"])
+@Serializable
+@SerialName("EVALUATION")
 @Open
 class Evaluation : CareEntry() {
     companion object {

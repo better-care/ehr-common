@@ -17,6 +17,8 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvDuration
@@ -38,6 +40,8 @@ import javax.xml.bind.annotation.XmlType
         "duration",
         "events",
         "summary"])
+@Serializable
+@SerialName("HISTORY")
 @Open
 class History : Locatable() {
     companion object {

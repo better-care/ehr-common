@@ -17,6 +17,8 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyProxy
@@ -37,6 +39,8 @@ import javax.xml.bind.annotation.*
         "otherParticipations",
         "workFlowId"])
 @XmlSeeAlso(value = [AdminEntry::class, CareEntry::class])
+@Serializable
+@SerialName("ENTRY")
 @Open
 abstract class Entry : ContentItem() {
     companion object {
@@ -58,8 +62,10 @@ abstract class Entry : ContentItem() {
     var provider: PartyProxy? = null
 
     @XmlElement(name = "other_participations")
+    @SerialName("other_participations")
     var otherParticipations: MutableList<Participation> = mutableListOf()
 
     @XmlElement(name = "work_flow_id")
+    @SerialName("work_flow_id")
     var workFlowId: ObjectRef? = null
 }

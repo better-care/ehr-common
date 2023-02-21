@@ -18,6 +18,7 @@ package org.openehr.base.resource
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.rm.common.StringDictionaryItem
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
@@ -37,6 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "author",
         "accreditation",
         "otherDetails"])
+@kotlinx.serialization.Serializable
+@SerialName("TRANSLATION_DETAILS")
 @Open
 class TranslationDetails : RmObject(), Serializable {
     companion object {
@@ -54,5 +57,6 @@ class TranslationDetails : RmObject(), Serializable {
     var accreditation: String? = null
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 }

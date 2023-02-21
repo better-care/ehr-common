@@ -16,6 +16,8 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -30,6 +32,8 @@ import javax.xml.bind.annotation.*
         "otherReferenceRanges",
         "normalStatus"])
 @XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class, DvScale::class])
+@Serializable
+@SerialName("DV_ORDERED")
 @Open
 abstract class DvOrdered() : DataValue() {
 
@@ -38,12 +42,15 @@ abstract class DvOrdered() : DataValue() {
     }
 
     @XmlElement(name = "normal_range")
+    @SerialName("normal_range")
     var normalRange: DvInterval? = null
 
     @XmlElement(name = "other_reference_ranges")
+    @SerialName("other_reference_ranges")
     var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf()
 
     @XmlElement(name = "normal_status")
+    @SerialName("normal_status")
     var normalStatus: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =

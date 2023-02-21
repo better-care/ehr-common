@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.UidBasedId
 import org.openehr.proc.taskplanning.*
 import org.openehr.rm.composition.Activity
@@ -61,6 +62,8 @@ import javax.xml.bind.annotation.*
         DatasetSpec::class,
     ])
 @XmlRootElement
+@kotlinx.serialization.Serializable
+@SerialName("LOCATABLE")
 @Open
 abstract class Locatable : RmObject(), Serializable {
     companion object {
@@ -76,12 +79,15 @@ abstract class Locatable : RmObject(), Serializable {
     var links: MutableList<Link> = mutableListOf()
 
     @XmlElement(name = "archetype_details")
+    @SerialName("archetype_details")
     var archetypeDetails: Archetyped? = null
 
     @XmlElement(name = "feeder_audit")
+    @SerialName("feeder_audit")
     var feederAudit: FeederAudit? = null
 
     @XmlAttribute(name = "archetype_node_id", required = true)
     @Required
+    @SerialName("archetype_node_id")
     var archetypeNodeId: String? = null
 }

@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -40,6 +41,8 @@ import javax.xml.bind.annotation.XmlType
         "copyright",
         "originalResourceUri",
         "otherDetails"])
+@kotlinx.serialization.Serializable
+@SerialName("RESOURCE_DESCRIPTION_ITEM")
 @Open
 class ResourceDescriptionItem : RmObject(), Serializable {
     companion object {
@@ -63,8 +66,10 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     var copyright: String? = null
 
     @XmlElement(name = "original_resource_uri")
+    @SerialName("original_resource_uri")
     var originalResourceUri: MutableList<StringDictionaryItem> = mutableListOf()
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 }

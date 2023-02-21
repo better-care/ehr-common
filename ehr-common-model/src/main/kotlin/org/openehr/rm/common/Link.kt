@@ -18,6 +18,8 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvEhrUri
 import org.openehr.rm.datatypes.DvText
 import javax.xml.bind.annotation.XmlAccessType
@@ -35,6 +37,8 @@ import javax.xml.bind.annotation.XmlType
         "meaning",
         "type",
         "target"])
+@Serializable
+@SerialName("LINK")
 @Open
 class Link() : RmObject(), java.io.Serializable {
 

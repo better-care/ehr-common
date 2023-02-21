@@ -17,6 +17,8 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
 import javax.xml.bind.annotation.*
@@ -32,6 +34,8 @@ import javax.xml.bind.annotation.*
         "data",
         "state"])
 @XmlSeeAlso(value = [PointEvent::class, IntervalEvent::class])
+@Serializable
+@SerialName("EVENT")
 @Open
 abstract class Event : Locatable() {
     companion object {

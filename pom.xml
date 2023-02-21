@@ -18,19 +18,18 @@
 
     <groupId>care.better.platform</groupId>
     <artifactId>ehr-common</artifactId>
-    <version>4.2.2-SNAPSHOT</version>
+    <version>4.3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>ehr-common-model</module>
-        <module>ehr-common-json-jackson</module>
-        <module>ehr-common-utils</module>
-        <module>ehr-common-terminology</module>
-        <module>ehr-common-path</module>
         <module>ehr-common-amnode</module>
-        <module>ehr-common-xml-jaxb</module>
         <module>ehr-common-jacoco</module>
+        <module>ehr-common-model</module>
+        <module>ehr-common-path</module>
+        <module>ehr-common-serialization</module>
+        <module>ehr-common-terminology</module>
         <module>ehr-common-time</module>
+        <module>ehr-common-utils</module>
     </modules>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -39,7 +38,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.9.20</kotlin.version>
+        <kotlin.version>1.9.22</kotlin.version>
 
         <jetbrains-annotations.version>23.1.0</jetbrains-annotations.version>
 
@@ -47,10 +46,14 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <guava.version>32.1.2-jre</guava.version>
         <jackson.version>2.18.3</jackson.version>
+        <kotlin-serialization.version>1.6.3</kotlin-serialization.version>
+        <ksp.version>1.9.22-1.0.17</ksp.version>
+        <kotlinpoet.version>1.16.0</kotlinpoet.version>
         <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
         <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
         <joda-time.version>2.12.5</joda-time.version>
         <mockk.version>1.14.0</mockk.version>
+        <reflections.version>0.10.2</reflections.version>
 
         <jupiter.version>5.9.3</jupiter.version>
         <assertj.version>3.24.2</assertj.version>
@@ -99,57 +102,87 @@
             </dependency>
 
             <dependency>
+                <groupId>org.jetbrains.kotlinx</groupId>
+                <artifactId>kotlinx-serialization-core-jvm</artifactId>
+                <version>${kotlin-serialization.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.kotlinx</groupId>
+                <artifactId>kotlinx-serialization-json</artifactId>
+                <version>${kotlin-serialization.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-model</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-time</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terminology</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-jacoco</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-amnode</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-kotlin-serialization-polymorphisem-api</artifactId>
+                <version>4.3.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-kotlin-serialization-polymorphisem-generator</artifactId>
+                <version>4.3.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-json-kotlin-serialization</artifactId>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-xml-jaxb</artifactId>
-                <version>4.2.2-SNAPSHOT</version>
+                <version>4.3.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
@@ -210,11 +243,34 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup</groupId>
+                <artifactId>kotlinpoet-jvm</artifactId>
+                <version>${kotlinpoet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup</groupId>
+                <artifactId>kotlinpoet-ksp</artifactId>
+                <version>${kotlinpoet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.devtools.ksp</groupId>
+                <artifactId>symbol-processing-api</artifactId>
+                <version>${ksp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
             </dependency>
 
             <dependency>
@@ -278,49 +334,6 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmTarget>${java.version}</jvmTarget>
-                    <args>
-                        <arg>-Xjsr305=strict</arg>
-                        <arg>-Xjvm-default=all-compatibility</arg>
-                    </args>
-                    <compilerPlugins>
-                        <plugin>all-open</plugin>
-                    </compilerPlugins>
-
-                    <pluginOptions>
-                        <option>all-open:annotation=care.better.platform.annotation.Open</option>
-                    </pluginOptions>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-noarg</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-allopen</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
@@ -354,6 +367,60 @@
 
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>test-compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <jvmTarget>${java.version}</jvmTarget>
+                        <args>
+                            <arg>-Xjsr305=strict</arg>
+                            <arg>-Xjvm-default=all-compatibility</arg>
+                        </args>
+                        <compilerPlugins>
+                            <plugin>all-open</plugin>
+                            <plugin>kotlinx-serialization</plugin>
+                        </compilerPlugins>
+
+                        <pluginOptions>
+                            <option>all-open:annotation=care.better.platform.annotation.Open</option>
+                        </pluginOptions>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-noarg</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-serialization</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-allopen</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>

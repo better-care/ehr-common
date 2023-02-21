@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.HierObjectId
 import java.io.Serializable
 import javax.xml.bind.annotation.*
@@ -30,6 +31,8 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CONTRIBUTION", propOrder = ["uid", "versions", "audit"])
 @XmlRootElement
+@kotlinx.serialization.Serializable
+@SerialName("CONTRIBUTION")
 @Open
 class Contribution() : RmObject(), Serializable {
     companion object {

@@ -15,6 +15,8 @@
 
 package org.openehr.rm.composition
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.proc.taskplanning.TaskPlan
 import org.openehr.proc.taskplanning.WorkPlan
 import org.openehr.rm.common.Locatable
@@ -32,6 +34,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CONTENT_ITEM")
 @XmlSeeAlso(value = [Section::class, GenericEntry::class, Entry::class, WorkPlan::class, TaskPlan::class])
+@Serializable
+@SerialName("CONTENT_ITEM")
 abstract class ContentItem : Locatable() {
     companion object {
         private const val serialVersionUID: Long = 0L

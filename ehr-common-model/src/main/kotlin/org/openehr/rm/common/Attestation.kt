@@ -17,6 +17,8 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -36,6 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "items",
         "reason",
         "isPending"])
+@Serializable
+@SerialName("ATTESTATION")
 @Open
 class Attestation() : AuditDetails() {
     @JvmOverloads
@@ -67,6 +71,7 @@ class Attestation() : AuditDetails() {
     }
 
     @XmlElement(name = "attested_view")
+    @SerialName("attested_view")
     var attestedView: DvMultimedia? = null
     var proof: String? = null
     var items: MutableList<DvEhrUri> = mutableListOf()
@@ -76,5 +81,6 @@ class Attestation() : AuditDetails() {
     var reason: DvText? = null
 
     @XmlElement(name = "is_pending", defaultValue = "false")
+    @SerialName("is_pending")
     var isPending: Boolean = false
 }

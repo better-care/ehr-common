@@ -16,6 +16,8 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datastructures.ItemStructure
 import javax.xml.bind.annotation.XmlAccessType
@@ -33,6 +35,8 @@ import javax.xml.bind.annotation.XmlType
         "folders",
         "items",
         "details"])
+@Serializable
+@SerialName("FOLDER")
 @Open
 class Folder : Locatable() {
     companion object {

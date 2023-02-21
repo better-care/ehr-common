@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -41,6 +42,8 @@ import javax.xml.bind.annotation.XmlType
         DvTimeSpecification::class,
         DvEncapsulated::class,
         DvUri::class])
+@kotlinx.serialization.Serializable
+@SerialName("DATA_VALUE")
 abstract class DataValue : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L

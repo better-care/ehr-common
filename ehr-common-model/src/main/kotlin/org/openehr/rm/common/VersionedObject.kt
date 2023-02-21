@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datatypes.DvCodedText
@@ -30,6 +31,8 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VERSIONED_OBJECT", namespace = "http://schemas.openehr.org/v1", propOrder = ["uid", "ownerId", "timeCreated", "trunkLifecycleState"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
+@kotlinx.serialization.Serializable
+@SerialName("VERSIONED_OBJECT")
 class VersionedObject : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
@@ -39,11 +42,14 @@ class VersionedObject : RmObject(), Serializable {
     var uid: HierObjectId? = null
 
     @XmlElement(name = "owner_id")
+    @SerialName("owner_id")
     var ownerId: ObjectRef? = null
 
     @XmlElement(name = "time_created")
+    @SerialName("time_created")
     var timeCreated: DvDateTime? = null
 
     @XmlElement(name = "trunk_lifecycle_state")
+    @SerialName("trunk_lifecycle_state")
     var trunkLifecycleState: DvCodedText? = null
 }

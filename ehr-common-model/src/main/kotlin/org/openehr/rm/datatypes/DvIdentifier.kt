@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -34,6 +36,8 @@ import javax.xml.bind.annotation.XmlType
         "assigner",
         "id",
         "type"])
+@Serializable
+@SerialName("DV_IDENTIFIER")
 @Open
 class DvIdentifier() : DataValue() {
     @JvmOverloads

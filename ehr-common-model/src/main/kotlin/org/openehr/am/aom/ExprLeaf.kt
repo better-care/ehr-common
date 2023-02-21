@@ -15,6 +15,7 @@
 
 package org.openehr.am.aom
 
+import kotlinx.serialization.Contextual
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -36,6 +37,7 @@ class ExprLeaf : ExprItem() {
     }
 
     @XmlElement(required = true)
+    @Contextual
     lateinit var item: Any
 
     @XmlElement(name = "reference_type", required = true)

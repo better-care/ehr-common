@@ -17,6 +17,8 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDuration
 import javax.xml.bind.annotation.XmlAccessType
@@ -34,6 +36,8 @@ import javax.xml.bind.annotation.XmlType
         "width",
         "sampleCount",
         "mathFunction"])
+@Serializable
+@SerialName("INTERVAL_EVENT")
 @Open
 class IntervalEvent : Event() {
     companion object {
@@ -45,9 +49,11 @@ class IntervalEvent : Event() {
     var width: DvDuration? = null
 
     @XmlElement(name = "sample_count")
+    @SerialName("sample_count")
     var sampleCount: Int? = null
 
     @XmlElement(name = "math_function", required = true)
     @Required
+    @SerialName("math_function")
     var mathFunction: DvCodedText? = null
 }

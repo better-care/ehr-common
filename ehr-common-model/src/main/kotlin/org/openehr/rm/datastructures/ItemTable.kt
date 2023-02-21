@@ -16,6 +16,8 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
@@ -27,6 +29,8 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ITEM_TABLE", propOrder = ["rows"])
+@Serializable
+@SerialName("ITEM_TABLE")
 @Open
 class ItemTable : ItemStructure() {
     companion object {

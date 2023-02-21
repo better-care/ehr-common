@@ -16,6 +16,8 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -27,6 +29,8 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_SELF")
+@Serializable
+@SerialName("PARTY_SELF")
 @Open
 class PartySelf() : PartyProxy() {
     companion object {

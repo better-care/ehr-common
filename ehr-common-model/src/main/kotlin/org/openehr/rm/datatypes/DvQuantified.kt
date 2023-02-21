@@ -16,6 +16,8 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -26,6 +28,8 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_QUANTIFIED", propOrder = ["magnitudeStatus"])
 @XmlSeeAlso(value = [DvTemporal::class, DvAmount::class])
+@Serializable
+@SerialName("DV_QUANTIFIED")
 @Open
 abstract class DvQuantified : DvOrdered() {
 
@@ -34,6 +38,7 @@ abstract class DvQuantified : DvOrdered() {
     }
 
     @XmlElement(name = "magnitude_status")
+    @SerialName("magnitude_status")
     var magnitudeStatus: String? = null
 
     override fun equals(other: Any?): Boolean =

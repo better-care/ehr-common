@@ -16,6 +16,8 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
@@ -27,6 +29,8 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_EHR_URI")
+@Serializable
+@SerialName("DV_EHR_URI")
 @Open
 class DvEhrUri() : DvUri() {
     constructor(value: String) : this() {

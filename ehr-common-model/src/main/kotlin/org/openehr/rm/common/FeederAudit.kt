@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvEncapsulated
 import org.openehr.rm.datatypes.DvIdentifier
 import java.io.Serializable
@@ -39,6 +40,8 @@ import javax.xml.bind.annotation.XmlType
         "originalContent",
         "originatingSystemAudit",
         "feederSystemAudit"])
+@kotlinx.serialization.Serializable
+@SerialName("FEEDER_AUDIT")
 @Open
 class FeederAudit() : RmObject(), Serializable {
     companion object {
@@ -60,19 +63,24 @@ class FeederAudit() : RmObject(), Serializable {
     }
 
     @XmlElement(name = "originating_system_item_ids")
+    @SerialName("originating_system_item_ids")
     var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
 
     @XmlElement(name = "feeder_system_item_ids")
+    @SerialName("feeder_system_item_ids")
     var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
 
     @XmlElement(name = "original_content")
+    @SerialName("original_content")
     var originalContent: DvEncapsulated? = null
 
     @XmlElement(name = "originating_system_audit", required = true)
     @Required
+    @SerialName("originating_system_audit")
     var originatingSystemAudit: FeederAuditDetails? = null
 
     @XmlElement(name = "feeder_system_audit")
+    @SerialName("feeder_system_audit")
     var feederSystemAudit: FeederAuditDetails? = null
 
 }

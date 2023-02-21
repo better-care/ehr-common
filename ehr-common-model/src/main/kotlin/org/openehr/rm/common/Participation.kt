@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvInterval
 import org.openehr.rm.datatypes.DvText
@@ -38,6 +39,8 @@ import javax.xml.bind.annotation.XmlType
         "performer",
         "time",
         "mode"])
+@kotlinx.serialization.Serializable
+@SerialName("PARTICIPATION")
 @Open
 class Participation() : RmObject(), Serializable {
     companion object {

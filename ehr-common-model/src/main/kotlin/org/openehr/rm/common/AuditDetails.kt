@@ -18,6 +18,8 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvText
@@ -31,13 +33,16 @@ import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "AUDIT_DETAILS", propOrder = [
-        "systemId",
-        "committer",
-        "timeCommitted",
-        "changeType",
-        "description"])
+        name = "AUDIT_DETAILS", propOrder = [
+    "systemId",
+    "committer",
+    "timeCommitted",
+    "changeType",
+    "description"])
 @XmlSeeAlso(Attestation::class)
+@kotlinx.serialization.Serializable
+@SerialName("AUDIT_DETAILS")
+@Polymorphic
 @Open
 class AuditDetails() : RmObject(), Serializable {
     @JvmOverloads
@@ -60,6 +65,7 @@ class AuditDetails() : RmObject(), Serializable {
 
     @XmlElement(name = "system_id", required = true)
     @Required
+    @SerialName("system_id")
     var systemId: String? = null
 
     @XmlElement(required = true)
@@ -68,10 +74,12 @@ class AuditDetails() : RmObject(), Serializable {
 
     @XmlElement(name = "time_committed", required = true)
     @Required
+    @SerialName("time_committed")
     var timeCommitted: DvDateTime? = null
 
     @XmlElement(name = "change_type", required = true)
     @Required
+    @SerialName("change_type")
     var changeType: DvCodedText? = null
 
     var description: DvText? = null

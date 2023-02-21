@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.*
 
@@ -27,6 +28,8 @@ import javax.xml.bind.annotation.*
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StringDictionaryItem", propOrder = ["value"])
+@kotlinx.serialization.Serializable
+@SerialName("STRING_DICTIONARY_ITEM")
 @Open
 class StringDictionaryItem : RmObject(), Serializable {
     companion object {

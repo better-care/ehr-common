@@ -16,6 +16,9 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -26,10 +29,13 @@ import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "DV_AMOUNT", propOrder = [
-        "accuracy",
-        "accuracyIsPercent"])
+        name = "DV_AMOUNT", propOrder = [
+    "accuracy",
+    "accuracyIsPercent"])
 @XmlSeeAlso(value = [DvCount::class, DvQuantity::class, DvProportion::class, DvDuration::class])
+@Serializable
+@SerialName("DV_AMOUNT")
+@Polymorphic
 @Open
 class DvAmount : DvQuantified() {
     companion object {
@@ -40,6 +46,7 @@ class DvAmount : DvQuantified() {
     var accuracy: Float? = null
 
     @XmlElement(name = "accuracy_is_percent")
+    @SerialName("accuracy_is_percent")
     var accuracyIsPercent: Boolean? = null
 
     override fun equals(other: Any?): Boolean =

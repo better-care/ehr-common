@@ -17,6 +17,9 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.time.format.DateTimeFormatters
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.time.OffsetDateTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -33,6 +36,8 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_DATE_TIME", propOrder = ["value"])
+@Serializable
+@SerialName("DV_DATE_TIME")
 @Open
 class DvDateTime() : DvTemporal() {
     @JvmOverloads

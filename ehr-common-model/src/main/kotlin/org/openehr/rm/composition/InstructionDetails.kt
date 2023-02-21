@@ -18,6 +18,7 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.datastructures.ItemStructure
 import java.io.Serializable
@@ -36,6 +37,8 @@ import javax.xml.bind.annotation.XmlType
         "instructionId",
         "activityId",
         "wfDetails"])
+@kotlinx.serialization.Serializable
+@SerialName("INSTRUCTION_DETAILS")
 @Open
 class InstructionDetails : RmObject(), Serializable {
     companion object {
@@ -44,12 +47,15 @@ class InstructionDetails : RmObject(), Serializable {
 
     @XmlElement(name = "instruction_id", required = true)
     @Required
+    @SerialName("instruction_id")
     var instructionId: LocatableRef? = null
 
     @XmlElement(name = "activity_id", required = true)
     @Required
+    @SerialName("activity_id")
     var activityId: String? = null
 
     @XmlElement(name = "wf_details")
+    @SerialName("wf_details")
     var wfDetails: ItemStructure? = null
 }

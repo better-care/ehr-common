@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -38,6 +39,8 @@ import javax.xml.bind.annotation.XmlType
         "otherDetails",
         "details",
         "parentResource"])
+@kotlinx.serialization.Serializable
+@SerialName("RESOURCE_DESCRIPTION")
 @Open
 class ResourceDescription : RmObject(), Serializable {
     companion object {
@@ -46,19 +49,24 @@ class ResourceDescription : RmObject(), Serializable {
 
     @XmlElement(name = "original_author", required = true)
     @Required
+    @SerialName("original_author")
     var originalAuthor: MutableList<StringDictionaryItem> = mutableListOf()
 
     @XmlElement(name = "other_contributors")
+    @SerialName("other_contributors")
     var otherContributors: MutableList<String> = mutableListOf()
 
     @XmlElement(name = "lifecycle_state", required = true)
     @Required
+    @SerialName("lifecycle_state")
     var lifecycleState: String? = null
 
     @XmlElement(name = "resource_package_uri")
+    @SerialName("resource_package_uri")
     var resourcePackageUri: String? = null
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
     @XmlElement(required = true)
@@ -66,5 +74,6 @@ class ResourceDescription : RmObject(), Serializable {
     var details: MutableList<ResourceDescriptionItem> = mutableListOf()
 
     @XmlElement(name = "parent_resource")
+    @SerialName("parent_resource")
     var parentResource: AuthoredResource? = null
 }

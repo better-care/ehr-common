@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ObjectVersionId
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -34,6 +35,8 @@ import javax.xml.bind.annotation.XmlType
     name = "REVISION_HISTORY_ITEM", propOrder = [
         "versionId",
         "audits"])
+@kotlinx.serialization.Serializable
+@SerialName("REVISION_HISTORY_ITEM")
 @Open
 class RevisionHistoryItem : RmObject(), Serializable {
     companion object {
@@ -42,6 +45,7 @@ class RevisionHistoryItem : RmObject(), Serializable {
 
     @XmlElement(name = "version_id", required = true)
     @Required
+    @SerialName("version_id")
     var versionId: ObjectVersionId? = null
 
     @XmlElement(required = true)

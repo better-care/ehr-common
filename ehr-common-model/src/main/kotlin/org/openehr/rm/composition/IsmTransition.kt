@@ -18,6 +18,7 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
@@ -37,6 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "transition",
         "careflowStep",
         "reason"])
+@kotlinx.serialization.Serializable
+@SerialName("ISM_TRANSITION")
 @Open
 class IsmTransition : RmObject(), Serializable {
     companion object {
@@ -45,11 +48,13 @@ class IsmTransition : RmObject(), Serializable {
 
     @XmlElement(name = "current_state", required = true)
     @Required
+    @SerialName("current_state")
     var currentState: DvCodedText? = null
 
     var transition: DvCodedText? = null
 
     @XmlElement(name = "careflow_step")
+    @SerialName("careflow_step")
     var careflowStep: DvCodedText? = null
 
     var reason: MutableList<DvText> = mutableListOf()

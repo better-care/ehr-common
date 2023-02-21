@@ -18,6 +18,7 @@ package org.openehr.base.basetypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import java.util.*
 import javax.xml.bind.annotation.*
@@ -32,6 +33,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OBJECT_ID", propOrder = ["value"])
 @XmlSeeAlso(value = [ArchetypeId::class, TemplateId::class, TerminologyId::class, UidBasedId::class, GenericId::class])
+@kotlinx.serialization.Serializable
+@SerialName("OBJECT_ID")
 @Open
 abstract class ObjectId : RmObject(), Serializable {
 

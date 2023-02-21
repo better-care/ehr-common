@@ -17,6 +17,8 @@ package org.openehr.rm.integration
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.composition.ContentItem
 import org.openehr.rm.datastructures.ItemTree
 import javax.xml.bind.annotation.XmlAccessType
@@ -31,6 +33,8 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GENERIC_ENTRY", propOrder = ["data"])
+@Serializable
+@SerialName("GENERIC_ENTRY")
 @Open
 class GenericEntry : ContentItem() {
     companion object {

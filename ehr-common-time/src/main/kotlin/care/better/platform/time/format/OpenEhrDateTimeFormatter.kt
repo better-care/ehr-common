@@ -30,6 +30,7 @@ import java.util.*
 /**
  * @author Matic Ribic
  */
+@Suppress("UNCHECKED_CAST")
 class OpenEhrDateTimeFormatter(
         private val defaultFormatter: DateTimeFormatter,
         private val timeFormatter: DateTimeFormatter,

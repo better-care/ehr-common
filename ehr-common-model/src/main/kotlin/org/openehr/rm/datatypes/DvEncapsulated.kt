@@ -16,6 +16,8 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -33,6 +35,8 @@ import javax.xml.bind.annotation.XmlType
         "charset",
         "language"])
 @XmlSeeAlso(value = [DvMultimedia::class, DvParsable::class])
+@Serializable
+@SerialName("DV_ENCAPSULATED")
 @Open
 abstract class DvEncapsulated(var charset: CodePhrase? = null, var language: CodePhrase? = null) : DataValue() {
     companion object {

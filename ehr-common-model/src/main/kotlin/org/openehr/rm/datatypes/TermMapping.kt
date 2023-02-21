@@ -18,6 +18,7 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -34,6 +35,8 @@ import javax.xml.bind.annotation.XmlType
         "match",
         "purpose",
         "target"])
+@kotlinx.serialization.Serializable
+@SerialName("TERM_MAPPING")
 @Open
 class TermMapping() : RmObject(), Serializable {
     @JvmOverloads

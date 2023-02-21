@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -30,6 +32,8 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_DURATION", propOrder = ["value"])
+@Serializable
+@SerialName("DV_DURATION")
 @Open
 class DvDuration() : DvAmount() {
     @JvmOverloads

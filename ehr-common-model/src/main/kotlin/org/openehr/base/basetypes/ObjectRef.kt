@@ -18,6 +18,8 @@ package org.openehr.base.basetypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.*
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter
@@ -29,11 +31,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "OBJECT_REF", propOrder = [
-        "id",
-        "namespace",
-        "type"])
+        name = "OBJECT_REF", propOrder = [
+    "id",
+    "namespace",
+    "type"])
 @XmlSeeAlso(value = [PartyRef::class, AccessGroupRef::class, LocatableRef::class])
+@kotlinx.serialization.Serializable
+@SerialName("OBJECT_REF")
+@Polymorphic
 @Open
 class ObjectRef() : RmObject(), Serializable {
     @JvmOverloads

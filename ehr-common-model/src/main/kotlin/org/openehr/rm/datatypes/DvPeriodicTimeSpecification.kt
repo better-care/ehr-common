@@ -16,6 +16,8 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
@@ -26,6 +28,8 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_PERIODIC_TIME_SPECIFICATION")
+@Serializable
+@SerialName("DV_PERIODIC_TIME_SPECIFICATION")
 @Open
 class DvPeriodicTimeSpecification() : DvTimeSpecification() {
     constructor(value: DvParsable) : this() {

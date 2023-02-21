@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
 import java.io.Serializable
@@ -37,6 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "archetypeId",
         "templateId",
         "rmVersion"])
+@kotlinx.serialization.Serializable
+@SerialName("ARCHETYPED")
 @Open
 class Archetyped constructor() : RmObject(), Serializable {
 
@@ -53,11 +56,14 @@ class Archetyped constructor() : RmObject(), Serializable {
 
     @XmlElement(name = "archetype_id", required = true)
     @Required
+    @SerialName("archetype_id")
     var archetypeId: ArchetypeId? = null
 
     @XmlElement(name = "template_id")
+    @SerialName("template_id")
     var templateId: TemplateId? = null
 
     @XmlElement(name = "rm_version", required = true)
+    @SerialName("rm_version")
     var rmVersion: String = RM_VERSION.getVersion()
 }

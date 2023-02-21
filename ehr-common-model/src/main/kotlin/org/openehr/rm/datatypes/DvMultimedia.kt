@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -39,6 +41,8 @@ import javax.xml.bind.annotation.XmlType
         "integrityCheckAlgorithm",
         "size",
         "thumbnail"])
+@Serializable
+@SerialName("DV_MULTIMEDIA")
 @Open
 class DvMultimedia() : DvEncapsulated() {
     private constructor(
@@ -103,21 +107,26 @@ class DvMultimedia() : DvEncapsulated() {
     }
 
     @XmlElement(name = "alternate_text")
+    @SerialName("alternate_text")
     var alternateText: String? = null
     var uri: DvUri? = null
     var data: ByteArray? = null
 
     @XmlElement(name = "media_type", required = true)
     @Required
+    @SerialName("media_type")
     var mediaType: CodePhrase? = null
 
     @XmlElement(name = "compression_algorithm")
+    @SerialName("compression_algorithm")
     var compressionAlgorithm: CodePhrase? = null
 
     @XmlElement(name = "integrity_check")
+    @SerialName("integrity_check")
     var integrityCheck: ByteArray? = null
 
     @XmlElement(name = "integrity_check_algorithm")
+    @SerialName("integrity_check_algorithm")
     var integrityCheckAlgorithm: CodePhrase? = null
     var size: Int = 0
     var thumbnail: DvMultimedia? = null

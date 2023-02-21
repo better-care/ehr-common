@@ -15,6 +15,7 @@
 
 package org.openehr.am.aom
 
+import care.better.platform.annotation.Open
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlSeeAlso
@@ -27,7 +28,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "C_DEFINED_OBJECT")
 @XmlSeeAlso(value = [CPrimitiveObject::class, CComplexObject::class, CDomainType::class])
-open class CDefinedObject : CObject() {
+@Open
+class CDefinedObject : CObject() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

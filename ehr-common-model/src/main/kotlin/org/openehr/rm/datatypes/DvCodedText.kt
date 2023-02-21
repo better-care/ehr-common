@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -30,6 +32,8 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_CODED_TEXT", propOrder = ["definingCode"])
+@Serializable
+@SerialName("DV_CODED_TEXT")
 @Open
 class DvCodedText() : DvText() {
     @JvmOverloads
@@ -88,6 +92,7 @@ class DvCodedText() : DvText() {
 
     @XmlElement(name = "defining_code", required = true)
     @Required
+    @SerialName("defining_code")
     var definingCode: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =

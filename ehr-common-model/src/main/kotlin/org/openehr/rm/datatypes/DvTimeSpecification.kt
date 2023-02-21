@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -28,6 +30,8 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_TIME_SPECIFICATION", propOrder = ["value"])
 @XmlSeeAlso(value = [DvPeriodicTimeSpecification::class, DvGeneralTimeSpecification::class])
+@Serializable
+@SerialName("DV_TIME_SPECIFICATION")
 @Open
 abstract class DvTimeSpecification(
         @XmlElement(required = true)

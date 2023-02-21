@@ -17,6 +17,8 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvIdentifier
@@ -31,9 +33,10 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_RELATED", propOrder = ["relationship"])
+@Serializable
+@SerialName("PARTY_RELATED")
 @Open
-class PartyRelated
-constructor(): PartyIdentified() {
+class PartyRelated constructor(): PartyIdentified() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }

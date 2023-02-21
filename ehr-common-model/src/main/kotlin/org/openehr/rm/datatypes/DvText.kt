@@ -17,6 +17,9 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -33,9 +36,15 @@ import javax.xml.bind.annotation.*
         "mappings",
         "language",
         "encoding"])
-@XmlSeeAlso(DvCodedText::class)
+@Serializable
+@SerialName("DV_TEXT")
+@Polymorphic
 @Open
 class DvText() : DataValue() {
+    companion object {
+        private const val serialVersionUID: Long = 0L
+    }
+
     @JvmOverloads
     constructor(
             value: String,
@@ -50,10 +59,6 @@ class DvText() : DataValue() {
         this.mappings = mappings
         this.language = language
         this.encoding = encoding
-    }
-
-    companion object {
-        private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)

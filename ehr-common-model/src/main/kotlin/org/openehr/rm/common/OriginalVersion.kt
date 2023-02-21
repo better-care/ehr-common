@@ -17,6 +17,9 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectVersionId
 import org.openehr.rm.composition.Composition
 import org.openehr.rm.datatypes.DvCodedText
@@ -42,6 +45,8 @@ import javax.xml.bind.annotation.XmlType
         "lifecycleState"])
 @XmlRootElement
 @XmlSeeAlso(value = [Composition::class])
+@Serializable
+@SerialName("ORIGINAL_VERSION")
 @Open
 class OriginalVersion : Version() {
     companion object {
@@ -52,17 +57,21 @@ class OriginalVersion : Version() {
     @Required
     var uid: ObjectVersionId? = null
 
+    @Contextual
     var data: Any? = null
 
     @XmlElement(name = "preceding_version_uid")
+    @SerialName("preceding_version_uid")
     var precedingVersionUid: ObjectVersionId? = null
 
     @XmlElement(name = "other_input_version_uids")
+    @SerialName("other_input_version_uids")
     var otherInputVersionUids: MutableList<ObjectVersionId> = mutableListOf()
 
     var attestations: MutableList<Attestation> = mutableListOf()
 
     @XmlElement(name = "lifecycle_state", required = true)
     @Required
+    @SerialName("lifecycle_state")
     var lifecycleState: DvCodedText? = null
 }

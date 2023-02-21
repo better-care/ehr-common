@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -32,6 +34,8 @@ import javax.xml.bind.annotation.XmlType
     name = "DV_SCALE", propOrder = [
         "symbol",
         "value"])
+@Serializable
+@SerialName("DV_SCALE")
 @Open
 class DvScale() : DvOrdered() {
 

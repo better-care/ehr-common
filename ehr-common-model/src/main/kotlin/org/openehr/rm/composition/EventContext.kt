@@ -18,6 +18,7 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyIdentified
 import org.openehr.rm.datastructures.ItemStructure
@@ -44,6 +45,8 @@ import javax.xml.bind.annotation.XmlType
         "otherContext",
         "healthCareFacility",
         "participations"])
+@kotlinx.serialization.Serializable
+@SerialName("EVENT_CONTEXT")
 @Open
 class EventContext : RmObject(), Serializable {
     companion object {
@@ -52,9 +55,11 @@ class EventContext : RmObject(), Serializable {
 
     @XmlElement(name = "start_time", required = true)
     @Required
+    @SerialName("start_time")
     var startTime: DvDateTime? = null
 
     @XmlElement(name = "end_time")
+    @SerialName("end_time")
     var endTime: DvDateTime? = null
 
     var location: String? = null
@@ -64,9 +69,11 @@ class EventContext : RmObject(), Serializable {
     var setting: DvCodedText? = null
 
     @XmlElement(name = "other_context")
+    @SerialName("other_context")
     var otherContext: ItemStructure? = null
 
     @XmlElement(name = "health_care_facility")
+    @SerialName("health_care_facility")
     var healthCareFacility: PartyIdentified? = null
 
     var participations: MutableList<Participation> = mutableListOf()

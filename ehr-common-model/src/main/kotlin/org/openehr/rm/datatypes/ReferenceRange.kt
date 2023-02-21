@@ -18,6 +18,7 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -33,6 +34,8 @@ import javax.xml.bind.annotation.XmlType
     name = "REFERENCE_RANGE", propOrder = [
         "meaning",
         "range"])
+@kotlinx.serialization.Serializable
+@SerialName("REFERENCE_RANGE")
 @Open
 class ReferenceRange() : RmObject(), Serializable {
     constructor(meaning: DvText, range: DvInterval) : this() {

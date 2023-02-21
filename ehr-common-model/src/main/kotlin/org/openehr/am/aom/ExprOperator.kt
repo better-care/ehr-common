@@ -15,6 +15,7 @@
 
 package org.openehr.am.aom
 
+import kotlinx.serialization.Contextual
 import java.math.BigInteger
 import javax.xml.bind.annotation.*
 
@@ -35,6 +36,7 @@ abstract class ExprOperator : ExprItem() {
     }
 
     @XmlElement(required = true)
+    @Contextual
     lateinit var operator: BigInteger
 
     @XmlElement(name = "precedence_overridden")

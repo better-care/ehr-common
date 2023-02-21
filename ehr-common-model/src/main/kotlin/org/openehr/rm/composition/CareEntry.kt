@@ -16,6 +16,8 @@
 package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datastructures.ItemStructure
 import javax.xml.bind.annotation.*
@@ -31,6 +33,8 @@ import javax.xml.bind.annotation.*
         "protocol",
         "guidelineId"])
 @XmlSeeAlso(value = [Evaluation::class, Observation::class, Instruction::class, Action::class])
+@Serializable
+@SerialName("CARE_ENTRY")
 @Open
 abstract class CareEntry : Entry() {
     companion object {
@@ -40,5 +44,6 @@ abstract class CareEntry : Entry() {
     var protocol: ItemStructure? = null
 
     @XmlElement(name = "guideline_id")
+    @SerialName("guideline_id")
     var guidelineId: ObjectRef? = null
 }

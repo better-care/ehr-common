@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RangeParameters
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -36,6 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "upperIncluded",
         "lowerUnbounded",
         "upperUnbounded"])
+@Serializable
+@SerialName("DV_INTERVAL")
 @Open
 class DvInterval() : DataValue(), RangeParameters {
     @JvmOverloads
@@ -63,15 +67,19 @@ class DvInterval() : DataValue(), RangeParameters {
     var upper: DvOrdered? = null
 
     @XmlElement(name = "lower_included")
+    @SerialName("lower_included")
     var lowerIncluded: Boolean? = null
 
     @XmlElement(name = "upper_included")
+    @SerialName("upper_included")
     var upperIncluded: Boolean? = null
 
     @XmlElement(name = "lower_unbounded")
+    @SerialName("lower_unbounded")
     var lowerUnbounded: Boolean = false
 
     @XmlElement(name = "upper_unbounded")
+    @SerialName("upper_unbounded")
     var upperUnbounded: Boolean = false
 
     override fun isLowerIncluded(): Boolean? = lowerIncluded

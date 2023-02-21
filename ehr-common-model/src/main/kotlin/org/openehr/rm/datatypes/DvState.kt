@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -33,6 +35,8 @@ import javax.xml.bind.annotation.XmlType
     name = "DV_STATE", propOrder = [
         "value",
         "isTerminal"])
+@Serializable
+@SerialName("DV_STATE")
 @Open
 class DvState() : DataValue() {
     @JvmOverloads
@@ -50,6 +54,7 @@ class DvState() : DataValue() {
     var value: DvCodedText? = null
 
     @XmlElement(name = "is_terminal")
+    @SerialName("is_terminal")
     var isTerminal: Boolean = false
 
     override fun equals(other: Any?): Boolean =

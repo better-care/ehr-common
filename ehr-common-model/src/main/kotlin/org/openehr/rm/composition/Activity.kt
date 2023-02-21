@@ -17,6 +17,8 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvParsable
@@ -35,6 +37,8 @@ import javax.xml.bind.annotation.XmlType
         "description",
         "timing",
         "actionArchetypeId"])
+@Serializable
+@SerialName("ACTIVITY")
 @Open
 class Activity : Locatable() {
     companion object {
@@ -49,5 +53,6 @@ class Activity : Locatable() {
 
     @XmlElement(name = "action_archetype_id", required = true)
     @Required
+    @SerialName("action_archetype_id")
     var actionArchetypeId: String? = null
 }

@@ -16,6 +16,7 @@
 package org.openehr.rm.ehr
 
 import care.better.openehr.rm.RmObject
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
@@ -30,21 +31,27 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PATIENT_EHR", namespace = "http://schemas.openehr.org/v1", propOrder = ["systemId", "ehrId", "timeCreated", "ehrStatus"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
+@kotlinx.serialization.Serializable
+@SerialName("EHR")
 class Ehr : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "system_id")
+    @SerialName("system_id")
     var systemId: HierObjectId? = null
 
     @XmlElement(name = "ehr_id")
+    @SerialName("ehr_id")
     var ehrId: HierObjectId? = null
 
     @XmlElement(name = "time_created")
+    @SerialName("time_created")
     var timeCreated: DvDateTime? = null
 
     @XmlElement(name = "ehr_status")
+    @SerialName("ehr_status")
     var ehrStatus: EhrStatus? = null
 
     override fun equals(other: Any?): Boolean =

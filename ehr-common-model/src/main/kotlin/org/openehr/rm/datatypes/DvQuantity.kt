@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -36,6 +38,8 @@ import javax.xml.bind.annotation.XmlType
         "precision",
         "unitsSystem",
         "unitsDisplayName"])
+@Serializable
+@SerialName("DV_QUANTITY")
 @Open
 class DvQuantity() : DvAmount() {
     @JvmOverloads
@@ -78,9 +82,11 @@ class DvQuantity() : DvAmount() {
     var precision: Int? = null
 
     @XmlElement(name = "units_system")
+    @SerialName("units_system")
     var unitsSystem: String? = null
 
     @XmlElement(name = "units_display_name")
+    @SerialName("units_display_name")
     var unitsDisplayName: String? = null
 
     override fun equals(other: Any?): Boolean =

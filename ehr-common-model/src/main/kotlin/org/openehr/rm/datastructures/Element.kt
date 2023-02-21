@@ -16,6 +16,8 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DataValue
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
@@ -34,6 +36,8 @@ import javax.xml.bind.annotation.XmlType
         "value",
         "nullFlavour",
         "nullReason"])
+@Serializable
+@SerialName("ELEMENT")
 @Open
 class Element : Item() {
     companion object {
@@ -43,8 +47,10 @@ class Element : Item() {
     var value: DataValue? = null
 
     @XmlElement(name = "null_flavour")
+    @SerialName("null_flavour")
     var nullFlavour: DvCodedText? = null
 
     @XmlElement(name = "null_reason")
+    @SerialName("null_reason")
     var nullReason: DvText? = null
 }

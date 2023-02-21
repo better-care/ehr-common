@@ -16,6 +16,8 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlSeeAlso
@@ -28,6 +30,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UID_BASED_ID")
 @XmlSeeAlso(value = [ObjectVersionId::class, HierObjectId::class])
+@Serializable
+@SerialName("UID_BASED_ID")
 @Open
 abstract class UidBasedId : ObjectId() {
     companion object {

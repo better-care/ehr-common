@@ -17,6 +17,9 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.*
 
@@ -27,7 +30,10 @@ import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_URI", propOrder = ["value"])
-@XmlSeeAlso(DvEhrUri::class)
+@XmlSeeAlso(DvUri::class, DvEhrUri::class)
+@Serializable
+@SerialName("DV_URI")
+@Polymorphic
 @Open
 class DvUri() : DataValue() {
     constructor(value: String) : this() {

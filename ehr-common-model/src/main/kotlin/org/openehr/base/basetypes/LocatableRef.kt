@@ -16,6 +16,8 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlType
@@ -26,6 +28,8 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LOCATABLE_REF", propOrder = ["path"])
+@Serializable
+@SerialName("LOCATABLE_REF")
 @Open
 class LocatableRef() : ObjectRef() {
     @JvmOverloads

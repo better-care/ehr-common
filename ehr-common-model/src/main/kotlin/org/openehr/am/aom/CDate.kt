@@ -15,6 +15,7 @@
 
 package org.openehr.am.aom
 
+import kotlinx.serialization.Contextual
 import org.openehr.base.foundationtypes.IntervalOfDate
 import java.math.BigInteger
 import javax.xml.bind.annotation.XmlAccessType
@@ -42,6 +43,7 @@ class CDate : CPrimitive() {
     var pattern: String? = null
 
     @XmlElement(name = "timezone_validity")
+    @Contextual
     var timezoneValidity: BigInteger? = null
 
     var range: IntervalOfDate? = null

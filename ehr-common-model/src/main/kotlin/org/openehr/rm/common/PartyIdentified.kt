@@ -16,6 +16,9 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
 import org.openehr.rm.datatypes.DvIdentifier
 import javax.xml.bind.annotation.XmlAccessType
@@ -29,10 +32,13 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "PARTY_IDENTIFIED", propOrder = [
-        "name",
-        "identifiers"])
+        name = "PARTY_IDENTIFIED", propOrder = [
+    "name",
+    "identifiers"])
 @XmlSeeAlso(PartyRelated::class)
+@Serializable
+@SerialName("PARTY_IDENTIFIED")
+@Polymorphic
 @Open
 class PartyIdentified() : PartyProxy() {
 

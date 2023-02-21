@@ -17,6 +17,8 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
@@ -28,6 +30,8 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IMPORTED_VERSION", propOrder = ["item"])
+@Serializable
+@SerialName("IMPORTED_VERSION")
 @Open
 class ImportedVersion : Version() {
     companion object {

@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import kotlinx.serialization.SerialName
 import org.openehr.base.resource.TranslationDetails
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
@@ -39,6 +40,8 @@ import javax.xml.bind.annotation.XmlType
         "description",
         "translations",
         "revisionHistory"])
+@kotlinx.serialization.Serializable
+@SerialName("AUTHORED_RESOURCE")
 @Open
 abstract class AuthoredResource() : RmObject(), Serializable {
     companion object {
@@ -61,9 +64,11 @@ abstract class AuthoredResource() : RmObject(), Serializable {
 
     @XmlElement(name = "original_language", required = true)
     @Required
+    @SerialName("original_language")
     var originalLanguage: CodePhrase? = null
 
     @XmlElement(name = "is_controlled")
+    @SerialName("is_controlled")
     var isControlled: Boolean? = null
 
     var description: ResourceDescription? = null
@@ -71,5 +76,6 @@ abstract class AuthoredResource() : RmObject(), Serializable {
     var translations: MutableList<TranslationDetails> = mutableListOf()
 
     @XmlElement(name = "revision_history")
+    @SerialName("revision_history")
     var revisionHistory: RevisionHistory? = null
 }

@@ -17,6 +17,7 @@ package care.better.openehr.rm
 
 import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -25,6 +26,7 @@ import javax.xml.bind.annotation.XmlTransient
 
 @XmlTransient
 @XmlRootElement
+@Serializable
 abstract class RmObject {
     companion object {
         @JvmField

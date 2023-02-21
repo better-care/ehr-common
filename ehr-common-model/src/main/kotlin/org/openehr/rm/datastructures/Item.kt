@@ -16,6 +16,8 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -29,6 +31,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ITEM")
 @XmlSeeAlso(value = [Cluster::class, Element::class])
+@Serializable
+@SerialName("ITEM")
 @Open
 abstract class Item : Locatable() {
     companion object {

@@ -16,6 +16,8 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
@@ -28,6 +30,8 @@ import javax.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_BOOLEAN", propOrder = ["value"])
+@Serializable
+@SerialName("DV_BOOLEAN")
 @Open
 class DvBoolean() : DataValue() {
     constructor(value: Boolean) : this() {
