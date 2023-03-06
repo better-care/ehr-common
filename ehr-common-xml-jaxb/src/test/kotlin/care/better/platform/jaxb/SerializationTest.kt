@@ -68,7 +68,7 @@ open class SerializationTest {
         val writer = StringWriter()
         val jaxbRegistry = createInstance(listOf("care.better.tagging"))
         val marshaller = jaxbRegistry.createMarshaller()
-        val tagWithValueDto = TagWithValueDto("tag", "value", "/")
+        val tagWithValueDto = TagWithValueDto("tag", "value")
         marshaller.marshal(tagWithValueDto, writer)
         val xml = writer.toString()
         assertThat(xml).contains("<te:tag>tag</te:tag>")

@@ -43,7 +43,7 @@ open class TagDto : Serializable {
     @JvmOverloads
     constructor(tag: String?, aqlPath: String? = "/") {
         this.tag = tag
-        this.aqlPath = aqlPath
+        this.aqlPath = aqlPath ?: "/"
     }
 
     /**
