@@ -17,6 +17,7 @@ package care.better.platform.json.jackson.rm
 
 import care.better.openehr.rm.RmObject
 import care.better.platform.utils.RmUtils
+import care.better.tagging.dto.TagWithValueDto
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonToken
 import com.fasterxml.jackson.core.util.JsonParserSequence
@@ -50,12 +51,18 @@ class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, proper
     }
 
     @Throws(IOException::class)
-    override fun deserializeTypedFromAny(p: JsonParser, ctxt: DeserializationContext): Any? =
-        if (p.currentToken == JsonToken.START_ARRAY)
-            ctxt.findRootValueDeserializer(ctxt.typeFactory.constructType(MutableCollection::class.java)).deserialize(p, ctxt)
+    override fun deserializeTypedFromAny(p: JsonParser, ctxt: DeserializationContext): Any? {
+        return if (p.currentToken == JsonToken.START_ARRAY)
+            ctxt.findRootValueDeserializer(
+                    if (p.parsingContext.parent?.parent?.currentValue?.javaClass?.canonicalName == "care.better.datastream.data.StreamData"
+                        && (p.parsingContext.parent?.currentName == "TAGS_PREVIOUS" || p.parsingContext.parent?.currentName == "TAGS_CURRENT")) {
+                        ctxt.typeFactory.constructCollectionType(MutableCollection::class.java, TagWithValueDto::class.java)
+                    } else {
+                        ctxt.typeFactory.constructType(MutableCollection::class.java)
+                    }).deserialize(p, ctxt)
         else
             deserializeTypedFromObject(p, ctxt)
-
+    }
 
     override fun forProperty(prop: BeanProperty?): TypeDeserializer? {
         val typeDeserializer: TypeDeserializer = super.forProperty(prop)
@@ -140,3 +147,4 @@ class RmAwareAsPropertyTypeDeserializer(src: AsPropertyTypeDeserializer?, proper
         return deserializer.deserialize(jsonParser, context)
     }
 }
+
