@@ -15,6 +15,9 @@
 
 package care.better.platform.jaxb
 
+import care.better.platform.jaxb.JaxbRegistry.Companion.createInstance
+import care.better.tagging.dto.TagList
+import care.better.tagging.dto.TagWithValueDto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.openehr.am.aom.TermBindingItem
@@ -57,6 +60,42 @@ open class SerializationTest {
         val compositionString = stringWriter.toString()
         assertThat(compositionString).startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
         assertThat(compositionString).contains("<uid xsi:type=\"OBJECT_VERSION_ID\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><value>f74c649e-3259-4b43-9943-67c86b8ee13a::default::1</value></uid>")
+    }
+
+    @Test
+    @Throws(JAXBException::class)
+    fun testTagSerialization() {
+        val writer = StringWriter()
+        val jaxbRegistry = createInstance(listOf("care.better.tagging"))
+        val marshaller = jaxbRegistry.createMarshaller()
+        val tagWithValueDto = TagWithValueDto("tag", "value", "/")
+        marshaller.marshal(tagWithValueDto, writer)
+        val xml = writer.toString()
+        assertThat(xml).contains("<te:tag>tag</te:tag>")
+        val unmarshaller = jaxbRegistry.createUnmarshaller()
+        val returned = unmarshaller.unmarshal(StreamSource(StringReader(xml))) as TagWithValueDto
+        assertThat(returned.tag).isEqualTo("tag")
+        assertThat(returned.value).isEqualTo("value")
+        assertThat(returned.getAqlPath()).isEqualTo("/")
+    }
+
+    @Test
+    @Throws(JAXBException::class)
+    fun testTagListSerialization() {
+        val writer = StringWriter()
+        val jaxbRegistry = createInstance(listOf("care.better.tagging"))
+        val marshaller = jaxbRegistry.createMarshaller()
+        val tagWithValueDto = TagWithValueDto("tag", "value", "/")
+        val tagList = TagList(setOf(tagWithValueDto))
+        marshaller.marshal(tagList, writer)
+        val xml = writer.toString()
+        assertThat(xml).contains("<te:tagList")
+        assertThat(xml).contains("<te:tag>tag</te:tag>")
+        val unmarshaller = jaxbRegistry.createUnmarshaller()
+        val returned = unmarshaller.unmarshal(StreamSource(StringReader(xml))) as TagList
+        assertThat(returned.tags!![0].tag).isEqualTo("tag")
+        assertThat(returned.tags!![0].value).isEqualTo("value")
+        assertThat(returned.tags!![0].getAqlPath()).isEqualTo("/")
     }
 
     @Test
@@ -145,8 +184,8 @@ open class SerializationTest {
         val executor = Executors.newFixedThreadPool(20)
 
         IntRange(0, 1000)
-                .map { Runnable { JaxbRegistry.getInstance().marshaller.marshal(composition, StringWriter()) } }
-                .forEach(executor::submit)
+            .map { Runnable { JaxbRegistry.getInstance().marshaller.marshal(composition, StringWriter()) } }
+            .forEach(executor::submit)
 
         testCompositionSerialization()
     }
@@ -156,19 +195,19 @@ open class SerializationTest {
         val executor = Executors.newFixedThreadPool(20)
 
         IntRange(0, 1000)
-                .map { Runnable { getComposition("/composition.xml") } }
-                .forEach(executor::submit)
+            .map { Runnable { getComposition("/composition.xml") } }
+            .forEach(executor::submit)
 
         testCompositionDeserialization()
     }
 
     @Throws(JAXBException::class, IOException::class)
     protected open fun getComposition(compositionFile: String): Composition =
-            SerializationTest::class.java.getResourceAsStream(compositionFile).use { stream ->
-                if (stream == null)
-                    throw RuntimeException("Composition resource was not found: $compositionFile.")
-                else
-                    JaxbRegistry.getInstance().unmarshaller.unmarshal(StreamSource(stream), Composition::class.java).value
-            }
+        SerializationTest::class.java.getResourceAsStream(compositionFile).use { stream ->
+            if (stream == null)
+                throw RuntimeException("Composition resource was not found: $compositionFile.")
+            else
+                JaxbRegistry.getInstance().unmarshaller.unmarshal(StreamSource(stream), Composition::class.java).value
+        }
 
 }
