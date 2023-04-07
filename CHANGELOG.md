@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.2 - 2023-04-11
+
+- Fix the issue that units_system and units_display_name attributes were defined in CDvQuantity
+
 ## 3.2.1 - 2022-12-22
 
 - A 3.2.x version based on 3.1.7
