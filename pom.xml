@@ -55,7 +55,6 @@
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.java.version>${java.version}</project.build.java.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
@@ -350,8 +349,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <source>${project.build.java.version}</source>
-                        <target>${project.build.java.version}</target>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
                         <optimize>true</optimize>
                         <encoding>utf-8</encoding>
                         <showWarnings>true</showWarnings>
