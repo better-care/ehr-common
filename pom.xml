@@ -40,29 +40,36 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <kotlin.version>1.5.30</kotlin.version>
+        <kotlin.version>1.7.20</kotlin.version>
 
-        <kotlin-annotations.version>20.1.0</kotlin-annotations.version>
+        <jetbrains-annotations.version>20.1.0</jetbrains-annotations.version>
 
-        <guava.version>29.0-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <guava.version>30.0-jre</guava.version>
         <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
-        <joda.version>2.10.8</joda.version>
-        <jackson.version>2.13.4</jackson.version>
+        <joda-time.version>2.10.8</joda-time.version>
+        <jackson.version>2.15.0</jackson.version>
 
-        <jupiter.version>5.8.1</jupiter.version>
-        <assertj.version>3.21.0</assertj.version>
+        <jupiter.version>5.9.2</jupiter.version>
+        <assertj.version>3.24.2</assertj.version>
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.java.version>${java.version}</project.build.java.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven-dokka-plugin.version>1.5.30</maven-dokka-plugin.version>
+        <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-dokka-plugin.version>${kotlin.version}</maven-dokka-plugin.version>
         <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
         <maven-jacoco-plugin.version>0.8.7</maven-jacoco-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -88,7 +95,7 @@
             <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <version>${kotlin-annotations.version}</version>
+                <version>${jetbrains-annotations.version}</version>
             </dependency>
 
             <dependency>
@@ -173,7 +180,7 @@
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>${joda.version}</version>
+                <version>${joda-time.version}</version>
             </dependency>
 
             <dependency>
@@ -333,6 +340,55 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${project.build.java.version}</source>
+                        <target>${project.build.java.version}</target>
+                        <optimize>true</optimize>
+                        <encoding>utf-8</encoding>
+                        <showWarnings>true</showWarnings>
+                        <parameters>true</parameters>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                    <configuration>
+                        <encoding>${project.reporting.outputEncoding}</encoding>
+                    </configuration>
+                </plugin>
+
+                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${maven-jacoco-plugin.version}</version>
@@ -411,7 +467,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${nexus-staging-maven-plugin.version}</version>
+                        <version>${maven-nexus-staging-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
