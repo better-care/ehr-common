@@ -15,9 +15,6 @@
 
 package care.better.platform.utils
 
-import javax.xml.bind.JAXBElement
-import javax.xml.bind.JAXBException
-import javax.xml.bind.Unmarshaller
 import org.xml.sax.InputSource
 import org.xml.sax.SAXException
 import org.xml.sax.SAXNotRecognizedException
@@ -25,6 +22,9 @@ import org.xml.sax.SAXNotSupportedException
 import java.io.*
 import java.nio.charset.StandardCharsets
 import javax.xml.XMLConstants
+import javax.xml.bind.JAXBElement
+import javax.xml.bind.JAXBException
+import javax.xml.bind.Unmarshaller
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
@@ -39,6 +39,8 @@ import javax.xml.transform.sax.SAXSource
 
 object XmlUtils {
     private const val XML_START_CHAR = '<'.code
+    private const val DEFAULT_SAX_PARSER_IMPL = "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"
+    private const val DEFAULT_DOC_BUILDER_IMPL = "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl"
 
     @JvmStatic
     @Throws(ParserConfigurationException::class)
@@ -47,7 +49,7 @@ object XmlUtils {
     @JvmStatic
     @Throws(ParserConfigurationException::class)
     fun createDocumentBuilderFactory(): DocumentBuilderFactory =
-        DocumentBuilderFactory.newInstance().apply {
+        DocumentBuilderFactory.newInstance(DEFAULT_DOC_BUILDER_IMPL, null).apply {
             this.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
             this.setFeature("http://xml.org/sax/features/external-general-entities", false)
             this.setFeature("http://xml.org/sax/features/external-parameter-entities", false)
@@ -62,7 +64,7 @@ object XmlUtils {
     @JvmStatic
     @Throws(SAXNotSupportedException::class, SAXNotRecognizedException::class, ParserConfigurationException::class)
     fun createSAXParserFactory(): SAXParserFactory =
-        SAXParserFactory.newInstance().apply {
+        SAXParserFactory.newInstance(DEFAULT_SAX_PARSER_IMPL, null).apply {
             this.setFeature("http://xml.org/sax/features/external-general-entities", false)
             this.setFeature("http://xml.org/sax/features/external-parameter-entities", false)
             this.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
