@@ -16,9 +16,9 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
+import jakarta.xml.bind.annotation.*
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

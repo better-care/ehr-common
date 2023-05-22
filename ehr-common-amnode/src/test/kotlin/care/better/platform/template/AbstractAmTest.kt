@@ -16,14 +16,14 @@
 package care.better.platform.template
 
 import care.better.platform.jaxb.JaxbRegistry
+import jakarta.xml.bind.JAXBException
+import jakarta.xml.bind.Unmarshaller
 import org.openehr.am.aom.Template
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.PushbackInputStream
 import java.nio.charset.StandardCharsets
-import javax.xml.bind.JAXBException
-import javax.xml.bind.Unmarshaller
 import javax.xml.transform.stream.StreamSource
 
 /**

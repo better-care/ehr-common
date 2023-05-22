@@ -1,8 +1,8 @@
 package care.better.tagging.dto
 
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlRootElement
 import java.util.*
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlRootElement
 
 /**
  * An extension of TagDto containing also a value (TAG:VALUE)

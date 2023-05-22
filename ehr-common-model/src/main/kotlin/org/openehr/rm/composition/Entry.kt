@@ -17,11 +17,11 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyProxy
 import org.openehr.rm.datatypes.CodePhrase
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

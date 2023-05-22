@@ -15,8 +15,8 @@
 
 package care.better.platform.time.xmladapters
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 import java.time.Duration
-import javax.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Matija Polajnar

@@ -18,9 +18,9 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.HierObjectId
 import java.io.Serializable
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
