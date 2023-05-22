@@ -47,8 +47,8 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <guava.version>30.1-jre</guava.version>  <!-- revert version for checker-qual:jar:3.5.0 consistency with org.postgresql:postgresql:jar:42.5.1 -->
         <jackson.version>2.15.0</jackson.version>
-        <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
-        <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
+        <jakarta.xml.bind.version>4.0.0</jakarta.xml.bind.version>
+        <jaxb-runtime.version>4.0.2</jaxb-runtime.version>
         <joda-time.version>2.11.1</joda-time.version>
 
         <jupiter.version>5.9.2</jupiter.version>
@@ -162,6 +162,13 @@
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
                 <version>${jaxb-runtime.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <!-- The API (jakarta.xml.bind-api) brings a different version. -->
+                        <groupId>jakarta.activation</groupId>
+                        <artifactId>jakarta.activation-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>

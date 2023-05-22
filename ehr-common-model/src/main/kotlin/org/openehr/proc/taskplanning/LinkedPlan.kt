@@ -15,8 +15,8 @@
 
 package org.openehr.proc.taskplanning
 
+import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.UidBasedId
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

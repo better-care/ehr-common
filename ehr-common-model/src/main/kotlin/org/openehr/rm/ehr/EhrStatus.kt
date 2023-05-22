@@ -17,10 +17,10 @@ package org.openehr.rm.ehr
 
 import care.better.platform.annotation.OpenEhrName
 import care.better.platform.annotation.Required
+import jakarta.xml.bind.annotation.*
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.common.PartySelf
 import org.openehr.rm.datastructures.ItemStructure
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
