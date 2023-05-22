@@ -18,6 +18,10 @@ package care.better.platform.jaxb
 import care.better.platform.jaxb.JaxbRegistry.Companion.createInstance
 import care.better.tagging.dto.TagList
 import care.better.tagging.dto.TagWithValueDto
+import jakarta.xml.bind.JAXBElement
+import jakarta.xml.bind.JAXBException
+import jakarta.xml.bind.Marshaller
+import jakarta.xml.bind.Unmarshaller
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.openehr.am.aom.TermBindingItem
@@ -30,10 +34,6 @@ import java.io.IOException
 import java.io.StringReader
 import java.io.StringWriter
 import java.util.concurrent.Executors
-import javax.xml.bind.JAXBElement
-import javax.xml.bind.JAXBException
-import javax.xml.bind.Marshaller
-import javax.xml.bind.Unmarshaller
 import javax.xml.namespace.QName
 import javax.xml.transform.stream.StreamSource
 

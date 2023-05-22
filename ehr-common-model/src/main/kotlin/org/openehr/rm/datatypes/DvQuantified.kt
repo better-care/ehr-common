@@ -16,8 +16,8 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import jakarta.xml.bind.annotation.*
 import java.util.*
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

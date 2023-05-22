@@ -1,12 +1,12 @@
 package care.better.platform.time.xmladapters
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.time.temporal.Temporal
 import java.util.*
-import javax.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Matic Ribic

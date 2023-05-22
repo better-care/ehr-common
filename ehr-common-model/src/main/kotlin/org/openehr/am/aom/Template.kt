@@ -17,13 +17,13 @@ package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
+import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.base.basetypes.TemplateId
 import org.openehr.rm.common.ResourceDescription
 import org.openehr.rm.common.RevisionHistory
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

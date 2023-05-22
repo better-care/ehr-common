@@ -1,7 +1,7 @@
 package care.better.tagging.dto
 
+import jakarta.xml.bind.annotation.*
 import java.io.Serializable
-import javax.xml.bind.annotation.*
 
 /**
  * @author Domen Muren

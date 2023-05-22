@@ -15,9 +15,9 @@
 
 package care.better.platform.jaxb
 
-import javax.xml.bind.annotation.XmlAccessType
-import javax.xml.bind.annotation.XmlAccessorType
-import javax.xml.bind.annotation.adapters.XmlAdapter
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Primoz Delopst

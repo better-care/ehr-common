@@ -15,9 +15,9 @@
 
 package care.better.platform.time.xmladapters
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 import org.joda.time.DateTime
 import org.joda.time.format.ISODateTimeFormat
-import javax.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Bostjan Lah

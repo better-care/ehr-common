@@ -18,8 +18,8 @@ package care.better.platform.time.xmladapters
 import care.better.platform.time.format.OpenEhrDateTimeFormatter
 import care.better.platform.time.temporal.OpenEhrField
 import care.better.platform.time.temporal.OpenEhrOffsetTime
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 import java.time.OffsetTime
-import javax.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Matic Ribic

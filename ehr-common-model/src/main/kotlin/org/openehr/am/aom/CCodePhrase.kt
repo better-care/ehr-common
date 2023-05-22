@@ -15,9 +15,9 @@
 
 package org.openehr.am.aom
 
+import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.TerminologyId
 import org.openehr.rm.datatypes.CodePhrase
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
