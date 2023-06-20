@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file.
 
 - Initial 3.2.x version based on 3.1.4
 
+## 3.1.8 - 2023-06-20
+
+- Fix stream data serialization
+- Fix the issue that units_system and units_display_name attributes were defined in CDvQuantity and CQuantityItem
+- Increase dependencies versions (guava, jackson, jupiter, kotlin)
+
 ## 3.1.7 - 2022-10-28
 
 - Bump jackson dependencies version to 2.13.4
