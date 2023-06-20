@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.3 - 2023-06-20
+
+- Increase dependencies versions (guava, jackson, jupiter, kotlin)
+
 ## 3.2.2 - 2023-04-07
 
 - Fix the issue that units_system and units_display_name attributes were defined in CDvQuantity
