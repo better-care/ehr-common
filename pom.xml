@@ -19,7 +19,7 @@
 
     <groupId>care.better.platform</groupId>
     <artifactId>ehr-common</artifactId>
-    <version>3.2.3</version>
+    <version>3.2.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -112,55 +112,55 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-model</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-time</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terminology</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-jacoco</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-amnode</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-xml-jaxb</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.4-SNAPSHOT</version>
             </dependency>
 
             <dependency>
