@@ -39,6 +39,8 @@ import javax.xml.transform.sax.SAXSource
 
 object XmlUtils {
     private const val XML_START_CHAR = '<'.code
+    const val DEFAULT_SAX_PARSER_IMPL = "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"
+    const val DEFAULT_DOC_BUILDER_IMPL = "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl"
 
     @JvmStatic
     @Throws(ParserConfigurationException::class)
@@ -47,7 +49,7 @@ object XmlUtils {
     @JvmStatic
     @Throws(ParserConfigurationException::class)
     fun createDocumentBuilderFactory(): DocumentBuilderFactory =
-        DocumentBuilderFactory.newInstance().apply {
+        DocumentBuilderFactory.newInstance(DEFAULT_DOC_BUILDER_IMPL, null).apply {
             this.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
             this.setFeature("http://xml.org/sax/features/external-general-entities", false)
             this.setFeature("http://xml.org/sax/features/external-parameter-entities", false)
@@ -62,7 +64,7 @@ object XmlUtils {
     @JvmStatic
     @Throws(SAXNotSupportedException::class, SAXNotRecognizedException::class, ParserConfigurationException::class)
     fun createSAXParserFactory(): SAXParserFactory =
-        SAXParserFactory.newInstance().apply {
+        SAXParserFactory.newInstance(DEFAULT_SAX_PARSER_IMPL, null).apply {
             this.setFeature("http://xml.org/sax/features/external-general-entities", false)
             this.setFeature("http://xml.org/sax/features/external-parameter-entities", false)
             this.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
