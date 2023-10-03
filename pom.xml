@@ -42,10 +42,10 @@
         <java.version>17</java.version>
         <kotlin.version>1.8.21</kotlin.version>
 
-        <jetbrains-annotations.version>20.1.0</jetbrains-annotations.version>
+        <jetbrains-annotations.version>23.1.0</jetbrains-annotations.version>
 
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <guava.version>30.1-jre</guava.version>  <!-- revert version for checker-qual:jar:3.5.0 consistency with org.postgresql:postgresql:jar:42.5.1 -->
+        <guava.version>32.1.2-jre</guava.version>
         <jackson.version>2.15.2</jackson.version>
         <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
         <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
