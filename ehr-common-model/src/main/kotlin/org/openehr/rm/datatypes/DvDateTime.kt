@@ -17,7 +17,6 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import care.better.platform.time.format.DateTimeFormatters
 import java.time.OffsetDateTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -63,7 +62,7 @@ class DvDateTime() : DvTemporal() {
          * @return [DvDateTime]
          */
         @JvmStatic
-        fun create(dateTime: ZonedDateTime): DvDateTime = DvDateTime(DateTimeFormatters.ISO_DB_OFFSET_DATE_TIME.format(dateTime))
+        fun create(dateTime: ZonedDateTime): DvDateTime = DvDateTime(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateTime))
 
         /**
          * Converts [OffsetDateTime] to [DvDateTime]
@@ -72,7 +71,7 @@ class DvDateTime() : DvTemporal() {
          * @return [DvDateTime]
          */
         @JvmStatic
-        fun create(dateTime: OffsetDateTime): DvDateTime = DvDateTime(DateTimeFormatters.ISO_DB_OFFSET_DATE_TIME.format(dateTime))
+        fun create(dateTime: OffsetDateTime): DvDateTime = DvDateTime(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateTime))
     }
 
     @XmlElement(required = true)
