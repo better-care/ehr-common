@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.4 - 2023-09-20
+
+- Increase dependencies versions due to regular security updates
+
 ## 3.2.3 - 2023-06-20
 
 - Increase dependencies versions (guava, jackson, jupiter, kotlin)
