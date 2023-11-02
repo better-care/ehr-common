@@ -33,14 +33,24 @@ import org.openehr.proc.taskplanning.BooleanContextExpression
  */
 
 @Open
-class BetterObjectMapper : ObjectMapper() {
+class BetterObjectMapper : ObjectMapper {
+    constructor() : super()
+    constructor(src: BetterObjectMapper) : super(src)
+    constructor(src: BetterObjectMapper, factory: JsonFactory) : super(src, factory)
+
     init {
         this.defaultInit()
     }
 
-    override fun copy(): ObjectMapper = super.copy().also { it.defaultInit() }
+    override fun copy(): ObjectMapper {
+        _checkInvalidCopy(BetterObjectMapper::class.java)
+        return BetterObjectMapper(this).also { it.defaultInit() }
+    }
 
-    override fun copyWith(factory: JsonFactory?): ObjectMapper = super.copyWith(factory).also { it.defaultInit() }
+    override fun copyWith(factory: JsonFactory): ObjectMapper {
+        _checkInvalidCopy(BetterObjectMapper::class.java)
+        return BetterObjectMapper(this, factory).also { it.defaultInit() }
+    }
 
     companion object {
         private const val serialVersionUID: Long = 0L
