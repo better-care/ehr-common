@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.5 - 2024-02-13
+
+- Allow BetterObjectMapper to be `copy()`-ed
+
 ## 3.2.4 - 2023-09-20
 
 - Increase dependencies versions due to regular security updates
