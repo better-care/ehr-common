@@ -1,7 +1,7 @@
 package care.better.platform.json.jackson.time
 
 import care.better.platform.time.temporal.OpenEhrTemporal
-import care.better.platform.web.template.converter.json.serializers.OpenEhrSerializer
+import care.better.platform.json.jackson.time.serializers.OpenEhrSerializer
 import com.fasterxml.jackson.core.util.VersionUtil
 import com.fasterxml.jackson.databind.module.SimpleModule
 

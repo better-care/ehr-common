@@ -1,4 +1,4 @@
-package care.better.platform.web.template.converter.json.serializers
+package care.better.platform.json.jackson.time.serializers
 
 import care.better.platform.time.format.OpenEhrDateTimeFormatter
 import care.better.platform.time.temporal.OpenEhrTemporal
@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer
 /**
  * @author Matic Ribic
  */
-class OpenEhrSerializer() : StdSerializer<OpenEhrTemporal<*>>(OpenEhrTemporal::class.java) {
+class OpenEhrSerializer : StdSerializer<OpenEhrTemporal<*>>(OpenEhrTemporal::class.java) {
 
     override fun serialize(value: OpenEhrTemporal<*>?, generator: JsonGenerator, provider: SerializerProvider) {
         requireNotNull(value) { handledType().simpleName }
