@@ -251,8 +251,8 @@ class DateTimeConversionUtilsTest {
 
     @Test
     fun testInvalidDateTime() {
-        assertThat(DateTimeConversionUtils.toOffsetDateTime("0001-01-01T00:57:44.000+00:57:44"))
-            .isEqualTo(OffsetDateTime.of(1, 1, 1, 0, 57, 44, 0, ZoneOffset.ofHoursMinutesSeconds(0, 57, 44)))
+        assertThat(DateTimeConversionUtils.toOffsetDateTime("0001-01-01T00:57:44.00000017+00:57:44"))
+            .isEqualTo(OffsetDateTime.of(1, 1, 1, 0, 57, 44, 170, ZoneOffset.ofHoursMinutesSeconds(0, 57, 44)))
     }
 
     @Test
