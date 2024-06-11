@@ -17,13 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import care.better.platform.time.format.DateTimeFormatters
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
 import java.time.OffsetDateTime
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 /**
