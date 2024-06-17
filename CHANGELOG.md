@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.0.0 - 2024-02-15
+
+- Initial 4.0.x version based on 3.2.5
+- Introduction of openEHR Terminology (TERM) 3.0.0
+- Java 17 supported and required
+- Based on Kotlin 1.9.20
+
+## 3.2.5 - 2024-02-13
+
+- Allow BetterObjectMapper to be `copy()`-ed
+
 ## 3.2.4 - 2023-09-20
 
 - Increase dependencies versions due to regular security updates
