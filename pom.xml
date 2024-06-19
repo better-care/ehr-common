@@ -417,7 +417,7 @@
 
     <profiles>
         <profile>
-            <id>prepareJacocoAgent</id>
+            <id>runSonar</id>
             <build>
                 <plugins>
                     <plugin>
@@ -432,6 +432,7 @@
                         <executions>
                             <execution>
                                 <id>prepare-agent</id>
+                                <phase>initialize</phase>
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
