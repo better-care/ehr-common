@@ -57,7 +57,7 @@ class BetterObjectMapper : ObjectMapper {
     }
 }
 
-fun ObjectMapper.defaultInit() {
+fun BetterObjectMapper.defaultInit() {
     this.setDefaultTyping(RmTypeResolverBuilder(ObjectMapper.DefaultTyping.NON_FINAL).init(JsonTypeInfo.Id.CLASS, null).inclusion(JsonTypeInfo.As.PROPERTY))
 
     this.registerKotlinModule()
