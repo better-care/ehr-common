@@ -73,14 +73,6 @@
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
 
-        <!--suppress UnresolvedMavenProperty -->
-        <sonar.coverage.jacoco.xmlReportPaths>
-            ${maven.multiModuleProjectDirectory}/ehr-common-jacoco/target/site/jacoco-aggregate/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
-        <!--suppress UnresolvedMavenProperty -->
-        <dependency.check.report.dir>${maven.multiModuleProjectDirectory}/ehr-common-jacoco/target</dependency.check.report.dir>
-        <sonar.dependencyCheck.jsonReportPath>${dependency.check.report.dir}/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>
-        <sonar.dependencyCheck.htmlReportPath>${dependency.check.report.dir}/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
         <sonar.java.source>${java.version}</sonar.java.source>
     </properties>
 
@@ -417,6 +409,11 @@
     <profiles>
         <profile>
             <id>runSonar</id>
+            <activation>
+                <property>
+                    <name>runSonar</name>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
