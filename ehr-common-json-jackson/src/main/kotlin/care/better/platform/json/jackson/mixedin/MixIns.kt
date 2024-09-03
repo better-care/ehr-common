@@ -23,7 +23,7 @@ import org.openehr.proc.taskplanning.TypeDefBoolean
  * @since 3.1.0
  */
 
-abstract class BooleanContextExpressionMixedIn {
+abstract class BooleanContextExpressionMixIn {
     @JsonIgnore
     abstract fun setType(type: TypeDefBoolean)
 }
