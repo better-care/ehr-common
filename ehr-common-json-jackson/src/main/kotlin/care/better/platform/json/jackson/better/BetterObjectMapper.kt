@@ -16,7 +16,7 @@
 package care.better.platform.json.jackson.better
 
 import care.better.platform.annotation.Open
-import care.better.platform.json.jackson.mixedin.BooleanContextExpressionMixedIn
+import care.better.platform.json.jackson.mixedin.BooleanContextExpressionMixIn
 import care.better.platform.json.jackson.rm.RmTypeResolverBuilder
 import care.better.platform.json.jackson.time.OpenEhrTimeModule
 import com.fasterxml.jackson.annotation.JsonTypeInfo
@@ -67,6 +67,6 @@ fun BetterObjectMapper.defaultInit() {
     this.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false)
     this.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     this.configure(DeserializationFeature.FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY, false)
-    this.addMixIn(BooleanContextExpression::class.java, BooleanContextExpressionMixedIn::class.java)
+    this.addMixIn(BooleanContextExpression::class.java, BooleanContextExpressionMixIn::class.java)
     this.propertyNamingStrategy = BetterPlatformPropertyNamingStrategy()
 }
