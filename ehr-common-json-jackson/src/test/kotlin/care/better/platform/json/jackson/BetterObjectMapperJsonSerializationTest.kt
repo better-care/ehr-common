@@ -355,10 +355,10 @@ class BetterObjectMapperJsonSerializationTest {
         assertThat(json).contains("\"lower_included\":false")
         assertThat(json).contains("\"upper_unbounded\":true")
         assertThat(json).contains("\"upper_included\":false")
-        assertThat(json).contains("\"is_lower_unbounded\":true")
-        assertThat(json).contains("\"is_lower_included\":false")
-        assertThat(json).contains("\"is_upper_unbounded\":true")
-        assertThat(json).contains("\"is_upper_included\":false")
+        assertThat(json).doesNotContain("\"is_lower_unbounded\":true")
+        assertThat(json).doesNotContain("\"is_lower_included\":false")
+        assertThat(json).doesNotContain("\"is_upper_unbounded\":true")
+        assertThat(json).doesNotContain("\"is_upper_included\":false")
     }
 
     @Test
@@ -369,10 +369,10 @@ class BetterObjectMapperJsonSerializationTest {
         assertThat(json).contains("\"lower_included\":false")
         assertThat(json).contains("\"upper_unbounded\":true")
         assertThat(json).contains("\"upper_included\":false")
-        assertThat(json).contains("\"is_lower_unbounded\":true")
-        assertThat(json).contains("\"is_lower_included\":false")
-        assertThat(json).contains("\"is_upper_unbounded\":true")
-        assertThat(json).contains("\"is_upper_included\":false")
+        assertThat(json).doesNotContain("\"is_lower_unbounded\":true")
+        assertThat(json).doesNotContain("\"is_lower_included\":false")
+        assertThat(json).doesNotContain("\"is_upper_unbounded\":true")
+        assertThat(json).doesNotContain("\"is_upper_included\":false")
     }
 
     @Test

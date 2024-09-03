@@ -27,3 +27,17 @@ abstract class BooleanContextExpressionMixIn {
     @JsonIgnore
     abstract fun setType(type: TypeDefBoolean)
 }
+
+abstract class RangeParametersMixIn {
+    @JsonIgnore
+    abstract fun isLowerIncluded(): Boolean?
+
+    @JsonIgnore
+    abstract fun isUpperIncluded(): Boolean?
+
+    @JsonIgnore
+    abstract fun isLowerUnbounded(): Boolean
+
+    @JsonIgnore
+    abstract fun isUpperUnbounded(): Boolean
+}
