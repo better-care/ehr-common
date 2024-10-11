@@ -18,10 +18,13 @@ package org.openehr.rm.common
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import org.openehr.base.basetypes.ObjectVersionId
+import org.openehr.rm.composition.Composition
 import org.openehr.rm.datatypes.DvCodedText
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlRootElement
+import javax.xml.bind.annotation.XmlSeeAlso
 import javax.xml.bind.annotation.XmlType
 
 /**
@@ -37,6 +40,8 @@ import javax.xml.bind.annotation.XmlType
         "otherInputVersionUids",
         "attestations",
         "lifecycleState"])
+@XmlRootElement
+@XmlSeeAlso(value = [Composition::class])
 @Open
 class OriginalVersion : Version() {
     companion object {
