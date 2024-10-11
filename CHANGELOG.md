@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.0.4 - 2024-10-11
+
+- Fix issue with `OriginalVersion` XML serialization
+- Fix issue with `DvInterval` JSON serialization
+- 
 ## 4.0.3 - 2024-08-15
 
 - Add terminology foundation classes (`TerminologyCode` and `TerminologyTerm`)
