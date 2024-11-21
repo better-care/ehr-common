@@ -43,7 +43,7 @@
 
         <jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
 
-        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
         <guava.version>33.3.1-jre</guava.version>
         <jackson.version>2.18.1</jackson.version>
         <jakarta.xml.bind.version>4.0.2</jakarta.xml.bind.version>
