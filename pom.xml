@@ -19,7 +19,7 @@
 
     <groupId>care.better.platform</groupId>
     <artifactId>ehr-common</artifactId>
-    <version>4.0.3-SNAPSHOT</version>
+    <version>4.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -73,14 +73,6 @@
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
 
-        <!--suppress UnresolvedMavenProperty -->
-        <sonar.coverage.jacoco.xmlReportPaths>
-            ${maven.multiModuleProjectDirectory}/ehr-common-jacoco/target/site/jacoco-aggregate/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
-        <!--suppress UnresolvedMavenProperty -->
-        <dependency.check.report.dir>${maven.multiModuleProjectDirectory}/ehr-common-jacoco/target</dependency.check.report.dir>
-        <sonar.dependencyCheck.jsonReportPath>${dependency.check.report.dir}/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>
-        <sonar.dependencyCheck.htmlReportPath>${dependency.check.report.dir}/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
         <sonar.java.source>${java.version}</sonar.java.source>
     </properties>
 
@@ -107,55 +99,55 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-model</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-time</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terminology</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-jacoco</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-amnode</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-xml-jaxb</artifactId>
-                <version>4.0.3-SNAPSHOT</version>
+                <version>4.0.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
@@ -424,6 +416,11 @@
     <profiles>
         <profile>
             <id>runSonar</id>
+            <activation>
+                <property>
+                    <name>runSonar</name>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <plugin>

@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.0.4 - 2024-10-11
+
+- Fix issue with `OriginalVersion` XML serialization
+- Fix issue with `DvInterval` JSON serialization
+
+## 4.0.3 - 2024-08-15
+
+- Add terminology foundation classes (`TerminologyCode` and `TerminologyTerm`)
+- Fix ObjectMapper initialization
+
+## 4.0.2 - 2024-05-24
+
+- Change package of the `OpenEhrSerializer` and the `OpenEhrSerializer` classes
+
+## 4.0.1 - 2024-05-24 
+
+- Release was not published
+
 ## 4.0.0 - 2024-02-15
 
 - Initial 4.0.x version based on 3.2.5

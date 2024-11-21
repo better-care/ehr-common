@@ -26,26 +26,25 @@ import org.apache.commons.lang3.StringUtils
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.openehr.base.basetypes.TerminologyId
+import org.openehr.base.foundationtypes.IntervalOfInteger
 import org.openehr.rm.composition.Composition
 import org.openehr.rm.composition.Section
 import org.openehr.rm.datastructures.Cluster
 import org.openehr.rm.datatypes.CodePhrase
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvCodedText.Companion.create
+import org.openehr.rm.datatypes.DvInterval
 import org.openehr.rm.datatypes.DvText
 import java.io.IOException
 import java.time.OffsetDateTime
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 import kotlin.collections.set
 
 /**
  * @author Primoz Delopst
  * @since 3.1.0
  */
-class RmAwareObjectMapperJsonSerializationTest {
+class BetterObjectMapperJsonSerializationTest {
     private val objectMapper: ObjectMapper = BetterObjectMapper().apply { this.enable(JsonParser.Feature.ALLOW_COMMENTS) }
 
     @Test
@@ -154,7 +153,7 @@ class RmAwareObjectMapperJsonSerializationTest {
     @Test
     fun testSimpleMapInList1() {
         val fromJson = objectMapper.readValue(
-            """[
+                """[
                           {
                             "tags": [
                               {
@@ -170,15 +169,15 @@ class RmAwareObjectMapperJsonSerializationTest {
                             ]
                           }
                         ]""",
-            object : TypeReference<List<Any>>() {})
+                object : TypeReference<List<Any>>() {})
         assertThat(fromJson).hasSize(1)
         assertThat(fromJson[0]).isInstanceOf(MutableMap::class.java)
         val map = fromJson[0] as Map<*, *>
         assertThat(map["tags"]).isInstanceOf(MutableList::class.java)
         val tags = map["tags"] as List<*>
         assertThat(tags).containsExactly(
-            ImmutableMap.of("tag", "abc1", "value", "val1", "aqlPath", "/"),
-            ImmutableMap.of("tag", "abc2", "value", "val2", "aqlPath", "/"))
+                ImmutableMap.of("tag", "abc1", "value", "val1", "aqlPath", "/"),
+                ImmutableMap.of("tag", "abc2", "value", "val2", "aqlPath", "/"))
     }
 
     @Test
@@ -236,8 +235,8 @@ class RmAwareObjectMapperJsonSerializationTest {
     @Test
     fun testResultSetWithTags() {
         val fromJson: List<*> = objectMapper.readValue(
-            RmAwareObjectMapperJsonSerializationTest::class.java.getResource("/simple.json"),
-            MutableList::class.java)
+                BetterObjectMapperJsonSerializationTest::class.java.getResource("/simple.json"),
+                MutableList::class.java)
 
         assertThat(fromJson).isNotNull
         assertThat(fromJson).hasSize(1)
@@ -251,7 +250,7 @@ class RmAwareObjectMapperJsonSerializationTest {
 
     @Test
     fun testWrappedResultSetWithTags() {
-        val fromJson = objectMapper.readValue(RmAwareObjectMapperJsonSerializationTest::class.java.getResource("/result.json"), Result::class.java)
+        val fromJson = objectMapper.readValue(BetterObjectMapperJsonSerializationTest::class.java.getResource("/result.json"), Result::class.java)
         assertThat(fromJson).isNotNull
         assertThat(fromJson.resultSet).hasSize(1)
         assertThat(fromJson.resultSet[0]).isInstanceOf(MutableMap::class.java)
@@ -341,6 +340,50 @@ class RmAwareObjectMapperJsonSerializationTest {
         assertThat(rm3).isInstanceOf(DvCodedText::class.java)
         assertThat((rm3 as DvCodedText).definingCode).isInstanceOf(CodePhrase::class.java)
         assertThat(rm3.definingCode!!.terminologyId).isInstanceOf(TerminologyId::class.java)
+    }
+
+    @Test
+    fun intervalSerializationTest() {
+        val interval = IntervalOfInteger().apply {
+            lowerUnbounded = true
+            upperUnbounded = true
+            lowerIncluded = false
+            upperIncluded = false
+        }
+        val json = objectMapper.writeValueAsString(interval)
+        assertThat(json).contains("\"lower_unbounded\":true")
+        assertThat(json).contains("\"lower_included\":false")
+        assertThat(json).contains("\"upper_unbounded\":true")
+        assertThat(json).contains("\"upper_included\":false")
+        assertThat(json).contains("\"is_lower_unbounded\":true")
+        assertThat(json).contains("\"is_lower_included\":false")
+        assertThat(json).contains("\"is_upper_unbounded\":true")
+        assertThat(json).contains("\"is_upper_included\":false")
+    }
+
+    @Test
+    fun dvIntervalSerializationTest() {
+        val interval = DvInterval(null, null, false, false, true, true)
+        val json = objectMapper.writeValueAsString(interval)
+        assertThat(json).contains("\"lower_unbounded\":true")
+        assertThat(json).contains("\"lower_included\":false")
+        assertThat(json).contains("\"upper_unbounded\":true")
+        assertThat(json).contains("\"upper_included\":false")
+        assertThat(json).contains("\"is_lower_unbounded\":true")
+        assertThat(json).contains("\"is_lower_included\":false")
+        assertThat(json).contains("\"is_upper_unbounded\":true")
+        assertThat(json).contains("\"is_upper_included\":false")
+    }
+
+    @Test
+    fun dvIntervalDeserializationTest() {
+        val interval = objectMapper.readValue(
+                "{\"@class\":\"DV_INTERVAL\",\"lower\":null,\"upper\":null,\"lower_included\":false,\"upper_included\":false,\"lower_unbounded\":true,\"upper_unbounded\":true}",
+                DvInterval::class.java)
+        assertThat(interval.lowerUnbounded).isTrue
+        assertThat(interval.upperUnbounded).isTrue
+        assertThat(interval.lowerIncluded).isFalse
+        assertThat(interval.upperIncluded).isFalse
     }
 
     private fun buildCluster(): Cluster = Cluster().apply { this.name = DvCodedText.createWithLocalTerminology("at0001", "Name") }
