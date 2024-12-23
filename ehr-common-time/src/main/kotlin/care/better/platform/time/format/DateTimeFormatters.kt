@@ -385,7 +385,7 @@ class DateTimeFormatters {
         @JvmStatic
         fun offsetFormatter(compact: Boolean = false, strict: Boolean = true, forFormatting: Boolean = true): DateTimeFormatter =
             if (compact)
-                DateTimeFormatterBuilder().appendOptional(DateTimeFormatter.ofPattern("Z")).toFormatter()
+                DateTimeFormatterBuilder().optionalStart().appendZoneOrOffsetId().optionalEnd().appendOptional(DateTimeFormatter.ofPattern("Z")).toFormatter()
             else if (forFormatting)
                 if (strict)
                     DateTimeFormatterBuilder().appendZoneOrOffsetId().toFormatter()
