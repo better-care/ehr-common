@@ -95,6 +95,11 @@ class OpenEhrDateTimeFormatter(
         @JvmOverloads
         fun ofOptionalOffsetTime(strict: Boolean = true, locale: Locale? = null): OpenEhrDateTimeFormatter =
             OpenEhrDateTimeFormatterBuilder().appendPattern("HH:mm:??.???Z", strict).toOpenEhrFormatter(locale)
+
+        @JvmStatic
+        fun getPrecisionField(temporal: TemporalAccessor): OpenEhrField =
+            ChronoField.entries.firstOrNull { temporal.isSupported(it) }?.let { OpenEhrField.valueOf(it.baseUnit as ChronoUnit) }
+                ?: throw DateTimeException("Invalid value $temporal")
     }
 
     fun parseDate(text: String): TemporalAccessor = parseDate(text, { it, _, _ -> it })
@@ -169,7 +174,6 @@ class OpenEhrDateTimeFormatter(
                 else -> temporal
             }
         }
-
         return (defaultFormatter.takeUnless { isTime(validatedTemporal) } ?: timeFormatter).format(validatedTemporal)
     }
 
@@ -321,10 +325,6 @@ class OpenEhrDateTimeFormatter(
                 }
             return Pair(parseUnresolved, field)
         }
-
-        private fun getPrecisionField(temporal: TemporalAccessor): OpenEhrField =
-            ChronoField.values().firstOrNull { temporal.isSupported(it) }?.let { OpenEhrField.valueOf(it.baseUnit as ChronoUnit) }
-                ?: throw DateTimeException("Invalid value $temporal")
 
         private fun validateBeforeParsing(text: String, formatter: DateTimeFormatter, offsetValidationStyle: ResolverStyle?) {
             val parseUnresolved = (formatter.takeUnless { text.contains("T") } ?: dateTimeFormatter).parseUnresolved(text, ParsePosition(0))

@@ -1,5 +1,6 @@
 package care.better.platform.time.format
 
+import care.better.platform.time.temporal.OpenEhrField
 import care.better.platform.time.temporal.OpenEhrLocalDate
 import care.better.platform.time.temporal.OpenEhrLocalDateTime
 import care.better.platform.time.temporal.OpenEhrOffsetDateTime
@@ -26,6 +27,7 @@ class OpenEhrDateTimeFormattingTest {
     companion object {
         private lateinit var defaultTimeZone: TimeZone
         private const val CONVERSION_EXCEPTION = "CONVERSION_EXCEPTION"
+        private const val INVALID_FORMAT_EXCEPTION = "INVALID_FORMAT_EXCEPTION"
 
         @BeforeAll
         @JvmStatic
@@ -432,10 +434,134 @@ class OpenEhrDateTimeFormattingTest {
                 args("", "2021", Year.of(2021))
         )
 
+        @JvmStatic
+        @Suppress("unused")
+        fun provideDateTimeAndExpectedPrecisionFieldResult(): Stream<Arguments> = Stream.of(
+                // OpenEhrField.YEARS
+                args("2021", OpenEhrField.YEARS),
+                args("0202", OpenEhrField.YEARS),
+                args("0020", OpenEhrField.YEARS),
+                args("0002", OpenEhrField.YEARS),
+                args("0000", OpenEhrField.YEARS),
+
+                // OpenEhrField.MONTHS
+                args("2021-08", OpenEhrField.MONTHS),
+                args("2021-8", OpenEhrField.MONTHS),
+
+                // OpenEhrField.DAYS
+                args("2021-08-06", OpenEhrField.DAYS),
+                args("2021-08-6", OpenEhrField.DAYS),
+                args("2021-8-6", OpenEhrField.DAYS),
+                args("2021-8-06", OpenEhrField.DAYS),
+
+                // OpenEhrField.HOURS
+                args("2021-08-06T01", OpenEhrField.HOURS),
+                args("2021-08-06T22", OpenEhrField.HOURS),
+                args("2021-08-06T7", OpenEhrField.HOURS),
+
+                // OpenEhrField.MINUTES
+                args("2021-08-06T23:17-04:00", OpenEhrField.MINUTES),
+                args("2021-08-06T23:17-04:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T23:00", OpenEhrField.MINUTES),
+                args("2021-08-06T23:05", OpenEhrField.MINUTES),
+                args("2021-08-06T3:2", OpenEhrField.MINUTES),
+                args("2021-08-06T23:2", OpenEhrField.MINUTES),
+                args("2021-08-06T3:22", OpenEhrField.MINUTES),
+
+                // OpenEhrField.SECONDS
+                args("2021-08-06T23:17:35-04:00", OpenEhrField.SECONDS),
+                args("2021-08-06T23:17:5-04:00", OpenEhrField.SECONDS),
+                args("2021-08-06T2:1:5-04:00", OpenEhrField.SECONDS),
+                args("2021-08-06T23:17:35-04:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T23:17:5-04:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T2:1:5-04:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T23:17:5", OpenEhrField.SECONDS),
+                args("2021-08-06T23:17:0", OpenEhrField.SECONDS),
+                args("2021-08-06T23:17:35-0400", OpenEhrField.SECONDS),
+                args("2021-08-06T23:17:35-04", OpenEhrField.SECONDS),
+                args("2021-08-06T01:17:35+02:00", OpenEhrField.SECONDS),
+                args("2021-08-06T23:17:35-0400Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T23:17:35-04Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T01:17:35+02:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T23:17:35Z", OpenEhrField.SECONDS),
+
+                // OpenEhrField.NANOS
+                args("2021-08-06T23:17:35.654789-04:00", OpenEhrField.NANOS),
+                args("2021-08-06T23:17:35.0-04:00", OpenEhrField.NANOS),
+                args("2021-08-06T23:17:35.654789-04:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T23:17:35.0-04:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-06T23:17:35.0", OpenEhrField.NANOS),
+                args("2021-08-06T23:17:35.666", OpenEhrField.NANOS),
+                args("2021-08-06T23:17:35.66632532", OpenEhrField.NANOS),
+                args("2021-08-06T3:0:5.66632532", OpenEhrField.NANOS),
+                args("2021-08-06T23:17:35.654Z", OpenEhrField.NANOS),
+                args( "2013-1-1T01:00:17.000Z", OpenEhrField.NANOS),
+        )
+
+        @JvmStatic
+        @Suppress("unused")
+        fun provideCompactDateTimeAndExpectedPrecisionFieldResult(): Stream<Arguments> = Stream.of(
+                // OpenEhrField.YEARS compact pattern
+                args("2021", OpenEhrField.YEARS),
+                args("0202", OpenEhrField.YEARS),
+                args("0020", OpenEhrField.YEARS),
+                args("0002", OpenEhrField.YEARS),
+                args("0000", OpenEhrField.YEARS),
+
+                // OpenEhrField.MONTHS compact pattern
+                args("202108", OpenEhrField.MONTHS),
+                args("20218", OpenEhrField.MONTHS),
+
+                // OpenEhrField.DAYS compact pattern
+                args("20210806", OpenEhrField.DAYS),
+                args("2021086", OpenEhrField.DAYS),
+
+                // OpenEhrField.HOURS compact pattern
+                args("20210806T01", OpenEhrField.HOURS),
+                args("20210806T22", OpenEhrField.HOURS),
+                args("20210806T7", OpenEhrField.HOURS),
+
+                // OpenEhrField.MINUTES compact pattern
+                args("20210806T2317", OpenEhrField.MINUTES),
+                args("20210806T2300", OpenEhrField.MINUTES),
+                args("20210806T2305", OpenEhrField.MINUTES),
+                args("20210806T232", OpenEhrField.MINUTES),
+                args("20210806T232", OpenEhrField.MINUTES),
+
+                // OpenEhrField.SECONDS compact pattern
+                args("20210806T231735", OpenEhrField.SECONDS),
+                args("20210806T23175", OpenEhrField.SECONDS),
+                args("20210806T215", OpenEhrField.MINUTES),
+                args("20210806T23175", OpenEhrField.SECONDS),
+                args("20210806T23170", OpenEhrField.SECONDS),
+                args("20220806T231735", OpenEhrField.SECONDS),
+                args("20210806T231735", OpenEhrField.SECONDS),
+                args("20210806T011735", OpenEhrField.SECONDS),
+                args("20210806T231735Z", OpenEhrField.SECONDS),
+                args("20241203T152745.123456789+0530", OpenEhrField.NANOS),
+                args("20241203T152745.123456789+05:30", OpenEhrField.NANOS),
+                args("20241203T152745.123456789+0530Z", INVALID_FORMAT_EXCEPTION),
+                args("20241203T152745.123456789+05:30Z", INVALID_FORMAT_EXCEPTION),
+                args("20241203T152745.123456789Z", OpenEhrField.NANOS),
+
+                // OpenEhrField.NANOS compact pattern
+                args("20210806T231735.654789", OpenEhrField.NANOS),
+                args("20210806T231735.0", OpenEhrField.NANOS),
+                args("20210806T231735.0", OpenEhrField.NANOS),
+                args("20210806T231735.666", OpenEhrField.NANOS),
+                args("20210806T231735.66632532", OpenEhrField.NANOS),
+                args("20210806T235655.32532", OpenEhrField.NANOS),
+                args("20210806T235655.32532", OpenEhrField.NANOS),
+                args("20210806T231735.654Z", OpenEhrField.NANOS),
+                args( "20131122T010017.000Z", OpenEhrField.NANOS),
+        )
+
         private fun args(pattern: String?, dateTime: String, resultInLenientMode: String, resultInStrictMode: String) =
             Arguments.of(pattern, dateTime, resultInLenientMode, resultInStrictMode)
 
         private fun args(pattern: String?, dateTime: String, expectedParsedDateTime: Temporal) = Arguments.of(pattern, dateTime, expectedParsedDateTime)
+
+        private fun args(dateTime: String, expectedResult: Any) = Arguments.of(dateTime, expectedResult)
     }
 
     @ParameterizedTest
@@ -583,6 +709,46 @@ class OpenEhrDateTimeFormattingTest {
         assertThat(localDateTime).isInstanceOf(LocalDateTime::class.java)
         assertThat((localDateTime as LocalDateTime).second).isEqualTo(0)
         assertThat(localDateTime.isSupported(ChronoField.SECOND_OF_MINUTE)).isTrue
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideDateTimeAndExpectedPrecisionFieldResult")
+    fun handleDateTimePrecisionField(dateTimeString: String, expectedResult: Any) {
+        val pattern = ""
+        val formatter = OpenEhrDateTimeFormatter.ofPattern(pattern, false)
+
+        if (expectedResult == INVALID_FORMAT_EXCEPTION) {
+            assertThatExceptionOfType(DateTimeException::class.java)
+                .describedAs("Parsing \"$dateTimeString\" using pattern \"$pattern\".")
+                .isThrownBy {
+                    formatter.parseDateTime(dateTimeString)
+                }
+        } else {
+            val dateTime = formatter.parseDateTime(dateTimeString)
+            val actualResult: OpenEhrField = OpenEhrDateTimeFormatter.getPrecisionField(dateTime)
+            assertThat(actualResult)
+                .describedAs("Parsing \"$dateTime\" using pattern \"$pattern\".").isEqualTo(expectedResult)
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideCompactDateTimeAndExpectedPrecisionFieldResult")
+    fun handleCompactDateTimePrecisionField(dateTimeString: String, expectedResult: Any) {
+        val pattern = "yyyy????T??????.???Z"
+        val formatter = OpenEhrDateTimeFormatter.ofPattern(pattern, false)
+
+        if (expectedResult == INVALID_FORMAT_EXCEPTION) {
+            assertThatExceptionOfType(DateTimeException::class.java)
+                .describedAs("Parsing \"$String\" using pattern \"$pattern\".")
+                .isThrownBy {
+                    formatter.parseDateTime(dateTimeString)
+                }
+        } else {
+            val dateTime = formatter.parseDateTime(dateTimeString)
+            val actualResult: OpenEhrField = OpenEhrDateTimeFormatter.getPrecisionField(dateTime)
+            assertThat(actualResult)
+                .describedAs("Parsing \"$dateTime\" using pattern \"$pattern\".").isEqualTo(expectedResult)
+        }
     }
 
     private fun handleDateTime(pattern: String?, dateTime: String, expectedResult: String, strictMode: Boolean) {

@@ -57,20 +57,21 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven-dependency-check-plugin.version>8.3.1</maven-dependency-check-plugin.version>
+        <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+        <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-dependency-check-plugin.version>12.0.0</maven-dependency-check-plugin.version>
         <maven-dokka-plugin.version>1.9.10</maven-dokka-plugin.version>
-        <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
+        <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
-        <maven-jacoco-plugin.version>0.8.10</maven-jacoco-plugin.version>
-        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+        <maven-install-plugin.version>3.1.3</maven-install-plugin.version>
+        <maven-jacoco-plugin.version>0.8.12</maven-jacoco-plugin.version>
+        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-nexus-staging-plugin.version>1.6.13</maven-nexus-staging-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-sonar-plugin.version>3.9.1.2184</maven-sonar-plugin.version>
-        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-sonar-plugin.version>5.0.0.4389</maven-sonar-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
 
         <sonar.java.source>${java.version}</sonar.java.source>
     </properties>
@@ -394,13 +395,11 @@
                     <configuration>
                         <formats>json,html</formats>
                         <outputDirectory>${dependency.check.report.dir}</outputDirectory>
-                        <cveServerId>artifactory</cveServerId>
-                        <cveUrlBase>https://artifactory.better.care/artifactory/nvdcve/nvdcve-1.1-%d.json.gz</cveUrlBase>
-                        <!--<cveUrlBase>https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-%d.json.gz</cveUrlBase> Original URL - download new ones (after 2023) and upload them to artifactory-->
+                        <nvdApiKey>${dependency.check.nvdApiKey}</nvdApiKey>
+                        <nvdDatafeedUrl>${dependency.check.nvdDatafeedUrl}</nvdDatafeedUrl>
                         <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
                     </configuration>
                 </plugin>
-
             </plugins>
         </pluginManagement>
     </build>
@@ -530,7 +529,7 @@
 
     <developers>
         <developer>
-            <name>Bostjan Lah</name>
+            <name>Boštjan Lah</name>
             <email>bostjan.lah@better.care</email>
             <organization>Better Ltd</organization>
             <organizationUrl>https://www.better.care/</organizationUrl>
@@ -557,12 +556,6 @@
             <organizationUrl>https://www.better.care/</organizationUrl>
         </developer>
 
-        <developer>
-            <name>Matic Ribič</name>
-            <email>matic.ribic@better.care</email>
-            <organization>Better Ltd</organization>
-            <organizationUrl>https://www.better.care/</organizationUrl>
-        </developer>
     </developers>
 
     <distributionManagement>
