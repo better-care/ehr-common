@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.0.5 - 2025-02-06
+
+- Implement stricter DateTime validation 
+
 ## 4.0.4 - 2024-10-11
 
 - Fix issue with `OriginalVersion` XML serialization
