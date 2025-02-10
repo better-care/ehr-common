@@ -15,8 +15,8 @@
 
 package org.openehr.am.aom
 
+import jakarta.xml.bind.annotation.*
 import java.math.BigInteger
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

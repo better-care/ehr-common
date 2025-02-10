@@ -39,23 +39,18 @@
 
     <properties>
         <java.version>21</java.version>
-        <kotlin.version>1.9.24</kotlin.version>
+        <kotlin.version>2.1.0</kotlin.version>
 
-        <jetbrains-annotations.version>23.1.0</jetbrains-annotations.version>
+        <jetbrains-annotations.version>26.0.2</jetbrains-annotations.version>
 
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <guava.version>32.1.2-jre</guava.version>
-        <jackson.version>2.15.2</jackson.version>
-        <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
-        <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
-        <joda-time.version>2.12.5</joda-time.version>
-
-        <jupiter.version>5.9.3</jupiter.version>
-        <assertj.version>3.24.2</assertj.version>
-
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <assertj.version>3.27.3</assertj.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
+        <guava.version>33.3.1-jre</guava.version>
+        <jackson.version>2.18.2</jackson.version>
+        <jakarta.xml.bind.version>4.0.2</jakarta.xml.bind.version>
+        <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
+        <joda-time.version>2.13.0</joda-time.version>
+        <jupiter.version>5.11.4</jupiter.version>
 
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
         <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
@@ -74,6 +69,9 @@
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
 
         <sonar.java.source>${java.version}</sonar.java.source>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>
@@ -166,6 +164,13 @@
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
                 <version>${jaxb-runtime.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <!-- The API (jakarta.xml.bind-api) brings a different version. -->
+                        <groupId>jakarta.activation</groupId>
+                        <artifactId>jakarta.activation-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>

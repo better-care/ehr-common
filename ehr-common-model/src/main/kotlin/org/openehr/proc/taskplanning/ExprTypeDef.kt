@@ -17,9 +17,9 @@ package org.openehr.proc.taskplanning
 
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
+import jakarta.xml.bind.annotation.*
 import java.io.Serializable
 import java.util.*
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

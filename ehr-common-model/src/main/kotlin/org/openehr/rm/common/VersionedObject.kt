@@ -16,12 +16,12 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

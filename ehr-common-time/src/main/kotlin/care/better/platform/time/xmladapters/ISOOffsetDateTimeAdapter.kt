@@ -15,9 +15,9 @@
 
 package care.better.platform.time.xmladapters
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
-import javax.xml.bind.annotation.adapters.XmlAdapter
 
 /**
  * @author Bostjan Lah

@@ -18,10 +18,10 @@ package org.openehr.proc.taskplanning
 import care.better.platform.annotation.Open
 import care.better.platform.proc.taskplanning.visitor.TaskModelVisitor
 import care.better.platform.proc.taskplanning.visitor.VisitableByModelVisitor
+import jakarta.xml.bind.annotation.*
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import java.io.Serializable
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst

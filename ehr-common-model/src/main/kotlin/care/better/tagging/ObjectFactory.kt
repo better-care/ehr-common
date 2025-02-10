@@ -2,7 +2,7 @@ package care.better.tagging
 
 import care.better.tagging.dto.TagList
 import care.better.tagging.dto.TagWithValueDto
-import javax.xml.bind.annotation.XmlRegistry
+import jakarta.xml.bind.annotation.XmlRegistry
 
 /**
  * @author Domen Muren

@@ -15,10 +15,10 @@
 
 package org.openehr.am.aom
 
+import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.common.AuthoredResource
-import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
