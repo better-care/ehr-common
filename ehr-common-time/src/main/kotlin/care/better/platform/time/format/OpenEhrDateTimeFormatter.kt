@@ -356,8 +356,7 @@ class OpenEhrDateTimeFormatter(
 
         private fun validateOffset(text: String, parseUnresolved: TemporalAccessor, strict: Boolean, offsetValidationStyle: ResolverStyle?) {
             val hasTimeZone = parseUnresolved.query(TemporalQueries.zone()) != null
-
-            val validIsoDate = !hasTimeZone || parseUnresolved.isSupported(ChronoField.MINUTE_OF_HOUR)
+            val validIsoDate = !hasTimeZone || parseUnresolved.isSupported(ChronoField.HOUR_OF_DAY)
             require(validIsoDate) { "Invalid value \"$text\" for pattern \"${context.pattern}\"" }
 
             if (strict) {
