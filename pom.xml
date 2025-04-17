@@ -46,10 +46,11 @@
 
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <guava.version>32.1.2-jre</guava.version>
-        <jackson.version>2.15.2</jackson.version>
+        <jackson.version>2.18.3</jackson.version>
         <jakarta.xml.bind.version>2.3.3</jakarta.xml.bind.version>
         <jaxb-runtime.version>2.3.6</jaxb-runtime.version>
         <joda-time.version>2.12.5</joda-time.version>
+        <mockk.version>1.14.0</mockk.version>
 
         <jupiter.version>5.9.3</jupiter.version>
         <assertj.version>3.24.2</assertj.version>
@@ -186,6 +187,12 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -197,6 +204,13 @@
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.mockk</groupId>
+                <artifactId>mockk-jvm</artifactId>
+                <version>${mockk.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
