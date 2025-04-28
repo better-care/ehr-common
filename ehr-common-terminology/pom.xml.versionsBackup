@@ -17,20 +17,17 @@
     <parent>
         <artifactId>ehr-common</artifactId>
         <groupId>care.better.platform</groupId>
-        <version>4.1.0</version>
+        <version>4.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ehr-common-model</artifactId>
+    <artifactId>ehr-common-terminology</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>care.better.platform</groupId>
-            <artifactId>ehr-common-time</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
+            <artifactId>ehr-common-utils</artifactId>
         </dependency>
     </dependencies>
+
 </project>
