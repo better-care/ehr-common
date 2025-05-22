@@ -65,11 +65,11 @@ class OpenEhrDateTimeFormattingTest {
 
                 // UTC datetime pattern, partial datetime in timezone
                 args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T23:17-04:00", "2021-08-06T23:17:00-04:00", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T23-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T23-04:00", "2021-08-06T23:00:00-04:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T01:17+04:00", "2021-08-06T01:17:00+04:00", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T01+04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T01+04:00", "2021-08-06T01:00:00+04:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T23:17Z", "2021-08-06T23:17:00Z", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T23Z", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T23Z", "2021-08-06T23:00:00Z", CONVERSION_EXCEPTION),
 
                 // UTC datetime pattern, local partial datetime
                 args("yyyy-mm-ddTHH:MM:SSZ", "2021-08-06T01:17", "2021-08-06T01:17:00+02:00", CONVERSION_EXCEPTION),
@@ -93,11 +93,11 @@ class OpenEhrDateTimeFormattingTest {
 
                 // local datetime pattern, partial datetime in timezone
                 args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T23:17-04:00", "2021-08-06T23:17:00-04:00", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T23-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T23-04:00", "2021-08-06T23:00:00-04:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T01:17+04:00", "2021-08-06T01:17:00+04:00", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T01+04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T01+04:00", "2021-08-06T01:00:00+04:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T23:17Z", "2021-08-06T23:17:00Z", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T23Z", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T23Z", "2021-08-06T23:00:00Z", CONVERSION_EXCEPTION),
 
                 // local datetime pattern, local partial datetime
                 args("yyyy-mm-ddTHH:MM:SS", "2021-08-06T01:17", "2021-08-06T01:17:00+02:00", CONVERSION_EXCEPTION),
@@ -119,11 +119,11 @@ class OpenEhrDateTimeFormattingTest {
 
                 // optional seconds pattern, partial datetime in timezone
                 args("yyyy-mm-ddTHH:MM:??", "2021-08-06T23:17-04:00", "2021-08-07T05:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T23-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T23-04:00", "2021-08-07T05:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:??", "2021-08-06T01:17+04:00", "2021-08-05T23:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T01+04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T01+04:00", "2021-08-05T23:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:??", "2021-08-06T23:17Z", "2021-08-07T01:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T23Z", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:??", "2021-08-06T23Z", "2021-08-07T01:00", CONVERSION_EXCEPTION),
 
                 // optional seconds pattern, local partial datetime
                 args("yyyy-mm-ddTHH:MM:??", "2021-08-06T01:17", "2021-08-06T01:17", "2021-08-06T01:17"),
@@ -145,11 +145,11 @@ class OpenEhrDateTimeFormattingTest {
 
                 // not allowed seconds pattern, partial datetime in timezone
                 args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T23:17-04:00", "2021-08-07T05:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T23-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T23-04:00", "2021-08-07T05:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T01:17+04:00", "2021-08-05T23:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T01+04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T01+04:00", "2021-08-05T23:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T23:17Z", "2021-08-07T01:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T23Z", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T23Z", "2021-08-07T01:00", CONVERSION_EXCEPTION),
 
                 // not allowed seconds pattern, local partial datetime
                 args("yyyy-mm-ddTHH:MM:XX", "2021-08-06T01:17", "2021-08-06T01:17", "2021-08-06T01:17"),
@@ -170,16 +170,16 @@ class OpenEhrDateTimeFormattingTest {
 
                 // optional hour and minute and not allowed seconds pattern, partial datetime in timezone
                 args("yyyy-mm-ddT??:??:XX", "2021-08-06T23:17-04:00", "2021-08-07T05:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddT??:??:XX", "2021-08-06T23-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddT??:??:XX", "2021-08-06T23-04:00", "2021-08-07T05", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddT??:??:XX", "2021-08-06T01:17+04:00", "2021-08-05T23:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddT??:??:XX", "2021-08-06T01+04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddT??:??:XX", "2021-08-06T01+04:00", "2021-08-05T23", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddT??:??:XX", "2021-08-06T23:17Z", "2021-08-07T01:17", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddT??:??:XX", "2021-08-06T23Z", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddT??:??:XX", "2021-08-06T23Z", "2021-08-07T01", CONVERSION_EXCEPTION),
 
                 // optional hour and minute and not allowed seconds pattern, local partial datetime
                 args("yyyy-mm-ddT??:??:XX", "2021-08-06T01:17", "2021-08-06T01:17", "2021-08-06T01:17"),
                 args("yyyy-mm-ddT??:??:XX", "2021-08-06T01", "2021-08-06T01", "2021-08-06T01"),
-                args("yyyy-mm-ddT??:??:XX", "2021-08-06T", "CONVERSION_EXCEPTION", CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddT??:??:XX", "2021-08-06T", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddT??:??:XX", "2021-08-06", "2021-08-06", "2021-08-06"),
                 args("yyyy-mm-ddT??:??:XX", "2021-08", "2021-08-01", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddT??:??:XX", "2021", "2021-01-01", CONVERSION_EXCEPTION),
@@ -268,15 +268,16 @@ class OpenEhrDateTimeFormattingTest {
                 args("yyyy-mm-ddTHH:MMZ", "2021-08-06T23:17-04:00", "2021-08-06T23:17-04:00", "2021-08-06T23:17-04:00"),
                 args("yyyy-mm-ddTHH:MMZ", "2021-08-06T23:17Z", "2021-08-06T23:17Z", "2021-08-06T23:17Z"),
                 args("yyyy-mm-ddTHH:MMZ", "2021-08-06T23:17", "2021-08-06T23:17+02:00", CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH:MMZ", "2021-08-06TZ", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH:MM", "2021-08-06T23:17-04:00", "2021-08-06T23:17-04:00", "2021-08-06T23:17-04:00"),
                 args("yyyy-mm-ddTHH:MM", "2021-08-06T23:17Z", "2021-08-06T23:17Z", "2021-08-06T23:17Z"),
                 args("yyyy-mm-ddTHH:MM", "2021-08-06T23:17", "2021-08-06T23:17", "2021-08-06T23:17"),
 
-                args("yyyy-mm-ddTHHZ", "2021-08-06T23:17-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHHZ", "2021-08-06T23-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHHZ", "2021-08-06T23", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHHZ", "2021-08-06T23:17-04:00", "2021-08-07T05", CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHHZ", "2021-08-06T23-04:00", "2021-08-07T05", "2021-08-06T23-04:00"),
+                args("yyyy-mm-ddTHHZ", "2021-08-06T23", "2021-08-06T23+02:00", CONVERSION_EXCEPTION),
                 args("yyyy-mm-ddTHH", "2021-08-06T23:17-04:00", "2021-08-07T05", CONVERSION_EXCEPTION),
-                args("yyyy-mm-ddTHH", "2021-08-06T23-04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("yyyy-mm-ddTHH", "2021-08-06T23-04:00", "2021-08-07T05", "2021-08-06T23-04:00"),
                 args("yyyy-mm-ddTHH", "2021-08-06T23", "2021-08-06T23", "2021-08-06T23"),
 
                 args("yyyy-mm-ddZ", "2021-08-06Z", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
@@ -341,7 +342,7 @@ class OpenEhrDateTimeFormattingTest {
                 args("", "2021-08-06T23:17:35", "2021-08-06T23:17:35+02:00", "2021-08-06T23:17:35+02:00"),
                 args("", "2021-08-06T23:17Z", "2021-08-06T23:17Z", "2021-08-06T23:17Z"),
                 args("", "2021-08-06T04:03:02Z", "2021-08-06T04:03:02Z", "2021-08-06T04:03:02Z"),
-                args("", "2021-08-06T23Z", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
+                args("", "2021-08-06T23Z", "2021-08-07T01", CONVERSION_EXCEPTION),
                 args("", "2021-08-06", "2021-08-06", "2021-08-06"),
 
                 args("", "23:17:35.654+04:00", CONVERSION_EXCEPTION, CONVERSION_EXCEPTION),
@@ -455,13 +456,16 @@ class OpenEhrDateTimeFormattingTest {
                 args("2021-8-06", OpenEhrField.DAYS),
 
                 // OpenEhrField.HOURS
+                args("2021-08-06TZ", INVALID_FORMAT_EXCEPTION),
                 args("2021-08-06T01", OpenEhrField.HOURS),
+                args("2021-08-06T01Z", OpenEhrField.HOURS),
                 args("2021-08-06T22", OpenEhrField.HOURS),
                 args("2021-08-06T7", OpenEhrField.HOURS),
 
                 // OpenEhrField.MINUTES
                 args("2021-08-06T23:17-04:00", OpenEhrField.MINUTES),
                 args("2021-08-06T23:17-04:00Z", INVALID_FORMAT_EXCEPTION),
+                args("2021-08-07T01:12Z", OpenEhrField.MINUTES),
                 args("2021-08-06T23:00", OpenEhrField.MINUTES),
                 args("2021-08-06T23:05", OpenEhrField.MINUTES),
                 args("2021-08-06T3:2", OpenEhrField.MINUTES),
@@ -496,6 +500,7 @@ class OpenEhrDateTimeFormattingTest {
                 args("2021-08-06T3:0:5.66632532", OpenEhrField.NANOS),
                 args("2021-08-06T23:17:35.654Z", OpenEhrField.NANOS),
                 args( "2013-1-1T01:00:17.000Z", OpenEhrField.NANOS),
+                args("fres2021-08-06T23:17:35.654789-04:00", INVALID_FORMAT_EXCEPTION),
         )
 
         @JvmStatic
@@ -517,43 +522,43 @@ class OpenEhrDateTimeFormattingTest {
                 args("2021086", OpenEhrField.DAYS),
 
                 // OpenEhrField.HOURS compact pattern
+                args("20210806TZ", INVALID_FORMAT_EXCEPTION),
                 args("20210806T01", OpenEhrField.HOURS),
+                args("20210806T01Z", OpenEhrField.HOURS),
                 args("20210806T22", OpenEhrField.HOURS),
                 args("20210806T7", OpenEhrField.HOURS),
 
                 // OpenEhrField.MINUTES compact pattern
                 args("20210806T2317", OpenEhrField.MINUTES),
                 args("20210806T2300", OpenEhrField.MINUTES),
+                args("20210807T0112Z", OpenEhrField.MINUTES),
                 args("20210806T2305", OpenEhrField.MINUTES),
-                args("20210806T232", OpenEhrField.MINUTES),
+                args("20210806T215", OpenEhrField.MINUTES),
                 args("20210806T232", OpenEhrField.MINUTES),
 
                 // OpenEhrField.SECONDS compact pattern
                 args("20210806T231735", OpenEhrField.SECONDS),
                 args("20210806T23175", OpenEhrField.SECONDS),
-                args("20210806T215", OpenEhrField.MINUTES),
                 args("20210806T23175", OpenEhrField.SECONDS),
                 args("20210806T23170", OpenEhrField.SECONDS),
                 args("20220806T231735", OpenEhrField.SECONDS),
-                args("20210806T231735", OpenEhrField.SECONDS),
                 args("20210806T011735", OpenEhrField.SECONDS),
                 args("20210806T231735Z", OpenEhrField.SECONDS),
+
+                // OpenEhrField.NANOS compact pattern
                 args("20241203T152745.123456789+0530", OpenEhrField.NANOS),
                 args("20241203T152745.123456789+05:30", OpenEhrField.NANOS),
                 args("20241203T152745.123456789+0530Z", INVALID_FORMAT_EXCEPTION),
                 args("20241203T152745.123456789+05:30Z", INVALID_FORMAT_EXCEPTION),
                 args("20241203T152745.123456789Z", OpenEhrField.NANOS),
-
-                // OpenEhrField.NANOS compact pattern
                 args("20210806T231735.654789", OpenEhrField.NANOS),
-                args("20210806T231735.0", OpenEhrField.NANOS),
                 args("20210806T231735.0", OpenEhrField.NANOS),
                 args("20210806T231735.666", OpenEhrField.NANOS),
                 args("20210806T231735.66632532", OpenEhrField.NANOS),
                 args("20210806T235655.32532", OpenEhrField.NANOS),
                 args("20210806T235655.32532", OpenEhrField.NANOS),
                 args("20210806T231735.654Z", OpenEhrField.NANOS),
-                args( "20131122T010017.000Z", OpenEhrField.NANOS),
+                args("20131122T010017.000Z", OpenEhrField.NANOS),
         )
 
         private fun args(pattern: String?, dateTime: String, resultInLenientMode: String, resultInStrictMode: String) =

@@ -67,7 +67,7 @@ class OpenEhrDateTimeFormatterBuilder {
                 fieldStates: Map<OpenEhrField, OpenEhrFieldState>
         ): DateTimeFormatterBuilder {
 
-            if (fieldStates[OpenEhrField.MINUTES].let { it == null || it == OpenEhrFieldState.FORBIDDEN }
+            if (fieldStates[OpenEhrField.HOURS].let { it == null || it == OpenEhrFieldState.FORBIDDEN }
                     && fieldStates[OpenEhrField.OFFSET_SECONDS] != OpenEhrFieldState.FORBIDDEN) {
                 throw DateTimeException("Invalid pattern $pattern")
             }
@@ -141,7 +141,7 @@ class OpenEhrDateTimeFormatterBuilder {
             val nanosecond = matcher.group(12)
             val timeZone = matcher.group(13)
 
-            if ((minute == null || minute == "XX") && timeZone != null) {
+            if ((hour == null || hour == "XX") && timeZone != null) {
                 throw DateTimeException("Invalid pattern $pattern")
             }
 
@@ -161,12 +161,16 @@ class OpenEhrDateTimeFormatterBuilder {
                         OpenEhrFieldState.MANDATORY, OpenEhrFieldState.OPTIONAL, OpenEhrFieldState.UNDEFINED -> OpenEhrFieldState.OPTIONAL
                         null, OpenEhrFieldState.FORBIDDEN -> when (fieldStates[OpenEhrField.MINUTES]) {
                             OpenEhrFieldState.MANDATORY, OpenEhrFieldState.OPTIONAL, OpenEhrFieldState.UNDEFINED -> OpenEhrFieldState.OPTIONAL
-                            else -> OpenEhrFieldState.FORBIDDEN
+                            null, OpenEhrFieldState.FORBIDDEN -> when (fieldStates[OpenEhrField.HOURS]) {
+                                OpenEhrFieldState.MANDATORY, OpenEhrFieldState.OPTIONAL, OpenEhrFieldState.UNDEFINED -> OpenEhrFieldState.OPTIONAL
+                                else -> OpenEhrFieldState.FORBIDDEN
+                            }
                         }
                     }
-                fieldStates[OpenEhrField.MINUTES]?.possible == true -> OpenEhrFieldState.OPTIONAL
-                fieldStates[OpenEhrField.SECONDS] == null && fieldStates[OpenEhrField.MINUTES]?.possible == true -> OpenEhrFieldState.OPTIONAL
-                fieldStates[OpenEhrField.SECONDS]?.possible != true && fieldStates[OpenEhrField.MINUTES]?.possible != true -> OpenEhrFieldState.FORBIDDEN
+                fieldStates[OpenEhrField.HOURS]?.possible == true -> OpenEhrFieldState.OPTIONAL
+                fieldStates[OpenEhrField.SECONDS] == null && fieldStates[OpenEhrField.MINUTES]?.possible == true && fieldStates[OpenEhrField.HOURS]?.possible == true -> OpenEhrFieldState.OPTIONAL
+                fieldStates[OpenEhrField.SECONDS] == null && fieldStates[OpenEhrField.MINUTES]?.possible == null && fieldStates[OpenEhrField.HOURS]?.possible == true -> OpenEhrFieldState.OPTIONAL
+                fieldStates[OpenEhrField.SECONDS]?.possible != true && fieldStates[OpenEhrField.MINUTES]?.possible != true && fieldStates[OpenEhrField.HOURS]?.possible != true -> OpenEhrFieldState.FORBIDDEN
                 else -> null
             }?.let {
                 fieldStates[OpenEhrField.OFFSET_SECONDS] = it
@@ -179,7 +183,7 @@ class OpenEhrDateTimeFormatterBuilder {
             arrayOf(OpenEhrField.YEARS, OpenEhrField.MONTHS, OpenEhrField.DAYS).any { fieldStates[it] != null }
 
         fun isCompactPattern(pattern: String?) =
-            pattern?.isNotBlank() == true && pattern.uppercase().let { it != "YYYY" && it != "HH" }
+            pattern?.isNotBlank() == true && pattern.uppercase().let { it != "YYYY" && it != "HH" && it != "HHZ" }
                     && COMPACT_PARTIAL_DATE_TIME_REGEX_PATTERN.matcher(pattern).matches()
 
         private fun putFieldState(
