@@ -32,9 +32,8 @@ import java.util.function.Function
  * @constructor Creates a new instance of [SimplePathValueExtractor]
  * @param path Path [String]
  */
-open class SimplePathValueExtractor(path: String?, val propertyMethods: ConcurrentMap<MethodKey, Function<Any, Any?>>? = ConcurrentHashMap()) : PathValueExtractor {
+open class SimplePathValueExtractor @JvmOverloads constructor(path: String?, val propertyMethods: ConcurrentMap<MethodKey, Function<Any, Any?>>? = ConcurrentHashMap()) : PathValueExtractor {
     private var pathSegmentsWithNames: List<Pair<PathSegment, String>> = PathUtils.getPathSegments(path).map { Pair(it, PathUtils.getPropertyName(it.element)) }
-    constructor(path: String?) : this(path, null)
 
     /**
      * Extracts and returns [List] of values using the path.
