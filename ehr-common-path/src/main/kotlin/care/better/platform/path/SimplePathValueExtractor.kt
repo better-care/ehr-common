@@ -18,9 +18,9 @@ package care.better.platform.path
 import org.apache.commons.lang3.StringUtils
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
+import java.util.function.Function
 
 /**
  * @author Bostjan Lah
@@ -32,10 +32,8 @@ import java.util.concurrent.ConcurrentMap
  * @constructor Creates a new instance of [SimplePathValueExtractor]
  * @param path Path [String]
  */
-open class SimplePathValueExtractor(path: String?) : PathValueExtractor {
+open class SimplePathValueExtractor @JvmOverloads constructor(path: String?, val propertyMethods: ConcurrentMap<MethodKey, Function<Any, Any?>>? = ConcurrentHashMap()) : PathValueExtractor {
     private var pathSegmentsWithNames: List<Pair<PathSegment, String>> = PathUtils.getPathSegments(path).map { Pair(it, PathUtils.getPropertyName(it.element)) }
-    private val propertyMethods: ConcurrentMap<MethodKey, (Any) -> Any?> = ConcurrentHashMap()
-
 
     /**
      * Extracts and returns [List] of values using the path.
@@ -115,7 +113,7 @@ open class SimplePathValueExtractor(path: String?) : PathValueExtractor {
      * @return Node or [List] of nodes for the [Class] property
      */
     private fun getNodeForProperty(propertyName: String, node: Any, ignoreExceptions: Boolean): Any? =
-        propertyMethods.computeIfAbsent(MethodKey(node.javaClass, propertyName)) { getMethod(it, ignoreExceptions) }.invoke(node)
+        propertyMethods!!.computeIfAbsent(MethodKey(node.javaClass, propertyName)) { getMethod(it, ignoreExceptions) }.apply(node)
 
     /**
      * Returns function that will invokes [Method] on the object and returns the invocation result.
@@ -124,27 +122,27 @@ open class SimplePathValueExtractor(path: String?) : PathValueExtractor {
      * @param ignoreExceptions [Boolean] indicating if the exception will be thrown
      * @return  function that will retrieve call method on the invoked object and return the result
      */
-    private fun getMethod(methodKey: MethodKey, ignoreExceptions: Boolean): (Any) -> Any? {
+    private fun getMethod(methodKey: MethodKey, ignoreExceptions: Boolean): Function<Any, Any?> {
         val methodName: String = StringUtils.capitalize(methodKey.propertyName)
         try {
             val method = methodKey.clazz.getMethod("get$methodName")
-            return { invoke(method, it) }
-        } catch (ignored: NoSuchMethodException) {
-        } catch (ignored: SecurityException) {
+            return Function<Any, Any?> { t -> invoke(method, t) }
+        } catch (_: NoSuchMethodException) {
+        } catch (_: SecurityException) {
         }
 
         try {
             val method = methodKey.clazz.getMethod("is$methodName")
-            return { invoke(method, it) }
-        } catch (ignored: NoSuchMethodException) {
-        } catch (ignored: SecurityException) {
+            return Function<Any, Any?> { t -> invoke(method, t) }
+        } catch (_: NoSuchMethodException) {
+        } catch (_: SecurityException) {
         }
 
         try {
             val method = methodKey.clazz.getMethod(methodName)
-            return { invoke(method, it) }
+            return Function<Any, Any?> { t -> invoke(method, t) }
         } catch (e: NoSuchMethodException) {
-            return if (ignoreExceptions) { _ -> null } else throw PathValueExtractorException(e)
+            return if (ignoreExceptions) Function<Any, Any?> { t -> null } else throw PathValueExtractorException(e)
         }
     }
 
@@ -194,29 +192,7 @@ open class SimplePathValueExtractor(path: String?) : PathValueExtractor {
      */
     @Suppress("UNCHECKED_CAST")
     private fun asList(node: Any?): List<Any?> =
-        if (node is List<*>) {
-            node
-        } else {
-            if (node == null) emptyList() else listOf(node)
-        }
-
-    /**
-     * Holds information about method key.
-     *
-     * @constructor Creates a new instance of [MethodKey]
-     * @param clazz [Class]
-     * @param propertyName Name of the property
-     */
-    private data class MethodKey(val clazz: Class<*>, val propertyName: String) {
-        override fun equals(other: Any?): Boolean =
-            when {
-                this === other -> true
-                other == null || javaClass != other.javaClass -> false
-                else -> clazz == (other as MethodKey).clazz && propertyName == other.propertyName
-            }
-
-        override fun hashCode(): Int = Objects.hash(clazz, propertyName)
-    }
+        node as? List<*> ?: if (node == null) emptyList() else listOf(node)
 
     override fun toString(): String =
         "${javaClass.simpleName}[${pathSegmentsWithNames.joinToString("/") { it.first.asPathSegment() }}]"

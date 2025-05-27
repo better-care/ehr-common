@@ -24,8 +24,7 @@ import com.fasterxml.jackson.databind.jsontype.TypeIdResolver
 import com.fasterxml.jackson.databind.jsontype.impl.ClassNameIdResolver
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 import com.fasterxml.jackson.databind.type.TypeFactory
-import com.google.common.cache.CacheBuilder
-import com.google.common.cache.CacheLoader
+import com.github.benmanes.caffeine.cache.Caffeine
 import java.io.IOException
 import java.util.concurrent.ExecutionException
 
@@ -37,14 +36,9 @@ import java.util.concurrent.ExecutionException
 class RmIdResolver(private val typeFactory: TypeFactory) : TypeIdResolver {
     private var baseType: JavaType? = null
 
-    private val rmClassNames = CacheBuilder.newBuilder()
+    private val rmClassNames = Caffeine.newBuilder()
         .maximumSize(1000L)
-        .build(object : CacheLoader<Class<*>?, String?>() {
-            override fun load(clazz: Class<*>): String {
-                return RmUtils.getRmTypeName(clazz as Class<out RmObject>)
-            }
-        })
-
+        .build { clazz: Class<*> -> RmUtils.getRmTypeName(clazz as Class<out RmObject>) }
 
     override fun init(baseType: JavaType?) {
         this.baseType = baseType
