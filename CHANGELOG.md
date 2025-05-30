@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.1.1 - 2025-05-30
+
+- `SimplePathValueExtractor` cache optimization
+
 ## 4.1.0 - 2025-04-28
 
 - Add serializer to force multiline representation in YAML
