@@ -16,6 +16,9 @@
 package care.better.platform.path
 
 import org.openehr.rm.common.Locatable
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
+import java.util.function.Function
 
 /**
  * @author Bostjan Lah
@@ -29,7 +32,10 @@ import org.openehr.rm.common.Locatable
  * @param path Path [String]
  * @param matchNumberedNodes [Boolean] indicating if numbered nodes will be matched
  */
-class NameAndNodeMatchingPathValueExtractor @JvmOverloads constructor(path: String?, private val matchNumberedNodes: Boolean = false) : SimplePathValueExtractor(path) {
+class NameAndNodeMatchingPathValueExtractor @JvmOverloads constructor(
+    path: String?,
+    private val matchNumberedNodes: Boolean = false,
+    propertyMethods: ConcurrentMap<MethodKey, Function<Any, Any?>> = ConcurrentHashMap()) : SimplePathValueExtractor(path, propertyMethods) {
 
 
     /**
