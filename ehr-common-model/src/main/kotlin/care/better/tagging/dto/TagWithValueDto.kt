@@ -11,16 +11,12 @@ import java.util.*
  * @since 2.3
  */
 @XmlRootElement(name = "tag_with_value")
-class TagWithValueDto : TagDto {
+open class TagWithValueDto @JvmOverloads constructor(
+    tag: String,
     @get:XmlElement
-    var value: String? = null
-
-    constructor() {}
-
-    @JvmOverloads
-    constructor(tag: String?, value: String? = null, aqlPath: String? = null) : super(tag, aqlPath) {
-        this.value = value
-    }
+    val value: String? = null,
+    aqlPath: String? = null
+) : TagDto(tag, aqlPath) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {
@@ -44,6 +40,6 @@ class TagWithValueDto : TagDto {
     }
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const val serialVersionUID = 2L
     }
 }

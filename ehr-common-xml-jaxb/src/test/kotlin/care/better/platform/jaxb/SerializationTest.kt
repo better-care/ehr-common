@@ -76,7 +76,7 @@ open class SerializationTest {
         val returned = unmarshaller.unmarshal(StreamSource(StringReader(xml))) as TagWithValueDto
         assertThat(returned.tag).isEqualTo("tag")
         assertThat(returned.value).isEqualTo("value")
-        assertThat(returned.getAqlPath()).isEqualTo("/")
+        assertThat(returned.aqlPath).isEqualTo("/")
     }
 
     @Test
@@ -95,7 +95,7 @@ open class SerializationTest {
         val returned = unmarshaller.unmarshal(StreamSource(StringReader(xml))) as TagList
         assertThat(returned.tags!![0].tag).isEqualTo("tag")
         assertThat(returned.tags!![0].value).isEqualTo("value")
-        assertThat(returned.tags!![0].getAqlPath()).isEqualTo("/")
+        assertThat(returned.tags!![0].aqlPath).isEqualTo("/")
     }
 
     @Test

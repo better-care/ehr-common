@@ -11,59 +11,12 @@ import java.io.Serializable
  * @since 17.04.2014
  */
 @XmlRootElement(name = "tag")
-open class TagDto : Serializable {
-    /**
-     * Returns the string tag.
-     *
-     * @return tag
-     */
-    /**
-     * Sets the string tag.
-     *
-     * @param tag tag
-     */
+open class TagDto @JvmOverloads constructor(
     @get:XmlElement
-    var tag: String? = null
-
-    private var aqlPath: String? = null
-
-    /**
-     * Creates a new tag dto.
-     */
-    constructor() {}
-    /**
-     * Creates a new tag dto.
-     * @param tag The string tag.
-     * @param aqlPath The aql path. Can be null.
-     */
-    /**
-     * Creates a new tag dto.
-     * @param tag The string tag.
-     */
-    @JvmOverloads
-    constructor(tag: String?, aqlPath: String? = "/") {
-        this.tag = tag
-        this.aqlPath = aqlPath ?: "/"
-    }
-
-    /**
-     * Returns the aql path of this tag, if applicable.
-     *
-     * @return The aql path of the tag, or null if none.
-     */
-    @XmlElement
-    fun getAqlPath(): String? {
-        return aqlPath
-    }
-
-    /**
-     * Sets the aql path.
-     *
-     * @param aqlPath Sets the aql path. Can be null.
-     */
-    fun setAqlPath(aqlPath: String? = "/") {
-        this.aqlPath = aqlPath
-    }
+    open val tag: String,
+    @get:XmlElement
+    open val aqlPath: String? = "/"
+) : Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {
@@ -80,7 +33,7 @@ open class TagDto : Serializable {
 
     override fun hashCode(): Int {
         var result = tag.hashCode()
-        result = 31 * result + if (aqlPath != null) aqlPath.hashCode() else 0
+        result = 31 * result + (aqlPath?.hashCode() ?: 0)
         return result
     }
 
@@ -89,6 +42,6 @@ open class TagDto : Serializable {
     }
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const val serialVersionUID = 2L
     }
 }
