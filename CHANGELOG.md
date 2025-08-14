@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+<!--
+## 4.2.0 - 
+
+- Add support for datetime with hour as a last given unit
+-->
+
 ## 4.1.1 - 2025-05-30
 
 - `SimplePathValueExtractor` cache optimization
