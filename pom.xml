@@ -39,20 +39,20 @@
 
     <properties>
         <java.version>21</java.version>
-        <kotlin.version>2.2.0</kotlin.version>
+        <kotlin.version>2.2.20</kotlin.version>
 
-        <jetbrains-annotations.version>26.0.2</jetbrains-annotations.version>
+        <jetbrains-annotations.version>26.0.2-1</jetbrains-annotations.version>
 
-        <assertj.version>3.27.3</assertj.version>
-        <caffeine.version>3.2.0</caffeine.version>
+        <assertj.version>3.27.4</assertj.version>
+        <caffeine.version>3.2.2</caffeine.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
         <guava.version>33.4.8-jre</guava.version>
-        <jackson.version>2.19.1</jackson.version>
+        <jackson.version>2.19.2</jackson.version>
         <jakarta.xml.bind.version>4.0.2</jakarta.xml.bind.version>
         <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
         <joda-time.version>2.14.0</joda-time.version>
-        <jupiter.version>5.12.2</jupiter.version>
-        <mockk-jvm.version>1.14.4</mockk-jvm.version>
+        <jupiter.version>5.13.4</jupiter.version>
+        <mockk-jvm.version>1.14.5</mockk-jvm.version>
 
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
