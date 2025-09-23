@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 4.2.0 - 
+## 4.2.0 - 2025-09-22
 
 - Add support for datetime with hour as a last given unit
 
