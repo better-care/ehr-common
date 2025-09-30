@@ -42,17 +42,23 @@ class Link() : RmObject(), java.io.Serializable {
         private const val serialVersionUID: Long = 0L
 
         /**
-         * Creates a name suffix suitable for use in LINKs (i.e. /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
+         * Creates a name suffix suitable for use in LINKs (e.g. `"Order", 1` becomes `'Order #2'` and can be used like i.e. /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
          *
          * @param name  name part of suffix
          * @param index element index (0-based)
-         * @return complete suffix to be placed after node id
+         * @return suffix to be placed after node id
          */
         @JvmStatic
-        fun getNameSuffix(name: String, index: Int): String = '\''.toString() + quote(name) + (if (index > 0) " #" + (index + 1) else "") + '\''
+        fun getNameSuffix(name: String, index: Int): String = quote(name + (if (index > 0) " #" + (index + 1) else ""))
 
+        /**
+         * Quotes a name suffix suitable for use in LINKs (e.g. `"Order #2"` becomes `'Order #2'` and can be used like /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
+         *
+         * @param name  name
+         * @return suffix to be placed after node id
+         */
         @JvmStatic
-        fun quote(parameter: String): String = parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
+        fun quote(name: String): String = '\''.toString() + name.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")  + '\''
     }
 
     constructor(meaning: DvText, type: DvText, target: DvEhrUri) : this() {

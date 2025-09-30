@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.2.1 - 2025-10-01
+
+- Change `Link.quote` to actually quote the value, not just escape it
+
 ## 4.2.0 - 2025-09-22
 
 - Add support for datetime with hour as a last given unit
