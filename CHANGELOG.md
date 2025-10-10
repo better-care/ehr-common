@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 4.2.1 - 2025-10-01
+## 4.2.1 - 2025-10-10
 
 - Change `Link.quote` to actually quote the value, not just escape it
 
