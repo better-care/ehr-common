@@ -1,7 +1,6 @@
 package care.better.tagging.dto
 
 import jakarta.xml.bind.annotation.*
-import java.io.Serializable
 
 /**
  * @author Domen Muren
@@ -9,16 +8,13 @@ import java.io.Serializable
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TAG_LIST")
 @XmlRootElement
-class TagList : Serializable {
-    @XmlElement(name = "tag_with_value")
-    var tags: List<TagWithValueDto>? = null
-
-    constructor() {}
-    constructor(tags: Collection<TagWithValueDto>?) {
-        this.tags = ArrayList(tags)
-    }
+open class TagList @JvmOverloads constructor(
+    tags: Collection<TagWithValueDto> = listOf(),
+) {
+    @field:XmlElement(name = "tag_with_value")
+    open val tags: MutableList<TagWithValueDto> = tags.toMutableList()
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const val serialVersionUID = 2L
     }
 }

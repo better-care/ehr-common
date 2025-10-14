@@ -66,7 +66,7 @@ open class SerializationTest {
     @Throws(JAXBException::class)
     fun testTagSerialization() {
         val writer = StringWriter()
-        val jaxbRegistry = createInstance(listOf("care.better.tagging"))
+        val jaxbRegistry = createInstance(listOf("care.better.tagging.dto"))
         val marshaller = jaxbRegistry.createMarshaller()
         val tagWithValueDto = TagWithValueDto("tag", "value", null)
         marshaller.marshal(tagWithValueDto, writer)
@@ -83,7 +83,7 @@ open class SerializationTest {
     @Throws(JAXBException::class)
     fun testTagListSerialization() {
         val writer = StringWriter()
-        val jaxbRegistry = createInstance(listOf("care.better.tagging"))
+        val jaxbRegistry = createInstance(listOf("care.better.tagging.dto"))
         val marshaller = jaxbRegistry.createMarshaller()
         val tagWithValueDto = TagWithValueDto("tag", "value", "/")
         val tagList = TagList(setOf(tagWithValueDto))

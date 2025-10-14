@@ -1,5 +1,7 @@
 package care.better.tagging.dto
 
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlRootElement
 import java.io.Serializable
@@ -10,11 +12,12 @@ import java.io.Serializable
  * @author matijak
  * @since 17.04.2014
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "tag")
 open class TagDto @JvmOverloads constructor(
-    @get:XmlElement
-    open val tag: String,
-    @get:XmlElement
+    @field:XmlElement
+    open val tag: String = "",
+    @field:XmlElement
     open val aqlPath: String? = "/"
 ) : Serializable {
 

@@ -1,5 +1,7 @@
 package care.better.tagging.dto
 
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlRootElement
 import java.util.*
@@ -10,12 +12,15 @@ import java.util.*
  * @author Bostjan Lah
  * @since 2.3
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "tag_with_value")
 open class TagWithValueDto @JvmOverloads constructor(
-    tag: String,
-    @get:XmlElement
+    @field:XmlElement
+    tag: String = "",
+    @field:XmlElement
     val value: String? = null,
-    aqlPath: String? = null
+    @field:XmlElement
+    aqlPath: String? = "/"
 ) : TagDto(tag, aqlPath) {
 
     override fun equals(other: Any?): Boolean {
