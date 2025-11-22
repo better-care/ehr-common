@@ -15,7 +15,7 @@
 
 package care.better.platform.json.kotlin.serialization.openehr
 
-//import care.better.platform.json.kotlin.serialization.polymorphism.RmObjectPolymorphicSerializersModuleProvider
+import care.better.platform.json.kotlin.serialization.polymorphism.RmObjectPolymorphicSerializersModuleProvider
 import care.better.platform.json.kotlin.serialization.serializers.registerAdditionalJavaSerializers
 import care.better.platform.json.kotlin.serialization.serializers.registerOpenEhrTemporalSerializers
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -39,7 +39,7 @@ class OpenEhrKotlinJsonSerializer(private val serializerModules: List<Serializer
         ignoreUnknownKeys = true
         classDiscriminatorMode = ClassDiscriminatorMode.ALL_JSON_OBJECTS
         serializersModule = SerializersModule {
-//            include(RmObjectPolymorphicSerializersModuleProvider.module)
+            include(RmObjectPolymorphicSerializersModuleProvider.module)
             registerOpenEhrTemporalSerializers()
             registerAdditionalJavaSerializers()
             serializerModules.forEach { include(it) }

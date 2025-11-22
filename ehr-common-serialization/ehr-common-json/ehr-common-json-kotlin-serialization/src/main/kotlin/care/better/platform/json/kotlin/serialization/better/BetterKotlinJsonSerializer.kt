@@ -15,7 +15,7 @@
 
 package care.better.platform.json.kotlin.serialization.better
 
-//import care.better.platform.json.kotlin.serialization.polymorphism.RmObjectPolymorphicSerializersModuleProvider
+import care.better.platform.json.kotlin.serialization.polymorphism.RmObjectPolymorphicSerializersModuleProvider
 import care.better.platform.json.kotlin.serialization.serializers.registerAdditionalJavaSerializers
 import care.better.platform.json.kotlin.serialization.serializers.registerOpenEhrTemporalSerializers
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -39,7 +39,7 @@ class BetterKotlinJsonSerializer(private val serializerModules: List<Serializers
         ignoreUnknownKeys = true
         classDiscriminatorMode = ClassDiscriminatorMode.ALL_JSON_OBJECTS
         serializersModule = SerializersModule {
-//            include(RmObjectPolymorphicSerializersModuleProvider.module)
+            include(RmObjectPolymorphicSerializersModuleProvider.module)
             registerOpenEhrTemporalSerializers()
             registerAdditionalJavaSerializers()
 
