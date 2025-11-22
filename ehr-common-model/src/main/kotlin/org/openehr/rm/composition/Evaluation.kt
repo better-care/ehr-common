@@ -17,6 +17,7 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datastructures.ItemStructure
@@ -43,7 +44,8 @@ class Evaluation : CareEntry() {
     @Required
     var data: ItemStructure? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "EVALUATION")) return
         // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -66,7 +68,5 @@ class Evaluation : CareEntry() {
 
         // Visit own properties
         data?.visit("data", ctx)
-
-        ctx.visitLocatable(attributeName, this, "EVALUATION")
     }
 }

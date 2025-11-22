@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -61,12 +62,12 @@ class DvScale() : DvOrdered() {
     @Required
     var value: Double = 0.0
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_SCALE")) return
         normalRange?.visit("normal_range", ctx)
         otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
         normalStatus?.visit("normal_status", ctx)
         symbol?.visit("symbol", ctx)
         ctx.visitValue("value", value)
-        ctx.visitObject(attributeName, this, "DV_SCALE")
     }
 }

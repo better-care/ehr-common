@@ -17,6 +17,7 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -52,20 +53,5 @@ abstract class Event : Locatable() {
 
     var state: ItemStructure? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        // Visit parent properties
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
-
-        // Visit own properties
-        time?.visit("time", ctx)
-        data?.visit("data", ctx)
-        state?.visit("state", ctx)
-
-        ctx.visitLocatable(attributeName, this, "EVENT")
-    }
+    abstract fun visit(attributeName: String, ctx: RmVisitorContext)
 }

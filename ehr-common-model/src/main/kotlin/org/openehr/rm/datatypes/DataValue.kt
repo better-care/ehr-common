@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -49,7 +50,5 @@ abstract class DataValue : RmObject(), Serializable {
         private const val serialVersionUID: Long = 0L
     }
 
-    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        ctx.visitObject(attributeName, this, "DATA_VALUE")
-    }
+    abstract fun visit(attributeName: String, ctx: RmVisitorContext)
 }

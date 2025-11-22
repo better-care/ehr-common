@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
@@ -73,12 +74,12 @@ class DvOrdinal() : DvOrdered() {
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, symbol)
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_ORDINAL")) return
         normalRange?.visit("normal_range", ctx)
         otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
         normalStatus?.visit("normal_status", ctx)
         ctx.visitValue("value", value)
         symbol?.visit("symbol", ctx)
-        ctx.visitObject(attributeName, this, "DV_ORDINAL")
     }
 }

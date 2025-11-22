@@ -76,15 +76,4 @@ class ResourceDescription : RmObject(), Serializable {
     @XmlElement(name = "parent_resource")
     @SerialName("parent_resource")
     var parentResource: AuthoredResource? = null
-
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        originalAuthor.forEach { it.visit("original_author", ctx) }
-        otherContributors.forEach { ctx.visitValue("other_contributors", it) }
-        lifecycleState?.let { ctx.visitValue("lifecycle_state", it) }
-        resourcePackageUri?.let { ctx.visitValue("resource_package_uri", it) }
-        otherDetails.forEach { it.visit("other_details", ctx) }
-        details.forEach { it.visit("details", ctx) }
-        parentResource?.visit("parent_resource", ctx)
-        ctx.visitObject(attributeName, this, "RESOURCE_DESCRIPTION")
-    }
 }

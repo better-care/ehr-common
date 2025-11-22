@@ -17,6 +17,7 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
@@ -56,11 +57,11 @@ class PartyRelated constructor(): PartyIdentified() {
     @Required
     var relationship: DvCodedText? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "PARTY_RELATED")) return
         externalRef?.visit("external_ref", ctx)
         name?.let { ctx.visitValue("name", it) }
         identifiers.forEach { it.visit("identifiers", ctx) }
         relationship?.visit("relationship", ctx)
-        ctx.visitObject(attributeName, this, "PARTY_RELATED")
     }
 }

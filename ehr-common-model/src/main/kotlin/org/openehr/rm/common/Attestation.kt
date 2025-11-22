@@ -17,6 +17,7 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.*
@@ -84,7 +85,8 @@ class Attestation() : AuditDetails() {
     @SerialName("is_pending")
     var isPending: Boolean = false
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "ATTESTATION")) return
         // Visit parent properties
         systemId?.let { ctx.visitValue("system_id", it) }
         committer?.visit("committer", ctx)
@@ -98,7 +100,5 @@ class Attestation() : AuditDetails() {
         items.forEach { it.visit("items", ctx) }
         reason?.visit("reason", ctx)
         ctx.visitValue("is_pending", isPending)
-
-        ctx.visitObject(attributeName, this, "ATTESTATION")
     }
 }

@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -91,13 +92,13 @@ class DvText() : DataValue() {
 
     override fun hashCode(): Int = Objects.hash(value, encoding, formatting, hyperlink, language)
 
-    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    open override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_TEXT")) return
         value?.let { ctx.visitValue("value", it) }
         hyperlink?.visit("hyperlink", ctx)
         formatting?.let { ctx.visitValue("formatting", it) }
         mappings.forEach { it.visit("mappings", ctx) }
         language?.visit("language", ctx)
         encoding?.visit("encoding", ctx)
-        ctx.visitObject(attributeName, this, "DV_TEXT")
     }
 }

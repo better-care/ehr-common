@@ -141,4 +141,7 @@ class TaskPlan : ContentItem, VisitableByModelVisitor {
                 ", archetypeDetails=$archetypeDetails'" +
                 ", archetypeNodeId='$archetypeNodeId'" +
                 '}'
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    }
 }

@@ -15,6 +15,7 @@
 
 package org.openehr.rm.datastructures
 
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -38,15 +39,5 @@ abstract class ItemStructure : Locatable() {
         private const val serialVersionUID: Long = 0L
     }
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        // Visit parent properties
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
-
-        ctx.visitLocatable(attributeName, this, "ITEM_STRUCTURE")
-    }
+    abstract fun visit(attributeName: String, ctx: RmVisitorContext)
 }

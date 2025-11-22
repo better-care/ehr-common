@@ -49,9 +49,4 @@ abstract class DvTimeSpecification(
         }
 
     override fun hashCode(): Int = Objects.hash(value)
-
-    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        value?.visit("value", ctx)
-        ctx.visitObject(attributeName, this, "DV_TIME_SPECIFICATION")
-    }
 }

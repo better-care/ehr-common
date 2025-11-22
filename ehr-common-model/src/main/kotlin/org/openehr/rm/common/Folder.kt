@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectRef
@@ -47,7 +48,8 @@ class Folder : Locatable() {
     var items: MutableList<ObjectRef> = mutableListOf()
     var details: ItemStructure? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "FOLDER")) return
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -60,7 +62,5 @@ class Folder : Locatable() {
         folders.forEach { it.visit("folders", ctx) }
         items.forEach { it.visit("items", ctx) }
         details?.visit("details", ctx)
-
-        ctx.visitLocatable(attributeName, this, "FOLDER")
     }
 }

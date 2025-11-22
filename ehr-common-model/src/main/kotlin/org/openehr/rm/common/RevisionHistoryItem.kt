@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ObjectVersionId
 import java.io.Serializable
@@ -52,9 +53,9 @@ class RevisionHistoryItem : RmObject(), Serializable {
     @Required
     var audits: MutableList<AuditDetails> = mutableListOf()
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "REVISION_HISTORY_ITEM")) return
         versionId?.visit("version_id", ctx)
         audits.forEach { it.visit("audits", ctx) }
-        ctx.visitObject(attributeName, this, "REVISION_HISTORY_ITEM")
     }
 }

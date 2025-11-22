@@ -16,6 +16,7 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DataValue
@@ -54,7 +55,8 @@ class Element : Item() {
     @SerialName("null_reason")
     var nullReason: DvText? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "ELEMENT")) return
         // Visit parent properties (from Locatable via Item)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -68,6 +70,5 @@ class Element : Item() {
         nullFlavour?.visit("null_flavour", ctx)
         nullReason?.visit("null_reason", ctx)
 
-        ctx.visitLocatable(attributeName, this, "ELEMENT")
     }
 }

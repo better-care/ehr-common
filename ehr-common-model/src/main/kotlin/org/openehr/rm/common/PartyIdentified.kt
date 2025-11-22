@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -70,10 +71,10 @@ class PartyIdentified() : PartyProxy() {
 
     var identifiers: MutableList<DvIdentifier> = mutableListOf()
 
-    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    open override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "PARTY_IDENTIFIED")) return
         externalRef?.visit("external_ref", ctx)
         name?.let { ctx.visitValue("name", it) }
         identifiers.forEach { it.visit("identifiers", ctx) }
-        ctx.visitObject(attributeName, this, "PARTY_IDENTIFIED")
     }
 }

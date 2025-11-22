@@ -17,6 +17,7 @@ package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.PartyRef
 import java.io.Serializable
@@ -41,8 +42,5 @@ abstract class PartyProxy : RmObject(), Serializable {
     @SerialName("external_ref")
     var externalRef: PartyRef? = null
 
-    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        externalRef?.visit("external_ref", ctx)
-        ctx.visitObject(attributeName, this, "PARTY_PROXY")
-    }
+    abstract fun visit(attributeName: String, ctx: RmVisitorContext)
 }

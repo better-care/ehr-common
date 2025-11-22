@@ -17,6 +17,7 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -60,7 +61,8 @@ class History : Locatable() {
 
     var summary: ItemStructure? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "HISTORY")) return
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -75,7 +77,5 @@ class History : Locatable() {
         duration?.visit("duration", ctx)
         events.forEach { it.visit("events", ctx) }
         summary?.visit("summary", ctx)
-
-        ctx.visitLocatable(attributeName, this, "HISTORY")
     }
 }

@@ -17,6 +17,7 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -43,7 +44,8 @@ class Cluster : Item() {
     @Required
     var items: MutableList<Item> = mutableListOf()
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "CLUSTER")) return
         // Visit parent properties (from Locatable via Item)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -55,6 +57,5 @@ class Cluster : Item() {
         // Visit own properties
         items.forEach { it.visit("items", ctx) }
 
-        ctx.visitLocatable(attributeName, this, "CLUSTER")
     }
 }

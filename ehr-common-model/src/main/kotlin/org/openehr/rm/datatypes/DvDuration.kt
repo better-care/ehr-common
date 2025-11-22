@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
@@ -72,7 +73,8 @@ class DvDuration() : DvAmount() {
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_DURATION")) return
         normalRange?.visit("normal_range", ctx)
         otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
         normalStatus?.visit("normal_status", ctx)
@@ -80,6 +82,5 @@ class DvDuration() : DvAmount() {
         accuracy?.let { ctx.visitValue("accuracy", it) }
         accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it) }
         value?.let { ctx.visitValue("value", it) }
-        ctx.visitObject(attributeName, this, "DV_DURATION")
     }
 }

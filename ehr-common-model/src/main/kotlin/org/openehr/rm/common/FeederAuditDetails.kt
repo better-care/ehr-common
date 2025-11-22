@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
@@ -88,7 +89,8 @@ class FeederAuditDetails() : RmObject(), Serializable {
     @SerialName("other_details")
     var otherDetails: ItemStructure? = null
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "FEEDER_AUDIT_DETAILS")) return
         systemId?.let { ctx.visitValue("system_id", it) }
         location?.visit("location", ctx)
         provider?.visit("provider", ctx)
@@ -96,6 +98,5 @@ class FeederAuditDetails() : RmObject(), Serializable {
         time?.visit("time", ctx)
         versionId?.let { ctx.visitValue("version_id", it) }
         otherDetails?.visit("other_details", ctx)
-        ctx.visitObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
     }
 }

@@ -17,6 +17,7 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -68,7 +69,8 @@ class Composition : Locatable() {
 
     var content: MutableList<ContentItem> = mutableListOf()
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "COMPOSITION")) return
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -84,7 +86,5 @@ class Composition : Locatable() {
         composer?.visit("composer", ctx)
         context?.visit("context", ctx)
         content.forEach { it.visit("content", ctx) }
-
-        ctx.visitLocatable(attributeName, this, "COMPOSITION")
     }
 }

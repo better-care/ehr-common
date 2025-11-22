@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
@@ -73,7 +74,8 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")) return
         language?.visit("language", ctx)
         purpose?.let { ctx.visitValue("purpose", it) }
         keywords.forEach { ctx.visitValue("keywords", it) }
@@ -82,6 +84,5 @@ class ResourceDescriptionItem : RmObject(), Serializable {
         copyright?.let { ctx.visitValue("copyright", it) }
         originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
         otherDetails.forEach { it.visit("other_details", ctx) }
-        ctx.visitObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
     }
 }

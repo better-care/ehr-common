@@ -18,6 +18,7 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.LocatableRef
 import org.openehr.rm.datastructures.ItemStructure
@@ -59,10 +60,10 @@ class InstructionDetails : RmObject(), Serializable {
     @SerialName("wf_details")
     var wfDetails: ItemStructure? = null
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "INSTRUCTION_DETAILS")) return
         instructionId?.visit("instruction_id", ctx)
         activityId?.let { ctx.visitValue("activity_id", it) }
         wfDetails?.visit("wf_details", ctx)
-        ctx.visitObject(attributeName, this, "INSTRUCTION_DETAILS")
     }
 }

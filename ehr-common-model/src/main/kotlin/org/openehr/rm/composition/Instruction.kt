@@ -17,6 +17,7 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvDateTime
@@ -61,7 +62,8 @@ class Instruction : CareEntry() {
 
     var activities: MutableList<Activity> = mutableListOf()
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "INSTRUCTION")) return
         // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -87,7 +89,5 @@ class Instruction : CareEntry() {
         expiryTime?.visit("expiry_time", ctx)
         wfDefinition?.visit("wf_definition", ctx)
         activities.forEach { it.visit("activities", ctx) }
-
-        ctx.visitLocatable(attributeName, this, "INSTRUCTION")
     }
 }

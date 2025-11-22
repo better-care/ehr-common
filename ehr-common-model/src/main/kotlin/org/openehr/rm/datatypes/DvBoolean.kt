@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
@@ -62,8 +63,8 @@ class DvBoolean() : DataValue() {
 
     override fun hashCode(): Int = Objects.hash(value)
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_BOOLEAN")) return
         ctx.visitValue("value", value)
-        ctx.visitObject(attributeName, this, "DV_BOOLEAN")
     }
 }

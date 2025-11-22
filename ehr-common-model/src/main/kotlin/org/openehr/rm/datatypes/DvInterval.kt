@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RangeParameters
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
@@ -105,13 +106,13 @@ class DvInterval() : DataValue(), RangeParameters {
 
     override fun hashCode(): Int = Objects.hash(lower, upper, lowerIncluded, upperIncluded, lowerUnbounded, upperUnbounded)
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_INTERVAL")) return
         lower?.visit("lower", ctx)
         upper?.visit("upper", ctx)
         lowerIncluded?.let { ctx.visitValue("lower_included", it) }
         upperIncluded?.let { ctx.visitValue("upper_included", it) }
         ctx.visitValue("lower_unbounded", lowerUnbounded)
         ctx.visitValue("upper_unbounded", upperUnbounded)
-        ctx.visitObject(attributeName, this, "DV_INTERVAL")
     }
 }

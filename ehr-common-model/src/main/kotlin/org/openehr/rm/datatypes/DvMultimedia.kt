@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -131,7 +132,8 @@ class DvMultimedia() : DvEncapsulated() {
     var size: Int = 0
     var thumbnail: DvMultimedia? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_MULTIMEDIA")) return
         charset?.visit("charset", ctx)
         language?.visit("language", ctx)
         alternateText?.let { ctx.visitValue("alternate_text", it) }
@@ -143,6 +145,5 @@ class DvMultimedia() : DvEncapsulated() {
         integrityCheckAlgorithm?.visit("integrity_check_algorithm", ctx)
         ctx.visitValue("size", size)
         thumbnail?.visit("thumbnail", ctx)
-        ctx.visitObject(attributeName, this, "DV_MULTIMEDIA")
     }
 }

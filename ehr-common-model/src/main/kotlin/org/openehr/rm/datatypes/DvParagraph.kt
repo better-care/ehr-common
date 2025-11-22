@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -46,8 +47,8 @@ class DvParagraph() : DataValue() {
     @Required
     var items: MutableList<DvText> = mutableListOf()
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "DV_PARAGRAPH")) return
         items.forEach { it.visit("items", ctx) }
-        ctx.visitObject(attributeName, this, "DV_PARAGRAPH")
     }
 }

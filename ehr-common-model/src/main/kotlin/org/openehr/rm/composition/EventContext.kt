@@ -18,6 +18,7 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyIdentified
@@ -78,7 +79,8 @@ class EventContext : RmObject(), Serializable {
 
     var participations: MutableList<Participation> = mutableListOf()
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "EVENT_CONTEXT")) return
         startTime?.visit("start_time", ctx)
         endTime?.visit("end_time", ctx)
         location?.let { ctx.visitValue("location", it) }
@@ -86,6 +88,5 @@ class EventContext : RmObject(), Serializable {
         otherContext?.visit("other_context", ctx)
         healthCareFacility?.visit("health_care_facility", ctx)
         participations.forEach { it.visit("participations", ctx) }
-        ctx.visitObject(attributeName, this, "EVENT_CONTEXT")
     }
 }

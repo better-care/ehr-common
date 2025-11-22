@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.*
@@ -43,9 +44,9 @@ class StringDictionaryItem : RmObject(), Serializable {
     @Required
     var id: String? = null
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "STRING_DICTIONARY_ITEM")) return
         value?.let { ctx.visitValue("value", it) }
         id?.let { ctx.visitValue("id", it) }
-        ctx.visitObject(attributeName, this, "STRING_DICTIONARY_ITEM")
     }
 }

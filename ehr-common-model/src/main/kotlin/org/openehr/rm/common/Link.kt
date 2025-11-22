@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvEhrUri
@@ -83,10 +84,10 @@ class Link() : RmObject(), java.io.Serializable {
     @Required
     var target: DvEhrUri? = null
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "LINK")) return
         meaning?.visit("meaning", ctx)
         type?.visit("type", ctx)
         target?.visit("target", ctx)
-        ctx.visitObject(attributeName, this, "LINK")
     }
 }

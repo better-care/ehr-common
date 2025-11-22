@@ -18,6 +18,7 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
@@ -59,11 +60,11 @@ class IsmTransition : RmObject(), Serializable {
 
     var reason: MutableList<DvText> = mutableListOf()
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "ISM_TRANSITION")) return
         currentState?.visit("current_state", ctx)
         transition?.visit("transition", ctx)
         careflowStep?.visit("careflow_step", ctx)
         reason.forEach { it.visit("reason", ctx) }
-        ctx.visitObject(attributeName, this, "ISM_TRANSITION")
     }
 }

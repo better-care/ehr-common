@@ -17,6 +17,7 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvCodedText
@@ -57,7 +58,8 @@ class IntervalEvent : Event() {
     @SerialName("math_function")
     var mathFunction: DvCodedText? = null
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "INTERVAL_EVENT")) return
         // Visit parent properties (from Locatable via Event)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -76,6 +78,5 @@ class IntervalEvent : Event() {
         sampleCount?.let { ctx.visitValue("sample_count", it) }
         mathFunction?.visit("math_function", ctx)
 
-        ctx.visitLocatable(attributeName, this, "INTERVAL_EVENT")
     }
 }

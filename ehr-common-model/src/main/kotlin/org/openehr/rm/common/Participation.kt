@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvInterval
@@ -67,11 +68,11 @@ class Participation() : RmObject(), Serializable {
 
     var mode: DvCodedText? = null
 
-    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "PARTICIPATION")) return
         function?.visit("function", ctx)
         performer?.visit("performer", ctx)
         time?.visit("time", ctx)
         mode?.visit("mode", ctx)
-        ctx.visitObject(attributeName, this, "PARTICIPATION")
     }
 }

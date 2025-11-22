@@ -78,13 +78,4 @@ abstract class AuthoredResource() : RmObject(), Serializable {
     @XmlElement(name = "revision_history")
     @SerialName("revision_history")
     var revisionHistory: RevisionHistory? = null
-
-    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        originalLanguage?.visit("original_language", ctx)
-        isControlled?.let { ctx.visitValue("is_controlled", it) }
-        description?.visit("description", ctx)
-        translations.forEach { it.visit("translations", ctx) }
-        revisionHistory?.visit("revision_history", ctx)
-        ctx.visitObject(attributeName, this, "AUTHORED_RESOURCE")
-    }
 }

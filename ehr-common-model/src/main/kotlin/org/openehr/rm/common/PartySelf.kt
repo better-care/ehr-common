@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
@@ -41,8 +42,8 @@ class PartySelf() : PartyProxy() {
         this.externalRef = externalRef
     }
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitObject(attributeName, this, "PARTY_SELF")) return
         externalRef?.visit("external_ref", ctx)
-        ctx.visitObject(attributeName, this, "PARTY_SELF")
     }
 }

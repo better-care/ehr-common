@@ -16,6 +16,7 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -37,7 +38,8 @@ class PointEvent : Event() {
         private const val serialVersionUID: Long = 0L
     }
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (!ctx.visitLocatable(attributeName, this, "POINT_EVENT")) return
         // Visit parent properties (from Locatable via Event)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -51,6 +53,5 @@ class PointEvent : Event() {
         data?.visit("data", ctx)
         state?.visit("state", ctx)
 
-        ctx.visitLocatable(attributeName, this, "POINT_EVENT")
     }
 }
