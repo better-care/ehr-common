@@ -54,8 +54,9 @@ class RevisionHistoryItem : RmObject(), Serializable {
     var audits: MutableList<AuditDetails> = mutableListOf()
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "REVISION_HISTORY_ITEM")) return
+        ctx.beforeObject(attributeName, this, "REVISION_HISTORY_ITEM")
         versionId?.visit("version_id", ctx)
         audits.forEach { it.visit("audits", ctx) }
+        ctx.afterObject(attributeName, this, "REVISION_HISTORY_ITEM")
     }
 }

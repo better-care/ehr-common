@@ -80,7 +80,7 @@ class EventContext : RmObject(), Serializable {
     var participations: MutableList<Participation> = mutableListOf()
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "EVENT_CONTEXT")) return
+        ctx.beforeObject(attributeName, this, "EVENT_CONTEXT")
         startTime?.visit("start_time", ctx)
         endTime?.visit("end_time", ctx)
         location?.let { ctx.visitValue("location", it) }
@@ -88,5 +88,6 @@ class EventContext : RmObject(), Serializable {
         otherContext?.visit("other_context", ctx)
         healthCareFacility?.visit("health_care_facility", ctx)
         participations.forEach { it.visit("participations", ctx) }
+        ctx.afterObject(attributeName, this, "EVENT_CONTEXT")
     }
 }

@@ -103,7 +103,7 @@ class DvQuantity() : DvAmount() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude, precision, units)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_QUANTITY")) return
+        ctx.beforeObject(attributeName, this, "DV_QUANTITY")
         normalRange?.visit("normal_range", ctx)
         otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
         normalStatus?.visit("normal_status", ctx)
@@ -115,5 +115,6 @@ class DvQuantity() : DvAmount() {
         precision?.let { ctx.visitValue("precision", it) }
         unitsSystem?.let { ctx.visitValue("units_system", it) }
         unitsDisplayName?.let { ctx.visitValue("units_display_name", it) }
+        ctx.afterObject(attributeName, this, "DV_QUANTITY")
     }
 }

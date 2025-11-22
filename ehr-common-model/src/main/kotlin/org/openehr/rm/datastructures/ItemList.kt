@@ -41,7 +41,7 @@ class ItemList : ItemStructure() {
     var items: MutableList<Element> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "ITEM_LIST")) return
+        ctx.beforeLocatable(attributeName, this, "ITEM_LIST")
         // Visit parent properties (from Locatable via ItemStructure)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -53,5 +53,6 @@ class ItemList : ItemStructure() {
         // Visit own properties
         items.forEach { it.visit("items", ctx) }
 
+        ctx.afterLocatable(attributeName, this, "ITEM_LIST")
     }
 }

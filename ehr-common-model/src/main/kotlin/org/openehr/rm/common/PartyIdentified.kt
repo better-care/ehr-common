@@ -72,9 +72,10 @@ class PartyIdentified() : PartyProxy() {
     var identifiers: MutableList<DvIdentifier> = mutableListOf()
 
     open override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "PARTY_IDENTIFIED")) return
+        ctx.beforeObject(attributeName, this, "PARTY_IDENTIFIED")
         externalRef?.visit("external_ref", ctx)
         name?.let { ctx.visitValue("name", it) }
         identifiers.forEach { it.visit("identifiers", ctx) }
+        ctx.afterObject(attributeName, this, "PARTY_IDENTIFIED")
     }
 }

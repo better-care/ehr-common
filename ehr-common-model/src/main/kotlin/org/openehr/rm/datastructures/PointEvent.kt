@@ -39,7 +39,7 @@ class PointEvent : Event() {
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "POINT_EVENT")) return
+        ctx.beforeLocatable(attributeName, this, "POINT_EVENT")
         // Visit parent properties (from Locatable via Event)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -53,5 +53,6 @@ class PointEvent : Event() {
         data?.visit("data", ctx)
         state?.visit("state", ctx)
 
+        ctx.afterLocatable(attributeName, this, "POINT_EVENT")
     }
 }

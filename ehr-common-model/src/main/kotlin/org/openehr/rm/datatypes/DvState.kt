@@ -69,8 +69,9 @@ class DvState() : DataValue() {
     override fun hashCode(): Int = Objects.hash(value, isTerminal)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_STATE")) return
+        ctx.beforeObject(attributeName, this, "DV_STATE")
         value?.visit("value", ctx)
         ctx.visitValue("is_terminal", isTerminal)
+        ctx.afterObject(attributeName, this, "DV_STATE")
     }
 }

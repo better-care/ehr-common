@@ -45,7 +45,7 @@ class ItemSingle : ItemStructure() {
     var item: Element? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "ITEM_SINGLE")) return
+        ctx.beforeLocatable(attributeName, this, "ITEM_SINGLE")
         // Visit parent properties (from Locatable via ItemStructure)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -57,5 +57,6 @@ class ItemSingle : ItemStructure() {
         // Visit own properties
         item?.visit("item", ctx)
 
+        ctx.afterLocatable(attributeName, this, "ITEM_SINGLE")
     }
 }

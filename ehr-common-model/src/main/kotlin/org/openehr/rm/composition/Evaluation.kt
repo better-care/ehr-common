@@ -45,7 +45,7 @@ class Evaluation : CareEntry() {
     var data: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "EVALUATION")) return
+        ctx.beforeLocatable(attributeName, this, "EVALUATION")
         // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -68,5 +68,6 @@ class Evaluation : CareEntry() {
 
         // Visit own properties
         data?.visit("data", ctx)
+        ctx.afterLocatable(attributeName, this, "EVALUATION")
     }
 }

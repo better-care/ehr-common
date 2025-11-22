@@ -50,7 +50,7 @@ class Observation : CareEntry() {
     var state: History? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "OBSERVATION")) return
+        ctx.beforeLocatable(attributeName, this, "OBSERVATION")
         // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -74,5 +74,6 @@ class Observation : CareEntry() {
         // Visit own properties
         data?.visit("data", ctx)
         state?.visit("state", ctx)
+        ctx.afterLocatable(attributeName, this, "OBSERVATION")
     }
 }

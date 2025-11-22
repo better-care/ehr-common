@@ -75,11 +75,12 @@ class DvOrdinal() : DvOrdered() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, symbol)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_ORDINAL")) return
+        ctx.beforeObject(attributeName, this, "DV_ORDINAL")
         normalRange?.visit("normal_range", ctx)
         otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
         normalStatus?.visit("normal_status", ctx)
         ctx.visitValue("value", value)
         symbol?.visit("symbol", ctx)
+        ctx.afterObject(attributeName, this, "DV_ORDINAL")
     }
 }

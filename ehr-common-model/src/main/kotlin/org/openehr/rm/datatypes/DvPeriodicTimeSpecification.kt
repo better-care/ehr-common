@@ -42,7 +42,8 @@ class DvPeriodicTimeSpecification() : DvTimeSpecification() {
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_PERIODIC_TIME_SPECIFICATION")) return
+        ctx.beforeObject(attributeName, this, "DV_PERIODIC_TIME_SPECIFICATION")
         value?.visit("value", ctx)
+        ctx.afterObject(attributeName, this, "DV_PERIODIC_TIME_SPECIFICATION")
     }
 }

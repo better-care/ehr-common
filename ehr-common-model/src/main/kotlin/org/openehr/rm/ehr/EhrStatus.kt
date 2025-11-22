@@ -59,7 +59,7 @@ class EhrStatus : Locatable() {
     var otherDetails: ItemStructure? = null
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "EHR_STATUS")) return
+        ctx.beforeLocatable(attributeName, this, "EHR_STATUS")
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -74,5 +74,6 @@ class EhrStatus : Locatable() {
         ctx.visitValue("is_modifiable", modifiable)
         otherDetails?.visit("other_details", ctx)
 
+        ctx.afterLocatable(attributeName, this, "EHR_STATUS")
     }
 }

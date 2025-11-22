@@ -61,10 +61,11 @@ class IsmTransition : RmObject(), Serializable {
     var reason: MutableList<DvText> = mutableListOf()
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "ISM_TRANSITION")) return
+        ctx.beforeObject(attributeName, this, "ISM_TRANSITION")
         currentState?.visit("current_state", ctx)
         transition?.visit("transition", ctx)
         careflowStep?.visit("careflow_step", ctx)
         reason.forEach { it.visit("reason", ctx) }
+        ctx.afterObject(attributeName, this, "ISM_TRANSITION")
     }
 }

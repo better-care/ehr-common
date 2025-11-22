@@ -59,7 +59,7 @@ class IntervalEvent : Event() {
     var mathFunction: DvCodedText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "INTERVAL_EVENT")) return
+        ctx.beforeLocatable(attributeName, this, "INTERVAL_EVENT")
         // Visit parent properties (from Locatable via Event)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -78,5 +78,6 @@ class IntervalEvent : Event() {
         sampleCount?.let { ctx.visitValue("sample_count", it) }
         mathFunction?.visit("math_function", ctx)
 
+        ctx.afterLocatable(attributeName, this, "INTERVAL_EVENT")
     }
 }

@@ -63,11 +63,12 @@ class DvScale() : DvOrdered() {
     var value: Double = 0.0
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_SCALE")) return
+        ctx.beforeObject(attributeName, this, "DV_SCALE")
         normalRange?.visit("normal_range", ctx)
         otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
         normalStatus?.visit("normal_status", ctx)
         symbol?.visit("symbol", ctx)
         ctx.visitValue("value", value)
+        ctx.afterObject(attributeName, this, "DV_SCALE")
     }
 }

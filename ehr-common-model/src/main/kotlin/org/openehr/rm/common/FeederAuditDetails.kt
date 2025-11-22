@@ -90,7 +90,7 @@ class FeederAuditDetails() : RmObject(), Serializable {
     var otherDetails: ItemStructure? = null
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "FEEDER_AUDIT_DETAILS")) return
+        ctx.beforeObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
         systemId?.let { ctx.visitValue("system_id", it) }
         location?.visit("location", ctx)
         provider?.visit("provider", ctx)
@@ -98,5 +98,6 @@ class FeederAuditDetails() : RmObject(), Serializable {
         time?.visit("time", ctx)
         versionId?.let { ctx.visitValue("version_id", it) }
         otherDetails?.visit("other_details", ctx)
+        ctx.afterObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
     }
 }

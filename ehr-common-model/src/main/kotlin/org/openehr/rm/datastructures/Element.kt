@@ -56,7 +56,7 @@ class Element : Item() {
     var nullReason: DvText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "ELEMENT")) return
+        ctx.beforeLocatable(attributeName, this, "ELEMENT")
         // Visit parent properties (from Locatable via Item)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -70,5 +70,6 @@ class Element : Item() {
         nullFlavour?.visit("null_flavour", ctx)
         nullReason?.visit("null_reason", ctx)
 
+        ctx.afterLocatable(attributeName, this, "ELEMENT")
     }
 }

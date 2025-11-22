@@ -70,7 +70,7 @@ class Composition : Locatable() {
     var content: MutableList<ContentItem> = mutableListOf()
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "COMPOSITION")) return
+        ctx.beforeLocatable(attributeName, this, "COMPOSITION")
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -86,5 +86,6 @@ class Composition : Locatable() {
         composer?.visit("composer", ctx)
         context?.visit("context", ctx)
         content.forEach { it.visit("content", ctx) }
+        ctx.afterLocatable(attributeName, this, "COMPOSITION")
     }
 }

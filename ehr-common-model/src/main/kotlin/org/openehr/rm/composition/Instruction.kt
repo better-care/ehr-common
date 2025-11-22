@@ -63,7 +63,7 @@ class Instruction : CareEntry() {
     var activities: MutableList<Activity> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "INSTRUCTION")) return
+        ctx.beforeLocatable(attributeName, this, "INSTRUCTION")
         // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -89,5 +89,6 @@ class Instruction : CareEntry() {
         expiryTime?.visit("expiry_time", ctx)
         wfDefinition?.visit("wf_definition", ctx)
         activities.forEach { it.visit("activities", ctx) }
+        ctx.afterLocatable(attributeName, this, "INSTRUCTION")
     }
 }

@@ -76,10 +76,11 @@ class DvParsable() : DvEncapsulated() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, formalism)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_PARSABLE")) return
+        ctx.beforeObject(attributeName, this, "DV_PARSABLE")
         charset?.visit("charset", ctx)
         language?.visit("language", ctx)
         value?.let { ctx.visitValue("value", it) }
         formalism?.let { ctx.visitValue("formalism", it) }
+        ctx.afterObject(attributeName, this, "DV_PARSABLE")
     }
 }

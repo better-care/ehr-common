@@ -56,11 +56,12 @@ class Ehr : RmObject(), Serializable {
     var ehrStatus: EhrStatus? = null
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "EHR")) return
+        ctx.beforeObject(attributeName, this, "EHR")
         systemId?.visit("system_id", ctx)
         ehrId?.visit("ehr_id", ctx)
         timeCreated?.visit("time_created", ctx)
         ehrStatus?.visit("ehr_status", ctx)
+        ctx.afterObject(attributeName, this, "EHR")
     }
 
     override fun equals(other: Any?): Boolean =

@@ -47,7 +47,7 @@ class GenericEntry : ContentItem() {
     var data: ItemTree? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "GENERIC_ENTRY")) return
+        ctx.beforeLocatable(attributeName, this, "GENERIC_ENTRY")
         // Visit parent properties (from Locatable via ContentItem)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -59,5 +59,6 @@ class GenericEntry : ContentItem() {
         // Visit own properties
         data?.visit("data", ctx)
 
+        ctx.afterLocatable(attributeName, this, "GENERIC_ENTRY")
     }
 }

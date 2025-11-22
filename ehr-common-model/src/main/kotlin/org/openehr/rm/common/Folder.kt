@@ -49,7 +49,7 @@ class Folder : Locatable() {
     var details: ItemStructure? = null
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "FOLDER")) return
+        ctx.beforeLocatable(attributeName, this, "FOLDER")
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -62,5 +62,6 @@ class Folder : Locatable() {
         folders.forEach { it.visit("folders", ctx) }
         items.forEach { it.visit("items", ctx) }
         details?.visit("details", ctx)
+        ctx.afterLocatable(attributeName, this, "FOLDER")
     }
 }

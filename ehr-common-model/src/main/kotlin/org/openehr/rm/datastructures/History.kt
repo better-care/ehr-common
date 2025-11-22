@@ -62,7 +62,7 @@ class History : Locatable() {
     var summary: ItemStructure? = null
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "HISTORY")) return
+        ctx.beforeLocatable(attributeName, this, "HISTORY")
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -77,5 +77,6 @@ class History : Locatable() {
         duration?.visit("duration", ctx)
         events.forEach { it.visit("events", ctx) }
         summary?.visit("summary", ctx)
+        ctx.afterLocatable(attributeName, this, "HISTORY")
     }
 }

@@ -60,7 +60,8 @@ class DvUri() : DataValue() {
     override fun hashCode(): Int = Objects.hash(value)
 
     open override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_URI")) return
+        ctx.beforeObject(attributeName, this, "DV_URI")
         value?.let { ctx.visitValue("value", it) }
+        ctx.afterObject(attributeName, this, "DV_URI")
     }
 }

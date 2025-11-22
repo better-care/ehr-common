@@ -58,7 +58,7 @@ class Activity : Locatable() {
     var actionArchetypeId: String? = null
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "ACTIVITY")) return
+        ctx.beforeLocatable(attributeName, this, "ACTIVITY")
         // Visit parent properties
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -71,5 +71,6 @@ class Activity : Locatable() {
         description?.visit("description", ctx)
         timing?.visit("timing", ctx)
         actionArchetypeId?.let { ctx.visitValue("action_archetype_id", it) }
+        ctx.afterLocatable(attributeName, this, "ACTIVITY")
     }
 }

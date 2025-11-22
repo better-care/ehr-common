@@ -40,7 +40,7 @@ class Section : ContentItem() {
     var items: MutableList<ContentItem> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "SECTION")) return
+        ctx.beforeLocatable(attributeName, this, "SECTION")
         // Visit parent properties (from Locatable via ContentItem)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -51,5 +51,6 @@ class Section : ContentItem() {
 
         // Visit own properties
         items.forEach { it.visit("items", ctx) }
+        ctx.afterLocatable(attributeName, this, "SECTION")
     }
 }

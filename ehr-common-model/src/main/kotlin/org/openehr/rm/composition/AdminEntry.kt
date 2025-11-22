@@ -46,7 +46,7 @@ class AdminEntry : Entry() {
     var data: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "ADMIN_ENTRY")) return
+        ctx.beforeLocatable(attributeName, this, "ADMIN_ENTRY")
         // Visit parent properties (from Locatable via ContentItem via Entry)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -65,5 +65,6 @@ class AdminEntry : Entry() {
 
         // Visit own properties
         data?.visit("data", ctx)
+        ctx.afterLocatable(attributeName, this, "ADMIN_ENTRY")
     }
 }

@@ -75,7 +75,7 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")) return
+        ctx.beforeObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
         language?.visit("language", ctx)
         purpose?.let { ctx.visitValue("purpose", it) }
         keywords.forEach { ctx.visitValue("keywords", it) }
@@ -84,5 +84,6 @@ class ResourceDescriptionItem : RmObject(), Serializable {
         copyright?.let { ctx.visitValue("copyright", it) }
         originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
         otherDetails.forEach { it.visit("other_details", ctx) }
+        ctx.afterObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
     }
 }

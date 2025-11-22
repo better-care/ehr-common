@@ -106,7 +106,7 @@ class DvCodedText() : DvText() {
     override fun hashCode(): Int = Objects.hash(definingCode)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "DV_CODED_TEXT")) return
+        ctx.beforeObject(attributeName, this, "DV_CODED_TEXT")
         value?.let { ctx.visitValue("value", it) }
         hyperlink?.visit("hyperlink", ctx)
         formatting?.let { ctx.visitValue("formatting", it) }
@@ -114,5 +114,6 @@ class DvCodedText() : DvText() {
         language?.visit("language", ctx)
         encoding?.visit("encoding", ctx)
         definingCode?.visit("defining_code", ctx)
+        ctx.afterObject(attributeName, this, "DV_CODED_TEXT")
     }
 }

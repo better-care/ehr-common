@@ -65,7 +65,7 @@ class Action : CareEntry() {
     var instructionDetails: InstructionDetails? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitLocatable(attributeName, this, "ACTION")) return
+        ctx.beforeLocatable(attributeName, this, "ACTION")
         // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
@@ -91,5 +91,6 @@ class Action : CareEntry() {
         description?.visit("description", ctx)
         ismTransition?.visit("ism_transition", ctx)
         instructionDetails?.visit("instruction_details", ctx)
+        ctx.afterLocatable(attributeName, this, "ACTION")
     }
 }

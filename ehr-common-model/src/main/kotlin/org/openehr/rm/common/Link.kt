@@ -85,9 +85,10 @@ class Link() : RmObject(), java.io.Serializable {
     var target: DvEhrUri? = null
 
     fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (!ctx.visitObject(attributeName, this, "LINK")) return
+        ctx.beforeObject(attributeName, this, "LINK")
         meaning?.visit("meaning", ctx)
         type?.visit("type", ctx)
         target?.visit("target", ctx)
+        ctx.afterObject(attributeName, this, "LINK")
     }
 }
