@@ -61,4 +61,9 @@ class DvBoolean() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value)
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        ctx.visitValue("value", value)
+        ctx.visitObject(attributeName, this, "DV_BOOLEAN")
+    }
 }

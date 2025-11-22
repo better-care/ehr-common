@@ -59,4 +59,11 @@ class TermMapping() : RmObject(), Serializable {
     @XmlElement(required = true)
     @Required
     var target: CodePhrase? = null
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        match?.let { ctx.visitValue("match", it) }
+        purpose?.visit("purpose", ctx)
+        target?.visit("target", ctx)
+        ctx.visitObject(attributeName, this, "TERM_MAPPING")
+    }
 }

@@ -45,4 +45,9 @@ class DvParagraph() : DataValue() {
     @XmlElement(required = true)
     @Required
     var items: MutableList<DvText> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        items.forEach { it.visit("items", ctx) }
+        ctx.visitObject(attributeName, this, "DV_PARAGRAPH")
+    }
 }

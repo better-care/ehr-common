@@ -46,4 +46,21 @@ class Folder : Locatable() {
     var folders: MutableList<Folder> = mutableListOf()
     var items: MutableList<ObjectRef> = mutableListOf()
     var details: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        // Visit parent properties
+        name?.visit("name", ctx)
+        uid?.visit("uid", ctx)
+        links.forEach { it.visit("links", ctx) }
+        archetypeDetails?.visit("archetype_details", ctx)
+        feederAudit?.visit("feeder_audit", ctx)
+        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+
+        // Visit own properties
+        folders.forEach { it.visit("folders", ctx) }
+        items.forEach { it.visit("items", ctx) }
+        details?.visit("details", ctx)
+
+        ctx.visitLocatable(attributeName, this, "FOLDER")
+    }
 }

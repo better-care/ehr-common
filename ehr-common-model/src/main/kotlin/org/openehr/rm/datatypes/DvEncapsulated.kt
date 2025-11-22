@@ -52,4 +52,10 @@ abstract class DvEncapsulated(var charset: CodePhrase? = null, var language: Cod
         }
 
     override fun hashCode(): Int = Objects.hash(charset, language)
+
+    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        charset?.visit("charset", ctx)
+        language?.visit("language", ctx)
+        ctx.visitObject(attributeName, this, "DV_ENCAPSULATED")
+    }
 }

@@ -58,4 +58,11 @@ class InstructionDetails : RmObject(), Serializable {
     @XmlElement(name = "wf_details")
     @SerialName("wf_details")
     var wfDetails: ItemStructure? = null
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        instructionId?.visit("instruction_id", ctx)
+        activityId?.let { ctx.visitValue("activity_id", it) }
+        wfDetails?.visit("wf_details", ctx)
+        ctx.visitObject(attributeName, this, "INSTRUCTION_DETAILS")
+    }
 }

@@ -58,4 +58,12 @@ class IsmTransition : RmObject(), Serializable {
     var careflowStep: DvCodedText? = null
 
     var reason: MutableList<DvText> = mutableListOf()
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        currentState?.visit("current_state", ctx)
+        transition?.visit("transition", ctx)
+        careflowStep?.visit("careflow_step", ctx)
+        reason.forEach { it.visit("reason", ctx) }
+        ctx.visitObject(attributeName, this, "ISM_TRANSITION")
+    }
 }

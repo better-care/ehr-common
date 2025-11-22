@@ -64,4 +64,9 @@ class DvEhrUri() : DvUri() {
         fun create(ehrUid: String, compositionUid: String, path: String?): DvEhrUri =
             DvEhrUri("ehr://$ehrUid/$compositionUid" + (path?.let { if (it.startsWith("/")) it else "/$it" } ?: ""))
     }
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        ctx.visitObject(attributeName, this, "DV_EHR_URI")
+    }
 }

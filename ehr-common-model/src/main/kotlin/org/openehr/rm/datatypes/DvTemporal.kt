@@ -53,4 +53,13 @@ class DvTemporal : DvQuantified() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy)
+
+    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        normalRange?.visit("normal_range", ctx)
+        otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+        normalStatus?.visit("normal_status", ctx)
+        magnitudeStatus?.let { ctx.visitValue("magnitude_status", it) }
+        accuracy?.visit("accuracy", ctx)
+        ctx.visitObject(attributeName, this, "DV_TEMPORAL")
+    }
 }

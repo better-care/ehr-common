@@ -50,4 +50,12 @@ abstract class DvQuantified : DvOrdered() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitudeStatus)
+
+    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        normalRange?.visit("normal_range", ctx)
+        otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+        normalStatus?.visit("normal_status", ctx)
+        magnitudeStatus?.let { ctx.visitValue("magnitude_status", it) }
+        ctx.visitObject(attributeName, this, "DV_QUANTIFIED")
+    }
 }

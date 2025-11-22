@@ -21,7 +21,10 @@ import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
-import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
@@ -87,4 +90,14 @@ class DvText() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value, encoding, formatting, hyperlink, language)
+
+    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        hyperlink?.visit("hyperlink", ctx)
+        formatting?.let { ctx.visitValue("formatting", it) }
+        mappings.forEach { it.visit("mappings", ctx) }
+        language?.visit("language", ctx)
+        encoding?.visit("encoding", ctx)
+        ctx.visitObject(attributeName, this, "DV_TEXT")
+    }
 }

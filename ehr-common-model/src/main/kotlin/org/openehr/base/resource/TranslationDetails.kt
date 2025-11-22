@@ -59,4 +59,12 @@ class TranslationDetails : RmObject(), Serializable {
     @XmlElement(name = "other_details")
     @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        language?.visit("language", ctx)
+        author.forEach { it.visit("author", ctx) }
+        accreditation?.let { ctx.visitValue("accreditation", it) }
+        otherDetails.forEach { it.visit("other_details", ctx) }
+        ctx.visitObject(attributeName, this, "TRANSLATION_DETAILS")
+    }
 }

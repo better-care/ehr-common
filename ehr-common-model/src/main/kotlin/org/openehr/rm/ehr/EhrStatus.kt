@@ -56,4 +56,22 @@ class EhrStatus : Locatable() {
     @XmlElement(name = "other_details")
     @SerialName("other_details")
     var otherDetails: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        // Visit parent properties
+        name?.visit("name", ctx)
+        uid?.visit("uid", ctx)
+        links.forEach { it.visit("links", ctx) }
+        archetypeDetails?.visit("archetype_details", ctx)
+        feederAudit?.visit("feeder_audit", ctx)
+        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+
+        // Visit own properties
+        subject?.visit("subject", ctx)
+        ctx.visitValue("is_queryable", queryable)
+        ctx.visitValue("is_modifiable", modifiable)
+        otherDetails?.visit("other_details", ctx)
+
+        ctx.visitLocatable(attributeName, this, "EHR_STATUS")
+    }
 }

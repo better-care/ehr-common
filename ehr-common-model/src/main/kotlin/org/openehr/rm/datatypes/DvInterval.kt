@@ -104,4 +104,14 @@ class DvInterval() : DataValue(), RangeParameters {
         }
 
     override fun hashCode(): Int = Objects.hash(lower, upper, lowerIncluded, upperIncluded, lowerUnbounded, upperUnbounded)
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        lower?.visit("lower", ctx)
+        upper?.visit("upper", ctx)
+        lowerIncluded?.let { ctx.visitValue("lower_included", it) }
+        upperIncluded?.let { ctx.visitValue("upper_included", it) }
+        ctx.visitValue("lower_unbounded", lowerUnbounded)
+        ctx.visitValue("upper_unbounded", upperUnbounded)
+        ctx.visitObject(attributeName, this, "DV_INTERVAL")
+    }
 }

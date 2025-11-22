@@ -40,4 +40,9 @@ abstract class PartyProxy : RmObject(), Serializable {
     @XmlElement(name = "external_ref")
     @SerialName("external_ref")
     var externalRef: PartyRef? = null
+
+    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        externalRef?.visit("external_ref", ctx)
+        ctx.visitObject(attributeName, this, "PARTY_PROXY")
+    }
 }

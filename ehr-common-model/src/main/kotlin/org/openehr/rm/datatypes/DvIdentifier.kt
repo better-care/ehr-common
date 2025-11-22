@@ -77,4 +77,12 @@ class DvIdentifier() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(id, type, issuer, assigner)
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        issuer?.let { ctx.visitValue("issuer", it) }
+        assigner?.let { ctx.visitValue("assigner", it) }
+        id?.let { ctx.visitValue("id", it) }
+        type?.let { ctx.visitValue("type", it) }
+        ctx.visitObject(attributeName, this, "DV_IDENTIFIER")
+    }
 }

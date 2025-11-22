@@ -59,4 +59,23 @@ class History : Locatable() {
     var events: MutableList<Event> = mutableListOf()
 
     var summary: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        // Visit parent properties
+        name?.visit("name", ctx)
+        uid?.visit("uid", ctx)
+        links.forEach { it.visit("links", ctx) }
+        archetypeDetails?.visit("archetype_details", ctx)
+        feederAudit?.visit("feeder_audit", ctx)
+        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+
+        // Visit own properties
+        origin?.visit("origin", ctx)
+        period?.visit("period", ctx)
+        duration?.visit("duration", ctx)
+        events.forEach { it.visit("events", ctx) }
+        summary?.visit("summary", ctx)
+
+        ctx.visitLocatable(attributeName, this, "HISTORY")
+    }
 }

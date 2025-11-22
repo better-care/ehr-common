@@ -57,4 +57,9 @@ class DvUri() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value)
+
+    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        ctx.visitObject(attributeName, this, "DV_URI")
+    }
 }

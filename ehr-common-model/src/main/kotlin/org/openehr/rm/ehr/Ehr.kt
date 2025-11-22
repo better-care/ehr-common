@@ -54,6 +54,14 @@ class Ehr : RmObject(), Serializable {
     @SerialName("ehr_status")
     var ehrStatus: EhrStatus? = null
 
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        systemId?.visit("system_id", ctx)
+        ehrId?.visit("ehr_id", ctx)
+        timeCreated?.visit("time_created", ctx)
+        ehrStatus?.visit("ehr_status", ctx)
+        ctx.visitObject(attributeName, this, "EHR")
+    }
+
     override fun equals(other: Any?): Boolean =
         when {
             this === other -> true

@@ -130,4 +130,19 @@ class DvMultimedia() : DvEncapsulated() {
     var integrityCheckAlgorithm: CodePhrase? = null
     var size: Int = 0
     var thumbnail: DvMultimedia? = null
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        charset?.visit("charset", ctx)
+        language?.visit("language", ctx)
+        alternateText?.let { ctx.visitValue("alternate_text", it) }
+        uri?.visit("uri", ctx)
+        data?.let { ctx.visitValue("data", it) }
+        mediaType?.visit("media_type", ctx)
+        compressionAlgorithm?.visit("compression_algorithm", ctx)
+        integrityCheck?.let { ctx.visitValue("integrity_check", it) }
+        integrityCheckAlgorithm?.visit("integrity_check_algorithm", ctx)
+        ctx.visitValue("size", size)
+        thumbnail?.visit("thumbnail", ctx)
+        ctx.visitObject(attributeName, this, "DV_MULTIMEDIA")
+    }
 }

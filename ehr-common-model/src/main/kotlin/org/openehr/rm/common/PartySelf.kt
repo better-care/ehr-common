@@ -40,4 +40,9 @@ class PartySelf() : PartyProxy() {
     constructor(externalRef: PartyRef): this(){
         this.externalRef = externalRef
     }
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        externalRef?.visit("external_ref", ctx)
+        ctx.visitObject(attributeName, this, "PARTY_SELF")
+    }
 }

@@ -40,4 +40,9 @@ class DvGeneralTimeSpecification() : DvTimeSpecification() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.visit("value", ctx)
+        ctx.visitObject(attributeName, this, "DV_GENERAL_TIME_SPECIFICATION")
+    }
 }

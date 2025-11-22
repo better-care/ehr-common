@@ -60,4 +60,13 @@ class DvScale() : DvOrdered() {
     @XmlElement(required = true)
     @Required
     var value: Double = 0.0
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        normalRange?.visit("normal_range", ctx)
+        otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+        normalStatus?.visit("normal_status", ctx)
+        symbol?.visit("symbol", ctx)
+        ctx.visitValue("value", value)
+        ctx.visitObject(attributeName, this, "DV_SCALE")
+    }
 }

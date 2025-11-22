@@ -82,4 +82,11 @@ class Link() : RmObject(), java.io.Serializable {
     @XmlElement(required = true)
     @Required
     var target: DvEhrUri? = null
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        meaning?.visit("meaning", ctx)
+        type?.visit("type", ctx)
+        target?.visit("target", ctx)
+        ctx.visitObject(attributeName, this, "LINK")
+    }
 }

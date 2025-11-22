@@ -55,4 +55,12 @@ class PartyRelated constructor(): PartyIdentified() {
     @XmlElement(required = true)
     @Required
     var relationship: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        externalRef?.visit("external_ref", ctx)
+        name?.let { ctx.visitValue("name", it) }
+        identifiers.forEach { it.visit("identifiers", ctx) }
+        relationship?.visit("relationship", ctx)
+        ctx.visitObject(attributeName, this, "PARTY_RELATED")
+    }
 }

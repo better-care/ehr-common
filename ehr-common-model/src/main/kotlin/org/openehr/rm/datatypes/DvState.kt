@@ -66,4 +66,10 @@ class DvState() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value, isTerminal)
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.visit("value", ctx)
+        ctx.visitValue("is_terminal", isTerminal)
+        ctx.visitObject(attributeName, this, "DV_STATE")
+    }
 }

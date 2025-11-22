@@ -69,4 +69,11 @@ class PartyIdentified() : PartyProxy() {
     var name: String? = null
 
     var identifiers: MutableList<DvIdentifier> = mutableListOf()
+
+    open override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        externalRef?.visit("external_ref", ctx)
+        name?.let { ctx.visitValue("name", it) }
+        identifiers.forEach { it.visit("identifiers", ctx) }
+        ctx.visitObject(attributeName, this, "PARTY_IDENTIFIED")
+    }
 }

@@ -66,4 +66,12 @@ class Participation() : RmObject(), Serializable {
     var time: DvInterval? = null
 
     var mode: DvCodedText? = null
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        function?.visit("function", ctx)
+        performer?.visit("performer", ctx)
+        time?.visit("time", ctx)
+        mode?.visit("mode", ctx)
+        ctx.visitObject(attributeName, this, "PARTICIPATION")
+    }
 }

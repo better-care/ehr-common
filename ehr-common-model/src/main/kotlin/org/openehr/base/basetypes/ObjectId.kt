@@ -56,6 +56,11 @@ abstract class ObjectId : RmObject(), Serializable {
         }
 
     override fun hashCode(): Int = Objects.hash(value)
+
+    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        ctx.visitObject(attributeName, this, "OBJECT_ID")
+    }
 }
 
 

@@ -48,4 +48,8 @@ abstract class DataValue : RmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        ctx.visitObject(attributeName, this, "DATA_VALUE")
+    }
 }

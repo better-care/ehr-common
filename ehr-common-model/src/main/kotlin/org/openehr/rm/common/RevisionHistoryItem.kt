@@ -51,4 +51,10 @@ class RevisionHistoryItem : RmObject(), Serializable {
     @XmlElement(required = true)
     @Required
     var audits: MutableList<AuditDetails> = mutableListOf()
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        versionId?.visit("version_id", ctx)
+        audits.forEach { it.visit("audits", ctx) }
+        ctx.visitObject(attributeName, this, "REVISION_HISTORY_ITEM")
+    }
 }

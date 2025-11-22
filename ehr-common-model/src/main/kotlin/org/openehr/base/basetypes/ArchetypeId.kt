@@ -40,4 +40,9 @@ class ArchetypeId() : ObjectId() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        ctx.visitObject(attributeName, this, "ARCHETYPE_ID")
+    }
 }

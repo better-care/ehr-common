@@ -103,4 +103,15 @@ class DvCodedText() : DvText() {
         }
 
     override fun hashCode(): Int = Objects.hash(definingCode)
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        hyperlink?.visit("hyperlink", ctx)
+        formatting?.let { ctx.visitValue("formatting", it) }
+        mappings.forEach { it.visit("mappings", ctx) }
+        language?.visit("language", ctx)
+        encoding?.visit("encoding", ctx)
+        definingCode?.visit("defining_code", ctx)
+        ctx.visitObject(attributeName, this, "DV_CODED_TEXT")
+    }
 }

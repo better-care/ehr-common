@@ -88,4 +88,11 @@ class ObjectRef() : RmObject(), Serializable {
     @XmlSchemaType(name = "token")
     @Required
     var type: String? = null
+
+    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        id?.visit("id", ctx)
+        namespace?.let { ctx.visitValue("namespace", it) }
+        type?.let { ctx.visitValue("type", it) }
+        ctx.visitObject(attributeName, this, "OBJECT_REF")
+    }
 }

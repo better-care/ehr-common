@@ -38,4 +38,9 @@ class RevisionHistory : RmObject(), Serializable {
     }
 
     var items: MutableList<RevisionHistoryItem> = mutableListOf()
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        items.forEach { it.visit("items", ctx) }
+        ctx.visitObject(attributeName, this, "REVISION_HISTORY")
+    }
 }

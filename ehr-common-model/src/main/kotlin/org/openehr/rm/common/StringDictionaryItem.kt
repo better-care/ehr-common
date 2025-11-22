@@ -42,4 +42,10 @@ class StringDictionaryItem : RmObject(), Serializable {
     @XmlAttribute(name = "id", required = true)
     @Required
     var id: String? = null
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        id?.let { ctx.visitValue("id", it) }
+        ctx.visitObject(attributeName, this, "STRING_DICTIONARY_ITEM")
+    }
 }

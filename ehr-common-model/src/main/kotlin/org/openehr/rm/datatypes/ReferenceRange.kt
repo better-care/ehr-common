@@ -54,4 +54,10 @@ class ReferenceRange() : RmObject(), Serializable {
     @XmlElement(required = true)
     @Required
     var range: DvInterval? = null
+
+    fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        meaning?.visit("meaning", ctx)
+        range?.visit("range", ctx)
+        ctx.visitObject(attributeName, this, "REFERENCE_RANGE")
+    }
 }

@@ -48,4 +48,10 @@ class GenericId() : ObjectId() {
     @XmlElement(required = true)
     @Required
     var scheme: String? = null
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it) }
+        scheme?.let { ctx.visitValue("scheme", it) }
+        ctx.visitObject(attributeName, this, "GENERIC_ID")
+    }
 }

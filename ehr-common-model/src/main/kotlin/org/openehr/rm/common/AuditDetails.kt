@@ -83,4 +83,13 @@ class AuditDetails() : RmObject(), Serializable {
     var changeType: DvCodedText? = null
 
     var description: DvText? = null
+
+    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        systemId?.let { ctx.visitValue("system_id", it) }
+        committer?.visit("committer", ctx)
+        timeCommitted?.visit("time_committed", ctx)
+        changeType?.visit("change_type", ctx)
+        description?.visit("description", ctx)
+        ctx.visitObject(attributeName, this, "AUDIT_DETAILS")
+    }
 }

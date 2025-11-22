@@ -83,4 +83,22 @@ class Attestation() : AuditDetails() {
     @XmlElement(name = "is_pending", defaultValue = "false")
     @SerialName("is_pending")
     var isPending: Boolean = false
+
+    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
+        // Visit parent properties
+        systemId?.let { ctx.visitValue("system_id", it) }
+        committer?.visit("committer", ctx)
+        timeCommitted?.visit("time_committed", ctx)
+        changeType?.visit("change_type", ctx)
+        description?.visit("description", ctx)
+
+        // Visit own properties
+        attestedView?.visit("attested_view", ctx)
+        proof?.let { ctx.visitValue("proof", it) }
+        items.forEach { it.visit("items", ctx) }
+        reason?.visit("reason", ctx)
+        ctx.visitValue("is_pending", isPending)
+
+        ctx.visitObject(attributeName, this, "ATTESTATION")
+    }
 }
