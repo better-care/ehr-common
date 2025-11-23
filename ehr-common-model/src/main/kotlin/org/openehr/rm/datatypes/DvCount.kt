@@ -73,10 +73,10 @@ class DvCount() : DvAmount() {
             normalRange?.visit("normal_range", ctx)
             otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
             normalStatus?.visit("normal_status", ctx)
-            magnitudeStatus?.let { ctx.visitValue("magnitude_status", it) }
-            accuracy?.let { ctx.visitValue("accuracy", it) }
-            accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it) }
-            ctx.visitValue("magnitude", magnitude)
+            magnitudeStatus?.let { ctx.visitValue("magnitude_status", it, this) }
+            accuracy?.let { ctx.visitValue("accuracy", it, this) }
+            accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it, this) }
+            ctx.visitValue("magnitude", magnitude, this)
             ctx.afterObject(attributeName, this, "DV_COUNT")
         }
     }

@@ -79,7 +79,7 @@ class DvOrdinal() : DvOrdered() {
             normalRange?.visit("normal_range", ctx)
             otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
             normalStatus?.visit("normal_status", ctx)
-            ctx.visitValue("value", value)
+            ctx.visitValue("value", value, this)
             symbol?.visit("symbol", ctx)
             ctx.afterObject(attributeName, this, "DV_ORDINAL")
         }

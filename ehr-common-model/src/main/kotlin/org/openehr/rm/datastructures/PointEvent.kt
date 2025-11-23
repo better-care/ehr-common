@@ -46,7 +46,7 @@ class PointEvent : Event() {
             links.forEach { it.visit("links", ctx) }
             archetypeDetails?.visit("archetype_details", ctx)
             feederAudit?.visit("feeder_audit", ctx)
-            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it, this) }
 
             // Visit Event properties
             time?.visit("time", ctx)

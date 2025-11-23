@@ -110,10 +110,10 @@ class DvInterval() : DataValue(), RangeParameters {
         if (ctx.beforeObject(attributeName, this, "DV_INTERVAL")) {
             lower?.visit("lower", ctx)
             upper?.visit("upper", ctx)
-            lowerIncluded?.let { ctx.visitValue("lower_included", it) }
-            upperIncluded?.let { ctx.visitValue("upper_included", it) }
-            ctx.visitValue("lower_unbounded", lowerUnbounded)
-            ctx.visitValue("upper_unbounded", upperUnbounded)
+            lowerIncluded?.let { ctx.visitValue("lower_included", it, this) }
+            upperIncluded?.let { ctx.visitValue("upper_included", it, this) }
+            ctx.visitValue("lower_unbounded", lowerUnbounded, this)
+            ctx.visitValue("upper_unbounded", upperUnbounded, this)
             ctx.afterObject(attributeName, this, "DV_INTERVAL")
         }
     }

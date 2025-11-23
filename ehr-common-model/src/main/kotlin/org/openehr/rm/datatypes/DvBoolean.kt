@@ -65,7 +65,7 @@ class DvBoolean() : DataValue() {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "DV_BOOLEAN")) {
-            ctx.visitValue("value", value)
+            ctx.visitValue("value", value, this)
             ctx.afterObject(attributeName, this, "DV_BOOLEAN")
         }
     }

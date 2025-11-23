@@ -63,7 +63,7 @@ class InstructionDetails : RmObject(), Serializable {
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "INSTRUCTION_DETAILS")) {
             instructionId?.visit("instruction_id", ctx)
-            activityId?.let { ctx.visitValue("activity_id", it) }
+            activityId?.let { ctx.visitValue("activity_id", it, this) }
             wfDetails?.visit("wf_details", ctx)
             ctx.afterObject(attributeName, this, "INSTRUCTION_DETAILS")
         }

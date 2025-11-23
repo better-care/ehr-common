@@ -88,7 +88,7 @@ class Attestation() : AuditDetails() {
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "ATTESTATION")) {
             // Visit parent properties
-            systemId?.let { ctx.visitValue("system_id", it) }
+            systemId?.let { ctx.visitValue("system_id", it, this) }
             committer?.visit("committer", ctx)
             timeCommitted?.visit("time_committed", ctx)
             changeType?.visit("change_type", ctx)
@@ -96,10 +96,10 @@ class Attestation() : AuditDetails() {
 
             // Visit own properties
             attestedView?.visit("attested_view", ctx)
-            proof?.let { ctx.visitValue("proof", it) }
+            proof?.let { ctx.visitValue("proof", it, this) }
             items.forEach { it.visit("items", ctx) }
             reason?.visit("reason", ctx)
-            ctx.visitValue("is_pending", isPending)
+            ctx.visitValue("is_pending", isPending, this)
             ctx.afterObject(attributeName, this, "ATTESTATION")
         }
     }

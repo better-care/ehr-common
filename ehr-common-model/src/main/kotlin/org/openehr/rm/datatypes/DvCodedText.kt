@@ -107,9 +107,9 @@ class DvCodedText() : DvText() {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "DV_CODED_TEXT")) {
-            value?.let { ctx.visitValue("value", it) }
+            value?.let { ctx.visitValue("value", it, this) }
             hyperlink?.visit("hyperlink", ctx)
-            formatting?.let { ctx.visitValue("formatting", it) }
+            formatting?.let { ctx.visitValue("formatting", it, this) }
             mappings.forEach { it.visit("mappings", ctx) }
             language?.visit("language", ctx)
             encoding?.visit("encoding", ctx)

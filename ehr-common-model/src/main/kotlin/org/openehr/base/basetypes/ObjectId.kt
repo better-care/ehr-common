@@ -60,7 +60,7 @@ abstract class ObjectId : RmObject(), Serializable {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "OBJECT_ID")) {
-            value?.let { ctx.visitValue("value", it) }
+            value?.let { ctx.visitValue("value", it, this) }
             ctx.afterObject(attributeName, this, "OBJECT_ID")
         }
     }

@@ -68,7 +68,7 @@ class DvScale() : DvOrdered() {
             otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
             normalStatus?.visit("normal_status", ctx)
             symbol?.visit("symbol", ctx)
-            ctx.visitValue("value", value)
+            ctx.visitValue("value", value, this)
             ctx.afterObject(attributeName, this, "DV_SCALE")
         }
     }

@@ -79,8 +79,8 @@ class DvParsable() : DvEncapsulated() {
         if (ctx.beforeObject(attributeName, this, "DV_PARSABLE")) {
             charset?.visit("charset", ctx)
             language?.visit("language", ctx)
-            value?.let { ctx.visitValue("value", it) }
-            formalism?.let { ctx.visitValue("formalism", it) }
+            value?.let { ctx.visitValue("value", it, this) }
+            formalism?.let { ctx.visitValue("formalism", it, this) }
             ctx.afterObject(attributeName, this, "DV_PARSABLE")
         }
     }

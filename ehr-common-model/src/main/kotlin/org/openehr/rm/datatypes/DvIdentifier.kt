@@ -81,10 +81,10 @@ class DvIdentifier() : DataValue() {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "DV_IDENTIFIER")) {
-            issuer?.let { ctx.visitValue("issuer", it) }
-            assigner?.let { ctx.visitValue("assigner", it) }
-            id?.let { ctx.visitValue("id", it) }
-            type?.let { ctx.visitValue("type", it) }
+            issuer?.let { ctx.visitValue("issuer", it, this) }
+            assigner?.let { ctx.visitValue("assigner", it, this) }
+            id?.let { ctx.visitValue("id", it, this) }
+            type?.let { ctx.visitValue("type", it, this) }
             ctx.afterObject(attributeName, this, "DV_IDENTIFIER")
         }
     }

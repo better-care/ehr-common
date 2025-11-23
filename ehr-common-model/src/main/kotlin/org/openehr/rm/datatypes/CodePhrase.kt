@@ -118,8 +118,8 @@ class CodePhrase() : RmObject(), Serializable {
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "CODE_PHRASE")) {
             terminologyId?.visit("terminology_id", ctx)
-            codeString?.let { ctx.visitValue("code_string", it) }
-            preferredTerm?.let { ctx.visitValue("preferred_term", it) }
+            codeString?.let { ctx.visitValue("code_string", it, this) }
+            preferredTerm?.let { ctx.visitValue("preferred_term", it, this) }
             ctx.afterObject(attributeName, this, "CODE_PHRASE")
         }
     }

@@ -71,7 +71,7 @@ class DvState() : DataValue() {
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "DV_STATE")) {
             value?.visit("value", ctx)
-            ctx.visitValue("is_terminal", isTerminal)
+            ctx.visitValue("is_terminal", isTerminal, this)
             ctx.afterObject(attributeName, this, "DV_STATE")
         }
     }

@@ -41,7 +41,7 @@ abstract class UidBasedId : ObjectId() {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "UID_BASED_ID")) {
-            value?.let { ctx.visitValue("value", it) }
+            value?.let { ctx.visitValue("value", it, this) }
             ctx.afterObject(attributeName, this, "UID_BASED_ID")
         }
     }

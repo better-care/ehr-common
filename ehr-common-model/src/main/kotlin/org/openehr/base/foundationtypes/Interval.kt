@@ -69,10 +69,10 @@ abstract class Interval : RmObject(), Serializable, RangeParameters {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "INTERVAL")) {
-            lowerIncluded?.let { ctx.visitValue("lower_included", it) }
-            upperIncluded?.let { ctx.visitValue("upper_included", it) }
-            ctx.visitValue("lower_unbounded", lowerUnbounded)
-            ctx.visitValue("upper_unbounded", upperUnbounded)
+            lowerIncluded?.let { ctx.visitValue("lower_included", it, this) }
+            upperIncluded?.let { ctx.visitValue("upper_included", it, this) }
+            ctx.visitValue("lower_unbounded", lowerUnbounded, this)
+            ctx.visitValue("upper_unbounded", upperUnbounded, this)
             ctx.afterObject(attributeName, this, "INTERVAL")
         }
     }

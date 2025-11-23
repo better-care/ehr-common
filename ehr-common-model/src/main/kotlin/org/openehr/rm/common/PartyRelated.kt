@@ -60,7 +60,7 @@ class PartyRelated constructor(): PartyIdentified() {
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "PARTY_RELATED")) {
             externalRef?.visit("external_ref", ctx)
-            name?.let { ctx.visitValue("name", it) }
+            name?.let { ctx.visitValue("name", it, this) }
             identifiers.forEach { it.visit("identifiers", ctx) }
             relationship?.visit("relationship", ctx)
             ctx.afterObject(attributeName, this, "PARTY_RELATED")

@@ -66,7 +66,7 @@ class IntervalEvent : Event() {
             links.forEach { it.visit("links", ctx) }
             archetypeDetails?.visit("archetype_details", ctx)
             feederAudit?.visit("feeder_audit", ctx)
-            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it, this) }
 
             // Visit Event properties
             time?.visit("time", ctx)
@@ -75,7 +75,7 @@ class IntervalEvent : Event() {
 
             // Visit own properties
             width?.visit("width", ctx)
-            sampleCount?.let { ctx.visitValue("sample_count", it) }
+            sampleCount?.let { ctx.visitValue("sample_count", it, this) }
             mathFunction?.visit("math_function", ctx)
 
             ctx.afterLocatable(attributeName, this, "INTERVAL_EVENT")

@@ -8,5 +8,5 @@ interface RmVisitorContext {
     fun afterLocatable(attributeName: String, locatable: Locatable, typeName: String)
     fun beforeObject(attributeName: String, value: RmObject, typeName: String): Boolean = true
     fun afterObject(attributeName: String, value: RmObject, typeName: String)
-    fun visitValue(attributeName: String, value: Any): Boolean = true
+    fun visitValue(attributeName: String, value: Any, owner: Any)
 }

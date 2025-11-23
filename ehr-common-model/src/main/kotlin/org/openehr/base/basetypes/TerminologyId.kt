@@ -43,7 +43,7 @@ class TerminologyId() : ObjectId() {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "TERMINOLOGY_ID")) {
-            value?.let { ctx.visitValue("value", it) }
+            value?.let { ctx.visitValue("value", it, this) }
             ctx.afterObject(attributeName, this, "TERMINOLOGY_ID")
         }
     }

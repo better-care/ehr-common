@@ -107,14 +107,14 @@ class DvQuantity() : DvAmount() {
             normalRange?.visit("normal_range", ctx)
             otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
             normalStatus?.visit("normal_status", ctx)
-            magnitudeStatus?.let { ctx.visitValue("magnitude_status", it) }
-            accuracy?.let { ctx.visitValue("accuracy", it) }
-            accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it) }
-            ctx.visitValue("magnitude", magnitude)
-            units?.let { ctx.visitValue("units", it) }
-            precision?.let { ctx.visitValue("precision", it) }
-            unitsSystem?.let { ctx.visitValue("units_system", it) }
-            unitsDisplayName?.let { ctx.visitValue("units_display_name", it) }
+            magnitudeStatus?.let { ctx.visitValue("magnitude_status", it, this) }
+            accuracy?.let { ctx.visitValue("accuracy", it, this) }
+            accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it, this) }
+            ctx.visitValue("magnitude", magnitude, this)
+            units?.let { ctx.visitValue("units", it, this) }
+            precision?.let { ctx.visitValue("precision", it, this) }
+            unitsSystem?.let { ctx.visitValue("units_system", it, this) }
+            unitsDisplayName?.let { ctx.visitValue("units_display_name", it, this) }
             ctx.afterObject(attributeName, this, "DV_QUANTITY")
         }
     }

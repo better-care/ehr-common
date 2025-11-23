@@ -74,7 +74,7 @@ class PartyIdentified() : PartyProxy() {
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "PARTY_IDENTIFIED")) {
             externalRef?.visit("external_ref", ctx)
-            name?.let { ctx.visitValue("name", it) }
+            name?.let { ctx.visitValue("name", it, this) }
             identifiers.forEach { it.visit("identifiers", ctx) }
             ctx.afterObject(attributeName, this, "PARTY_IDENTIFIED")
         }

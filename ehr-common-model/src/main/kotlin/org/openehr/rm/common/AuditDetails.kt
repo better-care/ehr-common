@@ -87,7 +87,7 @@ class AuditDetails() : RmObject(), Serializable {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "AUDIT_DETAILS")) {
-            systemId?.let { ctx.visitValue("system_id", it) }
+            systemId?.let { ctx.visitValue("system_id", it, this) }
             committer?.visit("committer", ctx)
             timeCommitted?.visit("time_committed", ctx)
             changeType?.visit("change_type", ctx)

@@ -65,7 +65,7 @@ class TranslationDetails : RmObject(), Serializable {
         if (ctx.beforeObject(attributeName, this, "TRANSLATION_DETAILS")) {
             language?.visit("language", ctx)
             author.forEach { it.visit("author", ctx) }
-            accreditation?.let { ctx.visitValue("accreditation", it) }
+            accreditation?.let { ctx.visitValue("accreditation", it, this) }
             otherDetails.forEach { it.visit("other_details", ctx) }
             ctx.afterObject(attributeName, this, "TRANSLATION_DETAILS")
         }

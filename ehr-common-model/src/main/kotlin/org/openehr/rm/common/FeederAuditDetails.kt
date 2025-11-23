@@ -91,12 +91,12 @@ class FeederAuditDetails() : RmObject(), Serializable {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "FEEDER_AUDIT_DETAILS")) {
-            systemId?.let { ctx.visitValue("system_id", it) }
+            systemId?.let { ctx.visitValue("system_id", it, this) }
             location?.visit("location", ctx)
             provider?.visit("provider", ctx)
             subject?.visit("subject", ctx)
             time?.visit("time", ctx)
-            versionId?.let { ctx.visitValue("version_id", it) }
+            versionId?.let { ctx.visitValue("version_id", it, this) }
             otherDetails?.visit("other_details", ctx)
             ctx.afterObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
         }

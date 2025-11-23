@@ -136,14 +136,14 @@ class DvMultimedia() : DvEncapsulated() {
         if (ctx.beforeObject(attributeName, this, "DV_MULTIMEDIA")) {
             charset?.visit("charset", ctx)
             language?.visit("language", ctx)
-            alternateText?.let { ctx.visitValue("alternate_text", it) }
+            alternateText?.let { ctx.visitValue("alternate_text", it, this) }
             uri?.visit("uri", ctx)
-            data?.let { ctx.visitValue("data", it) }
+            data?.let { ctx.visitValue("data", it, this) }
             mediaType?.visit("media_type", ctx)
             compressionAlgorithm?.visit("compression_algorithm", ctx)
-            integrityCheck?.let { ctx.visitValue("integrity_check", it) }
+            integrityCheck?.let { ctx.visitValue("integrity_check", it, this) }
             integrityCheckAlgorithm?.visit("integrity_check_algorithm", ctx)
-            ctx.visitValue("size", size)
+            ctx.visitValue("size", size, this)
             thumbnail?.visit("thumbnail", ctx)
             ctx.afterObject(attributeName, this, "DV_MULTIMEDIA")
         }

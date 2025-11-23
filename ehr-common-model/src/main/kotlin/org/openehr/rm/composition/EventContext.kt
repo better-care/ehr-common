@@ -83,7 +83,7 @@ class EventContext : RmObject(), Serializable {
         if (ctx.beforeObject(attributeName, this, "EVENT_CONTEXT")) {
             startTime?.visit("start_time", ctx)
             endTime?.visit("end_time", ctx)
-            location?.let { ctx.visitValue("location", it) }
+            location?.let { ctx.visitValue("location", it, this) }
             setting?.visit("setting", ctx)
             otherContext?.visit("other_context", ctx)
             healthCareFacility?.visit("health_care_facility", ctx)

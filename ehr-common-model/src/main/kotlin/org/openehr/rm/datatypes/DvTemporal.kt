@@ -60,7 +60,7 @@ class DvTemporal : DvQuantified() {
             normalRange?.visit("normal_range", ctx)
             otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
             normalStatus?.visit("normal_status", ctx)
-            magnitudeStatus?.let { ctx.visitValue("magnitude_status", it) }
+            magnitudeStatus?.let { ctx.visitValue("magnitude_status", it, this) }
             accuracy?.visit("accuracy", ctx)
             ctx.afterObject(attributeName, this, "DV_TEMPORAL")
         }

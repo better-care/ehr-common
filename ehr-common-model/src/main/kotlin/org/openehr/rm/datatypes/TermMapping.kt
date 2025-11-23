@@ -63,7 +63,7 @@ class TermMapping() : RmObject(), Serializable {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "TERM_MAPPING")) {
-            match?.let { ctx.visitValue("match", it) }
+            match?.let { ctx.visitValue("match", it, this) }
             purpose?.visit("purpose", ctx)
             target?.visit("target", ctx)
             ctx.afterObject(attributeName, this, "TERM_MAPPING")
