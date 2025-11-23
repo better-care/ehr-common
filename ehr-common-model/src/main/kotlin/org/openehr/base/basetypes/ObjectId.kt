@@ -18,6 +18,7 @@ package org.openehr.base.basetypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import java.io.Serializable
 import java.util.*
@@ -57,9 +58,11 @@ abstract class ObjectId : RmObject(), Serializable {
 
     override fun hashCode(): Int = Objects.hash(value)
 
-    open fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        value?.let { ctx.visitValue("value", it) }
-        ctx.visitObject(attributeName, this, "OBJECT_ID")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "OBJECT_ID")) {
+            value?.let { ctx.visitValue("value", it) }
+            ctx.afterObject(attributeName, this, "OBJECT_ID")
+        }
     }
 }
 

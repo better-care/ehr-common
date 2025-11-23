@@ -92,14 +92,15 @@ class DvText() : DataValue() {
 
     override fun hashCode(): Int = Objects.hash(value, encoding, formatting, hyperlink, language)
 
-    open override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "DV_TEXT")
-        value?.let { ctx.visitValue("value", it) }
-        hyperlink?.visit("hyperlink", ctx)
-        formatting?.let { ctx.visitValue("formatting", it) }
-        mappings.forEach { it.visit("mappings", ctx) }
-        language?.visit("language", ctx)
-        encoding?.visit("encoding", ctx)
-        ctx.afterObject(attributeName, this, "DV_TEXT")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_TEXT")) {
+            value?.let { ctx.visitValue("value", it) }
+            hyperlink?.visit("hyperlink", ctx)
+            formatting?.let { ctx.visitValue("formatting", it) }
+            mappings.forEach { it.visit("mappings", ctx) }
+            language?.visit("language", ctx)
+            encoding?.visit("encoding", ctx)
+            ctx.afterObject(attributeName, this, "DV_TEXT")
+        }
     }
 }

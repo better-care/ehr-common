@@ -68,11 +68,12 @@ class Archetyped constructor() : RmObject(), Serializable {
     @SerialName("rm_version")
     var rmVersion: String = RM_VERSION.getVersion()
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "ARCHETYPED")
-        archetypeId?.visit("archetype_id", ctx)
-        templateId?.visit("template_id", ctx)
-        ctx.visitValue("rm_version", rmVersion)
-        ctx.afterObject(attributeName, this, "ARCHETYPED")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "ARCHETYPED")) {
+            archetypeId?.visit("archetype_id", ctx)
+            templateId?.visit("template_id", ctx)
+            ctx.visitValue("rm_version", rmVersion)
+            ctx.afterObject(attributeName, this, "ARCHETYPED")
+        }
     }
 }

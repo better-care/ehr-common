@@ -69,23 +69,24 @@ class Composition : Locatable() {
 
     var content: MutableList<ContentItem> = mutableListOf()
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "COMPOSITION")
-        // Visit parent properties
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "COMPOSITION")) {
+            // Visit parent properties
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit own properties
-        language?.visit("language", ctx)
-        territory?.visit("territory", ctx)
-        category?.visit("category", ctx)
-        composer?.visit("composer", ctx)
-        context?.visit("context", ctx)
-        content.forEach { it.visit("content", ctx) }
-        ctx.afterLocatable(attributeName, this, "COMPOSITION")
+            // Visit own properties
+            language?.visit("language", ctx)
+            territory?.visit("territory", ctx)
+            category?.visit("category", ctx)
+            composer?.visit("composer", ctx)
+            context?.visit("context", ctx)
+            content.forEach { it.visit("content", ctx) }
+            ctx.afterLocatable(attributeName, this, "COMPOSITION")
+        }
     }
 }

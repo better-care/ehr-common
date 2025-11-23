@@ -84,13 +84,14 @@ class FeederAudit() : RmObject(), Serializable {
     @SerialName("feeder_system_audit")
     var feederSystemAudit: FeederAuditDetails? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "FEEDER_AUDIT")
-        originatingSystemItemIds.forEach { it.visit("originating_system_item_ids", ctx) }
-        feederSystemItemIds.forEach { it.visit("feeder_system_item_ids", ctx) }
-        originalContent?.visit("original_content", ctx)
-        originatingSystemAudit?.visit("originating_system_audit", ctx)
-        feederSystemAudit?.visit("feeder_system_audit", ctx)
-        ctx.afterObject(attributeName, this, "FEEDER_AUDIT")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "FEEDER_AUDIT")) {
+            originatingSystemItemIds.forEach { it.visit("originating_system_item_ids", ctx) }
+            feederSystemItemIds.forEach { it.visit("feeder_system_item_ids", ctx) }
+            originalContent?.visit("original_content", ctx)
+            originatingSystemAudit?.visit("originating_system_audit", ctx)
+            feederSystemAudit?.visit("feeder_system_audit", ctx)
+            ctx.afterObject(attributeName, this, "FEEDER_AUDIT")
+        }
     }
 }

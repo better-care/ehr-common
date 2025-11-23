@@ -115,11 +115,12 @@ class CodePhrase() : RmObject(), Serializable {
 
     override fun hashCode(): Int = Objects.hash(terminologyId, codeString, preferredTerm)
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "CODE_PHRASE")
-        terminologyId?.visit("terminology_id", ctx)
-        codeString?.let { ctx.visitValue("code_string", it) }
-        preferredTerm?.let { ctx.visitValue("preferred_term", it) }
-        ctx.afterObject(attributeName, this, "CODE_PHRASE")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "CODE_PHRASE")) {
+            terminologyId?.visit("terminology_id", ctx)
+            codeString?.let { ctx.visitValue("code_string", it) }
+            preferredTerm?.let { ctx.visitValue("preferred_term", it) }
+            ctx.afterObject(attributeName, this, "CODE_PHRASE")
+        }
     }
 }

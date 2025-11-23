@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "OBSERVATION", propOrder = [
-        "data",
-        "state"])
+    "data",
+    "state"])
 @Serializable
 @SerialName("OBSERVATION")
 @Open
@@ -50,30 +50,31 @@ class Observation : CareEntry() {
     var state: History? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "OBSERVATION")
-        // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+        if (ctx.beforeLocatable(attributeName, this, "OBSERVATION")) {
+            // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit Entry properties
-        language?.visit("language", ctx)
-        encoding?.visit("encoding", ctx)
-        subject?.visit("subject", ctx)
-        provider?.visit("provider", ctx)
-        otherParticipations.forEach { it.visit("other_participations", ctx) }
-        workFlowId?.visit("work_flow_id", ctx)
+            // Visit Entry properties
+            language?.visit("language", ctx)
+            encoding?.visit("encoding", ctx)
+            subject?.visit("subject", ctx)
+            provider?.visit("provider", ctx)
+            otherParticipations.forEach { it.visit("other_participations", ctx) }
+            workFlowId?.visit("work_flow_id", ctx)
 
-        // Visit CareEntry properties
-        protocol?.visit("protocol", ctx)
-        guidelineId?.visit("guideline_id", ctx)
+            // Visit CareEntry properties
+            protocol?.visit("protocol", ctx)
+            guidelineId?.visit("guideline_id", ctx)
 
-        // Visit own properties
-        data?.visit("data", ctx)
-        state?.visit("state", ctx)
-        ctx.afterLocatable(attributeName, this, "OBSERVATION")
+            // Visit own properties
+            data?.visit("data", ctx)
+            state?.visit("state", ctx)
+            ctx.afterLocatable(attributeName, this, "OBSERVATION")
+        }
     }
 }

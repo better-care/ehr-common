@@ -65,32 +65,33 @@ class Action : CareEntry() {
     var instructionDetails: InstructionDetails? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "ACTION")
-        // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+        if (ctx.beforeLocatable(attributeName, this, "ACTION")) {
+            // Visit parent properties (from Locatable via ContentItem via Entry via CareEntry)
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit Entry properties
-        language?.visit("language", ctx)
-        encoding?.visit("encoding", ctx)
-        subject?.visit("subject", ctx)
-        provider?.visit("provider", ctx)
-        otherParticipations.forEach { it.visit("other_participations", ctx) }
-        workFlowId?.visit("work_flow_id", ctx)
+            // Visit Entry properties
+            language?.visit("language", ctx)
+            encoding?.visit("encoding", ctx)
+            subject?.visit("subject", ctx)
+            provider?.visit("provider", ctx)
+            otherParticipations.forEach { it.visit("other_participations", ctx) }
+            workFlowId?.visit("work_flow_id", ctx)
 
-        // Visit CareEntry properties
-        protocol?.visit("protocol", ctx)
-        guidelineId?.visit("guideline_id", ctx)
+            // Visit CareEntry properties
+            protocol?.visit("protocol", ctx)
+            guidelineId?.visit("guideline_id", ctx)
 
-        // Visit own properties
-        time?.visit("time", ctx)
-        description?.visit("description", ctx)
-        ismTransition?.visit("ism_transition", ctx)
-        instructionDetails?.visit("instruction_details", ctx)
-        ctx.afterLocatable(attributeName, this, "ACTION")
+            // Visit own properties
+            time?.visit("time", ctx)
+            description?.visit("description", ctx)
+            ismTransition?.visit("ism_transition", ctx)
+            instructionDetails?.visit("instruction_details", ctx)
+            ctx.afterLocatable(attributeName, this, "ACTION")
+        }
     }
 }

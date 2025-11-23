@@ -41,18 +41,19 @@ class ItemTree : ItemStructure() {
     var items: MutableList<Item> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "ITEM_TREE")
-        // Visit parent properties (from Locatable via ItemStructure)
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+        if (ctx.beforeLocatable(attributeName, this, "ITEM_TREE")) {
+            // Visit parent properties (from Locatable via ItemStructure)
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit own properties
-        items.forEach { it.visit("items", ctx) }
+            // Visit own properties
+            items.forEach { it.visit("items", ctx) }
 
-        ctx.afterLocatable(attributeName, this, "ITEM_TREE")
+            ctx.afterLocatable(attributeName, this, "ITEM_TREE")
+        }
     }
 }

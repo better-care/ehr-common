@@ -85,13 +85,14 @@ class AuditDetails() : RmObject(), Serializable {
 
     var description: DvText? = null
 
-    open fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "AUDIT_DETAILS")
-        systemId?.let { ctx.visitValue("system_id", it) }
-        committer?.visit("committer", ctx)
-        timeCommitted?.visit("time_committed", ctx)
-        changeType?.visit("change_type", ctx)
-        description?.visit("description", ctx)
-        ctx.afterObject(attributeName, this, "AUDIT_DETAILS")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "AUDIT_DETAILS")) {
+            systemId?.let { ctx.visitValue("system_id", it) }
+            committer?.visit("committer", ctx)
+            timeCommitted?.visit("time_committed", ctx)
+            changeType?.visit("change_type", ctx)
+            description?.visit("description", ctx)
+            ctx.afterObject(attributeName, this, "AUDIT_DETAILS")
+        }
     }
 }

@@ -45,18 +45,19 @@ class Cluster : Item() {
     var items: MutableList<Item> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "CLUSTER")
-        // Visit parent properties (from Locatable via Item)
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+        if (ctx.beforeLocatable(attributeName, this, "CLUSTER")) {
+            // Visit parent properties (from Locatable via Item)
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit own properties
-        items.forEach { it.visit("items", ctx) }
+            // Visit own properties
+            items.forEach { it.visit("items", ctx) }
 
-        ctx.afterLocatable(attributeName, this, "CLUSTER")
+            ctx.afterLocatable(attributeName, this, "CLUSTER")
+        }
     }
 }

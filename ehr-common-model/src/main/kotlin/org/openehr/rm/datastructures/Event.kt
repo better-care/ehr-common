@@ -17,7 +17,6 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -52,6 +51,4 @@ abstract class Event : Locatable() {
     var data: ItemStructure? = null
 
     var state: ItemStructure? = null
-
-    abstract fun visit(attributeName: String, ctx: RmVisitorContext)
 }

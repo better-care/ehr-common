@@ -68,12 +68,13 @@ class Participation() : RmObject(), Serializable {
 
     var mode: DvCodedText? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "PARTICIPATION")
-        function?.visit("function", ctx)
-        performer?.visit("performer", ctx)
-        time?.visit("time", ctx)
-        mode?.visit("mode", ctx)
-        ctx.afterObject(attributeName, this, "PARTICIPATION")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "PARTICIPATION")) {
+            function?.visit("function", ctx)
+            performer?.visit("performer", ctx)
+            time?.visit("time", ctx)
+            mode?.visit("mode", ctx)
+            ctx.afterObject(attributeName, this, "PARTICIPATION")
+        }
     }
 }

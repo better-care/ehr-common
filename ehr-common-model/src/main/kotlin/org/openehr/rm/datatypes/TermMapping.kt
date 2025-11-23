@@ -61,11 +61,12 @@ class TermMapping() : RmObject(), Serializable {
     @Required
     var target: CodePhrase? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "TERM_MAPPING")
-        match?.let { ctx.visitValue("match", it) }
-        purpose?.visit("purpose", ctx)
-        target?.visit("target", ctx)
-        ctx.afterObject(attributeName, this, "TERM_MAPPING")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "TERM_MAPPING")) {
+            match?.let { ctx.visitValue("match", it) }
+            purpose?.visit("purpose", ctx)
+            target?.visit("target", ctx)
+            ctx.afterObject(attributeName, this, "TERM_MAPPING")
+        }
     }
 }

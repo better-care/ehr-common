@@ -58,22 +58,23 @@ class EhrStatus : Locatable() {
     @SerialName("other_details")
     var otherDetails: ItemStructure? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "EHR_STATUS")
-        // Visit parent properties
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "EHR_STATUS")) {
+            // Visit parent properties
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit own properties
-        subject?.visit("subject", ctx)
-        ctx.visitValue("is_queryable", queryable)
-        ctx.visitValue("is_modifiable", modifiable)
-        otherDetails?.visit("other_details", ctx)
+            // Visit own properties
+            subject?.visit("subject", ctx)
+            ctx.visitValue("is_queryable", queryable)
+            ctx.visitValue("is_modifiable", modifiable)
+            otherDetails?.visit("other_details", ctx)
 
-        ctx.afterLocatable(attributeName, this, "EHR_STATUS")
+            ctx.afterLocatable(attributeName, this, "EHR_STATUS")
+        }
     }
 }

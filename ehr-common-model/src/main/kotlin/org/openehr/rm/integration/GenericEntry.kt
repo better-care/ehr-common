@@ -47,18 +47,19 @@ class GenericEntry : ContentItem() {
     var data: ItemTree? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "GENERIC_ENTRY")
-        // Visit parent properties (from Locatable via ContentItem)
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+        if (ctx.beforeLocatable(attributeName, this, "GENERIC_ENTRY")) {
+            // Visit parent properties (from Locatable via ContentItem)
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit own properties
-        data?.visit("data", ctx)
+            // Visit own properties
+            data?.visit("data", ctx)
 
-        ctx.afterLocatable(attributeName, this, "GENERIC_ENTRY")
+            ctx.afterLocatable(attributeName, this, "GENERIC_ENTRY")
+        }
     }
 }

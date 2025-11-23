@@ -15,7 +15,6 @@
 
 package org.openehr.rm.datastructures
 
-import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -38,6 +37,4 @@ abstract class ItemStructure : Locatable() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
-
-    abstract fun visit(attributeName: String, ctx: RmVisitorContext)
 }

@@ -48,20 +48,21 @@ class Folder : Locatable() {
     var items: MutableList<ObjectRef> = mutableListOf()
     var details: ItemStructure? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "FOLDER")
-        // Visit parent properties
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "FOLDER")) {
+            // Visit parent properties
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit own properties
-        folders.forEach { it.visit("folders", ctx) }
-        items.forEach { it.visit("items", ctx) }
-        details?.visit("details", ctx)
-        ctx.afterLocatable(attributeName, this, "FOLDER")
+            // Visit own properties
+            folders.forEach { it.visit("folders", ctx) }
+            items.forEach { it.visit("items", ctx) }
+            details?.visit("details", ctx)
+            ctx.afterLocatable(attributeName, this, "FOLDER")
+        }
     }
 }

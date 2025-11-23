@@ -74,16 +74,17 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
-        language?.visit("language", ctx)
-        purpose?.let { ctx.visitValue("purpose", it) }
-        keywords.forEach { ctx.visitValue("keywords", it) }
-        use?.let { ctx.visitValue("use", it) }
-        misuse?.let { ctx.visitValue("misuse", it) }
-        copyright?.let { ctx.visitValue("copyright", it) }
-        originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
-        otherDetails.forEach { it.visit("other_details", ctx) }
-        ctx.afterObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")) {
+            language?.visit("language", ctx)
+            purpose?.let { ctx.visitValue("purpose", it) }
+            keywords.forEach { ctx.visitValue("keywords", it) }
+            use?.let { ctx.visitValue("use", it) }
+            misuse?.let { ctx.visitValue("misuse", it) }
+            copyright?.let { ctx.visitValue("copyright", it) }
+            originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
+            otherDetails.forEach { it.visit("other_details", ctx) }
+            ctx.afterObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
+        }
     }
 }

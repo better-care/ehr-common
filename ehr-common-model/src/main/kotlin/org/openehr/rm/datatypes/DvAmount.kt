@@ -61,14 +61,15 @@ class DvAmount : DvQuantified() {
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy, accuracyIsPercent)
 
-    open override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "DV_AMOUNT")
-        normalRange?.visit("normal_range", ctx)
-        otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
-        normalStatus?.visit("normal_status", ctx)
-        magnitudeStatus?.let { ctx.visitValue("magnitude_status", it) }
-        accuracy?.let { ctx.visitValue("accuracy", it) }
-        accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it) }
-        ctx.afterObject(attributeName, this, "DV_AMOUNT")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_AMOUNT")) {
+            normalRange?.visit("normal_range", ctx)
+            otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+            normalStatus?.visit("normal_status", ctx)
+            magnitudeStatus?.let { ctx.visitValue("magnitude_status", it) }
+            accuracy?.let { ctx.visitValue("accuracy", it) }
+            accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it) }
+            ctx.afterObject(attributeName, this, "DV_AMOUNT")
+        }
     }
 }

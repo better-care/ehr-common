@@ -127,7 +127,4 @@ class WorkPlan() : ContentItem(), VisitableByModelVisitor {
                 ", archetypeNodeId='$archetypeNodeId'" +
                 ", classification=$classification" +
                 '}'
-
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-    }
 }

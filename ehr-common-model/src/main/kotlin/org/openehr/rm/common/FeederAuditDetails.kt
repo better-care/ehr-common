@@ -89,15 +89,16 @@ class FeederAuditDetails() : RmObject(), Serializable {
     @SerialName("other_details")
     var otherDetails: ItemStructure? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
-        systemId?.let { ctx.visitValue("system_id", it) }
-        location?.visit("location", ctx)
-        provider?.visit("provider", ctx)
-        subject?.visit("subject", ctx)
-        time?.visit("time", ctx)
-        versionId?.let { ctx.visitValue("version_id", it) }
-        otherDetails?.visit("other_details", ctx)
-        ctx.afterObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "FEEDER_AUDIT_DETAILS")) {
+            systemId?.let { ctx.visitValue("system_id", it) }
+            location?.visit("location", ctx)
+            provider?.visit("provider", ctx)
+            subject?.visit("subject", ctx)
+            time?.visit("time", ctx)
+            versionId?.let { ctx.visitValue("version_id", it) }
+            otherDetails?.visit("other_details", ctx)
+            ctx.afterObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
+        }
     }
 }

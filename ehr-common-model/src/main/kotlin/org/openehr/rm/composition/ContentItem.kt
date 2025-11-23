@@ -15,7 +15,6 @@
 
 package org.openehr.rm.composition
 
-import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.proc.taskplanning.TaskPlan
@@ -41,6 +40,4 @@ abstract class ContentItem : Locatable() {
     companion object {
         private const val serialVersionUID: Long = 0L
     }
-
-    abstract fun visit(attributeName: String, ctx: RmVisitorContext)
 }

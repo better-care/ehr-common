@@ -16,6 +16,7 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -41,8 +42,10 @@ class ArchetypeId() : ObjectId() {
         private const val serialVersionUID: Long = 0L
     }
 
-    override fun visit(attributeName: String, ctx: care.better.platform.visitor.RmVisitorContext) {
-        value?.let { ctx.visitValue("value", it) }
-        ctx.visitObject(attributeName, this, "ARCHETYPE_ID")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "ARCHETYPE_ID")) {
+            value?.let { ctx.visitValue("value", it) }
+            ctx.afterObject(attributeName, this, "ARCHETYPE_ID")
+        }
     }
 }

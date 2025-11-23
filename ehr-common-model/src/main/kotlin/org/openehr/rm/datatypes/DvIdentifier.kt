@@ -80,11 +80,12 @@ class DvIdentifier() : DataValue() {
     override fun hashCode(): Int = Objects.hash(id, type, issuer, assigner)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "DV_IDENTIFIER")
-        issuer?.let { ctx.visitValue("issuer", it) }
-        assigner?.let { ctx.visitValue("assigner", it) }
-        id?.let { ctx.visitValue("id", it) }
-        type?.let { ctx.visitValue("type", it) }
-        ctx.afterObject(attributeName, this, "DV_IDENTIFIER")
+        if (ctx.beforeObject(attributeName, this, "DV_IDENTIFIER")) {
+            issuer?.let { ctx.visitValue("issuer", it) }
+            assigner?.let { ctx.visitValue("assigner", it) }
+            id?.let { ctx.visitValue("id", it) }
+            type?.let { ctx.visitValue("type", it) }
+            ctx.afterObject(attributeName, this, "DV_IDENTIFIER")
+        }
     }
 }

@@ -56,10 +56,11 @@ class ReferenceRange() : RmObject(), Serializable {
     @Required
     var range: DvInterval? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "REFERENCE_RANGE")
-        meaning?.visit("meaning", ctx)
-        range?.visit("range", ctx)
-        ctx.afterObject(attributeName, this, "REFERENCE_RANGE")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "REFERENCE_RANGE")) {
+            meaning?.visit("meaning", ctx)
+            range?.visit("range", ctx)
+            ctx.afterObject(attributeName, this, "REFERENCE_RANGE")
+        }
     }
 }

@@ -60,11 +60,12 @@ class InstructionDetails : RmObject(), Serializable {
     @SerialName("wf_details")
     var wfDetails: ItemStructure? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "INSTRUCTION_DETAILS")
-        instructionId?.visit("instruction_id", ctx)
-        activityId?.let { ctx.visitValue("activity_id", it) }
-        wfDetails?.visit("wf_details", ctx)
-        ctx.afterObject(attributeName, this, "INSTRUCTION_DETAILS")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "INSTRUCTION_DETAILS")) {
+            instructionId?.visit("instruction_id", ctx)
+            activityId?.let { ctx.visitValue("activity_id", it) }
+            wfDetails?.visit("wf_details", ctx)
+            ctx.afterObject(attributeName, this, "INSTRUCTION_DETAILS")
+        }
     }
 }

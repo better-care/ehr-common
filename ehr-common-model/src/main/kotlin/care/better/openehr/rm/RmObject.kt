@@ -15,9 +15,10 @@
 
 package care.better.openehr.rm
 
+import care.better.platform.visitor.RmVisitorContext
+import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
-import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -31,5 +32,9 @@ abstract class RmObject {
     companion object {
         @JvmField
         val RM_VERSION = RmVersion.RM1_1_0
+    }
+
+    open fun visit(attributeName: String, ctx: RmVisitorContext) {
+
     }
 }

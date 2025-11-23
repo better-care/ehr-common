@@ -133,18 +133,19 @@ class DvMultimedia() : DvEncapsulated() {
     var thumbnail: DvMultimedia? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "DV_MULTIMEDIA")
-        charset?.visit("charset", ctx)
-        language?.visit("language", ctx)
-        alternateText?.let { ctx.visitValue("alternate_text", it) }
-        uri?.visit("uri", ctx)
-        data?.let { ctx.visitValue("data", it) }
-        mediaType?.visit("media_type", ctx)
-        compressionAlgorithm?.visit("compression_algorithm", ctx)
-        integrityCheck?.let { ctx.visitValue("integrity_check", it) }
-        integrityCheckAlgorithm?.visit("integrity_check_algorithm", ctx)
-        ctx.visitValue("size", size)
-        thumbnail?.visit("thumbnail", ctx)
-        ctx.afterObject(attributeName, this, "DV_MULTIMEDIA")
+        if (ctx.beforeObject(attributeName, this, "DV_MULTIMEDIA")) {
+            charset?.visit("charset", ctx)
+            language?.visit("language", ctx)
+            alternateText?.let { ctx.visitValue("alternate_text", it) }
+            uri?.visit("uri", ctx)
+            data?.let { ctx.visitValue("data", it) }
+            mediaType?.visit("media_type", ctx)
+            compressionAlgorithm?.visit("compression_algorithm", ctx)
+            integrityCheck?.let { ctx.visitValue("integrity_check", it) }
+            integrityCheckAlgorithm?.visit("integrity_check_algorithm", ctx)
+            ctx.visitValue("size", size)
+            thumbnail?.visit("thumbnail", ctx)
+            ctx.afterObject(attributeName, this, "DV_MULTIMEDIA")
+        }
     }
 }

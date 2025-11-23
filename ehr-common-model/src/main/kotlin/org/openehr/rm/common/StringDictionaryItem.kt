@@ -44,10 +44,11 @@ class StringDictionaryItem : RmObject(), Serializable {
     @Required
     var id: String? = null
 
-    fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "STRING_DICTIONARY_ITEM")
-        value?.let { ctx.visitValue("value", it) }
-        id?.let { ctx.visitValue("id", it) }
-        ctx.afterObject(attributeName, this, "STRING_DICTIONARY_ITEM")
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "STRING_DICTIONARY_ITEM")) {
+            value?.let { ctx.visitValue("value", it) }
+            id?.let { ctx.visitValue("id", it) }
+            ctx.afterObject(attributeName, this, "STRING_DICTIONARY_ITEM")
+        }
     }
 }

@@ -58,11 +58,12 @@ class PartyRelated constructor(): PartyIdentified() {
     var relationship: DvCodedText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeObject(attributeName, this, "PARTY_RELATED")
-        externalRef?.visit("external_ref", ctx)
-        name?.let { ctx.visitValue("name", it) }
-        identifiers.forEach { it.visit("identifiers", ctx) }
-        relationship?.visit("relationship", ctx)
-        ctx.afterObject(attributeName, this, "PARTY_RELATED")
+        if (ctx.beforeObject(attributeName, this, "PARTY_RELATED")) {
+            externalRef?.visit("external_ref", ctx)
+            name?.let { ctx.visitValue("name", it) }
+            identifiers.forEach { it.visit("identifiers", ctx) }
+            relationship?.visit("relationship", ctx)
+            ctx.afterObject(attributeName, this, "PARTY_RELATED")
+        }
     }
 }

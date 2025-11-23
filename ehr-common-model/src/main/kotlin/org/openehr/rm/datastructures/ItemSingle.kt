@@ -45,18 +45,19 @@ class ItemSingle : ItemStructure() {
     var item: Element? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        ctx.beforeLocatable(attributeName, this, "ITEM_SINGLE")
-        // Visit parent properties (from Locatable via ItemStructure)
-        name?.visit("name", ctx)
-        uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
-        archetypeDetails?.visit("archetype_details", ctx)
-        feederAudit?.visit("feeder_audit", ctx)
-        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
+        if (ctx.beforeLocatable(attributeName, this, "ITEM_SINGLE")) {
+            // Visit parent properties (from Locatable via ItemStructure)
+            name?.visit("name", ctx)
+            uid?.visit("uid", ctx)
+            links.forEach { it.visit("links", ctx) }
+            archetypeDetails?.visit("archetype_details", ctx)
+            feederAudit?.visit("feeder_audit", ctx)
+            archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it) }
 
-        // Visit own properties
-        item?.visit("item", ctx)
+            // Visit own properties
+            item?.visit("item", ctx)
 
-        ctx.afterLocatable(attributeName, this, "ITEM_SINGLE")
+            ctx.afterLocatable(attributeName, this, "ITEM_SINGLE")
+        }
     }
 }
