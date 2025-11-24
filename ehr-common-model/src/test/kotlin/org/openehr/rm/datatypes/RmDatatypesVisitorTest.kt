@@ -29,6 +29,7 @@ class RmDatatypesVisitorTest : RmVisitorTest() {
         val instance = CodePhrase()
         instance.terminologyId = TerminologyId("openehr")
         instance.codeString = "123"
+        instance.preferredTerm = "test term"
 
         validateVisit(instance)
     }
@@ -37,6 +38,7 @@ class RmDatatypesVisitorTest : RmVisitorTest() {
     fun `test DvAmount visit`() {
         val instance = DvAmount()
         instance.accuracy = 0.5f
+        instance.accuracyIsPercent = true
 
         validateVisit(instance)
     }
@@ -115,6 +117,10 @@ class RmDatatypesVisitorTest : RmVisitorTest() {
         val instance = DvInterval()
         instance.lower = DvQuantity(10.0, "kg")
         instance.upper = DvQuantity(20.0, "kg")
+        instance.lowerIncluded = true
+        instance.upperIncluded = true
+        instance.lowerUnbounded = false
+        instance.upperUnbounded = false
 
         validateVisit(instance)
     }
@@ -123,6 +129,8 @@ class RmDatatypesVisitorTest : RmVisitorTest() {
     fun `test DvMultimedia visit`() {
         val instance = DvMultimedia()
         instance.mediaType = CodePhrase(TerminologyId("IANA_media-types"), "text/plain")
+        instance.alternateText = "test alternate text"
+        instance.size = 1024
 
         validateVisit(instance)
     }
@@ -139,6 +147,7 @@ class RmDatatypesVisitorTest : RmVisitorTest() {
     @Test
     fun `test DvParagraph visit`() {
         val instance = DvParagraph()
+        instance.items = mutableListOf(DvText("test paragraph text"))
 
         validateVisit(instance)
     }
@@ -164,6 +173,7 @@ class RmDatatypesVisitorTest : RmVisitorTest() {
         instance.numerator = 1.0f
         instance.denominator = 2.0f
         instance.type = 0
+        instance.precision = 2
 
         validateVisit(instance)
     }
@@ -173,6 +183,7 @@ class RmDatatypesVisitorTest : RmVisitorTest() {
         val instance = DvQuantity()
         instance.magnitude = 10.0
         instance.units = "kg"
+        instance.precision = 1
 
         validateVisit(instance)
     }
