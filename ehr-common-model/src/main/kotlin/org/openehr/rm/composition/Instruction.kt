@@ -17,6 +17,7 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvDateTime
@@ -44,6 +45,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class Instruction : CareEntry() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -60,4 +62,19 @@ class Instruction : CareEntry() {
     var wfDefinition: DvParsable? = null
 
     var activities: MutableList<Activity> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "INSTRUCTION")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "INSTRUCTION")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        narrative?.visit("narrative", ctx)
+        expiryTime?.visit("expiry_time", ctx)
+        wfDefinition?.visit("wf_definition", ctx)
+        activities.forEach { it.visit("activities", ctx) }
+    }
 }

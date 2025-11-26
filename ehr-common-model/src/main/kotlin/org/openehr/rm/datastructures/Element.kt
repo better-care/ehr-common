@@ -16,6 +16,7 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DataValue
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class Element : Item() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -53,4 +55,18 @@ class Element : Item() {
     @XmlElement(name = "null_reason")
     @SerialName("null_reason")
     var nullReason: DvText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "ELEMENT")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "ELEMENT")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.visit("value", ctx)
+        nullFlavour?.visit("null_flavour", ctx)
+        nullReason?.visit("null_reason", ctx)
+    }
 }

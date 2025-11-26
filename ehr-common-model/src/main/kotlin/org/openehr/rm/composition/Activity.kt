@@ -17,6 +17,7 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -42,6 +43,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class Activity : Locatable() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -55,4 +57,18 @@ class Activity : Locatable() {
     @Required
     @SerialName("action_archetype_id")
     var actionArchetypeId: String? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "ACTIVITY")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "ACTIVITY")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        description?.visit("description", ctx)
+        timing?.visit("timing", ctx)
+        actionArchetypeId?.let { ctx.visitValue("action_archetype_id", it, this) }
+    }
 }

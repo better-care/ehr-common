@@ -17,18 +17,14 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectVersionId
 import org.openehr.rm.composition.Composition
 import org.openehr.rm.datatypes.DvCodedText
-import javax.xml.bind.annotation.XmlAccessType
-import javax.xml.bind.annotation.XmlAccessorType
-import javax.xml.bind.annotation.XmlElement
-import javax.xml.bind.annotation.XmlRootElement
-import javax.xml.bind.annotation.XmlSeeAlso
-import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.*
 
 /**
  * @author Primoz Delopst
@@ -74,4 +70,19 @@ class OriginalVersion : Version() {
     @Required
     @SerialName("lifecycle_state")
     var lifecycleState: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "ORIGINAL_VERSION")) {
+            contribution?.visit("contribution", ctx)
+            commitAudit?.visit("commit_audit", ctx)
+            signature?.let { ctx.visitValue("signature", it, this) }
+            uid?.visit("uid", ctx)
+            // data is ignored
+            precedingVersionUid?.visit("preceding_version_uid", ctx)
+            otherInputVersionUids.forEach { it.visit("other_input_version_uids", ctx) }
+            attestations.forEach { it.visit("attestations", ctx) }
+            lifecycleState?.visit("lifecycle_state", ctx)
+            ctx.afterObject(attributeName, this, "ORIGINAL_VERSION")
+        }
+    }
 }

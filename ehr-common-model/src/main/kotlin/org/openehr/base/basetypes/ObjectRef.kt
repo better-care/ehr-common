@@ -18,6 +18,7 @@ package org.openehr.base.basetypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import java.io.Serializable
@@ -88,4 +89,13 @@ class ObjectRef() : RmObject(), Serializable {
     @XmlSchemaType(name = "token")
     @Required
     var type: String? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "OBJECT_REF")) {
+            id?.visit("id", ctx)
+            namespace?.let { ctx.visitValue("namespace", it, this) }
+            type?.let { ctx.visitValue("type", it, this) }
+            ctx.afterObject(attributeName, this, "OBJECT_REF")
+        }
+    }
 }

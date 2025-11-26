@@ -16,6 +16,7 @@
 package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -34,8 +35,21 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class ItemTable : ItemStructure() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     var rows: MutableList<Cluster> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "ITEM_TABLE")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "ITEM_TABLE")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        rows.forEach { it.visit("rows", ctx) }
+    }
 }

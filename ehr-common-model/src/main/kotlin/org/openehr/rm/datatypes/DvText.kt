@@ -17,11 +17,15 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
-import javax.xml.bind.annotation.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst
@@ -42,6 +46,7 @@ import javax.xml.bind.annotation.*
 @Open
 class DvText() : DataValue() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -87,4 +92,21 @@ class DvText() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value, encoding, formatting, hyperlink, language)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_TEXT")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_TEXT")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.let { ctx.visitValue("value", it, this) }
+        hyperlink?.visit("hyperlink", ctx)
+        formatting?.let { ctx.visitValue("formatting", it, this) }
+        mappings.forEach { it.visit("mappings", ctx) }
+        language?.visit("language", ctx)
+        encoding?.visit("encoding", ctx)
+    }
 }

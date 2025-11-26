@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -103,6 +104,7 @@ class DvMultimedia() : DvEncapsulated() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -130,4 +132,24 @@ class DvMultimedia() : DvEncapsulated() {
     var integrityCheckAlgorithm: CodePhrase? = null
     var size: Int = 0
     var thumbnail: DvMultimedia? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_MULTIMEDIA")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_MULTIMEDIA")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        alternateText?.let { ctx.visitValue("alternate_text", it, this) }
+        uri?.visit("uri", ctx)
+        data?.let { ctx.visitValue("data", it, this) }
+        mediaType?.visit("media_type", ctx)
+        compressionAlgorithm?.visit("compression_algorithm", ctx)
+        integrityCheck?.let { ctx.visitValue("integrity_check", it, this) }
+        integrityCheckAlgorithm?.visit("integrity_check_algorithm", ctx)
+        ctx.visitValue("size", size, this)
+        thumbnail?.visit("thumbnail", ctx)
+    }
 }

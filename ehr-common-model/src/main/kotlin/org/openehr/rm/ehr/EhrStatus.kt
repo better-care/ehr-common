@@ -17,6 +17,7 @@ package org.openehr.rm.ehr
 
 import care.better.platform.annotation.OpenEhrName
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -36,6 +37,7 @@ import javax.xml.bind.annotation.*
 @SerialName("EHR_STATUS")
 class EhrStatus : Locatable() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -56,4 +58,19 @@ class EhrStatus : Locatable() {
     @XmlElement(name = "other_details")
     @SerialName("other_details")
     var otherDetails: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "EHR_STATUS")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "EHR_STATUS")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        subject?.visit("subject", ctx)
+        ctx.visitValue("is_queryable", queryable, this)
+        ctx.visitValue("is_modifiable", modifiable, this)
+        otherDetails?.visit("other_details", ctx)
+    }
 }

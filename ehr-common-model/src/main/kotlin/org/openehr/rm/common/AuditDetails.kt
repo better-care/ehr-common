@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
@@ -60,6 +61,7 @@ class AuditDetails() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -83,4 +85,19 @@ class AuditDetails() : RmObject(), Serializable {
     var changeType: DvCodedText? = null
 
     var description: DvText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "AUDIT_DETAILS")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "AUDIT_DETAILS")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        systemId?.let { ctx.visitValue("system_id", it, this) }
+        committer?.visit("committer", ctx)
+        timeCommitted?.visit("time_committed", ctx)
+        changeType?.visit("change_type", ctx)
+        description?.visit("description", ctx)
+    }
 }

@@ -18,6 +18,7 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -44,6 +45,7 @@ class ReferenceRange() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -54,4 +56,16 @@ class ReferenceRange() : RmObject(), Serializable {
     @XmlElement(required = true)
     @Required
     var range: DvInterval? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "REFERENCE_RANGE")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "REFERENCE_RANGE")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        meaning?.visit("meaning", ctx)
+        range?.visit("range", ctx)
+    }
 }

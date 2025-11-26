@@ -16,6 +16,7 @@
 package org.openehr.rm.ehr
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.datatypes.DvDateTime
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.*
 @SerialName("EHR")
 class Ehr : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -53,6 +55,20 @@ class Ehr : RmObject(), Serializable {
     @XmlElement(name = "ehr_status")
     @SerialName("ehr_status")
     var ehrStatus: EhrStatus? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "EHR")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "EHR")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        systemId?.visit("system_id", ctx)
+        ehrId?.visit("ehr_id", ctx)
+        timeCreated?.visit("time_created", ctx)
+        ehrStatus?.visit("ehr_status", ctx)
+    }
 
     override fun equals(other: Any?): Boolean =
         when {

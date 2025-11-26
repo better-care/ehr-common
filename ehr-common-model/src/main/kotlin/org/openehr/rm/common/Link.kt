@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvEhrUri
@@ -43,6 +44,7 @@ import javax.xml.bind.annotation.XmlType
 class Link() : RmObject(), java.io.Serializable {
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -82,4 +84,17 @@ class Link() : RmObject(), java.io.Serializable {
     @XmlElement(required = true)
     @Required
     var target: DvEhrUri? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "LINK")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "LINK")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        meaning?.visit("meaning", ctx)
+        type?.visit("type", ctx)
+        target?.visit("target", ctx)
+    }
 }

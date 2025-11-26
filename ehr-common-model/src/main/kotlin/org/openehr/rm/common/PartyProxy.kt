@@ -34,10 +34,15 @@ import javax.xml.bind.annotation.*
 @Open
 abstract class PartyProxy : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "external_ref")
     @SerialName("external_ref")
     var externalRef: PartyRef? = null
+
+    internal fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        externalRef?.visit("external_ref", ctx)
+    }
 }

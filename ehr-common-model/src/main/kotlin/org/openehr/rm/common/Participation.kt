@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvInterval
@@ -44,6 +45,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class Participation() : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -66,4 +68,18 @@ class Participation() : RmObject(), Serializable {
     var time: DvInterval? = null
 
     var mode: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "PARTICIPATION")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "PARTICIPATION")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        function?.visit("function", ctx)
+        performer?.visit("performer", ctx)
+        time?.visit("time", ctx)
+        mode?.visit("mode", ctx)
+    }
 }

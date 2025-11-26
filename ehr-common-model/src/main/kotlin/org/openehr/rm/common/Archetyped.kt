@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
@@ -51,6 +52,7 @@ class Archetyped constructor() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -66,4 +68,17 @@ class Archetyped constructor() : RmObject(), Serializable {
     @XmlElement(name = "rm_version", required = true)
     @SerialName("rm_version")
     var rmVersion: String = RM_VERSION.getVersion()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "ARCHETYPED")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "ARCHETYPED")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        archetypeId?.visit("archetype_id", ctx)
+        templateId?.visit("template_id", ctx)
+        ctx.visitValue("rm_version", rmVersion, this)
+    }
 }

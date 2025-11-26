@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -39,10 +40,23 @@ class DvParagraph() : DataValue() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)
     @Required
     var items: MutableList<DvText> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_PARAGRAPH")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_PARAGRAPH")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        items.forEach { it.visit("items", ctx) }
+    }
 }

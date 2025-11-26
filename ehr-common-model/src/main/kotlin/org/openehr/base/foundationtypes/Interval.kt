@@ -18,6 +18,7 @@ package org.openehr.base.foundationtypes
 import care.better.openehr.rm.RangeParameters
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.*
@@ -65,4 +66,14 @@ abstract class Interval : RmObject(), Serializable, RangeParameters {
     override fun isLowerUnbounded(): Boolean = lowerUnbounded
 
     override fun isUpperUnbounded(): Boolean = upperUnbounded
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "INTERVAL")) {
+            lowerIncluded?.let { ctx.visitValue("lower_included", it, this) }
+            upperIncluded?.let { ctx.visitValue("upper_included", it, this) }
+            ctx.visitValue("lower_unbounded", lowerUnbounded, this)
+            ctx.visitValue("upper_unbounded", upperUnbounded, this)
+            ctx.afterObject(attributeName, this, "INTERVAL")
+        }
+    }
 }

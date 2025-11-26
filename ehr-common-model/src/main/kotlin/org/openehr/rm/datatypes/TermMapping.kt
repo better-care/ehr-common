@@ -18,6 +18,7 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -47,6 +48,7 @@ class TermMapping() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -59,4 +61,17 @@ class TermMapping() : RmObject(), Serializable {
     @XmlElement(required = true)
     @Required
     var target: CodePhrase? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "TERM_MAPPING")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "TERM_MAPPING")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        match?.let { ctx.visitValue("match", it, this) }
+        purpose?.visit("purpose", ctx)
+        target?.visit("target", ctx)
+    }
 }

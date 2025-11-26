@@ -18,6 +18,7 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyIdentified
@@ -50,6 +51,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class EventContext : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -77,4 +79,21 @@ class EventContext : RmObject(), Serializable {
     var healthCareFacility: PartyIdentified? = null
 
     var participations: MutableList<Participation> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "EVENT_CONTEXT")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "EVENT_CONTEXT")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        startTime?.visit("start_time", ctx)
+        endTime?.visit("end_time", ctx)
+        location?.let { ctx.visitValue("location", it, this) }
+        setting?.visit("setting", ctx)
+        otherContext?.visit("other_context", ctx)
+        healthCareFacility?.visit("health_care_facility", ctx)
+        participations.forEach { it.visit("participations", ctx) }
+    }
 }

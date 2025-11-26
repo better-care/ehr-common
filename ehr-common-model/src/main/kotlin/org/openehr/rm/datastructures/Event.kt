@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.*
 @Open
 abstract class Event : Locatable() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -51,4 +52,11 @@ abstract class Event : Locatable() {
     var data: ItemStructure? = null
 
     var state: ItemStructure? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        time?.visit("time", ctx)
+        data?.visit("data", ctx)
+        state?.visit("state", ctx)
+    }
 }

@@ -17,6 +17,7 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.*
@@ -67,6 +68,7 @@ class Attestation() : AuditDetails() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -83,4 +85,20 @@ class Attestation() : AuditDetails() {
     @XmlElement(name = "is_pending", defaultValue = "false")
     @SerialName("is_pending")
     var isPending: Boolean = false
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "ATTESTATION")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "ATTESTATION")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        attestedView?.visit("attested_view", ctx)
+        proof?.let { ctx.visitValue("proof", it, this) }
+        items.forEach { it.visit("items", ctx) }
+        reason?.visit("reason", ctx)
+        ctx.visitValue("is_pending", isPending, this)
+    }
 }

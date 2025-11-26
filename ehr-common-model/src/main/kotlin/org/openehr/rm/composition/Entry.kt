@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.*
 @Open
 abstract class Entry : ContentItem() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -68,4 +69,14 @@ abstract class Entry : ContentItem() {
     @XmlElement(name = "work_flow_id")
     @SerialName("work_flow_id")
     var workFlowId: ObjectRef? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        language?.visit("language", ctx)
+        encoding?.visit("encoding", ctx)
+        subject?.visit("subject", ctx)
+        provider?.visit("provider", ctx)
+        otherParticipations.forEach { it.visit("other_participations", ctx) }
+        workFlowId?.visit("work_flow_id", ctx)
+    }
 }

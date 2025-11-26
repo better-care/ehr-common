@@ -16,6 +16,7 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -36,5 +37,12 @@ import javax.xml.bind.annotation.XmlType
 abstract class UidBasedId : ObjectId() {
     companion object {
         private const val serialVersionUID: Long = 0L
+    }
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "UID_BASED_ID")) {
+            value?.let { ctx.visitValue("value", it, this) }
+            ctx.afterObject(attributeName, this, "UID_BASED_ID")
+        }
     }
 }

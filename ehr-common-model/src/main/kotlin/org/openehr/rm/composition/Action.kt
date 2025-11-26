@@ -17,6 +17,7 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.datastructures.ItemStructure
@@ -43,6 +44,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class Action : CareEntry() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -62,4 +64,19 @@ class Action : CareEntry() {
     @XmlElement(name = "instruction_details")
     @SerialName("instruction_details")
     var instructionDetails: InstructionDetails? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "ACTION")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "ACTION")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        time?.visit("time", ctx)
+        description?.visit("description", ctx)
+        ismTransition?.visit("ism_transition", ctx)
+        instructionDetails?.visit("instruction_details", ctx)
+    }
 }

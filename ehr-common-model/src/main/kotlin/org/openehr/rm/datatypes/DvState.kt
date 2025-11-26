@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
@@ -46,6 +47,7 @@ class DvState() : DataValue() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -66,4 +68,17 @@ class DvState() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value, isTerminal)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_STATE")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_STATE")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.visit("value", ctx)
+        ctx.visitValue("is_terminal", isTerminal, this)
+    }
 }

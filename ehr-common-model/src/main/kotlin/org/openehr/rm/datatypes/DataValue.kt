@@ -46,6 +46,11 @@ import javax.xml.bind.annotation.XmlType
 @SerialName("DATA_VALUE")
 abstract class DataValue : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    internal open fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        // DataValue has no properties
     }
 }

@@ -17,6 +17,7 @@ package org.openehr.rm.integration
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.composition.ContentItem
@@ -38,10 +39,23 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class GenericEntry : ContentItem() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)
     @Required
     var data: ItemTree? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "GENERIC_ENTRY")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "GENERIC_ENTRY")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        data?.visit("data", ctx)
+    }
 }

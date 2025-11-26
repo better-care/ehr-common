@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.base.basetypes.ObjectRef
@@ -52,4 +53,14 @@ class VersionedObject : RmObject(), Serializable {
     @XmlElement(name = "trunk_lifecycle_state")
     @SerialName("trunk_lifecycle_state")
     var trunkLifecycleState: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "VERSIONED_OBJECT")) {
+            uid?.visit("uid", ctx)
+            ownerId?.visit("owner_id", ctx)
+            timeCreated?.visit("time_created", ctx)
+            trunkLifecycleState?.visit("trunk_lifecycle_state", ctx)
+            ctx.afterObject(attributeName, this, "VERSIONED_OBJECT")
+        }
+    }
 }

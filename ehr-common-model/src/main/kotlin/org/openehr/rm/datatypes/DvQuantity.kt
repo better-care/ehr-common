@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.*
@@ -69,6 +70,7 @@ class DvQuantity() : DvAmount() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -100,4 +102,20 @@ class DvQuantity() : DvAmount() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude, precision, units)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_QUANTITY")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_QUANTITY")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        ctx.visitValue("magnitude", magnitude, this)
+        units?.let { ctx.visitValue("units", it, this) }
+        precision?.let { ctx.visitValue("precision", it, this) }
+        unitsSystem?.let { ctx.visitValue("units_system", it, this) }
+        unitsDisplayName?.let { ctx.visitValue("units_display_name", it, this) }
+    }
 }

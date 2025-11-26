@@ -16,6 +16,7 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
@@ -34,10 +35,18 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class PartySelf() : PartyProxy() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
-    constructor(externalRef: PartyRef): this(){
+    constructor(externalRef: PartyRef) : this() {
         this.externalRef = externalRef
+    }
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "PARTY_SELF")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "PARTY_SELF")
+        }
     }
 }

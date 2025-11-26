@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
@@ -46,6 +47,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class ResourceDescriptionItem : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -72,4 +74,22 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     @XmlElement(name = "other_details")
     @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        language?.visit("language", ctx)
+        purpose?.let { ctx.visitValue("purpose", it, this) }
+        keywords.forEach { ctx.visitValue("keywords", it, this) }
+        use?.let { ctx.visitValue("use", it, this) }
+        misuse?.let { ctx.visitValue("misuse", it, this) }
+        copyright?.let { ctx.visitValue("copyright", it, this) }
+        originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
+        otherDetails.forEach { it.visit("other_details", ctx) }
+    }
 }

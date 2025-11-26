@@ -38,7 +38,13 @@ abstract class DvTimeSpecification(
         @Required
         var value: DvParsable? = null) : DataValue() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.visit("value", ctx)
     }
 
     override fun equals(other: Any?): Boolean =

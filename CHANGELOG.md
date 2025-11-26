@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Increase Kotlin version to 1.9.22
 - Move YAML support to `ehr-common-yaml-jackson` module
 - Support Kotlin serialization for JSON format
+- Add visitor functions to all classes extending `RmObject`
 
 ## 4.2.1 - 2025-10-10
 

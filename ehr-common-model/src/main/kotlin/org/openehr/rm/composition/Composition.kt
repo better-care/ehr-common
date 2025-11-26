@@ -17,6 +17,7 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
@@ -45,6 +46,7 @@ import javax.xml.bind.annotation.*
 @Open
 class Composition : Locatable() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -67,4 +69,21 @@ class Composition : Locatable() {
     var context: EventContext? = null
 
     var content: MutableList<ContentItem> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "COMPOSITION")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "COMPOSITION")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        language?.visit("language", ctx)
+        territory?.visit("territory", ctx)
+        category?.visit("category", ctx)
+        composer?.visit("composer", ctx)
+        context?.visit("context", ctx)
+        content.forEach { it.visit("content", ctx) }
+    }
 }

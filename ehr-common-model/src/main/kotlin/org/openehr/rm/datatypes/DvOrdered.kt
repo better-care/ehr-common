@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.*
 abstract class DvOrdered() : DataValue() {
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -52,6 +53,13 @@ abstract class DvOrdered() : DataValue() {
     @XmlElement(name = "normal_status")
     @SerialName("normal_status")
     var normalStatus: CodePhrase? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        normalRange?.visit("normal_range", ctx)
+        otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+        normalStatus?.visit("normal_status", ctx)
+    }
 
     override fun equals(other: Any?): Boolean =
         when {

@@ -16,6 +16,7 @@
 package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -33,8 +34,21 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class Section : ContentItem() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     var items: MutableList<ContentItem> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeLocatable(attributeName, this, "SECTION")) {
+            visitProperties(ctx)
+            ctx.afterLocatable(attributeName, this, "SECTION")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        items.forEach { it.visit("items", ctx) }
+    }
 }

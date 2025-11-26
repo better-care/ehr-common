@@ -17,6 +17,7 @@ package org.openehr.rm.common
 
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -34,8 +35,20 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class RevisionHistory : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     var items: MutableList<RevisionHistoryItem> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "REVISION_HISTORY")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "REVISION_HISTORY")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        items.forEach { it.visit("items", ctx) }
+    }
 }

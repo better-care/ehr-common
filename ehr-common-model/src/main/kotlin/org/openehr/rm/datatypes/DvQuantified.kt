@@ -34,12 +34,18 @@ import javax.xml.bind.annotation.*
 abstract class DvQuantified : DvOrdered() {
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "magnitude_status")
     @SerialName("magnitude_status")
     var magnitudeStatus: String? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        magnitudeStatus?.let { ctx.visitValue("magnitude_status", it, this) }
+    }
 
     override fun equals(other: Any?): Boolean =
         when {

@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvEncapsulated
 import org.openehr.rm.datatypes.DvIdentifier
@@ -45,6 +46,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class FeederAudit() : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -55,6 +57,7 @@ class FeederAudit() : RmObject(), Serializable {
             originalContent: DvEncapsulated? = null,
             originatingSystemAudit: FeederAuditDetails,
             feederSystemAudit: FeederAuditDetails? = null) : this() {
+        this.originatingSystemItemIds = originatingSystemItemIds
         this.originatingSystemAudit = originatingSystemAudit
         this.feederSystemItemIds = feederSystemItemIds
         this.originalContent = originalContent
@@ -83,4 +86,18 @@ class FeederAudit() : RmObject(), Serializable {
     @SerialName("feeder_system_audit")
     var feederSystemAudit: FeederAuditDetails? = null
 
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "FEEDER_AUDIT")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "FEEDER_AUDIT")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        originatingSystemItemIds.forEach { it.visit("originating_system_item_ids", ctx) }
+        feederSystemItemIds.forEach { it.visit("feeder_system_item_ids", ctx) }
+        originalContent?.visit("original_content", ctx)
+        originatingSystemAudit?.visit("originating_system_audit", ctx)
+        feederSystemAudit?.visit("feeder_system_audit", ctx)
+    }
 }

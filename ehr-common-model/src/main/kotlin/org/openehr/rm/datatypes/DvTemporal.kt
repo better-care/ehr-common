@@ -16,6 +16,7 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -39,6 +40,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class DvTemporal : DvQuantified() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -53,4 +55,16 @@ class DvTemporal : DvQuantified() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_TEMPORAL")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_TEMPORAL")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        accuracy?.visit("accuracy", ctx)
+    }
 }

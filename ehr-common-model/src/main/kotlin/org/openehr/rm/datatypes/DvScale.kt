@@ -17,6 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -38,6 +39,10 @@ import javax.xml.bind.annotation.XmlType
 @SerialName("DV_SCALE")
 @Open
 class DvScale() : DvOrdered() {
+    companion object {
+        @Suppress("unused")
+        private const val serialVersionUID: Long = 0L
+    }
 
     @JvmOverloads
     constructor(
@@ -60,4 +65,17 @@ class DvScale() : DvOrdered() {
     @XmlElement(required = true)
     @Required
     var value: Double = 0.0
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_SCALE")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_SCALE")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        symbol?.visit("symbol", ctx)
+        ctx.visitValue("value", value, this)
+    }
 }

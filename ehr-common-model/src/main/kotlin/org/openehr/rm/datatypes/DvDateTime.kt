@@ -17,7 +17,7 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import care.better.platform.time.format.DateTimeFormatters
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.OffsetDateTime
@@ -57,6 +57,7 @@ class DvDateTime() : DvTemporal() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -92,4 +93,16 @@ class DvDateTime() : DvTemporal() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "DV_DATE_TIME")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "DV_DATE_TIME")
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.let { ctx.visitValue("value", it, this) }
+    }
 }

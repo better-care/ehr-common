@@ -40,7 +40,14 @@ import javax.xml.bind.annotation.XmlType
 @Open
 abstract class DvEncapsulated(var charset: CodePhrase? = null, var language: CodePhrase? = null) : DataValue() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        charset?.visit("charset", ctx)
+        language?.visit("language", ctx)
     }
 
     override fun equals(other: Any?): Boolean =

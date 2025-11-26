@@ -17,6 +17,7 @@ package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -48,4 +49,12 @@ class GenericId() : ObjectId() {
     @XmlElement(required = true)
     @Required
     var scheme: String? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "GENERIC_ID")) {
+            value?.let { ctx.visitValue("value", it, this) }
+            scheme?.let { ctx.visitValue("scheme", it, this) }
+            ctx.afterObject(attributeName, this, "GENERIC_ID")
+        }
+    }
 }

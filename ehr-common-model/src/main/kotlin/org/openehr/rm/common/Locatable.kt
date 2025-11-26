@@ -67,6 +67,7 @@ import javax.xml.bind.annotation.*
 @Open
 abstract class Locatable : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -90,4 +91,13 @@ abstract class Locatable : RmObject(), Serializable {
     @Required
     @SerialName("archetype_node_id")
     var archetypeNodeId: String? = null
+
+    internal fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        name?.visit("name", ctx)
+        uid?.visit("uid", ctx)
+        links.forEach { it.visit("links", ctx) }
+        archetypeDetails?.visit("archetype_details", ctx)
+        feederAudit?.visit("feeder_audit", ctx)
+        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it, this) }
+    }
 }

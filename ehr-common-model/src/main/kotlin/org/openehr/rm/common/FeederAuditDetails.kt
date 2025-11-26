@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
@@ -46,6 +47,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class FeederAuditDetails() : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -87,4 +89,21 @@ class FeederAuditDetails() : RmObject(), Serializable {
     @XmlElement(name = "other_details")
     @SerialName("other_details")
     var otherDetails: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "FEEDER_AUDIT_DETAILS")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        systemId?.let { ctx.visitValue("system_id", it, this) }
+        location?.visit("location", ctx)
+        provider?.visit("provider", ctx)
+        subject?.visit("subject", ctx)
+        time?.visit("time", ctx)
+        versionId?.let { ctx.visitValue("version_id", it, this) }
+        otherDetails?.visit("other_details", ctx)
+    }
 }

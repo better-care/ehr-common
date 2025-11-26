@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.*
 @Open
 abstract class CareEntry : Entry() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -46,4 +47,10 @@ abstract class CareEntry : Entry() {
     @XmlElement(name = "guideline_id")
     @SerialName("guideline_id")
     var guidelineId: ObjectRef? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        protocol?.visit("protocol", ctx)
+        guidelineId?.visit("guideline_id", ctx)
+    }
 }

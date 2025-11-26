@@ -18,6 +18,7 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
@@ -50,6 +51,7 @@ class CodePhrase() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -113,4 +115,17 @@ class CodePhrase() : RmObject(), Serializable {
         }
 
     override fun hashCode(): Int = Objects.hash(terminologyId, codeString, preferredTerm)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "CODE_PHRASE")) {
+            visitProperties(ctx)
+            ctx.afterObject(attributeName, this, "CODE_PHRASE")
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        terminologyId?.visit("terminology_id", ctx)
+        codeString?.let { ctx.visitValue("code_string", it, this) }
+        preferredTerm?.let { ctx.visitValue("preferred_term", it, this) }
+    }
 }

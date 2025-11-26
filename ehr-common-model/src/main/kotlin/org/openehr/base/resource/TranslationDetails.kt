@@ -18,6 +18,7 @@ package org.openehr.base.resource
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import org.openehr.rm.common.StringDictionaryItem
 import org.openehr.rm.datatypes.CodePhrase
@@ -59,4 +60,14 @@ class TranslationDetails : RmObject(), Serializable {
     @XmlElement(name = "other_details")
     @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        if (ctx.beforeObject(attributeName, this, "TRANSLATION_DETAILS")) {
+            language?.visit("language", ctx)
+            author.forEach { it.visit("author", ctx) }
+            accreditation?.let { ctx.visitValue("accreditation", it, this) }
+            otherDetails.forEach { it.visit("other_details", ctx) }
+            ctx.afterObject(attributeName, this, "TRANSLATION_DETAILS")
+        }
+    }
 }
