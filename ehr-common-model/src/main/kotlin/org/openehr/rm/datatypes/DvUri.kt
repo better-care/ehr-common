@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_URI", propOrder = ["value"])
-@XmlSeeAlso(DvUri::class, DvEhrUri::class)
+@XmlSeeAlso(DvEhrUri::class)
 @Serializable
 @SerialName("DV_URI")
 @Polymorphic
