@@ -94,6 +94,9 @@ class EventContext : RmObject(), Serializable {
         setting?.visit("setting", ctx)
         otherContext?.visit("other_context", ctx)
         healthCareFacility?.visit("health_care_facility", ctx)
-        participations.forEach { it.visit("participations", ctx) }
+        if (ctx.beforeCollection("participations", participations, this)) {
+            participations.forEach { it.visit("participations", ctx) }
+            ctx.afterCollection("participations", participations, this)
+        }
     }
 }

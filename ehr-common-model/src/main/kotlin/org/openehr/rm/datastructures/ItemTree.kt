@@ -50,6 +50,9 @@ class ItemTree : ItemStructure() {
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        items.forEach { it.visit("items", ctx) }
+        if (ctx.beforeCollection("items", items, this)) {
+            items.forEach { it.visit("items", ctx) }
+            ctx.afterCollection("items", items, this)
+        }
     }
 }

@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlType
 @Open
 class TranslationDetails : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -64,9 +65,15 @@ class TranslationDetails : RmObject(), Serializable {
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         if (ctx.beforeObject(attributeName, this, "TRANSLATION_DETAILS")) {
             language?.visit("language", ctx)
-            author.forEach { it.visit("author", ctx) }
+            if (ctx.beforeCollection("author", author, this)) {
+                author.forEach { it.visit("author", ctx) }
+                ctx.afterCollection("author", author, this)
+            }
             accreditation?.let { ctx.visitValue("accreditation", it, this) }
-            otherDetails.forEach { it.visit("other_details", ctx) }
+            if (ctx.beforeCollection("other_details", otherDetails, this)) {
+                otherDetails.forEach { it.visit("other_details", ctx) }
+                ctx.afterCollection("other_details", otherDetails, this)
+            }
             ctx.afterObject(attributeName, this, "TRANSLATION_DETAILS")
         }
     }

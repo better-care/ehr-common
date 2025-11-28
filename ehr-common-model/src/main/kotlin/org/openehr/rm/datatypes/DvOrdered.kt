@@ -57,7 +57,10 @@ abstract class DvOrdered() : DataValue() {
     override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
         super.visitProperties(ctx)
         normalRange?.visit("normal_range", ctx)
-        otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+        if (ctx.beforeCollection("other_reference_ranges", otherReferenceRanges, this)) {
+            otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+            ctx.afterCollection("other_reference_ranges", otherReferenceRanges, this)
+        }
         normalStatus?.visit("normal_status", ctx)
     }
 

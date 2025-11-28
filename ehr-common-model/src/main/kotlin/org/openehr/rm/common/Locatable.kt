@@ -95,7 +95,10 @@ abstract class Locatable : RmObject(), Serializable {
     internal fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
-        links.forEach { it.visit("links", ctx) }
+        if (ctx.beforeCollection("links", links, this)) {
+            links.forEach { it.visit("links", ctx) }
+            ctx.afterCollection("links", links, this)
+        }
         archetypeDetails?.visit("archetype_details", ctx)
         feederAudit?.visit("feeder_audit", ctx)
         archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it, this) }

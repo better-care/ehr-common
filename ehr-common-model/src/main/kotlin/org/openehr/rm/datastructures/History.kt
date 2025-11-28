@@ -74,7 +74,10 @@ class History : Locatable() {
         origin?.visit("origin", ctx)
         period?.visit("period", ctx)
         duration?.visit("duration", ctx)
-        events.forEach { it.visit("events", ctx) }
+        if (ctx.beforeCollection("events", events, this)) {
+            events.forEach { it.visit("events", ctx) }
+            ctx.afterCollection("events", events, this)
+        }
         summary?.visit("summary", ctx)
     }
 }

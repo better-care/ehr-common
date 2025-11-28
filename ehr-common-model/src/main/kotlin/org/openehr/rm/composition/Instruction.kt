@@ -75,6 +75,9 @@ class Instruction : CareEntry() {
         narrative?.visit("narrative", ctx)
         expiryTime?.visit("expiry_time", ctx)
         wfDefinition?.visit("wf_definition", ctx)
-        activities.forEach { it.visit("activities", ctx) }
+        if (ctx.beforeCollection("activities", activities, this)) {
+            activities.forEach { it.visit("activities", ctx) }
+            ctx.afterCollection("activities", activities, this)
+        }
     }
 }

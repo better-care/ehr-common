@@ -103,7 +103,10 @@ class DvText() : DataValue() {
         value?.let { ctx.visitValue("value", it, this) }
         hyperlink?.visit("hyperlink", ctx)
         formatting?.let { ctx.visitValue("formatting", it, this) }
-        mappings.forEach { it.visit("mappings", ctx) }
+        if (ctx.beforeCollection("mappings", mappings, this)) {
+            mappings.forEach { it.visit("mappings", ctx) }
+            ctx.afterCollection("mappings", mappings, this)
+        }
         language?.visit("language", ctx)
         encoding?.visit("encoding", ctx)
     }

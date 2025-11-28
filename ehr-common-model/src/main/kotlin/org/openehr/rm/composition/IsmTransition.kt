@@ -72,6 +72,9 @@ class IsmTransition : RmObject(), Serializable {
         currentState?.visit("current_state", ctx)
         transition?.visit("transition", ctx)
         careflowStep?.visit("careflow_step", ctx)
-        reason.forEach { it.visit("reason", ctx) }
+        if (ctx.beforeCollection("reason", reason, this)) {
+            reason.forEach { it.visit("reason", ctx) }
+            ctx.afterCollection("reason", reason, this)
+        }
     }
 }

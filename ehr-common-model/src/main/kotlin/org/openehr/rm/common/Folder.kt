@@ -58,8 +58,14 @@ class Folder : Locatable() {
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        folders.forEach { it.visit("folders", ctx) }
-        items.forEach { it.visit("items", ctx) }
+        if (ctx.beforeCollection("folders", folders, this)) {
+            folders.forEach { it.visit("folders", ctx) }
+            ctx.afterCollection("folders", folders, this)
+        }
+        if (ctx.beforeCollection("items", items, this)) {
+            items.forEach { it.visit("items", ctx) }
+            ctx.afterCollection("items", items, this)
+        }
         details?.visit("details", ctx)
     }
 }

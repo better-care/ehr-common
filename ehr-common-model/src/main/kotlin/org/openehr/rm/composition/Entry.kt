@@ -76,7 +76,10 @@ abstract class Entry : ContentItem() {
         encoding?.visit("encoding", ctx)
         subject?.visit("subject", ctx)
         provider?.visit("provider", ctx)
-        otherParticipations.forEach { it.visit("other_participations", ctx) }
+        if (ctx.beforeCollection("other_participations", otherParticipations, this)) {
+            otherParticipations.forEach { it.visit("other_participations", ctx) }
+            ctx.afterCollection("other_participations", otherParticipations, this)
+        }
         workFlowId?.visit("work_flow_id", ctx)
     }
 }

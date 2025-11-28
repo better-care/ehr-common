@@ -49,6 +49,9 @@ class RevisionHistory : RmObject(), Serializable {
     }
 
     internal fun visitProperties(ctx: RmVisitorContext) {
-        items.forEach { it.visit("items", ctx) }
+        if (ctx.beforeCollection("items", items, this)) {
+            items.forEach { it.visit("items", ctx) }
+            ctx.afterCollection("items", items, this)
+        }
     }
 }

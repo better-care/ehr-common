@@ -50,6 +50,10 @@ open class RmVisitorTest {
             // Nothing to do
         }
 
+        override fun afterCollection(attributeName: String, collection: Collection<*>, owner: Any) {
+            // Nothing to do
+        }
+
         override fun visitValue(attributeName: String, value: Any, owner: Any) {
             visitedProperties.computeIfAbsent(owner) { mutableSetOf() }.add(attributeName)
         }

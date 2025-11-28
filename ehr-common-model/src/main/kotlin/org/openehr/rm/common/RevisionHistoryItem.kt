@@ -63,6 +63,9 @@ class RevisionHistoryItem : RmObject(), Serializable {
 
     internal fun visitProperties(ctx: RmVisitorContext) {
         versionId?.visit("version_id", ctx)
-        audits.forEach { it.visit("audits", ctx) }
+        if (ctx.beforeCollection("audits", audits, this)) {
+            audits.forEach { it.visit("audits", ctx) }
+            ctx.afterCollection("audits", audits, this)
+        }
     }
 }

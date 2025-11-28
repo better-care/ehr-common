@@ -23,5 +23,7 @@ interface RmVisitorContext {
     fun afterLocatable(attributeName: String, locatable: Locatable, typeName: String)
     fun beforeObject(attributeName: String, value: RmObject, typeName: String): Boolean = true
     fun afterObject(attributeName: String, value: RmObject, typeName: String)
+    fun beforeCollection(attributeName: String, collection: Collection<*>, owner: Any): Boolean = true
+    fun afterCollection(attributeName: String, collection: Collection<*>, owner: Any)
     fun visitValue(attributeName: String, value: Any, owner: Any)
 }

@@ -82,6 +82,9 @@ class PartyIdentified() : PartyProxy() {
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
         name?.let { ctx.visitValue("name", it, this) }
-        identifiers.forEach { it.visit("identifiers", ctx) }
+        if (ctx.beforeCollection("identifiers", identifiers, this)) {
+            identifiers.forEach { it.visit("identifiers", ctx) }
+            ctx.afterCollection("identifiers", identifiers, this)
+        }
     }
 }

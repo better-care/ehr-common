@@ -94,8 +94,14 @@ class FeederAudit() : RmObject(), Serializable {
     }
 
     internal fun visitProperties(ctx: RmVisitorContext) {
-        originatingSystemItemIds.forEach { it.visit("originating_system_item_ids", ctx) }
-        feederSystemItemIds.forEach { it.visit("feeder_system_item_ids", ctx) }
+        if (ctx.beforeCollection("originating_system_item_ids", originatingSystemItemIds, this)) {
+            originatingSystemItemIds.forEach { it.visit("originating_system_item_ids", ctx) }
+            ctx.afterCollection("originating_system_item_ids", originatingSystemItemIds, this)
+        }
+        if (ctx.beforeCollection("feeder_system_item_ids", feederSystemItemIds, this)) {
+            feederSystemItemIds.forEach { it.visit("feeder_system_item_ids", ctx) }
+            ctx.afterCollection("feeder_system_item_ids", feederSystemItemIds, this)
+        }
         originalContent?.visit("original_content", ctx)
         originatingSystemAudit?.visit("originating_system_audit", ctx)
         feederSystemAudit?.visit("feeder_system_audit", ctx)

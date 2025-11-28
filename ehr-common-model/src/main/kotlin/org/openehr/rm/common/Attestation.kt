@@ -97,7 +97,10 @@ class Attestation() : AuditDetails() {
         super.visitProperties(ctx)
         attestedView?.visit("attested_view", ctx)
         proof?.let { ctx.visitValue("proof", it, this) }
-        items.forEach { it.visit("items", ctx) }
+        if (ctx.beforeCollection("items", items, this)) {
+            items.forEach { it.visit("items", ctx) }
+            ctx.afterCollection("items", items, this)
+        }
         reason?.visit("reason", ctx)
         ctx.visitValue("is_pending", isPending, this)
     }

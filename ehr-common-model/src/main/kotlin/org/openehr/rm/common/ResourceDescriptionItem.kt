@@ -85,11 +85,20 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     internal fun visitProperties(ctx: RmVisitorContext) {
         language?.visit("language", ctx)
         purpose?.let { ctx.visitValue("purpose", it, this) }
-        keywords.forEach { ctx.visitValue("keywords", it, this) }
+        if (ctx.beforeCollection("keywords", keywords, this)) {
+            keywords.forEach { ctx.visitValue("keywords", it, this) }
+            ctx.afterCollection("keywords", keywords, this)
+        }
         use?.let { ctx.visitValue("use", it, this) }
         misuse?.let { ctx.visitValue("misuse", it, this) }
         copyright?.let { ctx.visitValue("copyright", it, this) }
-        originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
-        otherDetails.forEach { it.visit("other_details", ctx) }
+        if (ctx.beforeCollection("original_resource_uri", originalResourceUri, this)) {
+            originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
+            ctx.afterCollection("original_resource_uri", originalResourceUri, this)
+        }
+        if (ctx.beforeCollection("other_details", otherDetails, this)) {
+            otherDetails.forEach { it.visit("other_details", ctx) }
+            ctx.afterCollection("other_details", otherDetails, this)
+        }
     }
 }

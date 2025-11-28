@@ -46,6 +46,7 @@ import javax.xml.bind.annotation.*
 @Open
 class OriginalVersion : Version() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -79,8 +80,14 @@ class OriginalVersion : Version() {
             uid?.visit("uid", ctx)
             // data is ignored
             precedingVersionUid?.visit("preceding_version_uid", ctx)
-            otherInputVersionUids.forEach { it.visit("other_input_version_uids", ctx) }
-            attestations.forEach { it.visit("attestations", ctx) }
+            if (ctx.beforeCollection("other_input_version_uids", otherInputVersionUids, this)) {
+                otherInputVersionUids.forEach { it.visit("other_input_version_uids", ctx) }
+                ctx.afterCollection("other_input_version_uids", otherInputVersionUids, this)
+            }
+            if (ctx.beforeCollection("attestations", attestations, this)) {
+                attestations.forEach { it.visit("attestations", ctx) }
+                ctx.afterCollection("attestations", attestations, this)
+            }
             lifecycleState?.visit("lifecycle_state", ctx)
             ctx.afterObject(attributeName, this, "ORIGINAL_VERSION")
         }

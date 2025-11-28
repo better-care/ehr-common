@@ -50,6 +50,9 @@ class ItemTable : ItemStructure() {
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        rows.forEach { it.visit("rows", ctx) }
+        if (ctx.beforeCollection("rows", rows, this)) {
+            rows.forEach { it.visit("rows", ctx) }
+            ctx.afterCollection("rows", rows, this)
+        }
     }
 }

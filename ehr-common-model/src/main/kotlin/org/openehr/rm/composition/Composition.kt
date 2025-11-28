@@ -84,6 +84,9 @@ class Composition : Locatable() {
         category?.visit("category", ctx)
         composer?.visit("composer", ctx)
         context?.visit("context", ctx)
-        content.forEach { it.visit("content", ctx) }
+        if (ctx.beforeCollection("content", content, this)) {
+            content.forEach { it.visit("content", ctx) }
+            ctx.afterCollection("content", content, this)
+        }
     }
 }
