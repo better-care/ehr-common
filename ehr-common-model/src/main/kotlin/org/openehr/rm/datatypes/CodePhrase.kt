@@ -36,9 +36,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "CODE_PHRASE", propOrder = [
-        "terminologyId",
-        "codeString",
-        "preferredTerm"])
+    "terminologyId",
+    "codeString",
+    "preferredTerm"])
 @kotlinx.serialization.Serializable
 @SerialName("CODE_PHRASE")
 @Open
@@ -117,9 +117,8 @@ class CodePhrase() : RmObject(), Serializable {
     override fun hashCode(): Int = Objects.hash(terminologyId, codeString, preferredTerm)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "CODE_PHRASE")) {
+        ctx.withObject(attributeName, this, "CODE_PHRASE") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "CODE_PHRASE")
         }
     }
 

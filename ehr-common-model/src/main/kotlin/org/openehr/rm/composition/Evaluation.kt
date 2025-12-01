@@ -46,9 +46,8 @@ class Evaluation : CareEntry() {
     var data: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "EVALUATION")) {
+        ctx.withLocatable(attributeName, this, "EVALUATION") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "EVALUATION")
         }
     }
 

@@ -44,9 +44,8 @@ class PartySelf() : PartyProxy() {
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "PARTY_SELF")) {
+        ctx.withObject(attributeName, this, "PARTY_SELF") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "PARTY_SELF")
         }
     }
 }

@@ -68,9 +68,8 @@ class DvEhrUri() : DvUri() {
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_EHR_URI")) {
+        ctx.withObject(attributeName, this, "DV_EHR_URI") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_EHR_URI")
         }
     }
 }

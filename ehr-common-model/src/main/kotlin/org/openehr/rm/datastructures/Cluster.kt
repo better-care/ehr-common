@@ -46,17 +46,15 @@ class Cluster : Item() {
     var items: MutableList<Item> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "CLUSTER")) {
+        ctx.withLocatable(attributeName, this, "CLUSTER") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "CLUSTER")
         }
     }
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        if (ctx.beforeCollection("items", items, this)) {
+        ctx.withCollection("items", items, this) {
             items.forEach { it.visit("items", ctx) }
-            ctx.afterCollection("items", items, this)
         }
     }
 }

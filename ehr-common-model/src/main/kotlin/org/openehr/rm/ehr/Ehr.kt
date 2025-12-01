@@ -57,9 +57,8 @@ class Ehr : RmObject(), Serializable {
     var ehrStatus: EhrStatus? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "EHR")) {
+        ctx.withObject(attributeName, this, "EHR") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "EHR")
         }
     }
 

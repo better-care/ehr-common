@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-        name = "PARTY_IDENTIFIED", propOrder = [
+    name = "PARTY_IDENTIFIED", propOrder = [
     "name",
     "identifiers"])
 @XmlSeeAlso(PartyRelated::class)
@@ -60,9 +60,9 @@ class PartyIdentified() : PartyProxy() {
 
     @JvmOverloads
     constructor(
-            name: String,
-            identifiers: MutableList<DvIdentifier> = mutableListOf(),
-            externalRef: PartyRef? = null) : this() {
+        name: String,
+        identifiers: MutableList<DvIdentifier> = mutableListOf(),
+        externalRef: PartyRef? = null) : this() {
         this.name = name
         this.identifiers = identifiers
         super.externalRef = externalRef
@@ -73,18 +73,16 @@ class PartyIdentified() : PartyProxy() {
     var identifiers: MutableList<DvIdentifier> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "PARTY_IDENTIFIED")) {
+        ctx.withObject(attributeName, this, "PARTY_IDENTIFIED") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "PARTY_IDENTIFIED")
         }
     }
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
         name?.let { ctx.visitValue("name", it, this) }
-        if (ctx.beforeCollection("identifiers", identifiers, this)) {
+        ctx.withCollection("identifiers", identifiers, this) {
             identifiers.forEach { it.visit("identifiers", ctx) }
-            ctx.afterCollection("identifiers", identifiers, this)
         }
     }
 }

@@ -36,11 +36,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "FEEDER_AUDIT", propOrder = [
-        "originatingSystemItemIds",
-        "feederSystemItemIds",
-        "originalContent",
-        "originatingSystemAudit",
-        "feederSystemAudit"])
+    "originatingSystemItemIds",
+    "feederSystemItemIds",
+    "originalContent",
+    "originatingSystemAudit",
+    "feederSystemAudit"])
 @kotlinx.serialization.Serializable
 @SerialName("FEEDER_AUDIT")
 @Open
@@ -52,11 +52,11 @@ class FeederAudit() : RmObject(), Serializable {
 
     @JvmOverloads
     constructor(
-            originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
-            feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
-            originalContent: DvEncapsulated? = null,
-            originatingSystemAudit: FeederAuditDetails,
-            feederSystemAudit: FeederAuditDetails? = null) : this() {
+        originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
+        feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
+        originalContent: DvEncapsulated? = null,
+        originatingSystemAudit: FeederAuditDetails,
+        feederSystemAudit: FeederAuditDetails? = null) : this() {
         this.originatingSystemItemIds = originatingSystemItemIds
         this.originatingSystemAudit = originatingSystemAudit
         this.feederSystemItemIds = feederSystemItemIds
@@ -87,20 +87,17 @@ class FeederAudit() : RmObject(), Serializable {
     var feederSystemAudit: FeederAuditDetails? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "FEEDER_AUDIT")) {
+        ctx.withObject(attributeName, this, "FEEDER_AUDIT") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "FEEDER_AUDIT")
         }
     }
 
     internal fun visitProperties(ctx: RmVisitorContext) {
-        if (ctx.beforeCollection("originating_system_item_ids", originatingSystemItemIds, this)) {
+        ctx.withCollection("originating_system_item_ids", originatingSystemItemIds, this) {
             originatingSystemItemIds.forEach { it.visit("originating_system_item_ids", ctx) }
-            ctx.afterCollection("originating_system_item_ids", originatingSystemItemIds, this)
         }
-        if (ctx.beforeCollection("feeder_system_item_ids", feederSystemItemIds, this)) {
+        ctx.withCollection("feeder_system_item_ids", feederSystemItemIds, this) {
             feederSystemItemIds.forEach { it.visit("feeder_system_item_ids", ctx) }
-            ctx.afterCollection("feeder_system_item_ids", feederSystemItemIds, this)
         }
         originalContent?.visit("original_content", ctx)
         originatingSystemAudit?.visit("originating_system_audit", ctx)

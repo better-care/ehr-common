@@ -42,17 +42,15 @@ class ItemList : ItemStructure() {
     var items: MutableList<Element> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "ITEM_LIST")) {
+        ctx.withLocatable(attributeName, this, "ITEM_LIST") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "ITEM_LIST")
         }
     }
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        if (ctx.beforeCollection("items", items, this)) {
+        ctx.withCollection("items", items, this) {
             items.forEach { it.visit("items", ctx) }
-            ctx.afterCollection("items", items, this)
         }
     }
 }

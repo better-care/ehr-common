@@ -37,31 +37,30 @@ import javax.xml.bind.annotation.XmlType
 @Serializable
 @SerialName("PARTY_RELATED")
 @Open
-class PartyRelated constructor(): PartyIdentified() {
+class PartyRelated() : PartyIdentified() {
     companion object {
         @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     constructor(
-            relationship: DvCodedText? = null,
-            name: String? = null,
-            identifiers: MutableList<DvIdentifier> = mutableListOf(),
-            externalRef: PartyRef? = null): this() {
-                this.name = name
-                this.identifiers = identifiers
-                this.externalRef = externalRef
-                this.relationship = relationship
-            }
+        relationship: DvCodedText? = null,
+        name: String? = null,
+        identifiers: MutableList<DvIdentifier> = mutableListOf(),
+        externalRef: PartyRef? = null) : this() {
+        this.name = name
+        this.identifiers = identifiers
+        this.externalRef = externalRef
+        this.relationship = relationship
+    }
 
     @XmlElement(required = true)
     @Required
     var relationship: DvCodedText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "PARTY_RELATED")) {
+        ctx.withObject(attributeName, this, "PARTY_RELATED") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "PARTY_RELATED")
         }
     }
 

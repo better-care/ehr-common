@@ -35,11 +35,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "INSTRUCTION", propOrder = [
-        "narrative",
-        "expiryTime",
-        "wfDefinition",
-        "activities"
-    ])
+    "narrative",
+    "expiryTime",
+    "wfDefinition",
+    "activities"
+])
 @Serializable
 @SerialName("INSTRUCTION")
 @Open
@@ -64,9 +64,8 @@ class Instruction : CareEntry() {
     var activities: MutableList<Activity> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "INSTRUCTION")) {
+        ctx.withLocatable(attributeName, this, "INSTRUCTION") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "INSTRUCTION")
         }
     }
 
@@ -75,9 +74,8 @@ class Instruction : CareEntry() {
         narrative?.visit("narrative", ctx)
         expiryTime?.visit("expiry_time", ctx)
         wfDefinition?.visit("wf_definition", ctx)
-        if (ctx.beforeCollection("activities", activities, this)) {
+        ctx.withCollection("activities", activities, this) {
             activities.forEach { it.visit("activities", ctx) }
-            ctx.afterCollection("activities", activities, this)
         }
     }
 }

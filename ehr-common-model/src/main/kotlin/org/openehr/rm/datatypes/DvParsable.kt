@@ -34,18 +34,18 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_PARSABLE", propOrder = [
-        "value",
-        "formalism"])
+    "value",
+    "formalism"])
 @Serializable
 @SerialName("DV_PARSABLE")
 @Open
 class DvParsable() : DvEncapsulated() {
     @JvmOverloads
     constructor(
-            value: String,
-            formalism: String,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null) : this() {
+        value: String,
+        formalism: String,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null) : this() {
         this.value = value
         this.formalism = formalism
         this.charset = charset
@@ -77,9 +77,8 @@ class DvParsable() : DvEncapsulated() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, formalism)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_PARSABLE")) {
+        ctx.withObject(attributeName, this, "DV_PARSABLE") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_PARSABLE")
         }
     }
 

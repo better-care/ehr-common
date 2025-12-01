@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "TERM_MAPPING", propOrder = [
-        "match",
-        "purpose",
-        "target"])
+    "match",
+    "purpose",
+    "target"])
 @kotlinx.serialization.Serializable
 @SerialName("TERM_MAPPING")
 @Open
@@ -63,9 +63,8 @@ class TermMapping() : RmObject(), Serializable {
     var target: CodePhrase? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "TERM_MAPPING")) {
+        ctx.withObject(attributeName, this, "TERM_MAPPING") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "TERM_MAPPING")
         }
     }
 

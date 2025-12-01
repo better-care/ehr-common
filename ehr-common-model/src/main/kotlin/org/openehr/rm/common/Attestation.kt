@@ -34,27 +34,27 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ATTESTATION", propOrder = [
-        "attestedView",
-        "proof",
-        "items",
-        "reason",
-        "isPending"])
+    "attestedView",
+    "proof",
+    "items",
+    "reason",
+    "isPending"])
 @Serializable
 @SerialName("ATTESTATION")
 @Open
 class Attestation() : AuditDetails() {
     @JvmOverloads
     constructor(
-            reason: DvText,
-            attestedView: DvMultimedia? = null,
-            proof: String? = null,
-            items: MutableList<DvEhrUri> = mutableListOf(),
-            isPending: Boolean = false,
-            systemId: String? = null,
-            committer: PartyProxy? = null,
-            timeCommitted: DvDateTime? = null,
-            changeType: DvCodedText? = null,
-            description: DvText? = null) : this() {
+        reason: DvText,
+        attestedView: DvMultimedia? = null,
+        proof: String? = null,
+        items: MutableList<DvEhrUri> = mutableListOf(),
+        isPending: Boolean = false,
+        systemId: String? = null,
+        committer: PartyProxy? = null,
+        timeCommitted: DvDateTime? = null,
+        changeType: DvCodedText? = null,
+        description: DvText? = null) : this() {
         this.reason = reason
         this.attestedView = attestedView
         this.proof = proof
@@ -87,9 +87,8 @@ class Attestation() : AuditDetails() {
     var isPending: Boolean = false
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "ATTESTATION")) {
+        ctx.withObject(attributeName, this, "ATTESTATION") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "ATTESTATION")
         }
     }
 
@@ -97,9 +96,8 @@ class Attestation() : AuditDetails() {
         super.visitProperties(ctx)
         attestedView?.visit("attested_view", ctx)
         proof?.let { ctx.visitValue("proof", it, this) }
-        if (ctx.beforeCollection("items", items, this)) {
+        ctx.withCollection("items", items, this) {
             items.forEach { it.visit("items", ctx) }
-            ctx.afterCollection("items", items, this)
         }
         reason?.visit("reason", ctx)
         ctx.visitValue("is_pending", isPending, this)

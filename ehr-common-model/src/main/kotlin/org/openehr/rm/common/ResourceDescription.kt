@@ -32,13 +32,13 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "RESOURCE_DESCRIPTION", propOrder = [
-        "originalAuthor",
-        "otherContributors",
-        "lifecycleState",
-        "resourcePackageUri",
-        "otherDetails",
-        "details",
-        "parentResource"])
+    "originalAuthor",
+    "otherContributors",
+    "lifecycleState",
+    "resourcePackageUri",
+    "otherDetails",
+    "details",
+    "parentResource"])
 @kotlinx.serialization.Serializable
 @SerialName("RESOURCE_DESCRIPTION")
 @Open

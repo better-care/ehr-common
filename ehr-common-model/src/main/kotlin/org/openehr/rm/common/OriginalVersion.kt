@@ -33,12 +33,12 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ORIGINAL_VERSION", propOrder = [
-        "uid",
-        "data",
-        "precedingVersionUid",
-        "otherInputVersionUids",
-        "attestations",
-        "lifecycleState"])
+    "uid",
+    "data",
+    "precedingVersionUid",
+    "otherInputVersionUids",
+    "attestations",
+    "lifecycleState"])
 @XmlRootElement
 @XmlSeeAlso(value = [Composition::class])
 @Serializable
@@ -73,23 +73,21 @@ class OriginalVersion : Version() {
     var lifecycleState: DvCodedText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "ORIGINAL_VERSION")) {
+        ctx.withObject(attributeName, this, "ORIGINAL_VERSION") {
             contribution?.visit("contribution", ctx)
             commitAudit?.visit("commit_audit", ctx)
             signature?.let { ctx.visitValue("signature", it, this) }
             uid?.visit("uid", ctx)
             // data is ignored
             precedingVersionUid?.visit("preceding_version_uid", ctx)
-            if (ctx.beforeCollection("other_input_version_uids", otherInputVersionUids, this)) {
+            ctx.withCollection("other_input_version_uids", otherInputVersionUids, this) {
                 otherInputVersionUids.forEach { it.visit("other_input_version_uids", ctx) }
-                ctx.afterCollection("other_input_version_uids", otherInputVersionUids, this)
             }
-            if (ctx.beforeCollection("attestations", attestations, this)) {
+            ctx.withCollection("attestations", attestations, this) {
                 attestations.forEach { it.visit("attestations", ctx) }
-                ctx.afterCollection("attestations", attestations, this)
             }
             lifecycleState?.visit("lifecycle_state", ctx)
-            ctx.afterObject(attributeName, this, "ORIGINAL_VERSION")
+
         }
     }
 }

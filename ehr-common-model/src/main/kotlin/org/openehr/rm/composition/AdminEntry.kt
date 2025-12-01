@@ -47,9 +47,8 @@ class AdminEntry : Entry() {
     var data: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "ADMIN_ENTRY")) {
+        ctx.withLocatable(attributeName, this, "ADMIN_ENTRY") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "ADMIN_ENTRY")
         }
     }
 

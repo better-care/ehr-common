@@ -35,13 +35,13 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "FEEDER_AUDIT_DETAILS", propOrder = [
-        "systemId",
-        "location",
-        "provider",
-        "subject",
-        "time",
-        "versionId",
-        "otherDetails"])
+    "systemId",
+    "location",
+    "provider",
+    "subject",
+    "time",
+    "versionId",
+    "otherDetails"])
 @kotlinx.serialization.Serializable
 @SerialName("FEEDER_AUDIT_DETAILS")
 @Open
@@ -53,13 +53,13 @@ class FeederAuditDetails() : RmObject(), Serializable {
 
     @JvmOverloads
     constructor(
-            systemId: String,
-            location: PartyIdentified? = null,
-            provider: PartyIdentified? = null,
-            subject: PartyProxy? = null,
-            time: DvDateTime? = null,
-            versionId: String? = null,
-            otherDetails: ItemStructure? = null) : this() {
+        systemId: String,
+        location: PartyIdentified? = null,
+        provider: PartyIdentified? = null,
+        subject: PartyProxy? = null,
+        time: DvDateTime? = null,
+        versionId: String? = null,
+        otherDetails: ItemStructure? = null) : this() {
         this.systemId = systemId
         this.location = location
         this.provider = provider
@@ -91,9 +91,8 @@ class FeederAuditDetails() : RmObject(), Serializable {
     var otherDetails: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "FEEDER_AUDIT_DETAILS")) {
+        ctx.withObject(attributeName, this, "FEEDER_AUDIT_DETAILS") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "FEEDER_AUDIT_DETAILS")
         }
     }
 

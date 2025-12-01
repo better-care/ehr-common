@@ -39,13 +39,14 @@ class ArchetypeId() : ObjectId() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "ARCHETYPE_ID")) {
+        ctx.withObject(attributeName, this, "ARCHETYPE_ID") {
             value?.let { ctx.visitValue("value", it, this) }
-            ctx.afterObject(attributeName, this, "ARCHETYPE_ID")
+
         }
     }
 }

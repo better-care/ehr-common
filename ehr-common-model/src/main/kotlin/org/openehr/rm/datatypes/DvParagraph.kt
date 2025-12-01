@@ -49,17 +49,15 @@ class DvParagraph() : DataValue() {
     var items: MutableList<DvText> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_PARAGRAPH")) {
+        ctx.withObject(attributeName, this, "DV_PARAGRAPH") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_PARAGRAPH")
         }
     }
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        if (ctx.beforeCollection("items", items, this)) {
+        ctx.withCollection("items", items, this) {
             items.forEach { it.visit("items", ctx) }
-            ctx.afterCollection("items", items, this)
         }
     }
 }

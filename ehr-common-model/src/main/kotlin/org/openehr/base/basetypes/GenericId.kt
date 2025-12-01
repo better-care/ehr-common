@@ -51,10 +51,10 @@ class GenericId() : ObjectId() {
     var scheme: String? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "GENERIC_ID")) {
+        ctx.withObject(attributeName, this, "GENERIC_ID") {
             value?.let { ctx.visitValue("value", it, this) }
             scheme?.let { ctx.visitValue("scheme", it, this) }
-            ctx.afterObject(attributeName, this, "GENERIC_ID")
+
         }
     }
 }

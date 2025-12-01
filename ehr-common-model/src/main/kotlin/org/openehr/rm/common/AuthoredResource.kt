@@ -35,11 +35,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "AUTHORED_RESOURCE", propOrder = [
-        "originalLanguage",
-        "isControlled",
-        "description",
-        "translations",
-        "revisionHistory"])
+    "originalLanguage",
+    "isControlled",
+    "description",
+    "translations",
+    "revisionHistory"])
 @kotlinx.serialization.Serializable
 @SerialName("AUTHORED_RESOURCE")
 @Open
@@ -50,11 +50,11 @@ abstract class AuthoredResource() : RmObject(), Serializable {
 
     @JvmOverloads
     constructor(
-            originalLanguage: CodePhrase,
-            isControlled: Boolean? = null,
-            description: ResourceDescription? = null,
-            translations: MutableList<TranslationDetails> = mutableListOf(),
-            revisionHistory: RevisionHistory? = null) : this() {
+        originalLanguage: CodePhrase,
+        isControlled: Boolean? = null,
+        description: ResourceDescription? = null,
+        translations: MutableList<TranslationDetails> = mutableListOf(),
+        revisionHistory: RevisionHistory? = null) : this() {
         this.originalLanguage = originalLanguage
         this.isControlled = isControlled
         this.description = description

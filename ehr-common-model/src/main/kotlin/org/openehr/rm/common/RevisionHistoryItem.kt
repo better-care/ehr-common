@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "REVISION_HISTORY_ITEM", propOrder = [
-        "versionId",
-        "audits"])
+    "versionId",
+    "audits"])
 @kotlinx.serialization.Serializable
 @SerialName("REVISION_HISTORY_ITEM")
 @Open
@@ -55,17 +55,15 @@ class RevisionHistoryItem : RmObject(), Serializable {
     var audits: MutableList<AuditDetails> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "REVISION_HISTORY_ITEM")) {
+        ctx.withObject(attributeName, this, "REVISION_HISTORY_ITEM") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "REVISION_HISTORY_ITEM")
         }
     }
 
     internal fun visitProperties(ctx: RmVisitorContext) {
         versionId?.visit("version_id", ctx)
-        if (ctx.beforeCollection("audits", audits, this)) {
+        ctx.withCollection("audits", audits, this) {
             audits.forEach { it.visit("audits", ctx) }
-            ctx.afterCollection("audits", audits, this)
         }
     }
 }

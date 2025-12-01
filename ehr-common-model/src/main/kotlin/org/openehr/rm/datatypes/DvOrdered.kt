@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_ORDERED", propOrder = [
-        "normalRange",
-        "otherReferenceRanges",
-        "normalStatus"])
+    "normalRange",
+    "otherReferenceRanges",
+    "normalStatus"])
 @XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class, DvScale::class])
 @Serializable
 @SerialName("DV_ORDERED")
 @Open
-abstract class DvOrdered() : DataValue() {
+abstract class DvOrdered : DataValue() {
 
     companion object {
         @Suppress("unused")
@@ -57,9 +57,8 @@ abstract class DvOrdered() : DataValue() {
     override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
         super.visitProperties(ctx)
         normalRange?.visit("normal_range", ctx)
-        if (ctx.beforeCollection("other_reference_ranges", otherReferenceRanges, this)) {
+        ctx.withCollection("other_reference_ranges", otherReferenceRanges, this) {
             otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
-            ctx.afterCollection("other_reference_ranges", otherReferenceRanges, this)
         }
         normalStatus?.visit("normal_status", ctx)
     }

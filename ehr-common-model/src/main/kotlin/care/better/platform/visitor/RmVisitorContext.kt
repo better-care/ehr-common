@@ -19,11 +19,8 @@ import care.better.openehr.rm.RmObject
 import org.openehr.rm.common.Locatable
 
 interface RmVisitorContext {
-    fun beforeLocatable(attributeName: String, locatable: Locatable, typeName: String): Boolean = true
-    fun afterLocatable(attributeName: String, locatable: Locatable, typeName: String)
-    fun beforeObject(attributeName: String, value: RmObject, typeName: String): Boolean = true
-    fun afterObject(attributeName: String, value: RmObject, typeName: String)
-    fun beforeCollection(attributeName: String, collection: Collection<*>, owner: Any): Boolean = true
-    fun afterCollection(attributeName: String, collection: Collection<*>, owner: Any)
+    fun withLocatable(attributeName: String, locatable: Locatable, typeName: String, processProperties: (RmVisitorContext) -> Unit)
+    fun withObject(attributeName: String, value: RmObject, typeName: String, processProperties: (RmVisitorContext) -> Unit)
+    fun withCollection(attributeName: String, collection: Collection<*>, owner: Any, processProperties: (RmVisitorContext) -> Unit)
     fun visitValue(attributeName: String, value: Any, owner: Any)
 }

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-        name = "DV_AMOUNT", propOrder = [
+    name = "DV_AMOUNT", propOrder = [
     "accuracy",
     "accuracyIsPercent"])
 @XmlSeeAlso(value = [DvCount::class, DvQuantity::class, DvProportion::class, DvDuration::class])
@@ -63,9 +63,8 @@ class DvAmount : DvQuantified() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy, accuracyIsPercent)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_AMOUNT")) {
+        ctx.withObject(attributeName, this, "DV_AMOUNT") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_AMOUNT")
         }
     }
 

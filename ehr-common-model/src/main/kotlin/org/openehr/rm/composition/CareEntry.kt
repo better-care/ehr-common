@@ -30,8 +30,8 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "CARE_ENTRY", propOrder = [
-        "protocol",
-        "guidelineId"])
+    "protocol",
+    "guidelineId"])
 @XmlSeeAlso(value = [Evaluation::class, Observation::class, Instruction::class, Action::class])
 @Serializable
 @SerialName("CARE_ENTRY")

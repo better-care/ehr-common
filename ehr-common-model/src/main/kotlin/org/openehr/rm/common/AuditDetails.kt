@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-        name = "AUDIT_DETAILS", propOrder = [
+    name = "AUDIT_DETAILS", propOrder = [
     "systemId",
     "committer",
     "timeCommitted",
@@ -48,11 +48,11 @@ import javax.xml.bind.annotation.*
 class AuditDetails() : RmObject(), Serializable {
     @JvmOverloads
     constructor(
-            systemId: String,
-            committer: PartyProxy,
-            timeCommitted: DvDateTime,
-            changeType: DvCodedText,
-            description: DvText? = null) : this() {
+        systemId: String,
+        committer: PartyProxy,
+        timeCommitted: DvDateTime,
+        changeType: DvCodedText,
+        description: DvText? = null) : this() {
         this.systemId = systemId
         this.committer = committer
         this.timeCommitted = timeCommitted
@@ -87,9 +87,8 @@ class AuditDetails() : RmObject(), Serializable {
     var description: DvText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "AUDIT_DETAILS")) {
+        ctx.withObject(attributeName, this, "AUDIT_DETAILS") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "AUDIT_DETAILS")
         }
     }
 

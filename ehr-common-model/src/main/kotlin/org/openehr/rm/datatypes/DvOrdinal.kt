@@ -33,19 +33,19 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_ORDINAL", propOrder = [
-        "value",
-        "symbol"])
+    "value",
+    "symbol"])
 @Serializable
 @SerialName("DV_ORDINAL")
 @Open
 class DvOrdinal() : DvOrdered() {
     @JvmOverloads
     constructor(
-            value: Int,
-            symbol: DvCodedText,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null) : this() {
+        value: Int,
+        symbol: DvCodedText,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null) : this() {
         this.value = value
         this.symbol = symbol
         this.normalRange = normalRange
@@ -76,9 +76,8 @@ class DvOrdinal() : DvOrdered() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, symbol)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_ORDINAL")) {
+        ctx.withObject(attributeName, this, "DV_ORDINAL") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_ORDINAL")
         }
     }
 

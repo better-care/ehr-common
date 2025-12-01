@@ -39,13 +39,14 @@ import javax.xml.bind.annotation.XmlType
 class DvDuration() : DvAmount() {
     @JvmOverloads
     constructor(
-            value: String,
-            accuracy: Float? = null,
-            accuracyIsPercent: Boolean? = null,
-            magnitudeStatus: String? = null,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null, ) : this() {
+        value: String,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null,
+    ) : this() {
         this.value = value
         this.accuracy = accuracy
         this.accuracyIsPercent = accuracyIsPercent
@@ -75,9 +76,8 @@ class DvDuration() : DvAmount() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_DURATION")) {
+        ctx.withObject(attributeName, this, "DV_DURATION") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_DURATION")
         }
     }
 

@@ -34,28 +34,28 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_QUANTITY", propOrder = [
-        "magnitude",
-        "units",
-        "precision",
-        "unitsSystem",
-        "unitsDisplayName"])
+    "magnitude",
+    "units",
+    "precision",
+    "unitsSystem",
+    "unitsDisplayName"])
 @Serializable
 @SerialName("DV_QUANTITY")
 @Open
 class DvQuantity() : DvAmount() {
     @JvmOverloads
     constructor(
-            magnitude: Double,
-            units: String,
-            precision: Int? = null,
-            accuracy: Float? = null,
-            accuracyIsPercent: Boolean? = null,
-            magnitudeStatus: String? = null,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null,
-            unitsSystem: String? = null,
-            unitsDisplayName: String? = null) : this() {
+        magnitude: Double,
+        units: String,
+        precision: Int? = null,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null,
+        unitsSystem: String? = null,
+        unitsDisplayName: String? = null) : this() {
         this.magnitude = magnitude
         this.units = units
         this.precision = precision
@@ -104,9 +104,8 @@ class DvQuantity() : DvAmount() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude, precision, units)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_QUANTITY")) {
+        ctx.withObject(attributeName, this, "DV_QUANTITY") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_QUANTITY")
         }
     }
 

@@ -68,12 +68,12 @@ abstract class Interval : RmObject(), Serializable, RangeParameters {
     override fun isUpperUnbounded(): Boolean = upperUnbounded
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "INTERVAL")) {
+        ctx.withObject(attributeName, this, "INTERVAL") {
             lowerIncluded?.let { ctx.visitValue("lower_included", it, this) }
             upperIncluded?.let { ctx.visitValue("upper_included", it, this) }
             ctx.visitValue("lower_unbounded", lowerUnbounded, this)
             ctx.visitValue("upper_unbounded", upperUnbounded, this)
-            ctx.afterObject(attributeName, this, "INTERVAL")
+
         }
     }
 }

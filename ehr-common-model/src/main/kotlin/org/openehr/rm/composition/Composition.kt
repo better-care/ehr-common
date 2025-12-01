@@ -34,12 +34,12 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "COMPOSITION", propOrder = [
-        "language",
-        "territory",
-        "category",
-        "composer",
-        "context",
-        "content"])
+    "language",
+    "territory",
+    "category",
+    "composer",
+    "context",
+    "content"])
 @XmlRootElement
 @Serializable
 @SerialName("COMPOSITION")
@@ -71,9 +71,8 @@ class Composition : Locatable() {
     var content: MutableList<ContentItem> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "COMPOSITION")) {
+        ctx.withLocatable(attributeName, this, "COMPOSITION") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "COMPOSITION")
         }
     }
 
@@ -84,9 +83,8 @@ class Composition : Locatable() {
         category?.visit("category", ctx)
         composer?.visit("composer", ctx)
         context?.visit("context", ctx)
-        if (ctx.beforeCollection("content", content, this)) {
+        ctx.withCollection("content", content, this) {
             content.forEach { it.visit("content", ctx) }
-            ctx.afterCollection("content", content, this)
         }
     }
 }

@@ -33,26 +33,26 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_PROPORTION", propOrder = [
-        "numerator",
-        "denominator",
-        "type",
-        "precision"])
+    "numerator",
+    "denominator",
+    "type",
+    "precision"])
 @Serializable
 @SerialName("DV_PROPORTION")
 @Open
 class DvProportion() : DvAmount() {
     @JvmOverloads
     constructor(
-            numerator: Float,
-            denominator: Float,
-            type: Int,
-            precision: Int? = null,
-            accuracy: Float? = null,
-            accuracyIsPercent: Boolean? = null,
-            magnitudeStatus: String? = null,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null) : this() {
+        numerator: Float,
+        denominator: Float,
+        type: Int,
+        precision: Int? = null,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null) : this() {
         this.numerator = numerator
         this.denominator = denominator
         this.type = type
@@ -96,9 +96,8 @@ class DvProportion() : DvAmount() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(numerator, type, precision, denominator)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_PROPORTION")) {
+        ctx.withObject(attributeName, this, "DV_PROPORTION") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_PROPORTION")
         }
     }
 

@@ -35,10 +35,10 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ACTION", propOrder = [
-        "time",
-        "description",
-        "ismTransition",
-        "instructionDetails"])
+    "time",
+    "description",
+    "ismTransition",
+    "instructionDetails"])
 @Serializable
 @SerialName("ACTION")
 @Open
@@ -66,9 +66,8 @@ class Action : CareEntry() {
     var instructionDetails: InstructionDetails? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "ACTION")) {
+        ctx.withLocatable(attributeName, this, "ACTION") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "ACTION")
         }
     }
 

@@ -33,24 +33,24 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_INTERVAL", propOrder = [
-        "lower",
-        "upper",
-        "lowerIncluded",
-        "upperIncluded",
-        "lowerUnbounded",
-        "upperUnbounded"])
+    "lower",
+    "upper",
+    "lowerIncluded",
+    "upperIncluded",
+    "lowerUnbounded",
+    "upperUnbounded"])
 @Serializable
 @SerialName("DV_INTERVAL")
 @Open
 class DvInterval() : DataValue(), RangeParameters {
     @JvmOverloads
     constructor(
-            lower: DvOrdered?,
-            upper: DvOrdered?,
-            lowerIncluded: Boolean? = null,
-            upperIncluded: Boolean? = null,
-            lowerUnbounded: Boolean = false,
-            upperUnbounded: Boolean = false) : this() {
+        lower: DvOrdered?,
+        upper: DvOrdered?,
+        lowerIncluded: Boolean? = null,
+        upperIncluded: Boolean? = null,
+        lowerUnbounded: Boolean = false,
+        upperUnbounded: Boolean = false) : this() {
         this.lower = lower
         this.upper = upper
         this.lowerIncluded = lowerIncluded
@@ -108,9 +108,8 @@ class DvInterval() : DataValue(), RangeParameters {
     override fun hashCode(): Int = Objects.hash(lower, upper, lowerIncluded, upperIncluded, lowerUnbounded, upperUnbounded)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_INTERVAL")) {
+        ctx.withObject(attributeName, this, "DV_INTERVAL") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_INTERVAL")
         }
     }
 

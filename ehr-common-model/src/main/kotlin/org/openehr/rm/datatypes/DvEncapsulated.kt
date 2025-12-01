@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_ENCAPSULATED", propOrder = [
-        "charset",
-        "language"])
+    "charset",
+    "language"])
 @XmlSeeAlso(value = [DvMultimedia::class, DvParsable::class])
 @Serializable
 @SerialName("DV_ENCAPSULATED")

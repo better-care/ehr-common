@@ -39,11 +39,11 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "LOCATABLE", propOrder = [
-        "name",
-        "uid",
-        "links",
-        "archetypeDetails",
-        "feederAudit"])
+    "name",
+    "uid",
+    "links",
+    "archetypeDetails",
+    "feederAudit"])
 @XmlSeeAlso(
     value = [
         Composition::class,
@@ -95,9 +95,8 @@ abstract class Locatable : RmObject(), Serializable {
     internal fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
         name?.visit("name", ctx)
         uid?.visit("uid", ctx)
-        if (ctx.beforeCollection("links", links, this)) {
+        ctx.withCollection("links", links, this) {
             links.forEach { it.visit("links", ctx) }
-            ctx.afterCollection("links", links, this)
         }
         archetypeDetails?.visit("archetype_details", ctx)
         feederAudit?.visit("feeder_audit", ctx)

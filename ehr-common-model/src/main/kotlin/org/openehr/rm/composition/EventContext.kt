@@ -39,13 +39,13 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "EVENT_CONTEXT", propOrder = [
-        "startTime",
-        "endTime",
-        "location",
-        "setting",
-        "otherContext",
-        "healthCareFacility",
-        "participations"])
+    "startTime",
+    "endTime",
+    "location",
+    "setting",
+    "otherContext",
+    "healthCareFacility",
+    "participations"])
 @kotlinx.serialization.Serializable
 @SerialName("EVENT_CONTEXT")
 @Open
@@ -81,9 +81,8 @@ class EventContext : RmObject(), Serializable {
     var participations: MutableList<Participation> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "EVENT_CONTEXT")) {
+        ctx.withObject(attributeName, this, "EVENT_CONTEXT") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "EVENT_CONTEXT")
         }
     }
 
@@ -94,9 +93,8 @@ class EventContext : RmObject(), Serializable {
         setting?.visit("setting", ctx)
         otherContext?.visit("other_context", ctx)
         healthCareFacility?.visit("health_care_facility", ctx)
-        if (ctx.beforeCollection("participations", participations, this)) {
+        ctx.withCollection("participations", participations, this) {
             participations.forEach { it.visit("participations", ctx) }
-            ctx.afterCollection("participations", participations, this)
         }
     }
 }

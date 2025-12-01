@@ -48,9 +48,8 @@ class GenericEntry : ContentItem() {
     var data: ItemTree? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "GENERIC_ENTRY")) {
+        ctx.withLocatable(attributeName, this, "GENERIC_ENTRY") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "GENERIC_ENTRY")
         }
     }
 

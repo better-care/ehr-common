@@ -59,9 +59,9 @@ abstract class ObjectId : RmObject(), Serializable {
     override fun hashCode(): Int = Objects.hash(value)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "OBJECT_ID")) {
+        ctx.withObject(attributeName, this, "OBJECT_ID") {
             value?.let { ctx.visitValue("value", it, this) }
-            ctx.afterObject(attributeName, this, "OBJECT_ID")
+
         }
     }
 }

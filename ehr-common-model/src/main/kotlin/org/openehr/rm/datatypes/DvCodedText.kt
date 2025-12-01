@@ -39,13 +39,13 @@ import javax.xml.bind.annotation.XmlType
 class DvCodedText() : DvText() {
     @JvmOverloads
     constructor(
-            definingCode: CodePhrase,
-            value: String,
-            hyperlink: DvUri? = null,
-            formatting: String? = null,
-            mappings: MutableList<TermMapping> = mutableListOf(),
-            language: CodePhrase? = null,
-            encoding: CodePhrase? = null) : this() {
+        definingCode: CodePhrase,
+        value: String,
+        hyperlink: DvUri? = null,
+        formatting: String? = null,
+        mappings: MutableList<TermMapping> = mutableListOf(),
+        language: CodePhrase? = null,
+        encoding: CodePhrase? = null) : this() {
         this.definingCode = definingCode
         this.value = value
         this.hyperlink = hyperlink
@@ -107,9 +107,8 @@ class DvCodedText() : DvText() {
     override fun hashCode(): Int = Objects.hash(definingCode)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_CODED_TEXT")) {
+        ctx.withObject(attributeName, this, "DV_CODED_TEXT") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_CODED_TEXT")
         }
     }
 

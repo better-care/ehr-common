@@ -36,11 +36,11 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "HISTORY", propOrder = [
-        "origin",
-        "period",
-        "duration",
-        "events",
-        "summary"])
+    "origin",
+    "period",
+    "duration",
+    "events",
+    "summary"])
 @Serializable
 @SerialName("HISTORY")
 @Open
@@ -63,9 +63,8 @@ class History : Locatable() {
     var summary: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "HISTORY")) {
+        ctx.withLocatable(attributeName, this, "HISTORY") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "HISTORY")
         }
     }
 
@@ -74,9 +73,8 @@ class History : Locatable() {
         origin?.visit("origin", ctx)
         period?.visit("period", ctx)
         duration?.visit("duration", ctx)
-        if (ctx.beforeCollection("events", events, this)) {
+        ctx.withCollection("events", events, this) {
             events.forEach { it.visit("events", ctx) }
-            ctx.afterCollection("events", events, this)
         }
         summary?.visit("summary", ctx)
     }

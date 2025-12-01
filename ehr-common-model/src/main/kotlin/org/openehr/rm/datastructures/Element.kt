@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ELEMENT", propOrder = [
-        "value",
-        "nullFlavour",
-        "nullReason"])
+    "value",
+    "nullFlavour",
+    "nullReason"])
 @Serializable
 @SerialName("ELEMENT")
 @Open
@@ -57,9 +57,8 @@ class Element : Item() {
     var nullReason: DvText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "ELEMENT")) {
+        ctx.withLocatable(attributeName, this, "ELEMENT") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "ELEMENT")
         }
     }
 

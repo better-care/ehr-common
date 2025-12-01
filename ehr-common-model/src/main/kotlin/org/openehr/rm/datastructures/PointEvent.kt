@@ -40,9 +40,8 @@ class PointEvent : Event() {
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "POINT_EVENT")) {
+        ctx.withLocatable(attributeName, this, "POINT_EVENT") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "POINT_EVENT")
         }
     }
 }

@@ -35,9 +35,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ACTIVITY", propOrder = [
-        "description",
-        "timing",
-        "actionArchetypeId"])
+    "description",
+    "timing",
+    "actionArchetypeId"])
 @Serializable
 @SerialName("ACTIVITY")
 @Open
@@ -59,9 +59,8 @@ class Activity : Locatable() {
     var actionArchetypeId: String? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "ACTIVITY")) {
+        ctx.withLocatable(attributeName, this, "ACTIVITY") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "ACTIVITY")
         }
     }
 

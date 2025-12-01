@@ -41,17 +41,15 @@ class Section : ContentItem() {
     var items: MutableList<ContentItem> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "SECTION")) {
+        ctx.withLocatable(attributeName, this, "SECTION") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "SECTION")
         }
     }
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        if (ctx.beforeCollection("items", items, this)) {
+        ctx.withCollection("items", items, this) {
             items.forEach { it.visit("items", ctx) }
-            ctx.afterCollection("items", items, this)
         }
     }
 }

@@ -31,12 +31,12 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_TEXT", propOrder = [
-        "value",
-        "hyperlink",
-        "formatting",
-        "mappings",
-        "language",
-        "encoding"])
+    "value",
+    "hyperlink",
+    "formatting",
+    "mappings",
+    "language",
+    "encoding"])
 @XmlSeeAlso(DvCodedText::class)
 @Serializable
 @SerialName("DV_TEXT")
@@ -50,12 +50,12 @@ class DvText() : DataValue() {
 
     @JvmOverloads
     constructor(
-            value: String,
-            hyperlink: DvUri? = null,
-            formatting: String? = null,
-            mappings: MutableList<TermMapping> = mutableListOf(),
-            language: CodePhrase? = null,
-            encoding: CodePhrase? = null) : this() {
+        value: String,
+        hyperlink: DvUri? = null,
+        formatting: String? = null,
+        mappings: MutableList<TermMapping> = mutableListOf(),
+        language: CodePhrase? = null,
+        encoding: CodePhrase? = null) : this() {
         this.value = value
         this.hyperlink = hyperlink
         this.formatting = formatting
@@ -92,9 +92,8 @@ class DvText() : DataValue() {
     override fun hashCode(): Int = Objects.hash(value, encoding, formatting, hyperlink, language)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_TEXT")) {
+        ctx.withObject(attributeName, this, "DV_TEXT") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_TEXT")
         }
     }
 
@@ -103,9 +102,8 @@ class DvText() : DataValue() {
         value?.let { ctx.visitValue("value", it, this) }
         hyperlink?.visit("hyperlink", ctx)
         formatting?.let { ctx.visitValue("formatting", it, this) }
-        if (ctx.beforeCollection("mappings", mappings, this)) {
+        ctx.withCollection("mappings", mappings, this) {
             mappings.forEach { it.visit("mappings", ctx) }
-            ctx.afterCollection("mappings", mappings, this)
         }
         language?.visit("language", ctx)
         encoding?.visit("encoding", ctx)

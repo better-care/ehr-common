@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "FOLDER", propOrder = [
-        "folders",
-        "items",
-        "details"])
+    "folders",
+    "items",
+    "details"])
 @Serializable
 @SerialName("FOLDER")
 @Open
@@ -50,21 +50,18 @@ class Folder : Locatable() {
     var details: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "FOLDER")) {
+        ctx.withLocatable(attributeName, this, "FOLDER") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "FOLDER")
         }
     }
 
     override fun visitProperties(ctx: RmVisitorContext) {
         super.visitProperties(ctx)
-        if (ctx.beforeCollection("folders", folders, this)) {
+        ctx.withCollection("folders", folders, this) {
             folders.forEach { it.visit("folders", ctx) }
-            ctx.afterCollection("folders", folders, this)
         }
-        if (ctx.beforeCollection("items", items, this)) {
+        ctx.withCollection("items", items, this) {
             items.forEach { it.visit("items", ctx) }
-            ctx.afterCollection("items", items, this)
         }
         details?.visit("details", ctx)
     }

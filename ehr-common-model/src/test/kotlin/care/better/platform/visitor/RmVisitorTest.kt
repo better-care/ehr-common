@@ -34,24 +34,28 @@ open class RmVisitorTest {
     class TrackingVisitorContext : RmVisitorContext {
         val visitedProperties = mutableMapOf<Any, MutableSet<String>>()
 
-        override fun beforeLocatable(attributeName: String, locatable: Locatable, typeName: String): Boolean {
-            return true
+        override fun withLocatable(
+            attributeName: String,
+            locatable: Locatable,
+            typeName: String,
+            processProperties: (RmVisitorContext) -> Unit) {
+            processProperties(this)
         }
 
-        override fun afterLocatable(attributeName: String, locatable: Locatable, typeName: String) {
-            // Nothing to do
+        override fun withObject(
+            attributeName: String,
+            value: RmObject,
+            typeName: String,
+            processProperties: (RmVisitorContext) -> Unit) {
+            processProperties(this)
         }
 
-        override fun beforeObject(attributeName: String, value: RmObject, typeName: String): Boolean {
-            return true
-        }
-
-        override fun afterObject(attributeName: String, value: RmObject, typeName: String) {
-            // Nothing to do
-        }
-
-        override fun afterCollection(attributeName: String, collection: Collection<*>, owner: Any) {
-            // Nothing to do
+        override fun withCollection(
+            attributeName: String,
+            collection: Collection<*>,
+            owner: Any,
+            processProperties: (RmVisitorContext) -> Unit) {
+            processProperties(this)
         }
 
         override fun visitValue(attributeName: String, value: Any, owner: Any) {

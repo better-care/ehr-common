@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.*
 @SerialName("DV_TIME_SPECIFICATION")
 @Open
 abstract class DvTimeSpecification(
-        @XmlElement(required = true)
-        @Required
-        var value: DvParsable? = null) : DataValue() {
+    @XmlElement(required = true)
+    @Required
+    var value: DvParsable? = null) : DataValue() {
     companion object {
         @Suppress("unused")
         private const val serialVersionUID: Long = 0L

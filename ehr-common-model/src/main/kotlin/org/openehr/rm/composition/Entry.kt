@@ -32,12 +32,12 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ENTRY", propOrder = [
-        "language",
-        "encoding",
-        "subject",
-        "provider",
-        "otherParticipations",
-        "workFlowId"])
+    "language",
+    "encoding",
+    "subject",
+    "provider",
+    "otherParticipations",
+    "workFlowId"])
 @XmlSeeAlso(value = [AdminEntry::class, CareEntry::class])
 @Serializable
 @SerialName("ENTRY")
@@ -76,9 +76,8 @@ abstract class Entry : ContentItem() {
         encoding?.visit("encoding", ctx)
         subject?.visit("subject", ctx)
         provider?.visit("provider", ctx)
-        if (ctx.beforeCollection("other_participations", otherParticipations, this)) {
+        ctx.withCollection("other_participations", otherParticipations, this) {
             otherParticipations.forEach { it.visit("other_participations", ctx) }
-            ctx.afterCollection("other_participations", otherParticipations, this)
         }
         workFlowId?.visit("work_flow_id", ctx)
     }

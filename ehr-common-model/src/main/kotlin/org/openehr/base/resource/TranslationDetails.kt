@@ -63,18 +63,15 @@ class TranslationDetails : RmObject(), Serializable {
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "TRANSLATION_DETAILS")) {
+        ctx.withObject(attributeName, this, "TRANSLATION_DETAILS") {
             language?.visit("language", ctx)
-            if (ctx.beforeCollection("author", author, this)) {
+            ctx.withCollection("author", author, this) {
                 author.forEach { it.visit("author", ctx) }
-                ctx.afterCollection("author", author, this)
             }
             accreditation?.let { ctx.visitValue("accreditation", it, this) }
-            if (ctx.beforeCollection("other_details", otherDetails, this)) {
+            ctx.withCollection("other_details", otherDetails, this) {
                 otherDetails.forEach { it.visit("other_details", ctx) }
-                ctx.afterCollection("other_details", otherDetails, this)
             }
-            ctx.afterObject(attributeName, this, "TRANSLATION_DETAILS")
         }
     }
 }

@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "REFERENCE_RANGE", propOrder = [
-        "meaning",
-        "range"])
+    "meaning",
+    "range"])
 @kotlinx.serialization.Serializable
 @SerialName("REFERENCE_RANGE")
 @Open
@@ -58,9 +58,8 @@ class ReferenceRange() : RmObject(), Serializable {
     var range: DvInterval? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "REFERENCE_RANGE")) {
+        ctx.withObject(attributeName, this, "REFERENCE_RANGE") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "REFERENCE_RANGE")
         }
     }
 

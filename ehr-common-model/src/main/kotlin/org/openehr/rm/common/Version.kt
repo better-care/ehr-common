@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "VERSION", propOrder = [
-        "contribution",
-        "commitAudit",
-        "signature"])
+    "contribution",
+    "commitAudit",
+    "signature"])
 @XmlSeeAlso(value = [OriginalVersion::class, ImportedVersion::class])
 @kotlinx.serialization.Serializable
 @SerialName("VERSION")

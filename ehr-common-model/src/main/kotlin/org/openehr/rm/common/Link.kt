@@ -35,9 +35,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "LINK", propOrder = [
-        "meaning",
-        "type",
-        "target"])
+    "meaning",
+    "type",
+    "target"])
 @Serializable
 @SerialName("LINK")
 @Open
@@ -64,7 +64,7 @@ class Link() : RmObject(), java.io.Serializable {
          * @return suffix to be placed after node id
          */
         @JvmStatic
-        fun quote(name: String): String = '\''.toString() + name.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")  + '\''
+        fun quote(name: String): String = '\''.toString() + name.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'") + '\''
     }
 
     constructor(meaning: DvText, type: DvText, target: DvEhrUri) : this() {
@@ -86,9 +86,8 @@ class Link() : RmObject(), java.io.Serializable {
     var target: DvEhrUri? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "LINK")) {
+        ctx.withObject(attributeName, this, "LINK") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "LINK")
         }
     }
 

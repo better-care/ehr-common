@@ -33,29 +33,29 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_MULTIMEDIA", propOrder = [
-        "alternateText",
-        "uri",
-        "data",
-        "mediaType",
-        "compressionAlgorithm",
-        "integrityCheck",
-        "integrityCheckAlgorithm",
-        "size",
-        "thumbnail"])
+    "alternateText",
+    "uri",
+    "data",
+    "mediaType",
+    "compressionAlgorithm",
+    "integrityCheck",
+    "integrityCheckAlgorithm",
+    "size",
+    "thumbnail"])
 @Serializable
 @SerialName("DV_MULTIMEDIA")
 @Open
 class DvMultimedia() : DvEncapsulated() {
     private constructor(
-            alternateText: String? = null,
-            mediaType: CodePhrase? = null,
-            compressionAlgorithm: CodePhrase? = null,
-            integrityCheck: ByteArray? = null,
-            integrityCheckAlgorithm: CodePhrase? = null,
-            size: Int = 0,
-            thumbnail: DvMultimedia? = null,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null) : this() {
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null) : this() {
         this.alternateText = alternateText
         this.mediaType = mediaType
         this.compressionAlgorithm = compressionAlgorithm
@@ -69,17 +69,17 @@ class DvMultimedia() : DvEncapsulated() {
 
     @JvmOverloads
     constructor(
-            uri: DvUri,
-            data: ByteArray? = null,
-            alternateText: String? = null,
-            mediaType: CodePhrase? = null,
-            compressionAlgorithm: CodePhrase? = null,
-            integrityCheck: ByteArray? = null,
-            integrityCheckAlgorithm: CodePhrase? = null,
-            size: Int = 0,
-            thumbnail: DvMultimedia? = null,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null
+        uri: DvUri,
+        data: ByteArray? = null,
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
     ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
         this.data = data
@@ -87,17 +87,17 @@ class DvMultimedia() : DvEncapsulated() {
 
     @JvmOverloads
     constructor(
-            data: ByteArray,
-            uri: DvUri? = null,
-            alternateText: String? = null,
-            mediaType: CodePhrase? = null,
-            compressionAlgorithm: CodePhrase? = null,
-            integrityCheck: ByteArray? = null,
-            integrityCheckAlgorithm: CodePhrase? = null,
-            size: Int = 0,
-            thumbnail: DvMultimedia? = null,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null
+        data: ByteArray,
+        uri: DvUri? = null,
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
     ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
         this.data = data
@@ -134,9 +134,8 @@ class DvMultimedia() : DvEncapsulated() {
     var thumbnail: DvMultimedia? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_MULTIMEDIA")) {
+        ctx.withObject(attributeName, this, "DV_MULTIMEDIA") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_MULTIMEDIA")
         }
     }
 

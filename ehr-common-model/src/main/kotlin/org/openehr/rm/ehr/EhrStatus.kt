@@ -60,9 +60,8 @@ class EhrStatus : Locatable() {
     var otherDetails: ItemStructure? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "EHR_STATUS")) {
+        ctx.withLocatable(attributeName, this, "EHR_STATUS") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "EHR_STATUS")
         }
     }
 

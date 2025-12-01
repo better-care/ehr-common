@@ -33,20 +33,20 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_IDENTIFIER", propOrder = [
-        "issuer",
-        "assigner",
-        "id",
-        "type"])
+    "issuer",
+    "assigner",
+    "id",
+    "type"])
 @Serializable
 @SerialName("DV_IDENTIFIER")
 @Open
 class DvIdentifier() : DataValue() {
     @JvmOverloads
     constructor(
-            id: String,
-            issuer: String? = null,
-            assigner: String? = null,
-            type: String? = null) : this() {
+        id: String,
+        issuer: String? = null,
+        assigner: String? = null,
+        type: String? = null) : this() {
         this.id = id
         this.issuer = issuer
         this.assigner = assigner
@@ -81,9 +81,8 @@ class DvIdentifier() : DataValue() {
     override fun hashCode(): Int = Objects.hash(id, type, issuer, assigner)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_IDENTIFIER")) {
+        ctx.withObject(attributeName, this, "DV_IDENTIFIER") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_IDENTIFIER")
         }
     }
 

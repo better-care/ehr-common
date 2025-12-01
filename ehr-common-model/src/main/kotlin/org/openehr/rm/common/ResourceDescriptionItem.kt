@@ -34,14 +34,14 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "RESOURCE_DESCRIPTION_ITEM", propOrder = [
-        "language",
-        "purpose",
-        "keywords",
-        "use",
-        "misuse",
-        "copyright",
-        "originalResourceUri",
-        "otherDetails"])
+    "language",
+    "purpose",
+    "keywords",
+    "use",
+    "misuse",
+    "copyright",
+    "originalResourceUri",
+    "otherDetails"])
 @kotlinx.serialization.Serializable
 @SerialName("RESOURCE_DESCRIPTION_ITEM")
 @Open
@@ -76,29 +76,25 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")) {
+        ctx.withObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM")
         }
     }
 
     internal fun visitProperties(ctx: RmVisitorContext) {
         language?.visit("language", ctx)
         purpose?.let { ctx.visitValue("purpose", it, this) }
-        if (ctx.beforeCollection("keywords", keywords, this)) {
+        ctx.withCollection("keywords", keywords, this) {
             keywords.forEach { ctx.visitValue("keywords", it, this) }
-            ctx.afterCollection("keywords", keywords, this)
         }
         use?.let { ctx.visitValue("use", it, this) }
         misuse?.let { ctx.visitValue("misuse", it, this) }
         copyright?.let { ctx.visitValue("copyright", it, this) }
-        if (ctx.beforeCollection("original_resource_uri", originalResourceUri, this)) {
+        ctx.withCollection("original_resource_uri", originalResourceUri, this) {
             originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
-            ctx.afterCollection("original_resource_uri", originalResourceUri, this)
         }
-        if (ctx.beforeCollection("other_details", otherDetails, this)) {
+        ctx.withCollection("other_details", otherDetails, this) {
             otherDetails.forEach { it.visit("other_details", ctx) }
-            ctx.afterCollection("other_details", otherDetails, this)
         }
     }
 }

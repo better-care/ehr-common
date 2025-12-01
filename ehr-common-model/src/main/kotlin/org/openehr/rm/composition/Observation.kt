@@ -51,9 +51,8 @@ class Observation : CareEntry() {
     var state: History? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "OBSERVATION")) {
+        ctx.withLocatable(attributeName, this, "OBSERVATION") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "OBSERVATION")
         }
     }
 

@@ -44,9 +44,8 @@ class DvGeneralTimeSpecification() : DvTimeSpecification() {
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_GENERAL_TIME_SPECIFICATION")) {
+        ctx.withObject(attributeName, this, "DV_GENERAL_TIME_SPECIFICATION") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_GENERAL_TIME_SPECIFICATION")
         }
     }
 }

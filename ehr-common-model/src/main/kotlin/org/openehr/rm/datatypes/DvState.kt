@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "DV_STATE", propOrder = [
-        "value",
-        "isTerminal"])
+    "value",
+    "isTerminal"])
 @Serializable
 @SerialName("DV_STATE")
 @Open
@@ -70,9 +70,8 @@ class DvState() : DataValue() {
     override fun hashCode(): Int = Objects.hash(value, isTerminal)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_STATE")) {
+        ctx.withObject(attributeName, this, "DV_STATE") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_STATE")
         }
     }
 

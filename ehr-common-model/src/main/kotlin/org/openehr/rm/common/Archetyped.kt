@@ -36,13 +36,13 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ARCHETYPED", propOrder = [
-        "archetypeId",
-        "templateId",
-        "rmVersion"])
+    "archetypeId",
+    "templateId",
+    "rmVersion"])
 @kotlinx.serialization.Serializable
 @SerialName("ARCHETYPED")
 @Open
-class Archetyped constructor() : RmObject(), Serializable {
+class Archetyped() : RmObject(), Serializable {
 
     @JvmOverloads
     constructor(archetypeId: ArchetypeId, templateId: TemplateId? = null, rmVersion: String = RM_VERSION.getVersion()) : this() {
@@ -70,9 +70,8 @@ class Archetyped constructor() : RmObject(), Serializable {
     var rmVersion: String = RM_VERSION.getVersion()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "ARCHETYPED")) {
+        ctx.withObject(attributeName, this, "ARCHETYPED") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "ARCHETYPED")
         }
     }
 

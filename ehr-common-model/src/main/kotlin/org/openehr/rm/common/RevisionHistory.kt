@@ -42,16 +42,14 @@ class RevisionHistory : RmObject(), Serializable {
     var items: MutableList<RevisionHistoryItem> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "REVISION_HISTORY")) {
+        ctx.withObject(attributeName, this, "REVISION_HISTORY") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "REVISION_HISTORY")
         }
     }
 
     internal fun visitProperties(ctx: RmVisitorContext) {
-        if (ctx.beforeCollection("items", items, this)) {
+        ctx.withCollection("items", items, this) {
             items.forEach { it.visit("items", ctx) }
-            ctx.afterCollection("items", items, this)
         }
     }
 }

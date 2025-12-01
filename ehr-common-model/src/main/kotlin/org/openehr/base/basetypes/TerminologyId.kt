@@ -38,13 +38,14 @@ class TerminologyId() : ObjectId() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "TERMINOLOGY_ID")) {
+        ctx.withObject(attributeName, this, "TERMINOLOGY_ID") {
             value?.let { ctx.visitValue("value", it, this) }
-            ctx.afterObject(attributeName, this, "TERMINOLOGY_ID")
+
         }
     }
 }

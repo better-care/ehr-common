@@ -91,11 +91,11 @@ class ObjectRef() : RmObject(), Serializable {
     var type: String? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "OBJECT_REF")) {
+        ctx.withObject(attributeName, this, "OBJECT_REF") {
             id?.visit("id", ctx)
             namespace?.let { ctx.visitValue("namespace", it, this) }
             type?.let { ctx.visitValue("type", it, this) }
-            ctx.afterObject(attributeName, this, "OBJECT_REF")
+
         }
     }
 }

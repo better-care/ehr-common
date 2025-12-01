@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "EVENT", propOrder = [
-        "time",
-        "data",
-        "state"])
+    "time",
+    "data",
+    "state"])
 @XmlSeeAlso(value = [PointEvent::class, IntervalEvent::class])
 @Serializable
 @SerialName("EVENT")

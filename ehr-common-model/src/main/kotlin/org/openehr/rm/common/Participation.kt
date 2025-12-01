@@ -36,10 +36,10 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "PARTICIPATION", propOrder = [
-        "function",
-        "performer",
-        "time",
-        "mode"])
+    "function",
+    "performer",
+    "time",
+    "mode"])
 @kotlinx.serialization.Serializable
 @SerialName("PARTICIPATION")
 @Open
@@ -50,7 +50,7 @@ class Participation() : RmObject(), Serializable {
     }
 
     @JvmOverloads
-    constructor(function: DvText, performer: PartyProxy, time: DvInterval? = null, mode: DvCodedText? = null) : this(){
+    constructor(function: DvText, performer: PartyProxy, time: DvInterval? = null, mode: DvCodedText? = null) : this() {
         this.function = function
         this.performer = performer
         this.time = time
@@ -70,9 +70,8 @@ class Participation() : RmObject(), Serializable {
     var mode: DvCodedText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "PARTICIPATION")) {
+        ctx.withObject(attributeName, this, "PARTICIPATION") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "PARTICIPATION")
         }
     }
 

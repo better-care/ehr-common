@@ -35,10 +35,10 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "ISM_TRANSITION", propOrder = [
-        "currentState",
-        "transition",
-        "careflowStep",
-        "reason"])
+    "currentState",
+    "transition",
+    "careflowStep",
+    "reason"])
 @kotlinx.serialization.Serializable
 @SerialName("ISM_TRANSITION")
 @Open
@@ -62,9 +62,8 @@ class IsmTransition : RmObject(), Serializable {
     var reason: MutableList<DvText> = mutableListOf()
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "ISM_TRANSITION")) {
+        ctx.withObject(attributeName, this, "ISM_TRANSITION") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "ISM_TRANSITION")
         }
     }
 
@@ -72,9 +71,8 @@ class IsmTransition : RmObject(), Serializable {
         currentState?.visit("current_state", ctx)
         transition?.visit("transition", ctx)
         careflowStep?.visit("careflow_step", ctx)
-        if (ctx.beforeCollection("reason", reason, this)) {
+        ctx.withCollection("reason", reason, this) {
             reason.forEach { it.visit("reason", ctx) }
-            ctx.afterCollection("reason", reason, this)
         }
     }
 }

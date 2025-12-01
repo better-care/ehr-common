@@ -46,9 +46,8 @@ class StringDictionaryItem : RmObject(), Serializable {
     var id: String? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "STRING_DICTIONARY_ITEM")) {
+        ctx.withObject(attributeName, this, "STRING_DICTIONARY_ITEM") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "STRING_DICTIONARY_ITEM")
         }
     }
 

@@ -57,9 +57,8 @@ class DvTemporal : DvQuantified() {
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy)
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "DV_TEMPORAL")) {
+        ctx.withObject(attributeName, this, "DV_TEMPORAL") {
             visitProperties(ctx)
-            ctx.afterObject(attributeName, this, "DV_TEMPORAL")
         }
     }
 

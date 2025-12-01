@@ -55,12 +55,12 @@ class VersionedObject : RmObject(), Serializable {
     var trunkLifecycleState: DvCodedText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeObject(attributeName, this, "VERSIONED_OBJECT")) {
+        ctx.withObject(attributeName, this, "VERSIONED_OBJECT") {
             uid?.visit("uid", ctx)
             ownerId?.visit("owner_id", ctx)
             timeCreated?.visit("time_created", ctx)
             trunkLifecycleState?.visit("trunk_lifecycle_state", ctx)
-            ctx.afterObject(attributeName, this, "VERSIONED_OBJECT")
+
         }
     }
 }

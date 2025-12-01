@@ -46,9 +46,8 @@ class ItemSingle : ItemStructure() {
     var item: Element? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "ITEM_SINGLE")) {
+        ctx.withLocatable(attributeName, this, "ITEM_SINGLE") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "ITEM_SINGLE")
         }
     }
 

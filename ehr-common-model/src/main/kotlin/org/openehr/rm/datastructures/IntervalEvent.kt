@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "INTERVAL_EVENT", propOrder = [
-        "width",
-        "sampleCount",
-        "mathFunction"])
+    "width",
+    "sampleCount",
+    "mathFunction"])
 @Serializable
 @SerialName("INTERVAL_EVENT")
 @Open
@@ -60,9 +60,8 @@ class IntervalEvent : Event() {
     var mathFunction: DvCodedText? = null
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
-        if (ctx.beforeLocatable(attributeName, this, "INTERVAL_EVENT")) {
+        ctx.withLocatable(attributeName, this, "INTERVAL_EVENT") {
             visitProperties(ctx)
-            ctx.afterLocatable(attributeName, this, "INTERVAL_EVENT")
         }
     }
 
