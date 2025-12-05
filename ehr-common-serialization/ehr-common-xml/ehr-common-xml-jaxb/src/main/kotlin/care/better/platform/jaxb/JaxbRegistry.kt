@@ -48,6 +48,21 @@ class JaxbRegistry(packages: List<String>) {
                     "org.openehr.rm.ehr:" +
                     "org.openehr.rm.integration"
 
+        const val OPENEHR_NAMESPACE_V1 = "http://schemas.openehr.org/v1"
+        const val OPENEHR_NAMESPACE_V2 = "http://schemas.openehr.org/v2"
+
+        /**
+         * The target namespace to serialize the xml to. Be aware that when using any namespace other than
+         * [OPENEHR_NAMESPACE_V1], not all marshaller output types will be supported. Namely: XMLEventWriter, XMLStreamWriter and ContentHandler.
+         */
+        var serializeWithNamespace = OPENEHR_NAMESPACE_V1
+
+        /** Should the [OPENEHR_NAMESPACE_V2] be supported during unmarshalling. When this is set to true, you will be able to
+         * deserialize templates with both V1 and V2 namespaces, but not all unmarshaller input types will be supported.
+         * Namely: Source, XMLStreamReader, and XMLEventReader.
+         * */
+        var supportDeserializingV2Namespace = true
+
         @JvmStatic
         @Throws(JAXBException::class)
         fun getInstance(): JaxbRegistry = INSTANCE
@@ -65,8 +80,22 @@ class JaxbRegistry(packages: List<String>) {
     val unmarshaller: Unmarshaller get() = createUnmarshaller()
 
     fun createMarshaller(): Marshaller = context.createMarshaller().apply { schema = null }
+        .let { original ->
+            if (serializeWithNamespace == OPENEHR_NAMESPACE_V1) {
+                original
+            } else {
+                NamespaceTransformingMarshaller(OPENEHR_NAMESPACE_V1, OPENEHR_NAMESPACE_V2, original)
+            }
+        }
 
     fun createUnmarshaller(): Unmarshaller = context.createUnmarshaller().apply { schema = null }
+        .let { original ->
+            if (supportDeserializingV2Namespace) {
+                NamespaceTransformingUnmarshaller(OPENEHR_NAMESPACE_V2, OPENEHR_NAMESPACE_V1, original)
+            } else {
+                original
+            }
+        }
 
     @Throws(JAXBException::class, ParserConfigurationException::class, SAXException::class, IOException::class)
     fun <T> unmarshal(stringToUnmarshall: String, clazz: Class<T>): JAXBElement<T> {
