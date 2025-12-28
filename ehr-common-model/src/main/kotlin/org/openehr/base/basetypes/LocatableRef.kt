@@ -16,6 +16,7 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import javax.xml.bind.annotation.XmlAccessType
@@ -34,10 +35,10 @@ import javax.xml.bind.annotation.XmlType
 class LocatableRef() : ObjectRef() {
     @JvmOverloads
     constructor(
-            id: ObjectId,
-            namespace: String,
-            type: String,
-            path: String? = null) : this() {
+        id: ObjectId,
+        namespace: String,
+        type: String,
+        path: String? = null) : this() {
         this.id = id
         this.namespace = namespace
         this.type = type
@@ -45,8 +46,20 @@ class LocatableRef() : ObjectRef() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     var path: String? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "LOCATABLE_REF") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        path?.let { ctx.visitValue("path", it, this) }
+    }
 }

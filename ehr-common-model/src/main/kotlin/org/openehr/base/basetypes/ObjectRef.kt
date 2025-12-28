@@ -50,6 +50,7 @@ class ObjectRef() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -92,10 +93,13 @@ class ObjectRef() : RmObject(), Serializable {
 
     override fun visit(attributeName: String, ctx: RmVisitorContext) {
         ctx.withObject(attributeName, this, "OBJECT_REF") {
-            id?.visit("id", ctx)
-            namespace?.let { ctx.visitValue("namespace", it, this) }
-            type?.let { ctx.visitValue("type", it, this) }
-
+            visitProperties(ctx)
         }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        id?.visit("id", ctx)
+        namespace?.let { ctx.visitValue("namespace", it, this) }
+        type?.let { ctx.visitValue("type", it, this) }
     }
 }
