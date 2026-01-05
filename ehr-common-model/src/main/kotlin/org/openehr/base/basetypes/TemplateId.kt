@@ -16,9 +16,12 @@
 package org.openehr.base.basetypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -26,6 +29,8 @@ import jakarta.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TEMPLATE_ID")
+@Serializable
+@SerialName("TEMPLATE_ID")
 @Open
 class TemplateId() : ObjectId() {
     constructor(value: String) : this() {
@@ -33,6 +38,14 @@ class TemplateId() : ObjectId() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "TEMPLATE_ID") {
+            value?.let { ctx.visitValue("value", it, this) }
+
+        }
     }
 }

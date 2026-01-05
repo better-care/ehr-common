@@ -18,7 +18,10 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvDateTime
 import org.openehr.rm.datatypes.DvText
@@ -36,17 +39,22 @@ import java.io.Serializable
         "committer",
         "timeCommitted",
         "changeType",
-        "description"])
+        "description"]
+)
 @XmlSeeAlso(Attestation::class)
+@kotlinx.serialization.Serializable
+@SerialName("AUDIT_DETAILS")
+@Polymorphic
 @Open
 class AuditDetails() : RmObject(), Serializable {
     @JvmOverloads
     constructor(
-            systemId: String,
-            committer: PartyProxy,
-            timeCommitted: DvDateTime,
-            changeType: DvCodedText,
-            description: DvText? = null) : this() {
+        systemId: String,
+        committer: PartyProxy,
+        timeCommitted: DvDateTime,
+        changeType: DvCodedText,
+        description: DvText? = null
+    ) : this() {
         this.systemId = systemId
         this.committer = committer
         this.timeCommitted = timeCommitted
@@ -55,11 +63,13 @@ class AuditDetails() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "system_id", required = true)
     @Required
+    @SerialName("system_id")
     var systemId: String? = null
 
     @XmlElement(required = true)
@@ -68,11 +78,27 @@ class AuditDetails() : RmObject(), Serializable {
 
     @XmlElement(name = "time_committed", required = true)
     @Required
+    @SerialName("time_committed")
     var timeCommitted: DvDateTime? = null
 
     @XmlElement(name = "change_type", required = true)
     @Required
+    @SerialName("change_type")
     var changeType: DvCodedText? = null
 
     var description: DvText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "AUDIT_DETAILS") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        systemId?.let { ctx.visitValue("system_id", it, this) }
+        committer?.visit("committer", ctx)
+        timeCommitted?.visit("time_committed", ctx)
+        changeType?.visit("change_type", ctx)
+        description?.visit("description", ctx)
+    }
 }

@@ -20,6 +20,8 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 
 /**
@@ -29,6 +31,8 @@ import org.openehr.rm.common.Locatable
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ITEM")
 @XmlSeeAlso(value = [Cluster::class, Element::class])
+@Serializable
+@SerialName("ITEM")
 @Open
 abstract class Item : Locatable() {
     companion object {

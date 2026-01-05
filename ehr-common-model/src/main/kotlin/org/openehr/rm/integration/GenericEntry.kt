@@ -17,12 +17,15 @@ package org.openehr.rm.integration
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.rm.composition.ContentItem
-import org.openehr.rm.datastructures.ItemTree
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import org.openehr.rm.composition.ContentItem
+import org.openehr.rm.datastructures.ItemTree
 
 /**
  * @author Primoz Delopst
@@ -31,13 +34,27 @@ import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GENERIC_ENTRY", propOrder = ["data"])
+@Serializable
+@SerialName("GENERIC_ENTRY")
 @Open
 class GenericEntry : ContentItem() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)
     @Required
     var data: ItemTree? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "GENERIC_ENTRY") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        data?.visit("data", ctx)
+    }
 }

@@ -16,10 +16,14 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -30,9 +34,13 @@ import java.util.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_TEMPORAL", propOrder = ["accuracy"])
 @XmlSeeAlso(value = [DvDateTime::class, DvTime::class, DvDate::class])
+@Serializable
+@SerialName("DV_TEMPORAL")
+@Polymorphic
 @Open
 class DvTemporal : DvQuantified() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -47,4 +55,15 @@ class DvTemporal : DvQuantified() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_TEMPORAL") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        accuracy?.visit("accuracy", ctx)
+    }
 }

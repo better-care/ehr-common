@@ -17,13 +17,16 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.rm.datatypes.DvDateTime
-import org.openehr.rm.datatypes.DvParsable
-import org.openehr.rm.datatypes.DvText
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import org.openehr.rm.datatypes.DvDateTime
+import org.openehr.rm.datatypes.DvParsable
+import org.openehr.rm.datatypes.DvText
 
 /**
  * @author Primoz Delopst
@@ -36,10 +39,14 @@ import jakarta.xml.bind.annotation.XmlType
         "expiryTime",
         "wfDefinition",
         "activities"
-    ])
+    ]
+)
+@Serializable
+@SerialName("INSTRUCTION")
 @Open
 class Instruction : CareEntry() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -48,10 +55,28 @@ class Instruction : CareEntry() {
     var narrative: DvText? = null
 
     @XmlElement(name = "expiry_time")
+    @SerialName("expiry_time")
     var expiryTime: DvDateTime? = null
 
     @XmlElement(name = "wf_definition")
+    @SerialName("wf_definition")
     var wfDefinition: DvParsable? = null
 
     var activities: MutableList<Activity> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "INSTRUCTION") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        narrative?.visit("narrative", ctx)
+        expiryTime?.visit("expiry_time", ctx)
+        wfDefinition?.visit("wf_definition", ctx)
+        ctx.withCollection("activities", activities, this) {
+            activities.forEach { it.visit("activities", ctx) }
+        }
+    }
 }

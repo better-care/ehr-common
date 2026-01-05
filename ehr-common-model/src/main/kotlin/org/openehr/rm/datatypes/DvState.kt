@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -32,7 +35,10 @@ import java.util.*
 @XmlType(
     name = "DV_STATE", propOrder = [
         "value",
-        "isTerminal"])
+        "isTerminal"]
+)
+@Serializable
+@SerialName("DV_STATE")
 @Open
 class DvState() : DataValue() {
     @JvmOverloads
@@ -42,6 +48,7 @@ class DvState() : DataValue() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -50,6 +57,7 @@ class DvState() : DataValue() {
     var value: DvCodedText? = null
 
     @XmlElement(name = "is_terminal")
+    @SerialName("is_terminal")
     var isTerminal: Boolean = false
 
     override fun equals(other: Any?): Boolean =
@@ -61,4 +69,16 @@ class DvState() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value, isTerminal)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_STATE") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.visit("value", ctx)
+        ctx.visitValue("is_terminal", isTerminal, this)
+    }
 }

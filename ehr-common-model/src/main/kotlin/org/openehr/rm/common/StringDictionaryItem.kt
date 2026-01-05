@@ -18,7 +18,9 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 
 /**
@@ -27,9 +29,12 @@ import java.io.Serializable
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StringDictionaryItem", propOrder = ["value"])
+@kotlinx.serialization.Serializable
+@SerialName("STRING_DICTIONARY_ITEM")
 @Open
 class StringDictionaryItem : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -39,4 +44,15 @@ class StringDictionaryItem : RmObject(), Serializable {
     @XmlAttribute(name = "id", required = true)
     @Required
     var id: String? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "STRING_DICTIONARY_ITEM") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        value?.let { ctx.visitValue("value", it, this) }
+        id?.let { ctx.visitValue("id", it, this) }
+    }
 }

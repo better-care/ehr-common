@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -31,17 +34,25 @@ import jakarta.xml.bind.annotation.XmlType
 @XmlType(
     name = "DV_SCALE", propOrder = [
         "symbol",
-        "value"])
+        "value"]
+)
+@Serializable
+@SerialName("DV_SCALE")
 @Open
 class DvScale() : DvOrdered() {
+    companion object {
+        @Suppress("unused")
+        private const val serialVersionUID: Long = 0L
+    }
 
     @JvmOverloads
     constructor(
-            value: Double,
-            symbol: DvCodedText,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null) : this() {
+        value: Double,
+        symbol: DvCodedText,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null
+    ) : this() {
         this.value = value
         this.symbol = symbol
         this.normalRange = normalRange
@@ -56,4 +67,16 @@ class DvScale() : DvOrdered() {
     @XmlElement(required = true)
     @Required
     var value: Double = 0.0
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_SCALE") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        symbol?.visit("symbol", ctx)
+        ctx.visitValue("value", value, this)
+    }
 }

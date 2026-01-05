@@ -17,10 +17,13 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datastructures.History
 
 /**
@@ -31,10 +34,14 @@ import org.openehr.rm.datastructures.History
 @XmlType(
     name = "OBSERVATION", propOrder = [
         "data",
-        "state"])
+        "state"]
+)
+@Serializable
+@SerialName("OBSERVATION")
 @Open
 class Observation : CareEntry() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -43,4 +50,16 @@ class Observation : CareEntry() {
     var data: History? = null
 
     var state: History? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "OBSERVATION") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        data?.visit("data", ctx)
+        state?.visit("state", ctx)
+    }
 }

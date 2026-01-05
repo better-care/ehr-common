@@ -18,10 +18,12 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvEncapsulated
 import org.openehr.rm.datatypes.DvIdentifier
 import java.io.Serializable
@@ -38,20 +40,26 @@ import java.io.Serializable
         "feederSystemItemIds",
         "originalContent",
         "originatingSystemAudit",
-        "feederSystemAudit"])
+        "feederSystemAudit"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("FEEDER_AUDIT")
 @Open
 class FeederAudit() : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @JvmOverloads
     constructor(
-            originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
-            feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
-            originalContent: DvEncapsulated? = null,
-            originatingSystemAudit: FeederAuditDetails,
-            feederSystemAudit: FeederAuditDetails? = null) : this() {
+        originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
+        feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf(),
+        originalContent: DvEncapsulated? = null,
+        originatingSystemAudit: FeederAuditDetails,
+        feederSystemAudit: FeederAuditDetails? = null
+    ) : this() {
+        this.originatingSystemItemIds = originatingSystemItemIds
         this.originatingSystemAudit = originatingSystemAudit
         this.feederSystemItemIds = feederSystemItemIds
         this.originalContent = originalContent
@@ -60,19 +68,41 @@ class FeederAudit() : RmObject(), Serializable {
     }
 
     @XmlElement(name = "originating_system_item_ids")
+    @SerialName("originating_system_item_ids")
     var originatingSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
 
     @XmlElement(name = "feeder_system_item_ids")
+    @SerialName("feeder_system_item_ids")
     var feederSystemItemIds: MutableList<DvIdentifier> = mutableListOf()
 
     @XmlElement(name = "original_content")
+    @SerialName("original_content")
     var originalContent: DvEncapsulated? = null
 
     @XmlElement(name = "originating_system_audit", required = true)
     @Required
+    @SerialName("originating_system_audit")
     var originatingSystemAudit: FeederAuditDetails? = null
 
     @XmlElement(name = "feeder_system_audit")
+    @SerialName("feeder_system_audit")
     var feederSystemAudit: FeederAuditDetails? = null
 
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "FEEDER_AUDIT") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        ctx.withCollection("originating_system_item_ids", originatingSystemItemIds, this) {
+            originatingSystemItemIds.forEach { it.visit("originating_system_item_ids", ctx) }
+        }
+        ctx.withCollection("feeder_system_item_ids", feederSystemItemIds, this) {
+            feederSystemItemIds.forEach { it.visit("feeder_system_item_ids", ctx) }
+        }
+        originalContent?.visit("original_content", ctx)
+        originatingSystemAudit?.visit("originating_system_audit", ctx)
+        feederSystemAudit?.visit("feeder_system_audit", ctx)
+    }
 }

@@ -19,6 +19,7 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.Contextual
 import org.openehr.base.foundationtypes.IntervalOfDateTime
 import java.math.BigInteger
 
@@ -43,6 +44,7 @@ class CDateTime : CPrimitive() {
     var pattern: String? = null
 
     @XmlElement(name = "timezone_validity")
+    @Contextual
     var timezoneValidity: BigInteger? = null
 
     var range: IntervalOfDateTime? = null

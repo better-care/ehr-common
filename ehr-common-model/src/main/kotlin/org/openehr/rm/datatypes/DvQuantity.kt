@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -35,22 +38,26 @@ import java.util.*
         "units",
         "precision",
         "unitsSystem",
-        "unitsDisplayName"])
+        "unitsDisplayName"]
+)
+@Serializable
+@SerialName("DV_QUANTITY")
 @Open
 class DvQuantity() : DvAmount() {
     @JvmOverloads
     constructor(
-            magnitude: Double,
-            units: String,
-            precision: Int? = null,
-            accuracy: Float? = null,
-            accuracyIsPercent: Boolean? = null,
-            magnitudeStatus: String? = null,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null,
-            unitsSystem: String? = null,
-            unitsDisplayName: String? = null) : this() {
+        magnitude: Double,
+        units: String,
+        precision: Int? = null,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null,
+        unitsSystem: String? = null,
+        unitsDisplayName: String? = null
+    ) : this() {
         this.magnitude = magnitude
         this.units = units
         this.precision = precision
@@ -65,6 +72,7 @@ class DvQuantity() : DvAmount() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -78,9 +86,11 @@ class DvQuantity() : DvAmount() {
     var precision: Int? = null
 
     @XmlElement(name = "units_system")
+    @SerialName("units_system")
     var unitsSystem: String? = null
 
     @XmlElement(name = "units_display_name")
+    @SerialName("units_display_name")
     var unitsDisplayName: String? = null
 
     override fun equals(other: Any?): Boolean =
@@ -94,4 +104,19 @@ class DvQuantity() : DvAmount() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude, precision, units)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_QUANTITY") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        ctx.visitValue("magnitude", magnitude, this)
+        units?.let { ctx.visitValue("units", it, this) }
+        precision?.let { ctx.visitValue("precision", it, this) }
+        unitsSystem?.let { ctx.visitValue("units_system", it, this) }
+        unitsDisplayName?.let { ctx.visitValue("units_display_name", it, this) }
+    }
 }

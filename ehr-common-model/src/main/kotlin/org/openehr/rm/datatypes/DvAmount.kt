@@ -16,7 +16,11 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -28,11 +32,16 @@ import java.util.*
 @XmlType(
     name = "DV_AMOUNT", propOrder = [
         "accuracy",
-        "accuracyIsPercent"])
+        "accuracyIsPercent"]
+)
 @XmlSeeAlso(value = [DvCount::class, DvQuantity::class, DvProportion::class, DvDuration::class])
+@Serializable
+@SerialName("DV_AMOUNT")
+@Polymorphic
 @Open
 class DvAmount : DvQuantified() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -40,6 +49,7 @@ class DvAmount : DvQuantified() {
     var accuracy: Float? = null
 
     @XmlElement(name = "accuracy_is_percent")
+    @SerialName("accuracy_is_percent")
     var accuracyIsPercent: Boolean? = null
 
     override fun equals(other: Any?): Boolean =
@@ -52,4 +62,16 @@ class DvAmount : DvQuantified() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(accuracy, accuracyIsPercent)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_AMOUNT") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        accuracy?.let { ctx.visitValue("accuracy", it, this) }
+        accuracyIsPercent?.let { ctx.visitValue("accuracy_is_percent", it, this) }
+    }
 }

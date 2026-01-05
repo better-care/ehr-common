@@ -19,6 +19,7 @@ import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.UidBasedId
 import org.openehr.proc.taskplanning.*
 import org.openehr.rm.composition.Activity
@@ -42,7 +43,8 @@ import java.io.Serializable
         "uid",
         "links",
         "archetypeDetails",
-        "feederAudit"])
+        "feederAudit"]
+)
 @XmlSeeAlso(
     value = [
         Composition::class,
@@ -59,11 +61,15 @@ import java.io.Serializable
         TaskParticipation::class,
         OrderRef::class,
         DatasetSpec::class,
-    ])
+    ]
+)
 @XmlRootElement
+@kotlinx.serialization.Serializable
+@SerialName("LOCATABLE")
 @Open
 abstract class Locatable : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -76,12 +82,26 @@ abstract class Locatable : RmObject(), Serializable {
     var links: MutableList<Link> = mutableListOf()
 
     @XmlElement(name = "archetype_details")
+    @SerialName("archetype_details")
     var archetypeDetails: Archetyped? = null
 
     @XmlElement(name = "feeder_audit")
+    @SerialName("feeder_audit")
     var feederAudit: FeederAudit? = null
 
     @XmlAttribute(name = "archetype_node_id", required = true)
     @Required
+    @SerialName("archetype_node_id")
     var archetypeNodeId: String? = null
+
+    internal fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        name?.visit("name", ctx)
+        uid?.visit("uid", ctx)
+        ctx.withCollection("links", links, this) {
+            links.forEach { it.visit("links", ctx) }
+        }
+        archetypeDetails?.visit("archetype_details", ctx)
+        feederAudit?.visit("feeder_audit", ctx)
+        archetypeNodeId?.let { ctx.visitValue("archetype_node_id", it, this) }
+    }
 }

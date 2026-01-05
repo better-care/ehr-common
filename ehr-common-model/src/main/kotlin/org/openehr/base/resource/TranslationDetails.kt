@@ -18,10 +18,12 @@ package org.openehr.base.resource
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.rm.common.StringDictionaryItem
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
@@ -37,9 +39,12 @@ import java.io.Serializable
         "author",
         "accreditation",
         "otherDetails"])
+@kotlinx.serialization.Serializable
+@SerialName("TRANSLATION_DETAILS")
 @Open
 class TranslationDetails : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -54,5 +59,19 @@ class TranslationDetails : RmObject(), Serializable {
     var accreditation: String? = null
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "TRANSLATION_DETAILS") {
+            language?.visit("language", ctx)
+            ctx.withCollection("author", author, this) {
+                author.forEach { it.visit("author", ctx) }
+            }
+            accreditation?.let { ctx.visitValue("accreditation", it, this) }
+            ctx.withCollection("other_details", otherDetails, this) {
+                otherDetails.forEach { it.visit("other_details", ctx) }
+            }
+        }
+    }
 }

@@ -20,6 +20,7 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 
 /**
@@ -40,9 +41,17 @@ import java.io.Serializable
         DvOrdered::class,
         DvTimeSpecification::class,
         DvEncapsulated::class,
-        DvUri::class])
+        DvUri::class]
+)
+@kotlinx.serialization.Serializable
+@SerialName("DATA_VALUE")
 abstract class DataValue : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    internal open fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        // DataValue has no properties
     }
 }

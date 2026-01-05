@@ -18,10 +18,12 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvInterval
 import org.openehr.rm.datatypes.DvText
@@ -37,15 +39,19 @@ import java.io.Serializable
         "function",
         "performer",
         "time",
-        "mode"])
+        "mode"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("PARTICIPATION")
 @Open
 class Participation() : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @JvmOverloads
-    constructor(function: DvText, performer: PartyProxy, time: DvInterval? = null, mode: DvCodedText? = null) : this(){
+    constructor(function: DvText, performer: PartyProxy, time: DvInterval? = null, mode: DvCodedText? = null) : this() {
         this.function = function
         this.performer = performer
         this.time = time
@@ -63,4 +69,17 @@ class Participation() : RmObject(), Serializable {
     var time: DvInterval? = null
 
     var mode: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "PARTICIPATION") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        function?.visit("function", ctx)
+        performer?.visit("performer", ctx)
+        time?.visit("time", ctx)
+        mode?.visit("mode", ctx)
+    }
 }

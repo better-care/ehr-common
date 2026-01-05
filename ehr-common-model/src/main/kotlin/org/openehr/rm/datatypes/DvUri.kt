@@ -17,7 +17,11 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -28,6 +32,9 @@ import java.util.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_URI", propOrder = ["value"])
 @XmlSeeAlso(DvEhrUri::class)
+@Serializable
+@SerialName("DV_URI")
+@Polymorphic
 @Open
 class DvUri() : DataValue() {
     constructor(value: String) : this() {
@@ -35,6 +42,7 @@ class DvUri() : DataValue() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -51,4 +59,15 @@ class DvUri() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_URI") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.let { ctx.visitValue("value", it, this) }
+    }
 }

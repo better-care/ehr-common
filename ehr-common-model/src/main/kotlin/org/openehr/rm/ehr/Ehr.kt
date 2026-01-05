@@ -16,7 +16,9 @@
 package org.openehr.rm.ehr
 
 import care.better.openehr.rm.RmObject
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.HierObjectId
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
@@ -30,22 +32,42 @@ import java.util.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PATIENT_EHR", namespace = "http://schemas.openehr.org/v1", propOrder = ["systemId", "ehrId", "timeCreated", "ehrStatus"])
 @XmlRootElement(namespace = "http://schemas.openehr.org/v1")
+@kotlinx.serialization.Serializable
+@SerialName("EHR")
 class Ehr : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "system_id")
+    @SerialName("system_id")
     var systemId: HierObjectId? = null
 
     @XmlElement(name = "ehr_id")
+    @SerialName("ehr_id")
     var ehrId: HierObjectId? = null
 
     @XmlElement(name = "time_created")
+    @SerialName("time_created")
     var timeCreated: DvDateTime? = null
 
     @XmlElement(name = "ehr_status")
+    @SerialName("ehr_status")
     var ehrStatus: EhrStatus? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "EHR") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        systemId?.visit("system_id", ctx)
+        ehrId?.visit("ehr_id", ctx)
+        timeCreated?.visit("time_created", ctx)
+        ehrStatus?.visit("ehr_status", ctx)
+    }
 
     override fun equals(other: Any?): Boolean =
         when {

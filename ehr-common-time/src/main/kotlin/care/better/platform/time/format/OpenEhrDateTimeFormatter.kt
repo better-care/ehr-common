@@ -30,6 +30,7 @@ import java.util.*
 /**
  * @author Matic Ribic
  */
+@Suppress("UNCHECKED_CAST")
 class OpenEhrDateTimeFormatter(
         private val defaultFormatter: DateTimeFormatter,
         private val timeFormatter: DateTimeFormatter,
@@ -37,7 +38,7 @@ class OpenEhrDateTimeFormatter(
 
     companion object {
         private val MIN_OPEN_EHR_FIELD_FOR_OFFSET = OpenEhrField.SECONDS
-        private val MIN_ISO_OPEN_EHR_FIELD_FOR_OFFSET = OpenEhrField.MINUTES
+        private val MIN_ISO_OPEN_EHR_FIELD_FOR_OFFSET = OpenEhrField.HOURS
         private val MIN_CHRONO_FIELD_FOR_OFFSET = MIN_OPEN_EHR_FIELD_FOR_OFFSET.field
         private val MIN_ISO_CHRONO_FIELD_FOR_OFFSET = MIN_ISO_OPEN_EHR_FIELD_FOR_OFFSET.field
 

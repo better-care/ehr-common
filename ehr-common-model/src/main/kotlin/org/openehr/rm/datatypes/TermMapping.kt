@@ -18,10 +18,12 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 
 /**
@@ -33,7 +35,10 @@ import java.io.Serializable
     name = "TERM_MAPPING", propOrder = [
         "match",
         "purpose",
-        "target"])
+        "target"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("TERM_MAPPING")
 @Open
 class TermMapping() : RmObject(), Serializable {
     @JvmOverloads
@@ -44,6 +49,7 @@ class TermMapping() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -56,4 +62,16 @@ class TermMapping() : RmObject(), Serializable {
     @XmlElement(required = true)
     @Required
     var target: CodePhrase? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "TERM_MAPPING") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        match?.let { ctx.visitValue("match", it, this) }
+        purpose?.visit("purpose", ctx)
+        target?.visit("target", ctx)
+    }
 }

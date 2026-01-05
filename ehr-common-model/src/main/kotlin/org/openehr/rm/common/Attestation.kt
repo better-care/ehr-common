@@ -17,10 +17,13 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.*
 
 /**
@@ -35,21 +38,25 @@ import org.openehr.rm.datatypes.*
         "proof",
         "items",
         "reason",
-        "isPending"])
+        "isPending"]
+)
+@Serializable
+@SerialName("ATTESTATION")
 @Open
 class Attestation() : AuditDetails() {
     @JvmOverloads
     constructor(
-            reason: DvText,
-            attestedView: DvMultimedia? = null,
-            proof: String? = null,
-            items: MutableList<DvEhrUri> = mutableListOf(),
-            isPending: Boolean = false,
-            systemId: String? = null,
-            committer: PartyProxy? = null,
-            timeCommitted: DvDateTime? = null,
-            changeType: DvCodedText? = null,
-            description: DvText? = null) : this() {
+        reason: DvText,
+        attestedView: DvMultimedia? = null,
+        proof: String? = null,
+        items: MutableList<DvEhrUri> = mutableListOf(),
+        isPending: Boolean = false,
+        systemId: String? = null,
+        committer: PartyProxy? = null,
+        timeCommitted: DvDateTime? = null,
+        changeType: DvCodedText? = null,
+        description: DvText? = null
+    ) : this() {
         this.reason = reason
         this.attestedView = attestedView
         this.proof = proof
@@ -63,10 +70,12 @@ class Attestation() : AuditDetails() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "attested_view")
+    @SerialName("attested_view")
     var attestedView: DvMultimedia? = null
     var proof: String? = null
     var items: MutableList<DvEhrUri> = mutableListOf()
@@ -76,5 +85,23 @@ class Attestation() : AuditDetails() {
     var reason: DvText? = null
 
     @XmlElement(name = "is_pending", defaultValue = "false")
+    @SerialName("is_pending")
     var isPending: Boolean = false
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "ATTESTATION") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        attestedView?.visit("attested_view", ctx)
+        proof?.let { ctx.visitValue("proof", it, this) }
+        ctx.withCollection("items", items, this) {
+            items.forEach { it.visit("items", ctx) }
+        }
+        reason?.visit("reason", ctx)
+        ctx.visitValue("is_pending", isPending, this)
+    }
 }

@@ -17,10 +17,13 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvParsable
@@ -34,10 +37,14 @@ import org.openehr.rm.datatypes.DvParsable
     name = "ACTIVITY", propOrder = [
         "description",
         "timing",
-        "actionArchetypeId"])
+        "actionArchetypeId"]
+)
+@Serializable
+@SerialName("ACTIVITY")
 @Open
 class Activity : Locatable() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -49,5 +56,19 @@ class Activity : Locatable() {
 
     @XmlElement(name = "action_archetype_id", required = true)
     @Required
+    @SerialName("action_archetype_id")
     var actionArchetypeId: String? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "ACTIVITY") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        description?.visit("description", ctx)
+        timing?.visit("timing", ctx)
+        actionArchetypeId?.let { ctx.visitValue("action_archetype_id", it, this) }
+    }
 }

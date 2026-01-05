@@ -18,6 +18,8 @@ package org.openehr.rm.composition
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectRef
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyProxy
@@ -35,11 +37,15 @@ import org.openehr.rm.datatypes.CodePhrase
         "subject",
         "provider",
         "otherParticipations",
-        "workFlowId"])
+        "workFlowId"]
+)
 @XmlSeeAlso(value = [AdminEntry::class, CareEntry::class])
+@Serializable
+@SerialName("ENTRY")
 @Open
 abstract class Entry : ContentItem() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -58,8 +64,22 @@ abstract class Entry : ContentItem() {
     var provider: PartyProxy? = null
 
     @XmlElement(name = "other_participations")
+    @SerialName("other_participations")
     var otherParticipations: MutableList<Participation> = mutableListOf()
 
     @XmlElement(name = "work_flow_id")
+    @SerialName("work_flow_id")
     var workFlowId: ObjectRef? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        language?.visit("language", ctx)
+        encoding?.visit("encoding", ctx)
+        subject?.visit("subject", ctx)
+        provider?.visit("provider", ctx)
+        ctx.withCollection("other_participations", otherParticipations, this) {
+            otherParticipations.forEach { it.visit("other_participations", ctx) }
+        }
+        workFlowId?.visit("work_flow_id", ctx)
+    }
 }

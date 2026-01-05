@@ -16,9 +16,12 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -28,6 +31,8 @@ import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_BOOLEAN", propOrder = ["value"])
+@Serializable
+@SerialName("DV_BOOLEAN")
 @Open
 class DvBoolean() : DataValue() {
     constructor(value: Boolean) : this() {
@@ -35,6 +40,7 @@ class DvBoolean() : DataValue() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -57,4 +63,15 @@ class DvBoolean() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(value)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_BOOLEAN") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        ctx.visitValue("value", value, this)
+    }
 }

@@ -17,6 +17,8 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -28,23 +30,39 @@ import java.util.*
     name = "DV_ORDERED", propOrder = [
         "normalRange",
         "otherReferenceRanges",
-        "normalStatus"])
+        "normalStatus"]
+)
 @XmlSeeAlso(value = [DvOrdinal::class, DvQuantified::class, DvScale::class])
+@Serializable
+@SerialName("DV_ORDERED")
 @Open
-abstract class DvOrdered() : DataValue() {
+abstract class DvOrdered : DataValue() {
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "normal_range")
+    @SerialName("normal_range")
     var normalRange: DvInterval? = null
 
     @XmlElement(name = "other_reference_ranges")
+    @SerialName("other_reference_ranges")
     var otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf()
 
     @XmlElement(name = "normal_status")
+    @SerialName("normal_status")
     var normalStatus: CodePhrase? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        normalRange?.visit("normal_range", ctx)
+        ctx.withCollection("other_reference_ranges", otherReferenceRanges, this) {
+            otherReferenceRanges.forEach { it.visit("other_reference_ranges", ctx) }
+        }
+        normalStatus?.visit("normal_status", ctx)
+    }
 
     override fun equals(other: Any?): Boolean =
         when {

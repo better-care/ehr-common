@@ -18,9 +18,11 @@ package org.openehr.base.basetypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 import java.util.*
 
@@ -32,6 +34,8 @@ import java.util.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OBJECT_ID", propOrder = ["value"])
 @XmlSeeAlso(value = [ArchetypeId::class, TemplateId::class, TerminologyId::class, UidBasedId::class, GenericId::class])
+@kotlinx.serialization.Serializable
+@SerialName("OBJECT_ID")
 @Open
 abstract class ObjectId : RmObject(), Serializable {
 
@@ -53,6 +57,13 @@ abstract class ObjectId : RmObject(), Serializable {
         }
 
     override fun hashCode(): Int = Objects.hash(value)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "OBJECT_ID") {
+            value?.let { ctx.visitValue("value", it, this) }
+
+        }
+    }
 }
 
 

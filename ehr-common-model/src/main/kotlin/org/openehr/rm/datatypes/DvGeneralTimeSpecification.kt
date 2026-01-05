@@ -16,9 +16,12 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -27,6 +30,8 @@ import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_GENERAL_TIME_SPECIFICATION")
+@Serializable
+@SerialName("DV_GENERAL_TIME_SPECIFICATION")
 @Open
 class DvGeneralTimeSpecification() : DvTimeSpecification() {
     constructor(value: DvParsable) : this() {
@@ -34,6 +39,13 @@ class DvGeneralTimeSpecification() : DvTimeSpecification() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_GENERAL_TIME_SPECIFICATION") {
+            visitProperties(ctx)
+        }
     }
 }

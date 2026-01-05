@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -33,15 +36,19 @@ import java.util.*
         "issuer",
         "assigner",
         "id",
-        "type"])
+        "type"]
+)
+@Serializable
+@SerialName("DV_IDENTIFIER")
 @Open
 class DvIdentifier() : DataValue() {
     @JvmOverloads
     constructor(
-            id: String,
-            issuer: String? = null,
-            assigner: String? = null,
-            type: String? = null) : this() {
+        id: String,
+        issuer: String? = null,
+        assigner: String? = null,
+        type: String? = null
+    ) : this() {
         this.id = id
         this.issuer = issuer
         this.assigner = assigner
@@ -49,6 +56,7 @@ class DvIdentifier() : DataValue() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -73,4 +81,18 @@ class DvIdentifier() : DataValue() {
         }
 
     override fun hashCode(): Int = Objects.hash(id, type, issuer, assigner)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_IDENTIFIER") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        issuer?.let { ctx.visitValue("issuer", it, this) }
+        assigner?.let { ctx.visitValue("assigner", it, this) }
+        id?.let { ctx.visitValue("id", it, this) }
+        type?.let { ctx.visitValue("type", it, this) }
+    }
 }

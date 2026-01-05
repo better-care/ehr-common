@@ -18,9 +18,12 @@ package org.openehr.base.basetypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
 import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 
 /**
@@ -29,11 +32,14 @@ import java.io.Serializable
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-    name = "OBJECT_REF", propOrder = [
-        "id",
-        "namespace",
-        "type"])
+        name = "OBJECT_REF", propOrder = [
+    "id",
+    "namespace",
+    "type"])
 @XmlSeeAlso(value = [PartyRef::class, AccessGroupRef::class, LocatableRef::class])
+@kotlinx.serialization.Serializable
+@SerialName("OBJECT_REF")
+@Polymorphic
 @Open
 class ObjectRef() : RmObject(), Serializable {
     @JvmOverloads
@@ -44,6 +50,7 @@ class ObjectRef() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -83,4 +90,16 @@ class ObjectRef() : RmObject(), Serializable {
     @XmlSchemaType(name = "token")
     @Required
     var type: String? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "OBJECT_REF") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        id?.visit("id", ctx)
+        namespace?.let { ctx.visitValue("namespace", it, this) }
+        type?.let { ctx.visitValue("type", it, this) }
+    }
 }

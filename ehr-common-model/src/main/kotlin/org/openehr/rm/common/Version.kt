@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Required
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ObjectRef
 import java.io.Serializable
 
@@ -30,8 +31,11 @@ import java.io.Serializable
     name = "VERSION", propOrder = [
         "contribution",
         "commitAudit",
-        "signature"])
+        "signature"]
+)
 @XmlSeeAlso(value = [OriginalVersion::class, ImportedVersion::class])
+@kotlinx.serialization.Serializable
+@SerialName("VERSION")
 @XmlRootElement
 abstract class Version : RmObject(), Serializable {
     companion object {
@@ -44,6 +48,7 @@ abstract class Version : RmObject(), Serializable {
 
     @XmlElement(name = "commit_audit", required = true)
     @Required
+    @SerialName("commit_audit")
     var commitAudit: AuditDetails? = null
 
     var signature: String? = null

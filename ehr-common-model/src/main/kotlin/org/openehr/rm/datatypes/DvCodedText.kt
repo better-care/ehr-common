@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -30,17 +33,20 @@ import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_CODED_TEXT", propOrder = ["definingCode"])
+@Serializable
+@SerialName("DV_CODED_TEXT")
 @Open
 class DvCodedText() : DvText() {
     @JvmOverloads
     constructor(
-            definingCode: CodePhrase,
-            value: String,
-            hyperlink: DvUri? = null,
-            formatting: String? = null,
-            mappings: MutableList<TermMapping> = mutableListOf(),
-            language: CodePhrase? = null,
-            encoding: CodePhrase? = null) : this() {
+        definingCode: CodePhrase,
+        value: String,
+        hyperlink: DvUri? = null,
+        formatting: String? = null,
+        mappings: MutableList<TermMapping> = mutableListOf(),
+        language: CodePhrase? = null,
+        encoding: CodePhrase? = null
+    ) : this() {
         this.definingCode = definingCode
         this.value = value
         this.hyperlink = hyperlink
@@ -51,6 +57,7 @@ class DvCodedText() : DvText() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -88,6 +95,7 @@ class DvCodedText() : DvText() {
 
     @XmlElement(name = "defining_code", required = true)
     @Required
+    @SerialName("defining_code")
     var definingCode: CodePhrase? = null
 
     override fun equals(other: Any?): Boolean =
@@ -98,4 +106,15 @@ class DvCodedText() : DvText() {
         }
 
     override fun hashCode(): Int = Objects.hash(definingCode)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_CODED_TEXT") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        definingCode?.visit("defining_code", ctx)
+    }
 }

@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -38,19 +41,23 @@ import jakarta.xml.bind.annotation.XmlType
         "integrityCheck",
         "integrityCheckAlgorithm",
         "size",
-        "thumbnail"])
+        "thumbnail"]
+)
+@Serializable
+@SerialName("DV_MULTIMEDIA")
 @Open
 class DvMultimedia() : DvEncapsulated() {
     private constructor(
-            alternateText: String? = null,
-            mediaType: CodePhrase? = null,
-            compressionAlgorithm: CodePhrase? = null,
-            integrityCheck: ByteArray? = null,
-            integrityCheckAlgorithm: CodePhrase? = null,
-            size: Int = 0,
-            thumbnail: DvMultimedia? = null,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null) : this() {
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
+    ) : this() {
         this.alternateText = alternateText
         this.mediaType = mediaType
         this.compressionAlgorithm = compressionAlgorithm
@@ -64,17 +71,17 @@ class DvMultimedia() : DvEncapsulated() {
 
     @JvmOverloads
     constructor(
-            uri: DvUri,
-            data: ByteArray? = null,
-            alternateText: String? = null,
-            mediaType: CodePhrase? = null,
-            compressionAlgorithm: CodePhrase? = null,
-            integrityCheck: ByteArray? = null,
-            integrityCheckAlgorithm: CodePhrase? = null,
-            size: Int = 0,
-            thumbnail: DvMultimedia? = null,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null
+        uri: DvUri,
+        data: ByteArray? = null,
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
     ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
         this.data = data
@@ -82,43 +89,68 @@ class DvMultimedia() : DvEncapsulated() {
 
     @JvmOverloads
     constructor(
-            data: ByteArray,
-            uri: DvUri? = null,
-            alternateText: String? = null,
-            mediaType: CodePhrase? = null,
-            compressionAlgorithm: CodePhrase? = null,
-            integrityCheck: ByteArray? = null,
-            integrityCheckAlgorithm: CodePhrase? = null,
-            size: Int = 0,
-            thumbnail: DvMultimedia? = null,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null
+        data: ByteArray,
+        uri: DvUri? = null,
+        alternateText: String? = null,
+        mediaType: CodePhrase? = null,
+        compressionAlgorithm: CodePhrase? = null,
+        integrityCheck: ByteArray? = null,
+        integrityCheckAlgorithm: CodePhrase? = null,
+        size: Int = 0,
+        thumbnail: DvMultimedia? = null,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
     ) : this(alternateText, mediaType, compressionAlgorithm, integrityCheck, integrityCheckAlgorithm, size, thumbnail, charset, language) {
         this.uri = uri
         this.data = data
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "alternate_text")
+    @SerialName("alternate_text")
     var alternateText: String? = null
     var uri: DvUri? = null
     var data: ByteArray? = null
 
     @XmlElement(name = "media_type", required = true)
     @Required
+    @SerialName("media_type")
     var mediaType: CodePhrase? = null
 
     @XmlElement(name = "compression_algorithm")
+    @SerialName("compression_algorithm")
     var compressionAlgorithm: CodePhrase? = null
 
     @XmlElement(name = "integrity_check")
+    @SerialName("integrity_check")
     var integrityCheck: ByteArray? = null
 
     @XmlElement(name = "integrity_check_algorithm")
+    @SerialName("integrity_check_algorithm")
     var integrityCheckAlgorithm: CodePhrase? = null
     var size: Int = 0
     var thumbnail: DvMultimedia? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_MULTIMEDIA") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        alternateText?.let { ctx.visitValue("alternate_text", it, this) }
+        uri?.visit("uri", ctx)
+        data?.let { ctx.visitValue("data", it, this) }
+        mediaType?.visit("media_type", ctx)
+        compressionAlgorithm?.visit("compression_algorithm", ctx)
+        integrityCheck?.let { ctx.visitValue("integrity_check", it, this) }
+        integrityCheckAlgorithm?.visit("integrity_check_algorithm", ctx)
+        ctx.visitValue("size", size, this)
+        thumbnail?.visit("thumbnail", ctx)
+    }
 }

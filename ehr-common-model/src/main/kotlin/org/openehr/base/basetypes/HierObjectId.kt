@@ -19,6 +19,8 @@ import care.better.platform.annotation.Open
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -27,6 +29,8 @@ import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HIER_OBJECT_ID")
+@Serializable
+@SerialName("HIER_OBJECT_ID")
 @Open
 class HierObjectId() : UidBasedId() {
     constructor(value: String) : this() {

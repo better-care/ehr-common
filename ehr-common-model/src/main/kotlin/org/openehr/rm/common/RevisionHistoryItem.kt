@@ -18,10 +18,12 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ObjectVersionId
 import java.io.Serializable
 
@@ -33,18 +35,36 @@ import java.io.Serializable
 @XmlType(
     name = "REVISION_HISTORY_ITEM", propOrder = [
         "versionId",
-        "audits"])
+        "audits"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("REVISION_HISTORY_ITEM")
 @Open
 class RevisionHistoryItem : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "version_id", required = true)
     @Required
+    @SerialName("version_id")
     var versionId: ObjectVersionId? = null
 
     @XmlElement(required = true)
     @Required
     var audits: MutableList<AuditDetails> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "REVISION_HISTORY_ITEM") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        versionId?.visit("version_id", ctx)
+        ctx.withCollection("audits", audits, this) {
+            audits.forEach { it.visit("audits", ctx) }
+        }
+    }
 }

@@ -16,10 +16,14 @@
 package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
 import org.openehr.rm.datatypes.DvIdentifier
 
@@ -31,12 +35,17 @@ import org.openehr.rm.datatypes.DvIdentifier
 @XmlType(
     name = "PARTY_IDENTIFIED", propOrder = [
         "name",
-        "identifiers"])
+        "identifiers"]
+)
 @XmlSeeAlso(PartyRelated::class)
+@Serializable
+@SerialName("PARTY_IDENTIFIED")
+@Polymorphic
 @Open
 class PartyIdentified() : PartyProxy() {
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
 
@@ -52,9 +61,10 @@ class PartyIdentified() : PartyProxy() {
 
     @JvmOverloads
     constructor(
-            name: String,
-            identifiers: MutableList<DvIdentifier> = mutableListOf(),
-            externalRef: PartyRef? = null) : this() {
+        name: String,
+        identifiers: MutableList<DvIdentifier> = mutableListOf(),
+        externalRef: PartyRef? = null
+    ) : this() {
         this.name = name
         this.identifiers = identifiers
         super.externalRef = externalRef
@@ -63,4 +73,18 @@ class PartyIdentified() : PartyProxy() {
     var name: String? = null
 
     var identifiers: MutableList<DvIdentifier> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "PARTY_IDENTIFIED") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        name?.let { ctx.visitValue("name", it, this) }
+        ctx.withCollection("identifiers", identifiers, this) {
+            identifiers.forEach { it.visit("identifiers", ctx) }
+        }
+    }
 }

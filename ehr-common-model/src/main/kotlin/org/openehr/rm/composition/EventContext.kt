@@ -18,10 +18,12 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.rm.common.Participation
 import org.openehr.rm.common.PartyIdentified
 import org.openehr.rm.datastructures.ItemStructure
@@ -43,18 +45,24 @@ import java.io.Serializable
         "setting",
         "otherContext",
         "healthCareFacility",
-        "participations"])
+        "participations"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("EVENT_CONTEXT")
 @Open
 class EventContext : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "start_time", required = true)
     @Required
+    @SerialName("start_time")
     var startTime: DvDateTime? = null
 
     @XmlElement(name = "end_time")
+    @SerialName("end_time")
     var endTime: DvDateTime? = null
 
     var location: String? = null
@@ -64,10 +72,30 @@ class EventContext : RmObject(), Serializable {
     var setting: DvCodedText? = null
 
     @XmlElement(name = "other_context")
+    @SerialName("other_context")
     var otherContext: ItemStructure? = null
 
     @XmlElement(name = "health_care_facility")
+    @SerialName("health_care_facility")
     var healthCareFacility: PartyIdentified? = null
 
     var participations: MutableList<Participation> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "EVENT_CONTEXT") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        startTime?.visit("start_time", ctx)
+        endTime?.visit("end_time", ctx)
+        location?.let { ctx.visitValue("location", it, this) }
+        setting?.visit("setting", ctx)
+        otherContext?.visit("other_context", ctx)
+        healthCareFacility?.visit("health_care_facility", ctx)
+        ctx.withCollection("participations", participations, this) {
+            participations.forEach { it.visit("participations", ctx) }
+        }
+    }
 }

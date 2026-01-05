@@ -18,6 +18,7 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.PartyRef
 import java.io.Serializable
 
@@ -28,12 +29,20 @@ import java.io.Serializable
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_PROXY", propOrder = ["externalRef"])
 @XmlSeeAlso(value = [PartyIdentified::class, PartySelf::class])
+@kotlinx.serialization.Serializable
+@SerialName("PARTY_PROXY")
 @Open
 abstract class PartyProxy : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "external_ref")
+    @SerialName("external_ref")
     var externalRef: PartyRef? = null
+
+    internal fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        externalRef?.visit("external_ref", ctx)
+    }
 }

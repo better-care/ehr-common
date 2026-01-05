@@ -18,6 +18,8 @@ package org.openehr.rm.datatypes
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -28,13 +30,22 @@ import java.util.*
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_TIME_SPECIFICATION", propOrder = ["value"])
 @XmlSeeAlso(value = [DvPeriodicTimeSpecification::class, DvGeneralTimeSpecification::class])
+@Serializable
+@SerialName("DV_TIME_SPECIFICATION")
 @Open
 abstract class DvTimeSpecification(
-        @XmlElement(required = true)
-        @Required
-        var value: DvParsable? = null) : DataValue() {
+    @param:XmlElement(required = true)
+    @Required
+    var value: DvParsable? = null
+) : DataValue() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.visit("value", ctx)
     }
 
     override fun equals(other: Any?): Boolean =

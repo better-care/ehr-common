@@ -18,6 +18,8 @@ package org.openehr.rm.datastructures
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.common.Locatable
 import org.openehr.rm.datatypes.DvDateTime
 
@@ -30,11 +32,15 @@ import org.openehr.rm.datatypes.DvDateTime
     name = "EVENT", propOrder = [
         "time",
         "data",
-        "state"])
+        "state"]
+)
 @XmlSeeAlso(value = [PointEvent::class, IntervalEvent::class])
+@Serializable
+@SerialName("EVENT")
 @Open
 abstract class Event : Locatable() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -47,4 +53,11 @@ abstract class Event : Locatable() {
     var data: ItemStructure? = null
 
     var state: ItemStructure? = null
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        time?.visit("time", ctx)
+        data?.visit("data", ctx)
+        state?.visit("state", ctx)
+    }
 }

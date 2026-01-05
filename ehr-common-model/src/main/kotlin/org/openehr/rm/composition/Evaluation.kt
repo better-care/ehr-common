@@ -17,10 +17,13 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datastructures.ItemStructure
 
 /**
@@ -29,13 +32,27 @@ import org.openehr.rm.datastructures.ItemStructure
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EVALUATION", propOrder = ["data"])
+@Serializable
+@SerialName("EVALUATION")
 @Open
 class Evaluation : CareEntry() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(required = true)
     @Required
     var data: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "EVALUATION") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        data?.visit("data", ctx)
+    }
 }

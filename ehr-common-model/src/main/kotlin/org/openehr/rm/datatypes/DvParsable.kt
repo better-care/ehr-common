@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -32,15 +35,19 @@ import java.util.*
 @XmlType(
     name = "DV_PARSABLE", propOrder = [
         "value",
-        "formalism"])
+        "formalism"]
+)
+@Serializable
+@SerialName("DV_PARSABLE")
 @Open
 class DvParsable() : DvEncapsulated() {
     @JvmOverloads
     constructor(
-            value: String,
-            formalism: String,
-            charset: CodePhrase? = null,
-            language: CodePhrase? = null) : this() {
+        value: String,
+        formalism: String,
+        charset: CodePhrase? = null,
+        language: CodePhrase? = null
+    ) : this() {
         this.value = value
         this.formalism = formalism
         this.charset = charset
@@ -48,6 +55,7 @@ class DvParsable() : DvEncapsulated() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -69,4 +77,16 @@ class DvParsable() : DvEncapsulated() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, formalism)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_PARSABLE") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.let { ctx.visitValue("value", it, this) }
+        formalism?.let { ctx.visitValue("formalism", it, this) }
+    }
 }

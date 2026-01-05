@@ -17,12 +17,15 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.rm.datatypes.DvCodedText
-import org.openehr.rm.datatypes.DvDuration
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import org.openehr.rm.datatypes.DvCodedText
+import org.openehr.rm.datatypes.DvDuration
 
 /**
  * @author Primoz Delopst
@@ -33,10 +36,14 @@ import jakarta.xml.bind.annotation.XmlType
     name = "INTERVAL_EVENT", propOrder = [
         "width",
         "sampleCount",
-        "mathFunction"])
+        "mathFunction"]
+)
+@Serializable
+@SerialName("INTERVAL_EVENT")
 @Open
 class IntervalEvent : Event() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -45,9 +52,24 @@ class IntervalEvent : Event() {
     var width: DvDuration? = null
 
     @XmlElement(name = "sample_count")
+    @SerialName("sample_count")
     var sampleCount: Int? = null
 
     @XmlElement(name = "math_function", required = true)
     @Required
+    @SerialName("math_function")
     var mathFunction: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "INTERVAL_EVENT") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        width?.visit("width", ctx)
+        sampleCount?.let { ctx.visitValue("sample_count", it, this) }
+        mathFunction?.visit("math_function", ctx)
+    }
 }

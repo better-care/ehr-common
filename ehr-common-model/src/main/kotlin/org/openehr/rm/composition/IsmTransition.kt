@@ -18,10 +18,12 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvText
 import java.io.Serializable
@@ -36,21 +38,42 @@ import java.io.Serializable
         "currentState",
         "transition",
         "careflowStep",
-        "reason"])
+        "reason"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("ISM_TRANSITION")
 @Open
 class IsmTransition : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "current_state", required = true)
     @Required
+    @SerialName("current_state")
     var currentState: DvCodedText? = null
 
     var transition: DvCodedText? = null
 
     @XmlElement(name = "careflow_step")
+    @SerialName("careflow_step")
     var careflowStep: DvCodedText? = null
 
     var reason: MutableList<DvText> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "ISM_TRANSITION") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        currentState?.visit("current_state", ctx)
+        transition?.visit("transition", ctx)
+        careflowStep?.visit("careflow_step", ctx)
+        ctx.withCollection("reason", reason, this) {
+            reason.forEach { it.visit("reason", ctx) }
+        }
+    }
 }

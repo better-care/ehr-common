@@ -18,10 +18,12 @@ package org.openehr.rm.datatypes
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.TerminologyId
 import java.io.Serializable
 import java.util.*
@@ -36,7 +38,10 @@ import java.util.*
     name = "CODE_PHRASE", propOrder = [
         "terminologyId",
         "codeString",
-        "preferredTerm"])
+        "preferredTerm"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("CODE_PHRASE")
 @Open
 class CodePhrase() : RmObject(), Serializable {
     @JvmOverloads
@@ -47,6 +52,7 @@ class CodePhrase() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -89,13 +95,16 @@ class CodePhrase() : RmObject(), Serializable {
 
     @XmlElement(name = "terminology_id", required = true)
     @Required
+    @SerialName("terminology_id")
     var terminologyId: TerminologyId? = null
 
     @XmlElement(name = "code_string", required = true)
     @Required
+    @SerialName("code_string")
     var codeString: String? = null
 
     @XmlElement(name = "preferred_term")
+    @SerialName("preferred_term")
     var preferredTerm: String? = null
 
     override fun equals(other: Any?): Boolean =
@@ -107,4 +116,16 @@ class CodePhrase() : RmObject(), Serializable {
         }
 
     override fun hashCode(): Int = Objects.hash(terminologyId, codeString, preferredTerm)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "CODE_PHRASE") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        terminologyId?.visit("terminology_id", ctx)
+        codeString?.let { ctx.visitValue("code_string", it, this) }
+        preferredTerm?.let { ctx.visitValue("preferred_term", it, this) }
+    }
 }

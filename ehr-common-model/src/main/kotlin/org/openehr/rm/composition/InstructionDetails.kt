@@ -18,13 +18,15 @@ package org.openehr.rm.composition
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.base.basetypes.LocatableRef
-import org.openehr.rm.datastructures.ItemStructure
-import java.io.Serializable
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import org.openehr.base.basetypes.LocatableRef
+import org.openehr.rm.datastructures.ItemStructure
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
@@ -35,7 +37,10 @@ import jakarta.xml.bind.annotation.XmlType
     name = "INSTRUCTION_DETAILS", propOrder = [
         "instructionId",
         "activityId",
-        "wfDetails"])
+        "wfDetails"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("INSTRUCTION_DETAILS")
 @Open
 class InstructionDetails : RmObject(), Serializable {
     companion object {
@@ -44,12 +49,24 @@ class InstructionDetails : RmObject(), Serializable {
 
     @XmlElement(name = "instruction_id", required = true)
     @Required
+    @SerialName("instruction_id")
     var instructionId: LocatableRef? = null
 
     @XmlElement(name = "activity_id", required = true)
     @Required
+    @SerialName("activity_id")
     var activityId: String? = null
 
     @XmlElement(name = "wf_details")
+    @SerialName("wf_details")
     var wfDetails: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "INSTRUCTION_DETAILS") {
+            instructionId?.visit("instruction_id", ctx)
+            activityId?.let { ctx.visitValue("activity_id", it, this) }
+            wfDetails?.visit("wf_details", ctx)
+
+        }
+    }
 }

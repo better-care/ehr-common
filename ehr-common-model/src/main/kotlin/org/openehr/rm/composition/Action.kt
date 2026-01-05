@@ -17,10 +17,13 @@ package org.openehr.rm.composition
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
 
@@ -35,10 +38,14 @@ import org.openehr.rm.datatypes.DvDateTime
         "time",
         "description",
         "ismTransition",
-        "instructionDetails"])
+        "instructionDetails"]
+)
+@Serializable
+@SerialName("ACTION")
 @Open
 class Action : CareEntry() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -52,8 +59,24 @@ class Action : CareEntry() {
 
     @XmlElement(name = "ism_transition", required = true)
     @Required
+    @SerialName("ism_transition")
     var ismTransition: IsmTransition? = null
 
     @XmlElement(name = "instruction_details")
+    @SerialName("instruction_details")
     var instructionDetails: InstructionDetails? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "ACTION") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        time?.visit("time", ctx)
+        description?.visit("description", ctx)
+        ismTransition?.visit("ism_transition", ctx)
+        instructionDetails?.visit("instruction_details", ctx)
+    }
 }

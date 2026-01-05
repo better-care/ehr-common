@@ -17,12 +17,11 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import jakarta.xml.bind.annotation.XmlAccessType
-import jakarta.xml.bind.annotation.XmlAccessorType
-import jakarta.xml.bind.annotation.XmlElement
-import jakarta.xml.bind.annotation.XmlRootElement
-import jakarta.xml.bind.annotation.XmlSeeAlso
-import jakarta.xml.bind.annotation.XmlType
+import care.better.platform.visitor.RmVisitorContext
+import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.ObjectVersionId
 import org.openehr.rm.composition.Composition
 import org.openehr.rm.datatypes.DvCodedText
@@ -39,12 +38,16 @@ import org.openehr.rm.datatypes.DvCodedText
         "precedingVersionUid",
         "otherInputVersionUids",
         "attestations",
-        "lifecycleState"])
+        "lifecycleState"]
+)
 @XmlRootElement
 @XmlSeeAlso(value = [Composition::class])
+@Serializable
+@SerialName("ORIGINAL_VERSION")
 @Open
 class OriginalVersion : Version() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -52,17 +55,40 @@ class OriginalVersion : Version() {
     @Required
     var uid: ObjectVersionId? = null
 
+    @Contextual
     var data: Any? = null
 
     @XmlElement(name = "preceding_version_uid")
+    @SerialName("preceding_version_uid")
     var precedingVersionUid: ObjectVersionId? = null
 
     @XmlElement(name = "other_input_version_uids")
+    @SerialName("other_input_version_uids")
     var otherInputVersionUids: MutableList<ObjectVersionId> = mutableListOf()
 
     var attestations: MutableList<Attestation> = mutableListOf()
 
     @XmlElement(name = "lifecycle_state", required = true)
     @Required
+    @SerialName("lifecycle_state")
     var lifecycleState: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "ORIGINAL_VERSION") {
+            contribution?.visit("contribution", ctx)
+            commitAudit?.visit("commit_audit", ctx)
+            signature?.let { ctx.visitValue("signature", it, this) }
+            uid?.visit("uid", ctx)
+            // data is ignored
+            precedingVersionUid?.visit("preceding_version_uid", ctx)
+            ctx.withCollection("other_input_version_uids", otherInputVersionUids, this) {
+                otherInputVersionUids.forEach { it.visit("other_input_version_uids", ctx) }
+            }
+            ctx.withCollection("attestations", attestations, this) {
+                attestations.forEach { it.visit("attestations", ctx) }
+            }
+            lifecycleState?.visit("lifecycle_state", ctx)
+
+        }
+    }
 }

@@ -13,7 +13,9 @@
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	See the License for the specific language governing permissions and
 	limitations under the License.
---><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>care.better.platform</groupId>
@@ -22,15 +24,14 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>ehr-common-model</module>
-        <module>ehr-common-json-jackson</module>
-        <module>ehr-common-utils</module>
-        <module>ehr-common-terminology</module>
-        <module>ehr-common-path</module>
         <module>ehr-common-amnode</module>
-        <module>ehr-common-xml-jaxb</module>
         <module>ehr-common-jacoco</module>
+        <module>ehr-common-model</module>
+        <module>ehr-common-path</module>
+        <module>ehr-common-serialization</module>
+        <module>ehr-common-terminology</module>
         <module>ehr-common-time</module>
+        <module>ehr-common-utils</module>
     </modules>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -38,37 +39,43 @@
     <url>https://github.com/better-care/ehr-common</url>
 
     <properties>
-        <java.version>21</java.version>
-        <kotlin.version>2.1.21</kotlin.version>
+        <java.version>25</java.version>
+        <kotlin.version>2.3.0</kotlin.version>
 
-        <jetbrains-annotations.version>26.0.2</jetbrains-annotations.version>
+        <jetbrains-annotations.version>26.0.2-1</jetbrains-annotations.version>
 
-        <assertj.version>3.27.3</assertj.version>
-        <caffeine.version>3.2.0</caffeine.version>
-        <commons-lang3.version>3.17.0</commons-lang3.version>
-        <guava.version>33.3.1-jre</guava.version>
-        <jackson.version>2.18.2</jackson.version>
-        <jakarta.xml.bind.version>4.0.2</jakarta.xml.bind.version>
-        <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
-        <joda-time.version>2.13.0</joda-time.version>
-        <jupiter.version>5.11.4</jupiter.version>
-        <mockk.version>1.14.2</mockk.version>
+        <assertj.version>3.27.4</assertj.version>
+        <caffeine.version>3.2.3</caffeine.version>
+        <classgraph.version>4.8.184</classgraph.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
+        <guava.version>33.4.8-jre</guava.version>
+        <jackson.version>2.20.1</jackson.version>
+        <jakarta.xml.bind.version>4.0.4</jakarta.xml.bind.version>
+        <jaxb-runtime.version>4.0.6</jaxb-runtime.version>
+        <joda-time.version>2.14.0</joda-time.version>
+        <jupiter.version>6.0.1</jupiter.version>
+        <kotlin-serialization.version>1.10.0-RC</kotlin-serialization.version>
+        <kotlin-symbol-processing.version>2.3.4</kotlin-symbol-processing.version>
+        <kotlinpoet.version>2.2.0</kotlinpoet.version>
+        <mockk-jvm.version>1.14.5</mockk-jvm.version>
 
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
-        <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-dependency-check-plugin.version>12.0.0</maven-dependency-check-plugin.version>
-        <maven-dokka-plugin.version>1.9.10</maven-dokka-plugin.version>
-        <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-install-plugin.version>3.1.3</maven-install-plugin.version>
-        <maven-jacoco-plugin.version>0.8.12</maven-jacoco-plugin.version>
-        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+        <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <maven-dependency-check-plugin.version>12.1.9</maven-dependency-check-plugin.version>
+        <maven-dokka-plugin.version>2.0.0</maven-dokka-plugin.version>
+        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+        <maven-jacoco-plugin.version>0.8.14</maven-jacoco-plugin.version>
+        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
         <maven-nexus-staging-plugin.version>1.6.13</maven-nexus-staging-plugin.version>
-        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-sonar-plugin.version>5.0.0.4389</maven-sonar-plugin.version>
-        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
+        <maven-sonar-plugin.version>5.3.0.6276</maven-sonar-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+        <ksp-maven-plugin.version>2.3.0-1</ksp-maven-plugin.version>
+
 
         <sonar.java.source>${java.version}</sonar.java.source>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -91,9 +98,32 @@
             </dependency>
 
             <dependency>
+                <groupId>com.google.devtools.ksp</groupId>
+                <artifactId>symbol-processing-cmdline</artifactId>
+                <version>${kotlin-symbol-processing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-compiler-embeddable</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
                 <version>${jetbrains-annotations.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.kotlinx</groupId>
+                <artifactId>kotlinx-serialization-core-jvm</artifactId>
+                <version>${kotlin-serialization.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.kotlinx</groupId>
+                <artifactId>kotlinx-serialization-json-jvm</artifactId>
+                <version>${kotlin-serialization.version}</version>
             </dependency>
 
             <dependency>
@@ -141,6 +171,24 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
+                <version>5.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-kotlin-serialization-polymorphisem-api</artifactId>
+                <version>5.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-kotlin-serialization-polymorphisem-generator</artifactId>
+                <version>5.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-json-kotlin-serialization</artifactId>
                 <version>5.0.0-SNAPSHOT</version>
             </dependency>
 
@@ -215,7 +263,6 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-kotlin</artifactId>
@@ -223,9 +270,33 @@
             </dependency>
 
             <dependency>
+                <groupId>com.squareup</groupId>
+                <artifactId>kotlinpoet-jvm</artifactId>
+                <version>${kotlinpoet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup</groupId>
+                <artifactId>kotlinpoet-ksp</artifactId>
+                <version>${kotlinpoet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.devtools.ksp</groupId>
+                <artifactId>symbol-processing-api</artifactId>
+                <version>${kotlin-symbol-processing.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.classgraph</groupId>
+                <artifactId>classgraph</artifactId>
+                <version>${classgraph.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>io.mockk</groupId>
                 <artifactId>mockk-jvm</artifactId>
-                <version>${mockk.version}</version>
+                <version>${mockk-jvm.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -283,49 +354,6 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmTarget>${java.version}</jvmTarget>
-                    <args>
-                        <arg>-Xjsr305=strict</arg>
-                        <arg>-Xjvm-default=all-compatibility</arg>
-                    </args>
-                    <compilerPlugins>
-                        <plugin>all-open</plugin>
-                    </compilerPlugins>
-
-                    <pluginOptions>
-                        <option>all-open:annotation=care.better.platform.annotation.Open</option>
-                    </pluginOptions>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-noarg</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-allopen</artifactId>
-                        <version>${kotlin.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>
@@ -359,6 +387,68 @@
 
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>test-compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <jvmTarget>${java.version}</jvmTarget>
+                        <args>
+                            <arg>-Xjsr305=strict</arg>
+                            <arg>-jvm-default=enable</arg>
+                        </args>
+                        <compilerPlugins>
+                            <plugin>all-open</plugin>
+                        <plugin>no-arg</plugin>
+                            <plugin>kotlinx-serialization</plugin>
+                        </compilerPlugins>
+
+                        <pluginOptions>
+                            <option>all-open:annotation=care.better.platform.annotation.Open</option>
+                        <option>no-arg:annotation=jakarta.xml.bind.annotation.XmlRootElement</option>
+                        </pluginOptions>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-noarg</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-serialization</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-allopen</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>io.mcarle</groupId>
+                    <artifactId>ksp-maven-plugin</artifactId>
+                    <version>${ksp-maven-plugin.version}</version>
+                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>

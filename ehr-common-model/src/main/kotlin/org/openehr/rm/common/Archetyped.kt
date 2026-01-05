@@ -18,10 +18,12 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ArchetypeId
 import org.openehr.base.basetypes.TemplateId
 import java.io.Serializable
@@ -36,9 +38,12 @@ import java.io.Serializable
     name = "ARCHETYPED", propOrder = [
         "archetypeId",
         "templateId",
-        "rmVersion"])
+        "rmVersion"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("ARCHETYPED")
 @Open
-class Archetyped constructor() : RmObject(), Serializable {
+class Archetyped() : RmObject(), Serializable {
 
     @JvmOverloads
     constructor(archetypeId: ArchetypeId, templateId: TemplateId? = null, rmVersion: String = RM_VERSION.getVersion()) : this() {
@@ -48,16 +53,32 @@ class Archetyped constructor() : RmObject(), Serializable {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @XmlElement(name = "archetype_id", required = true)
     @Required
+    @SerialName("archetype_id")
     var archetypeId: ArchetypeId? = null
 
     @XmlElement(name = "template_id")
+    @SerialName("template_id")
     var templateId: TemplateId? = null
 
     @XmlElement(name = "rm_version", required = true)
+    @SerialName("rm_version")
     var rmVersion: String = RM_VERSION.getVersion()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "ARCHETYPED") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        archetypeId?.visit("archetype_id", ctx)
+        templateId?.visit("template_id", ctx)
+        ctx.visitValue("rm_version", rmVersion, this)
+    }
 }

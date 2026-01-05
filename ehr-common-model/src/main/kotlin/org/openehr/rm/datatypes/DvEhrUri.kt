@@ -16,9 +16,12 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -27,6 +30,8 @@ import jakarta.xml.bind.annotation.XmlType
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_EHR_URI")
+@Serializable
+@SerialName("DV_EHR_URI")
 @Open
 class DvEhrUri() : DvUri() {
     constructor(value: String) : this() {
@@ -34,6 +39,7 @@ class DvEhrUri() : DvUri() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -59,5 +65,11 @@ class DvEhrUri() : DvUri() {
         @JvmStatic
         fun create(ehrUid: String, compositionUid: String, path: String?): DvEhrUri =
             DvEhrUri("ehr://$ehrUid/$compositionUid" + (path?.let { if (it.startsWith("/")) it else "/$it" } ?: ""))
+    }
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_EHR_URI") {
+            visitProperties(ctx)
+        }
     }
 }

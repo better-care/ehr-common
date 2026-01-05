@@ -18,10 +18,13 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.rm.datatypes.DvEhrUri
 import org.openehr.rm.datatypes.DvText
 
@@ -34,25 +37,35 @@ import org.openehr.rm.datatypes.DvText
     name = "LINK", propOrder = [
         "meaning",
         "type",
-        "target"])
+        "target"]
+)
+@Serializable
+@SerialName("LINK")
 @Open
 class Link() : RmObject(), java.io.Serializable {
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
-         * Creates a name suffix suitable for use in LINKs (i.e. /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
+         * Creates a name suffix suitable for use in LINKs (e.g. `"Order", 1` becomes `'Order #2'` and can be used like i.e. /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
          *
          * @param name  name part of suffix
          * @param index element index (0-based)
-         * @return complete suffix to be placed after node id
+         * @return suffix to be placed after node id
          */
         @JvmStatic
-        fun getNameSuffix(name: String, index: Int): String = '\''.toString() + quote(name) + (if (index > 0) " #" + (index + 1) else "") + '\''
+        fun getNameSuffix(name: String, index: Int): String = quote(name + (if (index > 0) " #" + (index + 1) else ""))
 
+        /**
+         * Quotes a name suffix suitable for use in LINKs (e.g. `"Order #2"` becomes `'Order #2'` and can be used like /items[at0001,&gt;&gt;'Order #2'&lt;&lt;]/...)
+         *
+         * @param name  name
+         * @return suffix to be placed after node id
+         */
         @JvmStatic
-        fun quote(parameter: String): String = parameter.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'")
+        fun quote(name: String): String = '\''.toString() + name.replace("\\", "\\\\").replace("\"", "\\\"").replace("'", "\\'") + '\''
     }
 
     constructor(meaning: DvText, type: DvText, target: DvEhrUri) : this() {
@@ -72,4 +85,16 @@ class Link() : RmObject(), java.io.Serializable {
     @XmlElement(required = true)
     @Required
     var target: DvEhrUri? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "LINK") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        meaning?.visit("meaning", ctx)
+        type?.visit("type", ctx)
+        target?.visit("target", ctx)
+    }
 }

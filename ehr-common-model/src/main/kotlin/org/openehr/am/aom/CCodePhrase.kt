@@ -15,6 +15,7 @@
 
 package org.openehr.am.aom
 
+import care.better.platform.annotation.Open
 import jakarta.xml.bind.annotation.*
 import org.openehr.base.basetypes.TerminologyId
 import org.openehr.rm.datatypes.CodePhrase
@@ -32,6 +33,7 @@ import org.openehr.rm.datatypes.CodePhrase
         "codeList",
         "preferredTerm"])
 @XmlSeeAlso(CCodeReference::class)
+@Open
 open class CCodePhrase : CDomainType() {
     companion object {
         private const val serialVersionUID: Long = 0L

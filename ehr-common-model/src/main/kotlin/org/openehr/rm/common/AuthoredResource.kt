@@ -22,6 +22,7 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.base.resource.TranslationDetails
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
@@ -38,7 +39,10 @@ import java.io.Serializable
         "isControlled",
         "description",
         "translations",
-        "revisionHistory"])
+        "revisionHistory"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("AUTHORED_RESOURCE")
 @Open
 abstract class AuthoredResource() : RmObject(), Serializable {
     companion object {
@@ -47,11 +51,12 @@ abstract class AuthoredResource() : RmObject(), Serializable {
 
     @JvmOverloads
     constructor(
-            originalLanguage: CodePhrase,
-            isControlled: Boolean? = null,
-            description: ResourceDescription? = null,
-            translations: MutableList<TranslationDetails> = mutableListOf(),
-            revisionHistory: RevisionHistory? = null) : this() {
+        originalLanguage: CodePhrase,
+        isControlled: Boolean? = null,
+        description: ResourceDescription? = null,
+        translations: MutableList<TranslationDetails> = mutableListOf(),
+        revisionHistory: RevisionHistory? = null
+    ) : this() {
         this.originalLanguage = originalLanguage
         this.isControlled = isControlled
         this.description = description
@@ -61,9 +66,11 @@ abstract class AuthoredResource() : RmObject(), Serializable {
 
     @XmlElement(name = "original_language", required = true)
     @Required
+    @SerialName("original_language")
     var originalLanguage: CodePhrase? = null
 
     @XmlElement(name = "is_controlled")
+    @SerialName("is_controlled")
     var isControlled: Boolean? = null
 
     var description: ResourceDescription? = null
@@ -71,5 +78,6 @@ abstract class AuthoredResource() : RmObject(), Serializable {
     var translations: MutableList<TranslationDetails> = mutableListOf()
 
     @XmlElement(name = "revision_history")
+    @SerialName("revision_history")
     var revisionHistory: RevisionHistory? = null
 }

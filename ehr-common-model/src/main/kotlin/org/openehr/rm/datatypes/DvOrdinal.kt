@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -31,16 +34,20 @@ import java.util.*
 @XmlType(
     name = "DV_ORDINAL", propOrder = [
         "value",
-        "symbol"])
+        "symbol"]
+)
+@Serializable
+@SerialName("DV_ORDINAL")
 @Open
 class DvOrdinal() : DvOrdered() {
     @JvmOverloads
     constructor(
-            value: Int,
-            symbol: DvCodedText,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null) : this() {
+        value: Int,
+        symbol: DvCodedText,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null
+    ) : this() {
         this.value = value
         this.symbol = symbol
         this.normalRange = normalRange
@@ -49,6 +56,7 @@ class DvOrdinal() : DvOrdered() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -68,4 +76,16 @@ class DvOrdinal() : DvOrdered() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value, symbol)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_ORDINAL") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        ctx.visitValue("value", value, this)
+        symbol?.visit("symbol", ctx)
+    }
 }

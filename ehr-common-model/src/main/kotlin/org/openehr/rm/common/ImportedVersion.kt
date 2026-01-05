@@ -21,6 +21,8 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -28,6 +30,8 @@ import jakarta.xml.bind.annotation.XmlType
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IMPORTED_VERSION", propOrder = ["item"])
+@Serializable
+@SerialName("IMPORTED_VERSION")
 @Open
 class ImportedVersion : Version() {
     companion object {

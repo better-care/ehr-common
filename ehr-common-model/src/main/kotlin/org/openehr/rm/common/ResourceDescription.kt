@@ -22,6 +22,7 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import java.io.Serializable
 
 /**
@@ -37,7 +38,10 @@ import java.io.Serializable
         "resourcePackageUri",
         "otherDetails",
         "details",
-        "parentResource"])
+        "parentResource"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("RESOURCE_DESCRIPTION")
 @Open
 class ResourceDescription : RmObject(), Serializable {
     companion object {
@@ -46,19 +50,24 @@ class ResourceDescription : RmObject(), Serializable {
 
     @XmlElement(name = "original_author", required = true)
     @Required
+    @SerialName("original_author")
     var originalAuthor: MutableList<StringDictionaryItem> = mutableListOf()
 
     @XmlElement(name = "other_contributors")
+    @SerialName("other_contributors")
     var otherContributors: MutableList<String> = mutableListOf()
 
     @XmlElement(name = "lifecycle_state", required = true)
     @Required
+    @SerialName("lifecycle_state")
     var lifecycleState: String? = null
 
     @XmlElement(name = "resource_package_uri")
+    @SerialName("resource_package_uri")
     var resourcePackageUri: String? = null
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
 
     @XmlElement(required = true)
@@ -66,5 +75,6 @@ class ResourceDescription : RmObject(), Serializable {
     var details: MutableList<ResourceDescriptionItem> = mutableListOf()
 
     @XmlElement(name = "parent_resource")
+    @SerialName("parent_resource")
     var parentResource: AuthoredResource? = null
 }

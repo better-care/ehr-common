@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.openehr.rm.RangeParameters
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -35,17 +38,21 @@ import java.util.*
         "lowerIncluded",
         "upperIncluded",
         "lowerUnbounded",
-        "upperUnbounded"])
+        "upperUnbounded"]
+)
+@Serializable
+@SerialName("DV_INTERVAL")
 @Open
 class DvInterval() : DataValue(), RangeParameters {
     @JvmOverloads
     constructor(
-            lower: DvOrdered?,
-            upper: DvOrdered?,
-            lowerIncluded: Boolean? = null,
-            upperIncluded: Boolean? = null,
-            lowerUnbounded: Boolean = false,
-            upperUnbounded: Boolean = false) : this() {
+        lower: DvOrdered?,
+        upper: DvOrdered?,
+        lowerIncluded: Boolean? = null,
+        upperIncluded: Boolean? = null,
+        lowerUnbounded: Boolean = false,
+        upperUnbounded: Boolean = false
+    ) : this() {
         this.lower = lower
         this.upper = upper
         this.lowerIncluded = lowerIncluded
@@ -55,6 +62,7 @@ class DvInterval() : DataValue(), RangeParameters {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -63,15 +71,19 @@ class DvInterval() : DataValue(), RangeParameters {
     var upper: DvOrdered? = null
 
     @XmlElement(name = "lower_included")
+    @SerialName("lower_included")
     var lowerIncluded: Boolean? = null
 
     @XmlElement(name = "upper_included")
+    @SerialName("upper_included")
     var upperIncluded: Boolean? = null
 
     @XmlElement(name = "lower_unbounded")
+    @SerialName("lower_unbounded")
     var lowerUnbounded: Boolean = false
 
     @XmlElement(name = "upper_unbounded")
+    @SerialName("upper_unbounded")
     var upperUnbounded: Boolean = false
 
     override fun isLowerIncluded(): Boolean? = lowerIncluded
@@ -96,4 +108,20 @@ class DvInterval() : DataValue(), RangeParameters {
         }
 
     override fun hashCode(): Int = Objects.hash(lower, upper, lowerIncluded, upperIncluded, lowerUnbounded, upperUnbounded)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_INTERVAL") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        lower?.visit("lower", ctx)
+        upper?.visit("upper", ctx)
+        lowerIncluded?.let { ctx.visitValue("lower_included", it, this) }
+        upperIncluded?.let { ctx.visitValue("upper_included", it, this) }
+        ctx.visitValue("lower_unbounded", lowerUnbounded, this)
+        ctx.visitValue("upper_unbounded", upperUnbounded, this)
+    }
 }

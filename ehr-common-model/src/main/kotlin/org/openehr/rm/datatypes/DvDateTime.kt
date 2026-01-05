@@ -17,10 +17,13 @@ package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.time.OffsetDateTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -33,16 +36,19 @@ import java.util.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_DATE_TIME", propOrder = ["value"])
+@Serializable
+@SerialName("DV_DATE_TIME")
 @Open
 class DvDateTime() : DvTemporal() {
     @JvmOverloads
     constructor(
-            value: String,
-            accuracy: DvDuration? = null,
-            magnitudeStatus: String? = null,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null) : this() {
+        value: String,
+        accuracy: DvDuration? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null
+    ) : this() {
         this.value = value
         this.accuracy = accuracy
         this.magnitudeStatus = magnitudeStatus
@@ -52,6 +58,7 @@ class DvDateTime() : DvTemporal() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
 
         /**
@@ -87,4 +94,15 @@ class DvDateTime() : DvTemporal() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(value)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_DATE_TIME") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        value?.let { ctx.visitValue("value", it, this) }
+    }
 }

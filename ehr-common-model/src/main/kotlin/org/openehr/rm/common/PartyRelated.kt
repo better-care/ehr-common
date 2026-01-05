@@ -17,10 +17,13 @@ package org.openehr.rm.common
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.openehr.base.basetypes.PartyRef
 import org.openehr.rm.datatypes.DvCodedText
 import org.openehr.rm.datatypes.DvIdentifier
@@ -31,25 +34,39 @@ import org.openehr.rm.datatypes.DvIdentifier
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PARTY_RELATED", propOrder = ["relationship"])
+@Serializable
+@SerialName("PARTY_RELATED")
 @Open
-class PartyRelated
-constructor(): PartyIdentified() {
+class PartyRelated() : PartyIdentified() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     constructor(
-            relationship: DvCodedText? = null,
-            name: String? = null,
-            identifiers: MutableList<DvIdentifier> = mutableListOf(),
-            externalRef: PartyRef? = null): this() {
-                this.name = name
-                this.identifiers = identifiers
-                this.externalRef = externalRef
-                this.relationship = relationship
-            }
+        relationship: DvCodedText? = null,
+        name: String? = null,
+        identifiers: MutableList<DvIdentifier> = mutableListOf(),
+        externalRef: PartyRef? = null
+    ) : this() {
+        this.name = name
+        this.identifiers = identifiers
+        this.externalRef = externalRef
+        this.relationship = relationship
+    }
 
     @XmlElement(required = true)
     @Required
     var relationship: DvCodedText? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "PARTY_RELATED") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        relationship?.visit("relationship", ctx)
+    }
 }

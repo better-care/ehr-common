@@ -19,6 +19,8 @@ import care.better.platform.annotation.Open
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @author Primoz Delopst
@@ -29,6 +31,8 @@ import jakarta.xml.bind.annotation.XmlType
     name = "IntervalOfDateTime", propOrder = [
         "lower",
         "upper"])
+@Serializable
+@SerialName("INTERVAL_OF_DATE_TIME")
 @Open
 class IntervalOfDateTime : Interval() {
     companion object {

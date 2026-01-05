@@ -17,13 +17,16 @@ package org.openehr.rm.datastructures
 
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
-import org.openehr.rm.common.Locatable
-import org.openehr.rm.datatypes.DvDateTime
-import org.openehr.rm.datatypes.DvDuration
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import org.openehr.rm.common.Locatable
+import org.openehr.rm.datatypes.DvDateTime
+import org.openehr.rm.datatypes.DvDuration
 
 /**
  * @author Primoz Delopst
@@ -37,10 +40,14 @@ import jakarta.xml.bind.annotation.XmlType
         "period",
         "duration",
         "events",
-        "summary"])
+        "summary"]
+)
+@Serializable
+@SerialName("HISTORY")
 @Open
 class History : Locatable() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -55,4 +62,21 @@ class History : Locatable() {
     var events: MutableList<Event> = mutableListOf()
 
     var summary: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withLocatable(attributeName, this, "HISTORY") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        origin?.visit("origin", ctx)
+        period?.visit("period", ctx)
+        duration?.visit("duration", ctx)
+        ctx.withCollection("events", events, this) {
+            events.forEach { it.visit("events", ctx) }
+        }
+        summary?.visit("summary", ctx)
+    }
 }

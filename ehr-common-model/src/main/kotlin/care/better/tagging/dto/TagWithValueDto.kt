@@ -1,5 +1,7 @@
 package care.better.tagging.dto
 
+import jakarta.xml.bind.annotation.XmlAccessType
+import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlRootElement
 import java.util.*
@@ -10,17 +12,16 @@ import java.util.*
  * @author Bostjan Lah
  * @since 2.3
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "tag_with_value")
-class TagWithValueDto : TagDto {
-    @get:XmlElement
-    var value: String? = null
-
-    constructor() {}
-
-    @JvmOverloads
-    constructor(tag: String?, value: String? = null, aqlPath: String? = null) : super(tag, aqlPath) {
-        this.value = value
-    }
+open class TagWithValueDto @JvmOverloads constructor(
+    @field:XmlElement
+    tag: String = "",
+    @field:XmlElement
+    val value: String? = null,
+    @field:XmlElement
+    aqlPath: String? = "/"
+) : TagDto(tag, aqlPath) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {
@@ -44,6 +45,6 @@ class TagWithValueDto : TagDto {
     }
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const val serialVersionUID = 2L
     }
 }

@@ -18,8 +18,10 @@ package org.openehr.base.foundationtypes
 import care.better.openehr.rm.RangeParameters
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
-import java.io.Serializable
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.*
+import kotlinx.serialization.SerialName
+import java.io.Serializable
 
 /**
  * @author Primoz Delopst
@@ -33,6 +35,8 @@ import jakarta.xml.bind.annotation.*
         "lowerUnbounded",
         "upperUnbounded"])
 @XmlSeeAlso(value = [IntervalOfInteger::class, IntervalOfReal::class, IntervalOfDate::class, IntervalOfDateTime::class, IntervalOfTime::class, IntervalOfDuration::class])
+@kotlinx.serialization.Serializable
+@SerialName("INTERVAL")
 @Open
 abstract class Interval : RmObject(), Serializable, RangeParameters {
     companion object {
@@ -40,15 +44,19 @@ abstract class Interval : RmObject(), Serializable, RangeParameters {
     }
 
     @XmlElement(name = "lower_included")
+    @SerialName("lower_included")
     var lowerIncluded: Boolean? = null
 
     @XmlElement(name = "upper_included")
+    @SerialName("upper_included")
     var upperIncluded: Boolean? = null
 
     @XmlElement(name = "lower_unbounded")
+    @SerialName("lower_unbounded")
     var lowerUnbounded = false
 
     @XmlElement(name = "upper_unbounded")
+    @SerialName("upper_unbounded")
     var upperUnbounded = false
 
     override fun isLowerIncluded(): Boolean? = lowerIncluded
@@ -58,4 +66,14 @@ abstract class Interval : RmObject(), Serializable, RangeParameters {
     override fun isLowerUnbounded(): Boolean = lowerUnbounded
 
     override fun isUpperUnbounded(): Boolean = upperUnbounded
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "INTERVAL") {
+            lowerIncluded?.let { ctx.visitValue("lower_included", it, this) }
+            upperIncluded?.let { ctx.visitValue("upper_included", it, this) }
+            ctx.visitValue("lower_unbounded", lowerUnbounded, this)
+            ctx.visitValue("upper_unbounded", upperUnbounded, this)
+
+        }
+    }
 }

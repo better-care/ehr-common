@@ -42,7 +42,7 @@ import java.util.*
         TypeDefTerminologyCode::class,
         TypeDefUri::class])
 @Open
-abstract class ExprTypeDef<T>(@XmlElement(name = "type_name", required = true) val typeName: String) : RmObject(), Serializable {
+abstract class ExprTypeDef<T>(@param:XmlElement(name = "type_name", required = true) val typeName: String) : RmObject(), Serializable {
 
     companion object {
         private const val serialVersionUID: Long = 0L

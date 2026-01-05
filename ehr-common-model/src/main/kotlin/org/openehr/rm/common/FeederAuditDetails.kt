@@ -18,10 +18,12 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datastructures.ItemStructure
 import org.openehr.rm.datatypes.DvDateTime
 import java.io.Serializable
@@ -39,22 +41,27 @@ import java.io.Serializable
         "subject",
         "time",
         "versionId",
-        "otherDetails"])
+        "otherDetails"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("FEEDER_AUDIT_DETAILS")
 @Open
 class FeederAuditDetails() : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
     @JvmOverloads
     constructor(
-            systemId: String,
-            location: PartyIdentified? = null,
-            provider: PartyIdentified? = null,
-            subject: PartyProxy? = null,
-            time: DvDateTime? = null,
-            versionId: String? = null,
-            otherDetails: ItemStructure? = null) : this() {
+        systemId: String,
+        location: PartyIdentified? = null,
+        provider: PartyIdentified? = null,
+        subject: PartyProxy? = null,
+        time: DvDateTime? = null,
+        versionId: String? = null,
+        otherDetails: ItemStructure? = null
+    ) : this() {
         this.systemId = systemId
         this.location = location
         this.provider = provider
@@ -66,6 +73,7 @@ class FeederAuditDetails() : RmObject(), Serializable {
 
     @XmlElement(name = "system_id", required = true)
     @Required
+    @SerialName("system_id")
     var systemId: String? = null
 
     var location: PartyIdentified? = null
@@ -77,8 +85,26 @@ class FeederAuditDetails() : RmObject(), Serializable {
     var time: DvDateTime? = null
 
     @XmlElement(name = "version_id")
+    @SerialName("version_id")
     var versionId: String? = null
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: ItemStructure? = null
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "FEEDER_AUDIT_DETAILS") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        systemId?.let { ctx.visitValue("system_id", it, this) }
+        location?.visit("location", ctx)
+        provider?.visit("provider", ctx)
+        subject?.visit("subject", ctx)
+        time?.visit("time", ctx)
+        versionId?.let { ctx.visitValue("version_id", it, this) }
+        otherDetails?.visit("other_details", ctx)
+    }
 }

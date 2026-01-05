@@ -20,6 +20,8 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -31,12 +33,22 @@ import java.util.*
 @XmlType(
     name = "DV_ENCAPSULATED", propOrder = [
         "charset",
-        "language"])
+        "language"]
+)
 @XmlSeeAlso(value = [DvMultimedia::class, DvParsable::class])
+@Serializable
+@SerialName("DV_ENCAPSULATED")
 @Open
 abstract class DvEncapsulated(var charset: CodePhrase? = null, var language: CodePhrase? = null) : DataValue() {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
+    }
+
+    override fun visitProperties(ctx: care.better.platform.visitor.RmVisitorContext) {
+        super.visitProperties(ctx)
+        charset?.visit("charset", ctx)
+        language?.visit("language", ctx)
     }
 
     override fun equals(other: Any?): Boolean =

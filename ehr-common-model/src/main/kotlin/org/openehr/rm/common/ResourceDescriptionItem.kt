@@ -18,10 +18,12 @@ package org.openehr.rm.common
 import care.better.openehr.rm.RmObject
 import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
 import org.openehr.rm.datatypes.CodePhrase
 import java.io.Serializable
 
@@ -39,10 +41,14 @@ import java.io.Serializable
         "misuse",
         "copyright",
         "originalResourceUri",
-        "otherDetails"])
+        "otherDetails"]
+)
+@kotlinx.serialization.Serializable
+@SerialName("RESOURCE_DESCRIPTION_ITEM")
 @Open
 class ResourceDescriptionItem : RmObject(), Serializable {
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -63,8 +69,33 @@ class ResourceDescriptionItem : RmObject(), Serializable {
     var copyright: String? = null
 
     @XmlElement(name = "original_resource_uri")
+    @SerialName("original_resource_uri")
     var originalResourceUri: MutableList<StringDictionaryItem> = mutableListOf()
 
     @XmlElement(name = "other_details")
+    @SerialName("other_details")
     var otherDetails: MutableList<StringDictionaryItem> = mutableListOf()
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "RESOURCE_DESCRIPTION_ITEM") {
+            visitProperties(ctx)
+        }
+    }
+
+    internal fun visitProperties(ctx: RmVisitorContext) {
+        language?.visit("language", ctx)
+        purpose?.let { ctx.visitValue("purpose", it, this) }
+        ctx.withCollection("keywords", keywords, this) {
+            keywords.forEach { ctx.visitValue("keywords", it, this) }
+        }
+        use?.let { ctx.visitValue("use", it, this) }
+        misuse?.let { ctx.visitValue("misuse", it, this) }
+        copyright?.let { ctx.visitValue("copyright", it, this) }
+        ctx.withCollection("original_resource_uri", originalResourceUri, this) {
+            originalResourceUri.forEach { it.visit("original_resource_uri", ctx) }
+        }
+        ctx.withCollection("other_details", otherDetails, this) {
+            otherDetails.forEach { it.visit("other_details", ctx) }
+        }
+    }
 }

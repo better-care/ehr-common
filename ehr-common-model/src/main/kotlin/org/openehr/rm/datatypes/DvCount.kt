@@ -16,9 +16,12 @@
 package org.openehr.rm.datatypes
 
 import care.better.platform.annotation.Open
+import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -27,17 +30,20 @@ import java.util.*
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DV_COUNT", propOrder = ["magnitude"])
+@Serializable
+@SerialName("DV_COUNT")
 @Open
 class DvCount() : DvAmount() {
     @JvmOverloads
     constructor(
-            magnitude: Long,
-            accuracy: Float? = null,
-            accuracyIsPercent: Boolean? = null,
-            magnitudeStatus: String? = null,
-            normalRange: DvInterval? = null,
-            otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
-            normalStatus: CodePhrase? = null, ) : this() {
+        magnitude: Long,
+        accuracy: Float? = null,
+        accuracyIsPercent: Boolean? = null,
+        magnitudeStatus: String? = null,
+        normalRange: DvInterval? = null,
+        otherReferenceRanges: MutableList<ReferenceRange> = mutableListOf(),
+        normalStatus: CodePhrase? = null,
+    ) : this() {
         this.magnitude = magnitude
         this.accuracy = accuracy
         this.accuracyIsPercent = accuracyIsPercent
@@ -48,6 +54,7 @@ class DvCount() : DvAmount() {
     }
 
     companion object {
+        @Suppress("unused")
         private const val serialVersionUID: Long = 0L
     }
 
@@ -62,4 +69,15 @@ class DvCount() : DvAmount() {
         }
 
     override fun hashCode(): Int = super.hashCode() + Objects.hash(magnitude)
+
+    override fun visit(attributeName: String, ctx: RmVisitorContext) {
+        ctx.withObject(attributeName, this, "DV_COUNT") {
+            visitProperties(ctx)
+        }
+    }
+
+    override fun visitProperties(ctx: RmVisitorContext) {
+        super.visitProperties(ctx)
+        ctx.visitValue("magnitude", magnitude, this)
+    }
 }
