@@ -23,35 +23,29 @@ class NamespaceTransformingUnmarshaller(
     private val transformer = NamespaceTransformer(fromNamespace, toNamespace)
 
     override fun unmarshal(file: File): Any {
-        val document = transformer.namespaceUnawareFactory.newDocumentBuilder().parse(file)
-        return unmarshal(document)
+        return file.inputStream().use { delegate.unmarshal(transformer.transform(it)) }
     }
 
     override fun unmarshal(inputStream: InputStream): Any {
-        val document = transformer.namespaceUnawareFactory.newDocumentBuilder().parse(inputStream)
-        return unmarshal(document)
+        return delegate.unmarshal(transformer.transform(inputStream))
     }
 
-
-    private fun <T: Any> unmarshal(inputStream: InputStream, type: Class<T>): JAXBElement<T> {
-        val document = transformer.namespaceUnawareFactory.newDocumentBuilder().parse(inputStream)
-        transformer.transform(document)
-        return delegate.unmarshal(document, type)
-    }
 
     override fun unmarshal(reader: Reader): Any {
-        val document = transformer.namespaceUnawareFactory.newDocumentBuilder().parse(InputSource(reader))
-        return unmarshal(document)
+        return delegate.unmarshal(transformer.transform(reader))
     }
 
     override fun unmarshal(url: URL): Any {
-        val document = transformer.namespaceUnawareFactory.newDocumentBuilder().parse(url.openStream())
-        return unmarshal(document)
+        return transformer.transform(url.openStream()).use { delegate.unmarshal(it) }
     }
 
     override fun unmarshal(inputSource: InputSource): Any {
-        val document = transformer.namespaceUnawareFactory.newDocumentBuilder().parse(inputSource)
-        return unmarshal(document)
+        val transformed = try {
+            transformer.transform(inputSource)
+        } catch (_: UnsupportedOperationException) {
+            return delegate.unmarshal(inputSource)
+        }
+        return delegate.unmarshal(transformed)
     }
 
     override fun unmarshal(node: Node): Any {

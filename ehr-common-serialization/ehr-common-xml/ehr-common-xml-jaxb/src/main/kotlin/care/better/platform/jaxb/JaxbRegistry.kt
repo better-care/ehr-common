@@ -74,6 +74,7 @@ class JaxbRegistry(packages: List<String>) {
         fun createInstance(packages: List<String>) = JaxbRegistry(packages.filter { !CONTEXT_PATH.contains(it) })
     }
 
+
     private val context: JAXBContext = JAXBContext.newInstance(if (packages.isNotEmpty()) "$CONTEXT_PATH:${packages.joinToString(":")}" else CONTEXT_PATH)
     private val saxParserFactory: SAXParserFactory = XmlUtils.createSAXParserFactory()
 

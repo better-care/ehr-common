@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<composition archetype_node_id="openEHR-EHR-COMPOSITION.report-mnd.v1" xmlns="http://schemas.openehr.org/v1">
+    <name>
+        <value>Laboratory report</value>
+    </name>
+    <archetype_details>
+        <archetype_id>
+            <value>openEHR-EHR-COMPOSITION.report-mnd.v1</value>
+        </archetype_id>
+        <template_id>
+            <value>ISPEK - LAB - Laboratory Test Report</value>
+        </template_id>
+        <rm_version>1.1.0</rm_version>
+    </archetype_details>
+    <content xsi:type="OBSERVATION" archetype_node_id="openEHR-EHR-OBSERVATION.lab_test.v1"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <name>
+            <value>Laboratory test</value>
+        </name>
+        <archetype_details>
+            <archetype_id>
+                <value>openEHR-EHR-OBSERVATION.lab_test.v1</value>
+            </archetype_id>
+            <rm_version>1.1.0</rm_version>
+        </archetype_details>
+        <protocol xsi:type="ITEM_TREE" archetype_node_id="at0004">
+            <name>
+                <value>Notification</value>
+            </name>
+        </protocol>
+        <data archetype_node_id="at0001">
+            <name>
+                <value>Event Series</value>
+            </name>
+            <events xsi:type="POINT_EVENT" archetype_node_id="at0002">
+                <name>
+                    <value>Any event</value>
+                </name>
+                <data xsi:type="ITEM_TREE" archetype_node_id="at0003">
+                    <name>
+                        <value>Specimen</value>
+                    </name>
+                    <items xsi:type="ELEMENT" archetype_node_id="at0078">
+                        <name>
+                            <value>Result</value>
+                        </name>
+                        <value xsi:type="DV_INTERVAL">
+                            <lower xsi:type="DV_QUANTITY">
+                                <magnitude>10.0</magnitude>
+                                <units>l</units>
+                            </lower>
+                            <upper xsi:type="DV_QUANTITY">
+                                <magnitude>20.0</magnitude>
+                                <units>l</units>
+                            </upper>
+                            <lower_included>true</lower_included>
+                            <upper_included>false</upper_included>
+                            <lower_unbounded>false</lower_unbounded>
+                            <upper_unbounded>false</upper_unbounded>
+                        </value>
+                    </items>
+                </data>
+            </events>
+        </data>
+    </content>
+</composition>
