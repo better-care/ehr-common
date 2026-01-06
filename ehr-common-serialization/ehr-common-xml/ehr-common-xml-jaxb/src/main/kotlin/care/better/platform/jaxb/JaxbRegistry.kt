@@ -15,12 +15,14 @@
 
 package care.better.platform.jaxb
 
+import care.better.platform.jaxb.JaxbRegistry.Companion.OPENEHR_NAMESPACE_V1
+import care.better.platform.jaxb.JaxbRegistry.Companion.OPENEHR_NAMESPACE_V2
 import care.better.platform.utils.XmlUtils
 import care.better.platform.utils.XmlUtils.unmarshal
-import javax.xml.bind.*
 import org.xml.sax.SAXException
 import java.io.IOException
 import java.io.InputStream
+import javax.xml.bind.*
 import javax.xml.parsers.ParserConfigurationException
 import javax.xml.parsers.SAXParserFactory
 

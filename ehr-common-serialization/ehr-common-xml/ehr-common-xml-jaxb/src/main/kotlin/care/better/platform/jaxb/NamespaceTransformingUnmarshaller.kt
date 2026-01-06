@@ -8,13 +8,7 @@ import java.io.Reader
 import java.net.URL
 import javax.xml.bind.JAXBElement
 import javax.xml.bind.Unmarshaller
-import javax.xml.bind.util.JAXBSource
-import javax.xml.stream.XMLEventReader
-import javax.xml.stream.XMLStreamReader
 import javax.xml.transform.Source
-import javax.xml.transform.dom.DOMSource
-import javax.xml.transform.stream.StreamResult
-import javax.xml.transform.stream.StreamSource
 
 /**
  * @author Marko Pipan
@@ -61,7 +55,7 @@ class NamespaceTransformingUnmarshaller(
     }
 
     override fun unmarshal(node: Node): Any {
-        return unmarshal(transformer.transform(node))
+        return delegate.unmarshal(transformer.transform(node))
     }
 
     override fun <T : Any> unmarshal(node: Node, type: Class<T>): JAXBElement<T> {
