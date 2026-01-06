@@ -45,6 +45,12 @@ class NamespaceTransformer(val fromNamespace: String, val toNamespace: String) {
         else -> throw UnsupportedOperationException("Transforming namespaces for source of type ${source.javaClass.name} is not supported")
     }
 
+    fun transform(source: InputSource): InputSource = when {
+        source.byteStream != null -> InputSource(transform(source.byteStream))
+        source.characterStream !=null -> InputSource(transform(source.characterStream))
+        else -> throw UnsupportedOperationException("Transforming namespaces for source of type ${source.javaClass.name} is not supported")
+    }
+
     fun transform(reader: Reader): Reader {
         val document = namespaceUnawareFactory.newDocumentBuilder().parse(InputSource(reader))
         transformNamespaces(document.documentElement)

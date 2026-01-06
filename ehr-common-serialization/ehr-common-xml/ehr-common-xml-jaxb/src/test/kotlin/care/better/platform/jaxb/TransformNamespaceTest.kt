@@ -5,8 +5,10 @@ import care.better.platform.jaxb.JaxbRegistry.Companion.OPENEHR_NAMESPACE_V2
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.openehr.am.aom.Template
+import org.openehr.rm.composition.Composition
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.io.Reader
 import java.io.StringWriter
 import java.nio.charset.StandardCharsets
 import javax.xml.bind.JAXBException
@@ -21,6 +23,18 @@ class TransformNamespaceTest {
     fun readWithNamespaceV1() {
         val template = loadTemplate("namespace_v1.opt")
         assertThat(template.definition!!.attributes.map { it.rmAttributeName }).containsExactly("category", "context", "content")
+    }
+
+    @Test
+    fun readCompositionWithNamespaceV1() {
+        val composition = parseComposition(openResource("composition_lab_report.xml").reader(StandardCharsets.UTF_8))
+        assertThat(composition.name?.value).isEqualTo("Laboratory report")
+    }
+
+    @Test
+    fun readCompositionWithNamespaceV2() {
+        val composition = parseComposition(openResource("composition_lab_report_v2.xml").reader(StandardCharsets.UTF_8))
+        assertThat(composition.name?.value).isEqualTo("Laboratory report")
     }
 
     @Test
@@ -58,7 +72,9 @@ class TransformNamespaceTest {
             throw IllegalStateException("Error creating JAXB context", e)
         }
 
-    fun loadTemplate(resourceName: String): Template = parse(Thread.currentThread().contextClassLoader.getResourceAsStream(resourceName))
+    fun loadTemplate(resourceName: String): Template = parse(openResource(resourceName))
+
+    fun openResource(resourceName: String): InputStream = Thread.currentThread().contextClassLoader.getResourceAsStream(resourceName) ?: throw IllegalArgumentException("Resource $resourceName not found")
 
     fun deserializeTemplate(templateString: String): Template = parse(templateString.byteInputStream(StandardCharsets.UTF_8))
 
@@ -76,6 +92,13 @@ class TransformNamespaceTest {
             }
         } catch (e: JAXBException) {
             throw IllegalStateException("Error parsing template!", e)
+        }
+    }
+    private fun parseComposition(reader: Reader): Composition {
+        try {
+            return jaxbRegistry.createUnmarshaller().unmarshal(reader) as Composition
+        } catch (e: JAXBException) {
+            throw IllegalStateException("Error parsing composition!", e)
         }
     }
 }
