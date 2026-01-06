@@ -24,8 +24,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import io.mockk.*
-import org.junit.jupiter.api.Test
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import java.io.StringWriter
 
 
@@ -39,9 +39,9 @@ class MultilineStringYamlSerializerTest {
     }
 
     private val yamlObjectMapper = ObjectMapper(
-            YAMLFactory()
-                .enable(YAMLGenerator.Feature.LITERAL_BLOCK_STYLE)
-                .disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
+        YAMLFactory()
+            .enable(YAMLGenerator.Feature.LITERAL_BLOCK_STYLE)
+            .disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
     ).registerKotlinModule()
 
     private val jsonObjectMapper = ObjectMapper().registerKotlinModule()
@@ -69,13 +69,15 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1
               line2
               line3${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -88,13 +90,15 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1
               line2
                 line3${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -108,13 +112,15 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1  after tab
                 indented line2
               line3${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -128,13 +134,15 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1
               line2
               line3${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -166,13 +174,15 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1
               line2
               line3${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -189,13 +199,15 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1  after tab
                 indented line2
               line3${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -217,7 +229,8 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1  after tab
@@ -229,19 +242,22 @@ class MultilineStringYamlSerializerTest {
             
             
               line9${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
     fun testComplexMultiLineStringFromJsonToYaml() {
-        val string = "{\"name\": \"testName\",\"description\": \"line1\\tafter tab\\n\\tindented line2\\n\\t\\tline3\\nline4 with trailing spaces   \\nline5 with trailing tabs\\t\\t\\t\\nline6 2 empty lines below\\n\\n\\nline9 with carriage return\\r\\nline10\"}"
+        val string =
+            "{\"name\": \"testName\",\"description\": \"line1\\tafter tab\\n\\tindented line2\\n\\t\\tline3\\nline4 with trailing spaces   \\nline5 with trailing tabs\\t\\t\\t\\nline6 2 empty lines below\\n\\n\\nline9 with carriage return\\r\\nline10\"}"
         val obj: MultiLineObject = jsonObjectMapper.readValue(string)
         assertThat(obj.description).contains("\t")
         assertThat(obj.description).contains("\r")
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1  after tab
@@ -254,7 +270,8 @@ class MultilineStringYamlSerializerTest {
 
               line9 with carriage return
               line10${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -264,13 +281,15 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).contains(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: |-
               line1
               line2
               line3${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -282,10 +301,12 @@ class MultilineStringYamlSerializerTest {
 
         val asString: String = yamlObjectMapper.writeValueAsString(obj)
         assertThat(asString).doesNotContain(YAML_LITERAL_STYLE_WITHOUT_INDENT)
-        assertThat(asString).isEqualTo("""
+        assertThat(asString).isEqualTo(
+            """
             name: "testName"
             description: "line1\r\nline2\tafter tab \nline3"${"\n"}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -330,12 +351,12 @@ class MultilineStringYamlSerializerTest {
 }
 
 data class SingleLineObject(
-        val name: String,
-        val description: String
+    val name: String,
+    val description: String
 )
 
 data class MultiLineObject(
-        val name: String,
-        @param:JsonSerialize(using = MultilineStringYamlSerializer::class)
-        val description: String
+    val name: String,
+    @param:JsonSerialize(using = MultilineStringYamlSerializer::class)
+    val description: String
 )
