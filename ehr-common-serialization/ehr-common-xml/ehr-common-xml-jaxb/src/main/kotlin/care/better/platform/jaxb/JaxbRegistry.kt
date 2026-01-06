@@ -15,6 +15,8 @@
 
 package care.better.platform.jaxb
 
+import care.better.platform.jaxb.JaxbRegistry.Companion.OPENEHR_NAMESPACE_V1
+import care.better.platform.jaxb.JaxbRegistry.Companion.OPENEHR_NAMESPACE_V2
 import care.better.platform.utils.XmlUtils
 import care.better.platform.utils.XmlUtils.unmarshal
 import jakarta.xml.bind.*

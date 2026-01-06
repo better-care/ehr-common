@@ -124,6 +124,7 @@ class KotlinSerializationPolymorphicGenerator(private val codeGenerator: CodeGen
         fun flatten(): List<KClass<*>> = listOf(kClass) + children.flatMap { it.flatten() }
     }
 
+
     @Suppress("UNCHECKED_CAST")
     private fun buildClassHierarchy(scanResult: ScanResult, parent: KClass<*>): ClassHierarchy {
         val children: List<ClassHierarchy> = scanResult

@@ -55,7 +55,7 @@ class NamespaceTransformingUnmarshaller(
     }
 
     override fun unmarshal(node: Node): Any {
-        return unmarshal(transformer.transform(node))
+        return delegate.unmarshal(transformer.transform(node))
     }
 
     override fun <T : Any> unmarshal(node: Node, type: Class<T>): JAXBElement<T> {

@@ -248,8 +248,7 @@ class MultilineStringYamlSerializerTest {
 
     @Test
     fun testComplexMultiLineStringFromJsonToYaml() {
-        val string =
-            "{\"name\": \"testName\",\"description\": \"line1\\tafter tab\\n\\tindented line2\\n\\t\\tline3\\nline4 with trailing spaces   \\nline5 with trailing tabs\\t\\t\\t\\nline6 2 empty lines below\\n\\n\\nline9 with carriage return\\r\\nline10\"}"
+        val string = "{\"name\": \"testName\",\"description\": \"line1\\tafter tab\\n\\tindented line2\\n\\t\\tline3\\nline4 with trailing spaces   \\nline5 with trailing tabs\\t\\t\\t\\nline6 2 empty lines below\\n\\n\\nline9 with carriage return\\r\\nline10\"}"
         val obj: MultiLineObject = jsonObjectMapper.readValue(string)
         assertThat(obj.description).contains("\t")
         assertThat(obj.description).contains("\r")
