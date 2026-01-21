@@ -25,6 +25,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ehr-common-json-kotlin-serialization</artifactId>
+    <name>${project.groupId}:${project.artifactId}</name>
 
     <properties>
         <kotlin-maven-symbol-processing.version>1.6</kotlin-maven-symbol-processing.version>
