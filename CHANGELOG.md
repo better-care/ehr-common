@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 4.3.0 -
+## 4.3.0 - 2026-01-21
 
 - Increase Kotlin version to 1.9.22
 - Move YAML support to `ehr-common-yaml-jackson` module

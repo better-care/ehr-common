@@ -20,7 +20,7 @@
     <parent>
         <groupId>care.better.platform</groupId>
         <artifactId>ehr-common</artifactId>
-        <version>4.3.0-SNAPSHOT</version>
+        <version>4.3.0</version>
     </parent>
 
     <artifactId>ehr-common-serialization</artifactId>
