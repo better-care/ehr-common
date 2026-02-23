@@ -27,6 +27,7 @@
         <module>ehr-common-model</module>
         <module>ehr-common-path</module>
         <module>ehr-common-serialization</module>
+        <module>ehr-common-terser</module>
         <module>ehr-common-terminology</module>
         <module>ehr-common-time</module>
         <module>ehr-common-utils</module>
@@ -158,6 +159,12 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
+                <version>4.3.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-terser</artifactId>
                 <version>4.3.1-SNAPSHOT</version>
             </dependency>
 
