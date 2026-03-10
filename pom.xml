@@ -18,7 +18,7 @@
 
     <groupId>care.better.platform</groupId>
     <artifactId>ehr-common</artifactId>
-    <version>4.3.1-SNAPSHOT</version>
+    <version>4.3.1</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -117,85 +117,85 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-model</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-time</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terminology</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-jacoco</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-amnode</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terser</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-kotlin-serialization-polymorphisem-api</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-kotlin-serialization-polymorphisem-generator</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-kotlin-serialization</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-xml-jaxb</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-yaml-jackson</artifactId>
-                <version>4.3.1-SNAPSHOT</version>
+                <version>4.3.1</version>
             </dependency>
 
             <dependency>
