@@ -40,7 +40,7 @@
 
     <properties>
         <java.version>25</java.version>
-        <kotlin.version>2.3.0</kotlin.version>
+        <kotlin.version>2.3.20</kotlin.version>
 
         <jetbrains-annotations.version>26.0.2-1</jetbrains-annotations.version>
 
@@ -49,13 +49,13 @@
         <caffeine.version>3.2.3</caffeine.version>
         <classgraph.version>4.8.184</classgraph.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
-        <guava.version>33.4.8-jre</guava.version>
+        <guava.version>33.5.0-jre</guava.version>
         <jackson.version>2.20.1</jackson.version>
         <jakarta.xml.bind.version>4.0.4</jakarta.xml.bind.version>
         <jaxb-runtime.version>4.0.6</jaxb-runtime.version>
         <joda-time.version>2.14.0</joda-time.version>
         <jupiter.version>6.0.1</jupiter.version>
-        <kotlin-serialization.version>1.10.0-RC</kotlin-serialization.version>
+        <kotlin-serialization.version>1.10.0</kotlin-serialization.version>
         <kotlin-symbol-processing.version>2.3.4</kotlin-symbol-processing.version>
         <kotlinpoet.version>2.2.0</kotlinpoet.version>
         <mockk-jvm.version>1.14.7</mockk-jvm.version>
