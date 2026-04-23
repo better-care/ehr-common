@@ -7,7 +7,7 @@ Common components of an openEHR-based system, like a Clinical Data Repository
 
 ## Release 
 
-[![Release Artifacts](https://maven-badges.herokuapp.com/sonatype-central/care.better.platform/ehr-common/badge.svg)](https://central.sonatype.com/artifact/care.better.platform/ehr-common)
+[![Release Artifacts](https://img.shields.io/maven-central/v/care.better.platform/ehr-common)](https://central.sonatype.com/artifact/care.better.platform/ehr-common)
 
 ## CI/CD
 [![CI](https://circleci.com/gh/wagnerjfr/circleci-travisci-codecov-maven-github.svg?style=shield)](https://app.circleci.com/pipelines/github/better-care/ehr-common)
