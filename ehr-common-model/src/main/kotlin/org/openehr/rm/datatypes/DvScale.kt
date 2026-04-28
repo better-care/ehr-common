@@ -42,7 +42,7 @@ import kotlinx.serialization.Serializable
 class DvScale() : DvOrdered() {
     companion object {
         @Suppress("unused")
-        private const val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = -6701275638768492424L
     }
 
     @JvmOverloads
