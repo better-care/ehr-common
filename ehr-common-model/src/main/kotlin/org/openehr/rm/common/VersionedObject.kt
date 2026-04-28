@@ -31,7 +31,7 @@ import java.io.Serializable
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "VERSIONED_OBJECT", namespace = "http://schemas.openehr.org/v1", propOrder = ["uid", "ownerId", "timeCreated", "trunkLifecycleState"])
-@XmlRootElement(namespace = "http://schemas.openehr.org/v1")
+@XmlRootElement
 @kotlinx.serialization.Serializable
 @SerialName("VERSIONED_OBJECT")
 class VersionedObject : RmObject(), Serializable {

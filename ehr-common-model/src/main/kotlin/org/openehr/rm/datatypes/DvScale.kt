@@ -31,18 +31,14 @@ import kotlinx.serialization.Serializable
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(
-    name = "DV_SCALE", propOrder = [
-        "symbol",
-        "value"]
-)
+@XmlType(name = "DV_SCALE", propOrder = ["symbol", "value"])
 @Serializable
 @SerialName("DV_SCALE")
 @Open
 class DvScale() : DvOrdered() {
     companion object {
         @Suppress("unused")
-        private const val serialVersionUID: Long = 0L
+        private const val serialVersionUID: Long = -6701275638768492424L
     }
 
     @JvmOverloads

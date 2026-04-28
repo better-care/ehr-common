@@ -32,7 +32,7 @@ import org.openehr.rm.datastructures.ItemStructure
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EHR_STATUS", namespace = "http://schemas.openehr.org/v1", propOrder = ["subject", "queryable", "modifiable", "otherDetails"])
-@XmlRootElement(namespace = "http://schemas.openehr.org/v1")
+@XmlRootElement
 @Serializable
 @SerialName("EHR_STATUS")
 class EhrStatus : Locatable() {
