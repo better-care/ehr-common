@@ -29,6 +29,7 @@
         <module>ehr-common-model</module>
         <module>ehr-common-path</module>
         <module>ehr-common-serialization</module>
+        <module>ehr-common-terser</module>
         <module>ehr-common-terminology</module>
         <module>ehr-common-time</module>
         <module>ehr-common-utils</module>
@@ -189,6 +190,12 @@
 
             <dependency>
                 <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-terser</artifactId>
+                <version>5.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-kotlin-serialization-polymorphisem-api</artifactId>
                 <version>5.0.0-SNAPSHOT</version>
             </dependency>
@@ -208,6 +215,12 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-xml-jaxb</artifactId>
+                <version>5.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>care.better.platform</groupId>
+                <artifactId>ehr-common-yaml-jackson</artifactId>
                 <version>5.0.0-SNAPSHOT</version>
             </dependency>
 

@@ -25,6 +25,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ehr-common-json-kotlin-serialization</artifactId>
+    <name>${project.groupId}:${project.artifactId}</name>
 
     <dependencies>
         <dependency>

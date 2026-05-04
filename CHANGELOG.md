@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
  - Initial 5.0.x version based on 4.3.0
  - Remove `is_lower_included`, `is_lower_unbounded`, `is_upper_included`, and `is_upper_unbounded` attributes from DvInterval and Interval JSON serialization because they duplicated the attributes without `is_` prefix that are defined in the specification
 
+## 4.3.1 - 2026-03-10
+
+- Revert `serialVersionUID` for `DvScale` to its previous (v4.2.1) value for backwards compatibility
+
 ## 4.3.0 - 2026-01-21
 
 - Increase Kotlin version to 1.9.22
