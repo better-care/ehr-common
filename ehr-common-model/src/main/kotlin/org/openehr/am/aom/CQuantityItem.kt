@@ -45,8 +45,8 @@ class CQuantityItem : AmObject(), Serializable {
 
     var precision: IntervalOfInteger? = null
 
-    @XmlElement(required = true)
-    lateinit var units: String
+    @XmlElement
+    var units: String? = null
 
     @XmlElement(name = "units_system")
     var unitsSystem: String? = null

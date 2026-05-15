@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.3.2 - ...
+
+- Make CQuantityItem.units nullable because there is a use-case for it, where unitsSystem acts as terminology reference, and any code from that terminology is considered valid
+
 ## 4.3.1 - 2026-03-10
 
 - Revert `serialVersionUID` for `DvScale` to its previous (v4.2.1) value for backwards compatibility
