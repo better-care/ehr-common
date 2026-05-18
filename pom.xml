@@ -13,14 +13,12 @@
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	See the License for the specific language governing permissions and
 	limitations under the License.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>care.better.platform</groupId>
     <artifactId>ehr-common</artifactId>
-    <version>5.0.0-SNAPSHOT</version>
+    <version>5.0.0-A36</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -131,85 +129,85 @@
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-model</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-utils</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-time</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-path</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terminology</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-jacoco</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-amnode</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-jackson</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-terser</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-kotlin-serialization-polymorphisem-api</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-kotlin-serialization-polymorphisem-generator</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-json-kotlin-serialization</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-xml-jaxb</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
                 <groupId>care.better.platform</groupId>
                 <artifactId>ehr-common-yaml-jackson</artifactId>
-                <version>5.0.0-SNAPSHOT</version>
+                <version>5.0.0-A36</version>
             </dependency>
 
             <dependency>
@@ -392,7 +390,7 @@
                         <id>enforce</id>
                         <configuration>
                             <rules>
-                                <dependencyConvergence/>
+                                <dependencyConvergence />
                                 <requireMavenVersion>
                                     <version>[3.6.2,)</version> <!-- https://issues.apache.org/jira/browse/MNG-6506 -->
                                 </requireMavenVersion>
