@@ -22,6 +22,7 @@ import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlRootElement
 import jakarta.xml.bind.annotation.XmlType
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ObjectVersionId
@@ -31,15 +32,12 @@ import java.io.Serializable
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Open
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(
-    name = "REVISION_HISTORY_ITEM", propOrder = [
-        "versionId",
-        "audits"]
-)
+@XmlType(name = "REVISION_HISTORY_ITEM", propOrder = ["versionId", "audits"])
+@XmlRootElement(namespace = "http://schemas.openehr.org/v1")
 @kotlinx.serialization.Serializable
 @SerialName("REVISION_HISTORY_ITEM")
-@Open
 class RevisionHistoryItem : RmObject(), Serializable {
     companion object {
         @Suppress("unused")

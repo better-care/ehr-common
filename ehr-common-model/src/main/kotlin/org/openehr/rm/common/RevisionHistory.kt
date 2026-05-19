@@ -20,6 +20,7 @@ import care.better.platform.annotation.Open
 import care.better.platform.visitor.RmVisitorContext
 import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
+import jakarta.xml.bind.annotation.XmlRootElement
 import jakarta.xml.bind.annotation.XmlType
 import kotlinx.serialization.SerialName
 import java.io.Serializable
@@ -28,11 +29,12 @@ import java.io.Serializable
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Open
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "REVISION_HISTORY", propOrder = ["items"])
+@XmlRootElement(namespace = "http://schemas.openehr.org/v1")
 @kotlinx.serialization.Serializable
 @SerialName("REVISION_HISTORY")
-@Open
 class RevisionHistory : RmObject(), Serializable {
     companion object {
         @Suppress("unused")

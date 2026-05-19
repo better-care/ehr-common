@@ -37,7 +37,6 @@ import org.openehr.rm.common.AuthoredResource
         "invariants",
         "ontology"])
 @XmlRootElement
-
 class Archetype : AuthoredResource() {
     companion object {
         private const val serialVersionUID: Long = 0L
