@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.3.2 - 2026-06-08
+
+- Revert `open` keyword for `CDefinedObject` to its previous (v4.2.1) value for backwards compatibility
+
 ## 4.3.1 - 2026-03-10
 
 - Revert `serialVersionUID` for `DvScale` to its previous (v4.2.1) value for backwards compatibility
