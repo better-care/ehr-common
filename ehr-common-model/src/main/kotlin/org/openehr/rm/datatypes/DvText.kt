@@ -43,10 +43,6 @@ import javax.xml.bind.annotation.*
 @Polymorphic
 @Open
 class DvText() : DataValue() {
-    companion object {
-        @Suppress("unused")
-        private const val serialVersionUID: Long = 0L
-    }
 
     @JvmOverloads
     constructor(
