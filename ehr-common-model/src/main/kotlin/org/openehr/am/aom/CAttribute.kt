@@ -16,7 +16,6 @@
 package org.openehr.am.aom
 
 import care.better.platform.annotation.Required
-import care.better.platform.jaxb.JaxbModelConfiguration
 import org.openehr.base.foundationtypes.IntervalOfInteger
 import javax.xml.bind.annotation.*
 
@@ -51,15 +50,8 @@ abstract class CAttribute : ArchetypeConstraint() {
     @XmlElement(name = "differential_path")
     var differentialPath: String? = null
 
-    // Avoid serializing match_negated, but the field still exists to retain compatibility with XMLs serialized with older versions
-    // This needs to be enabled with JabGlobalConfiguration.removeMatchNegatedOnSerialization,
-    // as such templates will no longer be readable by older versions of the library
-    @Deprecated("", level = DeprecationLevel.HIDDEN)
-    @Suppress("unused")
-    @get:XmlElement(name = "match_negated")
-    var matchNegated: Boolean?
-        get() = if (JaxbModelConfiguration.removeMatchNegatedOnSerialization) null else false
-        set(value) {  }
+    @XmlElement(name = "match_negated")
+    var matchNegated = false
 
     @XmlElement(type = CObject::class)
     var children: MutableList<CObject> = mutableListOf()

@@ -15,7 +15,6 @@
 
 package org.openehr.base.basetypes
 
-import care.better.platform.annotation.Open
 import care.better.platform.visitor.RmVisitorContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -31,7 +30,6 @@ import javax.xml.bind.annotation.XmlType
 @XmlType(name = "TEMPLATE_ID")
 @Serializable
 @SerialName("TEMPLATE_ID")
-@Open
 class TemplateId() : ObjectId() {
     constructor(value: String) : this() {
         this.value = value
