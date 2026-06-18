@@ -16,7 +16,6 @@
 package org.openehr.am.aom
 
 import care.better.openehr.am.AmObject
-import care.better.platform.annotation.Open
 import care.better.platform.annotation.Required
 import jakarta.xml.bind.annotation.*
 import java.io.Serializable
@@ -34,7 +33,6 @@ import java.io.Serializable
         "termBindings",
         "constraintBindings"])
 @XmlSeeAlso(value = [FlatArchetypeOntology::class])
-@Open
 open class ArchetypeOntology : AmObject(), Serializable {
     companion object {
         private const val serialVersionUID: Long = 0L

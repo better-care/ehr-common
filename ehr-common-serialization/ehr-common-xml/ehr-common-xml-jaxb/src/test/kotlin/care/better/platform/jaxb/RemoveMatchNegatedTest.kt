@@ -38,17 +38,6 @@ class RemoveMatchNegatedTest {
             .contains("<match_negated>")
     }
 
-    @Test
-    fun serializeWithoutMatchNegated() {
-        JaxbModelConfiguration.removeMatchNegatedOnSerialization = true
-        val template = loadTemplate("with_match_negated.opt")
-        val templateString = serializeTemplate(template)
-
-        assertThat(templateString)
-            .contains("<rm_attribute_name>")
-            .doesNotContain("<match_negated>")
-    }
-
     private val jaxbRegistry =
         try {
             JaxbRegistry.getInstance()

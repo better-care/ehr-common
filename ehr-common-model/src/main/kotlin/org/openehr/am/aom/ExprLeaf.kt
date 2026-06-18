@@ -19,7 +19,6 @@ import jakarta.xml.bind.annotation.XmlAccessType
 import jakarta.xml.bind.annotation.XmlAccessorType
 import jakarta.xml.bind.annotation.XmlElement
 import jakarta.xml.bind.annotation.XmlType
-import kotlinx.serialization.Contextual
 
 /**
  * @author Primoz Delopst
@@ -37,7 +36,6 @@ class ExprLeaf : ExprItem() {
     }
 
     @XmlElement(required = true)
-    @Contextual
     lateinit var item: Any
 
     @XmlElement(name = "reference_type", required = true)

@@ -18,7 +18,6 @@ package org.openehr.am.aom
 import care.better.openehr.am.AmObject
 import care.better.platform.annotation.Required
 import jakarta.xml.bind.annotation.*
-import kotlinx.serialization.Contextual
 import java.io.Serializable
 
 /**
@@ -57,7 +56,6 @@ class TView : AmObject(), Serializable {
 
             @XmlElement(required = true)
             @XmlSchemaType(name = "anySimpleType")
-            @Contextual
             lateinit var value: Any
 
             @XmlAttribute(name = "id", required = true)
