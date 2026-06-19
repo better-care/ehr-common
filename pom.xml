@@ -41,25 +41,25 @@
 
     <properties>
         <java.version>25</java.version>
-        <kotlin.version>2.3.21</kotlin.version>
+        <kotlin.version>2.4.0</kotlin.version>
 
-        <jetbrains-annotations.version>26.0.2-1</jetbrains-annotations.version>
+        <jetbrains-annotations.version>26.1.0</jetbrains-annotations.version>
 
         <assertj.version>3.27.7</assertj.version>
-        <byte-buddy.version>1.18.3</byte-buddy.version>
+        <byte-buddy.version>1.18.10</byte-buddy.version>
         <caffeine.version>3.2.4</caffeine.version>
         <classgraph.version>4.8.184</classgraph.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <guava.version>33.6.0-jre</guava.version>
-        <jackson.version>2.21.3</jackson.version>
-        <jakarta.xml.bind.version>4.0.4</jakarta.xml.bind.version>
-        <jaxb-runtime.version>4.0.6</jaxb-runtime.version>
-        <joda-time.version>2.14.0</joda-time.version>
-        <jupiter.version>6.0.1</jupiter.version>
+        <jackson.version>2.22.0</jackson.version>
+        <jakarta.xml.bind.version>4.0.5</jakarta.xml.bind.version>
+        <jaxb-runtime.version>4.0.9</jaxb-runtime.version>
+        <joda-time.version>2.14.2</joda-time.version>
+        <jupiter.version>6.1.0</jupiter.version>
         <kotlin-serialization.version>1.11.0</kotlin-serialization.version>
-        <kotlin-symbol-processing.version>2.3.4</kotlin-symbol-processing.version>
-        <kotlinpoet.version>2.2.0</kotlinpoet.version>
-        <mockk-jvm.version>1.14.7</mockk-jvm.version>
+        <kotlin-symbol-processing.version>2.3.9</kotlin-symbol-processing.version>
+        <kotlinpoet.version>2.3.0</kotlinpoet.version>
+        <mockk-jvm.version>1.14.11</mockk-jvm.version>
 
         <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
@@ -76,7 +76,7 @@
         <maven-sonar-plugin.version>5.3.0.6276</maven-sonar-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
-        <ksp-maven-plugin.version>2.3.0-1</ksp-maven-plugin.version>
+        <ksp-maven-plugin.version>2.3.5-1</ksp-maven-plugin.version>
 
 
         <sonar.java.source>${java.version}</sonar.java.source>
