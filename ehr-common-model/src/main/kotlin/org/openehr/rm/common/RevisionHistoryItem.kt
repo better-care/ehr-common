@@ -25,6 +25,7 @@ import java.io.Serializable
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlType
 
 /**
@@ -32,10 +33,8 @@ import javax.xml.bind.annotation.XmlType
  * @since 3.1.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(
-    name = "REVISION_HISTORY_ITEM", propOrder = [
-    "versionId",
-    "audits"])
+@XmlType(name = "REVISION_HISTORY_ITEM", propOrder = ["versionId", "audits"])
+@XmlRootElement(namespace = "http://schemas.openehr.org/v1")
 @kotlinx.serialization.Serializable
 @SerialName("REVISION_HISTORY_ITEM")
 @Open
