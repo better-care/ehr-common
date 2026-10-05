@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.3.4 - 2026-10-05
+
+- Increase dokka plugin version
+
+## 4.3.3 - 2026-07-16
+
+- Add @XmlRootElement for RevisionHistory and RevisionHistoryItem 
+
 ## 4.3.2 - 2026-06-08
 
 - Revert `open` keyword for `CDefinedObject` to its previous (v4.2.1) value for backwards compatibility
