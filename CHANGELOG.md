@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 5.0.0 - ...
+## 5.0.0 - 2026-10-13
  
  - Initial 5.0.x version based on 4.3.0
  - Remove `is_lower_included`, `is_lower_unbounded`, `is_upper_included`, and `is_upper_unbounded` attributes from DvInterval and Interval JSON serialization because they duplicated the attributes without `is_` prefix that are defined in the specification
