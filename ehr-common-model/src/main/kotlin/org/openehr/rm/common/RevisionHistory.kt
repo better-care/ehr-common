@@ -24,9 +24,6 @@ import jakarta.xml.bind.annotation.XmlRootElement
 import jakarta.xml.bind.annotation.XmlType
 import kotlinx.serialization.SerialName
 import java.io.Serializable
-import javax.xml.bind.annotation.XmlAccessType
-import javax.xml.bind.annotation.XmlAccessorType
-import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst

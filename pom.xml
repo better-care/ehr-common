@@ -41,13 +41,13 @@
 
     <properties>
         <java.version>25</java.version>
-        <kotlin.version>2.4.20</kotlin.version>
+        <kotlin.version>2.4.21</kotlin.version>
 
         <jetbrains-annotations.version>26.1.0</jetbrains-annotations.version>
 
         <assertj.version>3.27.7</assertj.version>
         <byte-buddy.version>1.18.10</byte-buddy.version>
-        <caffeine.version>3.3.0</caffeine.version>
+        <caffeine.version>3.3.1</caffeine.version>
         <classgraph.version>4.8.196</classgraph.version>
         <commons-lang3.version>3.21.0</commons-lang3.version>
         <guava.version>33.7.2-jre</guava.version>
@@ -58,24 +58,24 @@
         <jupiter.version>6.1.3</jupiter.version>
         <kotlin-serialization.version>1.11.0</kotlin-serialization.version>
         <kotlin-symbol-processing.version>2.3.11</kotlin-symbol-processing.version>
-        <kotlinpoet.version>2.3.0</kotlinpoet.version>
+        <kotlinpoet.version>2.4.0</kotlinpoet.version>
         <mockk-jvm.version>1.14.11</mockk-jvm.version>
 
         <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
         <maven-dependency-check-plugin.version>12.1.9</maven-dependency-check-plugin.version>
-        <maven-dokka-plugin.version>2.0.0</maven-dokka-plugin.version>
-        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+        <maven-dokka-plugin.version>2.2.0</maven-dokka-plugin.version>
+        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-        <maven-jacoco-plugin.version>0.8.14</maven-jacoco-plugin.version>
-        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
+        <maven-install-plugin.version>3.2.0</maven-install-plugin.version>
+        <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
+        <maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
         <maven-nexus-staging-plugin.version>1.6.13</maven-nexus-staging-plugin.version>
-        <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
-        <maven-sonar-plugin.version>5.3.0.6276</maven-sonar-plugin.version>
+        <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+        <maven-sonar-plugin.version>5.8.0.7211</maven-sonar-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
         <ksp-maven-plugin.version>2.3.5-1</ksp-maven-plugin.version>
 
 
