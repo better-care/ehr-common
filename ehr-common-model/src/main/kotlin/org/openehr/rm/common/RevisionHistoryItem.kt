@@ -27,6 +27,10 @@ import jakarta.xml.bind.annotation.XmlType
 import kotlinx.serialization.SerialName
 import org.openehr.base.basetypes.ObjectVersionId
 import java.io.Serializable
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
 
 /**
  * @author Primoz Delopst

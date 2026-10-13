@@ -7,6 +7,14 @@ All notable changes to this project will be documented in this file.
  - Initial 5.0.x version based on 4.3.0
  - Remove `is_lower_included`, `is_lower_unbounded`, `is_upper_included`, and `is_upper_unbounded` attributes from DvInterval and Interval JSON serialization because they duplicated the attributes without `is_` prefix that are defined in the specification
 
+## 4.3.4 - 2026-10-05
+
+- Increase dokka plugin version
+
+## 4.3.3 - 2026-07-16
+
+- Add @XmlRootElement for RevisionHistory and RevisionHistoryItem 
+
 ## 4.3.2 - 2026-06-08
 
 - Revert `open` keyword for `CDefinedObject` to its previous (v4.2.1) value for backwards compatibility
