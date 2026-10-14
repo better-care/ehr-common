@@ -691,7 +691,7 @@
     <scm>
         <connection>scm:git:git://github.com:better-care/ehr-common.git</connection>
         <developerConnection>scm:git:ssh://github.com:better-care/ehr-common.git</developerConnection>
-        <url>https://github.com/better-care/ehr-common/tree/master</url>
+        <url>https://github.com/better-care/ehr-common/tree/main</url>
     </scm>
 
     <developers>
