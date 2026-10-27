@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.0.1 - 2026-10-27
+
+- Remove Task Planning from EhrModelVersion and deprecate TP data model
+
 ## 5.0.0 - 2026-10-13
  
  - Initial 5.0.x version based on 4.3.0
