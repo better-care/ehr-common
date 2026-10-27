@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.*
  */
 
 @SuppressWarnings("ClassReferencesSubclass")
+@Deprecated("Will be removed in version 6.x")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CONTEXT_VALUE", propOrder = ["name", "type"])
 @XmlSeeAlso(value = [ContextVariable::class, ContextExpression::class, ContextConstant::class])

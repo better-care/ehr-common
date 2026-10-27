@@ -20,6 +20,7 @@ package org.openehr.proc.taskplanning
  * @since 3.1.0
  */
 
+@Deprecated("Will be removed in version 6.x")
 enum class ConcurrencyMode : EnumerationString, EnumerationInteger {
     XOR_ONE_PATH,
     AND_ALL_PATHS,

@@ -22,6 +22,7 @@ import care.better.platform.Version
  * @since 3.1.0
  */
 
+@Deprecated("Will be removed in version 6.x")
 enum class TpVersion(private val tpVersion: String, private val possibleValues: Set<String>) : Version<TpVersion> {
 
     TP1_5_0("tp1.5.0", setOf("tp1.5.0", "TP1.5.0", "tp1_5_0", "TP1_5_0")),

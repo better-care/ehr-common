@@ -15,7 +15,6 @@
 
 package care.better.platform
 
-import care.better.openehr.processmodel.taskplanning.TpVersion
 import care.better.openehr.rm.RmVersion
 
 /**
@@ -25,7 +24,10 @@ import care.better.openehr.rm.RmVersion
 class EhrModelVersion(vararg versions: Version<*>?) : ModelVersion(*versions) {
     companion object {
         @JvmField
-        val CURRENT_VERSION = EhrModelVersion(RmVersion.RM1_1_0, TpVersion.TP1_5_1)
+        val CURRENT_VERSION = EhrModelVersion(RmVersion.RM1_1_0_1)
+
+        @JvmField
+        val KRYO4_VERSION = EhrModelVersion(RmVersion.RM1_1_0)
 
         @JvmField
         val LEGACY_VERSION = EhrModelVersion(RmVersion.RM1_0_2)
@@ -34,16 +36,10 @@ class EhrModelVersion(vararg versions: Version<*>?) : ModelVersion(*versions) {
         val CURRENT_VERSION_STRING = CURRENT_VERSION.toString()
 
         @JvmStatic
-        fun fromRmAndTpVersionString(versionString: String): ModelVersion = with(versionString.split(",")) {
-            if (this.size > 1) {
-                EhrModelVersion(RmVersion.from(this[0]), TpVersion.from(this[1]))
-            } else {
-                EhrModelVersion(RmVersion.from(this[0]))
-            }
+        fun fromRmVersionString(versionString: String): ModelVersion = versionString.splitToSequence(",").first { !it.startsWith("tp") }.let {
+            EhrModelVersion(RmVersion.from(it))
         }
     }
 
     fun getRmVersion(): RmVersion? = getVersion(RmVersion::class.java)
-
-    fun getTpVersion(): TpVersion? = getVersion(TpVersion::class.java)
 }

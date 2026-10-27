@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CALLBACK_WAIT", propOrder = ["failAction", "customActions"])
 @Open

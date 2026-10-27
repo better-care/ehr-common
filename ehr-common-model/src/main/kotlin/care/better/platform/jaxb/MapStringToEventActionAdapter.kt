@@ -22,6 +22,7 @@ import org.openehr.proc.taskplanning.EventAction
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 class MapStringToEventActionAdapter : XmlAdapter<MapStringToEventActionAdapter.AdaptedMap, Map<String, EventAction>>() {
 
     override fun unmarshal(adaptedMap: AdaptedMap): MutableMap<String, EventAction> =

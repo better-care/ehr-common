@@ -20,6 +20,7 @@ package care.better.platform.proc.taskplanning.visitor
  * @since 3.1.0
  */
 
+@Deprecated("Will be removed in version 6.x")
 fun interface VisitableByModelVisitor {
     fun accept(visitor: TaskModelVisitor)
 }

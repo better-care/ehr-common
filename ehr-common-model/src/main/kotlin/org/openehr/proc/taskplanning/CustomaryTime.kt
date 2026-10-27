@@ -27,6 +27,7 @@ import org.openehr.rm.datatypes.DvCodedText
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CUSTOMARY_TIME", propOrder = arrayOf("time"))
 @Open

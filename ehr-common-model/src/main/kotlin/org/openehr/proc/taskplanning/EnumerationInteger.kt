@@ -20,6 +20,7 @@ package org.openehr.proc.taskplanning
  * @since 3.1.0
  */
 
+@Deprecated("Will be removed in version 6.x")
 interface EnumerationInteger {
 
     companion object {

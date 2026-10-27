@@ -27,6 +27,7 @@ import org.openehr.rm.datastructures.ItemStructure
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "STATE_TRIGGER", propOrder = ["expression"])
 @Open

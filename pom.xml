@@ -528,6 +528,12 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.jetbrains.dokka</groupId>
+                    <artifactId>dokka-maven-plugin</artifactId>
+                    <version>${maven-dokka-plugin.version}</version>
+                </plugin>
+
+                <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${maven-sonar-plugin.version}</version>
@@ -625,7 +631,6 @@
                     <plugin>
                         <groupId>org.jetbrains.dokka</groupId>
                         <artifactId>dokka-maven-plugin</artifactId>
-                        <version>${maven-dokka-plugin.version}</version>
                         <executions>
                             <execution>
                                 <phase>prepare-package</phase>

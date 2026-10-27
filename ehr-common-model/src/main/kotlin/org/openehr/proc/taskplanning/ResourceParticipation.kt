@@ -32,6 +32,7 @@ import java.io.Serializable
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RESOURCE_PARTICIPATION", propOrder = [
     "resourceType",

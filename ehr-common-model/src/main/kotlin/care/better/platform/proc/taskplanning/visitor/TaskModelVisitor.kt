@@ -23,6 +23,7 @@ import org.openehr.rm.common.PartyProxy
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 interface TaskModelVisitor {
     fun visit(workPlan: WorkPlan): Boolean
 

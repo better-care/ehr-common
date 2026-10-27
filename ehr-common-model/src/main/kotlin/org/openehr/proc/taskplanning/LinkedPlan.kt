@@ -22,6 +22,7 @@ import org.openehr.base.basetypes.UidBasedId
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LINKED_PLAN", propOrder = ["target", "targetUid"])
 @XmlSeeAlso(value = [SubPlan::class, HandOff::class])

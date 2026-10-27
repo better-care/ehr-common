@@ -22,6 +22,7 @@ import org.openehr.base.basetypes.UidBasedId
  * @since 3.1.0
  */
 
+@Deprecated("Will be removed in version 6.x")
 fun interface TaskReferencingEvent {
     fun getTaskId(): UidBasedId?
 }

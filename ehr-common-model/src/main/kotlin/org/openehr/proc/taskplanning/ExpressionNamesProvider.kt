@@ -19,6 +19,7 @@ package org.openehr.proc.taskplanning
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 interface ExpressionNamesProvider {
     fun getExpressionNames(): Sequence<String>
 }

@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.XmlType
  * @since 3.1.0
  */
 @SuppressWarnings("ClassReferencesSubclass")
+@Deprecated("Will be removed in version 6.x")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CONTEXT_VARIABLE")
 @XmlSeeAlso(value = [ExternalVariable::class, LocalVariable::class])

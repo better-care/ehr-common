@@ -23,6 +23,7 @@ import java.util.*
  * @author Primoz Delopst
  * @since 3.1.0
  */
+@Deprecated("Will be removed in version 6.x")
 enum class ExpressionType(val expressionTypeDef: ExprTypeDef<*>?, val javaClass: Class<*>) {
     BOOLEAN(TypeDefBoolean.INSTANCE, Boolean::class.java),
     DECIMAL(TypeDefReal.INSTANCE, Number::class.java),
