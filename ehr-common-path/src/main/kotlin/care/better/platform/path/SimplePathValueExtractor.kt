@@ -113,7 +113,8 @@ open class SimplePathValueExtractor @JvmOverloads constructor(path: String?, val
      * @return Node or [List] of nodes for the [Class] property
      */
     private fun getNodeForProperty(propertyName: String, node: Any, ignoreExceptions: Boolean): Any? =
-        propertyMethods!!.computeIfAbsent(MethodKey(node.javaClass, propertyName)) { getMethod(it, ignoreExceptions) }.apply(node)
+        val cached = propertyMethods?.computeIfAbsent(MethodKey(node.javaClass, propertyName)) { getMethod(it, ignoreExceptions) }
+        return cached?.apply(node)
 
     /**
      * Returns function that will invokes [Method] on the object and returns the invocation result.

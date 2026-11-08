@@ -45,9 +45,9 @@ class PathSegment(val element: String?, val archetypeNodeId: String?, val name: 
      */
     fun getSegment(): String =
         if (archetypeNodeId == null)
-            PathUtils.underscorePath(element!!)
+            PathUtils.underscorePath(element ?: "")
         else
-            "${PathUtils.underscorePath(element!!)}[${archetypeNodeId}]"
+            "${PathUtils.underscorePath(element ?: "")}[${archetypeNodeId}]"
 
     /**
      * Formats this [PathSegment] to be used in AQL paths. Note no leading '/' is added.
@@ -55,7 +55,7 @@ class PathSegment(val element: String?, val archetypeNodeId: String?, val name: 
      * @return [PathSegment] formatted for use in AQL path
      */
     fun asPathSegment(): String {
-        val path = StringBuilder(PathUtils.underscorePath(element!!))
+        val path = StringBuilder(PathUtils.underscorePath(element ?: ""))
         if (archetypeNodeId != null) {
             path.append('[').append(archetypeNodeId)
             if (name != null) {
