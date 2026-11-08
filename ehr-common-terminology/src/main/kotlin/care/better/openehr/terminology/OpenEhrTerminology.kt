@@ -140,7 +140,9 @@ class OpenEhrTerminology(private val groups: Map<String, TermGroup>, private val
                 "concept" -> {
                     if (currentParent is TermGroup) {
                         val id = attributes.getValue("id")
-                        terms[TermKey(currentLanguage!!, id)] = attributes.getValue("rubric")
+                        currentLanguage?.let { lang ->
+                            terms[TermKey(lang, id)] = attributes.getValue("rubric")
+                        }
                         (currentParent as TermGroup).termCodes.add(id)
                     }
                 }

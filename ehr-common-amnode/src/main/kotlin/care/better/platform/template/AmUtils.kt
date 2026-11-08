@@ -513,7 +513,7 @@ object AmUtils {
         for (amNode in amNodes) {
             if (archetypeMatches(amNode, locatable)) {
                 if (nameMatches(amNode, locatable)) {
-                    if (locatable.name!!.value == amNode.name)
+                    if (locatable.name?.value == amNode.name)
                         return amNode
                     else
                         matchingNode = amNode
